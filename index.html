@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assignment Directory — ACCT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#132242;
+    --navy-deep:#0A1730;
+    --navy-mid:#1C3157;
+    --gold:#B98A2E;
+    --gold-soft:#D9B45C;
+    --gold-pale:#F1E3BE;
+    --parchment:#F7F4EC;
+    --paper:#FFFEFA;
+    --ink:#1E2330;
+    --slate:#5C6270;
+    --line:#DAD4C2;
+    --line-soft:#E9E4D4;
+    --shadow: 0 1px 2px rgba(10,23,48,0.06), 0 6px 18px rgba(10,23,48,0.07);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--parchment);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    background-image: repeating-linear-gradient(to bottom, transparent, transparent 27px, var(--line-soft) 27px, var(--line-soft) 28px);
+  }
+  a{ color:inherit; }
+
+  header{
+    background: linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+    color:#EFE9D8;
+    padding: 42px 6vw 30px;
+    position:relative;
+  }
+  header::after{
+    content:"";
+    position:absolute; left:0; right:0; bottom:0; height:4px;
+    background: linear-gradient(90deg, var(--gold-soft), var(--gold) 40%, var(--gold-soft) 70%, var(--gold));
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--gold-soft); margin:0 0 10px;
+  }
+  h1.title{
+    font-family:'Source Serif 4', serif; font-weight:600;
+    font-size:clamp(28px,4vw,42px); margin:0 0 8px; letter-spacing:-0.01em;
+  }
+  .subtitle{ font-size:15px; color:#C7CBDA; max-width:640px; margin:0; }
+
+  .toolbar{
+    max-width:1180px; margin:0 auto; padding:22px 6vw 0;
+    display:flex; gap:12px; flex-wrap:wrap; align-items:center;
+  }
+  .toolbar input[type="text"], .toolbar select{
+    font-family:'Inter',sans-serif; font-size:13.5px; padding:9px 12px;
+    border:1px solid var(--line); border-radius:5px; background:var(--paper); color:var(--ink);
+  }
+  .toolbar input[type="text"]{ flex:1 1 220px; min-width:160px; }
+  .toolbar select{ min-width:170px; }
+  .toolbar input:focus, .toolbar select:focus{
+    outline:none; border-color:var(--navy-mid); box-shadow:0 0 0 3px rgba(19,34,66,0.08);
+  }
+  .count-pill{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--slate); margin-left:auto; white-space:nowrap; }
+
+  main{ max-width:1180px; margin:0 auto; padding:26px 6vw 80px; }
+
+  .section{ margin-top:38px; }
+  .section-head{
+    display:flex; align-items:baseline; gap:14px;
+    border-bottom:2px solid var(--navy); padding-bottom:8px; margin-bottom:18px;
+  }
+  .section-code{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--gold);
+    background:var(--navy); padding:3px 8px; border-radius:4px; letter-spacing:.03em;
+  }
+  .section-name{ font-family:'Source Serif 4', serif; font-size:21px; font-weight:600; color:var(--navy); margin:0; }
+  .section-tally{ margin-left:auto; font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--slate); }
+
+  .grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(270px, 1fr)); gap:18px; }
+
+  .card{
+    background:var(--paper); border:1px solid var(--line); border-radius:10px;
+    overflow:hidden; box-shadow:var(--shadow); display:flex; flex-direction:column;
+    transition: border-color .15s ease;
+  }
+  .card:hover{ border-color:var(--gold-soft); }
+  .card-link{ text-decoration:none; color:inherit; display:flex; flex-direction:column; height:100%; }
+  .card-img{ height:140px; background:var(--navy); background-size:cover; background-position:center; position:relative; }
+  .card-img.placeholder{ background: linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 100%); }
+  .card-img.placeholder::before{
+    content:"\00a7"; position:absolute; right:14px; top:8px;
+    font-family:'Source Serif 4', serif; font-size:44px; color:rgba(217,180,92,0.28);
+  }
+  .entry-tag{
+    font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--gold-pale);
+    background:rgba(10,23,48,0.55); padding:3px 8px; margin:10px; border-radius:4px;
+    letter-spacing:.03em; position:absolute; top:0; left:0;
+  }
+  .card-body{ padding:14px 16px 16px; display:flex; flex-direction:column; gap:8px; flex:1; }
+  .card-title{ font-family:'Source Serif 4', serif; font-size:17px; font-weight:600; color:var(--ink); margin:0; line-height:1.3; }
+  .card-desc{ font-size:13.5px; color:var(--slate); margin:0; flex:1; }
+  .card-foot{
+    display:flex; align-items:center; gap:5px; margin-top:6px; padding-top:10px;
+    border-top:1px dashed var(--line); font-size:13px; font-weight:600; color:var(--navy);
+  }
+  .card:hover .card-foot{ color:var(--gold); }
+  .card-foot svg{ width:13px; height:13px; }
+
+  .empty{
+    border:1px dashed var(--line); border-radius:10px; padding:34px 20px;
+    text-align:center; color:var(--slate); font-size:13.5px;
+  }
+  .empty strong{ color:var(--navy); display:block; font-family:'Source Serif 4',serif; font-size:16px; margin-bottom:4px; font-weight:600; }
+
+  footer{ text-align:center; padding:26px 6vw 40px; font-size:12px; color:var(--slate); }
+
+  @media (max-width:560px){
+    header{ padding:32px 5vw 26px; }
+    .toolbar, main{ padding-left:5vw; padding-right:5vw; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">Department of Accounting, Finance, Information Systems &amp; Business Law · WCU</p>
+  <h1 class="title">Assignment Directory</h1>
+  <p class="subtitle">Browse assignments, packets, and activities by course.</p>
+</header>
+
+<div class="toolbar">
+  <input type="text" id="searchInput" placeholder="Search titles or descriptions...">
+  <select id="courseFilter">
+    <option value="">All courses</option>
+  </select>
+  <span class="count-pill" id="countPill"></span>
+</div>
+
+<main id="mainContent"></main>
+
+<footer>Assignment Directory &middot; Western Carolina University</footer>
+
+<script>
+/* ============================================================
+   HOW TO ADD, EDIT, OR REMOVE AN ASSIGNMENT
+   ------------------------------------------------------------
+   Everything below is one JavaScript array. Each assignment is
+   one { ... } block. To add a new one, copy a block, paste it
+   before the closing "];", and fill in your own values.
+
+   Fields:
+     title        Required. What students will see as the name.
+     course       Required. e.g. "ACCT 351", "ACCT 352", "ACCT 251",
+                  "Graduate Intl. Accounting" — new course names
+                  create their own new section automatically.
+     chapter      Optional. e.g. "Ch. 4"
+     description  Optional. One or two sentences.
+     link         Required. Full URL, e.g. your GitHub Pages link:
+                  "https://yourusername.github.io/repo/file.html"
+     image        Optional. Full URL to an image (jpg/png), e.g.
+                  hosted in the same GitHub repo as your packets:
+                  "https://raw.githubusercontent.com/you/repo/main/img/ch4.png"
+                  Leave as null for a plain navy placeholder card.
+
+   After editing, save the file and re-upload it to GitHub Pages
+   (or wherever this page is hosted) — no other steps needed.
+   ============================================================ */
+
+const ASSIGNMENTS = [
+  {
+    title: "Chapter 2 — Tuckasegee Trail Guides & Outfitters Workbook",
+    course: "ACCT 351",
+    chapter: "Ch. 2",
+    description: "Accounting cycle problem set with ID-based personalization and a self-check solution key.",
+    link: "https://rdouglasparker.github.io/TuckasegeeTrailGuides/",
+    image: null
+  },
+  {
+    title: "Chapter 3 — Balance Sheet Packet",
+    course: "ACCT 351",
+    chapter: "Ch. 3",
+    description: "Harrowgate Supply Company and Thistlewood Circuits Corporation, algorithmic homework with Excel export.",
+    link: "https://rdouglasparker.github.io/BalanceSheetProblems/",
+    image: null
+  },
+  {
+    title: "Chapter 4 — Income Statement Packet",
+    course: "ACCT 351",
+    chapter: "Ch. 4",
+    description: "Alexian Systems, Duke Company, and Santana Industries, with self-check tool and live-formula Excel download.",
+    link: "https://rdouglasparker.github.io/IncomeStatement_CashFlowReview/",
+    image: null
+  },
+    {
+    title: "Chapter 12 — Debt Securities Packet",
+    course: "ACCT 352",
+    chapter: "Ch. 12",
+    description: "Investment classification and valuation practice, algorithmic and self-contained.",
+    link: "https://rdouglasparker.github.io/DebtInvestmentProblems//",
+    image: null
+  }
+  {
+    title: "Chapter 12 — Equity Securities Packet",
+    course: "ACCT 352",
+    chapter: "Ch. 12",
+    description: "Investment classification and valuation practice, algorithmic and self-contained.",
+    link: "https://rdouglasparker.github.io/EquitySecurityProblems/",
+    image: null
+  }
+];
+/* ============================================================
+   You should not need to edit anything below this line.
+   ============================================================ */
+
+(function(){
+  var COURSE_ORDER = ['ACCT 251','ACCT 351','ACCT 352','Graduate Intl. Accounting'];
+  var mainContent = document.getElementById('mainContent');
+  var searchInput = document.getElementById('searchInput');
+  var courseFilter = document.getElementById('courseFilter');
+  var countPill = document.getElementById('countPill');
+
+  function courseCode(course, chapter){
+    var base = (course || '').replace(/[^A-Za-z0-9]/g,'').slice(-4).toUpperCase();
+    var ch = (chapter || '').match(/\d+/);
+    if(base && ch) return base + '-' + ch[0];
+    if(base) return base;
+    return 'ENTRY';
+  }
+
+  function buildCourseFilterOptions(){
+    var courses = Array.from(new Set(ASSIGNMENTS.map(function(e){ return e.course; })));
+    courses.sort(function(a,b){
+      var ia = COURSE_ORDER.indexOf(a), ib = COURSE_ORDER.indexOf(b);
+      if(ia === -1) ia = 999;
+      if(ib === -1) ib = 999;
+      if(ia !== ib) return ia - ib;
+      return a.localeCompare(b);
+    });
+    courses.forEach(function(c){
+      var opt = document.createElement('option');
+      opt.value = c; opt.textContent = c;
+      courseFilter.appendChild(opt);
+    });
+  }
+
+  function groupedCourses(){
+    var courses = Array.from(new Set(ASSIGNMENTS.map(function(e){ return e.course; })));
+    courses.sort(function(a,b){
+      var ia = COURSE_ORDER.indexOf(a), ib = COURSE_ORDER.indexOf(b);
+      if(ia === -1) ia = 999;
+      if(ib === -1) ib = 999;
+      if(ia !== ib) return ia - ib;
+      return a.localeCompare(b);
+    });
+    return courses;
+  }
+
+  function matchesFilter(e){
+    var q = searchInput.value.trim().toLowerCase();
+    var cf = courseFilter.value;
+    if(cf && e.course !== cf) return false;
+    if(!q) return true;
+    return (e.title + ' ' + (e.description||'') + ' ' + (e.chapter||'')).toLowerCase().indexOf(q) !== -1;
+  }
+
+  function buildCard(e){
+    var card = document.createElement('div');
+    card.className = 'card';
+
+    var link = document.createElement('a');
+    link.className = 'card-link';
+    link.href = e.link;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+
+    var img = document.createElement('div');
+    if(e.image){
+      img.className = 'card-img';
+      img.style.backgroundImage = "url('" + e.image.replace(/'/g, "%27") + "')";
+    } else {
+      img.className = 'card-img placeholder';
+    }
+    var tag = document.createElement('span');
+    tag.className = 'entry-tag';
+    tag.textContent = courseCode(e.course, e.chapter);
+    img.appendChild(tag);
+    link.appendChild(img);
+
+    var body = document.createElement('div');
+    body.className = 'card-body';
+
+    var title = document.createElement('p');
+    title.className = 'card-title';
+    title.textContent = e.title;
+    body.appendChild(title);
+
+    if(e.description){
+      var desc = document.createElement('p');
+      desc.className = 'card-desc';
+      desc.textContent = e.description;
+      body.appendChild(desc);
+    }
+
+    var foot = document.createElement('div');
+    foot.className = 'card-foot';
+    foot.innerHTML = 'Open assignment <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>';
+    body.appendChild(foot);
+
+    link.appendChild(body);
+    card.appendChild(link);
+    return card;
+  }
+
+  function render(){
+    var visible = ASSIGNMENTS.filter(matchesFilter);
+    countPill.textContent = visible.length + ' of ' + ASSIGNMENTS.length + ' shown';
+    mainContent.innerHTML = '';
+
+    if(ASSIGNMENTS.length === 0){
+      var empty = document.createElement('div');
+      empty.className = 'empty';
+      empty.innerHTML = '<strong>No assignments yet</strong>Edit the ASSIGNMENTS list near the top of this file to add your first entry.';
+      mainContent.appendChild(empty);
+      return;
+    }
+
+    var courses = groupedCourses();
+    var anyVisible = false;
+
+    courses.forEach(function(course){
+      var visibleInCourse = ASSIGNMENTS.filter(function(e){ return e.course === course; }).filter(matchesFilter);
+      if(visibleInCourse.length === 0) return;
+      anyVisible = true;
+
+      var section = document.createElement('section');
+      section.className = 'section';
+
+      var head = document.createElement('div');
+      head.className = 'section-head';
+      var code = document.createElement('span');
+      code.className = 'section-code';
+      code.textContent = course.replace(/[^A-Za-z0-9]/g,'').slice(0,8).toUpperCase();
+      var name = document.createElement('h2');
+      name.className = 'section-name';
+      name.textContent = course;
+      var tally = document.createElement('span');
+      tally.className = 'section-tally';
+      tally.textContent = visibleInCourse.length + ' entr' + (visibleInCourse.length===1?'y':'ies');
+      head.appendChild(code); head.appendChild(name); head.appendChild(tally);
+      section.appendChild(head);
+
+      var grid = document.createElement('div');
+      grid.className = 'grid';
+
+      visibleInCourse.sort(function(a,b){
+        return (a.chapter||'').localeCompare(b.chapter||'', undefined, {numeric:true}) || a.title.localeCompare(b.title);
+      });
+      visibleInCourse.forEach(function(e){ grid.appendChild(buildCard(e)); });
+
+      section.appendChild(grid);
+      mainContent.appendChild(section);
+    });
+
+    if(!anyVisible){
+      var empty2 = document.createElement('div');
+      empty2.className = 'empty';
+      empty2.innerHTML = '<strong>No matches</strong>Try a different search term or course filter.';
+      mainContent.appendChild(empty2);
+    }
+  }
+
+  buildCourseFilterOptions();
+  searchInput.addEventListener('input', render);
+  courseFilter.addEventListener('change', render);
+  render();
+})();
+</script>
+
+</body>
+</html>
