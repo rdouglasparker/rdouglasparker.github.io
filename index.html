@@ -48,7 +48,7 @@
   }
   .eyebrow{
     font-family:'IBM Plex Mono', monospace;
-    font-size:12px; letter-spacing:.12em; text-transform:uppercase;
+    font-size:15px; letter-spacing:.03em;
     color:var(--gold-soft); margin:0 0 10px;
   }
   h1.title{
@@ -79,10 +79,6 @@
     display:flex; align-items:baseline; gap:14px;
     border-bottom:2px solid var(--purple); padding-bottom:8px; margin-bottom:18px;
   }
-  .section-code{
-    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--gold-soft);
-    background:var(--purple); padding:3px 8px; border-radius:4px; letter-spacing:.03em;
-  }
   .section-name{ font-family:'Source Serif 4', serif; font-size:21px; font-weight:600; color:var(--purple); margin:0; }
   .section-tally{ margin-left:auto; font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--slate); }
 
@@ -100,11 +96,6 @@
   .card-img.placeholder::before{
     content:"\00a7"; position:absolute; right:14px; top:8px;
     font-family:'Source Serif 4', serif; font-size:44px; color:rgba(214,195,152,0.32);
-  }
-  .entry-tag{
-    font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--gold-pale);
-    background:rgba(56,25,90,0.55); padding:3px 8px; margin:10px; border-radius:4px;
-    letter-spacing:.03em; position:absolute; top:0; left:0;
   }
   .card-body{ padding:14px 16px 16px; display:flex; flex-direction:column; gap:8px; flex:1; }
   .card-title{ font-family:'Source Serif 4', serif; font-size:17px; font-weight:600; color:var(--ink); margin:0; line-height:1.3; }
@@ -133,7 +124,7 @@
 <body>
 
 <header>
-  <p class="eyebrow">Doug Parker,Ph.D., Associate Professor of Accounting · Western Carolina University</p>
+  <p class="eyebrow">Doug Parker, Ph.D., Associate Professor of Accounting · Western Carolina University</p>
   <h1 class="title">Assignment Directory</h1>
   <p class="subtitle">Browse assignments, packets, and activities by course.</p>
 </header>
@@ -188,6 +179,14 @@ const ASSIGNMENTS = [
     image: "images/ch2-tuckasegee.svg"
   },
   {
+    title: "Revenue Recognition Case — Sylva Strength & Fitness",
+    course: "ACCT 351",
+    chapter: "Ch. 6",
+    description: "ASC 606 performance obligations and transaction price allocation.",
+    link: "https://rdouglasparker.github.io/SF-FRevenueRecognition/",
+    image: "images/revrec-sylva-fitness.svg"
+  },
+  {
     title: "Chapter 3 — Balance Sheet Packet",
     course: "ACCT 351",
     chapter: "Ch. 3",
@@ -202,14 +201,6 @@ const ASSIGNMENTS = [
     description: "Alexian Systems, Duke Company, and Santana Industries, with self-check tool and live-formula Excel download.",
     link: "https://rdouglasparker.github.io/IncomeStatement_CashFlowReview/",
     image: "images/ch4-income-statement.svg"
-  },
-  {
-    title: "Chapter 6 — Revenue Recognition Packet 1",
-    course: "ACCT 351",
-    chapter: "Ch. 6",
-    description: "ASC 606 performance obligations and transaction price allocation.",
-    link: "https://rdouglasparker.github.io/SF-FRevenueRecognition/",
-    image: "images/revrec-sylva-fitness.svg"
   },
   {
     title: "Chapter 12 — Debt Securities Packet",
@@ -238,14 +229,6 @@ const ASSIGNMENTS = [
   var searchInput = document.getElementById('searchInput');
   var courseFilter = document.getElementById('courseFilter');
   var countPill = document.getElementById('countPill');
-
-  function courseCode(course, chapter){
-    var base = (course || '').replace(/[^A-Za-z0-9]/g,'').slice(-4).toUpperCase();
-    var ch = (chapter || '').match(/\d+/);
-    if(base && ch) return base + '-' + ch[0];
-    if(base) return base;
-    return 'ENTRY';
-  }
 
   function buildCourseFilterOptions(){
     var courses = Array.from(new Set(ASSIGNMENTS.map(function(e){ return e.course; })));
@@ -300,10 +283,6 @@ const ASSIGNMENTS = [
     } else {
       img.className = 'card-img placeholder';
     }
-    var tag = document.createElement('span');
-    tag.className = 'entry-tag';
-    tag.textContent = courseCode(e.course, e.chapter);
-    img.appendChild(tag);
     link.appendChild(img);
 
     var body = document.createElement('div');
@@ -357,16 +336,13 @@ const ASSIGNMENTS = [
 
       var head = document.createElement('div');
       head.className = 'section-head';
-      var code = document.createElement('span');
-      code.className = 'section-code';
-      code.textContent = course.replace(/[^A-Za-z0-9]/g,'').slice(0,8).toUpperCase();
       var name = document.createElement('h2');
       name.className = 'section-name';
       name.textContent = course;
       var tally = document.createElement('span');
       tally.className = 'section-tally';
       tally.textContent = visibleInCourse.length + ' entr' + (visibleInCourse.length===1?'y':'ies');
-      head.appendChild(code); head.appendChild(name); head.appendChild(tally);
+      head.appendChild(name); head.appendChild(tally);
       section.appendChild(head);
 
       var grid = document.createElement('div');
