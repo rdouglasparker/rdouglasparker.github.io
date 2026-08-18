@@ -13,8 +13,7 @@
     <line x1="0" y1="280" x2="1200" y2="280"/>
     <line x1="0" y1="350" x2="1200" y2="350"/>
   </g>
-  <text x="1160" y="300" text-anchor="end" font-family="'IBM Plex Mono', monospace" font-size="220" font-weight="600" fill="#D6C398" fill-opacity="0.16">351-04</text>
-  <g transform="translate(120,110)" fill="none" stroke="#D6C398" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+  <g transform="translate(500,110)" fill="none" stroke="#D6C398" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
     <path d="M0 170 L45 170 L80 90 L120 140 L160 40 L200 70"/>
     <circle cx="200" cy="70" r="7" fill="#D6C398" stroke="none"/>
   </g>
