@@ -9,19 +9,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --navy:#132242;
-    --navy-deep:#0A1730;
-    --navy-mid:#1C3157;
-    --gold:#B98A2E;
-    --gold-soft:#D9B45C;
-    --gold-pale:#F1E3BE;
+    --purple:#592C88;
+    --purple-deep:#38195A;
+    --purple-mid:#6E3FA3;
+    --gold:#B0925C;
+    --gold-soft:#D6C398;
+    --gold-pale:#F1E9D6;
     --parchment:#F7F4EC;
     --paper:#FFFEFA;
-    --ink:#1E2330;
-    --slate:#5C6270;
-    --line:#DAD4C2;
-    --line-soft:#E9E4D4;
-    --shadow: 0 1px 2px rgba(10,23,48,0.06), 0 6px 18px rgba(10,23,48,0.07);
+    --ink:#221B2E;
+    --slate:#5F5A6B;
+    --line:#DBD3E0;
+    --line-soft:#EAE4EF;
+    --shadow: 0 1px 2px rgba(56,25,90,0.07), 0 6px 18px rgba(56,25,90,0.08);
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
@@ -36,8 +36,8 @@
   a{ color:inherit; }
 
   header{
-    background: linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
-    color:#EFE9D8;
+    background: linear-gradient(180deg, var(--purple) 0%, var(--purple-deep) 100%);
+    color:#F1E9D6;
     padding: 42px 6vw 30px;
     position:relative;
   }
@@ -55,7 +55,7 @@
     font-family:'Source Serif 4', serif; font-weight:600;
     font-size:clamp(28px,4vw,42px); margin:0 0 8px; letter-spacing:-0.01em;
   }
-  .subtitle{ font-size:15px; color:#C7CBDA; max-width:640px; margin:0; }
+  .subtitle{ font-size:15px; color:#D9CDE5; max-width:640px; margin:0; }
 
   .toolbar{
     max-width:1180px; margin:0 auto; padding:22px 6vw 0;
@@ -68,7 +68,7 @@
   .toolbar input[type="text"]{ flex:1 1 220px; min-width:160px; }
   .toolbar select{ min-width:170px; }
   .toolbar input:focus, .toolbar select:focus{
-    outline:none; border-color:var(--navy-mid); box-shadow:0 0 0 3px rgba(19,34,66,0.08);
+    outline:none; border-color:var(--purple-mid); box-shadow:0 0 0 3px rgba(89,44,136,0.10);
   }
   .count-pill{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--slate); margin-left:auto; white-space:nowrap; }
 
@@ -77,13 +77,13 @@
   .section{ margin-top:38px; }
   .section-head{
     display:flex; align-items:baseline; gap:14px;
-    border-bottom:2px solid var(--navy); padding-bottom:8px; margin-bottom:18px;
+    border-bottom:2px solid var(--purple); padding-bottom:8px; margin-bottom:18px;
   }
   .section-code{
-    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--gold);
-    background:var(--navy); padding:3px 8px; border-radius:4px; letter-spacing:.03em;
+    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--gold-soft);
+    background:var(--purple); padding:3px 8px; border-radius:4px; letter-spacing:.03em;
   }
-  .section-name{ font-family:'Source Serif 4', serif; font-size:21px; font-weight:600; color:var(--navy); margin:0; }
+  .section-name{ font-family:'Source Serif 4', serif; font-size:21px; font-weight:600; color:var(--purple); margin:0; }
   .section-tally{ margin-left:auto; font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--slate); }
 
   .grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(270px, 1fr)); gap:18px; }
@@ -93,17 +93,17 @@
     overflow:hidden; box-shadow:var(--shadow); display:flex; flex-direction:column;
     transition: border-color .15s ease;
   }
-  .card:hover{ border-color:var(--gold-soft); }
+  .card:hover{ border-color:var(--gold); }
   .card-link{ text-decoration:none; color:inherit; display:flex; flex-direction:column; height:100%; }
-  .card-img{ height:140px; background:var(--navy); background-size:cover; background-position:center; position:relative; }
-  .card-img.placeholder{ background: linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 100%); }
+  .card-img{ height:140px; background:var(--purple); background-size:cover; background-position:center; position:relative; }
+  .card-img.placeholder{ background: linear-gradient(160deg, var(--purple) 0%, var(--purple-mid) 100%); }
   .card-img.placeholder::before{
     content:"\00a7"; position:absolute; right:14px; top:8px;
-    font-family:'Source Serif 4', serif; font-size:44px; color:rgba(217,180,92,0.28);
+    font-family:'Source Serif 4', serif; font-size:44px; color:rgba(214,195,152,0.32);
   }
   .entry-tag{
     font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--gold-pale);
-    background:rgba(10,23,48,0.55); padding:3px 8px; margin:10px; border-radius:4px;
+    background:rgba(56,25,90,0.55); padding:3px 8px; margin:10px; border-radius:4px;
     letter-spacing:.03em; position:absolute; top:0; left:0;
   }
   .card-body{ padding:14px 16px 16px; display:flex; flex-direction:column; gap:8px; flex:1; }
@@ -111,7 +111,7 @@
   .card-desc{ font-size:13.5px; color:var(--slate); margin:0; flex:1; }
   .card-foot{
     display:flex; align-items:center; gap:5px; margin-top:6px; padding-top:10px;
-    border-top:1px dashed var(--line); font-size:13px; font-weight:600; color:var(--navy);
+    border-top:1px dashed var(--line); font-size:13px; font-weight:600; color:var(--purple);
   }
   .card:hover .card-foot{ color:var(--gold); }
   .card-foot svg{ width:13px; height:13px; }
@@ -120,7 +120,7 @@
     border:1px dashed var(--line); border-radius:10px; padding:34px 20px;
     text-align:center; color:var(--slate); font-size:13.5px;
   }
-  .empty strong{ color:var(--navy); display:block; font-family:'Source Serif 4',serif; font-size:16px; margin-bottom:4px; font-weight:600; }
+  .empty strong{ color:var(--purple); display:block; font-family:'Source Serif 4',serif; font-size:16px; margin-bottom:4px; font-weight:600; }
 
   footer{ text-align:center; padding:26px 6vw 40px; font-size:12px; color:var(--slate); }
 
@@ -155,8 +155,10 @@
    HOW TO ADD, EDIT, OR REMOVE AN ASSIGNMENT
    ------------------------------------------------------------
    Everything below is one JavaScript array. Each assignment is
-   one { ... } block. To add a new one, copy a block, paste it
-   before the closing "];", and fill in your own values.
+   one { ... } block, separated by commas. To add a new one,
+   copy a block, paste it before the closing "];", and fill in
+   your own values. Every block except the last one needs a
+   comma after its closing "}".
 
    Fields:
      title        Required. What students will see as the name.
@@ -170,7 +172,7 @@
      image        Optional. Full URL to an image (jpg/png), e.g.
                   hosted in the same GitHub repo as your packets:
                   "https://raw.githubusercontent.com/you/repo/main/img/ch4.png"
-                  Leave as null for a plain navy placeholder card.
+                  Leave as null for a plain purple placeholder card.
 
    After editing, save the file and re-upload it to GitHub Pages
    (or wherever this page is hosted) — no other steps needed.
@@ -201,14 +203,14 @@ const ASSIGNMENTS = [
     link: "https://rdouglasparker.github.io/IncomeStatement_CashFlowReview/",
     image: null
   },
-    {
+  {
     title: "Chapter 12 — Debt Securities Packet",
     course: "ACCT 352",
     chapter: "Ch. 12",
     description: "Investment classification and valuation practice, algorithmic and self-contained.",
-    link: "https://rdouglasparker.github.io/DebtInvestmentProblems//",
+    link: "https://rdouglasparker.github.io/DebtInvestmentProblems/",
     image: null
-  }
+  },
   {
     title: "Chapter 12 — Equity Securities Packet",
     course: "ACCT 352",
