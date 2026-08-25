@@ -1,0 +1,23 @@
+<svg viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg8" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#592C88"/>
+      <stop offset="100%" stop-color="#38195A"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="400" fill="url(#bg8)"/>
+  <g stroke="#D6C398" stroke-opacity="0.14" stroke-width="1">
+    <line x1="0" y1="70" x2="1200" y2="70"/>
+    <line x1="0" y1="140" x2="1200" y2="140"/>
+    <line x1="0" y1="210" x2="1200" y2="210"/>
+    <line x1="0" y1="280" x2="1200" y2="280"/>
+    <line x1="0" y1="350" x2="1200" y2="350"/>
+  </g>
+  <g transform="translate(500,70)" fill="none" stroke="#D6C398" stroke-width="6" stroke-linejoin="round">
+    <rect x="40" y="130" width="120" height="50" rx="4"/>
+    <rect x="20" y="70" width="160" height="50" rx="4"/>
+    <rect x="0" y="10" width="200" height="50" rx="4"/>
+  </g>
+  <text x="600" y="300" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="20" letter-spacing="2" fill="#B0925C">ACCT 351 &#183; CH. 8</text>
+  <text x="600" y="335" text-anchor="middle" font-family="'Source Serif 4', serif" font-size="26" font-weight="600" fill="#F1E9D6">Inventory Costing Packet</text>
+</svg>
