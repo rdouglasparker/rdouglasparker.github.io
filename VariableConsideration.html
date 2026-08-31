@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Variable Consideration Exercises — Highlands Advisory &amp; Ridgeline Elevator Care</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --purple:#592C88;
+    --purple-deep:#38195A;
+    --purple-mid:#6E3FA3;
+    --gold:#B0925C;
+    --gold-soft:#D6C398;
+    --gold-pale:#F1E9D6;
+    --parchment:#F7F4EC;
+    --paper:#FFFEFA;
+    --ink:#221B2E;
+    --slate:#5F5A6B;
+    --line:#DBD3E0;
+    --line-soft:#EAE4EF;
+    --answer:#1E5C34;
+    --answer-bg:#E7F1E9;
+    --danger:#9C3B34;
+    --shadow: 0 1px 2px rgba(56,25,90,0.07), 0 6px 18px rgba(56,25,90,0.08);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--parchment);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{ color:inherit; }
+
+  .instructor-banner{
+    background:var(--danger); color:#fff; text-align:center;
+    font-family:'IBM Plex Mono', monospace; font-size:12px;
+    letter-spacing:.08em; text-transform:uppercase; padding:7px;
+  }
+
+  header{
+    background: linear-gradient(180deg, var(--purple) 0%, var(--purple-deep) 100%);
+    color:#F1E9D6;
+    padding: 30px 6vw 24px;
+    position:relative;
+  }
+  header::after{
+    content:"";
+    position:absolute; left:0; right:0; bottom:0; height:4px;
+    background: linear-gradient(90deg, var(--gold-soft), var(--gold) 40%, var(--gold-soft) 70%, var(--gold));
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--gold-soft); margin:0 0 10px;
+  }
+  h1.title{
+    font-family:'Source Serif 4', serif; font-weight:600;
+    font-size:clamp(24px,3.4vw,34px); margin:0 0 8px; letter-spacing:-0.01em;
+  }
+  .subtitle{ font-size:14.5px; color:#D9CDE5; max-width:680px; margin:0; }
+
+  .id-bar{
+    max-width:900px; margin:0 auto; padding:18px 6vw 0;
+    display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  }
+  .id-bar label{ font-size:13px; font-weight:600; color:var(--slate); }
+  .id-bar input[type="text"]{
+    font-family:'IBM Plex Mono', monospace; font-size:13.5px; padding:8px 11px;
+    border:1px solid var(--line); border-radius:5px; background:var(--paper); color:var(--ink);
+    width:180px;
+  }
+  .id-bar input:focus{ outline:none; border-color:var(--purple-mid); box-shadow:0 0 0 3px rgba(89,44,136,0.10); }
+  .id-bar button{
+    font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600;
+    border-radius:5px; padding:8px 15px; border:1px solid var(--purple);
+    background:var(--purple); color:#fff; cursor:pointer;
+  }
+  .id-bar button:hover{ background:var(--purple-mid); }
+
+  .rounding-note{
+    max-width:900px; margin:14px auto 0; padding:12px 6vw;
+    font-size:12.5px; color:var(--slate); line-height:1.5;
+  }
+  .rounding-note strong{ color:var(--purple); font-weight:600; }
+
+  main{ max-width:900px; margin:0 auto; padding:22px 6vw 90px; }
+
+  .part{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:10px;
+    box-shadow:var(--shadow);
+    padding:24px 26px 26px;
+    margin-top:26px;
+  }
+  .part-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; color:var(--gold); background:var(--purple);
+    display:inline-block; padding:3px 9px; border-radius:4px; letter-spacing:.04em;
+    margin-bottom:12px;
+  }
+  .part h2{
+    font-family:'Source Serif 4', serif; font-size:21px; font-weight:600;
+    color:var(--purple); margin:0 0 12px;
+  }
+  .scenario{
+    background:var(--parchment);
+    border-left:3px solid var(--gold);
+    padding:14px 18px;
+    border-radius:0 6px 6px 0;
+    font-size:14.5px;
+    color:var(--ink);
+    margin-bottom:20px;
+  }
+  .scenario p{ margin:0 0 10px; }
+  .scenario p:last-child{ margin-bottom:0; }
+  .scenario span.val{ font-weight:700; color:var(--purple-deep); }
+
+  .req{
+    font-weight:600;
+    font-size:14.5px;
+    color:var(--ink);
+    margin:20px 0 10px;
+  }
+  .req .letter{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--purple);
+    margin-right:6px;
+  }
+
+  table.worksheet{
+    width:100%;
+    border-collapse:collapse;
+    font-size:13.5px;
+    margin-bottom:8px;
+  }
+  table.worksheet th{
+    text-align:left;
+    font-size:11.5px;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+    color:var(--slate);
+    border-bottom:2px solid var(--purple);
+    padding:8px 8px;
+  }
+  table.worksheet td{
+    border-bottom:1px solid var(--line);
+    padding:9px 8px;
+    vertical-align:middle;
+  }
+  table.worksheet tr.total-row td{
+    border-top:2px solid var(--purple);
+    border-bottom:none;
+    font-weight:600;
+  }
+  table.worksheet input[type="text"]{
+    width:100%;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13.5px;
+    padding:6px 8px;
+    border:1px solid var(--line);
+    border-radius:5px;
+    background:var(--parchment);
+    color:var(--ink);
+  }
+  table.worksheet input[type="text"]:focus{
+    outline:none; border-color:var(--purple-mid); box-shadow:0 0 0 3px rgba(89,44,136,0.10); background:var(--paper);
+  }
+  select.pobligation{
+    width:100%;
+    font-family:'Inter',sans-serif;
+    font-size:13.5px;
+    padding:6px 8px;
+    border:1px solid var(--line);
+    border-radius:5px;
+    background:var(--parchment);
+    color:var(--ink);
+  }
+
+  .work-line{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:13.5px;
+    margin:6px 0;
+    flex-wrap:wrap;
+  }
+  .work-line label{ color:var(--slate); min-width:auto; }
+  .work-line input[type="text"]{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13.5px;
+    padding:6px 8px;
+    border:1px solid var(--line);
+    border-radius:5px;
+    background:var(--parchment);
+    color:var(--ink);
+    width:110px;
+  }
+
+  table.je{
+    width:100%;
+    border-collapse:collapse;
+    font-size:13.5px;
+    margin-top:6px;
+  }
+  table.je th{
+    text-align:left;
+    font-size:11.5px;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+    color:var(--slate);
+    border-bottom:2px solid var(--purple);
+    padding:8px 8px;
+  }
+  table.je td{
+    border-bottom:1px solid var(--line);
+    padding:8px 8px;
+  }
+  table.je input[type="text"]{
+    width:100%;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13.5px;
+    padding:6px 8px;
+    border:1px solid var(--line);
+    border-radius:5px;
+    background:var(--parchment);
+    color:var(--ink);
+  }
+  table.je select.coa-select{
+    width:100%;
+    font-family:'Inter',sans-serif;
+    font-size:13.5px;
+    padding:6px 8px;
+    border:1px solid var(--line);
+    border-radius:5px;
+    background:var(--parchment);
+    color:var(--ink);
+  }
+  table.je select.coa-select:focus, table.je input[type="text"]:focus{
+    outline:none; border-color:var(--purple-mid); box-shadow:0 0 0 3px rgba(89,44,136,0.10); background:var(--paper);
+  }
+  table.je td.indent input{ padding-left:22px; }
+  .je-hint{ font-size:12px; color:var(--slate); margin-top:6px; }
+
+  .key{
+    margin-top:14px;
+    background:var(--answer-bg);
+    border:1px solid #B7D3BE;
+    border-radius:8px;
+    padding:14px 16px;
+    color:var(--answer);
+    font-size:13.5px;
+  }
+  .key strong{ display:block; margin-bottom:6px; font-family:'Source Serif 4', serif; font-size:14.5px; }
+  .key table{ width:100%; border-collapse:collapse; font-size:13px; margin-top:4px; }
+  .key td{ padding:4px 6px; border-bottom:1px dashed #B7D3BE; }
+  .key tr:last-child td{ border-bottom:none; font-weight:600; }
+
+  .check-bar{
+    margin-top:20px;
+    padding-top:16px;
+    border-top:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+  .btn-check{
+    font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600;
+    border-radius:5px; padding:9px 18px; border:1px solid var(--purple);
+    background:var(--purple); color:#fff; cursor:pointer;
+  }
+  .btn-check:hover{ background:var(--purple-mid); }
+  .check-summary{ font-size:13.5px; font-weight:600; }
+  .check-summary.good{ color:var(--answer); }
+  .check-summary.bad{ color:var(--danger); }
+  .check-disclaimer{ font-size:11.5px; color:var(--slate); width:100%; margin-top:2px; font-style:italic; }
+
+  .score-bar{
+    margin-top:26px;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:10px;
+    box-shadow:var(--shadow);
+    padding:16px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .score-bar .score-label{ font-family:'Source Serif 4', serif; font-size:16px; font-weight:600; color:var(--purple); }
+  .score-bar .score-value{ font-family:'IBM Plex Mono', monospace; font-size:18px; font-weight:600; color:var(--ink); }
+  .score-bar .score-breakdown{ font-size:12.5px; color:var(--slate); width:100%; }
+
+  input.field-correct, select.field-correct{
+    border-color:var(--answer) !important;
+    background:var(--answer-bg) !important;
+  }
+  input.field-incorrect, select.field-incorrect{
+    border-color:var(--danger) !important;
+    background:#F3E1DE !important;
+  }
+
+  .submit-bar{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:10px;
+    box-shadow:var(--shadow);
+    padding:22px 26px 24px;
+    margin-top:26px;
+  }
+  .submit-bar h2{
+    font-family:'Source Serif 4', serif; font-size:19px; font-weight:600;
+    color:var(--purple); margin:0 0 14px;
+  }
+  .submit-row{ display:flex; align-items:center; gap:10px; margin-bottom:12px; flex-wrap:wrap; }
+  .submit-row label{ font-size:13px; font-weight:600; color:var(--slate); }
+  .submit-row input[type="text"]{
+    font-family:'Inter',sans-serif; font-size:13.5px; padding:8px 11px;
+    border:1px solid var(--line); border-radius:5px; background:var(--parchment); color:var(--ink);
+    width:240px;
+  }
+  .submit-row input:focus{ outline:none; border-color:var(--purple-mid); box-shadow:0 0 0 3px rgba(89,44,136,0.10); }
+  .btn-submit{
+    font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600;
+    border-radius:5px; padding:10px 18px; border:1px solid var(--purple);
+    background:var(--purple); color:#fff; cursor:pointer;
+  }
+  .btn-submit:hover{ background:var(--purple-mid); }
+  .btn-submit-outline{ background:var(--paper); color:var(--purple); }
+  .btn-submit-outline:hover{ background:var(--parchment); }
+  .submit-status{ font-size:13px; font-weight:600; min-height:18px; margin:10px 0 0; color:var(--answer); }
+  .submit-status.error{ color:var(--danger); }
+  .submit-hint{ font-size:12px; color:var(--slate); margin:6px 0 0; }
+
+  @media print{
+    .print-hide, .id-bar, .check-bar, .rounding-note{ display:none !important; }
+    header{ background:none !important; color:var(--ink) !important; padding:0 0 14px !important; }
+    header::after{ display:none !important; }
+    .eyebrow{ color:var(--purple) !important; }
+    .subtitle{ color:var(--slate) !important; }
+    body{ background:#fff !important; }
+    .part{ box-shadow:none !important; border:1px solid #999 !important; break-inside:avoid; }
+    .score-bar{ box-shadow:none !important; border:1.5px solid var(--purple) !important; break-inside:avoid; break-before:avoid; }
+    input[type="text"], select{
+      border:none !important;
+      border-bottom:1px solid #000 !important;
+      background:transparent !important;
+      border-radius:0 !important;
+      color:#000 !important;
+      -webkit-appearance:none;
+      appearance:none;
+      padding:2px 4px !important;
+    }
+    .print-name-line{ display:block !important; }
+  }
+  .print-name-line{ display:none; font-size:13px; color:var(--ink); padding:0 6vw; margin:0 0 10px; }
+
+  footer{ text-align:center; padding:26px 6vw 40px; font-size:12px; color:var(--slate); }
+
+  @media (max-width:600px){
+    header, main, .id-bar{ padding-left:5vw; padding-right:5vw; }
+    table.worksheet, table.je{ font-size:12.5px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">ACCT 351 &middot; Intermediate Accounting I &middot; Variable Consideration</p>
+  <h1 class="title">Variable Consideration Exercises</h1>
+  <p class="subtitle">Estimating variable consideration using the expected value method and the most likely amount method under ASC 606.</p>
+</header>
+
+<p class="print-name-line" id="printNameLine"></p>
+<p class="print-name-line" id="printScoreLine" style="font-weight:600;"></p>
+
+<div class="id-bar">
+  <label for="studentId">Student ID</label>
+  <input type="text" id="studentId" placeholder="e.g. 92841016">
+  <button id="genBtn" type="button">Generate scenario</button>
+</div>
+
+<div class="rounding-note">
+  <strong>Rounding convention:</strong> round every dollar figure to the nearest cent as you work through each calculation. When a monthly amount doesn't divide evenly, round that monthly figure first, then use the rounded figure in any further calculation (such as a multi-month catch-up adjustment).
+</div>
+
+<main>
+
+  <div class="part">
+    <span class="part-label">Exercise 1 &middot; Expected Value Method</span>
+    <h2>Highlands Advisory Group</h2>
+    <div class="scenario">
+      <p>On January 1, Highlands Advisory Group entered into a contract to complete a cost-reduction program for Cowee Valley Manufacturing over a six-month period. Highlands will receive <span class="val" id="sE1Monthly">$44,000</span> from Cowee Valley at the end of each month. If total cost savings reach a specific target, Highlands will receive an additional <span class="val" id="sE1Var">$22,000</span> from Cowee Valley at the end of the contract, but if total cost savings fall short, Highlands will refund <span class="val" id="sE1Var2">$22,000</span> to Cowee Valley. Highlands estimates an <span class="val" id="sE1Prob">80%</span> chance that cost savings will reach the target and calculates the contract price based on the expected value of future payments to be received.</p>
+    </div>
+
+    <div class="req"><span class="letter">1.</span>Prepare the journal entry on January 31 to record the collection of cash and recognition of the first month's revenue.</div>
+    <table class="je">
+      <thead>
+        <tr><th style="width:54%;">Account</th><th style="width:23%;">Debit</th><th style="width:23%;">Credit</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><select class="coa-select" id="e1je1-r1-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="e1je1-cash-debit"></td><td><input type="text" placeholder="$" id="e1je1-r1-credit"></td></tr>
+        <tr><td class="indent"><select class="coa-select" id="e1je1-r2-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="e1je1-contractasset-debit"></td><td><input type="text" placeholder="$" id="e1je1-r2-credit"></td></tr>
+        <tr><td class="indent"><select class="coa-select" id="e1je1-r3-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="e1je1-r3-debit"></td><td><input type="text" placeholder="$" id="e1je1-revenue-credit"></td></tr>
+        <tr><td class="indent"><select class="coa-select" id="e1je1-r4-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="e1je1-r4-debit"></td><td><input type="text" placeholder="$" id="e1je1-r4-credit"></td></tr>
+      </tbody>
+    </table>
+    <p class="je-hint">Not every row above needs to be used — include only the accounts your analysis calls for, and leave any unneeded row blank.</p>
+
+    <div class="req"><span class="letter">2.</span>Assuming total cost savings exceed target, prepare the journal entry on June 30 to record receipt of the bonus.</div>
+    <table class="je">
+      <thead>
+        <tr><th style="width:54%;">Account</th><th style="width:23%;">Debit</th><th style="width:23%;">Credit</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><select class="coa-select" id="e1je2-r1-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="e1je2-cash-debit"></td><td><input type="text" placeholder="$" id="e1je2-r1-credit"></td></tr>
+        <tr><td class="indent"><select class="coa-select" id="e1je2-r2-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="e1je2-r2-debit"></td><td><input type="text" placeholder="$" id="e1je2-contractasset-credit"></td></tr>
+        <tr><td class="indent"><select class="coa-select" id="e1je2-r3-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="e1je2-r3-debit"></td><td><input type="text" placeholder="$" id="e1je2-revenue-credit"></td></tr>
+        <tr><td class="indent"><select class="coa-select" id="e1je2-r4-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="e1je2-r4-debit"></td><td><input type="text" placeholder="$" id="e1je2-r4-credit"></td></tr>
+      </tbody>
+    </table>
+    <p class="je-hint">Not every row above needs to be used — include only the accounts your analysis calls for, and leave any unneeded row blank.</p>
+
+    <div class="req"><span class="letter">3.</span>Assuming total cost savings fall short of target, prepare the journal entry on June 30 to record payment of the penalty.</div>
+    <table class="je">
+      <thead>
+        <tr><th style="width:54%;">Account</th><th style="width:23%;">Debit</th><th style="width:23%;">Credit</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><select class="coa-select" id="e1je3-r1-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="e1je3-revenue-debit"></td><td><input type="text" placeholder="$" id="e1je3-r1-credit"></td></tr>
+        <tr><td class="indent"><select class="coa-select" id="e1je3-r2-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="e1je3-r2-debit"></td><td><input type="text" placeholder="$" id="e1je3-cash-credit"></td></tr>
+        <tr><td class="indent"><select class="coa-select" id="e1je3-r3-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="e1je3-r3-debit"></td><td><input type="text" placeholder="$" id="e1je3-contractasset-credit"></td></tr>
+        <tr><td class="indent"><select class="coa-select" id="e1je3-r4-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="e1je3-r4-debit"></td><td><input type="text" placeholder="$" id="e1je3-r4-credit"></td></tr>
+      </tbody>
+    </table>
+    <p class="je-hint">Not every row above needs to be used — include only the accounts your analysis calls for, and leave any unneeded row blank.</p>
+
+    <div class="check-bar">
+      <button class="btn-check" id="checkE1" type="button">Check my work</button>
+      <span class="check-summary" id="e1Summary"></span>
+      <span class="check-disclaimer">This checks whether the accounts you selected and the dollar amounts you entered match the key within a small rounding tolerance.</span>
+    </div>
+  </div>
+
+  <div class="part">
+    <span class="part-label">Exercise 2 &middot; Most Likely Amount Method</span>
+    <h2>Ridgeline Elevator Care</h2>
+    <div class="scenario">
+      <p>Since 1988, Ridgeline Elevator Care has provided maintenance services for elevators. On January 1, 2027, Ridgeline obtains a contract to maintain the elevators in a <span class="val" id="sE2Floors">50</span>-story office tower in <span class="val" id="sE2City">Charlotte, NC</span> for 10 months and receives a fixed payment of <span class="val" id="sE2Fixed">$93,000</span>. The contract specifies that Ridgeline will receive an additional <span class="val" id="sE2Bonus">$46,500</span> at the end of the 10 months if there is no unexpected delay, stoppage, or accident during the year. Ridgeline estimates variable consideration to be the most likely amount it will receive.</p>
+    </div>
+
+    <div class="req"><span class="letter">1.</span>Assume that, because the building sees a constant flux of people throughout the day, Ridgeline is allowed to access the elevators and related mechanical equipment only between 3 a.m. and 5 a.m. on any given day, which is insufficient to perform some of the more time-consuming repair work. As a result, Ridgeline believes that unexpected delays are likely and that it will not earn the bonus. Prepare the journal entry Ridgeline would record on January 1.</div>
+    <table class="je">
+      <thead>
+        <tr><th style="width:54%;">Account</th><th style="width:23%;">Debit</th><th style="width:23%;">Credit</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><select class="coa-select" id="e2je1-r1-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="e2je1-cash-debit"></td><td><input type="text" placeholder="$" id="e2je1-r1-credit"></td></tr>
+        <tr><td class="indent"><select class="coa-select" id="e2je1-r2-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="e2je1-r2-debit"></td><td><input type="text" placeholder="$" id="e2je1-deferred-credit"></td></tr>
+        <tr><td class="indent"><select class="coa-select" id="e2je1-r3-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="e2je1-r3-debit"></td><td><input type="text" placeholder="$" id="e2je1-r3-credit"></td></tr>
+      </tbody>
+    </table>
+    <p class="je-hint">Not every row above needs to be used — include only the accounts your analysis calls for, and leave any unneeded row blank.</p>
+
+    <div class="req"><span class="letter">2.</span>Assume instead that Ridgeline knows at the inception of the contract that it will be given unlimited access to the elevators and related equipment each day, with the right to schedule repair sessions any time. When given these terms and conditions, Ridgeline has never had any delays or accidents in the past. Prepare the journal entry Ridgeline would record on January 31 to record one month of revenue.</div>
+    <table class="je">
+      <thead>
+        <tr><th style="width:54%;">Account</th><th style="width:23%;">Debit</th><th style="width:23%;">Credit</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><select class="coa-select" id="e2je2-r1-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="e2je2-deferred-debit"></td><td><input type="text" placeholder="$" id="e2je2-r1-credit"></td></tr>
+        <tr><td class="indent"><select class="coa-select" id="e2je2-r2-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="e2je2-contractasset-debit"></td><td><input type="text" placeholder="$" id="e2je2-r2-credit"></td></tr>
+        <tr><td class="indent"><select class="coa-select" id="e2je2-r3-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="e2je2-r3-debit"></td><td><input type="text" placeholder="$" id="e2je2-revenue-credit"></td></tr>
+        <tr><td class="indent"><select class="coa-select" id="e2je2-r4-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="e2je2-r4-debit"></td><td><input type="text" placeholder="$" id="e2je2-r4-credit"></td></tr>
+      </tbody>
+    </table>
+    <p class="je-hint">Not every row above needs to be used — include only the accounts your analysis calls for, and leave any unneeded row blank.</p>
+
+    <div class="req"><span class="letter">3.</span>Assume the same facts as requirement 1. In addition, assume that, on May 31, Ridgeline determines that it does not need to spend more than two hours on any given day to operate the elevator safely because the client's elevator is relatively new. Therefore, Ridgeline believes that unexpected delays are very unlikely. Prepare the journal entry Ridgeline would record on May 31 to recognize May revenue and any necessary revision in its estimated bonus receivable.</div>
+    <table class="je">
+      <thead>
+        <tr><th style="width:54%;">Account</th><th style="width:23%;">Debit</th><th style="width:23%;">Credit</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><select class="coa-select" id="e2je3-r1-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="e2je3-deferred-debit"></td><td><input type="text" placeholder="$" id="e2je3-r1-credit"></td></tr>
+        <tr><td class="indent"><select class="coa-select" id="e2je3-r2-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="e2je3-contractasset-debit"></td><td><input type="text" placeholder="$" id="e2je3-r2-credit"></td></tr>
+        <tr><td class="indent"><select class="coa-select" id="e2je3-r3-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="e2je3-r3-debit"></td><td><input type="text" placeholder="$" id="e2je3-revenue-credit"></td></tr>
+        <tr><td class="indent"><select class="coa-select" id="e2je3-r4-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="e2je3-r4-debit"></td><td><input type="text" placeholder="$" id="e2je3-r4-credit"></td></tr>
+      </tbody>
+    </table>
+    <p class="je-hint">Not every row above needs to be used — include only the accounts your analysis calls for, and leave any unneeded row blank. Consider months January through May (five months elapsed) when sizing any revision.</p>
+
+    <div class="check-bar">
+      <button class="btn-check" id="checkE2" type="button">Check my work</button>
+      <span class="check-summary" id="e2Summary"></span>
+      <span class="check-disclaimer">This checks whether the accounts you selected and the dollar amounts you entered match the key within a small rounding tolerance.</span>
+    </div>
+  </div>
+
+  <div class="score-bar">
+    <span class="score-label">Assignment score</span>
+    <span class="score-value" id="overallScore">Check both exercises to see your score</span>
+    <span class="score-breakdown" id="scoreBreakdown"></span>
+  </div>
+
+  <div class="submit-bar print-hide">
+    <h2>Ready to submit?</h2>
+    <div class="submit-row">
+      <label for="studentName">Your name</label>
+      <input type="text" id="studentName" placeholder="First and last name">
+    </div>
+    <div class="submit-row submit-actions">
+      <button class="btn-submit" id="printBtn" type="button">Print / Save as PDF</button>
+      <button class="btn-submit btn-submit-outline" id="downloadDocxBtn" type="button">Download as Word (.docx)</button>
+    </div>
+    <p class="submit-status" id="submitStatus"></p>
+    <p class="submit-hint">Both options capture exactly what's currently filled in above, including your generated scenario numbers. "Print / Save as PDF" works offline; "Download as Word" needs an internet connection to load the export tool.</p>
+  </div>
+
+</main>
+
+<footer>Variable Consideration Exercises &middot; ACCT 351 &middot; Western Carolina University</footer>
+
+<script>
+(function(){
+  function hashSeed(str){
+    var h = 2166136261;
+    for(var i=0;i<str.length;i++){
+      h ^= str.charCodeAt(i);
+      h = Math.imul(h, 16777619);
+    }
+    return h >>> 0;
+  }
+  function mulberry32(seed){
+    return function(){
+      seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+      var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  function pick(rand, arr){ return arr[Math.floor(rand() * arr.length)]; }
+  function round2(n){ return Math.round(n * 100) / 100; }
+
+  var CHART_OF_ACCOUNTS = {
+    'Assets': ['Cash', 'Accounts Receivable', 'Contract Asset', 'Prepaid Expenses'],
+    'Liabilities': ['Accounts Payable', 'Deferred Revenue', 'Refund Liability'],
+    'Equity': ['Common Stock', 'Retained Earnings'],
+    'Revenues': ['Service Revenue', 'Consulting Revenue', 'Interest Revenue'],
+    'Expenses': ['Cost of Services', 'Selling Expenses', 'Bad Debt Expense']
+  };
+
+  function populateCoaSelects(){
+    var optHtml = '<option value="">Select account\u2026</option>';
+    Object.keys(CHART_OF_ACCOUNTS).forEach(function(group){
+      optHtml += '<optgroup label="'+group+'">';
+      CHART_OF_ACCOUNTS[group].forEach(function(acct){
+        optHtml += '<option value="'+acct+'">'+acct+'</option>';
+      });
+      optHtml += '</optgroup>';
+    });
+    document.querySelectorAll('select.coa-select').forEach(function(sel){
+      if(!sel.dataset.populated){
+        sel.innerHTML = optHtml;
+        sel.dataset.populated = '1';
+      }
+    });
+  }
+
+  function money0(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
+  function money2(n){
+    var r = round2(n);
+    return '$' + r.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+  }
+
+  function generateScenario(id){
+    var seedStr = (id || 'demo').trim().toLowerCase();
+    var rand = mulberry32(hashSeed(seedStr));
+
+    // Exercise 1 - expected value method
+    var e1Monthly = pick(rand, [40000,42000,44000,46000,48000,50000]);
+    var e1Var = pick(rand, [18000,20000,22000,24000,26000]);
+    var e1ProbPct = pick(rand, [65,70,75,80,85,90]);
+
+    var e1EV = round2(e1Var * (2*e1ProbPct/100 - 1));
+    var e1MonthlyRevenue = round2(e1Monthly + e1EV/6);
+    var e1ContractAssetMonthly = round2(e1EV/6);
+
+    var e1JE2Revenue = round2(e1Var - e1EV);
+    var e1JE3Revenue = round2(e1Var + e1EV);
+
+    // Exercise 2 - most likely amount method
+    var e2Fixed = pick(rand, [80000,85000,90000,93000,95000,100000]);
+    var e2Bonus = pick(rand, [40000,42000,45000,46500,48000,50000]);
+    var e2Floors = pick(rand, [30,40,50,60,70,80,90]);
+    var e2City = pick(rand, ['Charlotte, NC','Raleigh, NC','Atlanta, GA','Nashville, TN','Richmond, VA']);
+
+    var e2Monthly = round2(e2Fixed/10);
+    var e2BonusMonthly = round2(e2Bonus/10);
+    var e2TotalMonthly = round2(e2Monthly + e2BonusMonthly);
+    var e2Catchup = round2(5 * e2BonusMonthly);
+    var e2JE3Revenue = round2(e2Monthly + e2Catchup);
+
+    return {
+      e1Monthly: e1Monthly, e1Var: e1Var, e1ProbPct: e1ProbPct, e1EV: e1EV,
+      e1MonthlyRevenue: e1MonthlyRevenue, e1ContractAssetMonthly: e1ContractAssetMonthly,
+      e1JE2Revenue: e1JE2Revenue, e1JE3Revenue: e1JE3Revenue,
+      e2Fixed: e2Fixed, e2Bonus: e2Bonus, e2Floors: e2Floors, e2City: e2City,
+      e2Monthly: e2Monthly, e2BonusMonthly: e2BonusMonthly, e2TotalMonthly: e2TotalMonthly,
+      e2Catchup: e2Catchup, e2JE3Revenue: e2JE3Revenue
+    };
+  }
+
+  function setText(id, text){
+    var el = document.getElementById(id);
+    if(el) el.textContent = text;
+  }
+
+  function applyScenario(d){
+    setText('sE1Monthly', money0(d.e1Monthly));
+    setText('sE1Var', money0(d.e1Var));
+    setText('sE1Var2', money0(d.e1Var));
+    setText('sE1Prob', d.e1ProbPct + '%');
+
+    setText('sE2Floors', d.e2Floors);
+    setText('sE2City', d.e2City);
+    setText('sE2Fixed', money0(d.e2Fixed));
+    setText('sE2Bonus', money0(d.e2Bonus));
+  }
+
+  var idInput = document.getElementById('studentId');
+  var genBtn = document.getElementById('genBtn');
+  var currentScenario = null;
+  var scoreState = { e1: null, e2: null };
+
+  function applyAndStore(id){
+    currentScenario = generateScenario(id);
+    applyScenario(currentScenario);
+    clearAllFieldStates();
+    scoreState.e1 = null;
+    scoreState.e2 = null;
+    ['e1Summary','e2Summary'].forEach(function(elId){
+      var el = document.getElementById(elId);
+      if(el){ el.textContent = ''; el.classList.remove('good','bad'); }
+    });
+    if(typeof updateOverallScore === 'function') updateOverallScore();
+  }
+
+  genBtn.addEventListener('click', function(){
+    applyAndStore(idInput.value);
+  });
+  idInput.addEventListener('keydown', function(e){
+    if(e.key === 'Enter') applyAndStore(idInput.value);
+  });
+
+  populateCoaSelects();
+  applyAndStore('');
+
+  // ---------------- Check my work ----------------
+  function parseMoney(s){
+    if(s === null || s === undefined) return NaN;
+    var cleaned = String(s).replace(/[^0-9.\-]/g, '');
+    if(cleaned === '' || cleaned === '-') return NaN;
+    return parseFloat(cleaned);
+  }
+  function parsePct(s){
+    if(s === null || s === undefined) return NaN;
+    var cleaned = String(s).replace(/[^0-9.\-]/g, '');
+    if(cleaned === '' || cleaned === '-') return NaN;
+    return parseFloat(cleaned);
+  }
+  function near(a, b, tol){
+    if(isNaN(a) || isNaN(b)) return false;
+    return Math.abs(a - b) <= tol;
+  }
+  function clearFieldState(el){
+    if(!el) return;
+    el.classList.remove('field-correct', 'field-incorrect');
+  }
+  function clearAllFieldStates(){
+    document.querySelectorAll('.field-correct, .field-incorrect').forEach(function(el){
+      el.classList.remove('field-correct', 'field-incorrect');
+    });
+  }
+  function markMoney(id, correct, tol){
+    var el = document.getElementById(id);
+    if(!el) return null;
+    el.classList.remove('field-correct', 'field-incorrect');
+    var val = parseMoney(el.value);
+    var ok = near(val, correct, tol === undefined ? 0.02 : tol);
+    el.classList.add(ok ? 'field-correct' : 'field-incorrect');
+    if(!el.dataset.clearBound){
+      el.addEventListener('input', function(){ clearFieldState(el); });
+      el.dataset.clearBound = '1';
+    }
+    return ok;
+  }
+  function markPct(id, correct, tol){
+    var el = document.getElementById(id);
+    if(!el) return null;
+    el.classList.remove('field-correct', 'field-incorrect');
+    var val = parsePct(el.value);
+    var ok = near(val, correct, tol === undefined ? 0.5 : tol);
+    el.classList.add(ok ? 'field-correct' : 'field-incorrect');
+    if(!el.dataset.clearBound){
+      el.addEventListener('input', function(){ clearFieldState(el); });
+      el.dataset.clearBound = '1';
+    }
+    return ok;
+  }
+  function markSelect(id, correct){
+    var el = document.getElementById(id);
+    if(!el) return null;
+    el.classList.remove('field-correct', 'field-incorrect');
+    var ok = el.value === correct;
+    el.classList.add(ok ? 'field-correct' : 'field-incorrect');
+    if(!el.dataset.clearBound){
+      el.addEventListener('change', function(){ clearFieldState(el); });
+      el.dataset.clearBound = '1';
+    }
+    return ok;
+  }
+  function updateSummary(elId, results, pointsPossible){
+    var el = document.getElementById(elId);
+    var graded = results.filter(function(r){ return r !== null; }).length;
+    var correct = results.filter(function(r){ return r === true; }).length;
+    var points = graded > 0 ? (correct / graded) * pointsPossible : 0;
+    el.textContent = correct + ' of ' + graded + ' correct \u2014 ' + points.toFixed(1) + ' of ' + pointsPossible.toFixed(1) + ' pts';
+    el.classList.remove('good', 'bad');
+    el.classList.add(correct === graded && graded > 0 ? 'good' : 'bad');
+    return points;
+  }
+
+  var TOTAL_POINTS = 100;
+  var E1_ITEM_COUNT = 18; // 9 accounts + 9 amounts
+  var E2_ITEM_COUNT = 16; // 8 accounts + 8 amounts
+  var TOTAL_ITEM_COUNT = E1_ITEM_COUNT + E2_ITEM_COUNT;
+  var POINTS_PER_ITEM = TOTAL_POINTS / TOTAL_ITEM_COUNT;
+  var E1_POSSIBLE = E1_ITEM_COUNT * POINTS_PER_ITEM;
+  var E2_POSSIBLE = E2_ITEM_COUNT * POINTS_PER_ITEM;
+
+  function updateOverallScore(){
+    var el = document.getElementById('overallScore');
+    var breakdown = document.getElementById('scoreBreakdown');
+    if(scoreState.e1 === null && scoreState.e2 === null){
+      el.textContent = 'Check both exercises to see your score';
+      breakdown.textContent = '';
+      return;
+    }
+    var p1 = scoreState.e1 === null ? 0 : scoreState.e1;
+    var p2 = scoreState.e2 === null ? 0 : scoreState.e2;
+    var total = p1 + p2;
+    el.textContent = total.toFixed(1) + ' / ' + TOTAL_POINTS.toFixed(1) + ' pts';
+    breakdown.textContent =
+      'Exercise 1: ' + (scoreState.e1 === null ? 'not checked yet' : scoreState.e1.toFixed(1) + ' / ' + E1_POSSIBLE.toFixed(1) + ' pts') +
+      '  \u00b7  Exercise 2: ' + (scoreState.e2 === null ? 'not checked yet' : scoreState.e2.toFixed(1) + ' / ' + E2_POSSIBLE.toFixed(1) + ' pts');
+  }
+
+  document.getElementById('checkE1').addEventListener('click', function(){
+    if(!currentScenario) return;
+    var d = currentScenario;
+    var results = [];
+    results.push(markSelect('e1je1-r1-account', 'Cash'));
+    results.push(markSelect('e1je1-r2-account', 'Contract Asset'));
+    results.push(markSelect('e1je1-r3-account', 'Service Revenue'));
+    results.push(markMoney('e1je1-cash-debit', d.e1Monthly));
+    results.push(markMoney('e1je1-contractasset-debit', d.e1ContractAssetMonthly));
+    results.push(markMoney('e1je1-revenue-credit', d.e1MonthlyRevenue));
+    results.push(markSelect('e1je2-r1-account', 'Cash'));
+    results.push(markSelect('e1je2-r2-account', 'Contract Asset'));
+    results.push(markSelect('e1je2-r3-account', 'Service Revenue'));
+    results.push(markMoney('e1je2-cash-debit', d.e1Var));
+    results.push(markMoney('e1je2-contractasset-credit', d.e1EV));
+    results.push(markMoney('e1je2-revenue-credit', d.e1JE2Revenue));
+    results.push(markSelect('e1je3-r1-account', 'Service Revenue'));
+    results.push(markSelect('e1je3-r2-account', 'Cash'));
+    results.push(markSelect('e1je3-r3-account', 'Contract Asset'));
+    results.push(markMoney('e1je3-revenue-debit', d.e1JE3Revenue));
+    results.push(markMoney('e1je3-cash-credit', d.e1Var));
+    results.push(markMoney('e1je3-contractasset-credit', d.e1EV));
+    scoreState.e1 = updateSummary('e1Summary', results, E1_POSSIBLE);
+    updateOverallScore();
+  });
+
+  document.getElementById('checkE2').addEventListener('click', function(){
+    if(!currentScenario) return;
+    var d = currentScenario;
+    var results = [];
+    results.push(markSelect('e2je1-r1-account', 'Cash'));
+    results.push(markSelect('e2je1-r2-account', 'Deferred Revenue'));
+    results.push(markMoney('e2je1-cash-debit', d.e2Fixed));
+    results.push(markMoney('e2je1-deferred-credit', d.e2Fixed));
+    results.push(markSelect('e2je2-r1-account', 'Deferred Revenue'));
+    results.push(markSelect('e2je2-r2-account', 'Contract Asset'));
+    results.push(markSelect('e2je2-r3-account', 'Service Revenue'));
+    results.push(markMoney('e2je2-deferred-debit', d.e2Monthly));
+    results.push(markMoney('e2je2-contractasset-debit', d.e2BonusMonthly));
+    results.push(markMoney('e2je2-revenue-credit', d.e2TotalMonthly));
+    results.push(markSelect('e2je3-r1-account', 'Deferred Revenue'));
+    results.push(markSelect('e2je3-r2-account', 'Contract Asset'));
+    results.push(markSelect('e2je3-r3-account', 'Service Revenue'));
+    results.push(markMoney('e2je3-deferred-debit', d.e2Monthly));
+    results.push(markMoney('e2je3-contractasset-debit', d.e2Catchup));
+    results.push(markMoney('e2je3-revenue-credit', d.e2JE3Revenue));
+    scoreState.e2 = updateSummary('e2Summary', results, E2_POSSIBLE);
+    updateOverallScore();
+  });
+
+  // ---------------- Print / Save as PDF ----------------
+  function val(id){
+    var el = document.getElementById(id);
+    return el ? el.value.trim() : '';
+  }
+  function selVal(id){
+    var el = document.getElementById(id);
+    if(!el) return '';
+    var opt = el.options[el.selectedIndex];
+    return opt ? opt.textContent : '';
+  }
+
+  document.getElementById('printBtn').addEventListener('click', function(){
+    var name = val('studentName');
+    var id = val('studentId');
+    var line = document.getElementById('printNameLine');
+    line.textContent = 'Name: ' + (name || '_______________________') + '     Student ID: ' + (id || '_______________________');
+    var scoreLine = document.getElementById('printScoreLine');
+    var scoreText = document.getElementById('overallScore').textContent;
+    var breakdownText = document.getElementById('scoreBreakdown').textContent;
+    scoreLine.textContent = 'Score: ' + scoreText + (breakdownText ? '  (' + breakdownText + ')' : '');
+    var oldTitle = document.title;
+    document.title = 'VariableConsideration-' + (id || 'submission');
+    window.print();
+    document.title = oldTitle;
+  });
+
+  // ---------------- Download as Word (.docx) ----------------
+  var docxLoadPromise = null;
+  function loadDocxLib(){
+    if(window.docx) return Promise.resolve();
+    if(docxLoadPromise) return docxLoadPromise;
+    docxLoadPromise = new Promise(function(resolve, reject){
+      var s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js';
+      s.onload = function(){ window.docx ? resolve() : reject(new Error('docx library did not load correctly')); };
+      s.onerror = function(){ reject(new Error('network error loading docx library')); };
+      document.head.appendChild(s);
+    });
+    return docxLoadPromise;
+  }
+
+  function blankIfEmpty(s){ return s && s.length ? s : '\u2014'; }
+
+  function buildAnswersDoc(){
+    var D = window.docx;
+    var PURPLE = '592C88', INK = '221B2E', SLATE = '5F5A6B';
+    var name = blankIfEmpty(val('studentName'));
+    var sid = blankIfEmpty(val('studentId'));
+
+    function h(text, size){
+      return new D.Paragraph({ spacing: { before: 200, after: 100 }, children: [new D.TextRun({ text: text, bold: true, color: PURPLE, size: size || 26 })] });
+    }
+    function p(text, opts){
+      opts = opts || {};
+      return new D.Paragraph({ spacing: { before: 60, after: 60 }, children: [new D.TextRun({ text: text, size: 20, color: opts.color || INK, bold: !!opts.bold })] });
+    }
+    function cell(text, width, opts){
+      opts = opts || {};
+      return new D.TableCell({
+        width: { size: width, type: D.WidthType.DXA },
+        shading: opts.shading ? { type: D.ShadingType.CLEAR, fill: opts.shading } : undefined,
+        margins: { top: 60, bottom: 60, left: 90, right: 90 },
+        children: [new D.Paragraph({ children: [new D.TextRun({ text: text, size: 19, bold: !!opts.bold, color: opts.color || INK })] })]
+      });
+    }
+    function row(cells){ return new D.TableRow({ children: cells }); }
+    function table(widths, rows){
+      return new D.Table({ width: { size: widths.reduce(function(a,b){return a+b;},0), type: D.WidthType.DXA }, columnWidths: widths, rows: rows });
+    }
+
+    var COLSJE = [5148, 2059, 2153];
+
+    function jeTable(rows){
+      var body = [row([cell('Account', COLSJE[0], {bold:true, shading:PURPLE, color:'FFFFFF'}), cell('Debit', COLSJE[1], {bold:true, shading:PURPLE, color:'FFFFFF'}), cell('Credit', COLSJE[2], {bold:true, shading:PURPLE, color:'FFFFFF'})])];
+      rows.forEach(function(ids){
+        body.push(row([cell(blankIfEmpty(selVal(ids[0])), COLSJE[0]), cell(blankIfEmpty(val(ids[1])), COLSJE[1]), cell(blankIfEmpty(val(ids[2])), COLSJE[2])]));
+      });
+      return table(COLSJE, body);
+    }
+
+    var children = [];
+    children.push(new D.Paragraph({ heading: D.HeadingLevel.TITLE, spacing: { after: 60 }, children: [new D.TextRun({ text: 'Variable Consideration Exercises', color: PURPLE, size: 32, bold: true })] }));
+    children.push(p('Name: ' + name + '     Student ID: ' + sid, { bold: true }));
+    children.push(p('ACCT 351  ·  Variable Consideration  ·  ASC 606', { color: SLATE }));
+
+    var scoreText = (document.getElementById('overallScore') || {}).textContent || '';
+    var breakdownText = (document.getElementById('scoreBreakdown') || {}).textContent || '';
+    children.push(new D.Paragraph({
+      spacing: { before: 200, after: 60 },
+      border: { top: { style: D.BorderStyle.SINGLE, size: 6, color: PURPLE }, bottom: { style: D.BorderStyle.SINGLE, size: 6, color: PURPLE } },
+      children: [new D.TextRun({ text: 'Assignment score', bold: true, color: PURPLE, size: 24 })]
+    }));
+    children.push(new D.Paragraph({ spacing: { before: 40, after: 20 }, children: [new D.TextRun({ text: scoreText, bold: true, color: INK, size: 24 })] }));
+    if (breakdownText) children.push(new D.Paragraph({ spacing: { after: 100 }, children: [new D.TextRun({ text: breakdownText, color: SLATE, size: 18 })] }));
+
+    children.push(h('Exercise 1 — Highlands Advisory Group (expected value method)'));
+    children.push(p('Requirement 1 — January 31 journal entry:', { bold: true }));
+    children.push(jeTable([
+      ['e1je1-r1-account','e1je1-cash-debit','e1je1-r1-credit'],
+      ['e1je1-r2-account','e1je1-contractasset-debit','e1je1-r2-credit'],
+      ['e1je1-r3-account','e1je1-r3-debit','e1je1-revenue-credit'],
+      ['e1je1-r4-account','e1je1-r4-debit','e1je1-r4-credit']
+    ]));
+    children.push(p('Requirement 2 — June 30 journal entry (bonus earned):', { bold: true }));
+    children.push(jeTable([
+      ['e1je2-r1-account','e1je2-cash-debit','e1je2-r1-credit'],
+      ['e1je2-r2-account','e1je2-r2-debit','e1je2-contractasset-credit'],
+      ['e1je2-r3-account','e1je2-r3-debit','e1je2-revenue-credit'],
+      ['e1je2-r4-account','e1je2-r4-debit','e1je2-r4-credit']
+    ]));
+    children.push(p('Requirement 3 — June 30 journal entry (penalty incurred):', { bold: true }));
+    children.push(jeTable([
+      ['e1je3-r1-account','e1je3-revenue-debit','e1je3-r1-credit'],
+      ['e1je3-r2-account','e1je3-r2-debit','e1je3-cash-credit'],
+      ['e1je3-r3-account','e1je3-r3-debit','e1je3-contractasset-credit'],
+      ['e1je3-r4-account','e1je3-r4-debit','e1je3-r4-credit']
+    ]));
+
+    children.push(h('Exercise 2 — Ridgeline Elevator Care (most likely amount method)'));
+    children.push(p('Requirement 1 — January 1 journal entry:', { bold: true }));
+    children.push(jeTable([
+      ['e2je1-r1-account','e2je1-cash-debit','e2je1-r1-credit'],
+      ['e2je1-r2-account','e2je1-r2-debit','e2je1-deferred-credit'],
+      ['e2je1-r3-account','e2je1-r3-debit','e2je1-r3-credit']
+    ]));
+    children.push(p('Requirement 2 — January 31 journal entry:', { bold: true }));
+    children.push(jeTable([
+      ['e2je2-r1-account','e2je2-deferred-debit','e2je2-r1-credit'],
+      ['e2je2-r2-account','e2je2-contractasset-debit','e2je2-r2-credit'],
+      ['e2je2-r3-account','e2je2-r3-debit','e2je2-revenue-credit'],
+      ['e2je2-r4-account','e2je2-r4-debit','e2je2-r4-credit']
+    ]));
+    children.push(p('Requirement 3 — May 31 journal entry:', { bold: true }));
+    children.push(jeTable([
+      ['e2je3-r1-account','e2je3-deferred-debit','e2je3-r1-credit'],
+      ['e2je3-r2-account','e2je3-contractasset-debit','e2je3-r2-credit'],
+      ['e2je3-r3-account','e2je3-r3-debit','e2je3-revenue-credit'],
+      ['e2je3-r4-account','e2je3-r4-debit','e2je3-r4-credit']
+    ]));
+
+    children.push(new D.Paragraph({ spacing: { before: 300 }, alignment: D.AlignmentType.CENTER, children: [new D.TextRun({ text: 'Variable Consideration Exercises  ·  ACCT 351  ·  Western Carolina University', size: 16, italics: true, color: SLATE })] }));
+
+    return new D.Document({
+      sections: [{
+        properties: { page: { size: { width: 12240, height: 15840 }, margin: { top: 1440, bottom: 1440, left: 1440, right: 1440 } } },
+        children: children
+      }]
+    });
+  }
+
+  document.getElementById('downloadDocxBtn').addEventListener('click', function(){
+    var statusEl = document.getElementById('submitStatus');
+    statusEl.classList.remove('error');
+    statusEl.textContent = 'Preparing your Word document\u2026';
+    loadDocxLib().then(function(){
+      var doc = buildAnswersDoc();
+      return window.docx.Packer.toBlob(doc);
+    }).then(function(blob){
+      var idPart = val('studentId') || 'submission';
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'VariableConsideration-' + idPart + '.docx';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      statusEl.textContent = 'Downloaded.';
+      setTimeout(function(){ statusEl.textContent = ''; }, 4000);
+    }).catch(function(err){
+      statusEl.classList.add('error');
+      statusEl.textContent = 'Could not load the Word export tool (needs internet access) \u2014 use Print / Save as PDF instead.';
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
