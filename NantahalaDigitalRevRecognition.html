@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revenue Recognition Case — Nantahala Digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --purple:#592C88;
+    --purple-deep:#38195A;
+    --purple-mid:#6E3FA3;
+    --gold:#B0925C;
+    --gold-soft:#D6C398;
+    --gold-pale:#F1E9D6;
+    --parchment:#F7F4EC;
+    --paper:#FFFEFA;
+    --ink:#221B2E;
+    --slate:#5F5A6B;
+    --line:#DBD3E0;
+    --line-soft:#EAE4EF;
+    --answer:#1E5C34;
+    --answer-bg:#E7F1E9;
+    --danger:#9C3B34;
+    --shadow: 0 1px 2px rgba(56,25,90,0.07), 0 6px 18px rgba(56,25,90,0.08);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--parchment);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{ color:inherit; }
+
+  .instructor-banner{
+    background:var(--danger); color:#fff; text-align:center;
+    font-family:'IBM Plex Mono', monospace; font-size:12px;
+    letter-spacing:.08em; text-transform:uppercase; padding:7px;
+  }
+
+  header{
+    background: linear-gradient(180deg, var(--purple) 0%, var(--purple-deep) 100%);
+    color:#F1E9D6;
+    padding: 30px 6vw 24px;
+    position:relative;
+  }
+  header::after{
+    content:"";
+    position:absolute; left:0; right:0; bottom:0; height:4px;
+    background: linear-gradient(90deg, var(--gold-soft), var(--gold) 40%, var(--gold-soft) 70%, var(--gold));
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--gold-soft); margin:0 0 10px;
+  }
+  h1.title{
+    font-family:'Source Serif 4', serif; font-weight:600;
+    font-size:clamp(24px,3.4vw,34px); margin:0 0 8px; letter-spacing:-0.01em;
+  }
+  .subtitle{ font-size:14.5px; color:#D9CDE5; max-width:680px; margin:0; }
+
+  .id-bar{
+    max-width:900px; margin:0 auto; padding:18px 6vw 0;
+    display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  }
+  .id-bar label{ font-size:13px; font-weight:600; color:var(--slate); }
+  .id-bar input[type="text"]{
+    font-family:'IBM Plex Mono', monospace; font-size:13.5px; padding:8px 11px;
+    border:1px solid var(--line); border-radius:5px; background:var(--paper); color:var(--ink);
+    width:180px;
+  }
+  .id-bar input:focus{ outline:none; border-color:var(--purple-mid); box-shadow:0 0 0 3px rgba(89,44,136,0.10); }
+  .id-bar button{
+    font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600;
+    border-radius:5px; padding:8px 15px; border:1px solid var(--purple);
+    background:var(--purple); color:#fff; cursor:pointer;
+  }
+  .id-bar button:hover{ background:var(--purple-mid); }
+
+  .rounding-note{
+    max-width:900px; margin:14px auto 0; padding:12px 6vw;
+    font-size:12.5px; color:var(--slate); line-height:1.5;
+  }
+  .rounding-note strong{ color:var(--purple); font-weight:600; }
+
+  main{ max-width:900px; margin:0 auto; padding:22px 6vw 90px; }
+
+  .part{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:10px;
+    box-shadow:var(--shadow);
+    padding:24px 26px 26px;
+    margin-top:26px;
+  }
+  .part-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; color:var(--gold); background:var(--purple);
+    display:inline-block; padding:3px 9px; border-radius:4px; letter-spacing:.04em;
+    margin-bottom:12px;
+  }
+  .part h2{
+    font-family:'Source Serif 4', serif; font-size:21px; font-weight:600;
+    color:var(--purple); margin:0 0 12px;
+  }
+  .scenario{
+    background:var(--parchment);
+    border-left:3px solid var(--gold);
+    padding:14px 18px;
+    border-radius:0 6px 6px 0;
+    font-size:14.5px;
+    color:var(--ink);
+    margin-bottom:20px;
+  }
+  .scenario p{ margin:0 0 10px; }
+  .scenario p:last-child{ margin-bottom:0; }
+  .scenario span.val{ font-weight:700; color:var(--purple-deep); }
+
+  .req{
+    font-weight:600;
+    font-size:14.5px;
+    color:var(--ink);
+    margin:20px 0 10px;
+  }
+  .req .letter{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--purple);
+    margin-right:6px;
+  }
+
+  table.worksheet{
+    width:100%;
+    border-collapse:collapse;
+    font-size:13.5px;
+    margin-bottom:8px;
+  }
+  table.worksheet th{
+    text-align:left;
+    font-size:11.5px;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+    color:var(--slate);
+    border-bottom:2px solid var(--purple);
+    padding:8px 8px;
+  }
+  table.worksheet td{
+    border-bottom:1px solid var(--line);
+    padding:9px 8px;
+    vertical-align:middle;
+  }
+  table.worksheet tr.total-row td{
+    border-top:2px solid var(--purple);
+    border-bottom:none;
+    font-weight:600;
+  }
+  table.worksheet input[type="text"]{
+    width:100%;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13.5px;
+    padding:6px 8px;
+    border:1px solid var(--line);
+    border-radius:5px;
+    background:var(--parchment);
+    color:var(--ink);
+  }
+  table.worksheet input[type="text"]:focus{
+    outline:none; border-color:var(--purple-mid); box-shadow:0 0 0 3px rgba(89,44,136,0.10); background:var(--paper);
+  }
+  select.pobligation{
+    width:100%;
+    font-family:'Inter',sans-serif;
+    font-size:13.5px;
+    padding:6px 8px;
+    border:1px solid var(--line);
+    border-radius:5px;
+    background:var(--parchment);
+    color:var(--ink);
+  }
+
+  .work-line{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:13.5px;
+    margin:6px 0;
+    flex-wrap:wrap;
+  }
+  .work-line label{ color:var(--slate); min-width:auto; }
+  .work-line input[type="text"]{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13.5px;
+    padding:6px 8px;
+    border:1px solid var(--line);
+    border-radius:5px;
+    background:var(--parchment);
+    color:var(--ink);
+    width:110px;
+  }
+
+  table.je{
+    width:100%;
+    border-collapse:collapse;
+    font-size:13.5px;
+    margin-top:6px;
+  }
+  table.je th{
+    text-align:left;
+    font-size:11.5px;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+    color:var(--slate);
+    border-bottom:2px solid var(--purple);
+    padding:8px 8px;
+  }
+  table.je td{
+    border-bottom:1px solid var(--line);
+    padding:8px 8px;
+  }
+  table.je input[type="text"]{
+    width:100%;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13.5px;
+    padding:6px 8px;
+    border:1px solid var(--line);
+    border-radius:5px;
+    background:var(--parchment);
+    color:var(--ink);
+  }
+  table.je select.coa-select{
+    width:100%;
+    font-family:'Inter',sans-serif;
+    font-size:13.5px;
+    padding:6px 8px;
+    border:1px solid var(--line);
+    border-radius:5px;
+    background:var(--parchment);
+    color:var(--ink);
+  }
+  table.je select.coa-select:focus, table.je input[type="text"]:focus{
+    outline:none; border-color:var(--purple-mid); box-shadow:0 0 0 3px rgba(89,44,136,0.10); background:var(--paper);
+  }
+  table.je td.indent input{ padding-left:22px; }
+  .je-hint{ font-size:12px; color:var(--slate); margin-top:6px; }
+
+  .key{
+    margin-top:14px;
+    background:var(--answer-bg);
+    border:1px solid #B7D3BE;
+    border-radius:8px;
+    padding:14px 16px;
+    color:var(--answer);
+    font-size:13.5px;
+  }
+  .key strong{ display:block; margin-bottom:6px; font-family:'Source Serif 4', serif; font-size:14.5px; }
+  .key table{ width:100%; border-collapse:collapse; font-size:13px; margin-top:4px; }
+  .key td{ padding:4px 6px; border-bottom:1px dashed #B7D3BE; }
+  .key tr:last-child td{ border-bottom:none; font-weight:600; }
+
+  .check-bar{
+    margin-top:20px;
+    padding-top:16px;
+    border-top:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+  .btn-check{
+    font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600;
+    border-radius:5px; padding:9px 18px; border:1px solid var(--purple);
+    background:var(--purple); color:#fff; cursor:pointer;
+  }
+  .btn-check:hover{ background:var(--purple-mid); }
+  .check-summary{ font-size:13.5px; font-weight:600; }
+  .check-summary.good{ color:var(--answer); }
+  .check-summary.bad{ color:var(--danger); }
+  .check-disclaimer{ font-size:11.5px; color:var(--slate); width:100%; margin-top:2px; font-style:italic; }
+
+  .score-bar{
+    margin-top:26px;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:10px;
+    box-shadow:var(--shadow);
+    padding:16px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .score-bar .score-label{ font-family:'Source Serif 4', serif; font-size:16px; font-weight:600; color:var(--purple); }
+  .score-bar .score-value{ font-family:'IBM Plex Mono', monospace; font-size:18px; font-weight:600; color:var(--ink); }
+  .score-bar .score-breakdown{ font-size:12.5px; color:var(--slate); width:100%; }
+
+  input.field-correct, select.field-correct{
+    border-color:var(--answer) !important;
+    background:var(--answer-bg) !important;
+  }
+  input.field-incorrect, select.field-incorrect{
+    border-color:var(--danger) !important;
+    background:#F3E1DE !important;
+  }
+
+  .submit-bar{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:10px;
+    box-shadow:var(--shadow);
+    padding:22px 26px 24px;
+    margin-top:26px;
+  }
+  .submit-bar h2{
+    font-family:'Source Serif 4', serif; font-size:19px; font-weight:600;
+    color:var(--purple); margin:0 0 14px;
+  }
+  .submit-row{ display:flex; align-items:center; gap:10px; margin-bottom:12px; flex-wrap:wrap; }
+  .submit-row label{ font-size:13px; font-weight:600; color:var(--slate); }
+  .submit-row input[type="text"]{
+    font-family:'Inter',sans-serif; font-size:13.5px; padding:8px 11px;
+    border:1px solid var(--line); border-radius:5px; background:var(--parchment); color:var(--ink);
+    width:240px;
+  }
+  .submit-row input:focus{ outline:none; border-color:var(--purple-mid); box-shadow:0 0 0 3px rgba(89,44,136,0.10); }
+  .btn-submit{
+    font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600;
+    border-radius:5px; padding:10px 18px; border:1px solid var(--purple);
+    background:var(--purple); color:#fff; cursor:pointer;
+  }
+  .btn-submit:hover{ background:var(--purple-mid); }
+  .btn-submit-outline{ background:var(--paper); color:var(--purple); }
+  .btn-submit-outline:hover{ background:var(--parchment); }
+  .submit-status{ font-size:13px; font-weight:600; min-height:18px; margin:10px 0 0; color:var(--answer); }
+  .submit-status.error{ color:var(--danger); }
+  .submit-hint{ font-size:12px; color:var(--slate); margin:6px 0 0; }
+
+  @media print{
+    .print-hide, .id-bar, .check-bar, .rounding-note{ display:none !important; }
+    header{ background:none !important; color:var(--ink) !important; padding:0 0 14px !important; }
+    header::after{ display:none !important; }
+    .eyebrow{ color:var(--purple) !important; }
+    .subtitle{ color:var(--slate) !important; }
+    body{ background:#fff !important; }
+    .part{ box-shadow:none !important; border:1px solid #999 !important; break-inside:avoid; }
+    .score-bar{ box-shadow:none !important; border:1.5px solid var(--purple) !important; break-inside:avoid; break-before:avoid; }
+    input[type="text"], select{
+      border:none !important;
+      border-bottom:1px solid #000 !important;
+      background:transparent !important;
+      border-radius:0 !important;
+      color:#000 !important;
+      -webkit-appearance:none;
+      appearance:none;
+      padding:2px 4px !important;
+    }
+    .print-name-line{ display:block !important; }
+  }
+  .print-name-line{ display:none; font-size:13px; color:var(--ink); padding:0 6vw; margin:0 0 10px; }
+
+  footer{ text-align:center; padding:26px 6vw 40px; font-size:12px; color:var(--slate); }
+
+  @media (max-width:600px){
+    header, main, .id-bar{ padding-left:5vw; padding-right:5vw; }
+    table.worksheet, table.je{ font-size:12.5px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">ACCT 351 &middot; Intermediate Accounting I &middot; Multiple-Element Arrangements</p>
+  <h1 class="title">Nantahala Digital</h1>
+  <p class="subtitle">Identifying performance obligations and allocating a bundled transaction price under ASC 606.</p>
+</header>
+
+<p class="print-name-line" id="printNameLine"></p>
+<p class="print-name-line" id="printScoreLine" style="font-weight:600;"></p>
+
+<div class="id-bar">
+  <label for="studentId">Student ID</label>
+  <input type="text" id="studentId" placeholder="e.g. 92841016">
+  <button id="genBtn" type="button">Generate scenario</button>
+</div>
+
+<div class="rounding-note">
+  <strong>Rounding convention:</strong> when allocating the transaction price, divide each performance obligation's standalone selling price (or expected value, for a material right) by the total standalone selling price, and round that percentage to two decimal places. Multiply the package price by that rounded percentage, then round the resulting dollar allocation to the nearest cent. When you scale a per-unit amount up to the full quantity sold, small rounding differences of a few hundred dollars on multi-million-dollar totals are expected and are not an error.
+</div>
+
+<main>
+
+  <div class="part">
+    <span class="part-label">Requirements 1 &amp; 2</span>
+    <h2>Performance obligations and allocation</h2>
+    <div class="scenario">
+      <p>Nantahala Digital sells a tablet computer called the <strong>Trailrunner</strong>. The <span class="val" id="sPackagePrice">$875</span> sales price of a Trailrunner Package includes: one Trailrunner tablet; a six-month limited warranty guaranteeing that Nantahala will cover repair or replacement costs for defective products for up to six months; a coupon to purchase a Nantahala PageFinder e-reader for <span class="val" id="sCouponPrice">$180</span>, a price that represents a <span class="val" id="sCouponDiscountPct">50%</span> discount from the regular PageFinder price of <span class="val" id="sRegularReaderPrice">$360</span> (Nantahala expects <span class="val" id="sRedemptionPct">25%</span> of these coupons to be redeemed); and a coupon to purchase a one-year extended warranty for <span class="val" id="sExtWarrantyPrice">$70</span> &mdash; the same <span class="val" id="sExtWarrantyPrice2">$70</span> price customers can pay for the extended warranty at other times as well (Nantahala estimates <span class="val" id="sExtWarrantyPurchasePct">45%</span> of customers will purchase an extended warranty).</p>
+      <p>Nantahala does not sell the Trailrunner without the limited warranty, the option to purchase a PageFinder, and the option to purchase an extended warranty, but estimates that if it did so, a Trailrunner alone would sell for <span class="val" id="sStandalonePrice">$855</span>. All Trailrunner sales are made in cash.</p>
+    </div>
+
+    <div class="req"><span class="letter">1 &amp; 2.</span>For each item below, indicate whether it is a separate performance obligation, then allocate a portion of the <span class="val" id="sPackagePrice2">$875</span> package price to each performance obligation you identify.</div>
+
+    <table class="worksheet">
+      <thead>
+        <tr>
+          <th style="width:26%;">Item</th>
+          <th style="width:18%;">Separate performance obligation?</th>
+          <th style="width:19%;">Standalone selling price / expected value</th>
+          <th style="width:37%;">Allocated transaction price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Trailrunner tablet</td>
+          <td>
+            <select class="pobligation" id="tablet-po">
+              <option value="">Select&hellip;</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </td>
+          <td><input type="text" placeholder="$" id="tablet-standalone"></td>
+          <td><input type="text" placeholder="$" id="tablet-allocated"></td>
+        </tr>
+        <tr>
+          <td>Six-month limited warranty</td>
+          <td>
+            <select class="pobligation" id="warranty-po">
+              <option value="">Select&hellip;</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </td>
+          <td><input type="text" placeholder="$"></td>
+          <td><input type="text" placeholder="$" id="warranty-allocated"></td>
+        </tr>
+        <tr>
+          <td>PageFinder e-reader coupon</td>
+          <td>
+            <select class="pobligation" id="reader-po">
+              <option value="">Select&hellip;</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </td>
+          <td><input type="text" placeholder="$" id="reader-standalone"></td>
+          <td><input type="text" placeholder="$" id="reader-allocated"></td>
+        </tr>
+        <tr>
+          <td>Extended warranty coupon</td>
+          <td>
+            <select class="pobligation" id="extwarranty-po">
+              <option value="">Select&hellip;</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </td>
+          <td><input type="text" placeholder="$"></td>
+          <td><input type="text" placeholder="$" id="extwarranty-allocated"></td>
+        </tr>
+        <tr class="total-row">
+          <td>Total</td>
+          <td></td>
+          <td><input type="text" placeholder="$" id="total-standalone"></td>
+          <td><input type="text" placeholder="$" id="total-allocated"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="req" style="margin-top:16px;">Show your work for the PageFinder coupon's material right:</div>
+    <div class="work-line">
+      <label>Regular PageFinder price:</label>
+      <input type="text" placeholder="$" id="reg-price"> &minus;
+      <label>Coupon price:</label>
+      <input type="text" placeholder="$" id="coup-price"> =
+      <input type="text" placeholder="$" id="disc-amt">
+    </div>
+    <div class="work-line">
+      <label>Discount per unit:</label>
+      <input type="text" placeholder="$" id="disc-amt-2"> &times;
+      <label>Expected redemption rate:</label>
+      <input type="text" placeholder="%" id="redemp-pct"> =
+      <input type="text" placeholder="$" id="reader-ev">
+    </div>
+    <p class="je-hint">Note: not every row in the table above will require a numeric entry — some items are not separate performance obligations. Explain your reasoning briefly for any item you mark "No."</p>
+
+    <div class="check-bar">
+      <button class="btn-check" id="checkReq12" type="button">Check my work</button>
+      <span class="check-summary" id="req12Summary"></span>
+      <span class="check-disclaimer">This checks whether your final numbers match the key within a reasonable rounding tolerance — it does not confirm your reasoning for which items are separate performance obligations.</span>
+    </div>
+  </div>
+
+  <div class="part">
+    <span class="part-label">Requirement 3</span>
+    <h2>Journal entry</h2>
+    <div class="req"><span class="letter">3.</span>Prepare a journal entry to record sales of <span class="val" id="sUnitsSold">90,000</span> Trailrunner Packages (ignore any sales of extended warranties).</div>
+
+    <table class="je">
+      <thead>
+        <tr><th style="width:54%;">Account</th><th style="width:23%;">Debit</th><th style="width:23%;">Credit</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><select class="coa-select" id="je1-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="je1-debit"></td><td><input type="text" placeholder="$" id="je1-credit"></td></tr>
+        <tr><td class="indent"><select class="coa-select" id="je2-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="je2-debit"></td><td><input type="text" placeholder="$" id="je2-credit"></td></tr>
+        <tr><td class="indent"><select class="coa-select" id="je3-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="je3-debit"></td><td><input type="text" placeholder="$" id="je3-credit"></td></tr>
+        <tr><td class="indent"><select class="coa-select" id="je4-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="je4-debit"></td><td><input type="text" placeholder="$" id="je4-credit"></td></tr>
+      </tbody>
+    </table>
+    <p class="je-hint">Not every row above needs to be used — include only the accounts your analysis calls for, and leave any unneeded row blank.</p>
+
+    <div class="check-bar">
+      <button class="btn-check" id="checkReq3" type="button">Check my work</button>
+      <span class="check-summary" id="req3Summary"></span>
+      <span class="check-disclaimer">This checks whether the accounts you selected and the dollar amounts you entered match the key within a reasonable rounding tolerance.</span>
+    </div>
+  </div>
+
+  <div class="score-bar">
+    <span class="score-label">Assignment score</span>
+    <span class="score-value" id="overallScore">Check both requirements to see your score</span>
+    <span class="score-breakdown" id="scoreBreakdown"></span>
+  </div>
+
+  <div class="submit-bar print-hide">
+    <h2>Ready to submit?</h2>
+    <div class="submit-row">
+      <label for="studentName">Your name</label>
+      <input type="text" id="studentName" placeholder="First and last name">
+    </div>
+    <div class="submit-row submit-actions">
+      <button class="btn-submit" id="printBtn" type="button">Print / Save as PDF</button>
+      <button class="btn-submit btn-submit-outline" id="downloadDocxBtn" type="button">Download as Word (.docx)</button>
+    </div>
+    <p class="submit-status" id="submitStatus"></p>
+    <p class="submit-hint">Both options capture exactly what's currently filled in above, including your generated scenario numbers. "Print / Save as PDF" works offline; "Download as Word" needs an internet connection to load the export tool.</p>
+  </div>
+
+</main>
+
+<footer>Nantahala Digital Revenue Recognition Case &middot; ACCT 351 &middot; Western Carolina University</footer>
+
+<script>
+(function(){
+  function hashSeed(str){
+    var h = 2166136261;
+    for(var i=0;i<str.length;i++){
+      h ^= str.charCodeAt(i);
+      h = Math.imul(h, 16777619);
+    }
+    return h >>> 0;
+  }
+  function mulberry32(seed){
+    return function(){
+      seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+      var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  function pick(rand, arr){ return arr[Math.floor(rand() * arr.length)]; }
+  function round2(n){ return Math.round(n * 100) / 100; }
+
+  var CHART_OF_ACCOUNTS = {
+    'Assets': ['Cash', 'Accounts Receivable', 'Inventory', 'Prepaid Expenses'],
+    'Liabilities': ['Accounts Payable', 'Deferred Revenue\u2014PageFinder Coupons', 'Deferred Revenue\u2014Extended Warranty', 'Warranty Liability', 'Unearned Revenue'],
+    'Equity': ['Common Stock', 'Retained Earnings'],
+    'Revenues': ['Sales Revenue\u2014Trailrunner Tablets', 'Sales Revenue\u2014PageFinder E-Readers', 'Extended Warranty Revenue', 'Service Revenue'],
+    'Expenses': ['Cost of Goods Sold', 'Warranty Expense', 'Selling Expenses', 'Bad Debt Expense']
+  };
+
+  function populateCoaSelects(){
+    var optHtml = '<option value="">Select account\u2026</option>';
+    Object.keys(CHART_OF_ACCOUNTS).forEach(function(group){
+      optHtml += '<optgroup label="'+group+'">';
+      CHART_OF_ACCOUNTS[group].forEach(function(acct){
+        optHtml += '<option value="'+acct+'">'+acct+'</option>';
+      });
+      optHtml += '</optgroup>';
+    });
+    document.querySelectorAll('select.coa-select').forEach(function(sel){
+      if(!sel.dataset.populated){
+        sel.innerHTML = optHtml;
+        sel.dataset.populated = '1';
+      }
+    });
+  }
+
+  function money0(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
+  function money2(n){
+    var r = round2(n);
+    return '$' + r.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+  }
+
+  function generateScenario(id){
+    var seedStr = (id || 'demo').trim().toLowerCase();
+    var rand = mulberry32(hashSeed(seedStr));
+
+    var packagePrice = pick(rand, [825,850,875,900,925]);
+    var gap = pick(rand, [15,20,25,30,35]);
+    var standalonePrice = packagePrice - gap;
+
+    var regularReaderPrice = pick(rand, [320,340,360,380,400]);
+    var couponDiscountPct = pick(rand, [40,45,50,55,60]);
+    var redemptionPct = pick(rand, [15,20,25,30,35,40]);
+
+    var extWarrantyPrice = pick(rand, [50,60,70,80,90]);
+    var extWarrantyPurchasePct = pick(rand, [35,40,45,50,55]);
+
+    var unitsSold = pick(rand, [70000,80000,90000,100000,110000]);
+
+    var couponPrice = round2(regularReaderPrice * (1 - couponDiscountPct/100));
+    var discountAmt = round2(regularReaderPrice - couponPrice);
+    var readerRightEV = round2(discountAmt * redemptionPct/100);
+
+    var totalStandalone = round2(standalonePrice + readerRightEV);
+    var tabletPct = round2((standalonePrice/totalStandalone) * 10000) / 100;
+    var readerPct = round2((readerRightEV/totalStandalone) * 10000) / 100;
+
+    var tabletAlloc = round2(packagePrice * tabletPct/100);
+    var readerAlloc = round2(packagePrice * readerPct/100);
+
+    var cashTotal = round2(packagePrice * unitsSold);
+    var revenueTotal = round2(tabletAlloc * unitsSold);
+    var deferredTotal = round2(readerAlloc * unitsSold);
+    var unitTolerance = round2(Math.max(50, 0.02 * unitsSold));
+
+    return {
+      packagePrice: packagePrice, standalonePrice: standalonePrice, gap: gap,
+      regularReaderPrice: regularReaderPrice, couponDiscountPct: couponDiscountPct, couponPrice: couponPrice,
+      discountAmt: discountAmt, redemptionPct: redemptionPct, readerRightEV: readerRightEV,
+      extWarrantyPrice: extWarrantyPrice, extWarrantyPurchasePct: extWarrantyPurchasePct,
+      unitsSold: unitsSold, totalStandalone: totalStandalone, tabletPct: tabletPct, readerPct: readerPct,
+      tabletAlloc: tabletAlloc, readerAlloc: readerAlloc, cashTotal: cashTotal,
+      revenueTotal: revenueTotal, deferredTotal: deferredTotal, unitTolerance: unitTolerance
+    };
+  }
+
+  function setText(id, text){
+    var el = document.getElementById(id);
+    if(el) el.textContent = text;
+  }
+
+  function applyScenario(d){
+    setText('sPackagePrice', money0(d.packagePrice));
+    setText('sPackagePrice2', money0(d.packagePrice));
+    setText('sCouponPrice', money0(d.couponPrice));
+    setText('sCouponDiscountPct', d.couponDiscountPct + '%');
+    setText('sRegularReaderPrice', money0(d.regularReaderPrice));
+    setText('sRedemptionPct', d.redemptionPct + '%');
+    setText('sExtWarrantyPrice', money0(d.extWarrantyPrice));
+    setText('sExtWarrantyPrice2', money0(d.extWarrantyPrice));
+    setText('sExtWarrantyPurchasePct', d.extWarrantyPurchasePct + '%');
+    setText('sStandalonePrice', money0(d.standalonePrice));
+    setText('sUnitsSold', d.unitsSold.toLocaleString('en-US'));
+  }
+
+  var idInput = document.getElementById('studentId');
+  var genBtn = document.getElementById('genBtn');
+  var currentScenario = null;
+  var scoreState = { req12: null, req3: null };
+
+  function applyAndStore(id){
+    currentScenario = generateScenario(id);
+    applyScenario(currentScenario);
+    clearAllFieldStates();
+    scoreState.req12 = null;
+    scoreState.req3 = null;
+    ['req12Summary','req3Summary'].forEach(function(elId){
+      var el = document.getElementById(elId);
+      if(el){ el.textContent = ''; el.classList.remove('good','bad'); }
+    });
+    if(typeof updateOverallScore === 'function') updateOverallScore();
+  }
+
+  genBtn.addEventListener('click', function(){
+    applyAndStore(idInput.value);
+  });
+  idInput.addEventListener('keydown', function(e){
+    if(e.key === 'Enter') applyAndStore(idInput.value);
+  });
+
+  populateCoaSelects();
+  applyAndStore('');
+
+  // ---------------- Check my work ----------------
+  function parseMoney(s){
+    if(s === null || s === undefined) return NaN;
+    var cleaned = String(s).replace(/[^0-9.\-]/g, '');
+    if(cleaned === '' || cleaned === '-') return NaN;
+    return parseFloat(cleaned);
+  }
+  function parsePct(s){
+    if(s === null || s === undefined) return NaN;
+    var cleaned = String(s).replace(/[^0-9.\-]/g, '');
+    if(cleaned === '' || cleaned === '-') return NaN;
+    return parseFloat(cleaned);
+  }
+  function near(a, b, tol){
+    if(isNaN(a) || isNaN(b)) return false;
+    return Math.abs(a - b) <= tol;
+  }
+  function clearFieldState(el){
+    if(!el) return;
+    el.classList.remove('field-correct', 'field-incorrect');
+  }
+  function clearAllFieldStates(){
+    document.querySelectorAll('.field-correct, .field-incorrect').forEach(function(el){
+      el.classList.remove('field-correct', 'field-incorrect');
+    });
+  }
+  function markMoney(id, correct, tol){
+    var el = document.getElementById(id);
+    if(!el) return null;
+    el.classList.remove('field-correct', 'field-incorrect');
+    var val = parseMoney(el.value);
+    var ok = near(val, correct, tol === undefined ? 0.02 : tol);
+    el.classList.add(ok ? 'field-correct' : 'field-incorrect');
+    if(!el.dataset.clearBound){
+      el.addEventListener('input', function(){ clearFieldState(el); });
+      el.dataset.clearBound = '1';
+    }
+    return ok;
+  }
+  function markPct(id, correct, tol){
+    var el = document.getElementById(id);
+    if(!el) return null;
+    el.classList.remove('field-correct', 'field-incorrect');
+    var val = parsePct(el.value);
+    var ok = near(val, correct, tol === undefined ? 0.5 : tol);
+    el.classList.add(ok ? 'field-correct' : 'field-incorrect');
+    if(!el.dataset.clearBound){
+      el.addEventListener('input', function(){ clearFieldState(el); });
+      el.dataset.clearBound = '1';
+    }
+    return ok;
+  }
+  function markSelect(id, correct){
+    var el = document.getElementById(id);
+    if(!el) return null;
+    el.classList.remove('field-correct', 'field-incorrect');
+    var ok = el.value === correct;
+    el.classList.add(ok ? 'field-correct' : 'field-incorrect');
+    if(!el.dataset.clearBound){
+      el.addEventListener('change', function(){ clearFieldState(el); });
+      el.dataset.clearBound = '1';
+    }
+    return ok;
+  }
+  function updateSummary(elId, results, pointsPossible){
+    var el = document.getElementById(elId);
+    var graded = results.filter(function(r){ return r !== null; }).length;
+    var correct = results.filter(function(r){ return r === true; }).length;
+    var points = graded > 0 ? (correct / graded) * pointsPossible : 0;
+    el.textContent = correct + ' of ' + graded + ' correct \u2014 ' + points.toFixed(1) + ' of ' + pointsPossible.toFixed(1) + ' pts';
+    el.classList.remove('good', 'bad');
+    el.classList.add(correct === graded && graded > 0 ? 'good' : 'bad');
+    return points;
+  }
+
+  var TOTAL_POINTS = 100;
+  var REQ12_ITEM_COUNT = 16;
+  var REQ3_ITEM_COUNT = 6; // 3 accounts + 3 amounts (je4 is an intentional unused decoy row)
+  var TOTAL_ITEM_COUNT = REQ12_ITEM_COUNT + REQ3_ITEM_COUNT;
+  var POINTS_PER_ITEM = TOTAL_POINTS / TOTAL_ITEM_COUNT;
+  var REQ12_POSSIBLE = REQ12_ITEM_COUNT * POINTS_PER_ITEM;
+  var REQ3_POSSIBLE = REQ3_ITEM_COUNT * POINTS_PER_ITEM;
+
+  function updateOverallScore(){
+    var el = document.getElementById('overallScore');
+    var breakdown = document.getElementById('scoreBreakdown');
+    if(scoreState.req12 === null && scoreState.req3 === null){
+      el.textContent = 'Check both requirements to see your score';
+      breakdown.textContent = '';
+      return;
+    }
+    var r1 = scoreState.req12 === null ? 0 : scoreState.req12;
+    var r2 = scoreState.req3 === null ? 0 : scoreState.req3;
+    var total = r1 + r2;
+    el.textContent = total.toFixed(1) + ' / ' + TOTAL_POINTS.toFixed(1) + ' pts';
+    breakdown.textContent =
+      'Requirements 1 & 2: ' + (scoreState.req12 === null ? 'not checked yet' : scoreState.req12.toFixed(1) + ' / ' + REQ12_POSSIBLE.toFixed(1) + ' pts') +
+      '  \u00b7  Requirement 3: ' + (scoreState.req3 === null ? 'not checked yet' : scoreState.req3.toFixed(1) + ' / ' + REQ3_POSSIBLE.toFixed(1) + ' pts');
+  }
+
+  document.getElementById('checkReq12').addEventListener('click', function(){
+    if(!currentScenario) return;
+    var d = currentScenario;
+    var results = [];
+    results.push(markSelect('tablet-po', 'yes'));
+    results.push(markSelect('warranty-po', 'no'));
+    results.push(markSelect('reader-po', 'yes'));
+    results.push(markSelect('extwarranty-po', 'no'));
+    results.push(markMoney('tablet-standalone', d.standalonePrice));
+    results.push(markMoney('tablet-allocated', d.tabletAlloc));
+    results.push(markMoney('reader-standalone', d.readerRightEV));
+    results.push(markMoney('reader-allocated', d.readerAlloc));
+    results.push(markMoney('total-standalone', d.totalStandalone));
+    results.push(markMoney('total-allocated', d.tabletAlloc + d.readerAlloc, 0.05));
+    results.push(markMoney('reg-price', d.regularReaderPrice));
+    results.push(markMoney('coup-price', d.couponPrice));
+    results.push(markMoney('disc-amt', d.discountAmt));
+    results.push(markMoney('disc-amt-2', d.discountAmt));
+    results.push(markPct('redemp-pct', d.redemptionPct));
+    results.push(markMoney('reader-ev', d.readerRightEV));
+    scoreState.req12 = updateSummary('req12Summary', results, REQ12_POSSIBLE);
+    updateOverallScore();
+  });
+
+  document.getElementById('checkReq3').addEventListener('click', function(){
+    if(!currentScenario) return;
+    var d = currentScenario;
+    var results = [];
+    results.push(markSelect('je1-account', 'Cash'));
+    results.push(markSelect('je2-account', 'Sales Revenue\u2014Trailrunner Tablets'));
+    results.push(markSelect('je3-account', 'Deferred Revenue\u2014PageFinder Coupons'));
+    results.push(markMoney('je1-debit', d.cashTotal, d.unitTolerance));
+    results.push(markMoney('je2-credit', d.revenueTotal, d.unitTolerance));
+    results.push(markMoney('je3-credit', d.deferredTotal, d.unitTolerance));
+    scoreState.req3 = updateSummary('req3Summary', results, REQ3_POSSIBLE);
+    updateOverallScore();
+  });
+
+  // ---------------- Print / Save as PDF ----------------
+  function val(id){
+    var el = document.getElementById(id);
+    return el ? el.value.trim() : '';
+  }
+  function selVal(id){
+    var el = document.getElementById(id);
+    if(!el) return '';
+    var opt = el.options[el.selectedIndex];
+    return opt ? opt.textContent : '';
+  }
+
+  document.getElementById('printBtn').addEventListener('click', function(){
+    var name = val('studentName');
+    var id = val('studentId');
+    var line = document.getElementById('printNameLine');
+    line.textContent = 'Name: ' + (name || '_______________________') + '     Student ID: ' + (id || '_______________________');
+    var scoreLine = document.getElementById('printScoreLine');
+    var scoreText = document.getElementById('overallScore').textContent;
+    var breakdownText = document.getElementById('scoreBreakdown').textContent;
+    scoreLine.textContent = 'Score: ' + scoreText + (breakdownText ? '  (' + breakdownText + ')' : '');
+    var oldTitle = document.title;
+    document.title = 'Nantahala-RevRec-' + (id || 'submission');
+    window.print();
+    document.title = oldTitle;
+  });
+
+  // ---------------- Download as Word (.docx) ----------------
+  var docxLoadPromise = null;
+  function loadDocxLib(){
+    if(window.docx) return Promise.resolve();
+    if(docxLoadPromise) return docxLoadPromise;
+    docxLoadPromise = new Promise(function(resolve, reject){
+      var s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js';
+      s.onload = function(){ window.docx ? resolve() : reject(new Error('docx library did not load correctly')); };
+      s.onerror = function(){ reject(new Error('network error loading docx library')); };
+      document.head.appendChild(s);
+    });
+    return docxLoadPromise;
+  }
+
+  function blankIfEmpty(s){ return s && s.length ? s : '\u2014'; }
+
+  function buildAnswersDoc(){
+    var D = window.docx;
+    var PURPLE = '592C88', INK = '221B2E', SLATE = '5F5A6B';
+    var name = blankIfEmpty(val('studentName'));
+    var sid = blankIfEmpty(val('studentId'));
+
+    function h(text, size){
+      return new D.Paragraph({ spacing: { before: 200, after: 100 }, children: [new D.TextRun({ text: text, bold: true, color: PURPLE, size: size || 26 })] });
+    }
+    function p(text, opts){
+      opts = opts || {};
+      return new D.Paragraph({ spacing: { before: 60, after: 60 }, children: [new D.TextRun({ text: text, size: 20, color: opts.color || INK, bold: !!opts.bold })] });
+    }
+    function cell(text, width, opts){
+      opts = opts || {};
+      return new D.TableCell({
+        width: { size: width, type: D.WidthType.DXA },
+        shading: opts.shading ? { type: D.ShadingType.CLEAR, fill: opts.shading } : undefined,
+        margins: { top: 60, bottom: 60, left: 90, right: 90 },
+        children: [new D.Paragraph({ children: [new D.TextRun({ text: text, size: 19, bold: !!opts.bold, color: opts.color || INK })] })]
+      });
+    }
+    function row(cells){ return new D.TableRow({ children: cells }); }
+    function table(widths, rows){
+      return new D.Table({ width: { size: widths.reduce(function(a,b){return a+b;},0), type: D.WidthType.DXA }, columnWidths: widths, rows: rows });
+    }
+
+    var COLS4 = [2542, 1872, 2412, 2534];
+    var COLSJE = [5148, 2059, 2153];
+
+    var children = [];
+    children.push(new D.Paragraph({ heading: D.HeadingLevel.TITLE, spacing: { after: 60 }, children: [new D.TextRun({ text: 'Nantahala Digital — Revenue Recognition Case', color: PURPLE, size: 32, bold: true })] }));
+    children.push(p('Name: ' + name + '     Student ID: ' + sid, { bold: true }));
+    children.push(p('ACCT 351  ·  Revenue Recognition  ·  ASC 606', { color: SLATE }));
+
+    var scoreText = (document.getElementById('overallScore') || {}).textContent || '';
+    var breakdownText = (document.getElementById('scoreBreakdown') || {}).textContent || '';
+    children.push(new D.Paragraph({
+      spacing: { before: 200, after: 60 },
+      border: { top: { style: D.BorderStyle.SINGLE, size: 6, color: PURPLE }, bottom: { style: D.BorderStyle.SINGLE, size: 6, color: PURPLE } },
+      children: [new D.TextRun({ text: 'Assignment score', bold: true, color: PURPLE, size: 24 })]
+    }));
+    children.push(new D.Paragraph({ spacing: { before: 40, after: 20 }, children: [new D.TextRun({ text: scoreText, bold: true, color: INK, size: 24 })] }));
+    if (breakdownText) children.push(new D.Paragraph({ spacing: { after: 100 }, children: [new D.TextRun({ text: breakdownText, color: SLATE, size: 18 })] }));
+
+    children.push(h('Requirements 1 & 2 — Performance obligations and allocation'));
+    children.push(table(COLS4, [
+      row([cell('Item', COLS4[0], {bold:true, shading:PURPLE, color:'FFFFFF'}), cell('Separate performance obligation?', COLS4[1], {bold:true, shading:PURPLE, color:'FFFFFF'}), cell('Standalone selling price / EV', COLS4[2], {bold:true, shading:PURPLE, color:'FFFFFF'}), cell('Allocated transaction price', COLS4[3], {bold:true, shading:PURPLE, color:'FFFFFF'})]),
+      row([cell('Trailrunner tablet', COLS4[0]), cell(blankIfEmpty(selVal('tablet-po')), COLS4[1]), cell(blankIfEmpty(val('tablet-standalone')), COLS4[2]), cell(blankIfEmpty(val('tablet-allocated')), COLS4[3])]),
+      row([cell('Six-month limited warranty', COLS4[0]), cell(blankIfEmpty(selVal('warranty-po')), COLS4[1]), cell('\u2014', COLS4[2]), cell(blankIfEmpty(val('warranty-allocated')), COLS4[3])]),
+      row([cell('PageFinder e-reader coupon', COLS4[0]), cell(blankIfEmpty(selVal('reader-po')), COLS4[1]), cell(blankIfEmpty(val('reader-standalone')), COLS4[2]), cell(blankIfEmpty(val('reader-allocated')), COLS4[3])]),
+      row([cell('Extended warranty coupon', COLS4[0]), cell(blankIfEmpty(selVal('extwarranty-po')), COLS4[1]), cell('\u2014', COLS4[2]), cell(blankIfEmpty(val('extwarranty-allocated')), COLS4[3])]),
+      row([cell('Total', COLS4[0], {bold:true}), cell('', COLS4[1]), cell(blankIfEmpty(val('total-standalone')), COLS4[2], {bold:true}), cell(blankIfEmpty(val('total-allocated')), COLS4[3], {bold:true})])
+    ]));
+    children.push(p('Show your work for the PageFinder coupon\u2019s material right:', { bold: true }));
+    children.push(p('Regular price: ' + blankIfEmpty(val('reg-price')) + '  \u2212  Coupon price: ' + blankIfEmpty(val('coup-price')) + '  =  ' + blankIfEmpty(val('disc-amt'))));
+    children.push(p('Discount per unit: ' + blankIfEmpty(val('disc-amt-2')) + '  \u00d7  Redemption rate: ' + blankIfEmpty(val('redemp-pct')) + '  =  ' + blankIfEmpty(val('reader-ev'))));
+
+    children.push(h('Requirement 3 — Journal entry'));
+    children.push(table(COLSJE, [
+      row([cell('Account', COLSJE[0], {bold:true, shading:PURPLE, color:'FFFFFF'}), cell('Debit', COLSJE[1], {bold:true, shading:PURPLE, color:'FFFFFF'}), cell('Credit', COLSJE[2], {bold:true, shading:PURPLE, color:'FFFFFF'})]),
+      row([cell(blankIfEmpty(selVal('je1-account')), COLSJE[0]), cell(blankIfEmpty(val('je1-debit')), COLSJE[1]), cell(blankIfEmpty(val('je1-credit')), COLSJE[2])]),
+      row([cell(blankIfEmpty(selVal('je2-account')), COLSJE[0]), cell(blankIfEmpty(val('je2-debit')), COLSJE[1]), cell(blankIfEmpty(val('je2-credit')), COLSJE[2])]),
+      row([cell(blankIfEmpty(selVal('je3-account')), COLSJE[0]), cell(blankIfEmpty(val('je3-debit')), COLSJE[1]), cell(blankIfEmpty(val('je3-credit')), COLSJE[2])]),
+      row([cell(blankIfEmpty(selVal('je4-account')), COLSJE[0]), cell(blankIfEmpty(val('je4-debit')), COLSJE[1]), cell(blankIfEmpty(val('je4-credit')), COLSJE[2])])
+    ]));
+
+    children.push(new D.Paragraph({ spacing: { before: 300 }, alignment: D.AlignmentType.CENTER, children: [new D.TextRun({ text: 'Nantahala Digital Revenue Recognition Case  ·  ACCT 351  ·  Western Carolina University', size: 16, italics: true, color: SLATE })] }));
+
+    return new D.Document({
+      sections: [{
+        properties: { page: { size: { width: 12240, height: 15840 }, margin: { top: 1440, bottom: 1440, left: 1440, right: 1440 } } },
+        children: children
+      }]
+    });
+  }
+
+  document.getElementById('downloadDocxBtn').addEventListener('click', function(){
+    var statusEl = document.getElementById('submitStatus');
+    statusEl.classList.remove('error');
+    statusEl.textContent = 'Preparing your Word document\u2026';
+    loadDocxLib().then(function(){
+      var doc = buildAnswersDoc();
+      return window.docx.Packer.toBlob(doc);
+    }).then(function(blob){
+      var idPart = val('studentId') || 'submission';
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'Nantahala-RevRec-' + idPart + '.docx';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      statusEl.textContent = 'Downloaded.';
+      setTimeout(function(){ statusEl.textContent = ''; }, 4000);
+    }).catch(function(err){
+      statusEl.classList.add('error');
+      statusEl.textContent = 'Could not load the Word export tool (needs internet access) \u2014 use Print / Save as PDF instead.';
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
