@@ -1,0 +1,28 @@
+<svg viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg13a" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#592C88"/>
+      <stop offset="100%" stop-color="#38195A"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="400" fill="url(#bg13a)"/>
+  <g stroke="#D6C398" stroke-opacity="0.14" stroke-width="1">
+    <line x1="0" y1="70" x2="1200" y2="70"/>
+    <line x1="0" y1="140" x2="1200" y2="140"/>
+    <line x1="0" y1="210" x2="1200" y2="210"/>
+    <line x1="0" y1="280" x2="1200" y2="280"/>
+    <line x1="0" y1="350" x2="1200" y2="350"/>
+  </g>
+  <g transform="translate(600,130)" stroke="#D6C398" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M-110 30 L0 -60 L110 30 Z"/>
+    <line x1="-125" y1="30" x2="125" y2="30"/>
+    <line x1="-90" y1="30" x2="-90" y2="110"/>
+    <line x1="-45" y1="30" x2="-45" y2="110"/>
+    <line x1="45" y1="30" x2="45" y2="110"/>
+    <line x1="90" y1="30" x2="90" y2="110"/>
+    <line x1="-125" y1="120" x2="125" y2="120"/>
+    <circle cx="0" cy="-20" r="6" fill="#D6C398" stroke="none"/>
+  </g>
+  <text x="600" y="300" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="20" letter-spacing="2" fill="#B0925C">ACCT 352 &#183; CH. 13</text>
+  <text x="600" y="335" text-anchor="middle" font-family="'Source Serif 4', serif" font-size="26" font-weight="600" fill="#F1E9D6">Current Liabilities Practice</text>
+</svg>
