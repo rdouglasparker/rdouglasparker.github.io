@@ -289,6 +289,11 @@
   .check-summary.good{ color:var(--answer); }
   .check-summary.bad{ color:var(--danger); }
   .check-disclaimer{ font-size:11.5px; color:var(--slate); width:100%; margin-top:2px; font-style:italic; }
+  .attempts-note{ font-size:12px; font-weight:600; color:var(--slate); }
+  .attempts-note.low{ color:var(--gold); }
+  .attempts-note.locked{ color:var(--danger); }
+
+  input:disabled, select:disabled{ opacity:0.7; cursor:not-allowed; }
 
   .score-bar{
     margin-top:26px;
@@ -314,6 +319,15 @@
   input.field-incorrect, select.field-incorrect{
     border-color:var(--danger) !important;
     background:#F3E1DE !important;
+  }
+  input.field-missing, select.field-missing{
+    border-color:var(--gold) !important;
+    background:var(--gold-pale) !important;
+  }
+  .missing-note{ font-size:12.5px; color:var(--danger); font-weight:600; width:100%; }
+  .key-reveal-note{
+    margin-top:14px; background:var(--gold-pale); border:1px solid var(--gold-soft); border-radius:8px;
+    padding:12px 16px; color:var(--purple-deep); font-size:13.5px; font-weight:600; display:none;
   }
 
   .submit-bar{
@@ -495,8 +509,10 @@
     <div class="check-bar">
       <button class="btn-check" id="checkPart1" type="button">Check my work</button>
       <span class="check-summary" id="part1Summary"></span>
+      <span class="attempts-note" id="part1Attempts">3 attempts remaining</span>
       <span class="check-disclaimer">This checks whether the accounts you selected and the dollar amounts you entered match the key within a small rounding tolerance.</span>
     </div>
+    <div class="key" id="part1Key" style="display:none;"></div>
   </div>
 
   <div class="part">
@@ -565,8 +581,10 @@
     <div class="check-bar">
       <button class="btn-check" id="checkPart2" type="button">Check my work</button>
       <span class="check-summary" id="part2Summary"></span>
+      <span class="attempts-note" id="part2Attempts">3 attempts remaining</span>
       <span class="check-disclaimer">This checks whether the accounts you selected and the dollar amounts you entered match the key within a small rounding tolerance.</span>
     </div>
+    <div class="key" id="part2Key" style="display:none;"></div>
   </div>
 
   <div class="score-bar">
@@ -574,6 +592,8 @@
     <span class="score-value" id="overallScore">Check both parts to see your score</span>
     <span class="score-breakdown" id="scoreBreakdown"></span>
   </div>
+
+  <div class="key-reveal-note" id="keyRevealNote">You've used all 3 attempts on both parts — the answer key is now shown below each part, and a submission PDF has opened for you to save.</div>
 
   <div class="submit-bar print-hide">
     <h2>Ready to submit?</h2>
@@ -757,6 +777,10 @@
   var genBtn = document.getElementById('genBtn');
   var currentScenario = null;
   var scoreState = { part1: null, part2: null };
+  var MAX_ATTEMPTS = 3;
+  var attempts = { part1: 0, part2: 0 };
+  var locked = { part1: false, part2: false };
+  var keyRevealed = false;
 
   function applyAndStore(id){
     currentScenario = generateScenario(id);
@@ -764,6 +788,19 @@
     clearAllFieldStates();
     scoreState.part1 = null;
     scoreState.part2 = null;
+    attempts.part1 = 0; attempts.part2 = 0;
+    locked.part1 = false; locked.part2 = false;
+    keyRevealed = false;
+    unlockPart(PART1_REQUIRED_IDS, 'checkPart1');
+    unlockPart(PART2_REQUIRED_IDS, 'checkPart2');
+    updateAttemptsNote('part1Attempts', 0);
+    updateAttemptsNote('part2Attempts', 0);
+    ['part1Key','part2Key'].forEach(function(elId){
+      var el = document.getElementById(elId);
+      if(el){ el.style.display = 'none'; el.innerHTML = ''; }
+    });
+    var noteEl = document.getElementById('keyRevealNote');
+    if(noteEl) noteEl.style.display = 'none';
     ['part1Summary','part2Summary'].forEach(function(elId){
       var el = document.getElementById(elId);
       if(el){ el.textContent = ''; el.classList.remove('good','bad'); }
@@ -777,9 +814,6 @@
   idInput.addEventListener('keydown', function(e){
     if(e.key === 'Enter') applyAndStore(idInput.value);
   });
-
-  populateCoaSelects();
-  applyAndStore('');
 
   // ---------------- Check my work ----------------
   function parseMoney(s){
@@ -800,11 +834,11 @@
   }
   function clearFieldState(el){
     if(!el) return;
-    el.classList.remove('field-correct', 'field-incorrect');
+    el.classList.remove('field-correct', 'field-incorrect', 'field-missing');
   }
   function clearAllFieldStates(){
-    document.querySelectorAll('.field-correct, .field-incorrect').forEach(function(el){
-      el.classList.remove('field-correct', 'field-incorrect');
+    document.querySelectorAll('.field-correct, .field-incorrect, .field-missing').forEach(function(el){
+      el.classList.remove('field-correct', 'field-incorrect', 'field-missing');
     });
   }
   function markMoney(id, correct, tol){
@@ -856,6 +890,111 @@
     return points;
   }
 
+  // ---------------- Require all cells filled before grading ----------------
+  var PART1_REQUIRED_IDS = ['p1-membership-po','p1-voucher-po','p1-membership-standalone','p1-voucher-standalone',
+    'p1-membership-allocated','p1-voucher-allocated','p1-total-standalone','p1-total-allocated',
+    'p1-normaldisc-pct','p1-normaldisc-amt','p1-voucherdisc-pct','p1-voucherdisc-amt',
+    'p1-inc-a','p1-inc-b','p1-inc-result','p1-ev-a','p1-ev-pct','p1-ev-result',
+    'p1-je1-account','p1-je2-account','p1-je3-account','p1-je1-debit','p1-je2-credit','p1-je3-credit'];
+  var PART2_REQUIRED_IDS = ['p2-pass-po','p2-fee-po','p2-pass-standalone','p2-pass-allocated','p2-fee-allocated',
+    'p2-total-standalone','p2-total-allocated','p2-je1-account','p2-je2-account','p2-je1-debit','p2-je2-credit'];
+  function fieldsFor(ids){
+    return ids.map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  }
+  function findMissing(ids){
+    return fieldsFor(ids).filter(function(el){ return !el.value || !el.value.trim(); });
+  }
+  function setMissing(ids, isMissing){
+    fieldsFor(ids).forEach(function(el){ el.classList.toggle('field-missing', isMissing); });
+  }
+
+  // ---------------- Combined 3-check trigger: reveal answer key + auto-print ----------------
+  function buildKeyTable(title, rows){
+    var html = '<strong>' + title + '</strong><table>';
+    rows.forEach(function(r){ html += '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td></tr>'; });
+    html += '</table>';
+    return html;
+  }
+  function revealAnswerKeys(){
+    if(!currentScenario) return;
+    var d = currentScenario;
+    var p1Rows = [
+      ['New membership \u2014 separate performance obligation?', 'Yes'],
+      ['Yoga discount voucher \u2014 separate performance obligation?', 'Yes'],
+      ['New membership \u2014 standalone selling price', money0(d.normalPrice)],
+      ['Yoga voucher \u2014 standalone selling price (expected value)', money2(d.voucherEV)],
+      ['New membership \u2014 allocated transaction price', money2(d.membAlloc)],
+      ['Yoga voucher \u2014 allocated transaction price', money2(d.voucherAlloc)],
+      ['Total standalone selling price', money2(d.totalStandalone)],
+      ['Total allocated transaction price', money0(d.contractPrice)],
+      ['Normal discount % on yoga enrollment', d.normalDiscPct + '%'],
+      ['Normal discount $ on yoga enrollment', money2(d.normalDiscPct/100*d.yogaPrice)],
+      ['Voucher discount % on yoga enrollment', d.vDiscPct + '%'],
+      ['Voucher discount $ on yoga enrollment', money2(d.vDiscPct/100*d.yogaPrice)],
+      ['Incremental discount from the voucher', money2(d.incrementalDisc)],
+      ['Expected value of the voucher', money2(d.voucherEV)],
+      ['Journal entry \u2014 line 1', 'Debit Cash ' + money0(d.contractPrice)],
+      ['Journal entry \u2014 line 2', 'Credit Deferred Revenue\u2014Membership ' + money2(d.membAlloc)],
+      ['Journal entry \u2014 line 3', 'Credit Deferred Revenue\u2014Discount Voucher ' + money2(d.voucherAlloc)]
+    ];
+    var p2Rows = [
+      ['Trailhead 50 pass \u2014 separate performance obligation?', 'Yes'],
+      ['Visitation fee beyond 50 \u2014 separate performance obligation?', 'No'],
+      ['Trailhead 50 pass \u2014 standalone selling price', money0(d.trailheadPrice)],
+      ['Trailhead 50 pass \u2014 allocated transaction price', money0(d.trailheadPrice)],
+      ['Visitation fee \u2014 allocated transaction price', money0(0)],
+      ['Total standalone selling price', money0(d.trailheadPrice)],
+      ['Total allocated transaction price', money0(d.trailheadPrice)],
+      ['Journal entry \u2014 line 1', 'Debit Cash ' + money0(d.trailheadPrice)],
+      ['Journal entry \u2014 line 2', 'Credit Deferred Revenue\u2014Trailhead 50 Pass ' + money0(d.trailheadPrice)]
+    ];
+    var key1 = document.getElementById('part1Key');
+    var key2 = document.getElementById('part2Key');
+    key1.innerHTML = buildKeyTable('Answer Key \u2014 Part 1', p1Rows);
+    key2.innerHTML = buildKeyTable('Answer Key \u2014 Part 2', p2Rows);
+    key1.style.display = 'block';
+    key2.style.display = 'block';
+    var noteEl = document.getElementById('keyRevealNote');
+    if(noteEl) noteEl.style.display = 'block';
+  }
+  function registerCheckAttempt(partKey, requiredIds, checkBtnId){
+    attempts[partKey]++;
+    var remaining = MAX_ATTEMPTS - attempts[partKey];
+    updateAttemptsNote(partKey === 'part1' ? 'part1Attempts' : 'part2Attempts', attempts[partKey]);
+    if(remaining <= 0){
+      locked[partKey] = true;
+      lockPart(requiredIds, checkBtnId);
+    }
+    if(locked.part1 && locked.part2 && !keyRevealed){
+      keyRevealed = true;
+      revealAnswerKeys();
+      setTimeout(function(){ triggerPrint(); }, 350);
+    }
+  }
+  function lockPart(ids, checkBtnId){
+    fieldsFor(ids).forEach(function(el){ el.disabled = true; });
+    var btn = document.getElementById(checkBtnId);
+    if(btn){ btn.disabled = true; btn.textContent = 'No attempts remaining'; }
+  }
+  function unlockPart(ids, checkBtnId){
+    fieldsFor(ids).forEach(function(el){ el.disabled = false; });
+    var btn = document.getElementById(checkBtnId);
+    if(btn){ btn.disabled = false; btn.textContent = 'Check my work'; }
+  }
+  function updateAttemptsNote(elId, used){
+    var el = document.getElementById(elId);
+    if(!el) return;
+    var remaining = MAX_ATTEMPTS - used;
+    el.classList.remove('low','locked');
+    if(remaining <= 0){
+      el.textContent = 'No attempts remaining \u2014 inputs locked';
+      el.classList.add('locked');
+    } else {
+      el.textContent = remaining + ' attempt' + (remaining===1?'':'s') + ' remaining';
+      if(remaining === 1) el.classList.add('low');
+    }
+  }
+
   var TOTAL_POINTS = 100;
   var PART1_ITEM_COUNT = 20; // 17 numeric/select checks + 3 journal-entry account checks
   var PART2_ITEM_COUNT = 11; // 9 numeric/select checks + 2 journal-entry account checks
@@ -882,7 +1021,18 @@
   }
 
   document.getElementById('checkPart1').addEventListener('click', function(){
-    if(!currentScenario) return;
+    if(!currentScenario || locked.part1) return;
+    var missing = findMissing(PART1_REQUIRED_IDS);
+    if(missing.length){
+      setMissing(PART1_REQUIRED_IDS, false);
+      setMissing(missing.map(function(el){ return el.id; }), true);
+      var summaryEl = document.getElementById('part1Summary');
+      summaryEl.textContent = 'Please fill in every cell before checking your work \u2014 ' + missing.length + ' field' + (missing.length===1?'':'s') + ' left blank.';
+      summaryEl.classList.remove('good'); summaryEl.classList.add('bad');
+      missing[0].focus();
+      return;
+    }
+    setMissing(PART1_REQUIRED_IDS, false);
     var d = currentScenario;
     var results = [];
     results.push(markSelect('p1-membership-po', 'yes'));
@@ -907,10 +1057,22 @@
     results.push(markMoney('p1-je3-credit', d.voucherAlloc));
     scoreState.part1 = updateSummary('part1Summary', results, PART1_POSSIBLE);
     updateOverallScore();
+    registerCheckAttempt('part1', PART1_REQUIRED_IDS, 'checkPart1');
   });
 
   document.getElementById('checkPart2').addEventListener('click', function(){
-    if(!currentScenario) return;
+    if(!currentScenario || locked.part2) return;
+    var missing = findMissing(PART2_REQUIRED_IDS);
+    if(missing.length){
+      setMissing(PART2_REQUIRED_IDS, false);
+      setMissing(missing.map(function(el){ return el.id; }), true);
+      var summaryEl2 = document.getElementById('part2Summary');
+      summaryEl2.textContent = 'Please fill in every cell before checking your work \u2014 ' + missing.length + ' field' + (missing.length===1?'':'s') + ' left blank.';
+      summaryEl2.classList.remove('good'); summaryEl2.classList.add('bad');
+      missing[0].focus();
+      return;
+    }
+    setMissing(PART2_REQUIRED_IDS, false);
     var d = currentScenario;
     var results = [];
     results.push(markSelect('p2-pass-po', 'yes'));
@@ -926,6 +1088,7 @@
     results.push(markMoney('p2-je2-credit', d.trailheadPrice));
     scoreState.part2 = updateSummary('part2Summary', results, PART2_POSSIBLE);
     updateOverallScore();
+    registerCheckAttempt('part2', PART2_REQUIRED_IDS, 'checkPart2');
   });
 
   // ---------------- Print / Save as PDF ----------------
@@ -940,7 +1103,8 @@
     return opt ? opt.textContent : '';
   }
 
-  document.getElementById('printBtn').addEventListener('click', function(){
+  document.getElementById('printBtn').addEventListener('click', triggerPrint);
+  function triggerPrint(){
     var name = val('studentName');
     var id = val('studentId');
     var line = document.getElementById('printNameLine');
@@ -953,7 +1117,7 @@
     document.title = 'Sylva-RevRec-' + (id || 'submission');
     window.print();
     document.title = oldTitle;
-  });
+  }
 
   // ---------------- Download as Word (.docx) ----------------
   var docxLoadPromise = null;
@@ -1084,6 +1248,9 @@
       statusEl.textContent = 'Could not load the Word export tool (needs internet access) \u2014 use Print / Save as PDF instead.';
     });
   });
+
+  populateCoaSelects();
+  applyAndStore('');
 })();
 </script>
 
