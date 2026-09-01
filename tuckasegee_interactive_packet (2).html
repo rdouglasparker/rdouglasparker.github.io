@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Accounting Cycle — Tuckasegee Trail Guides &amp; Outfitters</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --purple:#592C88;
+    --purple-deep:#38195A;
+    --purple-mid:#6E3FA3;
+    --gold:#B0925C;
+    --gold-soft:#D6C398;
+    --gold-pale:#F1E9D6;
+    --parchment:#F7F4EC;
+    --paper:#FFFEFA;
+    --ink:#221B2E;
+    --slate:#5F5A6B;
+    --line:#DBD3E0;
+    --line-soft:#EAE4EF;
+    --answer:#1E5C34;
+    --answer-bg:#E7F1E9;
+    --danger:#9C3B34;
+    --shadow: 0 1px 2px rgba(56,25,90,0.07), 0 6px 18px rgba(56,25,90,0.08);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--parchment); color:var(--ink); font-family:'Inter',sans-serif;
+    line-height:1.55; -webkit-font-smoothing:antialiased;
+  }
+  a{ color:inherit; }
+
+  header{
+    background: linear-gradient(180deg, var(--purple) 0%, var(--purple-deep) 100%);
+    color:#F1E9D6; padding: 30px 6vw 24px; position:relative;
+  }
+  header::after{
+    content:""; position:absolute; left:0; right:0; bottom:0; height:4px;
+    background: linear-gradient(90deg, var(--gold-soft), var(--gold) 40%, var(--gold-soft) 70%, var(--gold));
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--gold-soft); margin:0 0 10px;
+  }
+  h1.title{
+    font-family:'Source Serif 4', serif; font-weight:600; font-size:clamp(24px,3.4vw,34px);
+    margin:0 0 8px; letter-spacing:-0.01em;
+  }
+  .subtitle{ font-size:14.5px; color:#D9CDE5; max-width:680px; margin:0; }
+
+  .id-bar{
+    max-width:900px; margin:0 auto; padding:18px 6vw 0;
+    display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  }
+  .id-bar .code-label{ font-size:13px; font-weight:600; color:var(--slate); }
+  .id-bar .code-value{
+    font-family:'IBM Plex Mono', monospace; font-size:15px; letter-spacing:.15em;
+    padding:8px 12px; border:1px solid var(--line); border-radius:5px; background:var(--paper); color:var(--purple-deep); font-weight:600;
+  }
+  .id-bar button{
+    font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600;
+    border-radius:5px; padding:8px 15px; border:1px solid var(--purple);
+    background:var(--purple); color:#fff; cursor:pointer;
+  }
+  .id-bar button:hover{ background:var(--purple-mid); }
+  .id-bar button.outline{ background:var(--paper); color:var(--purple); }
+  .id-bar button.outline:hover{ background:var(--parchment); }
+
+  .rounding-note{ max-width:900px; margin:14px auto 0; padding:12px 6vw; font-size:12.5px; color:var(--slate); line-height:1.5; }
+  .rounding-note strong{ color:var(--purple); font-weight:600; }
+
+  main{ max-width:900px; margin:0 auto; padding:22px 6vw 90px; }
+
+  .part{
+    background:var(--paper); border:1px solid var(--line); border-radius:10px;
+    box-shadow:var(--shadow); padding:24px 26px 26px; margin-top:26px;
+  }
+  .part-label{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--gold); background:var(--purple);
+    display:inline-block; padding:3px 9px; border-radius:4px; letter-spacing:.04em; margin-bottom:12px;
+  }
+  .part h2{ font-family:'Source Serif 4', serif; font-size:21px; font-weight:600; color:var(--purple); margin:0 0 12px; }
+  .scenario{
+    background:var(--parchment); border-left:3px solid var(--gold); padding:14px 18px;
+    border-radius:0 6px 6px 0; font-size:14.5px; color:var(--ink); margin-bottom:20px;
+  }
+  .scenario p{ margin:0 0 10px; } .scenario p:last-child{ margin-bottom:0; }
+  .scenario span.val, .scenario strong.tag{ font-weight:700; color:var(--purple-deep); }
+
+  .req{ font-weight:600; font-size:14.5px; color:var(--ink); margin:20px 0 10px; }
+  .req .letter{ font-family:'IBM Plex Mono', monospace; color:var(--purple); margin-right:6px; }
+
+  table.worksheet{ width:100%; border-collapse:collapse; font-size:13.5px; margin-bottom:8px; }
+  table.worksheet th{
+    text-align:left; font-size:11.5px; text-transform:uppercase; letter-spacing:.03em;
+    color:var(--slate); border-bottom:2px solid var(--purple); padding:8px 8px;
+  }
+  table.worksheet td{ border-bottom:1px solid var(--line); padding:9px 8px; vertical-align:middle; }
+  table.worksheet tr.total-row td{ border-top:2px solid var(--purple); border-bottom:none; font-weight:600; }
+  table.worksheet td.given-val{ font-family:'IBM Plex Mono', monospace; font-weight:700; color:var(--purple-deep); text-align:right; }
+  table.worksheet input[type="text"], table.worksheet input[type="number"]{
+    width:100%; font-family:'IBM Plex Mono', monospace; font-size:13.5px; padding:6px 8px;
+    border:1px solid var(--line); border-radius:5px; background:var(--parchment); color:var(--ink); text-align:right;
+  }
+  table.worksheet input:focus{ outline:none; border-color:var(--purple-mid); box-shadow:0 0 0 3px rgba(89,44,136,0.10); background:var(--paper); }
+
+  table.je{ width:100%; border-collapse:collapse; font-size:13.5px; margin-top:6px; }
+  table.je th{
+    text-align:left; font-size:11.5px; text-transform:uppercase; letter-spacing:.03em;
+    color:var(--slate); border-bottom:2px solid var(--purple); padding:8px 8px;
+  }
+  table.je td{ border-bottom:1px solid var(--line); padding:8px 8px; }
+  table.je input[type="text"], table.je input[type="number"]{
+    width:100%; font-family:'IBM Plex Mono', monospace; font-size:13.5px; padding:6px 8px;
+    border:1px solid var(--line); border-radius:5px; background:var(--parchment); color:var(--ink); text-align:right;
+  }
+  table.je select.coa-select{
+    width:100%; font-family:'Inter',sans-serif; font-size:13.5px; padding:6px 8px;
+    border:1px solid var(--line); border-radius:5px; background:var(--parchment); color:var(--ink);
+  }
+  table.je select.coa-select:focus, table.je input:focus{
+    outline:none; border-color:var(--purple-mid); box-shadow:0 0 0 3px rgba(89,44,136,0.10); background:var(--paper);
+  }
+  table.je td.indent select, table.je td.indent input{ margin-left:0; }
+  table.je td.indent{ padding-left:26px; }
+  .je-hint{ font-size:12px; color:var(--slate); margin:6px 0 0; }
+  .je-group{ margin:16px 0 6px; }
+  .je-group .je-tag{ font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--purple); font-weight:700; margin-bottom:4px; display:block; }
+
+  .check-bar{
+    margin-top:20px; padding-top:16px; border-top:1px solid var(--line);
+    display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+  }
+  .btn-check{
+    font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600; border-radius:5px;
+    padding:9px 18px; border:1px solid var(--purple); background:var(--purple); color:#fff; cursor:pointer;
+  }
+  .btn-check:hover{ background:var(--purple-mid); }
+  .check-summary{ font-size:13.5px; font-weight:600; }
+  .check-summary.good{ color:var(--answer); }
+  .check-summary.bad{ color:var(--danger); }
+
+  .score-bar{
+    margin-top:26px; background:var(--paper); border:1px solid var(--line); border-radius:10px;
+    box-shadow:var(--shadow); padding:16px 24px; display:flex; align-items:center;
+    justify-content:space-between; flex-wrap:wrap; gap:8px;
+  }
+  .score-bar .score-label{ font-family:'Source Serif 4', serif; font-size:16px; font-weight:600; color:var(--purple); }
+  .score-bar .score-value{ font-family:'IBM Plex Mono', monospace; font-size:18px; font-weight:600; color:var(--ink); }
+  .score-bar .score-breakdown{ font-size:12.5px; color:var(--slate); width:100%; }
+
+  /* Field correctness: color AND an accessible symbol + label — never color alone */
+  input.field-correct, select.field-correct{ border-color:var(--answer) !important; background:var(--answer-bg) !important; }
+  input.field-incorrect, select.field-incorrect{ border-color:var(--danger) !important; background:#F3E1DE !important; }
+  .field-with-icon{ display:flex; align-items:center; gap:6px; width:100%; }
+  .field-with-icon > input, .field-with-icon > select{ flex:1; min-width:0; }
+  .field-icon{ flex:0 0 auto; width:18px; text-align:center; font-weight:700; font-size:15px; font-family:'Inter',sans-serif; line-height:1; }
+  .field-icon:empty{ visibility:hidden; }
+  .field-icon.icon-correct{ color:var(--answer); }
+  .field-icon.icon-incorrect{ color:var(--danger); }
+
+  .ledger-grid{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin:10px 0 4px; }
+  @media (max-width:700px){ .ledger-grid{ grid-template-columns:1fr 1fr; } }
+  .taccount{ border:1px solid var(--line); border-radius:8px; overflow:hidden; break-inside:avoid; }
+  .taccount .tname{
+    text-align:center; font-family:'Inter',sans-serif; font-weight:700; font-size:10.5px;
+    background:var(--purple); color:#fff; padding:5px 4px; letter-spacing:.02em;
+  }
+  .taccount .tbody{ display:flex; }
+  .taccount .tside{ flex:1; padding:4px 6px; min-width:0; }
+  .taccount .tside.debit{ border-right:2px solid var(--purple); }
+  .taccount .tlabel{
+    font-family:'IBM Plex Mono', monospace; font-size:8.5px; text-transform:uppercase; letter-spacing:.03em;
+    color:var(--slate); text-align:center; margin-bottom:3px;
+  }
+  .taccount .tline{ border-bottom:1px dotted var(--line); height:15px; }
+  .taccount .tline.given{
+    color:var(--purple-deep); font-weight:700; font-size:10px; text-align:center;
+    border-bottom:1px solid var(--ink); font-family:'IBM Plex Mono', monospace;
+  }
+  .taccount .tend{
+    border-top:2px solid var(--purple); padding:6px 8px; font-size:11px; display:flex;
+    align-items:center; gap:6px; flex-wrap:wrap; background:var(--parchment);
+  }
+  .taccount .tend input{ width:75px; }
+  .taccount .tend select{ font-size:11px; padding:4px; }
+  .taccount-wide{ border:1px solid var(--line); border-radius:8px; overflow:hidden; margin-bottom:4px; }
+  .taccount-wide .tname{
+    text-align:center; font-family:'Inter',sans-serif; font-weight:700; font-size:12px;
+    background:var(--purple); color:#fff; padding:7px 4px;
+  }
+  .taccount-wide .tbody{ display:flex; }
+  .taccount-wide .tside{ flex:1; padding:6px 10px; }
+  .taccount-wide .tside.debit{ border-right:2px solid var(--purple); }
+  .taccount-wide .tlabel{
+    font-family:'IBM Plex Mono', monospace; font-size:9.5px; text-transform:uppercase; letter-spacing:.03em;
+    color:var(--slate); text-align:center; margin-bottom:4px;
+  }
+  .taccount-wide .tline{ border-bottom:1px dotted var(--line); height:19px; font-size:11px; }
+  .taccount-wide .tline.given{
+    color:var(--purple-deep); font-weight:700; text-align:center; border-bottom:1px solid var(--ink);
+    font-family:'IBM Plex Mono', monospace;
+  }
+  .taccount-wide .tend{
+    border-top:2px solid var(--purple); padding:8px 10px; font-size:12px; display:flex;
+    align-items:center; gap:8px; flex-wrap:wrap; background:var(--parchment);
+  }
+  .taccount-wide .tend input{ width:90px; }
+
+  .fs-shell{ margin:8px 0 18px; }
+  .fs-line{ display:flex; align-items:center; border-bottom:1px dotted var(--line); padding:6px 2px; font-size:13.5px; gap:10px; }
+  .fs-line .label{ flex:1; }
+  .fs-line input{ width:130px; }
+  .fs-line .given-val{ width:130px; text-align:right; font-family:'IBM Plex Mono', monospace; color:var(--purple-deep); font-weight:700; }
+  .fs-line.total{ font-weight:700; border-top:1.5px solid var(--purple); border-bottom:none; margin-top:4px; padding-top:8px; }
+  .fs-indent{ padding-left:18px; }
+
+  .refl li{ margin:12px 0; font-size:13.5px; }
+  .refl .fill-lines{ border-bottom:1px solid var(--line); height:24px; margin-top:4px; }
+
+  ul.acct-list{ column-count:2; column-gap:32px; margin:6px 0; padding-left:18px; font-size:13px; }
+  ul.acct-list li{ margin-bottom:4px; }
+
+  .submit-bar{ background:var(--paper); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); padding:22px 26px 24px; margin-top:26px; }
+  .submit-bar h2{ font-family:'Source Serif 4', serif; font-size:19px; font-weight:600; color:var(--purple); margin:0 0 14px; }
+  .submit-row{ display:flex; align-items:center; gap:10px; margin-bottom:12px; flex-wrap:wrap; }
+  .submit-row label{ font-size:13px; font-weight:600; color:var(--slate); }
+  .submit-row input[type="text"]{
+    font-family:'Inter',sans-serif; font-size:13.5px; padding:8px 11px; border:1px solid var(--line);
+    border-radius:5px; background:var(--parchment); color:var(--ink); width:240px;
+  }
+  .btn-submit{
+    font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600; border-radius:5px;
+    padding:10px 18px; border:1px solid var(--purple); background:var(--purple); color:#fff; cursor:pointer;
+  }
+  .btn-submit:hover{ background:var(--purple-mid); }
+
+  .print-name-line{ display:none; font-size:13px; color:var(--ink); padding:0 6vw; margin:0 0 10px; }
+  footer{ text-align:center; padding:26px 6vw 40px; font-size:12px; color:var(--slate); }
+
+  @media print{
+    .print-hide, .id-bar, .check-bar, .rounding-note{ display:none !important; }
+    header{ background:none !important; color:var(--ink) !important; padding:0 0 14px !important; }
+    header::after{ display:none !important; }
+    .eyebrow{ color:var(--purple) !important; }
+    .subtitle{ color:var(--slate) !important; }
+    body{ background:#fff !important; }
+    .part{ box-shadow:none !important; border:1px solid #999 !important; break-inside:avoid; }
+    .score-bar{ box-shadow:none !important; border:1.5px solid var(--purple) !important; break-inside:avoid; }
+    input, select{
+      border:none !important; border-bottom:1px solid #000 !important; background:transparent !important;
+      border-radius:0 !important; color:#000 !important; -webkit-appearance:none; appearance:none; padding:2px 4px !important;
+    }
+    .print-name-line{ display:block !important; }
+  }
+  @media (max-width:600px){
+    header, main, .id-bar{ padding-left:5vw; padding-right:5vw; }
+    table.worksheet, table.je{ font-size:12.5px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">ACCT 351 &middot; Intermediate Accounting I &middot; The Accounting Cycle</p>
+  <h1 class="title">Tuckasegee Trail Guides &amp; Outfitters</h1>
+  <p class="subtitle">Journalize, post, adjust, and close a full month of activity for a small western North Carolina outfitter — then check your own work at every stage.</p>
+</header>
+
+<p class="print-name-line" id="printNameLine"></p>
+<p class="print-name-line" id="printScoreLine" style="font-weight:600;"></p>
+
+<div class="id-bar print-hide">
+  <label for="studentId" class="code-label">Student ID</label>
+  <input type="text" id="studentId" placeholder="e.g. 92841016">
+  <button id="genBtn" type="button">Generate my scenario</button>
+  <span class="code-label">Data Set Code:</span>
+  <span class="code-value" id="codeDisplay"></span>
+  <button id="printBtn" type="button" class="outline">Print / Save as PDF</button>
+</div>
+
+<div class="rounding-note">
+  <strong>Note:</strong> entering your Student ID and clicking <strong>Generate my scenario</strong> always produces the same numbers for you — so you can close this page and reopen it later (or open it on a different device) and pick up the exact same data set by re-entering your ID. Keep the Data Set Code shown above with your submission — your instructor uses it to regenerate your exact solution. Round all dollar amounts to the nearest whole dollar. Use the <strong>Check my work</strong> button at the end of each step as you go; you can revise and re-check as many times as you like.
+</div>
+
+<main>
+
+  <div class="part">
+    <span class="part-label">Reference</span>
+    <h2>Chart of Accounts</h2>
+    <ul class="acct-list" id="chartList"></ul>
+  </div>
+
+  <div class="part">
+    <span class="part-label">Given</span>
+    <h2>Post-Closing Trial Balance — October 31, 2026</h2>
+    <table class="worksheet"><thead><tr><th>Account</th><th style="text-align:right;">Debit</th><th style="text-align:right;">Credit</th></tr></thead><tbody id="beginTB"></tbody></table>
+  </div>
+
+  <div class="part">
+    <span class="part-label">Step 1</span>
+    <h2>November 2026 Transactions — General Journal</h2>
+    <p class="je-hint">For each transaction, select the correct account and enter the correct dollar amount for the debit and the credit. Omit explanations.</p>
+    <div id="journalEntries"></div>
+    <div class="check-bar">
+      <button class="btn-check" id="checkStep1" type="button">Check my work</button>
+      <span class="check-summary" id="score1"></span>
+    </div>
+  </div>
+
+  <div class="part">
+    <span class="part-label">Step 2</span>
+    <h2>Ledger — Ending Balances</h2>
+    <p class="je-hint">Post each journal entry from Step 1 to T-accounts on scratch paper, starting from the October 31 balances above. Enter each account's <strong>unadjusted</strong> ending balance and normal side in the box below each T-account. Not every account had an October 31 balance — several start the period at zero.</p>
+    <div id="ledgerCash"></div>
+    <div class="ledger-grid" id="ledgerGrid"></div>
+    <div class="check-bar">
+      <button class="btn-check" id="checkStep2" type="button">Check my work</button>
+      <span class="check-summary" id="score2"></span>
+    </div>
+  </div>
+
+  <div class="part">
+    <span class="part-label">Step 3</span>
+    <h2>Unadjusted Trial Balance, November 30, 2026</h2>
+    <table class="worksheet"><thead><tr><th>Account</th><th style="text-align:right;">Debit</th><th style="text-align:right;">Credit</th></tr></thead><tbody id="unadjTB"></tbody></table>
+    <div class="check-bar">
+      <button class="btn-check" id="checkStep3" type="button">Check my work</button>
+      <span class="check-summary" id="score3"></span>
+    </div>
+  </div>
+
+  <div class="part">
+    <span class="part-label">Step 4</span>
+    <h2>Adjusting Entries, November 30, 2026</h2>
+    <div id="adjData"></div>
+    <div id="adjEntries"></div>
+    <div class="check-bar">
+      <button class="btn-check" id="checkStep4" type="button">Check my work</button>
+      <span class="check-summary" id="score4"></span>
+    </div>
+  </div>
+
+  <div class="part">
+    <span class="part-label">Step 5</span>
+    <h2>Adjusted Trial Balance, November 30, 2026</h2>
+    <table class="worksheet"><thead><tr><th>Account</th><th style="text-align:right;">Debit</th><th style="text-align:right;">Credit</th></tr></thead><tbody id="adjTB"></tbody></table>
+    <div class="check-bar">
+      <button class="btn-check" id="checkStep5" type="button">Check my work</button>
+      <span class="check-summary" id="score5"></span>
+    </div>
+  </div>
+
+  <div class="part">
+    <span class="part-label">Step 6</span>
+    <h2>Financial Statements, Month Ended November 30, 2026</h2>
+    <div class="req">Income Statement</div>
+    <div class="fs-shell" id="incomeShell"></div>
+    <div class="req">Statement of Retained Earnings</div>
+    <div class="fs-shell" id="reShell"></div>
+    <div class="req">Classified Balance Sheet</div>
+    <div class="fs-shell" id="bsShell"></div>
+    <div class="check-bar">
+      <button class="btn-check" id="checkStep6" type="button">Check my work</button>
+      <span class="check-summary" id="score6"></span>
+    </div>
+  </div>
+
+  <div class="part">
+    <span class="part-label">Step 7</span>
+    <h2>Closing Entries</h2>
+    <p class="je-hint">The accounts to close are given below — enter the correct closing amount for each line.</p>
+    <div id="closingEntries"></div>
+    <div class="check-bar">
+      <button class="btn-check" id="checkStep7" type="button">Check my work</button>
+      <span class="check-summary" id="score7"></span>
+    </div>
+  </div>
+
+  <div class="part">
+    <span class="part-label">Step 8</span>
+    <h2>Post-Closing Trial Balance, November 30, 2026</h2>
+    <table class="worksheet"><thead><tr><th>Account</th><th style="text-align:right;">Debit</th><th style="text-align:right;">Credit</th></tr></thead><tbody id="postCloseTB"></tbody></table>
+    <div class="check-bar">
+      <button class="btn-check" id="checkStep8" type="button">Check my work</button>
+      <span class="check-summary" id="score8"></span>
+    </div>
+  </div>
+
+  <div class="score-bar">
+    <span class="score-label">Assignment score</span>
+    <span class="score-value" id="overallScore">Check any step above to see your score</span>
+    <span class="score-breakdown" id="scoreBreakdown"></span>
+  </div>
+
+  <div class="part">
+    <span class="part-label">Reflection</span>
+    <h2>Reflection Questions</h2>
+    <ol class="refl">
+      <li>Which adjusting entry was hardest to figure out, and why? What made it click?
+        <div class="fill-lines"></div><div class="fill-lines"></div></li>
+      <li>The November 18 equipment purchase received no depreciation this month. Why not — what does that tell you about how depreciation policy is applied?
+        <div class="fill-lines"></div><div class="fill-lines"></div></li>
+      <li>Only part of the unearned revenue was earned this month. Explain in your own words why the rest stays a liability.
+        <div class="fill-lines"></div><div class="fill-lines"></div></li>
+      <li>Why does the order of adjusting entries (g) and (h) matter for computing bad debt expense correctly?
+        <div class="fill-lines"></div><div class="fill-lines"></div></li>
+      <li>Compare the unadjusted and adjusted trial balances. What does the difference tell you about why adjusting entries are necessary before financial statements can be prepared?
+        <div class="fill-lines"></div><div class="fill-lines"></div></li>
+    </ol>
+  </div>
+
+  <div class="submit-bar print-hide">
+    <h2>Ready to submit?</h2>
+    <div class="submit-row">
+      <label for="studentName">Your name</label>
+      <input type="text" id="studentName" placeholder="First and last name">
+    </div>
+    <div class="submit-row">
+      <button class="btn-submit" id="printBtn2" type="button">Print / Save as PDF</button>
+    </div>
+  </div>
+
+</main>
+
+<footer>Tuckasegee Trail Guides &amp; Outfitters &middot; Accounting Cycle Practice Problem &middot; ACCT 351 &middot; Western Carolina University</footer>
+
+<script>
+(function(){
+/* ============================== DATA GENERATION ============================== */
+function rnd(){ return Math.floor(Math.random()*10); }
+
+// Deterministic scenario generation from Student ID (same pattern as the Nantahala case)
+function hashSeed(str){
+  var h = 2166136261;
+  for(var i=0;i<str.length;i++){ h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
+  return h >>> 0;
+}
+function mulberry32(seed){
+  return function(){
+    seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+    var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+var rand = mulberry32(hashSeed('demo'));
+function rndSeeded(){ return Math.floor(rand() * 10); }
+var d1,d2,d3,d4,d5,d6,setCode;
+var Cash0,AR0,Allow0,PrepIns0,InsMonthly,Supplies0,Equip0,AccumDep0,AP0,NotesPay0,CommonStock0,RE0;
+var T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15;
+var Cash_u,AR_u,SuppliesAvail,Equip_u,AP_u,Unearned_u,GuideRev_u,EquipRentRev,SalExp_u,RentExp,UtilExp,AdvExp,Dividends_amt;
+var InsExp,SuppliesCount,SuppliesExp,DepExp,TripEarned,AccruedSalExp,AccruedInt,AccruedRev,ARafterG,DesiredAllow,BadDebtExp;
+var AR_a,Allow_a,PrepIns_a,Supplies_a,AccumDep_a,Unearned_a,SalPay_a,IntPay_a,SalExp_a,GuideRev_a;
+var TotalRevenue,TotalExpenses,NetIncome,RE_end,TotalCurrentAssets,TotalPPEnet,TotalAssets,TotalCurrentLiab,TotalLiab,TotalEquity;
+var txns, ledgerAccounts, unadjRows, adjItems, adjRows, postRows;
+
+var fmt = function(n){ return '$'+Math.round(n).toLocaleString('en-US'); };
+var r10 = function(x){ return Math.round(x/10)*10; };
+var R = function(x){ return Math.round(x); };
+
+var chartAccts = ['Cash','Accounts Receivable','Allowance for Doubtful Accounts','Prepaid Insurance','Supplies',
+'Equipment','Accumulated Depreciation—Equipment','Accounts Payable','Salaries Payable','Interest Payable',
+'Unearned Guide Fee Revenue','Notes Payable (6%, due 2028)','Common Stock','Retained Earnings','Dividends',
+'Income Summary','Guide Fee Revenue','Equipment Rental Revenue','Salaries Expense','Rent Expense',
+'Utilities Expense','Advertising Expense','Insurance Expense','Supplies Expense','Depreciation Expense',
+'Bad Debt Expense','Interest Expense'];
+document.getElementById('chartList').innerHTML = chartAccts.map(function(a){ return '<li>'+a+'</li>'; }).join('');
+var acctOptions = '<option value="">Select account…</option>' + chartAccts.map(function(a){
+  var val = a.indexOf('Notes Payable')===0 ? 'Notes Payable' : a;
+  return '<option value="'+val+'">'+a+'</option>';
+}).join('');
+
+function computeAll(seedStr){
+  rand = mulberry32(hashSeed((seedStr||'').trim().toLowerCase()));
+  d1=rndSeeded(); d2=rndSeeded(); d3=rndSeeded(); d4=rndSeeded(); d5=rndSeeded(); d6=rndSeeded();
+  setCode = ''+d1+d2+d3+d4+d5+d6;
+  document.getElementById('codeDisplay').textContent = setCode;
+
+  Cash0 = 35000 + d1*300;
+  AR0   = 11000 + d2*150;
+  Allow0 = 700 + d3*30;
+  PrepIns0 = 12*(300 + d4*10);
+  InsMonthly = PrepIns0/12;
+  Supplies0 = 1000 + d5*40;
+  Equip0 = 55000 + d6*500;
+  AccumDep0 = 10000 + d1*250;
+  AP0 = 2500 + d2*60;
+  NotesPay0 = 15000 + d3*1000;
+  CommonStock0 = 45000 + d4*500;
+  RE0 = (Cash0+AR0+PrepIns0+Supplies0+Equip0) - (Allow0+AccumDep0+AP0+NotesPay0+CommonStock0);
+
+  T1 = 8000 + d1*150; T2 = 9000 + d2*250; T4 = 600 + d4*40;
+  T3 = r10((AP0+T4)*(0.45+d3*0.02));
+  T5 = 3*(1200 + d5*50); T6 = 4800 + d6*70; T7 = 900 + d1*40; T8 = 1800 + d2*30;
+  T9 = 7000 + d3*200; T10 = 500 + d4*20; T11 = 5500 + d5*130; T12 = 5000 + d6*80;
+  T13 = 2000 + d1*60; T14 = 400 + d2*15; T15 = 4800 + d3*100;
+
+  Cash_u = Cash0+T2+T5+T7+T11-T3-T6-T8-T9-T10-T12-T13-T14;
+  AR_u = AR0+T1-T2+T15;
+  SuppliesAvail = Supplies0+T4;
+  Equip_u = Equip0+T9;
+  AP_u = AP0+T4-T3;
+  Unearned_u = T5;
+  GuideRev_u = T1+T11+T15;
+  EquipRentRev = T7;
+  SalExp_u = T6+T12;
+  RentExp = T8; UtilExp = T10; AdvExp = T14; Dividends_amt = T13;
+
+  InsExp = InsMonthly*4;
+  SuppliesCount = SuppliesAvail*0.35;
+  SuppliesExp = SuppliesAvail - SuppliesCount;
+  DepExp = Equip0*0.008;
+  TripEarned = T5/3;
+  AccruedSalExp = T12*0.33;
+  AccruedInt = NotesPay0*0.005;
+  AccruedRev = 1500 + d1*70;
+  ARafterG = AR_u + AccruedRev;
+  DesiredAllow = Math.round(ARafterG*0.06);
+  BadDebtExp = DesiredAllow - Allow0;
+
+  AR_a = ARafterG; Allow_a = DesiredAllow; PrepIns_a = PrepIns0 - InsExp; Supplies_a = SuppliesCount;
+  AccumDep_a = AccumDep0 + DepExp; Unearned_a = T5 - TripEarned; SalPay_a = AccruedSalExp; IntPay_a = AccruedInt;
+  SalExp_a = SalExp_u + AccruedSalExp; GuideRev_a = GuideRev_u + TripEarned + AccruedRev;
+
+  TotalRevenue = GuideRev_a + EquipRentRev;
+  TotalExpenses = SalExp_a+RentExp+UtilExp+AdvExp+InsExp+SuppliesExp+DepExp+AccruedInt+BadDebtExp;
+  NetIncome = TotalRevenue - TotalExpenses;
+  RE_end = RE0 + NetIncome - Dividends_amt;
+  TotalCurrentAssets = Cash_u + AR_a - Allow_a + PrepIns_a + Supplies_a;
+  TotalPPEnet = Equip_u - AccumDep_a;
+  TotalAssets = TotalCurrentAssets + TotalPPEnet;
+  TotalCurrentLiab = AP_u + SalPay_a + IntPay_a + Unearned_a;
+  TotalLiab = TotalCurrentLiab + NotesPay0;
+  TotalEquity = CommonStock0 + RE_end;
+
+  txns = [
+    ['Nov 2', 'Performed guiding services for clients on account, '+fmt(T1)+'.', 'Accounts Receivable','Guide Fee Revenue', T1],
+    ['Nov 3', 'Collected cash from customers on account, '+fmt(T2)+'.', 'Cash','Accounts Receivable', T2],
+    ['Nov 5', 'Paid cash on account to a supplier, '+fmt(T3)+'.', 'Accounts Payable','Cash', T3],
+    ['Nov 6', 'Purchased supplies on account, '+fmt(T4)+'.', 'Supplies','Accounts Payable', T4],
+    ['Nov 8', 'Received a cash advance from a client for 3 future guided trips, '+fmt(T5)+' total.', 'Cash','Unearned Guide Fee Revenue', T5],
+    ['Nov 10', 'Paid salaries for the pay period ended November 10, '+fmt(T6)+'.', 'Salaries Expense','Cash', T6],
+    ['Nov 12', 'Received cash for equipment rental revenue, '+fmt(T7)+'.', 'Cash','Equipment Rental Revenue', T7],
+    ['Nov 15', 'Paid rent for the month, '+fmt(T8)+'.', 'Rent Expense','Cash', T8],
+    ['Nov 18', 'Purchased equipment for cash, '+fmt(T9)+'.', 'Equipment','Cash', T9],
+    ['Nov 20', 'Paid utilities, '+fmt(T10)+'.', 'Utilities Expense','Cash', T10],
+    ['Nov 22', 'Performed guiding services for cash, '+fmt(T11)+'.', 'Cash','Guide Fee Revenue', T11],
+    ['Nov 25', 'Paid salaries for the pay period ended November 25, '+fmt(T12)+'.', 'Salaries Expense','Cash', T12],
+    ['Nov 27', 'Declared and paid a cash dividend, '+fmt(T13)+'.', 'Dividends','Cash', T13],
+    ['Nov 28', 'Paid for advertising, '+fmt(T14)+'.', 'Advertising Expense','Cash', T14],
+    ['Nov 30', 'Billed clients for guiding services performed, '+fmt(T15)+' (not yet collected).', 'Accounts Receivable','Guide Fee Revenue', T15],
+  ];
+
+  ledgerAccounts = [
+    ['Cash', Cash_u, 'debit', Cash0], ['Accounts Receivable', AR_u, 'debit', AR0],
+    ['Allowance for Doubtful Accounts', Allow0, 'credit', Allow0], ['Prepaid Insurance', PrepIns0, 'debit', PrepIns0],
+    ['Supplies', SuppliesAvail, 'debit', Supplies0], ['Equipment', Equip_u, 'debit', Equip0],
+    ['Accumulated Depreciation—Equipment', AccumDep0, 'credit', AccumDep0], ['Accounts Payable', AP_u, 'credit', AP0],
+    ['Salaries Payable', 0, 'credit', 0], ['Interest Payable', 0, 'credit', 0],
+    ['Unearned Guide Fee Revenue', Unearned_u, 'credit', 0], ['Notes Payable', NotesPay0, 'credit', NotesPay0],
+    ['Common Stock', CommonStock0, 'credit', CommonStock0], ['Retained Earnings', RE0, 'credit', RE0],
+    ['Dividends', Dividends_amt, 'debit', 0], ['Income Summary', 0, 'debit', 0],
+    ['Guide Fee Revenue', GuideRev_u, 'credit', 0], ['Equipment Rental Revenue', EquipRentRev, 'credit', 0],
+    ['Salaries Expense', SalExp_u, 'debit', 0], ['Rent Expense', RentExp, 'debit', 0],
+    ['Utilities Expense', UtilExp, 'debit', 0], ['Advertising Expense', AdvExp, 'debit', 0],
+    ['Insurance Expense', 0, 'debit', 0], ['Supplies Expense', 0, 'debit', 0],
+    ['Depreciation Expense', 0, 'debit', 0], ['Bad Debt Expense', 0, 'debit', 0], ['Interest Expense', 0, 'debit', 0],
+  ];
+
+  unadjRows = [
+    ['Cash','u0',Cash_u,0],['Accounts Receivable','u1',AR_u,0],['Allowance for Doubtful Accounts','u2',0,Allow0],
+    ['Prepaid Insurance','u3',PrepIns0,0],['Supplies','u4',SuppliesAvail,0],['Equipment','u5',Equip_u,0],
+    ['Accumulated Depreciation—Equipment','u6',0,AccumDep0],['Accounts Payable','u7',0,AP_u],
+    ['Unearned Guide Fee Revenue','u8',0,Unearned_u],['Notes Payable','u9',0,NotesPay0],
+    ['Common Stock','u10',0,CommonStock0],['Retained Earnings','u11',0,RE0],['Dividends','u12',Dividends_amt,0],
+    ['Guide Fee Revenue','u13',0,GuideRev_u],['Equipment Rental Revenue','u14',0,EquipRentRev],
+    ['Salaries Expense','u15',SalExp_u,0],['Rent Expense','u16',RentExp,0],['Utilities Expense','u17',UtilExp,0],
+    ['Advertising Expense','u18',AdvExp,0],
+  ];
+
+  adjItems = [
+    ['a','Insurance Expense','Prepaid Insurance', InsExp],
+    ['b','Supplies Expense','Supplies', SuppliesExp],
+    ['c','Depreciation Expense','Accumulated Depreciation—Equipment', DepExp],
+    ['d','Unearned Guide Fee Revenue','Guide Fee Revenue', TripEarned],
+    ['e','Salaries Expense','Salaries Payable', AccruedSalExp],
+    ['f','Interest Expense','Interest Payable', AccruedInt],
+    ['g','Accounts Receivable','Guide Fee Revenue', AccruedRev],
+    ['h','Bad Debt Expense','Allowance for Doubtful Accounts', BadDebtExp],
+  ];
+
+  adjRows = [
+    ['Cash','a0',Cash_u,0],['Accounts Receivable','a1',AR_a,0],['Allowance for Doubtful Accounts','a2',0,Allow_a],
+    ['Prepaid Insurance','a3',PrepIns_a,0],['Supplies','a4',Supplies_a,0],['Equipment','a5',Equip_u,0],
+    ['Accumulated Depreciation—Equipment','a6',0,AccumDep_a],['Accounts Payable','a7',0,AP_u],
+    ['Salaries Payable','a8',0,SalPay_a],['Interest Payable','a9',0,IntPay_a],
+    ['Unearned Guide Fee Revenue','a10',0,Unearned_a],['Notes Payable','a11',0,NotesPay0],
+    ['Common Stock','a12',0,CommonStock0],['Retained Earnings','a13',0,RE0],['Dividends','a14',Dividends_amt,0],
+    ['Guide Fee Revenue','a15',0,GuideRev_a],['Equipment Rental Revenue','a16',0,EquipRentRev],
+    ['Salaries Expense','a17',SalExp_a,0],['Rent Expense','a18',RentExp,0],['Utilities Expense','a19',UtilExp,0],
+    ['Advertising Expense','a20',AdvExp,0],['Insurance Expense','a21',InsExp,0],['Supplies Expense','a22',SuppliesExp,0],
+    ['Depreciation Expense','a23',DepExp,0],['Bad Debt Expense','a24',BadDebtExp,0],['Interest Expense','a25',AccruedInt,0],
+  ];
+
+  postRows = [
+    ['Cash','p0',Cash_u,0],['Accounts Receivable','p1',AR_a,0],['Allowance for Doubtful Accounts','p2',0,Allow_a],
+    ['Prepaid Insurance','p3',PrepIns_a,0],['Supplies','p4',Supplies_a,0],['Equipment','p5',Equip_u,0],
+    ['Accumulated Depreciation—Equipment','p6',0,AccumDep_a],['Accounts Payable','p7',0,AP_u],
+    ['Salaries Payable','p8',0,SalPay_a],['Interest Payable','p9',0,IntPay_a],
+    ['Unearned Guide Fee Revenue','p10',0,Unearned_a],['Notes Payable','p11',0,NotesPay0],
+    ['Common Stock','p12',0,CommonStock0],['Retained Earnings','p13',0,RE_end],
+  ];
+}
+
+/* ============================== ADA ICON HELPERS (shared pattern) ============================== */
+function ensureIcon(el){
+  var wrap = el.parentElement;
+  if(!wrap || !wrap.classList.contains('field-with-icon')){
+    wrap = document.createElement('span');
+    wrap.className = 'field-with-icon';
+    el.parentNode.insertBefore(wrap, el);
+    wrap.appendChild(el);
+    var icon = document.createElement('span');
+    icon.className = 'field-icon';
+    icon.setAttribute('role','img');
+    wrap.appendChild(icon);
+  }
+  return wrap.querySelector('.field-icon');
+}
+function setIcon(el, ok){
+  var icon = ensureIcon(el);
+  icon.textContent = ok ? '\u2713' : '\u2717';
+  icon.classList.remove('icon-correct','icon-incorrect');
+  icon.classList.add(ok ? 'icon-correct' : 'icon-incorrect');
+  icon.setAttribute('aria-label', ok ? 'Correct' : 'Incorrect');
+}
+function mark(el, isOk){
+  el.classList.remove('field-correct','field-incorrect');
+  el.classList.add(isOk?'field-correct':'field-incorrect');
+  setIcon(el, isOk);
+  return isOk;
+}
+function numVal(el){ var v = parseFloat(el.value); return isNaN(v) ? null : v; }
+function amtMatch(el, expected){ var v = numVal(el); return v!==null && R(v)===R(expected); }
+function badge(id, correct, total){
+  var el = document.getElementById(id);
+  el.textContent = correct+' of '+total+' correct';
+  el.classList.remove('good','bad');
+  el.classList.add(correct===total ? 'good' : 'bad');
+}
+
+/* ============================== RENDER HELPERS ============================== */
+function tbRow(name, id, given){
+  if(given!==undefined) return '<tr><td>'+name+'</td><td class="given-val">'+(given[0]?fmt(given[0]):'')+'</td><td class="given-val">'+(given[1]?fmt(given[1]):'')+'</td></tr>';
+  return '<tr><td>'+name+'</td>'+
+    '<td><input type="number" id="'+id+'_d"></td>'+
+    '<td><input type="number" id="'+id+'_c"></td></tr>';
+}
+function gradeTBRows(rows){
+  var correct=0, total=0;
+  rows.forEach(function(r){
+    var name=r[0], id=r[1], ed=r[2], ec=r[3];
+    var dEl = document.getElementById(id+'_d'), cEl = document.getElementById(id+'_c');
+    total+=2;
+    var dOk = (ed===0) ? (numVal(dEl)===null || R(numVal(dEl))===0) : amtMatch(dEl, ed);
+    var cOk = (ec===0) ? (numVal(cEl)===null || R(numVal(cEl))===0) : amtMatch(cEl, ec);
+    mark(dEl, dOk); mark(cEl, cOk);
+    if(dOk) correct++; if(cOk) correct++;
+  });
+  return {correct:correct, total:total};
+}
+function jeTable(prefix, dateLabel, desc){
+  return '<div class="je-group"><span class="je-tag">'+dateLabel+' — '+desc+'</span>'+
+    '<table class="je"><thead><tr><th style="width:54%;">Account</th><th style="width:23%;">Debit</th><th style="width:23%;">Credit</th></tr></thead><tbody>'+
+    '<tr><td><select class="coa-select" id="'+prefix+'_dr_acct">'+acctOptions+'</select></td>'+
+    '<td><input type="number" id="'+prefix+'_dr_amt" placeholder="$"></td><td></td></tr>'+
+    '<tr><td class="indent"><select class="coa-select" id="'+prefix+'_cr_acct">'+acctOptions+'</select></td>'+
+    '<td></td><td><input type="number" id="'+prefix+'_cr_amt" placeholder="$"></td></tr>'+
+    '</tbody></table></div>';
+}
+function gradeJERow(prefix, drAcct, crAcct, amt){
+  var drSel=document.getElementById(prefix+'_dr_acct'), drAmt=document.getElementById(prefix+'_dr_amt');
+  var crSel=document.getElementById(prefix+'_cr_acct'), crAmt=document.getElementById(prefix+'_cr_amt');
+  var c1 = mark(drSel, drSel.value===drAcct);
+  var c2 = mark(drAmt, amtMatch(drAmt, amt));
+  var c3 = mark(crSel, crSel.value===crAcct);
+  var c4 = mark(crAmt, amtMatch(crAmt, amt));
+  var correct = [c1,c2,c3,c4].filter(Boolean).length;
+  return {correct:correct, total:4};
+}
+
+/* ============================== BEGINNING TB (given) ============================== */
+function renderBeginTB(){
+  var beginRows = [
+    ['Cash', Cash0, 0],['Accounts Receivable', AR0, 0],['Allowance for Doubtful Accounts', 0, Allow0],
+    ['Prepaid Insurance', PrepIns0, 0],['Supplies', Supplies0, 0],['Equipment', Equip0, 0],
+    ['Accumulated Depreciation—Equipment', 0, AccumDep0],['Accounts Payable', 0, AP0],
+    ['Notes Payable (6%, due 2028)', 0, NotesPay0],['Common Stock', 0, CommonStock0],['Retained Earnings', 0, RE0],
+  ];
+  var dT=0,cT=0;
+  document.getElementById('beginTB').innerHTML = beginRows.map(function(r){ dT+=r[1]; cT+=r[2]; return tbRow(r[0], null, [r[1], r[2]]); }).join('') +
+    '<tr class="total-row"><td>Total</td><td class="given-val">'+fmt(dT)+'</td><td class="given-val">'+fmt(cT)+'</td></tr>';
+}
+
+/* ============================== STEP 1 ============================== */
+function renderStep1(){
+  document.getElementById('journalEntries').innerHTML = txns.map(function(t,i){ return jeTable('txn'+i, t[0], t[1]); }).join('');
+}
+function checkStep1(){
+  var correct=0, total=0;
+  txns.forEach(function(t,i){ var r = gradeJERow('txn'+i, t[2], t[3], t[4]); correct+=r.correct; total+=r.total; });
+  badge('score1', correct, total);
+  return {correct:correct, total:total};
+}
+
+/* ============================== STEP 2 ============================== */
+function tLines(n){ var out=''; for(var i=0;i<n;i++) out += '<div class="tline"></div>'; return out; }
+function renderStep2(){
+  // Cash gets its own wide T-account since it's touched by the most transactions (4 debit postings, 8 credit postings)
+  var cash = ledgerAccounts[0];
+  document.getElementById('ledgerCash').innerHTML =
+    '<div class="taccount-wide"><div class="tname">Cash</div><div class="tbody">' +
+      '<div class="tside debit"><div class="tlabel">Debit</div>' +
+        (cash[3] ? '<div class="tline given">'+fmt(cash[3])+'</div>' : '') + tLines(8) +
+      '</div>' +
+      '<div class="tside"><div class="tlabel">Credit</div>' + tLines(8) + '</div>' +
+    '</div>' +
+    '<div class="tend">Ending Bal: <input type="number" id="ledg0_amt"> ' +
+      '<select id="ledg0_side"><option value="">side</option><option value="debit">Dr</option><option value="credit">Cr</option></select></div>' +
+    '</div>';
+
+  document.getElementById('ledgerGrid').innerHTML = ledgerAccounts.slice(1).map(function(a,idx){
+    var i = idx+1; // real index into ledgerAccounts / id numbering
+    var name=a[0], beg=a[3], begSide=a[2];
+    var debitGiven = (beg && begSide==='debit') ? '<div class="tline given">'+fmt(beg)+'</div>' : '';
+    var creditGiven = (beg && begSide==='credit') ? '<div class="tline given">'+fmt(beg)+'</div>' : '';
+    return '<div class="taccount"><div class="tname">'+name+'</div><div class="tbody">' +
+      '<div class="tside debit"><div class="tlabel">Dr</div>' + debitGiven + tLines(4) + '</div>' +
+      '<div class="tside"><div class="tlabel">Cr</div>' + creditGiven + tLines(4) + '</div>' +
+      '</div>' +
+      '<div class="tend">Bal: <input type="number" id="ledg'+i+'_amt">' +
+      '<select id="ledg'+i+'_side"><option value="">side</option><option value="debit">Dr</option><option value="credit">Cr</option></select></div>' +
+      '</div>';
+  }).join('');
+}
+function checkStep2(){
+  var correct=0, total=0;
+  ledgerAccounts.forEach(function(a,i){
+    var amtEl=document.getElementById('ledg'+i+'_amt'), sideEl=document.getElementById('ledg'+i+'_side');
+    total+=2;
+    var amtOk = (a[1]===0) ? (numVal(amtEl)===null || R(numVal(amtEl))===0) : amtMatch(amtEl, a[1]);
+    var sideOk = (a[1]===0) ? true : (sideEl.value===a[2]);
+    mark(amtEl, amtOk);
+    sideEl.classList.remove('field-correct','field-incorrect');
+    sideEl.classList.add(sideOk ? 'field-correct' : 'field-incorrect');
+    setIcon(sideEl, sideOk);
+    if(amtOk) correct++; if(sideOk) correct++;
+  });
+  badge('score2', correct, total);
+  return {correct:correct, total:total};
+}
+
+/* ============================== STEP 3 ============================== */
+function renderStep3(){
+  document.getElementById('unadjTB').innerHTML = unadjRows.map(function(r){ return tbRow(r[0], r[1]); }).join('');
+}
+function checkStep3(){ var r = gradeTBRows(unadjRows); badge('score3', r.correct, r.total); return r; }
+
+/* ============================== STEP 4 ============================== */
+function renderStep4(){
+  document.getElementById('adjData').innerHTML =
+    '<div class="scenario"><p><strong class="tag">a.</strong> Prepaid expense. The insurance policy is a 12-month policy purchased August 1 for '+fmt(PrepIns0)+' total. Four months have now expired (Aug–Nov). Record insurance expense for the expired portion.</p>'+
+    '<p><strong class="tag">b.</strong> Prepaid expense. A physical count on November 30 shows supplies on hand equal to about 35% of supplies available for use during the period. Record the supplies used as expense.</p>'+
+    '<p><strong class="tag">c.</strong> Depreciation. Record straight-line-equivalent depreciation of 0.8% per month on the equipment owned prior to November (the November 18 purchase is <em>not</em> depreciated this month per company policy).</p>'+
+    '<p><strong class="tag">d.</strong> Unearned revenue. Of the 3 guided trips paid for in advance on November 8, only 1 trip was actually conducted by November 30. Recognize revenue for the portion earned.</p>'+
+    '<p><strong class="tag">e.</strong> Accrued expense. As of November 30, employees have earned approximately 33% of the next payroll period\u2019s salary (based on the November 25 payment) that has not yet been paid.</p>'+
+    '<p><strong class="tag">f.</strong> Accrued expense. One month of interest has accrued on the 6% note payable but has not been paid.</p>'+
+    '<p><strong class="tag">g.</strong> Accrued revenue. The company performed '+fmt(AccruedRev)+' of guiding services in the last two days of November that have not yet been billed or collected.</p>'+
+    '<p><strong class="tag">h.</strong> Estimation. Management estimates that 6% of the (updated, post-item-g) Accounts Receivable balance will ultimately be uncollectible. Record bad debt expense to bring the Allowance for Doubtful Accounts to this desired balance. Complete item g before item h — the order matters.</p></div>';
+  document.getElementById('adjEntries').innerHTML = adjItems.map(function(a,i){ return jeTable('adj'+i, '('+a[0]+')', 'Adjusting entry '+a[0]); }).join('');
+}
+function checkStep4(){
+  var correct=0, total=0;
+  adjItems.forEach(function(a,i){ var r = gradeJERow('adj'+i, a[1], a[2], a[3]); correct+=r.correct; total+=r.total; });
+  badge('score4', correct, total);
+  return {correct:correct, total:total};
+}
+
+/* ============================== STEP 5 ============================== */
+function renderStep5(){
+  document.getElementById('adjTB').innerHTML = adjRows.map(function(r){ return tbRow(r[0], r[1]); }).join('');
+}
+function checkStep5(){ var r = gradeTBRows(adjRows); badge('score5', r.correct, r.total); return r; }
+
+/* ============================== STEP 6 ============================== */
+function fsRow(label, id, indent, total){
+  return '<div class="fs-line'+(total?' total':'')+'"><span class="label'+(indent?' fs-indent':'')+'">'+label+'</span><input type="number" id="'+id+'"></div>';
+}
+function renderStep6(){
+  document.getElementById('incomeShell').innerHTML =
+    fsRow('Guide Fee Revenue','fs_gfr') + fsRow('Equipment Rental Revenue','fs_err') + fsRow('Total revenue','fs_totrev',false,true) +
+    fsRow('Salaries Expense','fs_sal',true) + fsRow('Rent Expense','fs_rent',true) + fsRow('Utilities Expense','fs_util',true) +
+    fsRow('Advertising Expense','fs_adv',true) + fsRow('Insurance Expense','fs_ins',true) + fsRow('Supplies Expense','fs_sup',true) +
+    fsRow('Depreciation Expense','fs_dep',true) + fsRow('Bad Debt Expense','fs_bd',true) + fsRow('Interest Expense','fs_int',true) +
+    fsRow('Total expenses','fs_totexp',false,true) + fsRow('Net income','fs_ni',false,true);
+  document.getElementById('reShell').innerHTML =
+    '<div class="fs-line"><span class="label">Retained earnings, November 1</span><span class="given-val">'+fmt(RE0)+'</span></div>'+
+    fsRow('Add: Net income','fs_re_ni') + fsRow('Less: Dividends','fs_re_div') + fsRow('Retained earnings, November 30','fs_re_end',false,true);
+  document.getElementById('bsShell').innerHTML =
+    '<div class="fs-line"><span class="label"><strong>Assets</strong></span></div>' +
+    fsRow('Cash','fs_bs_cash',true) + fsRow('Accounts Receivable, net of allowance','fs_bs_ar',true) +
+    fsRow('Prepaid Insurance','fs_bs_pi',true) + fsRow('Supplies','fs_bs_sup',true) +
+    fsRow('Total current assets','fs_bs_tca',false,true) + fsRow('Equipment, net of accumulated depreciation','fs_bs_eq',true) +
+    fsRow('Total assets','fs_bs_ta',false,true) +
+    '<div class="fs-line" style="margin-top:10px;"><span class="label"><strong>Liabilities</strong></span></div>' +
+    fsRow('Accounts Payable','fs_bs_ap',true) + fsRow('Salaries Payable','fs_bs_sp',true) + fsRow('Interest Payable','fs_bs_ip',true) +
+    fsRow('Unearned Guide Fee Revenue','fs_bs_un',true) + fsRow('Total current liabilities','fs_bs_tcl',false,true) +
+    fsRow('Notes Payable','fs_bs_np',true) + fsRow('Total liabilities','fs_bs_tl',false,true) +
+    '<div class="fs-line" style="margin-top:10px;"><span class="label"><strong>Stockholders\' Equity</strong></span></div>' +
+    fsRow('Common Stock','fs_bs_cs',true) + fsRow('Retained Earnings','fs_bs_re',true) +
+    fsRow('Total stockholders\' equity','fs_bs_te',false,true) + fsRow('Total liabilities and stockholders\' equity','fs_bs_tle',false,true);
+}
+function checkStep6(){
+  var pairs = [
+    ['fs_gfr',GuideRev_a],['fs_err',EquipRentRev],['fs_totrev',TotalRevenue],
+    ['fs_sal',SalExp_a],['fs_rent',RentExp],['fs_util',UtilExp],['fs_adv',AdvExp],
+    ['fs_ins',InsExp],['fs_sup',SuppliesExp],['fs_dep',DepExp],['fs_bd',BadDebtExp],['fs_int',AccruedInt],
+    ['fs_totexp',TotalExpenses],['fs_ni',NetIncome],
+    ['fs_re_ni',NetIncome],['fs_re_div',Dividends_amt],['fs_re_end',RE_end],
+    ['fs_bs_cash',Cash_u],['fs_bs_ar',AR_a-Allow_a],['fs_bs_pi',PrepIns_a],['fs_bs_sup',Supplies_a],
+    ['fs_bs_tca',TotalCurrentAssets],['fs_bs_eq',TotalPPEnet],['fs_bs_ta',TotalAssets],
+    ['fs_bs_ap',AP_u],['fs_bs_sp',SalPay_a],['fs_bs_ip',IntPay_a],['fs_bs_un',Unearned_a],
+    ['fs_bs_tcl',TotalCurrentLiab],['fs_bs_np',NotesPay0],['fs_bs_tl',TotalLiab],
+    ['fs_bs_cs',CommonStock0],['fs_bs_re',RE_end],['fs_bs_te',TotalEquity],['fs_bs_tle',TotalLiab+TotalEquity],
+  ];
+  var correct=0, total=pairs.length;
+  pairs.forEach(function(p){ var el=document.getElementById(p[0]); if(mark(el, amtMatch(el,p[1]))) correct++; });
+  badge('score6', correct, total);
+  return {correct:correct, total:total};
+}
+
+/* ============================== STEP 7 ============================== */
+function clRow(label, id, indent){
+  return '<tr><td'+(indent?' class="indent"':'')+'>'+label+'</td><td colspan="2"><input type="number" id="'+id+'" placeholder="$"></td></tr>';
+}
+function renderStep7(){
+  document.getElementById('closingEntries').innerHTML =
+    '<div class="je-group"><span class="je-tag">1. Close revenue accounts</span><table class="je"><tbody>'+
+      clRow('Guide Fee Revenue','cl1_gfr') + clRow('Equipment Rental Revenue','cl1_err') + clRow('&nbsp;&nbsp;Income Summary','cl1_is',true) +
+    '</tbody></table></div>'+
+    '<div class="je-group"><span class="je-tag">2. Close expense accounts</span><table class="je"><tbody>'+
+      clRow('Income Summary','cl2_is') +
+      clRow('&nbsp;&nbsp;Salaries Expense','cl2_sal',true) + clRow('&nbsp;&nbsp;Rent Expense','cl2_rent',true) +
+      clRow('&nbsp;&nbsp;Utilities Expense','cl2_util',true) + clRow('&nbsp;&nbsp;Advertising Expense','cl2_adv',true) +
+      clRow('&nbsp;&nbsp;Insurance Expense','cl2_ins',true) + clRow('&nbsp;&nbsp;Supplies Expense','cl2_sup',true) +
+      clRow('&nbsp;&nbsp;Depreciation Expense','cl2_dep',true) + clRow('&nbsp;&nbsp;Bad Debt Expense','cl2_bd',true) +
+      clRow('&nbsp;&nbsp;Interest Expense','cl2_int',true) +
+    '</tbody></table></div>'+
+    '<div class="je-group"><span class="je-tag">3. Close Income Summary to Retained Earnings</span><table class="je"><tbody>'+
+      clRow('Income Summary','cl3_is') + clRow('&nbsp;&nbsp;Retained Earnings','cl3_re',true) +
+    '</tbody></table></div>'+
+    '<div class="je-group"><span class="je-tag">4. Close Dividends</span><table class="je"><tbody>'+
+      clRow('Retained Earnings','cl4_re') + clRow('&nbsp;&nbsp;Dividends','cl4_div',true) +
+    '</tbody></table></div>';
+}
+function checkStep7(){
+  var pairs = [
+    ['cl1_gfr',GuideRev_a],['cl1_err',EquipRentRev],['cl1_is',TotalRevenue],
+    ['cl2_is',TotalExpenses],['cl2_sal',SalExp_a],['cl2_rent',RentExp],['cl2_util',UtilExp],['cl2_adv',AdvExp],
+    ['cl2_ins',InsExp],['cl2_sup',SuppliesExp],['cl2_dep',DepExp],['cl2_bd',BadDebtExp],['cl2_int',AccruedInt],
+    ['cl3_is',NetIncome],['cl3_re',NetIncome],
+    ['cl4_re',Dividends_amt],['cl4_div',Dividends_amt],
+  ];
+  var correct=0, total=pairs.length;
+  pairs.forEach(function(p){ var el=document.getElementById(p[0]); if(mark(el, amtMatch(el,p[1]))) correct++; });
+  badge('score7', correct, total);
+  return {correct:correct, total:total};
+}
+
+/* ============================== STEP 8 ============================== */
+function renderStep8(){
+  document.getElementById('postCloseTB').innerHTML = postRows.map(function(r){ return tbRow(r[0], r[1]); }).join('');
+}
+function checkStep8(){ var r = gradeTBRows(postRows); badge('score8', r.correct, r.total); return r; }
+
+/* ============================== OVERALL SCORE ============================== */
+var scoreState = { s1:null,s2:null,s3:null,s4:null,s5:null,s6:null,s7:null,s8:null };
+var STEP_LABELS = {
+  s1:'Step 1 — General Journal', s2:'Step 2 — Ledger', s3:'Step 3 — Unadjusted TB',
+  s4:'Step 4 — Adjusting Entries', s5:'Step 5 — Adjusted TB', s6:'Step 6 — Financial Statements',
+  s7:'Step 7 — Closing Entries', s8:'Step 8 — Post-Closing TB'
+};
+function updateOverallScore(){
+  var el = document.getElementById('overallScore');
+  var breakdown = document.getElementById('scoreBreakdown');
+  var anyChecked = Object.keys(scoreState).some(function(k){ return scoreState[k]!==null; });
+  if(!anyChecked){ el.textContent = 'Check any step above to see your score'; breakdown.textContent = ''; return; }
+  var correct=0, total=0;
+  Object.keys(scoreState).forEach(function(k){ if(scoreState[k]){ correct+=scoreState[k].correct; total+=scoreState[k].total; } });
+  var pct = total ? Math.round(100*correct/total) : 0;
+  el.textContent = correct+' / '+total+' correct ('+pct+'%)';
+  breakdown.textContent = Object.keys(scoreState).map(function(k){
+    return STEP_LABELS[k]+': '+(scoreState[k] ? scoreState[k].correct+'/'+scoreState[k].total : 'not checked yet');
+  }).join('  ·  ');
+}
+function bindCheck(btnId, fn, key){
+  document.getElementById(btnId).addEventListener('click', function(){
+    scoreState[key] = fn();
+    updateOverallScore();
+  });
+}
+
+/* ============================== INIT / REGENERATE ============================== */
+function renderAll(){
+  renderBeginTB(); renderStep1(); renderStep2(); renderStep3(); renderStep4();
+  renderStep5(); renderStep6(); renderStep7(); renderStep8();
+  scoreState = { s1:null,s2:null,s3:null,s4:null,s5:null,s6:null,s7:null,s8:null };
+  ['score1','score2','score3','score4','score5','score6','score7','score8'].forEach(function(id){
+    var el = document.getElementById(id); el.textContent=''; el.classList.remove('good','bad');
+  });
+  updateOverallScore();
+}
+function init(seedStr){
+  computeAll(seedStr);
+  renderAll();
+}
+init('');
+
+bindCheck('checkStep1', checkStep1, 's1');
+bindCheck('checkStep2', checkStep2, 's2');
+bindCheck('checkStep3', checkStep3, 's3');
+bindCheck('checkStep4', checkStep4, 's4');
+bindCheck('checkStep5', checkStep5, 's5');
+bindCheck('checkStep6', checkStep6, 's6');
+bindCheck('checkStep7', checkStep7, 's7');
+bindCheck('checkStep8', checkStep8, 's8');
+
+var idInput = document.getElementById('studentId');
+document.getElementById('genBtn').addEventListener('click', function(){ init(idInput.value); });
+idInput.addEventListener('keydown', function(e){ if(e.key==='Enter') init(idInput.value); });
+
+function doPrint(){
+  var name = (document.getElementById('studentName').value||'').trim();
+  var sid = (document.getElementById('studentId').value||'').trim();
+  document.getElementById('printNameLine').textContent = 'Name: ' + (name || '_______________________') + '     Student ID: ' + (sid || '_______________________') + '     Data Set Code: ' + setCode;
+  document.getElementById('printScoreLine').textContent = 'Score: ' + document.getElementById('overallScore').textContent;
+  window.print();
+}
+document.getElementById('printBtn').addEventListener('click', doPrint);
+document.getElementById('printBtn2').addEventListener('click', doPrint);
+
+})();
+</script>
+
+</body>
+</html>
