@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Classified Balance Sheet — Thistlewood Circuits Corporation</title>
+<title>Classified Balance Sheet — Pisgah Electronics Corporation</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -289,7 +289,7 @@
 
 <header>
   <p class="eyebrow">ACCT 351 &middot; Chapter 3 &middot; The Balance Sheet and Financial Disclosures</p>
-  <h1 class="title">Thistlewood Circuits Corporation</h1>
+  <h1 class="title">Pisgah Electronics Corporation</h1>
   <p class="subtitle">Reclassify an unclassified trial balance into a properly classified balance sheet.</p>
 </header>
 
@@ -534,7 +534,7 @@
     const RE = Total - sum18to27;
 
     document.getElementById('intro').textContent =
-      `The following is the ending balances of accounts at December 31, ${YEAR}, for the Thistlewood Circuits Corporation.`;
+      `The following is the ending balances of accounts at December 31, ${YEAR}, for the Pisgah Electronics Corporation.`;
 
     tbRows = [
       ['Cash', Cash, 0],['Short-term investments', STI, 0],['Accounts receivable', AR, 0],
@@ -572,7 +572,7 @@
     `;
 
     document.getElementById('instruction').textContent =
-      `Prepare a classified balance sheet for Thistlewood Circuits Corporation at December 31, ${YEAR}, using the blank template that follows.`;
+      `Prepare a classified balance sheet for Pisgah Electronics Corporation at December 31, ${YEAR}, using the blank template that follows.`;
 
     const CashEquiv = Cash + TBills;
     const STIrem = STI - TBills;
@@ -853,7 +853,7 @@
     const rows = [];
     const push = (...cells) => { rows.push(cells); return rows.length; };
 
-    push('THISTLEWOOD CIRCUITS CORPORATION');
+    push('PISGAH ELECTRONICS CORPORATION');
     push('Balance Sheet Workbook');
     push('');
     push('Name:', '');
@@ -942,7 +942,7 @@
 
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Balance Sheet');
-    XLSX.writeFile(wb, `Thistlewood_BalanceSheet_${setCode}.xlsx`);
+    XLSX.writeFile(wb, `Pisgah_BalanceSheet_${setCode}.xlsx`);
   });
 
   // ---------------- Print / Save as PDF ----------------
@@ -956,7 +956,7 @@
     const scoreLine = document.getElementById('printScoreLine');
     scoreLine.textContent = 'Self-check score: ' + document.getElementById('overallScore').textContent;
     const oldTitle = document.title;
-    document.title = 'Thistlewood-BalanceSheet-' + (val('studentIdInput') || 'submission');
+    document.title = 'Pisgah-BalanceSheet-' + (val('studentIdInput') || 'submission');
     window.print();
     document.title = oldTitle;
   }
@@ -997,7 +997,7 @@
 
     const COLS2 = [6096, 2622];
     const children = [];
-    children.push(new D.Paragraph({ heading: D.HeadingLevel.TITLE, spacing:{after:60}, children:[new D.TextRun({text:'Thistlewood Circuits Corporation \u2014 Classified Balance Sheet', color:PURPLE, size:32, bold:true})] }));
+    children.push(new D.Paragraph({ heading: D.HeadingLevel.TITLE, spacing:{after:60}, children:[new D.TextRun({text:'Pisgah Electronics Corporation \u2014 Classified Balance Sheet', color:PURPLE, size:32, bold:true})] }));
     children.push(p('Name: ' + name + '     Student ID: ' + sid, { bold:true }));
     children.push(p('ACCT 351  \u00b7  Classified Balance Sheet  \u00b7  Data Set ' + setCode, { color: SLATE }));
 
@@ -1040,7 +1040,7 @@
       const idPart = val('studentIdInput') || 'submission';
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = 'Thistlewood-BalanceSheet-' + idPart + '.docx';
+      a.download = 'Pisgah-BalanceSheet-' + idPart + '.docx';
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
