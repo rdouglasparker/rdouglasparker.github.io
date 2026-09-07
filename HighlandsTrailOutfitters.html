@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Highlands Trail Outfitters — Receivables Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --purple:#592C88; --purple-deep:#38195A; --purple-mid:#6E3FA3;
+    --gold:#B0925C; --gold-soft:#D6C398; --gold-pale:#F1E9D6;
+    --parchment:#F7F4EC; --paper:#FFFEFA; --ink:#221B2E; --slate:#5F5A6B;
+    --line:#DBD3E0; --answer:#1E5C34; --answer-bg:#E7F1E9; --danger:#9C3B34;
+    --shadow: 0 1px 2px rgba(56,25,90,0.07), 0 6px 18px rgba(56,25,90,0.08);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{ background:var(--parchment); color:var(--ink); font-family:'Inter',sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased; }
+  a{ color:inherit; }
+
+  header{ background: linear-gradient(180deg, var(--purple) 0%, var(--purple-deep) 100%); color:#F1E9D6; padding: 30px 6vw 24px; position:relative; }
+  header::after{ content:""; position:absolute; left:0; right:0; bottom:0; height:4px; background: linear-gradient(90deg, var(--gold-soft), var(--gold) 40%, var(--gold-soft) 70%, var(--gold)); }
+  .eyebrow{ font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold-soft); margin:0 0 10px; }
+  h1.title{ font-family:'Source Serif 4', serif; font-weight:600; font-size:clamp(24px,3.4vw,34px); margin:0 0 8px; letter-spacing:-0.01em; }
+  .subtitle{ font-size:14.5px; color:#D9CDE5; max-width:680px; margin:0; }
+
+  .id-bar{ max-width:900px; margin:0 auto; padding:18px 6vw 0; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .id-bar label{ font-size:13px; font-weight:600; color:var(--slate); }
+  .id-bar input[type="text"]{ font-family:'IBM Plex Mono', monospace; font-size:13.5px; padding:8px 11px; border:1px solid var(--line); border-radius:5px; background:var(--paper); color:var(--ink); width:180px; }
+  .id-bar input:focus{ outline:none; border-color:var(--purple-mid); box-shadow:0 0 0 3px rgba(89,44,136,0.10); }
+  .id-bar button{ font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600; border-radius:5px; padding:8px 15px; border:1px solid var(--purple); background:var(--purple); color:#fff; cursor:pointer; }
+  .id-bar button:hover{ background:var(--purple-mid); }
+  .id-hint{ font-size:12px; color:var(--slate); width:100%; margin-top:2px; }
+
+  .rounding-note{ max-width:900px; margin:14px auto 0; padding:12px 6vw; font-size:12.5px; color:var(--slate); line-height:1.5; }
+  .rounding-note strong{ color:var(--purple); font-weight:600; }
+
+  main{ max-width:900px; margin:0 auto; padding:10px 6vw 90px; }
+
+  .facts{ background:var(--paper); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); padding:18px 22px; margin-top:20px; font-size:14.5px; }
+  .facts h2{ font-family:'Source Serif 4', serif; font-size:19px; color:var(--purple); margin:0 0 10px; }
+  .facts ul{ margin:0; padding-left:18px; }
+  .facts li{ margin-bottom:8px; }
+  .facts .datebadge{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--purple-deep); font-weight:600; }
+  .facts span.val{ font-weight:700; color:var(--purple-deep); }
+
+  .part{ background:var(--paper); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); padding:24px 26px 26px; margin-top:26px; }
+  .part-label{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--gold); background:var(--purple); display:inline-block; padding:3px 9px; border-radius:4px; letter-spacing:.04em; margin-bottom:12px; }
+  .part h2{ font-family:'Source Serif 4', serif; font-size:21px; font-weight:600; color:var(--purple); margin:0 0 12px; }
+  .scenario{ background:var(--parchment); border-left:3px solid var(--gold); padding:14px 18px; border-radius:0 6px 6px 0; font-size:14.5px; color:var(--ink); margin-bottom:20px; }
+  .scenario p{ margin:0 0 10px; } .scenario p:last-child{ margin-bottom:0; }
+  .scenario span.val{ font-weight:700; color:var(--purple-deep); }
+
+  .req{ font-weight:600; font-size:14.5px; color:var(--ink); margin:20px 0 10px; }
+  .req .letter{ font-family:'IBM Plex Mono', monospace; color:var(--purple); margin-right:6px; }
+
+  .work-line{ display:flex; align-items:center; gap:8px; font-size:13.5px; margin:6px 0; flex-wrap:wrap; }
+  .work-line label{ color:var(--slate); min-width:auto; }
+  .work-line input[type="text"]{ font-family:'IBM Plex Mono', monospace; font-size:13.5px; padding:6px 8px; border:1px solid var(--line); border-radius:5px; background:var(--parchment); color:var(--ink); width:110px; }
+
+  table.je{ width:100%; border-collapse:collapse; font-size:13.5px; margin-top:6px; }
+  table.je th{ text-align:left; font-size:11.5px; text-transform:uppercase; letter-spacing:.03em; color:var(--slate); border-bottom:2px solid var(--purple); padding:8px 8px; }
+  table.je td{ border-bottom:1px solid var(--line); padding:8px 8px; }
+  table.je input[type="text"]{ width:100%; font-family:'IBM Plex Mono', monospace; font-size:13.5px; padding:6px 8px; border:1px solid var(--line); border-radius:5px; background:var(--parchment); color:var(--ink); }
+  table.je select.coa-select{ width:100%; font-family:'Inter',sans-serif; font-size:13.5px; padding:6px 8px; border:1px solid var(--line); border-radius:5px; background:var(--parchment); color:var(--ink); }
+  table.je select.coa-select:focus, table.je input[type="text"]:focus, .work-line input:focus{ outline:none; border-color:var(--purple-mid); box-shadow:0 0 0 3px rgba(89,44,136,0.10); background:var(--paper); }
+  table.je td.indent select{ margin-left:0; } table.je td.indent input{ padding-left:22px; }
+  .je-hint{ font-size:12px; color:var(--slate); margin-top:6px; }
+
+  .key{ margin-top:14px; background:var(--answer-bg); border:1px solid #B7D3BE; border-radius:8px; padding:14px 16px; color:var(--answer); font-size:13.5px; }
+  .key strong{ display:block; margin-bottom:6px; font-family:'Source Serif 4', serif; font-size:14.5px; }
+  .key table{ width:100%; border-collapse:collapse; font-size:13px; margin-top:4px; }
+  .key td{ padding:4px 6px; border-bottom:1px dashed #B7D3BE; }
+  .key tr:last-child td{ border-bottom:none; font-weight:600; }
+
+  .check-bar{ margin-top:20px; padding-top:16px; border-top:1px solid var(--line); display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  .btn-check{ font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600; border-radius:5px; padding:9px 18px; border:1px solid var(--purple); background:var(--purple); color:#fff; cursor:pointer; }
+  .btn-check:hover{ background:var(--purple-mid); }
+  .check-summary{ font-size:13.5px; font-weight:600; }
+  .check-summary.good{ color:var(--answer); } .check-summary.bad{ color:var(--danger); }
+  .check-disclaimer{ font-size:11.5px; color:var(--slate); width:100%; margin-top:2px; font-style:italic; }
+  .attempts-note{ font-size:12px; font-weight:600; color:var(--slate); }
+  .attempts-note.low{ color:var(--gold); } .attempts-note.locked{ color:var(--danger); }
+  input:disabled, select:disabled{ opacity:0.7; cursor:not-allowed; }
+
+  .score-bar{ margin-top:26px; background:var(--paper); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); padding:16px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+  .score-bar .score-label{ font-family:'Source Serif 4', serif; font-size:16px; font-weight:600; color:var(--purple); }
+  .score-bar .score-value{ font-family:'IBM Plex Mono', monospace; font-size:18px; font-weight:600; color:var(--ink); }
+  .score-bar .score-breakdown{ font-size:12px; color:var(--slate); width:100%; }
+
+  input.field-correct, select.field-correct{ border-color:var(--answer) !important; background:var(--answer-bg) !important; }
+  input.field-incorrect, select.field-incorrect{ border-color:var(--danger) !important; background:#F3E1DE !important; }
+  input.field-missing, select.field-missing{ border-color:var(--gold) !important; background:var(--gold-pale) !important; }
+  .key-reveal-note{ margin-top:14px; background:var(--gold-pale); border:1px solid var(--gold-soft); border-radius:8px; padding:12px 16px; color:var(--purple-deep); font-size:13.5px; font-weight:600; display:none; }
+
+  .submit-bar{ background:var(--paper); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); padding:22px 26px 24px; margin-top:26px; }
+  .submit-bar h2{ font-family:'Source Serif 4', serif; font-size:19px; font-weight:600; color:var(--purple); margin:0 0 14px; }
+  .submit-row{ display:flex; align-items:center; gap:10px; margin-bottom:12px; flex-wrap:wrap; }
+  .submit-row label{ font-size:13px; font-weight:600; color:var(--slate); }
+  .submit-row input[type="text"]{ font-family:'Inter',sans-serif; font-size:13.5px; padding:8px 11px; border:1px solid var(--line); border-radius:5px; background:var(--parchment); color:var(--ink); width:240px; }
+  .submit-row input:focus{ outline:none; border-color:var(--purple-mid); box-shadow:0 0 0 3px rgba(89,44,136,0.10); }
+  .btn-submit{ font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600; border-radius:5px; padding:10px 18px; border:1px solid var(--purple); background:var(--purple); color:#fff; cursor:pointer; }
+  .btn-submit:hover{ background:var(--purple-mid); }
+  .btn-submit-outline{ background:var(--paper); color:var(--purple); }
+  .btn-submit-outline:hover{ background:var(--parchment); }
+  .submit-status{ font-size:13px; font-weight:600; min-height:18px; margin:10px 0 0; color:var(--answer); }
+  .submit-status.error{ color:var(--danger); }
+  .submit-hint{ font-size:12px; color:var(--slate); margin:6px 0 0; }
+
+  @media print{
+    .print-hide, .id-bar, .check-bar, .rounding-note{ display:none !important; }
+    header{ background:none !important; color:var(--ink) !important; padding:0 0 14px !important; }
+    header::after{ display:none !important; }
+    .eyebrow{ color:var(--purple) !important; } .subtitle{ color:var(--slate) !important; }
+    body{ background:#fff !important; }
+    .part, .facts{ box-shadow:none !important; border:1px solid #999 !important; break-inside:avoid; }
+    .score-bar{ box-shadow:none !important; border:1.5px solid var(--purple) !important; break-inside:avoid; break-before:avoid; }
+    input[type="text"], select{ border:none !important; border-bottom:1px solid #000 !important; background:transparent !important; border-radius:0 !important; color:#000 !important; -webkit-appearance:none; appearance:none; padding:2px 4px !important; }
+    .print-name-line{ display:block !important; }
+  }
+  .print-name-line{ display:none; font-size:13px; color:var(--ink); padding:0 6vw; margin:0 0 10px; }
+  footer{ text-align:center; padding:26px 6vw 40px; font-size:12px; color:var(--slate); }
+  @media (max-width:600px){ header, main, .id-bar{ padding-left:5vw; padding-right:5vw; } table.je{ font-size:12.5px; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">ACCT 351 &middot; Receivables Review &middot; Chapter 7</p>
+  <h1 class="title">Highlands Trail Outfitters</h1>
+  <p class="subtitle">A full year of receivables activity — a write-off, a note loaned to an officer that later gets discounted at the bank, a cash-discount sale, a noninterest-bearing note from selling an investment, and the year-end aging adjustment.</p>
+</header>
+
+<p class="print-name-line" id="printNameLine"></p>
+<p class="print-name-line" id="printScoreLine" style="font-weight:600;"></p>
+
+<div class="id-bar">
+  <label for="studentId">Student ID</label>
+  <input type="text" id="studentId" placeholder="e.g. 92841016">
+  <button id="genBtn" type="button">Generate scenario</button>
+  <span class="id-hint">Your ID determines your numbers — everyone gets a different but equally solvable version of this problem.</span>
+</div>
+
+<div class="rounding-note">
+  <strong>Rounding convention:</strong> round every dollar amount to the nearest whole dollar unless a step specifically calls for cents.
+</div>
+
+<main>
+
+  <div class="facts">
+    <h2>The facts</h2>
+    <p style="margin:0 0 10px; color:var(--slate);">Highlands Trail Outfitters' fiscal year ends December 31. The following transactions involving receivables occurred during <span class="val yr">2024</span>:</p>
+    <ul>
+      <li><span class="datebadge">March 17, <span class="yr">2024</span></span> — Accounts receivable of <span class="val" id="sWriteOff">$2,600</span> were written off as uncollectible. The company uses the allowance method.</li>
+      <li><span class="datebadge">March 30, <span class="yr">2024</span></span> — Loaned an officer of the company <span class="val" id="sPrincipal">$33,000</span> and received a note requiring principal and interest at <span class="val" id="sNoteRate">7%</span> to be paid on March 30, <span class="yr1">2025</span>.</li>
+      <li><span class="datebadge">May 30, <span class="yr">2024</span></span> — Discounted the <span class="val" id="sPrincipal2">$33,000</span> note at a local bank. The bank's discount rate is <span class="val" id="sBankRate">8%</span>. The note was discounted without recourse and the sale criteria are met.</li>
+      <li><span class="datebadge">June 30, <span class="yr">2024</span></span> — Sold merchandise to Saluda Mercantile for <span class="val" id="sSaleAmount">$21,000</span>. Terms of the sale are <span class="val" id="sDiscPct">4</span>/<span class="val" id="sDiscDays">10</span>, n/30. Highlands Trail Outfitters uses the gross method to account for cash discounts.</li>
+      <li><span class="datebadge">July <span class="val" id="sCollectDay">8</span>, <span class="yr">2024</span></span> — Saluda Mercantile paid its account in full.</li>
+      <li><span class="datebadge">August 31, <span class="yr">2024</span></span> — Sold stock in a nonpublic company with a book value of <span class="val" id="sBookValue">$5,900</span> and accepted a <span class="val" id="sNoteFace">$6,900</span> noninterest-bearing note with a discount rate of <span class="val" id="sInvestRate">8%</span>. The payment is due on February 28, <span class="yr1">2025</span>. The stock has no ready market value.</li>
+      <li><span class="datebadge">December 31, <span class="yr">2024</span></span> — Highlands Trail Outfitters estimates that the allowance for uncollectible accounts should have a balance equal to <span class="val" id="sAllowRatePct">4%</span> of the gross accounts receivable balance of <span class="val" id="sArEndingGross">$680,000</span>. The allowance had a balance of <span class="val" id="sAllowBeg">$21,000</span> at the start of <span class="yr">2024</span>.</li>
+    </ul>
+  </div>
+
+  <!-- ============================ PART 1 ============================ -->
+  <div class="part" data-part-key="p1">
+    <span class="part-label">Part 1</span>
+    <h2>March 17 — Writing off an uncollectible account</h2>
+    <div class="req">Prepare the journal entry to record the write-off of <span class="val" id="sWriteOff2">$2,600</span>.</div>
+    <table class="je">
+      <thead><tr><th style="width:55%;">Account</th><th style="width:22%;">Debit</th><th style="width:23%;">Credit</th></tr></thead>
+      <tbody>
+        <tr><td><select class="coa-select" id="p1-je1-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="p1-je1-debit"></td><td><input type="text" placeholder="$"></td></tr>
+        <tr><td class="indent"><select class="coa-select" id="p1-je2-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$"></td><td><input type="text" placeholder="$" id="p1-je2-credit"></td></tr>
+      </tbody>
+    </table>
+    <p class="je-hint">Indent the credited account below the debited account, as usual.</p>
+    <div class="check-bar">
+      <button class="btn-check" id="checkP1" type="button">Check my work</button>
+      <span class="check-summary" id="p1Summary"></span>
+      <span class="attempts-note" id="p1Attempts">3 attempts remaining</span>
+      <span class="check-disclaimer">This checks whether the accounts you selected and the dollar amounts you entered match the key.</span>
+    </div>
+    <div class="key" id="p1Key" style="display:none;"></div>
+  </div>
+
+  <!-- ============================ PART 2 ============================ -->
+  <div class="part" data-part-key="p2">
+    <span class="part-label">Part 2</span>
+    <h2>March 30 — Loaning an officer on a note</h2>
+    <div class="req">Prepare the journal entry to record the <span class="val" id="sPrincipal3">$33,000</span> loan.</div>
+    <table class="je">
+      <thead><tr><th style="width:55%;">Account</th><th style="width:22%;">Debit</th><th style="width:23%;">Credit</th></tr></thead>
+      <tbody>
+        <tr><td><select class="coa-select" id="p2-je1-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="p2-je1-debit"></td><td><input type="text" placeholder="$"></td></tr>
+        <tr><td class="indent"><select class="coa-select" id="p2-je2-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$"></td><td><input type="text" placeholder="$" id="p2-je2-credit"></td></tr>
+      </tbody>
+    </table>
+    <div class="check-bar">
+      <button class="btn-check" id="checkP2" type="button">Check my work</button>
+      <span class="check-summary" id="p2Summary"></span>
+      <span class="attempts-note" id="p2Attempts">3 attempts remaining</span>
+      <span class="check-disclaimer">This checks whether the accounts you selected and the dollar amounts you entered match the key.</span>
+    </div>
+    <div class="key" id="p2Key" style="display:none;"></div>
+  </div>
+
+  <!-- ============================ PART 3 ============================ -->
+  <div class="part" data-part-key="p3">
+    <span class="part-label">Part 3</span>
+    <h2>May 30 — Discounting the note at the bank</h2>
+    <div class="scenario">
+      <p>Two months of interest have accrued on the note since March 30. Before the note can be discounted, that interest needs to be on the books — it's part of what's being sold.</p>
+    </div>
+
+    <div class="req"><span class="letter">a.</span>Accrue interest on the note through May 30.</div>
+    <div class="work-line">
+      <label>Accrued interest (2 months): <span class="val" id="sPrincipal4">$33,000</span> &times; <span class="val" id="sNoteRate2">7%</span> &times; 2/12 =</label>
+      <input type="text" placeholder="$" id="p3-wl-accrued">
+    </div>
+    <table class="je">
+      <thead><tr><th style="width:55%;">Account</th><th style="width:22%;">Debit</th><th style="width:23%;">Credit</th></tr></thead>
+      <tbody>
+        <tr><td><select class="coa-select" id="p3-jea1-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="p3-jea1-debit"></td><td><input type="text" placeholder="$"></td></tr>
+        <tr><td class="indent"><select class="coa-select" id="p3-jea2-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$"></td><td><input type="text" placeholder="$" id="p3-jea2-credit"></td></tr>
+      </tbody>
+    </table>
+
+    <div class="req" style="margin-top:22px;"><span class="letter">b.</span>Work out the mechanics of discounting the note at the bank.</div>
+    <div class="work-line">
+      <label>Maturity value at March 30, <span class="yr1">2025</span>: <span class="val" id="sPrincipal5">$33,000</span> + (<span class="val" id="sPrincipal6">$33,000</span> &times; <span class="val" id="sNoteRate3">7%</span> &times; 12/12) =</label>
+      <input type="text" placeholder="$" id="p3-wl-maturity">
+    </div>
+    <div class="work-line">
+      <label>Bank discount (10 months remaining &times; <span class="val" id="sBankRate2">8%</span>):</label>
+      <input type="text" placeholder="$ maturity value" id="p3-wl-matref"> &times; <span class="val" id="sBankRate3">8%</span> &times; 10/12 =
+      <input type="text" placeholder="$" id="p3-wl-bankdisc">
+    </div>
+    <div class="work-line">
+      <label>Cash proceeds: maturity value &minus; bank discount =</label>
+      <input type="text" placeholder="$" id="p3-wl-proceeds">
+    </div>
+    <div class="work-line">
+      <label>Carrying value given up: Notes Receivable + Interest Receivable =</label>
+      <input type="text" placeholder="$" id="p3-wl-carrying">
+    </div>
+    <div class="work-line">
+      <label>Loss on sale of the note: carrying value &minus; proceeds =</label>
+      <input type="text" placeholder="$" id="p3-wl-loss">
+    </div>
+
+    <div class="req" style="margin-top:16px;"><span class="letter">c.</span>Prepare the journal entry to record discounting the note, without recourse.</div>
+    <table class="je">
+      <thead><tr><th style="width:55%;">Account</th><th style="width:22%;">Debit</th><th style="width:23%;">Credit</th></tr></thead>
+      <tbody>
+        <tr><td><select class="coa-select" id="p3-jeb1-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="p3-jeb1-debit"></td><td><input type="text" placeholder="$"></td></tr>
+        <tr><td><select class="coa-select" id="p3-jeb2-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="p3-jeb2-debit"></td><td><input type="text" placeholder="$"></td></tr>
+        <tr><td class="indent"><select class="coa-select" id="p3-jeb3-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$"></td><td><input type="text" placeholder="$" id="p3-jeb3-credit"></td></tr>
+        <tr><td class="indent"><select class="coa-select" id="p3-jeb4-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$"></td><td><input type="text" placeholder="$" id="p3-jeb4-credit"></td></tr>
+      </tbody>
+    </table>
+    <p class="je-hint">Two debit lines, then two indented credit lines.</p>
+
+    <div class="check-bar">
+      <button class="btn-check" id="checkP3" type="button">Check my work</button>
+      <span class="check-summary" id="p3Summary"></span>
+      <span class="attempts-note" id="p3Attempts">3 attempts remaining</span>
+      <span class="check-disclaimer">This checks your work-line calculations, the accounts you selected, and the dollar amounts entered.</span>
+    </div>
+    <div class="key" id="p3Key" style="display:none;"></div>
+  </div>
+
+  <!-- ============================ PART 4 ============================ -->
+  <div class="part" data-part-key="p4">
+    <span class="part-label">Part 4</span>
+    <h2>June 30 &amp; July — A cash-discount sale and its collection</h2>
+
+    <div class="req"><span class="letter">a.</span>Prepare the journal entry for the June 30 sale to Saluda Mercantile (gross method).</div>
+    <table class="je">
+      <thead><tr><th style="width:55%;">Account</th><th style="width:22%;">Debit</th><th style="width:23%;">Credit</th></tr></thead>
+      <tbody>
+        <tr><td><select class="coa-select" id="p4-jea1-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="p4-jea1-debit"></td><td><input type="text" placeholder="$"></td></tr>
+        <tr><td class="indent"><select class="coa-select" id="p4-jea2-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$"></td><td><input type="text" placeholder="$" id="p4-jea2-credit"></td></tr>
+      </tbody>
+    </table>
+
+    <div class="req" style="margin-top:18px;"><span class="letter">b.</span>Saluda Mercantile pays on July <span class="val" id="sCollectDay2">8</span> — inside the <span class="val" id="sDiscDays2">10</span>-day discount window. Work out the discount, then prepare the collection entry.</div>
+    <div class="work-line">
+      <label>Sales discount: <span class="val" id="sSaleAmount2">$21,000</span> &times; <span class="val" id="sDiscPct2">4%</span> =</label>
+      <input type="text" placeholder="$" id="p4-wl-disc">
+    </div>
+    <div class="work-line">
+      <label>Cash received: <span class="val" id="sSaleAmount3">$21,000</span> &minus; discount =</label>
+      <input type="text" placeholder="$" id="p4-wl-cash">
+    </div>
+    <table class="je">
+      <thead><tr><th style="width:55%;">Account</th><th style="width:22%;">Debit</th><th style="width:23%;">Credit</th></tr></thead>
+      <tbody>
+        <tr><td><select class="coa-select" id="p4-jeb1-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="p4-jeb1-debit"></td><td><input type="text" placeholder="$"></td></tr>
+        <tr><td><select class="coa-select" id="p4-jeb2-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="p4-jeb2-debit"></td><td><input type="text" placeholder="$"></td></tr>
+        <tr><td class="indent"><select class="coa-select" id="p4-jeb3-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$"></td><td><input type="text" placeholder="$" id="p4-jeb3-credit"></td></tr>
+      </tbody>
+    </table>
+
+    <div class="check-bar">
+      <button class="btn-check" id="checkP4" type="button">Check my work</button>
+      <span class="check-summary" id="p4Summary"></span>
+      <span class="attempts-note" id="p4Attempts">3 attempts remaining</span>
+      <span class="check-disclaimer">This checks your work-line calculations, the accounts you selected, and the dollar amounts entered.</span>
+    </div>
+    <div class="key" id="p4Key" style="display:none;"></div>
+  </div>
+
+  <!-- ============================ PART 5 ============================ -->
+  <div class="part" data-part-key="p5">
+    <span class="part-label">Part 5</span>
+    <h2>August 31 — Selling stock for a noninterest-bearing note</h2>
+    <div class="scenario">
+      <p>The note has no stated interest, so the discount rate has to be used to find what the note is really worth today — and that fair value, not the face amount, is what determines the gain or loss on selling the stock.</p>
+    </div>
+    <div class="work-line">
+      <label>Discount on the note: <span class="val" id="sNoteFace2">$6,900</span> &times; <span class="val" id="sInvestRate2">8%</span> &times; 6/12 =</label>
+      <input type="text" placeholder="$" id="p5-wl-disc">
+    </div>
+    <div class="work-line">
+      <label>Present value (fair value) of the note: <span class="val" id="sNoteFace3">$6,900</span> &minus; discount =</label>
+      <input type="text" placeholder="$" id="p5-wl-pv">
+    </div>
+    <div class="work-line">
+      <label>Gain on sale of investment: fair value of note &minus; <span class="val" id="sBookValue2">$5,900</span> book value =</label>
+      <input type="text" placeholder="$" id="p5-wl-gain">
+    </div>
+
+    <div class="req" style="margin-top:16px;">Prepare the journal entry to record the sale of the stock.</div>
+    <table class="je">
+      <thead><tr><th style="width:55%;">Account</th><th style="width:22%;">Debit</th><th style="width:23%;">Credit</th></tr></thead>
+      <tbody>
+        <tr><td><select class="coa-select" id="p5-je1-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="p5-je1-debit"></td><td><input type="text" placeholder="$"></td></tr>
+        <tr><td class="indent"><select class="coa-select" id="p5-je2-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$"></td><td><input type="text" placeholder="$" id="p5-je2-credit"></td></tr>
+        <tr><td class="indent"><select class="coa-select" id="p5-je3-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$"></td><td><input type="text" placeholder="$" id="p5-je3-credit"></td></tr>
+        <tr><td class="indent"><select class="coa-select" id="p5-je4-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$"></td><td><input type="text" placeholder="$" id="p5-je4-credit"></td></tr>
+      </tbody>
+    </table>
+    <p class="je-hint">One debit line, then three indented credit lines.</p>
+
+    <div class="check-bar">
+      <button class="btn-check" id="checkP5" type="button">Check my work</button>
+      <span class="check-summary" id="p5Summary"></span>
+      <span class="attempts-note" id="p5Attempts">3 attempts remaining</span>
+      <span class="check-disclaimer">This checks your work-line calculations, the accounts you selected, and the dollar amounts entered.</span>
+    </div>
+    <div class="key" id="p5Key" style="display:none;"></div>
+  </div>
+
+  <!-- ============================ PART 6 ============================ -->
+  <div class="part" data-part-key="p6">
+    <span class="part-label">Part 6</span>
+    <h2>December 31 — Two year-end adjusting entries</h2>
+
+    <div class="req"><span class="letter">a.</span>Amortize the discount on the August 31 note through year-end.</div>
+    <div class="work-line">
+      <label>Discount earned: <span class="val" id="sNoteDiscountAmt">$276</span> total &divide; 6 months &times; 4 months elapsed (Aug 31–Dec 31) =</label>
+      <input type="text" placeholder="$" id="p6-wl-amort">
+    </div>
+    <table class="je">
+      <thead><tr><th style="width:55%;">Account</th><th style="width:22%;">Debit</th><th style="width:23%;">Credit</th></tr></thead>
+      <tbody>
+        <tr><td><select class="coa-select" id="p6-jea1-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="p6-jea1-debit"></td><td><input type="text" placeholder="$"></td></tr>
+        <tr><td class="indent"><select class="coa-select" id="p6-jea2-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$"></td><td><input type="text" placeholder="$" id="p6-jea2-credit"></td></tr>
+      </tbody>
+    </table>
+
+    <div class="req" style="margin-top:20px;"><span class="letter">b.</span>Adjust the allowance for uncollectible accounts to <span class="val" id="sAllowRatePct2">4%</span> of the <span class="val" id="sArEndingGross2">$680,000</span> gross accounts receivable balance.</div>
+    <div class="work-line">
+      <label>Allowance balance before adjustment: beginning <span class="val" id="sAllowBeg2">$21,000</span> &minus; March 17 write-off <span class="val" id="sWriteOff3">$2,600</span> =</label>
+      <input type="text" placeholder="$" id="p6-wl-before">
+    </div>
+    <div class="work-line">
+      <label>Required allowance: <span class="val" id="sAllowRatePct3">4%</span> &times; <span class="val" id="sArEndingGross3">$680,000</span> =</label>
+      <input type="text" placeholder="$" id="p6-wl-required">
+    </div>
+    <div class="work-line">
+      <label>Adjustment needed: required allowance &minus; balance before adjustment =</label>
+      <input type="text" placeholder="$" id="p6-wl-adj">
+    </div>
+    <table class="je">
+      <thead><tr><th style="width:55%;">Account</th><th style="width:22%;">Debit</th><th style="width:23%;">Credit</th></tr></thead>
+      <tbody>
+        <tr><td><select class="coa-select" id="p6-jeb1-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="p6-jeb1-debit"></td><td><input type="text" placeholder="$"></td></tr>
+        <tr><td class="indent"><select class="coa-select" id="p6-jeb2-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$"></td><td><input type="text" placeholder="$" id="p6-jeb2-credit"></td></tr>
+      </tbody>
+    </table>
+
+    <div class="check-bar">
+      <button class="btn-check" id="checkP6" type="button">Check my work</button>
+      <span class="check-summary" id="p6Summary"></span>
+      <span class="attempts-note" id="p6Attempts">3 attempts remaining</span>
+      <span class="check-disclaimer">This checks your work-line calculations, the accounts you selected, and the dollar amounts entered.</span>
+    </div>
+    <div class="key" id="p6Key" style="display:none;"></div>
+  </div>
+
+  <div class="score-bar">
+    <span class="score-label">Assignment score</span>
+    <span class="score-value" id="overallScore">Check each part to see your score</span>
+    <span class="score-breakdown" id="scoreBreakdown"></span>
+  </div>
+
+  <div class="key-reveal-note" id="keyRevealNote">You've used all 3 attempts on every part — the answer key is now shown below each part, and a submission PDF has opened for you to save.</div>
+
+  <div class="submit-bar print-hide">
+    <h2>Ready to submit?</h2>
+    <div class="submit-row">
+      <label for="studentName">Your name</label>
+      <input type="text" id="studentName" placeholder="First and last name">
+    </div>
+    <div class="submit-row submit-actions">
+      <button class="btn-submit" id="printBtn" type="button">Print / Save as PDF</button>
+      <button class="btn-submit btn-submit-outline" id="downloadDocxBtn" type="button">Download as Word (.docx)</button>
+    </div>
+    <p class="submit-status" id="submitStatus"></p>
+    <p class="submit-hint">Both options capture exactly what's currently filled in above, including your generated scenario numbers. "Print / Save as PDF" works offline; "Download as Word" needs an internet connection to load the export tool.</p>
+  </div>
+
+</main>
+
+<footer>Highlands Trail Outfitters Receivables Review &middot; ACCT 351 &middot; Western Carolina University</footer>
+
+<script>
+(function(){
+  // ---------------- seeding ----------------
+  function hashSeed(str){
+    var h = 2166136261;
+    for(var i=0;i<str.length;i++){ h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
+    return h >>> 0;
+  }
+  function mulberry32(seed){
+    return function(){
+      seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+      var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  function pick(rand, arr){ return arr[Math.floor(rand()*arr.length)]; }
+  function round2(n){ return Math.round(n*100)/100; }
+
+  var CHART_OF_ACCOUNTS = {
+    'Assets': ['Cash', 'Accounts Receivable', 'Interest Receivable', 'Notes Receivable', 'Investments'],
+    'Contra-Assets': ['Allowance for Uncollectible Accounts', 'Discount on Notes Receivable'],
+    'Revenues & Gains': ['Sales Revenue', 'Interest Revenue', 'Gain on Sale of Investments'],
+    'Expenses & Losses': ['Sales Discounts', 'Bad Debt Expense', 'Loss on Sale of Notes Receivable']
+  };
+  function populateCoaSelects(){
+    var optHtml = '<option value="">Select account\u2026</option>';
+    Object.keys(CHART_OF_ACCOUNTS).forEach(function(group){
+      optHtml += '<optgroup label="'+group+'">';
+      CHART_OF_ACCOUNTS[group].forEach(function(acct){ optHtml += '<option value="'+acct+'">'+acct+'</option>'; });
+      optHtml += '</optgroup>';
+    });
+    document.querySelectorAll('select.coa-select').forEach(function(sel){
+      if(!sel.dataset.populated){ sel.innerHTML = optHtml; sel.dataset.populated = '1'; }
+    });
+  }
+  populateCoaSelects();
+
+  // ---------------- year auto-update (independent of scenario/ID) ----------------
+  var YEAR = new Date().getFullYear();
+  var YEAR1 = YEAR + 1;
+  document.querySelectorAll('.yr').forEach(function(el){ el.textContent = YEAR; });
+  document.querySelectorAll('.yr1').forEach(function(el){ el.textContent = YEAR1; });
+
+  function money0(n){ var r=Math.round(n); var sign = r<0?'\u2212':''; return sign+'$'+Math.abs(r).toLocaleString('en-US'); }
+  function money2(n){ var r=Math.round(n*100)/100; var sign=r<0?'\u2212':''; return sign+'$'+Math.abs(r).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+
+  // ---------------- scenario generation (tested exhaustively — see chat) ----------------
+  function generateScenario(id){
+    var seedStr = (id || 'demo').trim().toLowerCase();
+    var rand = mulberry32(hashSeed(seedStr));
+
+    var writeOff = pick(rand, [1800,2100,2400,2600,2900,3200,3500]);
+    var notePrincipal = pick(rand, [24000,27000,30000,33000,36000,39000]);
+    var noteRate = pick(rand, [6,7,8]);
+    var bankRate = noteRate + pick(rand, [2,3,4]);
+
+    var saleAmount = pick(rand, [15000,18000,21000,24000,27000]);
+    var discPct = pick(rand, [2,3,4,5]);
+    var discDays = pick(rand, [10,15]);
+
+    var investBookValue = pick(rand, [4200,4900,5600]);
+    var investNoteFace = pick(rand, [6500,6900,7300,7700,8100,8500]);
+    var investDiscRate = pick(rand, [6,7,8,9,10]);
+
+    var allowBeg = pick(rand, [12000,15000,18000]);
+    var arEndingGross = pick(rand, [650000,700000,750000,800000,850000,900000]);
+    var allowRatePct = pick(rand, [3,4,5]);
+
+    var accruedInterest = round2(notePrincipal*noteRate/100*2/12);
+    var maturityValue = round2(notePrincipal + notePrincipal*noteRate/100);
+    var bankDiscount = round2(maturityValue*bankRate/100*10/12);
+    var proceeds = round2(maturityValue - bankDiscount);
+    var carrying = round2(notePrincipal + accruedInterest);
+    var lossOnNote = round2(carrying - proceeds);
+
+    var salesDiscount = round2(saleAmount*discPct/100);
+    var cashReceived = round2(saleAmount - salesDiscount);
+
+    var noteDiscountAmt = round2(investNoteFace*investDiscRate/100*6/12);
+    var notePV = round2(investNoteFace - noteDiscountAmt);
+    var gainOnInvestment = round2(notePV - investBookValue);
+
+    var discountAmort = round2(noteDiscountAmt/6*4);
+
+    var allowBeforeAdj = allowBeg - writeOff;
+    var allowRequired = round2(arEndingGross*allowRatePct/100);
+    var badDebtAdj = round2(allowRequired - allowBeforeAdj);
+
+    return {
+      writeOff:writeOff, notePrincipal:notePrincipal, noteRate:noteRate, bankRate:bankRate,
+      saleAmount:saleAmount, discPct:discPct, discDays:discDays, collectDay:discDays-2,
+      investBookValue:investBookValue, investNoteFace:investNoteFace, investDiscRate:investDiscRate,
+      allowBeg:allowBeg, arEndingGross:arEndingGross, allowRatePct:allowRatePct,
+      accruedInterest:accruedInterest, maturityValue:maturityValue, bankDiscount:bankDiscount,
+      proceeds:proceeds, carrying:carrying, lossOnNote:lossOnNote,
+      salesDiscount:salesDiscount, cashReceived:cashReceived,
+      noteDiscountAmt:noteDiscountAmt, notePV:notePV, gainOnInvestment:gainOnInvestment,
+      discountAmort:discountAmort, allowBeforeAdj:allowBeforeAdj, allowRequired:allowRequired, badDebtAdj:badDebtAdj
+    };
+  }
+
+  function setText(id, text){ var el = document.getElementById(id); if(el) el.textContent = text; }
+
+  function applyScenario(d){
+    setText('sWriteOff', money0(d.writeOff)); setText('sWriteOff2', money0(d.writeOff)); setText('sWriteOff3', money0(d.writeOff));
+    setText('sPrincipal', money0(d.notePrincipal)); setText('sPrincipal2', money0(d.notePrincipal)); setText('sPrincipal3', money0(d.notePrincipal));
+    setText('sPrincipal4', money0(d.notePrincipal)); setText('sPrincipal5', money0(d.notePrincipal)); setText('sPrincipal6', money0(d.notePrincipal));
+    setText('sNoteRate', d.noteRate+'%'); setText('sNoteRate2', d.noteRate+'%'); setText('sNoteRate3', d.noteRate+'%');
+    setText('sBankRate', d.bankRate+'%'); setText('sBankRate2', d.bankRate+'%'); setText('sBankRate3', d.bankRate+'%');
+    setText('sSaleAmount', money0(d.saleAmount)); setText('sSaleAmount2', money0(d.saleAmount)); setText('sSaleAmount3', money0(d.saleAmount));
+    setText('sDiscPct', d.discPct); setText('sDiscPct2', d.discPct+'%');
+    setText('sDiscDays', d.discDays); setText('sDiscDays2', d.discDays);
+    setText('sCollectDay', d.collectDay); setText('sCollectDay2', d.collectDay);
+    setText('sBookValue', money0(d.investBookValue)); setText('sBookValue2', money0(d.investBookValue));
+    setText('sNoteFace', money0(d.investNoteFace)); setText('sNoteFace2', money0(d.investNoteFace)); setText('sNoteFace3', money0(d.investNoteFace));
+    setText('sInvestRate', d.investDiscRate+'%'); setText('sInvestRate2', d.investDiscRate+'%');
+    setText('sAllowBeg', money0(d.allowBeg)); setText('sAllowBeg2', money0(d.allowBeg));
+    setText('sArEndingGross', money0(d.arEndingGross)); setText('sArEndingGross2', money0(d.arEndingGross)); setText('sArEndingGross3', money0(d.arEndingGross));
+    setText('sAllowRatePct', d.allowRatePct+'%'); setText('sAllowRatePct2', d.allowRatePct+'%'); setText('sAllowRatePct3', d.allowRatePct+'%');
+    setText('sNoteDiscountAmt', money2(d.noteDiscountAmt));
+  }
+
+  // ---------------- shared grading helpers ----------------
+  function parseMoney(s){ if(s===null||s===undefined) return NaN; var c=String(s).replace(/[^0-9.\-]/g,''); if(c===''||c==='-') return NaN; return parseFloat(c); }
+  function near(a,b,tol){ if(isNaN(a)||isNaN(b)) return false; return Math.abs(a-b)<=tol; }
+  function clearFieldState(el){ if(el) el.classList.remove('field-correct','field-incorrect','field-missing'); }
+  function markMoney(id, correct, tol){
+    var el = document.getElementById(id); if(!el) return null;
+    el.classList.remove('field-correct','field-incorrect');
+    var ok = near(parseMoney(el.value), correct, tol===undefined?1:tol);
+    el.classList.add(ok?'field-correct':'field-incorrect');
+    if(!el.dataset.clearBound){ el.addEventListener('input', function(){ clearFieldState(el); }); el.dataset.clearBound='1'; }
+    return ok;
+  }
+  function markSelect(id, correct){
+    var el = document.getElementById(id); if(!el) return null;
+    el.classList.remove('field-correct','field-incorrect');
+    var ok = el.value === correct;
+    el.classList.add(ok?'field-correct':'field-incorrect');
+    if(!el.dataset.clearBound){ el.addEventListener('change', function(){ clearFieldState(el); }); el.dataset.clearBound='1'; }
+    return ok;
+  }
+  function fieldsFor(ids){ return ids.map(function(id){ return document.getElementById(id); }).filter(Boolean); }
+  function findMissing(ids){ return fieldsFor(ids).filter(function(el){ return !el.value || !el.value.trim(); }); }
+  function setMissing(ids, flag){ fieldsFor(ids).forEach(function(el){ el.classList.toggle('field-missing', flag); }); }
+  function lockPart(ids, btnId){
+    fieldsFor(ids).forEach(function(el){ el.disabled = true; });
+    var btn = document.getElementById(btnId); if(btn){ btn.disabled = true; btn.textContent = 'No attempts remaining'; }
+  }
+  function unlockPart(ids, btnId){
+    fieldsFor(ids).forEach(function(el){ el.disabled = false; });
+    var btn = document.getElementById(btnId); if(btn){ btn.disabled = false; btn.textContent = 'Check my work'; }
+  }
+  function updateAttemptsNote(elId, used, max){
+    var el = document.getElementById(elId); if(!el) return;
+    var remaining = max - used;
+    el.classList.remove('low','locked');
+    if(remaining<=0){ el.textContent = 'No attempts remaining \u2014 inputs locked'; el.classList.add('locked'); }
+    else { el.textContent = remaining+' attempt'+(remaining===1?'':'s')+' remaining'; if(remaining===1) el.classList.add('low'); }
+  }
+  function updateSummary(elId, results, pointsPossible){
+    var el = document.getElementById(elId);
+    var graded = results.filter(function(r){ return r!==null; }).length;
+    var correct = results.filter(function(r){ return r===true; }).length;
+    var points = graded>0 ? (correct/graded)*pointsPossible : 0;
+    el.textContent = correct+' of '+graded+' correct \u2014 '+points.toFixed(1)+' of '+pointsPossible.toFixed(1)+' pts';
+    el.classList.remove('good','bad'); el.classList.add(correct===graded && graded>0 ? 'good':'bad');
+    return points;
+  }
+  function buildKeyTable(title, rows){
+    var html = '<strong>'+title+'</strong><table>';
+    rows.forEach(function(r){ html += '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>'; });
+    html += '</table>'; return html;
+  }
+
+  // ---------------- PARTS CONFIG (grade functions read from currentScenario) ----------------
+  var MAX_ATTEMPTS = 3;
+  var attempts = {}, locked = {}, scoreState = {};
+  var keyRevealed = false;
+  var currentScenario = null;
+
+  var PARTS = [
+    { key:'p1', requiredIds:['p1-je1-account','p1-je2-account','p1-je1-debit','p1-je2-credit'], itemCount:4,
+      grade:function(d){ return [
+        markSelect('p1-je1-account','Allowance for Uncollectible Accounts'),
+        markSelect('p1-je2-account','Accounts Receivable'),
+        markMoney('p1-je1-debit', d.writeOff),
+        markMoney('p1-je2-credit', d.writeOff)
+      ]; },
+      keyRows:function(d){ return [['Line 1','Debit Allowance for Uncollectible Accounts '+money0(d.writeOff)],['Line 2','Credit Accounts Receivable '+money0(d.writeOff)]]; }
+    },
+    { key:'p2', requiredIds:['p2-je1-account','p2-je2-account','p2-je1-debit','p2-je2-credit'], itemCount:4,
+      grade:function(d){ return [
+        markSelect('p2-je1-account','Notes Receivable'),
+        markSelect('p2-je2-account','Cash'),
+        markMoney('p2-je1-debit', d.notePrincipal),
+        markMoney('p2-je2-credit', d.notePrincipal)
+      ]; },
+      keyRows:function(d){ return [['Line 1','Debit Notes Receivable '+money0(d.notePrincipal)],['Line 2','Credit Cash '+money0(d.notePrincipal)]]; }
+    },
+    { key:'p3', requiredIds:['p3-wl-accrued','p3-jea1-account','p3-jea2-account','p3-jea1-debit','p3-jea2-credit',
+        'p3-wl-maturity','p3-wl-matref','p3-wl-bankdisc','p3-wl-proceeds','p3-wl-carrying','p3-wl-loss',
+        'p3-jeb1-account','p3-jeb2-account','p3-jeb3-account','p3-jeb4-account','p3-jeb1-debit','p3-jeb2-debit','p3-jeb3-credit','p3-jeb4-credit'],
+      itemCount:18,
+      grade:function(d){ return [
+        markMoney('p3-wl-accrued', d.accruedInterest),
+        markSelect('p3-jea1-account','Interest Receivable'),
+        markSelect('p3-jea2-account','Interest Revenue'),
+        markMoney('p3-jea1-debit', d.accruedInterest),
+        markMoney('p3-jea2-credit', d.accruedInterest),
+        markMoney('p3-wl-maturity', d.maturityValue),
+        markMoney('p3-wl-matref', d.maturityValue),
+        markMoney('p3-wl-bankdisc', d.bankDiscount),
+        markMoney('p3-wl-proceeds', d.proceeds),
+        markMoney('p3-wl-carrying', d.carrying),
+        markMoney('p3-wl-loss', d.lossOnNote),
+        markSelect('p3-jeb1-account','Cash'),
+        markSelect('p3-jeb2-account','Loss on Sale of Notes Receivable'),
+        markSelect('p3-jeb3-account','Interest Receivable'),
+        markSelect('p3-jeb4-account','Notes Receivable'),
+        markMoney('p3-jeb1-debit', d.proceeds),
+        markMoney('p3-jeb2-debit', d.lossOnNote),
+        markMoney('p3-jeb3-credit', d.accruedInterest),
+        markMoney('p3-jeb4-credit', d.notePrincipal)
+      ]; },
+      keyRows:function(d){ return [
+        ['Accrued interest (2 months)', money2(d.accruedInterest)],
+        ['AJE — accrue interest', 'Debit Interest Receivable '+money2(d.accruedInterest)+' / Credit Interest Revenue '+money2(d.accruedInterest)],
+        ['Maturity value', money2(d.maturityValue)],
+        ['Bank discount', money2(d.bankDiscount)],
+        ['Cash proceeds', money2(d.proceeds)],
+        ['Carrying value given up', money2(d.carrying)],
+        ['Loss on sale of note', money2(d.lossOnNote)],
+        ['Entry to discount the note', 'Debit Cash '+money2(d.proceeds)+', Debit Loss on Sale of Notes Receivable '+money2(d.lossOnNote)+' / Credit Interest Receivable '+money2(d.accruedInterest)+', Credit Notes Receivable '+money0(d.notePrincipal)]
+      ]; }
+    },
+    { key:'p4', requiredIds:['p4-jea1-account','p4-jea2-account','p4-jea1-debit','p4-jea2-credit',
+        'p4-wl-disc','p4-wl-cash','p4-jeb1-account','p4-jeb2-account','p4-jeb3-account','p4-jeb1-debit','p4-jeb2-debit','p4-jeb3-credit'],
+      itemCount:12,
+      grade:function(d){ return [
+        markSelect('p4-jea1-account','Accounts Receivable'),
+        markSelect('p4-jea2-account','Sales Revenue'),
+        markMoney('p4-jea1-debit', d.saleAmount),
+        markMoney('p4-jea2-credit', d.saleAmount),
+        markMoney('p4-wl-disc', d.salesDiscount),
+        markMoney('p4-wl-cash', d.cashReceived),
+        markSelect('p4-jeb1-account','Cash'),
+        markSelect('p4-jeb2-account','Sales Discounts'),
+        markSelect('p4-jeb3-account','Accounts Receivable'),
+        markMoney('p4-jeb1-debit', d.cashReceived),
+        markMoney('p4-jeb2-debit', d.salesDiscount),
+        markMoney('p4-jeb3-credit', d.saleAmount)
+      ]; },
+      keyRows:function(d){ return [
+        ['June 30 sale', 'Debit Accounts Receivable '+money0(d.saleAmount)+' / Credit Sales Revenue '+money0(d.saleAmount)],
+        ['Sales discount', money0(d.salesDiscount)],
+        ['Cash received', money0(d.cashReceived)],
+        ['July collection', 'Debit Cash '+money0(d.cashReceived)+', Debit Sales Discounts '+money0(d.salesDiscount)+' / Credit Accounts Receivable '+money0(d.saleAmount)]
+      ]; }
+    },
+    { key:'p5', requiredIds:['p5-wl-disc','p5-wl-pv','p5-wl-gain','p5-je1-account','p5-je2-account','p5-je3-account','p5-je4-account',
+        'p5-je1-debit','p5-je2-credit','p5-je3-credit','p5-je4-credit'],
+      itemCount:11,
+      grade:function(d){ return [
+        markMoney('p5-wl-disc', d.noteDiscountAmt),
+        markMoney('p5-wl-pv', d.notePV),
+        markMoney('p5-wl-gain', d.gainOnInvestment),
+        markSelect('p5-je1-account','Notes Receivable'),
+        markSelect('p5-je2-account','Discount on Notes Receivable'),
+        markSelect('p5-je3-account','Investments'),
+        markSelect('p5-je4-account','Gain on Sale of Investments'),
+        markMoney('p5-je1-debit', d.investNoteFace),
+        markMoney('p5-je2-credit', d.noteDiscountAmt),
+        markMoney('p5-je3-credit', d.investBookValue),
+        markMoney('p5-je4-credit', d.gainOnInvestment)
+      ]; },
+      keyRows:function(d){ return [
+        ['Discount on the note', money2(d.noteDiscountAmt)],
+        ['Present value (fair value) of note', money2(d.notePV)],
+        ['Gain on sale of investment', money2(d.gainOnInvestment)],
+        ['Entry', 'Debit Notes Receivable '+money0(d.investNoteFace)+' / Credit Discount on Notes Receivable '+money2(d.noteDiscountAmt)+', Credit Investments '+money0(d.investBookValue)+', Credit Gain on Sale of Investments '+money2(d.gainOnInvestment)]
+      ]; }
+    },
+    { key:'p6', requiredIds:['p6-wl-amort','p6-jea1-account','p6-jea2-account','p6-jea1-debit','p6-jea2-credit',
+        'p6-wl-before','p6-wl-required','p6-wl-adj','p6-jeb1-account','p6-jeb2-account','p6-jeb1-debit','p6-jeb2-credit'],
+      itemCount:12,
+      grade:function(d){ return [
+        markMoney('p6-wl-amort', d.discountAmort),
+        markSelect('p6-jea1-account','Discount on Notes Receivable'),
+        markSelect('p6-jea2-account','Interest Revenue'),
+        markMoney('p6-jea1-debit', d.discountAmort),
+        markMoney('p6-jea2-credit', d.discountAmort),
+        markMoney('p6-wl-before', d.allowBeforeAdj),
+        markMoney('p6-wl-required', d.allowRequired),
+        markMoney('p6-wl-adj', d.badDebtAdj),
+        markSelect('p6-jeb1-account','Bad Debt Expense'),
+        markSelect('p6-jeb2-account','Allowance for Uncollectible Accounts'),
+        markMoney('p6-jeb1-debit', d.badDebtAdj),
+        markMoney('p6-jeb2-credit', d.badDebtAdj)
+      ]; },
+      keyRows:function(d){ return [
+        ['Discount amortization', money2(d.discountAmort)],
+        ['AJE — discount amortization', 'Debit Discount on Notes Receivable '+money2(d.discountAmort)+' / Credit Interest Revenue '+money2(d.discountAmort)],
+        ['Allowance before adjustment', money0(d.allowBeforeAdj)],
+        ['Required allowance', money0(d.allowRequired)],
+        ['Adjustment needed', money0(d.badDebtAdj)],
+        ['AJE — bad debt expense', 'Debit Bad Debt Expense '+money0(d.badDebtAdj)+' / Credit Allowance for Uncollectible Accounts '+money0(d.badDebtAdj)]
+      ]; }
+    }
+  ];
+
+  var TOTAL_ITEMS = PARTS.reduce(function(s,p){ return s+p.itemCount; }, 0);
+  var TOTAL_POINTS = 100;
+  var POINTS_PER_ITEM = TOTAL_POINTS/TOTAL_ITEMS;
+  PARTS.forEach(function(p){ p.possible = p.itemCount*POINTS_PER_ITEM; });
+
+  function clearAllFieldStates(){
+    document.querySelectorAll('.field-correct, .field-incorrect, .field-missing').forEach(function(el){
+      el.classList.remove('field-correct','field-incorrect','field-missing');
+    });
+  }
+
+  function updateOverallScore(){
+    var el = document.getElementById('overallScore');
+    var breakdown = document.getElementById('scoreBreakdown');
+    var anyChecked = PARTS.some(function(p){ return scoreState[p.key] !== null && scoreState[p.key] !== undefined; });
+    if(!anyChecked){ el.textContent = 'Check each part to see your score'; breakdown.textContent=''; return; }
+    var total = PARTS.reduce(function(s,p){ return s + (scoreState[p.key]||0); }, 0);
+    el.textContent = total.toFixed(1)+' / '+TOTAL_POINTS.toFixed(1)+' pts';
+    breakdown.textContent = PARTS.map(function(p,i){
+      return 'Part '+(i+1)+': '+(scoreState[p.key]==null ? 'not checked yet' : scoreState[p.key].toFixed(1)+' / '+p.possible.toFixed(1)+' pts');
+    }).join('  \u00b7  ');
+  }
+
+  function revealAllKeys(){
+    if(!currentScenario) return;
+    PARTS.forEach(function(p,i){
+      var keyEl = document.getElementById(p.key+'Key');
+      if(keyEl){ keyEl.innerHTML = buildKeyTable('Answer Key \u2014 Part '+(i+1), p.keyRows(currentScenario)); keyEl.style.display='block'; }
+    });
+    var noteEl = document.getElementById('keyRevealNote'); if(noteEl) noteEl.style.display='block';
+  }
+
+  function registerCheckAttempt(part){
+    attempts[part.key]++;
+    var remaining = MAX_ATTEMPTS - attempts[part.key];
+    updateAttemptsNote(part.key+'Attempts', attempts[part.key], MAX_ATTEMPTS);
+    if(remaining<=0){ locked[part.key]=true; lockPart(part.requiredIds, 'check'+part.key.charAt(0).toUpperCase()+part.key.slice(1)); }
+    if(PARTS.every(function(p){ return locked[p.key]; }) && !keyRevealed){
+      keyRevealed = true; revealAllKeys(); setTimeout(function(){ triggerPrint(); }, 350);
+    }
+  }
+
+  PARTS.forEach(function(part){
+    var btnId = 'check'+part.key.charAt(0).toUpperCase()+part.key.slice(1);
+    var btn = document.getElementById(btnId);
+    var summaryId = part.key+'Summary';
+    btn.addEventListener('click', function(){
+      if(!currentScenario || locked[part.key]) return;
+      var missing = findMissing(part.requiredIds);
+      if(missing.length){
+        setMissing(part.requiredIds, false);
+        setMissing(missing.map(function(el){ return el.id; }), true);
+        var summaryEl = document.getElementById(summaryId);
+        summaryEl.textContent = 'Please fill in every cell before checking your work \u2014 '+missing.length+' field'+(missing.length===1?'':'s')+' left blank.';
+        summaryEl.classList.remove('good'); summaryEl.classList.add('bad');
+        missing[0].focus();
+        return;
+      }
+      setMissing(part.requiredIds, false);
+      var results = part.grade(currentScenario);
+      scoreState[part.key] = updateSummary(summaryId, results, part.possible);
+      updateOverallScore();
+      registerCheckAttempt(part);
+    });
+  });
+
+  function applyAndStore(id){
+    currentScenario = generateScenario(id);
+    applyScenario(currentScenario);
+    clearAllFieldStates();
+    PARTS.forEach(function(p){ attempts[p.key]=0; locked[p.key]=false; scoreState[p.key]=null;
+      unlockPart(p.requiredIds, 'check'+p.key.charAt(0).toUpperCase()+p.key.slice(1));
+      updateAttemptsNote(p.key+'Attempts', 0, MAX_ATTEMPTS);
+      var keyEl = document.getElementById(p.key+'Key'); if(keyEl){ keyEl.style.display='none'; keyEl.innerHTML=''; }
+      var sumEl = document.getElementById(p.key+'Summary'); if(sumEl){ sumEl.textContent=''; sumEl.classList.remove('good','bad'); }
+    });
+    keyRevealed = false;
+    var noteEl = document.getElementById('keyRevealNote'); if(noteEl) noteEl.style.display='none';
+    updateOverallScore();
+  }
+
+  var idInput = document.getElementById('studentId');
+  var genBtn = document.getElementById('genBtn');
+  genBtn.addEventListener('click', function(){ applyAndStore(idInput.value); });
+  idInput.addEventListener('keydown', function(e){ if(e.key==='Enter') applyAndStore(idInput.value); });
+
+  // ---------------- Print ----------------
+  function val(id){ var el=document.getElementById(id); return el?el.value.trim():''; }
+  document.getElementById('printBtn').addEventListener('click', triggerPrint);
+  function triggerPrint(){
+    var name = val('studentName'), id = val('studentId');
+    document.getElementById('printNameLine').textContent = 'Name: '+(name||'_______________________')+'     Student ID: '+(id||'_______________________');
+    var scoreText = document.getElementById('overallScore').textContent;
+    var breakdownText = document.getElementById('scoreBreakdown').textContent;
+    document.getElementById('printScoreLine').textContent = 'Score: '+scoreText+(breakdownText?'  ('+breakdownText+')':'');
+    var oldTitle = document.title;
+    document.title = 'HighlandsTrail-'+(id||'submission');
+    window.print();
+    document.title = oldTitle;
+  }
+
+  // ---------------- Download as Word (.docx) — DOM-walking export ----------------
+  var docxLoadPromise = null;
+  function loadDocxLib(){
+    if(window.docx) return Promise.resolve();
+    if(docxLoadPromise) return docxLoadPromise;
+    docxLoadPromise = new Promise(function(resolve, reject){
+      var s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js';
+      s.onload = function(){ window.docx ? resolve() : reject(new Error('docx library did not load correctly')); };
+      s.onerror = function(){ reject(new Error('network error loading docx library')); };
+      document.head.appendChild(s);
+    });
+    return docxLoadPromise;
+  }
+  function blankIfEmpty(s){ return s && s.length ? s : '\u2014'; }
+  function inputOrSelectValue(el){
+    if(el.tagName==='SELECT'){ var opt=el.options[el.selectedIndex]; return opt?opt.textContent:''; }
+    if(el.tagName==='INPUT'){ return el.value || ''; }
+    return el.textContent || '';
+  }
+  function walkWorkLine(el){
+    var parts = [];
+    el.childNodes.forEach(function(node){
+      if(node.nodeType===3){ var t=node.textContent.replace(/\s+/g,' ').trim(); if(t) parts.push(t); }
+      else if(node.tagName==='INPUT' || node.tagName==='SELECT'){ parts.push(blankIfEmpty(inputOrSelectValue(node))); }
+      else { var t2=node.textContent.replace(/\s+/g,' ').trim(); if(t2) parts.push(t2); }
+    });
+    return parts.join(' ');
+  }
+  function buildAnswersDoc(){
+    var D = window.docx;
+    var PURPLE='592C88', INK='221B2E', SLATE='5F5A6B';
+    var name = blankIfEmpty(val('studentName'));
+    var sid = blankIfEmpty(val('studentId'));
+    function h(text){ return new D.Paragraph({ spacing:{before:220,after:100}, children:[new D.TextRun({text:text,bold:true,color:PURPLE,size:26})] }); }
+    function p(text, opts){ opts=opts||{}; return new D.Paragraph({ spacing:{before:60,after:60}, children:[new D.TextRun({text:text,size:20,color:opts.color||INK,bold:!!opts.bold})] }); }
+    function cellDocx(text,width,opts){
+      opts=opts||{};
+      return new D.TableCell({ width:{size:width,type:D.WidthType.DXA}, shading:opts.shading?{type:D.ShadingType.CLEAR,fill:opts.shading}:undefined,
+        margins:{top:60,bottom:60,left:90,right:90}, children:[new D.Paragraph({children:[new D.TextRun({text:text,size:19,bold:!!opts.bold,color:opts.color||INK})]})] });
+    }
+    function tableFromEl(tableEl){
+      var theadCells = Array.from(tableEl.querySelectorAll('thead th')).map(function(th){ return th.textContent.trim(); });
+      var bodyRows = Array.from(tableEl.querySelectorAll('tbody tr'));
+      var colCount = theadCells.length || (bodyRows[0]?bodyRows[0].children.length:1);
+      var colWidth = Math.floor(9000/colCount);
+      var widths = new Array(colCount).fill(colWidth);
+      var rows = [];
+      if(theadCells.length){ rows.push(new D.TableRow({ children: theadCells.map(function(t){ return cellDocx(t,colWidth,{bold:true,shading:PURPLE,color:'FFFFFF'}); }) })); }
+      bodyRows.forEach(function(tr){
+        var cells = Array.from(tr.children).map(function(td){
+          var field = td.querySelector('input,select');
+          var text = field ? blankIfEmpty(inputOrSelectValue(field)) : td.textContent.trim();
+          return cellDocx(text, colWidth, { bold: tr.classList.contains('total-row') });
+        });
+        rows.push(new D.TableRow({ children: cells }));
+      });
+      return new D.Table({ width:{size:widths.reduce(function(a,b){return a+b;},0),type:D.WidthType.DXA}, columnWidths:widths, rows:rows });
+    }
+    var children = [];
+    children.push(new D.Paragraph({ heading:D.HeadingLevel.TITLE, spacing:{after:60}, children:[new D.TextRun({text:'Highlands Trail Outfitters \u2014 Receivables Review', color:PURPLE, size:32, bold:true})] }));
+    children.push(p('Name: '+name+'     Student ID: '+sid, { bold:true }));
+    children.push(p('ACCT 351  \u00b7  Receivables  \u00b7  Chapter 7', { color:SLATE }));
+    var scoreText = (document.getElementById('overallScore')||{}).textContent || '';
+    var breakdownText = (document.getElementById('scoreBreakdown')||{}).textContent || '';
+    children.push(new D.Paragraph({ spacing:{before:200,after:60}, border:{ top:{style:D.BorderStyle.SINGLE,size:6,color:PURPLE}, bottom:{style:D.BorderStyle.SINGLE,size:6,color:PURPLE} },
+      children:[new D.TextRun({text:'Assignment score', bold:true, color:PURPLE, size:24})] }));
+    children.push(new D.Paragraph({ spacing:{before:40,after:20}, children:[new D.TextRun({text:scoreText, bold:true, color:INK, size:24})] }));
+    if(breakdownText) children.push(new D.Paragraph({ spacing:{after:100}, children:[new D.TextRun({text:breakdownText, color:SLATE, size:18})] }));
+    document.querySelectorAll('.part').forEach(function(partEl, idx){
+      var h2El = partEl.querySelector('h2');
+      children.push(h('Part '+(idx+1)+' \u2014 '+(h2El?h2El.textContent:'')));
+      Array.from(partEl.children).forEach(function(child){
+        if(child.classList.contains('part-label') || child.tagName==='H2') return;
+        if(child.classList.contains('scenario')){ child.querySelectorAll('p').forEach(function(pp){ children.push(p(pp.textContent)); }); }
+        else if(child.classList.contains('req')){ children.push(p(child.textContent.trim(), { bold:true })); }
+        else if(child.tagName==='TABLE'){ children.push(tableFromEl(child)); children.push(new D.Paragraph({ spacing:{after:80}, children:[] })); }
+        else if(child.classList.contains('work-line')){ children.push(p(walkWorkLine(child))); }
+      });
+    });
+    children.push(new D.Paragraph({ spacing:{before:300}, alignment:D.AlignmentType.CENTER, children:[new D.TextRun({text:'Highlands Trail Outfitters Receivables Review  \u00b7  ACCT 351  \u00b7  Western Carolina University', size:16, italics:true, color:SLATE})] }));
+    return new D.Document({ sections:[{ properties:{ page:{ size:{width:12240,height:15840}, margin:{top:1440,bottom:1440,left:1440,right:1440} } }, children:children }] });
+  }
+  document.getElementById('downloadDocxBtn').addEventListener('click', function(){
+    var statusEl = document.getElementById('submitStatus');
+    statusEl.classList.remove('error'); statusEl.textContent = 'Preparing your Word document\u2026';
+    loadDocxLib().then(function(){ var doc=buildAnswersDoc(); return window.docx.Packer.toBlob(doc); })
+    .then(function(blob){
+      var idPart = val('studentId') || 'submission';
+      var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'HighlandsTrail-'+idPart+'.docx';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      statusEl.textContent = 'Downloaded.'; setTimeout(function(){ statusEl.textContent=''; }, 4000);
+    }).catch(function(err){
+      statusEl.classList.add('error'); statusEl.textContent = 'Could not load the Word export tool (needs internet access) \u2014 use Print / Save as PDF instead.';
+    });
+  });
+
+  applyAndStore('');
+})();
+</script>
+
+</body>
+</html>
