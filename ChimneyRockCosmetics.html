@@ -216,11 +216,11 @@
       <p>Before any bad-debt estimate can be applied, you need the ending gross AR balance. Roll the T-account forward from where <span class="val yr0d">2023</span> left off.</p>
     </div>
     <div class="work-line">
-      <label>Beginning gross AR (1/1/<span class="val yr3b">2024</span>): net receivables <span class="val" id="sNetBeg2">$437,000</span> + allowance <span class="val" id="sAllowBeg2">$31,000</span> =</label>
+      <label>Beginning gross AR (1/1/<span class="val yr3b">2024</span>) — net receivables plus the allowance:</label>
       <input type="text" placeholder="$" id="p2-wl-beg">
     </div>
     <div class="work-line">
-      <label>Ending gross AR (12/31/<span class="val yr3c">2024</span>): beginning + credit sales <span class="val" id="sCreditSales2">$1,755,000</span> &minus; collections <span class="val" id="sCollections2">$1,835,000</span> &minus; write-offs <span class="val" id="sWriteOff3">$36,000</span> =</label>
+      <label>Ending gross AR (12/31/<span class="val yr3c">2024</span>) — beginning, plus credit sales, minus collections, minus write-offs:</label>
       <input type="text" placeholder="$" id="p2-wl-end">
     </div>
     <div class="check-bar">
@@ -242,7 +242,7 @@
 
     <div class="req"><span class="letter">a.</span>Bad debt expense is estimated to be <span class="val" id="sSalesPct">2%</span> of credit sales for the year.</div>
     <div class="work-line">
-      <label><span class="val" id="sSalesPct2">2%</span> &times; <span class="val" id="sCreditSales3">$1,755,000</span> credit sales =</label>
+      <label>Bad debt expense (<span class="val" id="sSalesPct2">2%</span> of credit sales):</label>
       <input type="text" placeholder="$" id="p3a-wl">
     </div>
     <table class="je">
@@ -255,11 +255,11 @@
 
     <div class="req" style="margin-top:22px;"><span class="letter">b.</span>The allowance for uncollectible accounts is estimated to be <span class="val" id="sArPct">10%</span> of the year-end balance in accounts receivable.</div>
     <div class="work-line">
-      <label>Target allowance: <span class="val" id="sArPct2">10%</span> &times; ending AR =</label>
+      <label>Target allowance (<span class="val" id="sArPct2">10%</span> of ending AR):</label>
       <input type="text" placeholder="$" id="p3b-wl-target">
     </div>
     <div class="work-line">
-      <label>Allowance balance before adjustment: beginning <span class="val" id="sAllowBeg3">$31,000</span> + recovery <span class="val" id="sRecovery3">$3,100</span> &minus; write-off <span class="val" id="sWriteOff4">$36,000</span> =</label>
+      <label>Allowance balance before adjustment (beginning, plus the recovery, minus the write-off):</label>
       <input type="text" placeholder="$ (use a minus sign if a debit balance)" id="p3b-wl-before">
     </div>
     <div class="work-line">
