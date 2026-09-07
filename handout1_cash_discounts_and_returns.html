@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ch. 7 Walkthrough — Cash Discounts &amp; Sales Returns</title>
+<style>
+  :root{
+    --purple: #4b2e6f;
+    --purple-dark: #33204d;
+    --purple-pale: #f3effa;
+    --gold: #c9a227;
+    --gold-pale: #faf4de;
+    --ink: #23202b;
+    --paper: #fffdf9;
+    --line: #e2dcea;
+    --green: #1e7a4c;
+    --green-bg: #e9f6ee;
+    --red: #a3312a;
+    --red-bg: #fbeceb;
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
+    --serif: 'Source Serif 4', Georgia, serif;
+    --sans: 'Inter', -apple-system, sans-serif;
+  }
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Inter:wght@400;500;600;700&display=swap');
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--sans); line-height:1.6;
+  }
+  header.top{
+    background:var(--purple); color:#fff; padding:2.2rem 1.5rem 2.6rem;
+    position:relative; overflow:hidden;
+  }
+  header.top::after{
+    content:""; position:absolute; right:-40px; bottom:-60px; width:220px; height:220px;
+    border-radius:50%; background:var(--purple-dark); opacity:.5;
+  }
+  header.top .eyebrow{
+    font-family:var(--mono); font-size:.78rem; letter-spacing:.02em; color:var(--gold);
+    margin-bottom:.5rem; position:relative;
+  }
+  header.top h1{
+    margin:0 0 .4rem; font-family:var(--serif); font-weight:600; font-size:1.9rem; max-width:38rem; position:relative;
+  }
+  header.top p{ margin:0; max-width:34rem; color:#e6ddf2; font-size:.98rem; position:relative;}
+
+  main{ max-width:44rem; margin:0 auto; padding:2.4rem 1.5rem 5rem; }
+
+  .problem{
+    margin-top:3rem; padding-top:1.6rem; border-top:3px solid var(--purple);
+  }
+  .problem h2{
+    font-family:var(--serif); font-size:1.5rem; color:var(--purple-dark); margin:0 0 .3rem;
+  }
+  .problem .facts{
+    background:var(--purple-pale); border-left:4px solid var(--purple);
+    padding:1rem 1.2rem; border-radius:4px; font-size:.95rem; margin:1rem 0 1.8rem;
+  }
+  .facts p{margin:.3rem 0;}
+  .facts strong{color:var(--purple-dark);}
+
+  .step{ margin:2.2rem 0; }
+  .step .step-label{
+    font-family:var(--mono); font-size:.75rem; color:var(--gold); background:var(--purple-dark);
+    display:inline-block; padding:.2rem .55rem; border-radius:3px; margin-bottom:.7rem;
+  }
+  .step h3{ font-family:var(--serif); font-size:1.15rem; margin:.2rem 0 .6rem; color:var(--ink); }
+  .step .narrative{ font-family:var(--serif); font-size:1.02rem; color:#3a3542; }
+  .step .narrative p{ margin:.55rem 0; }
+  .step .narrative .think{
+    background:var(--gold-pale); border:1px dashed var(--gold); border-radius:6px;
+    padding:.8rem 1rem; font-family:var(--sans); font-size:.92rem; margin:1rem 0;
+  }
+
+  .reveal-btn{
+    font-family:var(--sans); font-weight:600; font-size:.9rem; color:#fff; background:var(--purple);
+    border:none; border-radius:5px; padding:.6rem 1.1rem; cursor:pointer; margin-top:.4rem;
+  }
+  .reveal-btn:hover{ background:var(--purple-dark); }
+  .reveal-btn.shown{ background:#8a7c98; }
+
+  .entry-wrap{ display:none; margin-top:1.1rem; animation:fadein .35s ease; }
+  .entry-wrap.open{ display:block; }
+  @keyframes fadein{ from{opacity:0; transform:translateY(-4px);} to{opacity:1; transform:translateY(0);} }
+
+  .entry-date{ font-family:var(--mono); font-size:.85rem; color:var(--purple-dark); font-weight:600; margin-bottom:.4rem;}
+
+  table.jtable{
+    width:100%; border-collapse:collapse; font-family:var(--mono); font-size:.82rem;
+    background:#fff; border:1px solid var(--line);
+  }
+  table.jtable th{
+    background:var(--purple-dark); color:#fff; font-family:var(--sans); font-weight:600;
+    font-size:.72rem; padding:.5rem .4rem; text-align:center;
+  }
+  table.jtable td{ padding:.5rem .5rem; border-top:1px solid var(--line); text-align:center; }
+  table.jtable td.acct{ text-align:left; padding-left:.9rem; }
+  table.jtable td.acct.credit{ padding-left:2.2rem; color:#4a4552;}
+  table.jtable td.amt{ font-weight:600; }
+  table.jtable td.chg{ font-size:.9rem; }
+  .up{ color:var(--green); font-weight:700; }
+  .down{ color:var(--red); font-weight:700; }
+  .dash{ color:#c3bccb; }
+
+  .statement-row{
+    display:grid; grid-template-columns:1fr 1fr 1fr; gap:.7rem; margin-top:.9rem;
+  }
+  .stbox{
+    background:var(--purple-pale); border-radius:6px; padding:.65rem .75rem; font-size:.8rem;
+  }
+  .stbox .lbl{ font-family:var(--sans); font-weight:700; color:var(--purple-dark); font-size:.7rem; text-transform:uppercase; letter-spacing:.03em; display:block; margin-bottom:.25rem;}
+  .stbox .val{ font-family:var(--mono); }
+  .stbox.no-effect{ background:#f1eff4; color:#8b8494; }
+
+  .callout{
+    background:var(--gold-pale); border-left:4px solid var(--gold); border-radius:4px;
+    padding:.8rem 1rem; font-size:.9rem; margin:1.4rem 0;
+  }
+  .callout strong{ color:var(--purple-dark); }
+
+  .checkyourself{
+    background:var(--green-bg); border:1px solid #b9dfc8; border-radius:6px;
+    padding:1rem 1.1rem; margin-top:1.6rem; font-size:.92rem;
+  }
+  .checkyourself .lbl{ font-family:var(--sans); font-weight:700; color:var(--green); font-size:.78rem; text-transform:uppercase; letter-spacing:.03em; display:block; margin-bottom:.4rem;}
+
+  .answer-note{
+    background:var(--red-bg); border:1px solid #e2b6b1; border-radius:6px; padding:.8rem 1rem;
+    font-size:.85rem; margin-top:1rem; color:#5c231e;
+  }
+  .answer-note strong{ color:var(--red); }
+
+  footer{ text-align:center; padding:2rem; font-family:var(--mono); font-size:.75rem; color:#a89bb5; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="eyebrow">ACCT 351 · Intermediate Accounting I · Chapter 7</div>
+  <h1>Cash Discounts &amp; Sales Returns</h1>
+  <p>A guided walkthrough of two receivables scenarios: recognizing revenue under different collection timings — compared across the gross and net methods — and estimating a refund liability for expected returns.</p>
+</header>
+
+<main>
+
+  <div class="callout">
+    <strong>How this works:</strong> Each transaction is taught like a mini-lecture — first the reasoning, then the completed entry. Read the reasoning and try to picture the entry yourself before you click "Reveal the entry." That struggle is where the learning happens.
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PROBLEM 1: HARWELL -->
+  <!-- ============================================================ -->
+  <section class="problem">
+    <h2>Problem 1 — Harwell Company</h2>
+    <div class="facts">
+      <p><strong>Harwell Company</strong> manufactures tires. On <strong>July 15, 2024</strong>, it sold <strong>1,200 tires</strong> to Nixon Car Company at <strong>$65 each</strong>.</p>
+      <p>Terms: <strong>3/15, n/30</strong> &nbsp;·&nbsp; Method: <strong>gross method</strong> for cash discounts &nbsp;·&nbsp; Ignore cost of goods sold.</p>
+      <p>Sale amount = 1,200 × $65 = <strong>$78,000</strong></p>
+    </div>
+
+    <div class="step">
+      <span class="step-label">STEP 1</span>
+      <h3>Recording the sale on July 15</h3>
+      <div class="narrative">
+        <p>Under the <strong>gross method</strong>, Harwell records the sale at its full invoice price — $78,000 — and doesn't worry yet about whether Nixon will actually take the discount. The discount only gets recorded if and when Nixon pays early. So on the date of sale, this looks like any ordinary credit sale.</p>
+        <div class="think">💭 Think it through: What's debited, what's credited, and does anything about the 3/15, n/30 terms change this particular entry?</div>
+      </div>
+      <button class="reveal-btn" onclick="toggleEntry(this,'h1-s1')">Reveal the entry</button>
+      <div class="entry-wrap" id="h1-s1">
+        <div class="entry-date">July 15, 2024</div>
+        <table class="jtable">
+          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
+          <tr><td class="acct">Accounts Receivable</td><td class="amt">78,000</td><td></td><td class="chg up">↑78,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+          <tr><td class="acct credit">Sales Revenue</td><td></td><td class="amt">78,000</td><td class="dash">—</td><td class="dash">—</td><td class="chg up">↑78,000</td><td class="chg up">↑78,000</td><td class="dash">—</td><td class="chg up">↑78,000</td></tr>
+        </table>
+        <div class="statement-row">
+          <div class="stbox"><span class="lbl">Balance Sheet</span><span class="val">Assets ↑78,000 = Equity ↑78,000</span></div>
+          <div class="stbox"><span class="lbl">Income Statement</span><span class="val">Revenue ↑78,000 → NI ↑78,000</span></div>
+          <div class="stbox no-effect"><span class="lbl">Statement of CF</span><span class="val">No effect — no cash moved</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-label">STEP 2 · PART 1</span>
+      <h3>Collection on July 23 — inside the discount window</h3>
+      <div class="narrative">
+        <p>The "3/15" in 3/15, n/30 means Nixon gets a <strong>3% discount</strong> if it pays within <strong>15 days</strong> of the invoice date. July 23 is only 8 days after July 15 — Nixon is inside the window, so it earns the discount.</p>
+        <p>Discount = 3% × $78,000 = <strong>$2,340</strong>. Cash received = $78,000 − $2,340 = <strong>$75,660</strong>. The full $78,000 receivable still has to come off the books, so the $2,340 gap goes to a <em>Sales Discounts</em> account — a contra-revenue account that reduces net sales.</p>
+        <div class="think">💭 Think it through: three accounts are touched here. Which one absorbs the discount, and does it increase or decrease net income?</div>
+      </div>
+      <button class="reveal-btn" onclick="toggleEntry(this,'h1-s2')">Reveal the entry</button>
+      <div class="entry-wrap" id="h1-s2">
+        <div class="entry-date">July 23, 2024</div>
+        <table class="jtable">
+          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
+          <tr><td class="acct">Cash</td><td class="amt">75,660</td><td></td><td class="chg up">↑75,660</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+          <tr><td class="acct">Sales Discounts</td><td class="amt">2,340</td><td></td><td class="dash">—</td><td class="dash">—</td><td class="chg down">↓2,340</td><td class="chg down">↓2,340</td><td class="dash">—</td><td class="chg down">↓2,340</td></tr>
+          <tr><td class="acct credit">Accounts Receivable</td><td></td><td class="amt">78,000</td><td class="chg down">↓78,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+        </table>
+        <div class="statement-row">
+          <div class="stbox"><span class="lbl">Balance Sheet</span><span class="val">Assets net ↓2,340 = Equity ↓2,340</span></div>
+          <div class="stbox"><span class="lbl">Income Statement</span><span class="val">Net revenue ↓2,340 → NI ↓2,340</span></div>
+          <div class="stbox"><span class="lbl">Statement of CF</span><span class="val">+75,660 operating inflow</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-label">STEP 2 · PART 2</span>
+      <h3>Alternative: collection on August 15 — outside the discount window</h3>
+      <div class="narrative">
+        <p>Now suppose Nixon waits until <strong>August 15</strong> instead — 31 days after the sale. The 15-day discount window closed on July 30, so Nixon has forfeited the discount. Nixon owes, and pays, the <em>full</em> $78,000.</p>
+        <p>Notice there's no Sales Discounts account anywhere in this version. Whether a discount ever appears in the books depends entirely on the customer's actual payment date — that's the defining feature of the gross method.</p>
+        <div class="think">💭 Think it through: since no discount is taken, does this entry affect net income at all?</div>
+      </div>
+      <button class="reveal-btn" onclick="toggleEntry(this,'h1-s3')">Reveal the entry</button>
+      <div class="entry-wrap" id="h1-s3">
+        <div class="entry-date">August 15, 2024</div>
+        <table class="jtable">
+          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
+          <tr><td class="acct">Cash</td><td class="amt">78,000</td><td></td><td class="chg up">↑78,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+          <tr><td class="acct credit">Accounts Receivable</td><td></td><td class="amt">78,000</td><td class="chg down">↓78,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+        </table>
+        <div class="statement-row">
+          <div class="stbox no-effect"><span class="lbl">Balance Sheet</span><span class="val">Asset mix shifts; total assets unchanged</span></div>
+          <div class="stbox no-effect"><span class="lbl">Income Statement</span><span class="val">No effect — revenue already recognized July 15</span></div>
+          <div class="stbox"><span class="lbl">Statement of CF</span><span class="val">+78,000 operating inflow</span></div>
+        </div>
+      </div>
+      <div class="checkyourself">
+        <span class="lbl">Notice the pattern</span>
+        Both collection scenarios start from the exact same July 15 sale entry. The only thing that changes downstream is <em>when Nixon pays</em>. That's the whole logic of the gross method — the discount is never assumed; it only shows up if it's actually earned.
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- PROBLEM 1B: HARWELL, REVISITED — NET METHOD -->
+  <!-- ============================================================ -->
+  <section class="problem">
+    <h2>Problem 1B — Harwell Company, revisited: the net method</h2>
+    <div class="facts">
+      <p>Same facts as Problem 1: 1,200 tires × $65 = <strong>$78,000</strong>, terms <strong>3/15, n/30</strong>. This time Harwell uses the <strong>net method</strong> instead of the gross method — same numbers, a different assumption baked into the very first entry.</p>
+    </div>
+
+    <div class="step">
+      <span class="step-label">THE BIG IDEA</span>
+      <h3>Gross method vs. net method: a different starting assumption</h3>
+      <div class="narrative">
+        <p>The <strong>gross method</strong> assumes nothing — it records the full invoice price and only acknowledges a discount if the customer actually takes it. The <strong>net method</strong> assumes the opposite: that a rational customer will almost always take a 3% discount to avoid paying 3% more, so the sale is recorded at the discounted amount right from the start.</p>
+        <p>That flips the whole problem around. Under the net method, taking the discount is the "nothing special happened" case, and it's <em>missing</em> the discount that requires an extra entry — because now Harwell has to record revenue it didn't originally expect to earn.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-label">STEP 1</span>
+      <h3>Recording the sale on July 15 — at the net amount</h3>
+      <div class="narrative">
+        <p>Instead of $78,000, the sale goes on the books at what Harwell expects to actually collect: $78,000 less the 3% discount, or <strong>$75,660</strong>. Compare this side-by-side with Problem 1, Step 1 — same sale, $2,340 less revenue recognized on day one.</p>
+        <div class="think">💭 Think it through: if Nixon never pays at all, which method's July 15 entry was "more correct" in hindsight?</div>
+      </div>
+      <button class="reveal-btn" onclick="toggleEntry(this,'h1b-s1')">Reveal the entry</button>
+      <div class="entry-wrap" id="h1b-s1">
+        <div class="entry-date">July 15, 2024 — net method</div>
+        <table class="jtable">
+          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
+          <tr><td class="acct">Accounts Receivable</td><td class="amt">75,660</td><td></td><td class="chg up">↑75,660</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+          <tr><td class="acct credit">Sales Revenue</td><td></td><td class="amt">75,660</td><td class="dash">—</td><td class="dash">—</td><td class="chg up">↑75,660</td><td class="chg up">↑75,660</td><td class="dash">—</td><td class="chg up">↑75,660</td></tr>
+        </table>
+        <div class="statement-row">
+          <div class="stbox"><span class="lbl">Balance Sheet</span><span class="val">Assets ↑75,660 = Equity ↑75,660</span></div>
+          <div class="stbox"><span class="lbl">Income Statement</span><span class="val">Revenue ↑75,660 → NI ↑75,660</span></div>
+          <div class="stbox no-effect"><span class="lbl">Statement of CF</span><span class="val">No effect — no cash moved</span></div>
+        </div>
+        <div class="answer-note"><strong>Compare:</strong> the gross method recognized $78,000 of revenue on this same date. The net method recognizes $75,660. Neither is "wrong" — they're just different assumptions about what Harwell truly expects to collect.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-label">STEP 2 · PART 1</span>
+      <h3>Collection on July 23 — the discount is taken (the expected case)</h3>
+      <div class="narrative">
+        <p>Nixon pays within the window, exactly as the net method assumed it would. Since the receivable was already sitting on the books at the discounted amount, collecting it is now completely uneventful — Nixon pays $75,660, and $75,660 comes off Accounts Receivable. No discount account appears anywhere, because none was ever "owed" in the net method's eyes.</p>
+      </div>
+      <button class="reveal-btn" onclick="toggleEntry(this,'h1b-s2')">Reveal the entry</button>
+      <div class="entry-wrap" id="h1b-s2">
+        <div class="entry-date">July 23, 2024 — net method</div>
+        <table class="jtable">
+          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
+          <tr><td class="acct">Cash</td><td class="amt">75,660</td><td></td><td class="chg up">↑75,660</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+          <tr><td class="acct credit">Accounts Receivable</td><td></td><td class="amt">75,660</td><td class="chg down">↓75,660</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+        </table>
+        <div class="statement-row">
+          <div class="stbox no-effect"><span class="lbl">Balance Sheet</span><span class="val">Asset mix shifts; total assets unchanged</span></div>
+          <div class="stbox no-effect"><span class="lbl">Income Statement</span><span class="val">No effect — revenue already recognized at net July 15</span></div>
+          <div class="stbox"><span class="lbl">Statement of CF</span><span class="val">+75,660 operating inflow</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-label">STEP 2 · PART 2</span>
+      <h3>Alternative: collection on August 15 — the discount is forfeited</h3>
+      <div class="narrative">
+        <p>Here's where the net method has to do extra work. Nixon misses the window and owes the full $78,000 — but Harwell's books only show a $75,660 receivable. The $2,340 gap has to be recognized as revenue Harwell wasn't originally expecting: it goes to an account often called <strong>Sales Discounts Forfeited</strong> (or Interest Revenue), and it's <em>additional</em> income, not a correction of the original sale.</p>
+        <div class="think">💭 Think it through: is "Sales Discounts Forfeited" a contra-revenue account like Sales Discounts was under the gross method, or something else entirely?</div>
+      </div>
+      <button class="reveal-btn" onclick="toggleEntry(this,'h1b-s3')">Reveal the entry</button>
+      <div class="entry-wrap" id="h1b-s3">
+        <div class="entry-date">August 15, 2024 — net method</div>
+        <table class="jtable">
+          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
+          <tr><td class="acct">Cash</td><td class="amt">78,000</td><td></td><td class="chg up">↑78,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+          <tr><td class="acct credit">Accounts Receivable</td><td></td><td class="amt">75,660</td><td class="chg down">↓75,660</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+          <tr><td class="acct credit">Sales Discounts Forfeited</td><td></td><td class="amt">2,340</td><td class="dash">—</td><td class="dash">—</td><td class="chg up">↑2,340</td><td class="dash">—</td><td class="dash">—</td><td class="chg up">↑2,340</td></tr>
+        </table>
+        <div class="statement-row">
+          <div class="stbox"><span class="lbl">Balance Sheet</span><span class="val">Assets net ↑2,340 = Equity ↑2,340</span></div>
+          <div class="stbox"><span class="lbl">Income Statement</span><span class="val">Other income ↑2,340 → NI ↑2,340</span></div>
+          <div class="stbox"><span class="lbl">Statement of CF</span><span class="val">+78,000 operating inflow</span></div>
+        </div>
+        <div class="answer-note"><strong>Notice:</strong> "Sales Discounts Forfeited" is <em>not</em> a contra-revenue account the way Sales Discounts was — it's a form of other income, since it represents money Harwell earned beyond what it originally expected. That's the opposite role from the gross method's Sales Discounts account.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-label">TYING IT TOGETHER</span>
+      <h3>Gross vs. net, side by side</h3>
+      <div class="tblock">
+        <div class="tt">Total revenue recognized on this sale — same ending result either way</div>
+        <div class="line"><span>Gross method, discount taken (July 23)</span><span>$78,000 − $2,340 = $75,660</span></div>
+        <div class="line"><span>Net method, discount taken (July 23)</span><span>$75,660 + $0 = $75,660</span></div>
+        <div class="line total"><span>Match</span><span>✓ identical</span></div>
+        <div class="line" style="margin-top:.6rem;"><span>Gross method, discount missed (Aug 15)</span><span>$78,000 (no discount account touched)</span></div>
+        <div class="line"><span>Net method, discount missed (Aug 15)</span><span>$75,660 + $2,340 = $78,000</span></div>
+        <div class="line total"><span>Match</span><span>✓ identical</span></div>
+      </div>
+      <div class="checkyourself">
+        <span class="lbl">The real difference isn't the ending number — it's the timing and the label</span>
+        Both methods land on exactly the same cash collected and the same total revenue once the dust settles. What differs is <em>when</em> the $2,340 shows up and <em>what it's called</em>: under the gross method, it's a reduction to revenue that only appears if the discount is taken; under the net method, it's a boost to revenue that only appears if the discount is <em>missed</em>. The gross method assumes the discount won't be taken until proven otherwise; the net method assumes it will be.
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- PROBLEM 2: HALIFAX -->
+  <!-- ============================================================ -->
+  <section class="problem">
+    <h2>Problem 2 — Halifax Manufacturing</h2>
+    <div class="facts">
+      <p><strong>Halifax Manufacturing</strong> lets customers return merchandise for credit. All sales are on account.</p>
+      <p>Beginning (1/1/24) refund liability: <strong>$320,000</strong> &nbsp;·&nbsp; 2024 sales on account: <strong>$11,700,000</strong> &nbsp;·&nbsp; COGS = <strong>75%</strong> of selling price.</p>
+      <p>2024 returns: <strong>$460,000</strong> total — <strong>$255,000</strong> from pre-2024 sales, the rest (<strong>$205,000</strong>) from 2024 sales.</p>
+      <p>Estimated returns = <strong>4% of sales</strong>, recorded as a year-end adjusting entry.</p>
+    </div>
+
+    <div class="step">
+      <span class="step-label">THE BIG IDEA</span>
+      <h3>Why a "refund liability" even exists</h3>
+      <div class="narrative">
+        <p>Under ASC 606, a company can't recognize revenue it doesn't expect to keep. If Halifax knows a slice of this year's sales will come back for credit, it sets up a <strong>refund liability</strong> — its best estimate of what it will owe back to customers — rather than waiting for the returns to actually happen.</p>
+        <p>That liability gets drawn down as actual returns occur, and then topped back up to the correct estimate at year-end. That's exactly the three-part structure this problem walks through.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-label">STEP 1</span>
+      <h3>(a) Actual 2024 returns of merchandise sold <em>before</em> 2024</h3>
+      <div class="narrative">
+        <p>These $255,000 in returns were already anticipated — they're exactly what the beginning $320,000 refund liability was sitting there to cover. So when the return actually happens, Halifax simply draws down the liability it already had. No new expense, no hit to this year's revenue — that already happened (or didn't) in a prior year.</p>
+        <p>Because the goods are coming back into inventory, the offsetting piece is inventory-side: Halifax had also set up an "Estimated Inventory Returns" asset when it built the original liability (at 75% of the sales-price estimate). The returned goods move out of that asset and into regular inventory.</p>
+        <div class="think">💭 Think it through: since the receivable was never collected in cash, what does "returning" the merchandise do to Accounts Receivable?</div>
+      </div>
+      <button class="reveal-btn" onclick="toggleEntry(this,'h2-s1')">Reveal the entry</button>
+      <div class="entry-wrap" id="h2-s1">
+        <div class="entry-date">2024 — returns of pre-2024 sales</div>
+        <table class="jtable">
+          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
+          <tr><td class="acct">Refund Liability</td><td class="amt">255,000</td><td></td><td class="dash">—</td><td class="chg down">↓255,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+          <tr><td class="acct credit">Accounts Receivable</td><td></td><td class="amt">255,000</td><td class="chg down">↓255,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+        </table>
+        <table class="jtable" style="margin-top:.6rem;">
+          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
+          <tr><td class="acct">Inventory</td><td class="amt">191,250</td><td></td><td class="chg up">↑191,250</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+          <tr><td class="acct credit">Estimated Inventory Returns</td><td></td><td class="amt">191,250</td><td class="chg down">↓191,250</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+        </table>
+        <div class="statement-row">
+          <div class="stbox no-effect"><span class="lbl">Balance Sheet</span><span class="val">Liability ↓255,000; asset mix shifts (net assets unchanged)</span></div>
+          <div class="stbox no-effect"><span class="lbl">Income Statement</span><span class="val">No effect — already anticipated</span></div>
+          <div class="stbox no-effect"><span class="lbl">Statement of CF</span><span class="val">No effect — no cash involved</span></div>
+        </div>
+        <div class="answer-note"><strong>Note for Doug:</strong> 75% × $255,000 = $191,250. If your course doesn't carry an "Estimated Inventory Returns" asset separately (some intro treatments skip the inventory side of the refund-liability model entirely), drop the second table and keep just the AR/liability entry.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-label">STEP 2</span>
+      <h3>(b) Actual 2024 returns of merchandise sold <em>during</em> 2024</h3>
+      <div class="narrative">
+        <p>This is different. The $320,000 beginning liability had nothing to do with 2024's own sales — and the adjusting entry that will estimate returns <em>on</em> 2024 sales hasn't happened yet (that's Step 3). So these $205,000 in returns aren't drawing down any liability yet; they're a direct reversal of this year's revenue and receivable.</p>
+        <div class="think">💭 Think it through: how is this entry structurally different from Step 1, even though both are "returns"?</div>
+      </div>
+      <button class="reveal-btn" onclick="toggleEntry(this,'h2-s2')">Reveal the entry</button>
+      <div class="entry-wrap" id="h2-s2">
+        <div class="entry-date">2024 — returns of 2024 sales</div>
+        <table class="jtable">
+          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
+          <tr><td class="acct">Sales Revenue</td><td class="amt">205,000</td><td></td><td class="dash">—</td><td class="dash">—</td><td class="chg down">↓205,000</td><td class="chg down">↓205,000</td><td class="dash">—</td><td class="chg down">↓205,000</td></tr>
+          <tr><td class="acct credit">Accounts Receivable</td><td></td><td class="amt">205,000</td><td class="chg down">↓205,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+        </table>
+        <table class="jtable" style="margin-top:.6rem;">
+          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
+          <tr><td class="acct">Inventory</td><td class="amt">153,750</td><td></td><td class="chg up">↑153,750</td><td class="dash">—</td><td class="chg up">↑153,750</td><td class="dash">—</td><td class="chg down">↓153,750</td><td class="chg up">↑153,750</td></tr>
+          <tr><td class="acct credit">Cost of Goods Sold</td><td></td><td class="amt">153,750</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+        </table>
+        <div class="statement-row">
+          <div class="stbox"><span class="lbl">Balance Sheet</span><span class="val">Assets net ↓51,250 = Equity ↓51,250</span></div>
+          <div class="stbox"><span class="lbl">Income Statement</span><span class="val">Revenue ↓205,000, COGS ↓153,750 → NI ↓51,250</span></div>
+          <div class="stbox no-effect"><span class="lbl">Statement of CF</span><span class="val">No effect — sale was never collected in cash</span></div>
+        </div>
+        <div class="answer-note"><strong>Note for Doug:</strong> 75% × $205,000 = $153,750. Same caveat as Step 1 — drop the inventory/COGS table if your course treats this at the revenue line only.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-label">STEP 3</span>
+      <h3>(c) Adjusting the refund liability to its year-end balance</h3>
+      <div class="narrative">
+        <p>Now for the estimate. Halifax expects <strong>4% of $11,700,000 = $468,000</strong> in total returns related to this year's sales — that's the balance the refund liability needs to show on the year-end balance sheet.</p>
+        <p>But the account doesn't start the adjustment at zero. Walk the T-account: it began the year at $320,000, and Step 1 already drew it down by $255,000, leaving <strong>$65,000</strong>. To get from $65,000 up to the required $468,000, Halifax needs one more credit of <strong>$403,000</strong>.</p>
+        <div class="think">💭 Think it through: what's the "cost" of building up a liability like this — what income-statement account absorbs it?</div>
+      </div>
+      <button class="reveal-btn" onclick="toggleEntry(this,'h2-s3')">Reveal the entry</button>
+      <div class="entry-wrap" id="h2-s3">
+        <div class="entry-date">December 31, 2024 — adjusting entry</div>
+        <table class="jtable">
+          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
+          <tr><td class="acct">Sales Revenue</td><td class="amt">403,000</td><td></td><td class="dash">—</td><td class="dash">—</td><td class="chg down">↓403,000</td><td class="chg down">↓403,000</td><td class="dash">—</td><td class="chg down">↓403,000</td></tr>
+          <tr><td class="acct credit">Refund Liability</td><td></td><td class="amt">403,000</td><td class="dash">—</td><td class="chg up">↑403,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+        </table>
+        <table class="jtable" style="margin-top:.6rem;">
+          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
+          <tr><td class="acct">Estimated Inventory Returns</td><td class="amt">302,250</td><td></td><td class="chg up">↑302,250</td><td class="dash">—</td><td class="chg up">↑302,250</td><td class="dash">—</td><td class="chg down">↓302,250</td><td class="chg up">↑302,250</td></tr>
+          <tr><td class="acct credit">Cost of Goods Sold</td><td></td><td class="amt">302,250</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+        </table>
+        <div class="statement-row">
+          <div class="stbox"><span class="lbl">Balance Sheet</span><span class="val">Liability ↑403,000; asset ↑302,250 → Equity ↓100,750</span></div>
+          <div class="stbox"><span class="lbl">Income Statement</span><span class="val">Rev ↓403,000, COGS ↓302,250 → NI ↓100,750</span></div>
+          <div class="stbox no-effect"><span class="lbl">Statement of CF</span><span class="val">No effect — non-cash estimate</span></div>
+        </div>
+      </div>
+      <div class="checkyourself">
+        <span class="lbl">Answering the handout's follow-up question</span>
+        <strong>Year-end refund liability = $468,000</strong> (4% × $11,700,000). That's the balance the Step 3 entry was built to land on exactly.
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>ACCT 351 · Chapter 7 · Handout 1 of 3</footer>
+
+<script>
+function toggleEntry(btn, id){
+  var el = document.getElementById(id);
+  var open = el.classList.toggle('open');
+  btn.textContent = open ? 'Hide the entry' : 'Reveal the entry';
+  btn.classList.toggle('shown', open);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ch. 7 Walkthrough — Estimating Bad Debts</title>
+<style>
+  :root{
+    --purple: #4b2e6f; --purple-dark: #33204d; --purple-pale: #f3effa;
+    --gold: #c9a227; --gold-pale: #faf4de;
+    --ink: #23202b; --paper: #fffdf9; --line: #e2dcea;
+    --green: #1e7a4c; --green-bg: #e9f6ee; --red: #a3312a; --red-bg: #fbeceb;
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
+    --serif: 'Source Serif 4', Georgia, serif;
+    --sans: 'Inter', -apple-system, sans-serif;
+  }
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Inter:wght@400;500;600;700&display=swap');
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--paper); color:var(--ink); font-family:var(--sans); line-height:1.6; }
+  header.top{ background:var(--purple); color:#fff; padding:2.2rem 1.5rem 2.6rem; position:relative; overflow:hidden;}
+  header.top::after{ content:""; position:absolute; right:-40px; bottom:-60px; width:220px; height:220px; border-radius:50%; background:var(--purple-dark); opacity:.5;}
+  header.top .eyebrow{ font-family:var(--mono); font-size:.78rem; color:var(--gold); margin-bottom:.5rem; position:relative;}
+  header.top h1{ margin:0 0 .4rem; font-family:var(--serif); font-weight:600; font-size:1.9rem; max-width:38rem; position:relative;}
+  header.top p{ margin:0; max-width:34rem; color:#e6ddf2; font-size:.98rem; position:relative;}
+  main{ max-width:44rem; margin:0 auto; padding:2.4rem 1.5rem 5rem; }
+  .problem{ margin-top:3rem; padding-top:1.6rem; border-top:3px solid var(--purple); }
+  .problem h2{ font-family:var(--serif); font-size:1.5rem; color:var(--purple-dark); margin:0 0 .3rem; }
+  .problem .facts{ background:var(--purple-pale); border-left:4px solid var(--purple); padding:1rem 1.2rem; border-radius:4px; font-size:.95rem; margin:1rem 0 1.8rem;}
+  .facts p{margin:.3rem 0;} .facts strong{color:var(--purple-dark);}
+  .step{ margin:2.2rem 0; }
+  .step .step-label{ font-family:var(--mono); font-size:.75rem; color:var(--gold); background:var(--purple-dark); display:inline-block; padding:.2rem .55rem; border-radius:3px; margin-bottom:.7rem;}
+  .step h3{ font-family:var(--serif); font-size:1.15rem; margin:.2rem 0 .6rem; color:var(--ink); }
+  .step .narrative{ font-family:var(--serif); font-size:1.02rem; color:#3a3542; }
+  .step .narrative p{ margin:.55rem 0; }
+  .step .narrative .think{ background:var(--gold-pale); border:1px dashed var(--gold); border-radius:6px; padding:.8rem 1rem; font-family:var(--sans); font-size:.92rem; margin:1rem 0;}
+  .reveal-btn{ font-family:var(--sans); font-weight:600; font-size:.9rem; color:#fff; background:var(--purple); border:none; border-radius:5px; padding:.6rem 1.1rem; cursor:pointer; margin-top:.4rem;}
+  .reveal-btn:hover{ background:var(--purple-dark); }
+  .reveal-btn.shown{ background:#8a7c98; }
+  .entry-wrap{ display:none; margin-top:1.1rem; animation:fadein .35s ease; }
+  .entry-wrap.open{ display:block; }
+  @keyframes fadein{ from{opacity:0; transform:translateY(-4px);} to{opacity:1; transform:translateY(0);} }
+  .entry-date{ font-family:var(--mono); font-size:.85rem; color:var(--purple-dark); font-weight:600; margin-bottom:.4rem;}
+  table.jtable{ width:100%; border-collapse:collapse; font-family:var(--mono); font-size:.82rem; background:#fff; border:1px solid var(--line);}
+  table.jtable th{ background:var(--purple-dark); color:#fff; font-family:var(--sans); font-weight:600; font-size:.72rem; padding:.5rem .4rem; text-align:center;}
+  table.jtable td{ padding:.5rem .5rem; border-top:1px solid var(--line); text-align:center; }
+  table.jtable td.acct{ text-align:left; padding-left:.9rem; }
+  table.jtable td.acct.credit{ padding-left:2.2rem; color:#4a4552;}
+  table.jtable td.amt{ font-weight:600; }
+  .up{ color:var(--green); font-weight:700; } .down{ color:var(--red); font-weight:700; } .dash{ color:#c3bccb; }
+  .statement-row{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:.7rem; margin-top:.9rem; }
+  .stbox{ background:var(--purple-pale); border-radius:6px; padding:.65rem .75rem; font-size:.8rem;}
+  .stbox .lbl{ font-family:var(--sans); font-weight:700; color:var(--purple-dark); font-size:.7rem; text-transform:uppercase; letter-spacing:.03em; display:block; margin-bottom:.25rem;}
+  .stbox .val{ font-family:var(--mono); }
+  .stbox.no-effect{ background:#f1eff4; color:#8b8494; }
+  .callout{ background:var(--gold-pale); border-left:4px solid var(--gold); border-radius:4px; padding:.8rem 1rem; font-size:.9rem; margin:1.4rem 0;}
+  .callout strong{ color:var(--purple-dark); }
+  .checkyourself{ background:var(--green-bg); border:1px solid #b9dfc8; border-radius:6px; padding:1rem 1.1rem; margin-top:1.6rem; font-size:.92rem;}
+  .checkyourself .lbl{ font-family:var(--sans); font-weight:700; color:var(--green); font-size:.78rem; text-transform:uppercase; letter-spacing:.03em; display:block; margin-bottom:.4rem;}
+  .answer-note{ background:var(--red-bg); border:1px solid #e2b6b1; border-radius:6px; padding:.8rem 1rem; font-size:.85rem; margin-top:1rem; color:#5c231e;}
+  .answer-note strong{ color:var(--red); }
+  .aging-table{ width:100%; border-collapse:collapse; font-family:var(--mono); font-size:.82rem; background:#fff; border:1px solid var(--line); margin:.8rem 0;}
+  .aging-table th{ background:var(--purple); color:#fff; font-family:var(--sans); font-weight:600; font-size:.72rem; padding:.5rem; text-align:right;}
+  .aging-table th:first-child{ text-align:left; }
+  .aging-table td{ padding:.45rem .5rem; text-align:right; border-top:1px solid var(--line);}
+  .aging-table td:first-child{ text-align:left; }
+  .aging-table tr.total td{ font-weight:700; border-top:2px solid var(--purple); }
+  .tblock{ background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:.9rem 1rem; font-family:var(--mono); font-size:.85rem; margin:.6rem 0;}
+  .tblock .tt{ font-family:var(--sans); font-weight:600; font-size:.78rem; color:var(--purple-dark); margin-bottom:.4rem;}
+  .tblock .line{ display:flex; justify-content:space-between; padding:.15rem 0; }
+  .tblock .line.total{ border-top:1px solid var(--line); margin-top:.3rem; padding-top:.4rem; font-weight:700;}
+  footer{ text-align:center; padding:2rem; font-family:var(--mono); font-size:.75rem; color:#a89bb5; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="eyebrow">ACCT 351 · Intermediate Accounting I · Chapter 7</div>
+  <h1>Estimating Bad Debts</h1>
+  <p>A guided walkthrough of two receivables problems: reconstructing an accounts receivable balance, and comparing the three ways to estimate uncollectible accounts.</p>
+</header>
+
+<main>
+  <div class="callout">
+    <strong>How this works:</strong> Read the reasoning, picture the entry yourself, then click "Reveal the entry" to check your thinking.
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PROBLEM 1: RAINTREE -->
+  <!-- ============================================================ -->
+  <section class="problem">
+    <h2>Problem 1 — Raintree Cosmetic Company</h2>
+    <div class="facts">
+      <p>2023 year-end balance sheet: <strong>Receivables, net</strong> of a $40,000 allowance = <strong>$482,000</strong> → gross AR = <strong>$522,000</strong>.</p>
+      <p>2024 activity: credit sales <strong>$1,800,000</strong> &nbsp;·&nbsp; collections <strong>$1,880,000</strong> &nbsp;·&nbsp; write-offs <strong>$45,000</strong> &nbsp;·&nbsp; recovery of a 2023 write-off <strong>$4,000</strong>.</p>
+      <p>Year-end aging (by % of receivables in each bucket):</p>
+      <table class="aging-table">
+        <tr><th>Age group</th><th>% of receivables</th><th>% uncollectible</th></tr>
+        <tr><td>0–60 days</td><td>60%</td><td>3%</td></tr>
+        <tr><td>61–90 days</td><td>10%</td><td>5%</td></tr>
+        <tr><td>91–120 days</td><td>20%</td><td>25%</td></tr>
+        <tr><td>Over 120 days</td><td>10%</td><td>45%</td></tr>
+      </table>
+    </div>
+
+    <div class="step">
+      <span class="step-label">STEP 1</span>
+      <h3>Write-offs and the recovered account</h3>
+      <div class="narrative">
+        <p>Writing off a specific customer's account under the <strong>allowance method</strong> never touches Bad Debt Expense — the expense was already estimated and booked earlier. A write-off just admits that a specific piece of the estimate has become real: it moves the loss out of the Allowance account and off Accounts Receivable.</p>
+        <p>A recovery is a write-off run in reverse, in two steps: first reinstate the receivable (undo the write-off), then record its collection like any normal cash receipt.</p>
+        <div class="think">💭 Think it through: does either of these entries change total assets?</div>
+      </div>
+      <button class="reveal-btn" onclick="toggleEntry(this,'r-s1')">Reveal the entries</button>
+      <div class="entry-wrap" id="r-s1">
+        <div class="entry-date">2024 — write-offs</div>
+        <table class="jtable">
+          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
+          <tr><td class="acct">Allowance for Uncollectible Accounts</td><td class="amt">45,000</td><td></td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+          <tr><td class="acct credit">Accounts Receivable</td><td></td><td class="amt">45,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+        </table>
+        <div class="entry-date" style="margin-top:.9rem;">2024 — recovery of a 2023 write-off</div>
+        <table class="jtable">
+          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
+          <tr><td class="acct">Accounts Receivable</td><td class="amt">4,000</td><td></td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+          <tr><td class="acct credit">Allowance for Uncollectible Accounts</td><td></td><td class="amt">4,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+          <tr><td class="acct">Cash</td><td class="amt">4,000</td><td></td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+          <tr><td class="acct credit">Accounts Receivable</td><td></td><td class="amt">4,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+        </table>
+        <div class="statement-row">
+          <div class="stbox no-effect"><span class="lbl">Balance Sheet</span><span class="val">No net effect — AR and Allowance move together</span></div>
+          <div class="stbox no-effect"><span class="lbl">Income Statement</span><span class="val">No effect — the estimate absorbs it</span></div>
+          <div class="stbox"><span class="lbl">Statement of CF</span><span class="val">+4,000 operating inflow (the recovery)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-label">STEP 2</span>
+      <h3>Reconstructing ending Accounts Receivable</h3>
+      <div class="narrative">
+        <p>Before any bad-debt estimate can be applied, you need the ending gross AR balance — everything else in this problem depends on it. Roll the T-account forward from where 2023 left off:</p>
+      </div>
+      <div class="tblock">
+        <div class="tt">Accounts Receivable roll-forward</div>
+        <div class="line"><span>Beginning balance (1/1/24)</span><span>$522,000</span></div>
+        <div class="line"><span>+ Credit sales</span><span>1,800,000</span></div>
+        <div class="line"><span>− Collections</span><span>(1,880,000)</span></div>
+        <div class="line"><span>− Write-offs</span><span>(45,000)</span></div>
+        <div class="line total"><span>Ending balance (12/31/24)</span><span>$397,000</span></div>
+      </div>
+      <div class="narrative"><p><em>(The $4,000 recovery reinstates and immediately re-collects the same receivable, so it nets to zero in the roll-forward.)</em></p></div>
+    </div>
+
+    <div class="step">
+      <span class="step-label">STEP 3</span>
+      <h3>Comparing three ways to estimate bad debts</h3>
+      <div class="narrative">
+        <p>All three methods land on the same Allowance account, but they answer different questions — and that changes the math.</p>
+      </div>
+
+      <h3 style="font-size:1rem; margin-top:1.4rem;">(a) 2% of credit sales — an income-statement approach</h3>
+      <div class="narrative">
+        <p>This method asks: "of what we <em>sold</em> this year, how much won't we collect?" It ignores the existing Allowance balance entirely and just adds this year's estimate on top.</p>
+      </div>
+      <button class="reveal-btn" onclick="toggleEntry(this,'r-s3a')">Reveal the entry</button>
+      <div class="entry-wrap" id="r-s3a">
+        <div class="entry-date">December 31, 2024</div>
+        <table class="jtable">
+          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
+          <tr><td class="acct">Bad Debt Expense</td><td class="amt">36,000</td><td></td><td class="dash">—</td><td class="dash">—</td><td class="chg down">↓36,000</td><td class="dash">—</td><td class="chg up">↑36,000</td><td class="chg down">↓36,000</td></tr>
+          <tr><td class="acct credit">Allowance for Uncollectible Accounts</td><td></td><td class="amt">36,000</td><td class="chg down">↓36,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+        </table>
+        <div class="statement-row">
+          <div class="stbox"><span class="lbl">Balance Sheet</span><span class="val">Net AR ↓36,000 = Equity ↓36,000</span></div>
+          <div class="stbox"><span class="lbl">Income Statement</span><span class="val">Bad Debt Exp ↑36,000 → NI ↓36,000</span></div>
+          <div class="stbox no-effect"><span class="lbl">Statement of CF</span><span class="val">No effect — non-cash estimate</span></div>
+        </div>
+        <div class="answer-note"><strong>Where 36,000 comes from:</strong> 2% × $1,800,000 credit sales.</div>
+      </div>
+
+      <h3 style="font-size:1rem; margin-top:1.6rem;">(b) 10% of ending AR — a balance-sheet approach</h3>
+      <div class="narrative">
+        <p>This method flips the question: "what should the <em>Allowance balance itself</em> be at year end?" That means the existing balance matters a lot — you're not adding 10%, you're adjusting <em>to</em> 10%.</p>
+        <p>Trace the Allowance T-account first: it began at $40,000 credit, gained $4,000 from the recovery, then lost $45,000 to the write-off — landing at a <strong>$1,000 debit</strong> balance before any adjustment. The target is 10% × $397,000 = $39,700 credit. Getting there takes a $40,700 swing.</p>
+      </div>
+      <button class="reveal-btn" onclick="toggleEntry(this,'r-s3b')">Reveal the entry</button>
+      <div class="entry-wrap" id="r-s3b">
+        <div class="entry-date">December 31, 2024</div>
+        <table class="jtable">
+          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
+          <tr><td class="acct">Bad Debt Expense</td><td class="amt">40,700</td><td></td><td class="dash">—</td><td class="dash">—</td><td class="chg down">↓40,700</td><td class="dash">—</td><td class="chg up">↑40,700</td><td class="chg down">↓40,700</td></tr>
+          <tr><td class="acct credit">Allowance for Uncollectible Accounts</td><td></td><td class="amt">40,700</td><td class="chg down">↓40,700</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+        </table>
+        <div class="statement-row">
+          <div class="stbox"><span class="lbl">Balance Sheet</span><span class="val">Net AR ↓40,700 = Equity ↓40,700</span></div>
+          <div class="stbox"><span class="lbl">Income Statement</span><span class="val">Bad Debt Exp ↑40,700 → NI ↓40,700</span></div>
+          <div class="stbox no-effect"><span class="lbl">Statement of CF</span><span class="val">No effect — non-cash estimate</span></div>
+        </div>
+      </div>
+
+      <h3 style="font-size:1rem; margin-top:1.6rem;">(c) Aging schedule — the same balance-sheet logic, sharper detail</h3>
+      <div class="narrative">
+        <p>Same idea as (b), but instead of one flat 10%, each receivable bucket gets its own uncollectible rate:</p>
+      </div>
+      <table class="aging-table">
+        <tr><th>Age group</th><th>Amount</th><th>Rate</th><th>Est. uncollectible</th></tr>
+        <tr><td>0–60 days</td><td>$238,200</td><td>3%</td><td>$7,146</td></tr>
+        <tr><td>61–90 days</td><td>39,700</td><td>5%</td><td>1,985</td></tr>
+        <tr><td>91–120 days</td><td>79,400</td><td>25%</td><td>19,850</td></tr>
+        <tr><td>Over 120 days</td><td>39,700</td><td>45%</td><td>17,865</td></tr>
+        <tr class="total"><td>Total</td><td>$397,000</td><td></td><td>$46,846</td></tr>
+      </table>
+      <div class="narrative"><p>Required allowance = $46,846. Starting again from the same $1,000 debit pre-adjustment balance, the entry needs to swing $47,846.</p></div>
+      <button class="reveal-btn" onclick="toggleEntry(this,'r-s3c')">Reveal the entry</button>
+      <div class="entry-wrap" id="r-s3c">
+        <div class="entry-date">December 31, 2024</div>
+        <table class="jtable">
+          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
+          <tr><td class="acct">Bad Debt Expense</td><td class="amt">47,846</td><td></td><td class="dash">—</td><td class="dash">—</td><td class="chg down">↓47,846</td><td class="dash">—</td><td class="chg up">↑47,846</td><td class="chg down">↓47,846</td></tr>
+          <tr><td class="acct credit">Allowance for Uncollectible Accounts</td><td></td><td class="amt">47,846</td><td class="chg down">↓47,846</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+        </table>
+        <div class="statement-row">
+          <div class="stbox"><span class="lbl">Balance Sheet</span><span class="val">Net AR ↓47,846 = Equity ↓47,846</span></div>
+          <div class="stbox"><span class="lbl">Income Statement</span><span class="val">Bad Debt Exp ↑47,846 → NI ↓47,846</span></div>
+          <div class="stbox no-effect"><span class="lbl">Statement of CF</span><span class="val">No effect — non-cash estimate</span></div>
+        </div>
+      </div>
+
+      <div class="checkyourself">
+        <span class="lbl">Answering the handout's follow-up question — Net AR under each method</span>
+        <div class="tblock" style="border:none; padding:0;">
+          <div class="line"><span>(a) 2% of credit sales</span><span>$397,000 − $35,000 = $362,000</span></div>
+          <div class="line"><span>(b) 10% of ending AR</span><span>$397,000 − $39,700 = $357,300</span></div>
+          <div class="line"><span>(c) Aging schedule</span><span>$397,000 − $46,846 = $350,154</span></div>
+        </div>
+        <p style="margin-top:.6rem; font-family:var(--sans);">Notice (a)'s ending Allowance is $35,000 (the $1,000 debit pre-adjustment balance plus the $36,000 charge) — <em>not</em> the $36,000 itself. That's the tell-tale sign of an income-statement method: it doesn't target a balance, so the pre-existing balance still matters for what's left over.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- PROBLEM 2: SWATHMORE -->
+  <!-- ============================================================ -->
+  <section class="problem">
+    <h2>Problem 2 — Swathmore Clothing Corporation</h2>
+    <div class="facts">
+      <p>30-day credit terms. A <strong>monthly accrual</strong> of 3% of that month's credit sales is booked all year; at year-end, an <strong>aging schedule</strong> true-ups the balance.</p>
+      <p>Beginning (12/31/23): AR <strong>$590,000</strong>, Allowance <strong>$54,000</strong> credit.</p>
+      <p>2024: credit sales <strong>$2,700,000</strong> &nbsp;·&nbsp; collections <strong>$2,563,000</strong> &nbsp;·&nbsp; write-offs <strong>$47,000</strong> &nbsp;·&nbsp; ending AR <strong>$680,000</strong>.</p>
+      <table class="aging-table">
+        <tr><th>Age group</th><th>Amount</th><th>% uncollectible</th></tr>
+        <tr><td>0–60 days</td><td>$410,000</td><td>5%</td></tr>
+        <tr><td>61–90 days</td><td>97,000</td><td>11%</td></tr>
+        <tr><td>91–120 days</td><td>57,000</td><td>27%</td></tr>
+        <tr><td>Over 120 days</td><td>116,000</td><td>38%</td></tr>
+        <tr class="total"><td>Total</td><td>$680,000</td><td></td></tr>
+      </table>
+    </div>
+
+    <div class="step">
+      <span class="step-label">STEP 1</span>
+      <h3>The monthly accrual, summarized for the year</h3>
+      <div class="narrative">
+        <p>Rather than wait for year-end, Swathmore books an estimate every single month — 3% of that month's credit sales — so Bad Debt Expense tracks revenue as it's earned rather than arriving in one lump at year-end. Add up all twelve months and it's mathematically identical to 3% of the full year's credit sales.</p>
+        <p>Combine that running accrual with the year's write-offs into one summary entry — the accrual side credits the Allowance, the write-off side debits it and clears the specific receivables.</p>
+        <div class="think">💭 Think it through: 3% × $2,700,000 gives the year's total accrual. What does the write-off do to that number?</div>
+      </div>
+      <button class="reveal-btn" onclick="toggleEntry(this,'s-s1')">Reveal the entry</button>
+      <div class="entry-wrap" id="s-s1">
+        <div class="entry-date">Summary for 2024</div>
+        <table class="jtable">
+          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
+          <tr><td class="acct">Bad Debt Expense</td><td class="amt">81,000</td><td></td><td class="dash">—</td><td class="dash">—</td><td class="chg down">↓81,000</td><td class="dash">—</td><td class="chg up">↑81,000</td><td class="chg down">↓81,000</td></tr>
+          <tr><td class="acct credit">Allowance for Uncollectible Accounts</td><td></td><td class="amt">34,000</td><td class="chg up">↑34,000 net</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+          <tr><td class="acct credit">Accounts Receivable</td><td></td><td class="amt">47,000</td><td class="chg down">↓47,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+        </table>
+        <div class="statement-row">
+          <div class="stbox"><span class="lbl">Balance Sheet</span><span class="val">Net AR ↓81,000 = Equity ↓81,000</span></div>
+          <div class="stbox"><span class="lbl">Income Statement</span><span class="val">Bad Debt Exp ↑81,000 → NI ↓81,000</span></div>
+          <div class="stbox no-effect"><span class="lbl">Statement of CF</span><span class="val">No effect — non-cash estimate</span></div>
+        </div>
+        <div class="answer-note"><strong>Where the numbers come from:</strong> Accrual = 3% × $2,700,000 = $81,000. The Allowance account nets $81,000 credit (accrual) against $47,000 debit (write-off) = $34,000 net credit change. If you'd rather present this as two separate entries — one for the monthly accrual, one for the write-offs — that works too; the totals are identical.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-label">STEP 2</span>
+      <h3>The year-end true-up against the aging schedule</h3>
+      <div class="narrative">
+        <p>The monthly accruals were a running estimate — now the aging schedule gives Swathmore a more precise year-end answer. First, find where the Allowance account actually sits after everything that's happened this year:</p>
+      </div>
+      <div class="tblock">
+        <div class="tt">Allowance for Uncollectible Accounts — running balance</div>
+        <div class="line"><span>Beginning (12/31/23)</span><span>$54,000 cr</span></div>
+        <div class="line"><span>+ Monthly accruals</span><span>81,000</span></div>
+        <div class="line"><span>− Write-offs</span><span>(47,000)</span></div>
+        <div class="line total"><span>Balance before year-end adjustment</span><span>$88,000 cr</span></div>
+      </div>
+      <div class="narrative"><p>The aging schedule calls for: (0.05×410,000) + (0.11×97,000) + (0.27×57,000) + (0.38×116,000) = <strong>$90,640</strong>. That's only $2,640 more than what's already there.</p></div>
+      <button class="reveal-btn" onclick="toggleEntry(this,'s-s2')">Reveal the entry</button>
+      <div class="entry-wrap" id="s-s2">
+        <div class="entry-date">December 31, 2024 — adjusting entry</div>
+        <table class="jtable">
+          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
+          <tr><td class="acct">Bad Debt Expense</td><td class="amt">2,640</td><td></td><td class="dash">—</td><td class="dash">—</td><td class="chg down">↓2,640</td><td class="dash">—</td><td class="chg up">↑2,640</td><td class="chg down">↓2,640</td></tr>
+          <tr><td class="acct credit">Allowance for Uncollectible Accounts</td><td></td><td class="amt">2,640</td><td class="chg down">↓2,640</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+        </table>
+        <div class="statement-row">
+          <div class="stbox"><span class="lbl">Balance Sheet</span><span class="val">Net AR ↓2,640 = Equity ↓2,640</span></div>
+          <div class="stbox"><span class="lbl">Income Statement</span><span class="val">Bad Debt Exp ↑2,640 → NI ↓2,640</span></div>
+          <div class="stbox no-effect"><span class="lbl">Statement of CF</span><span class="val">No effect — non-cash estimate</span></div>
+        </div>
+      </div>
+      <div class="checkyourself">
+        <span class="lbl">Answering the handout's follow-up questions</span>
+        <div class="tblock" style="border:none; padding:0;">
+          <div class="line"><span>Total Bad Debt Expense for 2024</span><span>$81,000 + $2,640 = <strong>$83,640</strong></span></div>
+          <div class="line"><span>Accounts Receivable, net (12/31/24)</span><span>$680,000 − $90,640 = <strong>$589,360</strong></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>ACCT 351 · Chapter 7 · Handout 2 of 3</footer>
+
+<script>
+function toggleEntry(btn, id){
+  var el = document.getElementById(id);
+  var open = el.classList.toggle('open');
+  btn.textContent = open ? 'Hide the entry' : 'Reveal the entry';
+  btn.classList.toggle('shown', open);
+}
+</script>
+</body>
+</html>

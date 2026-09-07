@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ch. 7 Walkthrough — Notes Receivable &amp; Financing Receivables</title>
+<style>
+  :root{
+    --purple: #4b2e6f; --purple-dark: #33204d; --purple-pale: #f3effa;
+    --gold: #c9a227; --gold-pale: #faf4de;
+    --ink: #23202b; --paper: #fffdf9; --line: #e2dcea;
+    --green: #1e7a4c; --green-bg: #e9f6ee; --red: #a3312a; --red-bg: #fbeceb;
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
+    --serif: 'Source Serif 4', Georgia, serif;
+    --sans: 'Inter', -apple-system, sans-serif;
+  }
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Inter:wght@400;500;600;700&display=swap');
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--paper); color:var(--ink); font-family:var(--sans); line-height:1.6; }
+  header.top{ background:var(--purple); color:#fff; padding:2.2rem 1.5rem 2.6rem; position:relative; overflow:hidden;}
+  header.top::after{ content:""; position:absolute; right:-40px; bottom:-60px; width:220px; height:220px; border-radius:50%; background:var(--purple-dark); opacity:.5;}
+  header.top .eyebrow{ font-family:var(--mono); font-size:.78rem; color:var(--gold); margin-bottom:.5rem; position:relative;}
+  header.top h1{ margin:0 0 .4rem; font-family:var(--serif); font-weight:600; font-size:1.9rem; max-width:38rem; position:relative;}
+  header.top p{ margin:0; max-width:34rem; color:#e6ddf2; font-size:.98rem; position:relative;}
+  main{ max-width:44rem; margin:0 auto; padding:2.4rem 1.5rem 5rem; }
+  .problem{ margin-top:3rem; padding-top:1.6rem; border-top:3px solid var(--purple); }
+  .problem h2{ font-family:var(--serif); font-size:1.5rem; color:var(--purple-dark); margin:0 0 .3rem; }
+  .problem .facts{ background:var(--purple-pale); border-left:4px solid var(--purple); padding:1rem 1.2rem; border-radius:4px; font-size:.95rem; margin:1rem 0 1.8rem;}
+  .facts p{margin:.3rem 0;} .facts strong{color:var(--purple-dark);}
+  .step{ margin:2.2rem 0; }
+  .step .step-label{ font-family:var(--mono); font-size:.75rem; color:var(--gold); background:var(--purple-dark); display:inline-block; padding:.2rem .55rem; border-radius:3px; margin-bottom:.7rem;}
+  .step h3{ font-family:var(--serif); font-size:1.15rem; margin:.2rem 0 .6rem; color:var(--ink); }
+  .step .narrative{ font-family:var(--serif); font-size:1.02rem; color:#3a3542; }
+  .step .narrative p{ margin:.55rem 0; }
+  .step .narrative .think{ background:var(--gold-pale); border:1px dashed var(--gold); border-radius:6px; padding:.8rem 1rem; font-family:var(--sans); font-size:.92rem; margin:1rem 0;}
+  .reveal-btn{ font-family:var(--sans); font-weight:600; font-size:.9rem; color:#fff; background:var(--purple); border:none; border-radius:5px; padding:.6rem 1.1rem; cursor:pointer; margin-top:.4rem;}
+  .reveal-btn:hover{ background:var(--purple-dark); }
+  .reveal-btn.shown{ background:#8a7c98; }
+  .entry-wrap{ display:none; margin-top:1.1rem; animation:fadein .35s ease; }
+  .entry-wrap.open{ display:block; }
+  @keyframes fadein{ from{opacity:0; transform:translateY(-4px);} to{opacity:1; transform:translateY(0);} }
+  .entry-date{ font-family:var(--mono); font-size:.85rem; color:var(--purple-dark); font-weight:600; margin-bottom:.4rem;}
+  table.jtable{ width:100%; border-collapse:collapse; font-family:var(--mono); font-size:.82rem; background:#fff; border:1px solid var(--line);}
+  table.jtable th{ background:var(--purple-dark); color:#fff; font-family:var(--sans); font-weight:600; font-size:.72rem; padding:.5rem .4rem; text-align:center;}
+  table.jtable td{ padding:.5rem .5rem; border-top:1px solid var(--line); text-align:center; }
+  table.jtable td.acct{ text-align:left; padding-left:.9rem; }
+  table.jtable td.acct.credit{ padding-left:2.2rem; color:#4a4552;}
+  table.jtable td.amt{ font-weight:600; }
+  .up{ color:var(--green); font-weight:700; } .down{ color:var(--red); font-weight:700; } .dash{ color:#c3bccb; }
+  .statement-row{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:.7rem; margin-top:.9rem; }
+  .stbox{ background:var(--purple-pale); border-radius:6px; padding:.65rem .75rem; font-size:.8rem;}
+  .stbox .lbl{ font-family:var(--sans); font-weight:700; color:var(--purple-dark); font-size:.7rem; text-transform:uppercase; letter-spacing:.03em; display:block; margin-bottom:.25rem;}
+  .stbox .val{ font-family:var(--mono); }
+  .stbox.no-effect{ background:#f1eff4; color:#8b8494; }
+  .callout{ background:var(--gold-pale); border-left:4px solid var(--gold); border-radius:4px; padding:.8rem 1rem; font-size:.9rem; margin:1.4rem 0;}
+  .callout strong{ color:var(--purple-dark); }
+  .checkyourself{ background:var(--green-bg); border:1px solid #b9dfc8; border-radius:6px; padding:1rem 1.1rem; margin-top:1.6rem; font-size:.92rem;}
+  .checkyourself .lbl{ font-family:var(--sans); font-weight:700; color:var(--green); font-size:.78rem; text-transform:uppercase; letter-spacing:.03em; display:block; margin-bottom:.4rem;}
+  .answer-note{ background:var(--red-bg); border:1px solid #e2b6b1; border-radius:6px; padding:.8rem 1rem; font-size:.85rem; margin-top:1rem; color:#5c231e;}
+  .answer-note strong{ color:var(--red); }
+  .tblock{ background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:.9rem 1rem; font-family:var(--mono); font-size:.85rem; margin:.6rem 0;}
+  .tblock .tt{ font-family:var(--sans); font-weight:600; font-size:.78rem; color:var(--purple-dark); margin-bottom:.4rem;}
+  .tblock .line{ display:flex; justify-content:space-between; padding:.15rem 0; }
+  .tblock .line.total{ border-top:1px solid var(--line); margin-top:.3rem; padding-top:.4rem; font-weight:700;}
+  .noentry{ font-family:var(--mono); background:#f1eff4; border:1px dashed #b3a6bf; border-radius:6px; padding:.8rem 1rem; text-align:center; color:#5c526b; }
+  footer{ text-align:center; padding:2rem; font-family:var(--mono); font-size:.75rem; color:#a89bb5; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="eyebrow">ACCT 351 · Intermediate Accounting I · Chapter 7</div>
+  <h1>Notes Receivable &amp; Financing Receivables</h1>
+  <p>A guided walkthrough of Evergreen Company's full receivables cycle and Lonergan Company's choice between assigning and factoring.</p>
+</header>
+
+<main>
+  <div class="callout">
+    <strong>How this works:</strong> Read the reasoning, picture the entry yourself, then click "Reveal the entry" to check your thinking.
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PROBLEM 1: EVERGREEN -->
+  <!-- ============================================================ -->
+  <section class="problem">
+    <h2>Problem 1 — Evergreen Company</h2>
+    <div class="facts">
+      <p>Fiscal year-end: <strong>December 31</strong>. Ignore COGS entries for merchandise sales throughout.</p>
+      <p>A running set of receivables transactions from late February through the end of April, with year-end adjustments still to come.</p>
+    </div>
+
+    <div class="step">
+      <span class="step-label">FEB 28</span>
+      <h3>An interest-bearing note at a market rate</h3>
+      <div class="narrative">
+        <p>Evergreen sells $18,000 of merchandise to Lennox and takes an 8%, 7-month note instead of cash. Since 8% is stated to be the appropriate market rate for a note like this, there's no hidden discount to unwind — the note's face amount already equals its present value. This is the simple case.</p>
+      </div>
+      <button class="reveal-btn" onclick="toggleEntry(this,'e-1')">Reveal the entry</button>
+      <div class="entry-wrap" id="e-1">
+        <div class="entry-date">February 28, 2024</div>
+        <table class="jtable">
+          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
+          <tr><td class="acct">Notes Receivable</td><td class="amt">18,000</td><td></td><td class="chg up">↑18,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+          <tr><td class="acct credit">Sales Revenue</td><td></td><td class="amt">18,000</td><td class="dash">—</td><td class="dash">—</td><td class="chg up">↑18,000</td><td class="chg up">↑18,000</td><td class="dash">—</td><td class="chg up">↑18,000</td></tr>
+        </table>
+        <div class="statement-row">
+          <div class="stbox"><span class="lbl">Balance Sheet</span><span class="val">Assets ↑18,000 = Equity ↑18,000</span></div>
+          <div class="stbox"><span class="lbl">Income Statement</span><span class="val">Revenue ↑18,000 → NI ↑18,000</span></div>
+          <div class="stbox no-effect"><span class="lbl">Statement of CF</span><span class="val">No effect — no cash yet</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-label">MAR 31</span>
+      <h3>A noninterest-bearing note — imputing the real rate</h3>
+      <div class="narrative">
+        <p>Maddox's note has no stated interest, but that doesn't mean there's no interest — it just means the interest is buried inside the $13,000 face amount. The merchandise's <strong>fair value, $11,960</strong>, tells you what was actually sold today; the $1,040 gap is interest Evergreen will earn over the year until the note matures.</p>
+        <p>So the note goes on the books at its $13,000 face, revenue is recognized at the $11,960 it's really worth today, and a <em>Discount on Notes Receivable</em> — a contra-asset — soaks up the difference until it's earned.</p>
+        <div class="think">💭 Think it through: why record revenue at $11,960 instead of the $13,000 the note promises to pay?</div>
+      </div>
+      <button class="reveal-btn" onclick="toggleEntry(this,'e-2')">Reveal the entry</button>
+      <div class="entry-wrap" id="e-2">
+        <div class="entry-date">March 31, 2024</div>
+        <table class="jtable">
+          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
+          <tr><td class="acct">Notes Receivable</td><td class="amt">13,000</td><td></td><td class="chg up">↑13,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+          <tr><td class="acct credit">Discount on Notes Receivable</td><td></td><td class="amt">1,040</td><td class="chg down">↓1,040</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+          <tr><td class="acct credit">Sales Revenue</td><td></td><td class="amt">11,960</td><td class="dash">—</td><td class="dash">—</td><td class="chg up">↑11,960</td><td class="chg up">↑11,960</td><td class="dash">—</td><td class="chg up">↑11,960</td></tr>
+        </table>
+        <div class="statement-row">
+          <div class="stbox"><span class="lbl">Balance Sheet</span><span class="val">Net assets ↑11,960 = Equity ↑11,960</span></div>
+          <div class="stbox"><span class="lbl">Income Statement</span><span class="val">Revenue ↑11,960 → NI ↑11,960</span></div>
+          <div class="stbox no-effect"><span class="lbl">Statement of CF</span><span class="val">No effect — no cash yet</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-label">APR 3 &amp; APR 11</span>
+      <h3>An ordinary credit sale — then a return</h3>
+      <div class="narrative">
+        <p>Carr Company buys $11,000 of merchandise on 3/10, n/30 terms — the same gross-method logic as the Harwell problem. Eight days later, part of that sale comes back: Evergreen knocks $6,700 off Carr's receivable. Since COGS is being ignored throughout this problem, the return is purely a revenue reversal.</p>
+      </div>
+      <button class="reveal-btn" onclick="toggleEntry(this,'e-3')">Reveal both entries</button>
+      <div class="entry-wrap" id="e-3">
+        <div class="entry-date">April 3, 2024 — the sale</div>
+        <table class="jtable">
+          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
+          <tr><td class="acct">Accounts Receivable</td><td class="amt">11,000</td><td></td><td class="chg up">↑11,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+          <tr><td class="acct credit">Sales Revenue</td><td></td><td class="amt">11,000</td><td class="dash">—</td><td class="dash">—</td><td class="chg up">↑11,000</td><td class="chg up">↑11,000</td><td class="dash">—</td><td class="chg up">↑11,000</td></tr>
+        </table>
+        <div class="entry-date" style="margin-top:.9rem;">April 11, 2024 — the return</div>
+        <table class="jtable">
+          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
+          <tr><td class="acct">Sales Returns</td><td class="amt">6,700</td><td></td><td class="dash">—</td><td class="dash">—</td><td class="chg down">↓6,700</td><td class="chg down">↓6,700</td><td class="dash">—</td><td class="chg down">↓6,700</td></tr>
+          <tr><td class="acct credit">Accounts Receivable</td><td></td><td class="amt">6,700</td><td class="chg down">↓6,700</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-label">APR 17</span>
+      <h3>Carr pays — but too late for the discount</h3>
+      <div class="narrative">
+        <p>The discount window from April 3 closes on April 13 (10 days). April 17 is outside it, so Carr pays the full remaining balance: $11,000 − $6,700 = $4,300, no discount.</p>
+      </div>
+      <button class="reveal-btn" onclick="toggleEntry(this,'e-4')">Reveal the entry</button>
+      <div class="entry-wrap" id="e-4">
+        <div class="entry-date">April 17, 2024</div>
+        <table class="jtable">
+          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
+          <tr><td class="acct">Cash</td><td class="amt">4,300</td><td></td><td class="chg up">↑4,300</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+          <tr><td class="acct credit">Accounts Receivable</td><td></td><td class="amt">4,300</td><td class="chg down">↓4,300</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+        </table>
+        <div class="statement-row">
+          <div class="stbox no-effect"><span class="lbl">Balance Sheet</span><span class="val">Asset mix shifts; total unchanged</span></div>
+          <div class="stbox no-effect"><span class="lbl">Income Statement</span><span class="val">No effect</span></div>
+          <div class="stbox"><span class="lbl">Statement of CF</span><span class="val">+4,300 operating inflow</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-label">APR 30 · PART 1</span>
+      <h3>Factoring $67,000 of receivables without recourse</h3>
+      <div class="narrative">
+        <p>"Without recourse" and "sale criteria met" together mean this is a true sale — the receivables leave Evergreen's books entirely, and Evergreen is done with them. The bank isn't lending against them; it owns them now, risk and all. The 2% finance charge is the price of getting cash today instead of waiting for customers to pay — that's a loss, not an expense.</p>
+      </div>
+      <button class="reveal-btn" onclick="toggleEntry(this,'e-5')">Reveal the entry</button>
+      <div class="entry-wrap" id="e-5">
+        <div class="entry-date">April 30, 2024</div>
+        <table class="jtable">
+          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
+          <tr><td class="acct">Cash</td><td class="amt">65,660</td><td></td><td class="chg up">↑65,660</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+          <tr><td class="acct">Loss on Sale of Receivables</td><td class="amt">1,340</td><td></td><td class="dash">—</td><td class="dash">—</td><td class="chg down">↓1,340</td><td class="dash">—</td><td class="chg up">↑1,340</td><td class="chg down">↓1,340</td></tr>
+          <tr><td class="acct credit">Accounts Receivable</td><td></td><td class="amt">67,000</td><td class="chg down">↓67,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+        </table>
+        <div class="statement-row">
+          <div class="stbox"><span class="lbl">Balance Sheet</span><span class="val">Assets net ↓1,340 = Equity ↓1,340</span></div>
+          <div class="stbox"><span class="lbl">Income Statement</span><span class="val">Loss ↑1,340 → NI ↓1,340</span></div>
+          <div class="stbox"><span class="lbl">Statement of CF</span><span class="val">+65,660 operating inflow</span></div>
+        </div>
+        <div class="answer-note"><strong>Where the numbers come from:</strong> 2% × $67,000 = $1,340 finance charge; $67,000 − $1,340 = $65,660 cash.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-label">APR 30 · PART 2</span>
+      <h3>Discounting the Lennox note at the bank</h3>
+      <div class="narrative">
+        <p>This is a two-step move. First, Evergreen owns two months of accrued (unpaid) interest on the Lennox note as of April 30 — that has to go on the books before anything else happens, because it's part of what's being sold.</p>
+        <p>Then the note itself (plus that accrued interest) is discounted to the bank at the bank's own 10% rate, applied over the <em>remaining</em> five months to maturity — not the original 7. The bank effectively buys the note's future maturity value at a discount; whatever cash Evergreen nets versus its carrying amount is a gain or loss.</p>
+        <div class="think">💭 Think it through: the note's 8% rate and the bank's 10% discount rate are two completely different numbers doing two different jobs. What is each one used for?</div>
+      </div>
+      <button class="reveal-btn" onclick="toggleEntry(this,'e-6')">Reveal the entries</button>
+      <div class="entry-wrap" id="e-6">
+        <div class="tblock">
+          <div class="tt">Getting to the numbers</div>
+          <div class="line"><span>Maturity value: $18,000 + (8% × 7/12 × 18,000)</span><span>$18,840</span></div>
+          <div class="line"><span>Bank discount: 10% × 5/12 × $18,840</span><span>(785)</span></div>
+          <div class="line total"><span>Cash proceeds from bank</span><span>$18,055</span></div>
+          <div class="line" style="margin-top:.5rem;"><span>Accrued interest to date (2 months): 8% × 2/12 × 18,000</span><span>$240</span></div>
+          <div class="line"><span>Carrying value being given up: $18,000 + $240</span><span>$18,240</span></div>
+          <div class="line total"><span>Loss on discounting: $18,240 − $18,055</span><span>$185</span></div>
+        </div>
+        <div class="entry-date">April 30, 2024 — accrue interest to date</div>
+        <table class="jtable">
+          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
+          <tr><td class="acct">Interest Receivable</td><td class="amt">240</td><td></td><td class="chg up">↑240</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+          <tr><td class="acct credit">Interest Revenue</td><td></td><td class="amt">240</td><td class="dash">—</td><td class="dash">—</td><td class="chg up">↑240</td><td class="chg up">↑240</td><td class="dash">—</td><td class="chg up">↑240</td></tr>
+        </table>
+        <div class="entry-date" style="margin-top:.9rem;">April 30, 2024 — discount the note, without recourse</div>
+        <table class="jtable">
+          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
+          <tr><td class="acct">Cash</td><td class="amt">18,055</td><td></td><td class="chg up">↑18,055</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+          <tr><td class="acct">Loss on Sale of Note Receivable</td><td class="amt">185</td><td></td><td class="dash">—</td><td class="dash">—</td><td class="chg down">↓185</td><td class="dash">—</td><td class="chg up">↑185</td><td class="chg down">↓185</td></tr>
+          <tr><td class="acct credit">Notes Receivable</td><td></td><td class="amt">18,000</td><td class="chg down">↓18,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+          <tr><td class="acct credit">Interest Receivable</td><td></td><td class="amt">240</td><td class="chg down">↓240</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+        </table>
+        <div class="statement-row">
+          <div class="stbox"><span class="lbl">Balance Sheet</span><span class="val">Assets net ↓185 (before interest accrual) = Equity ↓185</span></div>
+          <div class="stbox"><span class="lbl">Income Statement</span><span class="val">Interest Rev ↑240, Loss ↑185 → NI ↑55 net</span></div>
+          <div class="stbox"><span class="lbl">Statement of CF</span><span class="val">+18,055 operating inflow</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-label">SEP 30</span>
+      <h3>Lennox pays the note — but not to Evergreen</h3>
+      <div class="narrative">
+        <p>This is the conceptual punchline of the whole problem. Evergreen sold this note <em>without recourse</em> back on April 30 — it's off Evergreen's books for good, gain or loss already recognized. When Lennox eventually pays, it pays the bank, which now owns the note. Evergreen has no journal entry at all.</p>
+      </div>
+      <div class="noentry">No entry required — Evergreen no longer holds this receivable.</div>
+    </div>
+
+    <div class="step">
+      <span class="step-label">DEC 31 — YEAR-END ADJUSTMENTS</span>
+      <h3>What's still outstanding needs one adjustment: the Maddox discount</h3>
+      <div class="narrative">
+        <p>By December 31, the Lennox note and the factored receivables are long gone from Evergreen's books — nothing to adjust there. The only open item is the Maddox note, which has now earned 9 months of its implicit interest (March 31 to December 31). The full-year discount was $1,040, so 9/12 of it has now been earned and needs to move out of the contra-asset and into revenue.</p>
+      </div>
+      <button class="reveal-btn" onclick="toggleEntry(this,'e-7')">Reveal the entry</button>
+      <div class="entry-wrap" id="e-7">
+        <div class="entry-date">December 31, 2024</div>
+        <table class="jtable">
+          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
+          <tr><td class="acct">Discount on Notes Receivable</td><td class="amt">780</td><td></td><td class="chg up">↑780</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+          <tr><td class="acct credit">Interest Revenue</td><td></td><td class="amt">780</td><td class="dash">—</td><td class="dash">—</td><td class="chg up">↑780</td><td class="chg up">↑780</td><td class="dash">—</td><td class="chg up">↑780</td></tr>
+        </table>
+        <div class="statement-row">
+          <div class="stbox"><span class="lbl">Balance Sheet</span><span class="val">Assets ↑780 = Equity ↑780</span></div>
+          <div class="stbox"><span class="lbl">Income Statement</span><span class="val">Interest Rev ↑780 → NI ↑780</span></div>
+          <div class="stbox no-effect"><span class="lbl">Statement of CF</span><span class="val">No effect — non-cash</span></div>
+        </div>
+        <div class="answer-note"><strong>Where 780 comes from:</strong> $1,040 total discount × 9/12 = $780 (straight-line amortization over the note's one-year term).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- PROBLEM 2: LONERGAN -->
+  <!-- ============================================================ -->
+  <section class="problem">
+    <h2>Problem 2 — Lonergan Company</h2>
+    <div class="facts">
+      <p>End of June 2024: Accounts Receivable = <strong>$960,000</strong>. Lonergan needs about <strong>$590,000</strong> in cash and is weighing two bank offers on July 1.</p>
+      <p><strong>Alternative A (assignment):</strong> borrow $590,000 on a note, pledging the entire $960,000 AR balance as collateral. Each month, remit collections plus 12% interest on the note's beginning balance.</p>
+      <p><strong>Alternative B (factoring):</strong> transfer $640,000 of specific receivables to the bank without recourse; sale criteria met; 4% factoring fee.</p>
+    </div>
+
+    <div class="step">
+      <span class="step-label">THE BIG IDEA</span>
+      <h3>Borrowing against receivables vs. selling them</h3>
+      <div class="narrative">
+        <p>These two alternatives look similar — both get Lonergan cash today using its receivables — but they're structurally opposite. In <strong>Alternative A</strong>, the receivables never leave Lonergan's balance sheet; they're just collateral for a loan. Lonergan still owns them, still collects them, and still owes the bank money. In <strong>Alternative B</strong>, the receivables are truly sold — they disappear from Lonergan's books, and with them, all further involvement.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-label">JULY 1</span>
+      <h3>Alternative A — signing the note</h3>
+      <div class="narrative">
+        <p>Since this is a loan, not a sale, the $960,000 of assigned receivables stays exactly where it is on the balance sheet (typically just disclosed as pledged, in the notes). The only new item is the debt itself.</p>
+      </div>
+      <button class="reveal-btn" onclick="toggleEntry(this,'l-1')">Reveal the entry</button>
+      <div class="entry-wrap" id="l-1">
+        <div class="entry-date">July 1, 2024 — Alternative A</div>
+        <table class="jtable">
+          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
+          <tr><td class="acct">Cash</td><td class="amt">590,000</td><td></td><td class="chg up">↑590,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+          <tr><td class="acct credit">Notes Payable</td><td></td><td class="amt">590,000</td><td class="dash">—</td><td class="chg up">↑590,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+        </table>
+        <div class="statement-row">
+          <div class="stbox"><span class="lbl">Balance Sheet</span><span class="val">Assets ↑590,000 = Liabilities ↑590,000</span></div>
+          <div class="stbox no-effect"><span class="lbl">Income Statement</span><span class="val">No effect</span></div>
+          <div class="stbox"><span class="lbl">Statement of CF</span><span class="val">+590,000 financing inflow</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-label">JULY 1</span>
+      <h3>Alternative B — selling the receivables</h3>
+      <div class="narrative">
+        <p>Same logic as Evergreen's factoring transaction earlier: without recourse plus sale criteria met means a true sale. The $640,000 of specific receivables come off the books, cash comes in net of the 4% fee, and the fee itself is a loss.</p>
+      </div>
+      <button class="reveal-btn" onclick="toggleEntry(this,'l-2')">Reveal the entry</button>
+      <div class="entry-wrap" id="l-2">
+        <div class="entry-date">July 1, 2024 — Alternative B</div>
+        <table class="jtable">
+          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
+          <tr><td class="acct">Cash</td><td class="amt">614,400</td><td></td><td class="chg up">↑614,400</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+          <tr><td class="acct">Loss on Sale of Receivables</td><td class="amt">25,600</td><td></td><td class="dash">—</td><td class="dash">—</td><td class="chg down">↓25,600</td><td class="dash">—</td><td class="chg up">↑25,600</td><td class="chg down">↓25,600</td></tr>
+          <tr><td class="acct credit">Accounts Receivable</td><td></td><td class="amt">640,000</td><td class="chg down">↓640,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+        </table>
+        <div class="statement-row">
+          <div class="stbox"><span class="lbl">Balance Sheet</span><span class="val">Assets net ↓25,600 = Equity ↓25,600</span></div>
+          <div class="stbox"><span class="lbl">Income Statement</span><span class="val">Loss ↑25,600 → NI ↓25,600</span></div>
+          <div class="stbox"><span class="lbl">Statement of CF</span><span class="val">+614,400 operating inflow</span></div>
+        </div>
+        <div class="answer-note"><strong>Where the numbers come from:</strong> 4% × $640,000 = $25,600 fee; $640,000 − $25,600 = $614,400 cash.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <span class="step-label">JULY 31</span>
+      <h3>80% collected — what happens under each alternative</h3>
+      <div class="narrative">
+        <p>This is where the two alternatives really diverge. Under <strong>Alternative A</strong>, Lonergan still owns <em>all</em> $960,000 of receivables, so 80% of the whole thing — <strong>$768,000</strong> — flows through Lonergan's own Cash and AR accounts. Under <strong>Alternative B</strong>, only the $320,000 that <em>wasn't</em> factored still belongs to Lonergan; the $640,000 piece is the bank's problem now, and customers pay the bank directly with no entry on Lonergan's books at all.</p>
+      </div>
+
+      <h3 style="font-size:1rem; margin-top:1.2rem;">Alternative A: collection, then remittance to the bank</h3>
+      <div class="narrative">
+        <p>Lonergan first collects the $768,000 like normal. Then it owes the bank interest for July — 12% annual, one month, on the note's <em>beginning</em> balance of $590,000 — plus, since collections comfortably exceed what's owed, it can retire the note entirely in this one remittance. Whatever's left over after paying off principal and interest stays with Lonergan; the assignment only ever secured the bank up to what it was owed.</p>
+      </div>
+      <button class="reveal-btn" onclick="toggleEntry(this,'l-3')">Reveal the entries</button>
+      <div class="entry-wrap" id="l-3">
+        <div class="entry-date">July 31, 2024 — collect from customers</div>
+        <table class="jtable">
+          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
+          <tr><td class="acct">Cash</td><td class="amt">768,000</td><td></td><td class="chg up">↑768,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+          <tr><td class="acct credit">Accounts Receivable</td><td></td><td class="amt">768,000</td><td class="chg down">↓768,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+        </table>
+        <div class="entry-date" style="margin-top:.9rem;">July 31, 2024 — remit to the bank</div>
+        <table class="jtable">
+          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
+          <tr><td class="acct">Interest Expense</td><td class="amt">5,900</td><td></td><td class="dash">—</td><td class="dash">—</td><td class="chg down">↓5,900</td><td class="dash">—</td><td class="chg up">↑5,900</td><td class="chg down">↓5,900</td></tr>
+          <tr><td class="acct">Notes Payable</td><td class="amt">590,000</td><td></td><td class="dash">—</td><td class="chg down">↓590,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+          <tr><td class="acct credit">Cash</td><td></td><td class="amt">595,900</td><td class="chg down">↓595,900</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+        </table>
+        <div class="statement-row">
+          <div class="stbox"><span class="lbl">Balance Sheet</span><span class="val">Assets ↓595,900, Liabilities ↓590,000 → Equity ↓5,900</span></div>
+          <div class="stbox"><span class="lbl">Income Statement</span><span class="val">Interest Exp ↑5,900 → NI ↓5,900</span></div>
+          <div class="stbox"><span class="lbl">Statement of CF</span><span class="val">−595,900 (financing: −590,000; operating: −5,900)</span></div>
+        </div>
+        <div class="answer-note"><strong>Where the numbers come from:</strong> Interest = 12% × $590,000 × 1/12 = $5,900. Lonergan keeps the $768,000 − $595,900 = $172,100 left over after the note is fully retired.</div>
+      </div>
+
+      <h3 style="font-size:1rem; margin-top:1.6rem;">Alternative B: collecting what wasn't factored</h3>
+      <div class="narrative">
+        <p>Only $960,000 − $640,000 = $320,000 of receivables are still Lonergan's own. 80% of that — $256,000 — is a completely ordinary collection, with nothing owed to any bank.</p>
+      </div>
+      <button class="reveal-btn" onclick="toggleEntry(this,'l-4')">Reveal the entry</button>
+      <div class="entry-wrap" id="l-4">
+        <div class="entry-date">July 31, 2024 — Alternative B</div>
+        <table class="jtable">
+          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
+          <tr><td class="acct">Cash</td><td class="amt">256,000</td><td></td><td class="chg up">↑256,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+          <tr><td class="acct credit">Accounts Receivable</td><td></td><td class="amt">256,000</td><td class="chg down">↓256,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+        </table>
+        <div class="statement-row">
+          <div class="stbox no-effect"><span class="lbl">Balance Sheet</span><span class="val">Asset mix shifts; total unchanged</span></div>
+          <div class="stbox no-effect"><span class="lbl">Income Statement</span><span class="val">No effect</span></div>
+          <div class="stbox"><span class="lbl">Statement of CF</span><span class="val">+256,000 operating inflow</span></div>
+        </div>
+        <div class="checkyourself">
+          <span class="lbl">The takeaway</span>
+          Same 80% collection rate, wildly different bookkeeping — because the two alternatives answer a different question: does Lonergan still own the receivable, or not?
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>ACCT 351 · Chapter 7 · Handout 3 of 3</footer>
+
+<script>
+function toggleEntry(btn, id){
+  var el = document.getElementById(id);
+  var open = el.classList.toggle('open');
+  btn.textContent = open ? 'Hide the entry' : 'Reveal the entry';
+  btn.classList.toggle('shown', open);
+}
+</script>
+</body>
+</html>
