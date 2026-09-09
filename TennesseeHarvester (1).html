@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tennessee Harvester Corporation — Bond Amortization Schedule</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --purple:#592C88; --purple-deep:#38195A; --purple-mid:#6E3FA3;
+    --gold:#B0925C; --gold-soft:#D6C398; --gold-pale:#F1E9D6;
+    --parchment:#F7F4EC; --paper:#FFFEFA; --ink:#221B2E; --slate:#5F5A6B;
+    --line:#DBD3E0; --answer:#1E5C34; --answer-bg:#E7F1E9; --danger:#9C3B34;
+    --shadow: 0 1px 2px rgba(56,25,90,0.07), 0 6px 18px rgba(56,25,90,0.08);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{ background:var(--parchment); color:var(--ink); font-family:'Inter',sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased; }
+  a{ color:inherit; }
+
+  header{ background: linear-gradient(180deg, var(--purple) 0%, var(--purple-deep) 100%); color:#F1E9D6; padding: 30px 6vw 24px; position:relative; }
+  header::after{ content:""; position:absolute; left:0; right:0; bottom:0; height:4px; background: linear-gradient(90deg, var(--gold-soft), var(--gold) 40%, var(--gold-soft) 70%, var(--gold)); }
+  .eyebrow{ font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold-soft); margin:0 0 10px; }
+  h1.title{ font-family:'Source Serif 4', serif; font-weight:600; font-size:clamp(24px,3.4vw,34px); margin:0 0 8px; letter-spacing:-0.01em; }
+  .subtitle{ font-size:14.5px; color:#D9CDE5; max-width:680px; margin:0; }
+
+  .id-bar{ max-width:900px; margin:0 auto; padding:18px 6vw 0; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .id-bar label{ font-size:13px; font-weight:600; color:var(--slate); }
+  .id-bar input[type="text"]{ font-family:'IBM Plex Mono', monospace; font-size:13.5px; padding:8px 11px; border:1px solid var(--line); border-radius:5px; background:var(--paper); color:var(--ink); width:180px; }
+  .id-bar input:focus{ outline:none; border-color:var(--purple-mid); box-shadow:0 0 0 3px rgba(89,44,136,0.10); }
+  .id-bar button{ font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600; border-radius:5px; padding:8px 15px; border:1px solid var(--purple); background:var(--purple); color:#fff; cursor:pointer; }
+  .id-bar button:hover{ background:var(--purple-mid); }
+  .id-hint{ font-size:12px; color:var(--slate); width:100%; margin-top:2px; }
+
+  .rounding-note{ max-width:900px; margin:14px auto 0; padding:12px 6vw; font-size:12.5px; color:var(--slate); line-height:1.5; }
+  .rounding-note strong{ color:var(--purple); font-weight:600; }
+
+  main{ max-width:900px; margin:0 auto; padding:10px 6vw 90px; }
+
+  .facts{ background:var(--paper); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); padding:18px 22px; margin-top:20px; font-size:14.5px; }
+  .facts h2{ font-family:'Source Serif 4', serif; font-size:19px; color:var(--purple); margin:0 0 10px; }
+  .facts p{ margin:0 0 10px; } .facts p:last-child{ margin-bottom:0; }
+  .facts span.val{ font-weight:700; color:var(--purple-deep); }
+
+  table.sched{ width:100%; border-collapse:collapse; font-size:13px; margin-top:14px; font-family:'IBM Plex Mono', monospace; }
+  table.sched th{ text-align:right; font-family:'Inter',sans-serif; font-size:11px; text-transform:uppercase; letter-spacing:.03em; color:var(--slate); border-bottom:2px solid var(--purple); padding:8px 8px; }
+  table.sched th:first-child, table.sched td:first-child{ text-align:left; }
+  table.sched td{ text-align:right; border-bottom:1px solid var(--line); padding:7px 8px; }
+  table.sched tr.ellipsis td{ text-align:center; color:var(--slate); letter-spacing:2px; border-bottom:none; }
+  table.sched tr.opening td{ font-style:italic; color:var(--slate); }
+
+  .part{ background:var(--paper); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); padding:24px 26px 26px; margin-top:26px; }
+  .part-label{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--gold); background:var(--purple); display:inline-block; padding:3px 9px; border-radius:4px; letter-spacing:.04em; margin-bottom:12px; }
+  .part h2{ font-family:'Source Serif 4', serif; font-size:21px; font-weight:600; color:var(--purple); margin:0 0 12px; }
+  .scenario{ background:var(--parchment); border-left:3px solid var(--gold); padding:14px 18px; border-radius:0 6px 6px 0; font-size:14.5px; color:var(--ink); margin-bottom:20px; }
+  .scenario p{ margin:0 0 10px; } .scenario p:last-child{ margin-bottom:0; }
+
+  .req{ font-weight:600; font-size:14.5px; color:var(--ink); margin:20px 0 10px; }
+  .req .letter{ font-family:'IBM Plex Mono', monospace; color:var(--purple); margin-right:6px; }
+
+  .work-line{ display:flex; align-items:center; gap:8px; font-size:13.5px; margin:6px 0; flex-wrap:wrap; }
+  .work-line label{ color:var(--slate); min-width:auto; }
+  .work-line input[type="text"]{ font-family:'IBM Plex Mono', monospace; font-size:13.5px; padding:6px 8px; border:1px solid var(--line); border-radius:5px; background:var(--parchment); color:var(--ink); width:170px; }
+  .work-line select{ font-family:'Inter',sans-serif; font-size:13.5px; padding:6px 8px; border:1px solid var(--line); border-radius:5px; background:var(--parchment); color:var(--ink); width:260px; }
+  .work-line input:focus, .work-line select:focus{ outline:none; border-color:var(--purple-mid); box-shadow:0 0 0 3px rgba(89,44,136,0.10); background:var(--paper); }
+  .req-hint{ font-size:12px; color:var(--slate); margin:0 0 8px; }
+
+  .key{ margin-top:14px; background:var(--answer-bg); border:1px solid #B7D3BE; border-radius:8px; padding:14px 16px; color:var(--answer); font-size:13.5px; }
+  .key strong{ display:block; margin-bottom:6px; font-family:'Source Serif 4', serif; font-size:14.5px; }
+  .key table{ width:100%; border-collapse:collapse; font-size:13px; margin-top:4px; }
+  .key td{ padding:4px 6px; border-bottom:1px dashed #B7D3BE; }
+  .key tr:last-child td{ border-bottom:none; font-weight:600; }
+
+  .check-bar{ margin-top:20px; padding-top:16px; border-top:1px solid var(--line); display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  .btn-check{ font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600; border-radius:5px; padding:9px 18px; border:1px solid var(--purple); background:var(--purple); color:#fff; cursor:pointer; }
+  .btn-check:hover{ background:var(--purple-mid); }
+  .check-summary{ font-size:13.5px; font-weight:600; }
+  .check-summary.good{ color:var(--answer); } .check-summary.bad{ color:var(--danger); }
+  .check-disclaimer{ font-size:11.5px; color:var(--slate); width:100%; margin-top:2px; font-style:italic; }
+  .attempts-note{ font-size:12px; font-weight:600; color:var(--slate); }
+  .attempts-note.low{ color:var(--gold); } .attempts-note.locked{ color:var(--danger); }
+  input:disabled, select:disabled{ opacity:0.7; cursor:not-allowed; }
+
+  .score-bar{ margin-top:26px; background:var(--paper); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); padding:16px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+  .score-bar .score-label{ font-family:'Source Serif 4', serif; font-size:16px; font-weight:600; color:var(--purple); }
+  .score-bar .score-value{ font-family:'IBM Plex Mono', monospace; font-size:18px; font-weight:600; color:var(--ink); }
+  .score-bar .score-breakdown{ font-size:12px; color:var(--slate); width:100%; }
+
+  input.field-correct, select.field-correct{ border-color:var(--answer) !important; background:var(--answer-bg) !important; }
+  input.field-incorrect, select.field-incorrect{ border-color:var(--danger) !important; background:#F3E1DE !important; }
+  input.field-missing, select.field-missing{ border-color:var(--gold) !important; background:var(--gold-pale) !important; }
+  .key-reveal-note{ margin-top:14px; background:var(--gold-pale); border:1px solid var(--gold-soft); border-radius:8px; padding:12px 16px; color:var(--purple-deep); font-size:13.5px; font-weight:600; display:none; }
+
+  .submit-bar{ background:var(--paper); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); padding:22px 26px 24px; margin-top:26px; }
+  .submit-bar h2{ font-family:'Source Serif 4', serif; font-size:19px; font-weight:600; color:var(--purple); margin:0 0 14px; }
+  .submit-row{ display:flex; align-items:center; gap:10px; margin-bottom:12px; flex-wrap:wrap; }
+  .submit-row label{ font-size:13px; font-weight:600; color:var(--slate); }
+  .submit-row input[type="text"]{ font-family:'Inter',sans-serif; font-size:13.5px; padding:8px 11px; border:1px solid var(--line); border-radius:5px; background:var(--parchment); color:var(--ink); width:240px; }
+  .submit-row input:focus{ outline:none; border-color:var(--purple-mid); box-shadow:0 0 0 3px rgba(89,44,136,0.10); }
+  .btn-submit{ font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600; border-radius:5px; padding:10px 18px; border:1px solid var(--purple); background:var(--purple); color:#fff; cursor:pointer; }
+  .btn-submit:hover{ background:var(--purple-mid); }
+  .btn-submit-outline{ background:var(--paper); color:var(--purple); }
+  .btn-submit-outline:hover{ background:var(--parchment); }
+  .submit-status{ font-size:13px; font-weight:600; min-height:18px; margin:10px 0 0; color:var(--answer); }
+  .submit-status.error{ color:var(--danger); }
+  .submit-hint{ font-size:12px; color:var(--slate); margin:6px 0 0; }
+
+  @media print{
+    .print-hide, .id-bar, .check-bar, .rounding-note{ display:none !important; }
+    header{ background:none !important; color:var(--ink) !important; padding:0 0 14px !important; }
+    header::after{ display:none !important; }
+    .eyebrow{ color:var(--purple) !important; } .subtitle{ color:var(--slate) !important; }
+    body{ background:#fff !important; }
+    .part, .facts{ box-shadow:none !important; border:1px solid #999 !important; break-inside:avoid; }
+    .score-bar{ box-shadow:none !important; border:1.5px solid var(--purple) !important; break-inside:avoid; break-before:avoid; }
+    input[type="text"], select{ border:none !important; border-bottom:1px solid #000 !important; background:transparent !important; border-radius:0 !important; color:#000 !important; -webkit-appearance:none; appearance:none; padding:2px 4px !important; }
+    .print-name-line{ display:block !important; }
+  }
+  .print-name-line{ display:none; font-size:13px; color:var(--ink); padding:0 6vw; margin:0 0 10px; }
+  footer{ text-align:center; padding:26px 6vw 40px; font-size:12px; color:var(--slate); }
+  @media (max-width:600px){ header, main, .id-bar{ padding-left:5vw; padding-right:5vw; } table.sched{ font-size:11.5px; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">ACCT 351 &middot; Long-Term Debt &middot; Chapter 14</p>
+  <h1 class="title">Tennessee Harvester Corporation</h1>
+  <p class="subtitle">Someone already built the amortization schedule. Your job is to read it like an auditor would and reconstruct the terms of the bond issue and its lifetime interest cost — no PV tables required.</p>
+</header>
+
+<p class="print-name-line" id="printNameLine"></p>
+<p class="print-name-line" id="printScoreLine" style="font-weight:600;"></p>
+
+<div class="id-bar">
+  <label for="studentId">Student ID</label>
+  <input type="text" id="studentId" placeholder="e.g. 92841016">
+  <button id="genBtn" type="button">Generate scenario</button>
+  <span class="id-hint">Your ID determines your numbers — everyone gets a different but equally solvable version of this problem.</span>
+</div>
+
+<div class="rounding-note">
+  <strong>Rounding convention:</strong> round every dollar amount to the nearest whole dollar and every interest rate to the nearest whole percent.
+</div>
+
+<main>
+
+  <div class="facts">
+    <h2>The facts</h2>
+    <p>On January 1, Year 1, Tennessee Harvester Corporation issued debenture bonds that pay interest semiannually on June 30 and December 31. Portions of the bond amortization schedule appear below.</p>
+  </div>
+
+  <table class="sched" id="schedTable">
+    <thead>
+      <tr><th>Payment</th><th>Cash Payment</th><th>Effective Interest</th><th>Increase in Balance</th><th>Outstanding Balance</th></tr>
+    </thead>
+    <tbody>
+      <tr class="opening"><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td id="sc-row0-bal"></td></tr>
+      <tr><td id="sc-row1-pmt"></td><td id="sc-row1-cash"></td><td id="sc-row1-int"></td><td id="sc-row1-inc"></td><td id="sc-row1-bal"></td></tr>
+      <tr><td id="sc-row2-pmt"></td><td id="sc-row2-cash"></td><td id="sc-row2-int"></td><td id="sc-row2-inc"></td><td id="sc-row2-bal"></td></tr>
+      <tr><td id="sc-row3-pmt"></td><td id="sc-row3-cash"></td><td id="sc-row3-int"></td><td id="sc-row3-inc"></td><td id="sc-row3-bal"></td></tr>
+      <tr><td id="sc-row4-pmt"></td><td id="sc-row4-cash"></td><td id="sc-row4-int"></td><td id="sc-row4-inc"></td><td id="sc-row4-bal"></td></tr>
+      <tr><td id="sc-row5-pmt"></td><td id="sc-row5-cash"></td><td id="sc-row5-int"></td><td id="sc-row5-inc"></td><td id="sc-row5-bal"></td></tr>
+      <tr><td id="sc-row6-pmt"></td><td id="sc-row6-cash"></td><td id="sc-row6-int"></td><td id="sc-row6-inc"></td><td id="sc-row6-bal"></td></tr>
+      <tr class="ellipsis"><td>&middot;</td><td>&middot;</td><td>&middot;</td><td>&middot;</td><td>&middot;</td></tr>
+      <tr><td id="sc-rowA-pmt"></td><td id="sc-rowA-cash"></td><td id="sc-rowA-int"></td><td id="sc-rowA-inc"></td><td id="sc-rowA-bal"></td></tr>
+      <tr><td id="sc-rowB-pmt"></td><td id="sc-rowB-cash"></td><td id="sc-rowB-int"></td><td id="sc-rowB-inc"></td><td id="sc-rowB-bal"></td></tr>
+      <tr><td id="sc-rowC-pmt"></td><td id="sc-rowC-cash"></td><td id="sc-rowC-int"></td><td id="sc-rowC-inc"></td><td id="sc-rowC-bal"></td></tr>
+    </tbody>
+  </table>
+
+  <!-- ============================ PART 1 ============================ -->
+  <div class="part" data-part-key="p1">
+    <span class="part-label">Part 1</span>
+    <h2>Identifying the bond terms</h2>
+    <p class="req-hint">Everything you need is already in the schedule above — you're working backward from the numbers to the terms that produced them.</p>
+
+    <div class="req"><span class="letter">1.</span>What is the face amount of the bonds?</div>
+    <div class="work-line"><label>Face amount:</label><input type="text" placeholder="$" id="p1-face"></div>
+
+    <div class="req"><span class="letter">2.</span>What is the initial selling price of the bonds?</div>
+    <div class="work-line"><label>Initial selling price:</label><input type="text" placeholder="$" id="p1-price"></div>
+
+    <div class="req"><span class="letter">3.</span>What is the term to maturity, in years?</div>
+    <div class="work-line"><label>Term to maturity:</label><input type="text" placeholder="years" id="p1-term"></div>
+
+    <div class="req"><span class="letter">4.</span>Interest is determined by what approach?</div>
+    <div class="work-line"><label>Approach:</label>
+      <select id="p1-approach">
+        <option value="">Select approach&hellip;</option>
+        <option value="Effective interest method">Effective interest method</option>
+        <option value="Straight-line method">Straight-line method</option>
+      </select>
+    </div>
+
+    <div class="req"><span class="letter">5.</span>What is the stated annual interest rate?</div>
+    <div class="work-line"><label>Stated annual rate:</label><input type="text" placeholder="%" id="p1-stated"></div>
+
+    <div class="req"><span class="letter">6.</span>What is the effective annual interest rate?</div>
+    <div class="work-line"><label>Effective annual rate:</label><input type="text" placeholder="%" id="p1-effective"></div>
+
+    <div class="check-bar">
+      <button class="btn-check" id="checkP1" type="button">Check my work</button>
+      <span class="check-summary" id="p1Summary"></span>
+      <span class="attempts-note" id="p1Attempts">3 attempts remaining</span>
+      <span class="check-disclaimer">This checks all six answers above.</span>
+    </div>
+    <div class="key" id="p1Key" style="display:none;"></div>
+  </div>
+
+  <!-- ============================ PART 2 ============================ -->
+  <div class="part" data-part-key="p2">
+    <span class="part-label">Part 2</span>
+    <h2>Total interest over the life of the bonds</h2>
+    <div class="scenario">
+      <p>Cash interest is fixed every period, but effective interest grows as the discount (or shrinks as the premium) amortizes. Over the full life of the bonds, the two totals differ by exactly the amount of the original discount or premium.</p>
+    </div>
+
+    <div class="req"><span class="letter">7.</span>What is the total cash interest paid over the term to maturity?</div>
+    <div class="work-line"><label>Total cash interest:</label><input type="text" placeholder="$" id="p2-cash"></div>
+
+    <div class="req"><span class="letter">8.</span>What is the total effective interest expense recorded over the term to maturity?</div>
+    <div class="work-line"><label>Total effective interest:</label><input type="text" placeholder="$" id="p2-effective"></div>
+
+    <div class="check-bar">
+      <button class="btn-check" id="checkP2" type="button">Check my work</button>
+      <span class="check-summary" id="p2Summary"></span>
+      <span class="attempts-note" id="p2Attempts">3 attempts remaining</span>
+      <span class="check-disclaimer">This checks both totals above.</span>
+    </div>
+    <div class="key" id="p2Key" style="display:none;"></div>
+  </div>
+
+  <div class="score-bar">
+    <span class="score-label">Assignment score</span>
+    <span class="score-value" id="overallScore">Check each part to see your score</span>
+    <span class="score-breakdown" id="scoreBreakdown"></span>
+  </div>
+
+  <div class="key-reveal-note" id="keyRevealNote">You've used all 3 attempts on every part — the answer key is now shown below each part, and a submission PDF has opened for you to save.</div>
+
+  <div class="submit-bar print-hide">
+    <h2>Ready to submit?</h2>
+    <div class="submit-row">
+      <label for="studentName">Your name</label>
+      <input type="text" id="studentName" placeholder="First and last name">
+    </div>
+    <div class="submit-row submit-actions">
+      <button class="btn-submit" id="printBtn" type="button">Print / Save as PDF</button>
+      <button class="btn-submit btn-submit-outline" id="downloadDocxBtn" type="button">Download as Word (.docx)</button>
+    </div>
+    <p class="submit-status" id="submitStatus"></p>
+    <p class="submit-hint">Both options capture exactly what's currently filled in above, including your generated scenario numbers. "Print / Save as PDF" works offline; "Download as Word" needs an internet connection to load the export tool.</p>
+  </div>
+
+</main>
+
+<footer>Tennessee Harvester Corporation Bond Amortization Schedule &middot; ACCT 351 &middot; Western Carolina University</footer>
+
+<script>
+(function(){
+  // ---------------- seeding ----------------
+  function hashSeed(str){
+    var h = 2166136261;
+    for(var i=0;i<str.length;i++){ h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
+    return h >>> 0;
+  }
+  function mulberry32(seed){
+    return function(){
+      seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+      var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  function pick(rand, arr){ return arr[Math.floor(rand()*arr.length)]; }
+  function round2(n){ return Math.round(n*100)/100; }
+  function money0(n){ var r=Math.round(n); var sign=r<0?'\u2212':''; return sign+'$'+Math.abs(r).toLocaleString('en-US'); }
+  function num0(n){ var r=Math.round(n); return r.toLocaleString('en-US'); }
+
+  // ---------------- bond math engine ----------------
+  function buildSchedule(price, coupon, periodicRate, totalPeriods){
+    var carrying = price;
+    var schedule = [];
+    for(var i=1;i<=totalPeriods;i++){
+      var interest = carrying*periodicRate;
+      var inc = interest - coupon;
+      var newCarrying = carrying + inc;
+      schedule.push({ i:i, cash:coupon, interest:interest, inc:inc, begin:carrying, end:newCarrying });
+      carrying = newCarrying;
+    }
+    return schedule;
+  }
+
+  // ---------------- scenario generation ----------------
+  function generateScenario(id){
+    var seedStr = (id || 'demo').trim().toLowerCase();
+    var rand = mulberry32(hashSeed(seedStr));
+
+    var face = pick(rand, [3000000, 4000000, 5000000, 6000000, 7000000, 8000000, 9000000, 10000000]);
+    var stated = pick(rand, [6, 7, 8, 9, 10]);
+    var deltaSign = pick(rand, [1, -1]);
+    var delta = pick(rand, [1, 2, 3]);
+    var market = stated + deltaSign*delta;
+    if(market <= 0) market = stated + delta; // guard against non-positive rates
+
+    var years = pick(rand, [10, 15, 20, 25]);
+    var totalPeriods = years*2;
+
+    var coupon = round2(face*stated/100/2);
+    var periodicRate = market/100/2;
+    var pvAnnuityFactor = (1-Math.pow(1+periodicRate,-totalPeriods))/periodicRate;
+    var pvLumpFactor = Math.pow(1+periodicRate,-totalPeriods);
+    var priceRaw = coupon*pvAnnuityFactor + face*pvLumpFactor;
+    var price = Math.round(priceRaw);
+
+    var schedule = buildSchedule(price, coupon, periodicRate, totalPeriods);
+
+    // Plug the final period so the schedule ties out exactly to face value.
+    // Rounding the issue price to the nearest dollar otherwise leaves the
+    // last outstanding balance a dollar or two short of (or over) face.
+    if(totalPeriods >= 2){
+      var lastRow = schedule[totalPeriods-1];
+      var priorEnd = schedule[totalPeriods-2].end;
+      var pluggedInc = face - priorEnd;
+      lastRow.begin = priorEnd;
+      lastRow.inc = pluggedInc;
+      lastRow.interest = coupon + pluggedInc;
+      lastRow.end = face;
+    } else {
+      schedule[totalPeriods-1].end = face;
+    }
+
+    var totalCash = round2(coupon*totalPeriods);
+    var totalEffective = round2(totalCash + (face - price));
+
+    return {
+      face:face, stated:stated, market:market, years:years, totalPeriods:totalPeriods,
+      coupon:coupon, price:price, schedule:schedule,
+      totalCash:totalCash, totalEffective:totalEffective
+    };
+  }
+
+  function fillRow(prefix, row){
+    var pmtEl = document.getElementById('sc-'+prefix+'-pmt'); if(pmtEl) pmtEl.textContent = row.i;
+    var cashEl = document.getElementById('sc-'+prefix+'-cash'); if(cashEl) cashEl.textContent = num0(row.cash);
+    var intEl = document.getElementById('sc-'+prefix+'-int'); if(intEl) intEl.textContent = num0(row.interest);
+    var incEl = document.getElementById('sc-'+prefix+'-inc'); if(incEl) incEl.textContent = num0(row.inc);
+    var balEl = document.getElementById('sc-'+prefix+'-bal'); if(balEl) balEl.textContent = num0(row.end);
+  }
+
+  function applyScenario(d){
+    var el0 = document.getElementById('sc-row0-bal'); if(el0) el0.textContent = num0(d.price);
+    fillRow('row1', d.schedule[0]);
+    fillRow('row2', d.schedule[1]);
+    fillRow('row3', d.schedule[2]);
+    fillRow('row4', d.schedule[3]);
+    fillRow('row5', d.schedule[4]);
+    fillRow('row6', d.schedule[5]);
+    fillRow('rowA', d.schedule[d.totalPeriods-3]);
+    fillRow('rowB', d.schedule[d.totalPeriods-2]);
+    fillRow('rowC', d.schedule[d.totalPeriods-1]);
+  }
+
+  // ---------------- shared grading helpers ----------------
+  function parseMoney(s){ if(s===null||s===undefined) return NaN; var c=String(s).replace(/[^0-9.\-]/g,''); if(c===''||c==='-') return NaN; return parseFloat(c); }
+  function parsePercent(s){ if(s===null||s===undefined) return NaN; var c=String(s).replace(/[^0-9.\-]/g,''); if(c===''||c==='-') return NaN; return parseFloat(c); }
+  function parseNumber(s){ if(s===null||s===undefined) return NaN; var c=String(s).replace(/[^0-9.\-]/g,''); if(c===''||c==='-') return NaN; return parseFloat(c); }
+  function near(a,b,tol){ if(isNaN(a)||isNaN(b)) return false; return Math.abs(a-b)<=tol; }
+  function clearFieldState(el){ if(el) el.classList.remove('field-correct','field-incorrect','field-missing'); }
+  function markGeneric(id, ok){
+    var el = document.getElementById(id); if(!el) return null;
+    el.classList.remove('field-correct','field-incorrect');
+    el.classList.add(ok?'field-correct':'field-incorrect');
+    if(!el.dataset.clearBound){ el.addEventListener(el.tagName==='SELECT'?'change':'input', function(){ clearFieldState(el); }); el.dataset.clearBound='1'; }
+    return ok;
+  }
+  function markMoney(id, correct, tol){ var el=document.getElementById(id); if(!el) return null; return markGeneric(id, near(parseMoney(el.value), correct, tol===undefined?2:tol)); }
+  function markPercent(id, correct, tol){ var el=document.getElementById(id); if(!el) return null; return markGeneric(id, near(parsePercent(el.value), correct, tol===undefined?0.05:tol)); }
+  function markNumber(id, correct, tol){ var el=document.getElementById(id); if(!el) return null; return markGeneric(id, near(parseNumber(el.value), correct, tol===undefined?0.05:tol)); }
+  function markSelect(id, correct){ var el=document.getElementById(id); if(!el) return null; return markGeneric(id, el.value === correct); }
+  function fieldsFor(ids){ return ids.map(function(id){ return document.getElementById(id); }).filter(Boolean); }
+  function findMissing(ids){ return fieldsFor(ids).filter(function(el){ return !el.value || !el.value.trim(); }); }
+  function setMissing(ids, flag){ fieldsFor(ids).forEach(function(el){ el.classList.toggle('field-missing', flag); }); }
+  function lockPart(ids, btnId){
+    fieldsFor(ids).forEach(function(el){ el.disabled = true; });
+    var btn = document.getElementById(btnId); if(btn){ btn.disabled = true; btn.textContent = 'No attempts remaining'; }
+  }
+  function unlockPart(ids, btnId){
+    fieldsFor(ids).forEach(function(el){ el.disabled = false; });
+    var btn = document.getElementById(btnId); if(btn){ btn.disabled = false; btn.textContent = 'Check my work'; }
+  }
+  function updateAttemptsNote(elId, used, max){
+    var el = document.getElementById(elId); if(!el) return;
+    var remaining = max - used;
+    el.classList.remove('low','locked');
+    if(remaining<=0){ el.textContent = 'No attempts remaining \u2014 inputs locked'; el.classList.add('locked'); }
+    else { el.textContent = remaining+' attempt'+(remaining===1?'':'s')+' remaining'; if(remaining===1) el.classList.add('low'); }
+  }
+  function updateSummary(elId, results, pointsPossible){
+    var el = document.getElementById(elId);
+    var graded = results.filter(function(r){ return r!==null; }).length;
+    var correct = results.filter(function(r){ return r===true; }).length;
+    var points = graded>0 ? (correct/graded)*pointsPossible : 0;
+    el.textContent = correct+' of '+graded+' correct \u2014 '+points.toFixed(1)+' of '+pointsPossible.toFixed(1)+' pts';
+    el.classList.remove('good','bad'); el.classList.add(correct===graded && graded>0 ? 'good':'bad');
+    return points;
+  }
+  function buildKeyTable(title, rows){
+    var html = '<strong>'+title+'</strong><table>';
+    rows.forEach(function(r){ html += '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>'; });
+    html += '</table>'; return html;
+  }
+
+  // ---------------- PARTS CONFIG ----------------
+  var MAX_ATTEMPTS = 3;
+  var attempts = {}, locked = {}, scoreState = {};
+  var keyRevealed = false;
+  var currentScenario = null;
+
+  var PARTS = [
+    { key:'p1', requiredIds:['p1-face','p1-price','p1-term','p1-approach','p1-stated','p1-effective'],
+      itemCount:6,
+      grade:function(d){ return [
+        markMoney('p1-face', d.face),
+        markMoney('p1-price', d.price),
+        markNumber('p1-term', d.years),
+        markSelect('p1-approach', 'Effective interest method'),
+        markPercent('p1-stated', d.stated),
+        markPercent('p1-effective', d.market)
+      ]; },
+      keyRows:function(d){ return [
+        ['Face amount', money0(d.face)],
+        ['Initial selling price', money0(d.price)],
+        ['Term to maturity', d.years+' years'],
+        ['Interest approach', 'Effective interest method'],
+        ['Stated annual rate', d.stated+'%'],
+        ['Effective annual rate', d.market+'%']
+      ]; }
+    },
+    { key:'p2', requiredIds:['p2-cash','p2-effective'],
+      itemCount:2,
+      grade:function(d){ return [
+        markMoney('p2-cash', d.totalCash),
+        markMoney('p2-effective', d.totalEffective)
+      ]; },
+      keyRows:function(d){ return [
+        ['Total cash interest paid', money0(d.totalCash)+'  (='+money0(d.coupon)+' \u00d7 '+d.totalPeriods+' payments)'],
+        ['Total effective interest expense', money0(d.totalEffective)+'  (= total cash interest + face \u2212 price)']
+      ]; }
+    }
+  ];
+
+  var TOTAL_ITEMS = PARTS.reduce(function(s,p){ return s+p.itemCount; }, 0);
+  var TOTAL_POINTS = 100;
+  var POINTS_PER_ITEM = TOTAL_POINTS/TOTAL_ITEMS;
+  PARTS.forEach(function(p){ p.possible = p.itemCount*POINTS_PER_ITEM; });
+
+  function clearAllFieldStates(){
+    document.querySelectorAll('.field-correct, .field-incorrect, .field-missing').forEach(function(el){
+      el.classList.remove('field-correct','field-incorrect','field-missing');
+    });
+  }
+
+  function updateOverallScore(){
+    var el = document.getElementById('overallScore');
+    var breakdown = document.getElementById('scoreBreakdown');
+    var anyChecked = PARTS.some(function(p){ return scoreState[p.key] !== null && scoreState[p.key] !== undefined; });
+    if(!anyChecked){ el.textContent = 'Check each part to see your score'; breakdown.textContent=''; return; }
+    var total = PARTS.reduce(function(s,p){ return s + (scoreState[p.key]||0); }, 0);
+    el.textContent = total.toFixed(1)+' / '+TOTAL_POINTS.toFixed(1)+' pts';
+    breakdown.textContent = PARTS.map(function(p,i){
+      return 'Part '+(i+1)+': '+(scoreState[p.key]==null ? 'not checked yet' : scoreState[p.key].toFixed(1)+' / '+p.possible.toFixed(1)+' pts');
+    }).join('  \u00b7  ');
+  }
+
+  function revealAllKeys(){
+    if(!currentScenario) return;
+    PARTS.forEach(function(p,i){
+      var keyEl = document.getElementById(p.key+'Key');
+      if(keyEl){ keyEl.innerHTML = buildKeyTable('Answer Key \u2014 Part '+(i+1), p.keyRows(currentScenario)); keyEl.style.display='block'; }
+    });
+    var noteEl = document.getElementById('keyRevealNote'); if(noteEl) noteEl.style.display='block';
+  }
+
+  function registerCheckAttempt(part){
+    attempts[part.key]++;
+    var remaining = MAX_ATTEMPTS - attempts[part.key];
+    updateAttemptsNote(part.key+'Attempts', attempts[part.key], MAX_ATTEMPTS);
+    if(remaining<=0){ locked[part.key]=true; lockPart(part.requiredIds, 'check'+part.key.charAt(0).toUpperCase()+part.key.slice(1)); }
+    if(PARTS.every(function(p){ return locked[p.key]; }) && !keyRevealed){
+      keyRevealed = true; revealAllKeys(); setTimeout(function(){ triggerPrint(); }, 350);
+    }
+  }
+
+  PARTS.forEach(function(part){
+    var btnId = 'check'+part.key.charAt(0).toUpperCase()+part.key.slice(1);
+    var btn = document.getElementById(btnId);
+    var summaryId = part.key+'Summary';
+    btn.addEventListener('click', function(){
+      if(!currentScenario || locked[part.key]) return;
+      var missing = findMissing(part.requiredIds);
+      if(missing.length){
+        setMissing(part.requiredIds, false);
+        setMissing(missing.map(function(el){ return el.id; }), true);
+        var summaryEl = document.getElementById(summaryId);
+        summaryEl.textContent = 'Please fill in every field before checking your work \u2014 '+missing.length+' field'+(missing.length===1?'':'s')+' left blank.';
+        summaryEl.classList.remove('good'); summaryEl.classList.add('bad');
+        missing[0].focus();
+        return;
+      }
+      setMissing(part.requiredIds, false);
+      var results = part.grade(currentScenario);
+      scoreState[part.key] = updateSummary(summaryId, results, part.possible);
+      updateOverallScore();
+      registerCheckAttempt(part);
+    });
+  });
+
+  function applyAndStore(id){
+    currentScenario = generateScenario(id);
+    applyScenario(currentScenario);
+    clearAllFieldStates();
+    PARTS.forEach(function(p){ attempts[p.key]=0; locked[p.key]=false; scoreState[p.key]=null;
+      unlockPart(p.requiredIds, 'check'+p.key.charAt(0).toUpperCase()+p.key.slice(1));
+      updateAttemptsNote(p.key+'Attempts', 0, MAX_ATTEMPTS);
+      var keyEl = document.getElementById(p.key+'Key'); if(keyEl){ keyEl.style.display='none'; keyEl.innerHTML=''; }
+      var sumEl = document.getElementById(p.key+'Summary'); if(sumEl){ sumEl.textContent=''; sumEl.classList.remove('good','bad'); }
+    });
+    keyRevealed = false;
+    var noteEl = document.getElementById('keyRevealNote'); if(noteEl) noteEl.style.display='none';
+    updateOverallScore();
+  }
+
+  var idInput = document.getElementById('studentId');
+  var genBtn = document.getElementById('genBtn');
+  genBtn.addEventListener('click', function(){ applyAndStore(idInput.value); });
+  idInput.addEventListener('keydown', function(e){ if(e.key==='Enter') applyAndStore(idInput.value); });
+
+  // ---------------- Print ----------------
+  function val(id){ var el=document.getElementById(id); return el?el.value.trim():''; }
+  document.getElementById('printBtn').addEventListener('click', triggerPrint);
+  function triggerPrint(){
+    var name = val('studentName'), id = val('studentId');
+    document.getElementById('printNameLine').textContent = 'Name: '+(name||'_______________________')+'     Student ID: '+(id||'_______________________');
+    var scoreText = document.getElementById('overallScore').textContent;
+    var breakdownText = document.getElementById('scoreBreakdown').textContent;
+    document.getElementById('printScoreLine').textContent = 'Score: '+scoreText+(breakdownText?'  ('+breakdownText+')':'');
+    var oldTitle = document.title;
+    document.title = 'TennesseeHarvester-'+(id||'submission');
+    window.print();
+    document.title = oldTitle;
+  }
+
+  // ---------------- Download as Word (.docx) ----------------
+  var docxLoadPromise = null;
+  function loadDocxLib(){
+    if(window.docx) return Promise.resolve();
+    if(docxLoadPromise) return docxLoadPromise;
+    docxLoadPromise = new Promise(function(resolve, reject){
+      var s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js';
+      s.onload = function(){ window.docx ? resolve() : reject(new Error('docx library did not load correctly')); };
+      s.onerror = function(){ reject(new Error('network error loading docx library')); };
+      document.head.appendChild(s);
+    });
+    return docxLoadPromise;
+  }
+  function blankIfEmpty(s){ return s && s.length ? s : '\u2014'; }
+  function inputOrSelectValue(el){
+    if(el.tagName==='SELECT'){ var opt=el.options[el.selectedIndex]; return opt?opt.textContent:''; }
+    if(el.tagName==='INPUT'){ return el.value || ''; }
+    return el.textContent || '';
+  }
+  function walkWorkLine(el){
+    var parts = [];
+    el.childNodes.forEach(function(node){
+      if(node.nodeType===3){ var t=node.textContent.replace(/\s+/g,' ').trim(); if(t) parts.push(t); }
+      else if(node.tagName==='INPUT' || node.tagName==='SELECT'){ parts.push(blankIfEmpty(inputOrSelectValue(node))); }
+      else { var t2=node.textContent.replace(/\s+/g,' ').trim(); if(t2) parts.push(t2); }
+    });
+    return parts.join(' ');
+  }
+  function buildAnswersDoc(){
+    var D = window.docx;
+    var PURPLE='592C88', INK='221B2E', SLATE='5F5A6B';
+    var name = blankIfEmpty(val('studentName'));
+    var sid = blankIfEmpty(val('studentId'));
+    function h(text){ return new D.Paragraph({ spacing:{before:220,after:100}, children:[new D.TextRun({text:text,bold:true,color:PURPLE,size:26})] }); }
+    function p(text, opts){ opts=opts||{}; return new D.Paragraph({ spacing:{before:60,after:60}, children:[new D.TextRun({text:text,size:20,color:opts.color||INK,bold:!!opts.bold})] }); }
+    function cellDocx(text,width,opts){
+      opts=opts||{};
+      return new D.TableCell({ width:{size:width,type:D.WidthType.DXA}, shading:opts.shading?{type:D.ShadingType.CLEAR,fill:opts.shading}:undefined,
+        margins:{top:60,bottom:60,left:90,right:90}, children:[new D.Paragraph({children:[new D.TextRun({text:text,size:19,bold:!!opts.bold,color:opts.color||INK})]})] });
+    }
+    function tableFromEl(tableEl){
+      var theadCells = Array.from(tableEl.querySelectorAll('thead th')).map(function(th){ return th.textContent.trim(); });
+      var bodyRows = Array.from(tableEl.querySelectorAll('tbody tr'));
+      var colCount = theadCells.length || (bodyRows[0]?bodyRows[0].children.length:1);
+      var colWidth = Math.floor(9000/colCount);
+      var widths = new Array(colCount).fill(colWidth);
+      var rows = [];
+      if(theadCells.length){ rows.push(new D.TableRow({ children: theadCells.map(function(t){ return cellDocx(t,colWidth,{bold:true,shading:PURPLE,color:'FFFFFF'}); }) })); }
+      bodyRows.forEach(function(tr){
+        var cells = Array.from(tr.children).map(function(td){ return cellDocx(td.textContent.trim(), colWidth, {}); });
+        rows.push(new D.TableRow({ children: cells }));
+      });
+      return new D.Table({ width:{size:widths.reduce(function(a,b){return a+b;},0),type:D.WidthType.DXA}, columnWidths:widths, rows:rows });
+    }
+    var children = [];
+    children.push(new D.Paragraph({ heading:D.HeadingLevel.TITLE, spacing:{after:60}, children:[new D.TextRun({text:'Tennessee Harvester Corporation \u2014 Bond Amortization Schedule', color:PURPLE, size:32, bold:true})] }));
+    children.push(p('Name: '+name+'     Student ID: '+sid, { bold:true }));
+    children.push(p('ACCT 351  \u00b7  Long-Term Debt  \u00b7  Chapter 14', { color:SLATE }));
+    var scoreText = (document.getElementById('overallScore')||{}).textContent || '';
+    var breakdownText = (document.getElementById('scoreBreakdown')||{}).textContent || '';
+    children.push(new D.Paragraph({ spacing:{before:200,after:60}, border:{ top:{style:D.BorderStyle.SINGLE,size:6,color:PURPLE}, bottom:{style:D.BorderStyle.SINGLE,size:6,color:PURPLE} },
+      children:[new D.TextRun({text:'Assignment score', bold:true, color:PURPLE, size:24})] }));
+    children.push(new D.Paragraph({ spacing:{before:40,after:20}, children:[new D.TextRun({text:scoreText, bold:true, color:INK, size:24})] }));
+    if(breakdownText) children.push(new D.Paragraph({ spacing:{after:100}, children:[new D.TextRun({text:breakdownText, color:SLATE, size:18})] }));
+    children.push(h('Bond amortization schedule (as generated)'));
+    children.push(tableFromEl(document.getElementById('schedTable')));
+    document.querySelectorAll('.part').forEach(function(partEl, idx){
+      var h2El = partEl.querySelector('h2');
+      children.push(h('Part '+(idx+1)+' \u2014 '+(h2El?h2El.textContent:'')));
+      Array.from(partEl.children).forEach(function(child){
+        if(child.classList.contains('part-label') || child.tagName==='H2') return;
+        if(child.classList.contains('scenario')){ child.querySelectorAll('p').forEach(function(pp){ children.push(p(pp.textContent)); }); }
+        else if(child.classList.contains('req')){ children.push(p(child.textContent.trim(), { bold:true })); }
+        else if(child.classList.contains('req-hint')){ children.push(p(child.textContent.trim(), { color:SLATE })); }
+        else if(child.classList.contains('work-line')){ children.push(p(walkWorkLine(child))); }
+      });
+    });
+    children.push(new D.Paragraph({ spacing:{before:300}, alignment:D.AlignmentType.CENTER, children:[new D.TextRun({text:'Tennessee Harvester Corporation Bond Amortization Schedule  \u00b7  ACCT 351  \u00b7  Western Carolina University', size:16, italics:true, color:SLATE})] }));
+    return new D.Document({ sections:[{ properties:{ page:{ size:{width:12240,height:15840}, margin:{top:1440,bottom:1440,left:1440,right:1440} } }, children:children }] });
+  }
+  document.getElementById('downloadDocxBtn').addEventListener('click', function(){
+    var statusEl = document.getElementById('submitStatus');
+    statusEl.classList.remove('error'); statusEl.textContent = 'Preparing your Word document\u2026';
+    loadDocxLib().then(function(){ var doc=buildAnswersDoc(); return window.docx.Packer.toBlob(doc); })
+    .then(function(blob){
+      var idPart = val('studentId') || 'submission';
+      var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'TennesseeHarvester-'+idPart+'.docx';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      statusEl.textContent = 'Downloaded.'; setTimeout(function(){ statusEl.textContent=''; }, 4000);
+    }).catch(function(err){
+      statusEl.classList.add('error'); statusEl.textContent = 'Could not load the Word export tool (needs internet access) \u2014 use Print / Save as PDF instead.';
+    });
+  });
+
+  applyAndStore('');
+})();
+</script>
+
+</body>
+</html>
