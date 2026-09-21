@@ -69,7 +69,8 @@
   table.stmt td:first-child{ text-align:left; }
   table.stmt td.indent{ padding-left:22px; }
   table.stmt input[type="text"]{ width:100%; text-align:right; font-family:'IBM Plex Mono', monospace; font-size:13.5px; padding:6px 8px; border:1px solid var(--line); border-radius:5px; background:var(--parchment); color:var(--ink); }
-  table.stmt input:focus, .work-line input:focus{ outline:none; border-color:var(--purple-mid); box-shadow:0 0 0 3px rgba(89,44,136,0.10); background:var(--paper); }
+  table.stmt select.line-select{ width:100%; font-family:'Inter',sans-serif; font-size:13.5px; padding:6px 8px; border:1px solid var(--line); border-radius:5px; background:var(--parchment); color:var(--ink); }
+  table.stmt input:focus, table.stmt select:focus, .work-line input:focus{ outline:none; border-color:var(--purple-mid); box-shadow:0 0 0 3px rgba(89,44,136,0.10); background:var(--paper); }
   table.stmt tr.subtotal-row td{ border-top:2px solid var(--purple); font-weight:600; }
   table.stmt tr.final-row td{ border-top:3px double var(--purple); font-weight:700; }
   .stmt-hint{ font-size:12px; color:var(--slate); margin-top:6px; }
@@ -177,15 +178,15 @@
   <div class="part" data-part-key="p1">
     <span class="part-label">Part 1</span>
     <h2>Net sales and gross profit</h2>
-    <div class="req"><span class="letter">a.</span>Build the top of the statement.</div>
+    <div class="req"><span class="letter">a.</span>Build the top of the statement. For each row, select the correct line item from the dropdown and enter its dollar amount.</div>
     <table class="stmt">
       <thead><tr><th style="width:60%;">Line item</th><th style="width:40%;">Amount</th></tr></thead>
       <tbody>
-        <tr><td>Sales revenue</td><td><input type="text" placeholder="$" id="p1-sales"></td></tr>
-        <tr><td class="indent">Less: Sales returns and allowances</td><td><input type="text" placeholder="$" id="p1-sra"></td></tr>
-        <tr class="subtotal-row"><td>Net sales</td><td><input type="text" placeholder="$" id="p1-netsales"></td></tr>
-        <tr><td>Cost of goods sold</td><td><input type="text" placeholder="$" id="p1-cogs"></td></tr>
-        <tr class="subtotal-row"><td>Gross profit</td><td><input type="text" placeholder="$" id="p1-gp"></td></tr>
+        <tr><td><select class="line-select" id="p1-sales-label" data-answer="Sales revenue"></select></td><td><input type="text" placeholder="$" id="p1-sales"></td></tr>
+        <tr><td class="indent"><select class="line-select" id="p1-sra-label" data-answer="Less: Sales returns and allowances"></select></td><td><input type="text" placeholder="$" id="p1-sra"></td></tr>
+        <tr class="subtotal-row"><td><select class="line-select" id="p1-netsales-label" data-answer="Net sales"></select></td><td><input type="text" placeholder="$" id="p1-netsales"></td></tr>
+        <tr><td><select class="line-select" id="p1-cogs-label" data-answer="Cost of goods sold"></select></td><td><input type="text" placeholder="$" id="p1-cogs"></td></tr>
+        <tr class="subtotal-row"><td><select class="line-select" id="p1-gp-label" data-answer="Gross profit"></select></td><td><input type="text" placeholder="$" id="p1-gp"></td></tr>
       </tbody>
     </table>
 
@@ -193,7 +194,7 @@
       <button class="btn-check" id="checkP1" type="button">Check my work</button>
       <span class="check-summary" id="p1Summary"></span>
       <span class="attempts-note" id="p1Attempts">3 attempts remaining</span>
-      <span class="check-disclaimer">This checks every transcribed amount and both subtotals.</span>
+      <span class="check-disclaimer">This checks every line item you selected, every transcribed amount, and both subtotals.</span>
     </div>
     <div class="key" id="p1Key" style="display:none;"></div>
   </div>
@@ -202,21 +203,21 @@
   <div class="part" data-part-key="p2">
     <span class="part-label">Part 2</span>
     <h2>Operating income, net income, and earnings per share</h2>
-    <div class="req"><span class="letter">b.</span>Finish the income statement.</div>
+    <div class="req"><span class="letter">b.</span>Finish the income statement. For each row, select the correct line item from the dropdown and enter its dollar amount.</div>
     <table class="stmt">
       <thead><tr><th style="width:60%;">Line item</th><th style="width:40%;">Amount</th></tr></thead>
       <tbody>
-        <tr><td>Selling expenses</td><td><input type="text" placeholder="$" id="p2-se"></td></tr>
-        <tr><td>General and administrative expenses</td><td><input type="text" placeholder="$" id="p2-ga"></td></tr>
-        <tr class="subtotal-row"><td>Total operating expenses</td><td><input type="text" placeholder="$" id="p2-totalopex"></td></tr>
-        <tr class="subtotal-row"><td>Operating income</td><td><input type="text" placeholder="$" id="p2-opinc"></td></tr>
-        <tr><td>Interest revenue</td><td><input type="text" placeholder="$" id="p2-ir"></td></tr>
-        <tr><td>Gain on sale of investments</td><td><input type="text" placeholder="$" id="p2-gain"></td></tr>
-        <tr><td>Interest expense</td><td><input type="text" placeholder="$" id="p2-ie"></td></tr>
-        <tr class="subtotal-row"><td>Total other income (expense), net</td><td><input type="text" placeholder="$ (use a minus sign if net expense)" id="p2-othernet"></td></tr>
-        <tr class="subtotal-row"><td>Income before income taxes</td><td><input type="text" placeholder="$" id="p2-ibt"></td></tr>
-        <tr><td>Income tax expense</td><td><input type="text" placeholder="$" id="p2-tax"></td></tr>
-        <tr class="final-row"><td>Net income</td><td><input type="text" placeholder="$" id="p2-ni"></td></tr>
+        <tr><td><select class="line-select" id="p2-se-label" data-answer="Selling expenses"></select></td><td><input type="text" placeholder="$" id="p2-se"></td></tr>
+        <tr><td><select class="line-select" id="p2-ga-label" data-answer="General and administrative expenses"></select></td><td><input type="text" placeholder="$" id="p2-ga"></td></tr>
+        <tr class="subtotal-row"><td><select class="line-select" id="p2-totalopex-label" data-answer="Total operating expenses"></select></td><td><input type="text" placeholder="$" id="p2-totalopex"></td></tr>
+        <tr class="subtotal-row"><td><select class="line-select" id="p2-opinc-label" data-answer="Operating income"></select></td><td><input type="text" placeholder="$" id="p2-opinc"></td></tr>
+        <tr><td><select class="line-select" id="p2-ir-label" data-answer="Interest revenue"></select></td><td><input type="text" placeholder="$" id="p2-ir"></td></tr>
+        <tr><td><select class="line-select" id="p2-gain-label" data-answer="Gain on sale of investments"></select></td><td><input type="text" placeholder="$" id="p2-gain"></td></tr>
+        <tr><td><select class="line-select" id="p2-ie-label" data-answer="Interest expense"></select></td><td><input type="text" placeholder="$" id="p2-ie"></td></tr>
+        <tr class="subtotal-row"><td><select class="line-select" id="p2-othernet-label" data-answer="Total other income (expense), net"></select></td><td><input type="text" placeholder="$ (use a minus sign if net expense)" id="p2-othernet"></td></tr>
+        <tr class="subtotal-row"><td><select class="line-select" id="p2-ibt-label" data-answer="Income before income taxes"></select></td><td><input type="text" placeholder="$" id="p2-ibt"></td></tr>
+        <tr><td><select class="line-select" id="p2-tax-label" data-answer="Income tax expense"></select></td><td><input type="text" placeholder="$" id="p2-tax"></td></tr>
+        <tr class="final-row"><td><select class="line-select" id="p2-ni-label" data-answer="Net income"></select></td><td><input type="text" placeholder="$" id="p2-ni"></td></tr>
       </tbody>
     </table>
     <div class="work-line" style="margin-top:14px;">
@@ -228,7 +229,7 @@
       <button class="btn-check" id="checkP2" type="button">Check my work</button>
       <span class="check-summary" id="p2Summary"></span>
       <span class="attempts-note" id="p2Attempts">3 attempts remaining</span>
-      <span class="check-disclaimer">This checks every line item, every subtotal, tax expense, net income, and EPS.</span>
+      <span class="check-disclaimer">This checks every line item you selected, every amount, every subtotal, tax expense, net income, and EPS.</span>
     </div>
     <div class="key" id="p2Key" style="display:none;"></div>
   </div>
@@ -240,15 +241,15 @@
     <div class="scenario">
       <p>Comprehensive income captures changes in equity from non-owner sources that bypass the income statement — Whittier reports these as other comprehensive income (OCI), net of tax.</p>
     </div>
-    <div class="req"><span class="letter">c.</span>Prepare the statement of comprehensive income.</div>
+    <div class="req"><span class="letter">c.</span>Prepare the statement of comprehensive income. For each row, select the correct line item from the dropdown and enter its dollar amount.</div>
     <table class="stmt">
       <thead><tr><th style="width:60%;">Line item</th><th style="width:40%;">Amount</th></tr></thead>
       <tbody>
-        <tr><td>Net income</td><td><input type="text" placeholder="$" id="p3-ni"></td></tr>
-        <tr><td class="indent">Unrealized holding gain (loss) on AFS debt securities</td><td><input type="text" placeholder="$ (use a minus sign if a loss)" id="p3-ug"></td></tr>
-        <tr><td class="indent">Foreign currency translation adjustment</td><td><input type="text" placeholder="$ (use a minus sign if negative)" id="p3-fx"></td></tr>
-        <tr class="subtotal-row"><td>Other comprehensive income</td><td><input type="text" placeholder="$" id="p3-oci"></td></tr>
-        <tr class="final-row"><td>Comprehensive income</td><td><input type="text" placeholder="$" id="p3-ci"></td></tr>
+        <tr><td><select class="line-select" id="p3-ni-label" data-answer="Net income"></select></td><td><input type="text" placeholder="$" id="p3-ni"></td></tr>
+        <tr><td class="indent"><select class="line-select" id="p3-ug-label" data-answer="Unrealized holding gain (loss) on AFS debt securities"></select></td><td><input type="text" placeholder="$ (use a minus sign if a loss)" id="p3-ug"></td></tr>
+        <tr><td class="indent"><select class="line-select" id="p3-fx-label" data-answer="Foreign currency translation adjustment"></select></td><td><input type="text" placeholder="$ (use a minus sign if negative)" id="p3-fx"></td></tr>
+        <tr class="subtotal-row"><td><select class="line-select" id="p3-oci-label" data-answer="Other comprehensive income"></select></td><td><input type="text" placeholder="$" id="p3-oci"></td></tr>
+        <tr class="final-row"><td><select class="line-select" id="p3-ci-label" data-answer="Comprehensive income"></select></td><td><input type="text" placeholder="$" id="p3-ci"></td></tr>
       </tbody>
     </table>
     <p class="stmt-hint">Net income carries forward from Part 2.</p>
@@ -257,7 +258,7 @@
       <button class="btn-check" id="checkP3" type="button">Check my work</button>
       <span class="check-summary" id="p3Summary"></span>
       <span class="attempts-note" id="p3Attempts">3 attempts remaining</span>
-      <span class="check-disclaimer">This checks net income, both OCI items, the OCI subtotal, and comprehensive income.</span>
+      <span class="check-disclaimer">This checks the line items you selected, net income, both OCI items, the OCI subtotal, and comprehensive income.</span>
     </div>
     <div class="key" id="p3Key" style="display:none;"></div>
   </div>
@@ -380,6 +381,38 @@
     if(!el.dataset.clearBound){ el.addEventListener('input', function(){ clearFieldState(el); }); el.dataset.clearBound='1'; }
     return ok;
   }
+  function markSelect(id){
+    var el = document.getElementById(id); if(!el) return null;
+    el.classList.remove('field-correct','field-incorrect');
+    var ok = !!el.value && el.value === el.dataset.answer;
+    el.classList.add(ok?'field-correct':'field-incorrect');
+    if(!el.dataset.clearBound){ el.addEventListener('change', function(){ clearFieldState(el); }); el.dataset.clearBound='1'; }
+    return ok;
+  }
+
+  // ---------------- line-item dropdown bank ----------------
+  // Every line item that appears anywhere on the statement, shuffled into one
+  // shared list so choosing the right label also means correctly classifying
+  // which section of the statement (or which subtotal) it belongs to.
+  var LINE_ITEM_BANK = [
+    'Comprehensive income','Cost of goods sold','Foreign currency translation adjustment',
+    'Gain on sale of investments','General and administrative expenses','Gross profit',
+    'Income before income taxes','Income tax expense','Interest expense','Interest revenue',
+    'Less: Sales returns and allowances','Net income','Net sales','Operating income',
+    'Other comprehensive income','Sales revenue','Selling expenses','Total operating expenses',
+    'Total other income (expense), net','Unrealized holding gain (loss) on AFS debt securities'
+  ];
+  document.querySelectorAll('select.line-select').forEach(function(sel){
+    var placeholder = document.createElement('option');
+    placeholder.value = ''; placeholder.textContent = 'Select the line item\u2026';
+    sel.appendChild(placeholder);
+    LINE_ITEM_BANK.forEach(function(item){
+      var opt = document.createElement('option');
+      opt.value = item; opt.textContent = item;
+      sel.appendChild(opt);
+    });
+    sel.value = '';
+  });
   function fieldsFor(ids){ return ids.map(function(id){ return document.getElementById(id); }).filter(Boolean); }
   function findMissing(ids){ return fieldsFor(ids).filter(function(el){ return !el.value || !el.value.trim(); }); }
   function setMissing(ids, flag){ fieldsFor(ids).forEach(function(el){ el.classList.toggle('field-missing', flag); }); }
@@ -420,12 +453,17 @@
   var currentScenario = null;
 
   var PARTS = [
-    { key:'p1', requiredIds:['p1-sales','p1-sra','p1-netsales','p1-cogs','p1-gp'], itemCount:5,
+    { key:'p1', requiredIds:['p1-sales-label','p1-sales','p1-sra-label','p1-sra','p1-netsales-label','p1-netsales','p1-cogs-label','p1-cogs','p1-gp-label','p1-gp'], itemCount:10,
       grade:function(d){ return [
+        markSelect('p1-sales-label'),
         markMoney('p1-sales', d.S),
+        markSelect('p1-sra-label'),
         markMoney('p1-sra', d.SRA),
+        markSelect('p1-netsales-label'),
         markMoney('p1-netsales', d.NetSales),
+        markSelect('p1-cogs-label'),
         markMoney('p1-cogs', d.COGS),
+        markSelect('p1-gp-label'),
         markMoney('p1-gp', d.GrossProfit)
       ]; },
       keyRows:function(d){ return [
@@ -436,18 +474,29 @@
         ['Gross profit', money0(d.GrossProfit)]
       ]; }
     },
-    { key:'p2', requiredIds:['p2-se','p2-ga','p2-totalopex','p2-opinc','p2-ir','p2-gain','p2-ie','p2-othernet','p2-ibt','p2-tax','p2-ni','p2-eps'], itemCount:12,
+    { key:'p2', requiredIds:['p2-se-label','p2-se','p2-ga-label','p2-ga','p2-totalopex-label','p2-totalopex','p2-opinc-label','p2-opinc','p2-ir-label','p2-ir','p2-gain-label','p2-gain','p2-ie-label','p2-ie','p2-othernet-label','p2-othernet','p2-ibt-label','p2-ibt','p2-tax-label','p2-tax','p2-ni-label','p2-ni','p2-eps'], itemCount:23,
       grade:function(d){ return [
+        markSelect('p2-se-label'),
         markMoney('p2-se', d.SE),
+        markSelect('p2-ga-label'),
         markMoney('p2-ga', d.GA),
+        markSelect('p2-totalopex-label'),
         markMoney('p2-totalopex', d.TotalOpEx),
+        markSelect('p2-opinc-label'),
         markMoney('p2-opinc', d.OperatingIncome),
+        markSelect('p2-ir-label'),
         markMoney('p2-ir', d.IR),
+        markSelect('p2-gain-label'),
         markMoney('p2-gain', d.GAIN),
+        markSelect('p2-ie-label'),
         markMoney('p2-ie', d.IE),
+        markSelect('p2-othernet-label'),
         markMoney('p2-othernet', d.OtherNet),
+        markSelect('p2-ibt-label'),
         markMoney('p2-ibt', d.IncomeBeforeTax),
+        markSelect('p2-tax-label'),
         markMoney('p2-tax', d.TaxExpense),
+        markSelect('p2-ni-label'),
         markMoney('p2-ni', d.NetIncome),
         markMoney('p2-eps', d.EPS, 0.01)
       ]; },
@@ -466,12 +515,17 @@
         ['Earnings per share', moneyCents(d.EPS)]
       ]; }
     },
-    { key:'p3', requiredIds:['p3-ni','p3-ug','p3-fx','p3-oci','p3-ci'], itemCount:5,
+    { key:'p3', requiredIds:['p3-ni-label','p3-ni','p3-ug-label','p3-ug','p3-fx-label','p3-fx','p3-oci-label','p3-oci','p3-ci-label','p3-ci'], itemCount:10,
       grade:function(d){ return [
+        markSelect('p3-ni-label'),
         markMoney('p3-ni', d.NetIncome),
+        markSelect('p3-ug-label'),
         markMoney('p3-ug', d.UG),
+        markSelect('p3-fx-label'),
         markMoney('p3-fx', d.FX),
+        markSelect('p3-oci-label'),
         markMoney('p3-oci', d.TotalOCI),
+        markSelect('p3-ci-label'),
         markMoney('p3-ci', d.ComprehensiveIncome)
       ]; },
       keyRows:function(d){ return [
