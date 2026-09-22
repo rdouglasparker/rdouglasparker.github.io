@@ -36,6 +36,8 @@
   .entry-block.entry-correct { border-left-color: var(--good); }
   .entry-block.entry-incorrect { border-left-color: var(--bad); }
   .entry-desc { font-size: 0.94rem; margin-bottom: 0.7rem; }
+  .tx-recap { font-size: 0.9rem; background: var(--panel); border-radius: 6px; padding: 0.6rem 0.8rem; margin-bottom: 0.6rem; color: #4a453f; }
+  .tx-recap .letter { font-weight: 700; color: var(--wcu-purple-dark); }
   .entry-desc .letter { font-weight: 700; color: var(--wcu-purple-dark); }
   table.je-table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
   table.je-table th, table.je-table td { border: 1px solid var(--rule); padding: 0.4rem 0.5rem; }
@@ -63,7 +65,7 @@
 <body>
 
 <header>
-  <div class="eyebrow">ACCT 351 · Intermediate Accounting I · Chapter 8</div>
+  <div class="eyebrow">ACCT 351 · Intermediate Accounting I</div>
   <h1>Purchase Discounts &amp; Freight: Buyer and Seller Transactions</h1>
   <p class="sub">Perpetual Inventory System — Gross Method (Part 1) and Net Method (Part 2)</p>
 </header>
@@ -236,15 +238,33 @@ function generateScenario() {
   document.getElementById('overallScore').textContent = 'Check both parts above to see your combined score.';
 }
 
+function transactionText(key) {
+  const s = SCN;
+  switch (key) {
+    case 'a':
+      return 'November 1, ' + YEAR + ' — ' + BUYER + ' purchases inventory on account from ' + SELLER + '. Invoice price: ' + fmt(s.P) + '. Terms: 2/10, n/30. Shipped F.O.B. shipping point.' +
+        (SYSTEM === 'perpetual' ? ' ' + SELLER + '\'s cost of the inventory sold is ' + fmt(s.totalCost) + '.' : '');
+    case 'b':
+      return 'November 1, ' + YEAR + ' — ' + BUYER + ' pays ' + fmt(s.F) + ' cash for freight on the shipment (F.O.B. shipping point, so the buyer is responsible for shipping costs).';
+    case 'c':
+      return 'November 4, ' + YEAR + ' — ' + BUYER + ' returns ' + fmt(s.R) + ' (invoice price) of inventory to ' + SELLER + ' for credit against the account.' +
+        (SYSTEM === 'perpetual' ? ' The cost of the returned inventory is ' + fmt(s.returnCost) + '.' : '');
+    case 'd':
+      return 'November 9, ' + YEAR + ' — ' + BUYER + ' pays ' + fmt(s.firstPortion) + ' of the remaining invoice balance. This payment falls within the 10-day discount period.';
+    case 'e':
+      return 'November 24, ' + YEAR + ' — ' + BUYER + ' pays the remaining ' + fmt(s.secondPortion) + ' of the invoice balance. The 10-day discount period has already passed.';
+  }
+}
+
 function renderBackground() {
   const s = SCN;
   const html =
-    '<div class="tx-line"><strong>(a)</strong> November 1, ' + YEAR + ' — ' + BUYER + ' purchases inventory on account from ' + SELLER + '. Invoice price: ' + fmt(s.P) + '. Terms: 2/10, n/30. Shipped F.O.B. shipping point.</div>' +
-    '<div class="tx-line"><strong>(b)</strong> November 1, ' + YEAR + ' — ' + BUYER + ' pays ' + fmt(s.F) + ' cash for freight on the shipment (F.O.B. shipping point, so the buyer is responsible for shipping costs).</div>' +
-    '<div class="tx-line"><strong>(c)</strong> November 4, ' + YEAR + ' — ' + BUYER + ' returns ' + fmt(s.R) + ' (invoice price) of inventory to ' + SELLER + ' for credit against the account.</div>' +
-    '<div class="tx-line"><strong>(d)</strong> November 9, ' + YEAR + ' — ' + BUYER + ' pays ' + fmt(s.firstPortion) + ' of the remaining invoice balance. This payment falls within the 10-day discount period.</div>' +
-    '<div class="tx-line"><strong>(e)</strong> November 24, ' + YEAR + ' — ' + BUYER + ' pays the remaining ' + fmt(s.secondPortion) + ' of the invoice balance. The 10-day discount period has already passed.</div>' +
-    (SYSTEM === 'perpetual' ? '<div class="tx-line" style="margin-top:0.6rem;">Both companies use a <strong>perpetual</strong> inventory system. ' + SELLER + '\'s cost of the inventory sold is ' + fmt(s.totalCost) + ', and the cost of the portion returned in (c) is ' + fmt(s.returnCost) + '.</div>' : '<div class="tx-line" style="margin-top:0.6rem;">Both companies use a <strong>periodic</strong> inventory system.</div>');
+    '<div class="tx-line"><strong>(a)</strong> ' + transactionText('a') + '</div>' +
+    '<div class="tx-line"><strong>(b)</strong> ' + transactionText('b') + '</div>' +
+    '<div class="tx-line"><strong>(c)</strong> ' + transactionText('c') + '</div>' +
+    '<div class="tx-line"><strong>(d)</strong> ' + transactionText('d') + '</div>' +
+    '<div class="tx-line"><strong>(e)</strong> ' + transactionText('e') + '</div>' +
+    (SYSTEM === 'perpetual' ? '<div class="tx-line" style="margin-top:0.6rem;">Both companies use a <strong>perpetual</strong> inventory system.</div>' : '<div class="tx-line" style="margin-top:0.6rem;">Both companies use a <strong>periodic</strong> inventory system.</div>');
   document.getElementById('bgText').innerHTML = html;
 }
 
@@ -283,7 +303,8 @@ function buildEntryBlock(method, party, key, lines) {
   const letter = key;
   const label = ENTRY_DESC[party][key](SCN);
   return '<div class="entry-block" id="block-' + uid + '">' +
-    '<div class="entry-desc"><span class="letter">(' + letter + ')</span> ' + label + '</div>' +
+    '<div class="tx-recap"><span class="letter">(' + letter + ')</span> ' + transactionText(key) + '</div>' +
+    '<div class="entry-desc">' + label + '</div>' +
     '<table class="je-table"><thead><tr><th style="width:55%">Account</th><th>Debit</th><th>Credit</th></tr></thead>' +
     '<tbody>' + rows + '</tbody></table>' +
     '<div class="entry-result" id="result-' + uid + '"></div>' +
