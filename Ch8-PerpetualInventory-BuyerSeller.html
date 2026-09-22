@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Purchase Discounts &amp; Freight: Buyer and Seller Transactions (Perpetual System)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+  :root {
+    --wcu-purple: #4B2E83; --wcu-purple-dark: #341f5c; --wcu-gold: #C8A24A;
+    --ink: #232023; --paper: #fdfcfb; --panel: #f7f3ec; --rule: #e2d9c8;
+    --good: #2E6B45; --good-bg: #E7F3EB; --bad: #9C4221; --bad-bg: #FBEAE2;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; line-height: 1.55; }
+  header { background: linear-gradient(135deg, var(--wcu-purple) 0%, var(--wcu-purple-dark) 100%); color: #fff; padding: 2.2rem 1.5rem 1.8rem; border-bottom: 6px solid var(--wcu-gold); }
+  header .eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--wcu-gold); margin-bottom: 0.4rem; }
+  header h1 { font-family: 'Source Serif 4', serif; font-weight: 700; font-size: 1.7rem; margin: 0 0 0.3rem; }
+  header p.sub { margin: 0; color: #e7e0f2; font-size: 0.95rem; }
+  main { max-width: 900px; margin: 0 auto; padding: 1.6rem 1.5rem 4rem; }
+  h2 { font-family: 'Source Serif 4', serif; font-size: 1.4rem; margin: 2.2rem 0 0.8rem; color: var(--wcu-purple-dark); border-bottom: 2px solid var(--rule); padding-bottom: 0.4rem; }
+  h3 { font-family: 'Source Serif 4', serif; font-size: 1.1rem; margin: 1.4rem 0 0.6rem; color: var(--wcu-purple-dark); }
+  p { margin: 0.6rem 0; }
+  .meta-bar { display: flex; flex-wrap: wrap; gap: 0.8rem; align-items: center; background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 0.9rem 1.1rem; margin-top: 1.2rem; }
+  .meta-bar label { font-size: 0.88rem; font-weight: 600; color: var(--wcu-purple-dark); }
+  .meta-bar input[type="text"] { font-family: 'IBM Plex Mono', monospace; padding: 0.4rem 0.6rem; border: 1px solid var(--rule); border-radius: 5px; width: 160px; }
+  .meta-bar button { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.88rem; color: #fff; background: var(--wcu-purple); border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; }
+  .meta-bar button:hover { background: var(--wcu-purple-dark); }
+  .meta-bar .year-note { font-size: 0.82rem; color: #6b6560; }
+  .rounding-note { font-size: 0.88rem; background: #fff; border: 1px solid var(--rule); border-radius: 6px; padding: 0.7rem 1rem; margin-top: 1rem; }
+  .background-box { background: #fff; border: 1px solid var(--rule); border-radius: 8px; padding: 1rem 1.2rem; margin-top: 1rem; }
+  .background-box .tx-line { margin: 0.4rem 0; padding-left: 1.4rem; text-indent: -1.4rem; }
+  .part-instructions { font-style: italic; color: #4a453f; margin-bottom: 1rem; }
+  .party-header { font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #fff; background: var(--wcu-purple); padding: 0.5rem 0.9rem; border-radius: 5px; margin: 1.4rem 0 0.8rem; }
+  .entry-block { background: #fff; border: 1px solid var(--rule); border-left: 5px solid var(--rule); border-radius: 8px; padding: 0.9rem 1.1rem; margin-bottom: 1rem; transition: border-color 0.2s ease; }
+  .entry-block.entry-correct { border-left-color: var(--good); }
+  .entry-block.entry-incorrect { border-left-color: var(--bad); }
+  .entry-desc { font-size: 0.94rem; margin-bottom: 0.7rem; }
+  .entry-desc .letter { font-weight: 700; color: var(--wcu-purple-dark); }
+  table.je-table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+  table.je-table th, table.je-table td { border: 1px solid var(--rule); padding: 0.4rem 0.5rem; }
+  table.je-table th { background: var(--panel); font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--wcu-purple-dark); }
+  table.je-table select { width: 100%; font-family: 'Inter', sans-serif; font-size: 0.88rem; padding: 0.3rem; border: 1px solid var(--rule); border-radius: 4px; background: #fff; }
+  table.je-table input[type="number"] { width: 100%; font-family: 'IBM Plex Mono', monospace; font-size: 0.88rem; padding: 0.3rem 0.4rem; border: 1px solid var(--rule); border-radius: 4px; }
+  .entry-result { font-size: 0.82rem; font-weight: 600; margin-top: 0.4rem; }
+  .entry-result.ok { color: var(--good); }
+  .entry-result.no { color: var(--bad); }
+  .check-row { display: flex; align-items: center; gap: 1rem; margin: 1.2rem 0 2rem; }
+  .check-row button { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.92rem; color: #fff; background: var(--wcu-gold); border: none; padding: 0.65rem 1.3rem; border-radius: 6px; cursor: pointer; }
+  .check-row button:hover { filter: brightness(0.95); }
+  .part-score { font-family: 'IBM Plex Mono', monospace; font-weight: 700; font-size: 0.95rem; color: var(--wcu-purple-dark); }
+  .overall-score { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 1.1rem 1.3rem; margin-top: 2rem; font-size: 1rem; }
+  .overall-score strong { color: var(--wcu-purple-dark); }
+  .submit-box { margin-top: 2rem; padding: 1.2rem; background: #fff; border: 1px solid var(--rule); border-radius: 8px; }
+  .submit-box input[type="text"] { font-family: 'Inter', sans-serif; padding: 0.5rem 0.7rem; border: 1px solid var(--rule); border-radius: 5px; width: 260px; margin-right: 0.8rem; }
+  .submit-box button { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.9rem; color: var(--wcu-purple-dark); background: #fff; border: 2px solid var(--wcu-purple); padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; }
+  footer { text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; color: #8a8380; padding: 1.5rem; }
+  @media print {
+    .meta-bar button, .check-row button, .submit-box button { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">ACCT 351 · Intermediate Accounting I · Chapter 8</div>
+  <h1>Purchase Discounts &amp; Freight: Buyer and Seller Transactions</h1>
+  <p class="sub">Perpetual Inventory System — Gross Method (Part 1) and Net Method (Part 2)</p>
+</header>
+
+<main>
+
+  <div class="meta-bar">
+    <label for="studentId">Student ID</label>
+    <input type="text" id="studentId" placeholder="e.g. 920123456" maxlength="20">
+    <button onclick="generateScenario()">Generate Scenario</button>
+    <span class="year-note" id="yearNote"></span>
+  </div>
+
+  <div class="rounding-note">
+    <strong>Rounding convention:</strong> round every dollar figure to the nearest whole dollar. This scenario is generated from the last six digits of the Student ID entered above — the same ID always produces the same numbers, and the transaction dates update automatically to the current year.
+  </div>
+
+  <h2>Background</h2>
+  <div class="background-box" id="bgText">Click "Generate Scenario" above to build your version of this problem.</div>
+
+  <!-- ============================== PART 1 ============================== -->
+  <h2>Part 1 of 2 — Gross Method</h2>
+  <p class="part-instructions">Assuming both companies use a <strong>perpetual</strong> inventory system and the <strong>gross method</strong> to record purchase and sales discounts, prepare the journal entries for transactions (a) through (e) below on each company's own books. Not every line needs a debit and a credit on the same row — pick the account for each line first, then enter the amount in the debit or credit column as appropriate.</p>
+  <div id="part1"></div>
+  <div class="check-row">
+    <button onclick="checkPart('gross')">Check My Work — Part 1</button>
+    <span class="part-score" id="score-gross"></span>
+  </div>
+
+  <!-- ============================== PART 2 ============================== -->
+  <h2>Part 2 of 2 — Net Method</h2>
+  <p class="part-instructions">Now assume both companies instead use the <strong>net method</strong> to record purchase and sales discounts. Record the same five transactions (a) through (e) again below, this time under the net method.</p>
+  <div id="part2"></div>
+  <div class="check-row">
+    <button onclick="checkPart('net')">Check My Work — Part 2</button>
+    <span class="part-score" id="score-net"></span>
+  </div>
+
+  <div class="overall-score" id="overallScore">Check both parts above to see your combined score.</div>
+
+  <div class="submit-box">
+    <label for="studentName">Your name:</label>
+    <input type="text" id="studentName" placeholder="Full name">
+    <button onclick="window.print()">Print / Save as PDF</button>
+  </div>
+
+</main>
+
+<footer>Purchase Discounts &amp; Freight: Buyer and Seller Transactions · Perpetual Inventory System · ACCT 351 · Western Carolina University</footer>
+
+<script>
+/* ---------------------------------------------------------------------
+   CONFIG
+--------------------------------------------------------------------- */
+const SYSTEM = 'perpetual';
+const BUYER = 'Sylva Mercantile Company';
+const SELLER = 'Panthertown Valley Wholesale Co.';
+const YEAR = new Date().getFullYear();
+
+const ACCOUNTS = [
+  'Cash','Accounts Receivable','Accounts Payable','Inventory','Purchases',
+  'Purchase Returns and Allowances','Purchase Discounts','Purchase Discounts Lost',
+  'Freight-In','Sales Revenue','Sales Returns and Allowances','Sales Discounts',
+  'Sales Discounts Forfeited','Cost of Goods Sold','No Entry Required'
+];
+
+document.getElementById('yearNote').textContent = 'Transactions are dated in ' + YEAR + ' and will roll forward automatically next year.';
+
+/* ---------------------------------------------------------------------
+   SCENARIO GENERATION (seeded from Student ID, last 6 digits)
+--------------------------------------------------------------------- */
+function seedFromString(str) {
+  let h = 2166136261 >>> 0;
+  for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
+  return h >>> 0;
+}
+function mulberry32(a) {
+  return function() {
+    a |= 0; a = (a + 0x6D2B79F5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+function pick(rng, arr) { return arr[Math.floor(rng() * arr.length)]; }
+
+function buildScenario(studentId) {
+  const last6 = String(studentId).replace(/\D/g, '').slice(-6).padStart(6, '0');
+  const rng = mulberry32(seedFromString(last6));
+  const P = pick(rng, [55,60,65,70,75,80,85,90]) * 1000;
+  const F = pick(rng, [6,8,10,12,14]) * 100;
+  const returnPct = pick(rng, [0.10,0.15,0.20,0.25]);
+  const R = Math.round(P * returnPct / 50) * 50;
+  const d = 0.02;
+  const p1 = pick(rng, [0.5,0.6,0.7]);
+  const costRatio = pick(rng, [0.55,0.60,0.65,0.70]);
+  const remaining = P - R;
+  const firstPortion = Math.round(remaining * p1);
+  const secondPortion = remaining - firstPortion;
+  const firstDiscount = Math.round(firstPortion * d);
+  const firstCash = firstPortion - firstDiscount;
+  const netFirstAmt = Math.round(firstPortion * (1 - d));
+  const netSecondNet = Math.round(secondPortion * (1 - d));
+  const netSecondLost = secondPortion - netSecondNet;
+  const totalCost = Math.round(P * costRatio);
+  const returnCost = Math.round(R * costRatio);
+  return { P, F, R, d, p1, remaining, firstPortion, secondPortion, firstDiscount, firstCash,
+    netFirstAmt, netSecondNet, netSecondLost, totalCost, returnCost, last6 };
+}
+
+function buildEntries(s, system, method) {
+  const perpetual = system === 'perpetual';
+  const invAcct = perpetual ? 'Inventory' : 'Purchases';
+  const buyerReturnCreditAcct = perpetual ? 'Inventory' : 'Purchase Returns and Allowances';
+  const buyerDiscountCreditAcct = perpetual ? 'Inventory' : 'Purchase Discounts';
+  const freightAcct = perpetual ? 'Inventory' : 'Freight-In';
+  const buyer = {}, seller = {};
+
+  if (method === 'gross') {
+    buyer.a = [ {a:invAcct, side:'debit', amt:s.P}, {a:'Accounts Payable', side:'credit', amt:s.P} ];
+    buyer.b = [ {a:freightAcct, side:'debit', amt:s.F}, {a:'Cash', side:'credit', amt:s.F} ];
+    buyer.c = [ {a:'Accounts Payable', side:'debit', amt:s.R}, {a:buyerReturnCreditAcct, side:'credit', amt:s.R} ];
+    buyer.d = [ {a:'Accounts Payable', side:'debit', amt:s.firstPortion}, {a:buyerDiscountCreditAcct, side:'credit', amt:s.firstDiscount}, {a:'Cash', side:'credit', amt:s.firstCash} ];
+    buyer.e = [ {a:'Accounts Payable', side:'debit', amt:s.secondPortion}, {a:'Cash', side:'credit', amt:s.secondPortion} ];
+
+    seller.a = [ {a:'Accounts Receivable', side:'debit', amt:s.P}, {a:'Sales Revenue', side:'credit', amt:s.P} ];
+    if (perpetual) seller.a.push({a:'Cost of Goods Sold', side:'debit', amt:s.totalCost}, {a:'Inventory', side:'credit', amt:s.totalCost});
+    seller.c = [ {a:'Sales Returns and Allowances', side:'debit', amt:s.R}, {a:'Accounts Receivable', side:'credit', amt:s.R} ];
+    if (perpetual) seller.c.push({a:'Inventory', side:'debit', amt:s.returnCost}, {a:'Cost of Goods Sold', side:'credit', amt:s.returnCost});
+    seller.d = [ {a:'Cash', side:'debit', amt:s.firstCash}, {a:'Sales Discounts', side:'debit', amt:s.firstDiscount}, {a:'Accounts Receivable', side:'credit', amt:s.firstPortion} ];
+    seller.e = [ {a:'Cash', side:'debit', amt:s.secondPortion}, {a:'Accounts Receivable', side:'credit', amt:s.secondPortion} ];
+  } else {
+    const netP = Math.round(s.P * (1 - s.d));
+    const netR = Math.round(s.R * (1 - s.d));
+    buyer.a = [ {a:invAcct, side:'debit', amt:netP}, {a:'Accounts Payable', side:'credit', amt:netP} ];
+    buyer.b = [ {a:freightAcct, side:'debit', amt:s.F}, {a:'Cash', side:'credit', amt:s.F} ];
+    buyer.c = [ {a:'Accounts Payable', side:'debit', amt:netR}, {a:buyerReturnCreditAcct, side:'credit', amt:netR} ];
+    buyer.d = [ {a:'Accounts Payable', side:'debit', amt:s.netFirstAmt}, {a:'Cash', side:'credit', amt:s.netFirstAmt} ];
+    buyer.e = [ {a:'Accounts Payable', side:'debit', amt:s.netSecondNet}, {a:'Purchase Discounts Lost', side:'debit', amt:s.netSecondLost}, {a:'Cash', side:'credit', amt:s.secondPortion} ];
+
+    seller.a = [ {a:'Accounts Receivable', side:'debit', amt:netP}, {a:'Sales Revenue', side:'credit', amt:netP} ];
+    if (perpetual) seller.a.push({a:'Cost of Goods Sold', side:'debit', amt:s.totalCost}, {a:'Inventory', side:'credit', amt:s.totalCost});
+    seller.c = [ {a:'Sales Returns and Allowances', side:'debit', amt:netR}, {a:'Accounts Receivable', side:'credit', amt:netR} ];
+    if (perpetual) seller.c.push({a:'Inventory', side:'debit', amt:s.returnCost}, {a:'Cost of Goods Sold', side:'credit', amt:s.returnCost});
+    seller.d = [ {a:'Cash', side:'debit', amt:s.netFirstAmt}, {a:'Accounts Receivable', side:'credit', amt:s.netFirstAmt} ];
+    seller.e = [ {a:'Cash', side:'debit', amt:s.secondPortion}, {a:'Accounts Receivable', side:'credit', amt:s.netSecondNet}, {a:'Sales Discounts Forfeited', side:'credit', amt:s.netSecondLost} ];
+  }
+  return { buyer, seller };
+}
+
+/* ---------------------------------------------------------------------
+   RENDERING
+--------------------------------------------------------------------- */
+let SCN = null;
+let ENTRIES = { gross: null, net: null };
+
+function fmt(n) { return '$' + Number(n).toLocaleString('en-US'); }
+
+function generateScenario() {
+  const raw = document.getElementById('studentId').value.trim();
+  const idVal = raw || '920123456';
+  SCN = buildScenario(idVal);
+  ENTRIES.gross = buildEntries(SCN, SYSTEM, 'gross');
+  ENTRIES.net = buildEntries(SCN, SYSTEM, 'net');
+  renderBackground();
+  renderPart('gross', 'part1');
+  renderPart('net', 'part2');
+  document.getElementById('score-gross').textContent = '';
+  document.getElementById('score-net').textContent = '';
+  document.getElementById('overallScore').textContent = 'Check both parts above to see your combined score.';
+}
+
+function renderBackground() {
+  const s = SCN;
+  const html =
+    '<div class="tx-line"><strong>(a)</strong> November 1, ' + YEAR + ' — ' + BUYER + ' purchases inventory on account from ' + SELLER + '. Invoice price: ' + fmt(s.P) + '. Terms: 2/10, n/30. Shipped F.O.B. shipping point.</div>' +
+    '<div class="tx-line"><strong>(b)</strong> November 1, ' + YEAR + ' — ' + BUYER + ' pays ' + fmt(s.F) + ' cash for freight on the shipment (F.O.B. shipping point, so the buyer is responsible for shipping costs).</div>' +
+    '<div class="tx-line"><strong>(c)</strong> November 4, ' + YEAR + ' — ' + BUYER + ' returns ' + fmt(s.R) + ' (invoice price) of inventory to ' + SELLER + ' for credit against the account.</div>' +
+    '<div class="tx-line"><strong>(d)</strong> November 9, ' + YEAR + ' — ' + BUYER + ' pays ' + fmt(s.firstPortion) + ' of the remaining invoice balance. This payment falls within the 10-day discount period.</div>' +
+    '<div class="tx-line"><strong>(e)</strong> November 24, ' + YEAR + ' — ' + BUYER + ' pays the remaining ' + fmt(s.secondPortion) + ' of the invoice balance. The 10-day discount period has already passed.</div>' +
+    (SYSTEM === 'perpetual' ? '<div class="tx-line" style="margin-top:0.6rem;">Both companies use a <strong>perpetual</strong> inventory system. ' + SELLER + '\'s cost of the inventory sold is ' + fmt(s.totalCost) + ', and the cost of the portion returned in (c) is ' + fmt(s.returnCost) + '.</div>' : '<div class="tx-line" style="margin-top:0.6rem;">Both companies use a <strong>periodic</strong> inventory system.</div>');
+  document.getElementById('bgText').innerHTML = html;
+}
+
+function acctOptions(selected) {
+  return ACCOUNTS.map(function(a) {
+    return '<option value="' + a + '"' + (a === selected ? ' selected' : '') + '>' + a + '</option>';
+  }).join('');
+}
+
+const ENTRY_DESC = {
+  buyer: {
+    a: function(s) { return 'Record ' + BUYER + '\'s purchase on account.'; },
+    b: function(s) { return 'Record ' + BUYER + '\'s payment of freight.'; },
+    c: function(s) { return 'Record ' + BUYER + '\'s return of goods for credit.'; },
+    d: function(s) { return 'Record ' + BUYER + '\'s first payment (within the discount period).'; },
+    e: function(s) { return 'Record ' + BUYER + '\'s final payment (after the discount period).'; }
+  },
+  seller: {
+    a: function(s) { return 'Record ' + SELLER + '\'s sale on account' + (SYSTEM === 'perpetual' ? ' and the related cost of goods sold.' : '.'); },
+    c: function(s) { return 'Record ' + SELLER + '\'s acceptance of the returned goods' + (SYSTEM === 'perpetual' ? ' and the related cost adjustment.' : '.'); },
+    d: function(s) { return 'Record ' + SELLER + '\'s receipt of the first payment (within the discount period).'; },
+    e: function(s) { return 'Record ' + SELLER + '\'s receipt of the final payment (after the discount period).'; }
+  }
+};
+
+function buildEntryBlock(method, party, key, lines) {
+  const uid = method + '-' + party + '-' + key;
+  let rows = '';
+  for (let i = 0; i < lines.length; i++) {
+    rows += '<tr>' +
+      '<td><select id="' + uid + '-acct-' + i + '"><option value="">Select account\u2026</option>' + acctOptions('') + '</select></td>' +
+      '<td><input type="number" step="1" id="' + uid + '-dr-' + i + '"></td>' +
+      '<td><input type="number" step="1" id="' + uid + '-cr-' + i + '"></td>' +
+      '</tr>';
+  }
+  const letter = key;
+  const label = ENTRY_DESC[party][key](SCN);
+  return '<div class="entry-block" id="block-' + uid + '">' +
+    '<div class="entry-desc"><span class="letter">(' + letter + ')</span> ' + label + '</div>' +
+    '<table class="je-table"><thead><tr><th style="width:55%">Account</th><th>Debit</th><th>Credit</th></tr></thead>' +
+    '<tbody>' + rows + '</tbody></table>' +
+    '<div class="entry-result" id="result-' + uid + '"></div>' +
+    '</div>';
+}
+
+function renderPart(method, containerId) {
+  const entries = ENTRIES[method];
+  let html = '<div class="party-header">' + BUYER + ' (Buyer)</div>';
+  ['a','b','c','d','e'].forEach(function(key) {
+    if (entries.buyer[key]) html += buildEntryBlock(method, 'buyer', key, entries.buyer[key]);
+  });
+  html += '<div class="party-header">' + SELLER + ' (Seller)</div>';
+  ['a','c','d','e'].forEach(function(key) {
+    if (entries.seller[key]) html += buildEntryBlock(method, 'seller', key, entries.seller[key]);
+  });
+  document.getElementById(containerId).innerHTML = html;
+}
+
+/* ---------------------------------------------------------------------
+   CHECKING
+--------------------------------------------------------------------- */
+function checkEntry(method, party, key, expectedLines) {
+  const uid = method + '-' + party + '-' + key;
+  const n = expectedLines.length;
+  const studentRows = [];
+  for (let i = 0; i < n; i++) {
+    const acct = document.getElementById(uid + '-acct-' + i).value;
+    const drRaw = document.getElementById(uid + '-dr-' + i).value;
+    const crRaw = document.getElementById(uid + '-cr-' + i).value;
+    const dr = parseFloat(drRaw), cr = parseFloat(crRaw);
+    if (acct && !isNaN(dr) && dr > 0) studentRows.push({ account: acct, side: 'debit', amt: dr });
+    else if (acct && !isNaN(cr) && cr > 0) studentRows.push({ account: acct, side: 'credit', amt: cr });
+  }
+  const remaining = studentRows.slice();
+  let correct = 0;
+  expectedLines.forEach(function(exp) {
+    const tol = Math.max(1, Math.abs(exp.amt) * 0.005);
+    const idx = remaining.findIndex(function(r) {
+      return r.account === exp.a && r.side === exp.side && Math.abs(r.amt - exp.amt) <= tol;
+    });
+    if (idx >= 0) { correct++; remaining.splice(idx, 1); }
+  });
+  const block = document.getElementById('block-' + uid);
+  const resultEl = document.getElementById('result-' + uid);
+  if (correct === n) {
+    block.className = 'entry-block entry-correct';
+    resultEl.className = 'entry-result ok';
+    resultEl.textContent = '\u2713 All ' + n + ' line' + (n > 1 ? 's' : '') + ' correct.';
+  } else {
+    block.className = 'entry-block entry-incorrect';
+    resultEl.className = 'entry-result no';
+    resultEl.textContent = correct + ' of ' + n + ' lines correct.';
+  }
+  return { correct: correct, total: n };
+}
+
+function checkPart(method) {
+  if (!ENTRIES[method]) { alert('Click "Generate Scenario" first.'); return; }
+  const entries = ENTRIES[method];
+  let totalCorrect = 0, totalLines = 0;
+  ['a','b','c','d','e'].forEach(function(key) {
+    if (entries.buyer[key]) {
+      const r = checkEntry(method, 'buyer', key, entries.buyer[key]);
+      totalCorrect += r.correct; totalLines += r.total;
+    }
+  });
+  ['a','c','d','e'].forEach(function(key) {
+    if (entries.seller[key]) {
+      const r = checkEntry(method, 'seller', key, entries.seller[key]);
+      totalCorrect += r.correct; totalLines += r.total;
+    }
+  });
+  document.getElementById('score-' + method).textContent = totalCorrect + ' of ' + totalLines + ' lines correct';
+  updateOverall();
+}
+
+function updateOverall() {
+  const g = document.getElementById('score-gross').textContent;
+  const n = document.getElementById('score-net').textContent;
+  if (g && n) {
+    document.getElementById('overallScore').innerHTML = '<strong>Part 1 (Gross Method):</strong> ' + g + ' &nbsp;&nbsp; <strong>Part 2 (Net Method):</strong> ' + n;
+  } else if (g || n) {
+    document.getElementById('overallScore').textContent = 'Check the other part to see your combined score.';
+  }
+}
+
+/* init */
+generateScenario();
+</script>
+
+</body>
+</html>
