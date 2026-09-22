@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Whittier Company — Multi-Step Income Statement and Comprehensive Income</title>
+<title>Whittier Company — Multi-Step Income Statement, Discontinued Operations, and Comprehensive Income</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -136,7 +136,7 @@
 <header>
   <p class="eyebrow">ACCT 351 &middot; Income Statement &middot; Chapter 4</p>
   <h1 class="title">Whittier Company</h1>
-  <p class="subtitle">Build the multi-step income statement through net income and earnings per share, then prepare a separate statement of comprehensive income.</p>
+  <p class="subtitle">Build the multi-step income statement through income from continuing operations, report discontinued operations, compute net income and earnings per share, then prepare a separate statement of comprehensive income.</p>
 </header>
 
 <p class="print-name-line" id="printNameLine"></p>
@@ -170,8 +170,11 @@
       <tr><td>Interest expense</td><td id="sIE">$22,000</td></tr>
       <tr><td>Unrealized holding gain (loss) on AFS debt securities</td><td id="sUG">$8,000</td></tr>
       <tr><td>Foreign currency translation adjustment</td><td id="sFX">$3,000</td></tr>
+      <tr><td>Operating loss from discontinued component</td><td id="sDISCLOSS">$20,000</td></tr>
+      <tr><td>Gain on disposal of discontinued component's assets</td><td id="sDISCGAIN">$60,000</td></tr>
     </table>
-    <p style="margin-top:10px;">The income tax rate is <span class="val" id="sRate">25%</span>, and Whittier had <span class="val" id="sSH">250,000</span> weighted-average common shares outstanding for the year. Both other comprehensive income items are shown net of tax.</p>
+    <p style="margin-top:10px;">During <span class="val yr"></span>, Whittier sold a component of its business that qualifies as a discontinued operation under GAAP. Excluded from the account balances above, the component generated the operating loss shown, and its disposal produced the gain shown.</p>
+    <p style="margin-top:10px;">The income tax rate is <span class="val" id="sRate">25%</span>, and Whittier had <span class="val" id="sSH">250,000</span> weighted-average common shares outstanding for the year. Both other comprehensive income items and both discontinued-operations items should be reported net of tax.</p>
   </div>
 
   <!-- ============================ PART 1: Gross profit ============================ -->
@@ -202,8 +205,8 @@
   <!-- ============================ PART 2: Operating income through net income & EPS ============================ -->
   <div class="part" data-part-key="p2">
     <span class="part-label">Part 2</span>
-    <h2>Operating income, net income, and earnings per share</h2>
-    <div class="req"><span class="letter">b.</span>Finish the income statement. For each row, select the correct line item from the dropdown and enter its dollar amount.</div>
+    <h2>Operating income and income from continuing operations</h2>
+    <div class="req"><span class="letter">b.</span>Continue the income statement through income tax expense and income from continuing operations. For each row, select the correct line item from the dropdown and enter its dollar amount.</div>
     <table class="stmt">
       <thead><tr><th style="width:60%;">Line item</th><th style="width:40%;">Amount</th></tr></thead>
       <tbody>
@@ -215,52 +218,88 @@
         <tr><td><select class="line-select" id="p2-gain-label" data-answer="Gain on sale of investments"></select></td><td><input type="text" placeholder="$" id="p2-gain"></td></tr>
         <tr><td><select class="line-select" id="p2-ie-label" data-answer="Interest expense"></select></td><td><input type="text" placeholder="$" id="p2-ie"></td></tr>
         <tr class="subtotal-row"><td><select class="line-select" id="p2-othernet-label" data-answer="Total other income (expense), net"></select></td><td><input type="text" placeholder="$ (use a minus sign if net expense)" id="p2-othernet"></td></tr>
-        <tr class="subtotal-row"><td><select class="line-select" id="p2-ibt-label" data-answer="Income before income taxes"></select></td><td><input type="text" placeholder="$" id="p2-ibt"></td></tr>
+        <tr class="subtotal-row"><td><select class="line-select" id="p2-ibt-label" data-answer="Income from continuing operations before income taxes"></select></td><td><input type="text" placeholder="$" id="p2-ibt"></td></tr>
         <tr><td><select class="line-select" id="p2-tax-label" data-answer="Income tax expense"></select></td><td><input type="text" placeholder="$" id="p2-tax"></td></tr>
-        <tr class="final-row"><td><select class="line-select" id="p2-ni-label" data-answer="Net income"></select></td><td><input type="text" placeholder="$" id="p2-ni"></td></tr>
+        <tr class="final-row"><td><select class="line-select" id="p2-cont-label" data-answer="Income from continuing operations"></select></td><td><input type="text" placeholder="$" id="p2-cont"></td></tr>
       </tbody>
     </table>
-    <div class="work-line" style="margin-top:14px;">
-      <label>Earnings per share:</label>
-      <input type="text" placeholder="$0.00" id="p2-eps">
-    </div>
 
     <div class="check-bar">
       <button class="btn-check" id="checkP2" type="button">Check my work</button>
       <span class="check-summary" id="p2Summary"></span>
       <span class="attempts-note" id="p2Attempts">3 attempts remaining</span>
-      <span class="check-disclaimer">This checks every line item you selected, every amount, every subtotal, tax expense, net income, and EPS.</span>
+      <span class="check-disclaimer">This checks every line item you selected, every amount, every subtotal, tax expense, and income from continuing operations.</span>
     </div>
     <div class="key" id="p2Key" style="display:none;"></div>
   </div>
 
-  <!-- ============================ PART 3: Comprehensive income ============================ -->
+  <!-- ============================ PART 3: Discontinued operations, net income, EPS ============================ -->
   <div class="part" data-part-key="p3">
     <span class="part-label">Part 3</span>
-    <h2>Statement of comprehensive income</h2>
+    <h2>Discontinued operations, net income, and earnings per share</h2>
     <div class="scenario">
-      <p>Comprehensive income captures changes in equity from non-owner sources that bypass the income statement — Whittier reports these as other comprehensive income (OCI), net of tax.</p>
+      <p>Whittier sold a component of its business during <span class="yr"></span> that qualifies as a discontinued operation under GAAP. Report it, net of tax, below income from continuing operations — it is never included in operating income.</p>
     </div>
-    <div class="req"><span class="letter">c.</span>Prepare the statement of comprehensive income. For each row, select the correct line item from the dropdown and enter its dollar amount.</div>
+    <div class="req"><span class="letter">c.</span>Complete the discontinued operations section and compute net income. For each row, select the correct line item from the dropdown and enter its dollar amount. Then calculate earnings per share for each of the three required components.</div>
     <table class="stmt">
       <thead><tr><th style="width:60%;">Line item</th><th style="width:40%;">Amount</th></tr></thead>
       <tbody>
-        <tr><td><select class="line-select" id="p3-ni-label" data-answer="Net income"></select></td><td><input type="text" placeholder="$" id="p3-ni"></td></tr>
-        <tr><td class="indent"><select class="line-select" id="p3-ug-label" data-answer="Unrealized holding gain (loss) on AFS debt securities"></select></td><td><input type="text" placeholder="$ (use a minus sign if a loss)" id="p3-ug"></td></tr>
-        <tr><td class="indent"><select class="line-select" id="p3-fx-label" data-answer="Foreign currency translation adjustment"></select></td><td><input type="text" placeholder="$ (use a minus sign if negative)" id="p3-fx"></td></tr>
-        <tr class="subtotal-row"><td><select class="line-select" id="p3-oci-label" data-answer="Other comprehensive income"></select></td><td><input type="text" placeholder="$" id="p3-oci"></td></tr>
-        <tr class="final-row"><td><select class="line-select" id="p3-ci-label" data-answer="Comprehensive income"></select></td><td><input type="text" placeholder="$" id="p3-ci"></td></tr>
+        <tr><td><select class="line-select" id="p3-discop-label" data-answer="Income from operations and disposal of discontinued component"></select></td><td><input type="text" placeholder="$" id="p3-discop"></td></tr>
+        <tr><td class="indent"><select class="line-select" id="p3-disctax-label" data-answer="Income tax expense"></select></td><td><input type="text" placeholder="$ (use a minus sign if a benefit)" id="p3-disctax"></td></tr>
+        <tr class="subtotal-row"><td><select class="line-select" id="p3-discni-label" data-answer="Income on discontinued component, net of tax"></select></td><td><input type="text" placeholder="$" id="p3-discni"></td></tr>
+        <tr class="final-row"><td><select class="line-select" id="p3-ni-label" data-answer="Net income"></select></td><td><input type="text" placeholder="$" id="p3-ni"></td></tr>
       </tbody>
     </table>
-    <p class="stmt-hint">Net income carries forward from Part 2.</p>
+    <p class="stmt-hint">Income from continuing operations carries forward from Part 2.</p>
+    <div class="work-line" style="margin-top:14px;">
+      <label>Earnings per share — Income from continuing operations:</label>
+      <input type="text" placeholder="$0.00" id="p3-eps-cont">
+    </div>
+    <div class="work-line">
+      <label>Earnings per share — Discontinued operations:</label>
+      <input type="text" placeholder="$0.00" id="p3-eps-disc">
+    </div>
+    <div class="work-line">
+      <label>Earnings per share — Net income:</label>
+      <input type="text" placeholder="$0.00" id="p3-eps-net">
+    </div>
 
     <div class="check-bar">
       <button class="btn-check" id="checkP3" type="button">Check my work</button>
       <span class="check-summary" id="p3Summary"></span>
       <span class="attempts-note" id="p3Attempts">3 attempts remaining</span>
-      <span class="check-disclaimer">This checks the line items you selected, net income, both OCI items, the OCI subtotal, and comprehensive income.</span>
+      <span class="check-disclaimer">This checks the line items you selected, the discontinued-operations amounts, net income, and all three EPS figures.</span>
     </div>
     <div class="key" id="p3Key" style="display:none;"></div>
+  </div>
+
+  <!-- ============================ PART 4: Comprehensive income ============================ -->
+  <div class="part" data-part-key="p4">
+    <span class="part-label">Part 4</span>
+    <h2>Statement of comprehensive income</h2>
+    <div class="scenario">
+      <p>Comprehensive income captures changes in equity from non-owner sources that bypass the income statement — Whittier reports these as other comprehensive income (OCI), net of tax.</p>
+    </div>
+    <div class="req"><span class="letter">d.</span>Prepare the statement of comprehensive income. For each row, select the correct line item from the dropdown and enter its dollar amount.</div>
+    <table class="stmt">
+      <thead><tr><th style="width:60%;">Line item</th><th style="width:40%;">Amount</th></tr></thead>
+      <tbody>
+        <tr><td><select class="line-select" id="p4-ni-label" data-answer="Net income"></select></td><td><input type="text" placeholder="$" id="p4-ni"></td></tr>
+        <tr><td class="indent"><select class="line-select" id="p4-ug-label" data-answer="Unrealized holding gain (loss) on AFS debt securities"></select></td><td><input type="text" placeholder="$ (use a minus sign if a loss)" id="p4-ug"></td></tr>
+        <tr><td class="indent"><select class="line-select" id="p4-fx-label" data-answer="Foreign currency translation adjustment"></select></td><td><input type="text" placeholder="$ (use a minus sign if negative)" id="p4-fx"></td></tr>
+        <tr class="subtotal-row"><td><select class="line-select" id="p4-oci-label" data-answer="Other comprehensive income"></select></td><td><input type="text" placeholder="$" id="p4-oci"></td></tr>
+        <tr class="final-row"><td><select class="line-select" id="p4-ci-label" data-answer="Comprehensive income"></select></td><td><input type="text" placeholder="$" id="p4-ci"></td></tr>
+      </tbody>
+    </table>
+    <p class="stmt-hint">Net income carries forward from Part 3.</p>
+
+    <div class="check-bar">
+      <button class="btn-check" id="checkP4" type="button">Check my work</button>
+      <span class="check-summary" id="p4Summary"></span>
+      <span class="attempts-note" id="p4Attempts">3 attempts remaining</span>
+      <span class="check-disclaimer">This checks the line items you selected, net income, both OCI items, the OCI subtotal, and comprehensive income.</span>
+    </div>
+    <div class="key" id="p4Key" style="display:none;"></div>
   </div>
 
   <div class="score-bar">
@@ -333,22 +372,33 @@
     var SH = pick(rand,[150000,200000,250000,300000,350000]);
     var UG = pick(rand,[-8000,-4000,4000,8000,12000]);
     var FX = pick(rand,[-6000,-3000,3000,6000,9000]);
+    var DISCLOSS = pick(rand,[15000,20000,25000,30000,35000]);
+    var DISCGAIN = pick(rand,[55000,65000,75000,85000,95000]);
 
     var NetSales = S-SRA;
     var GrossProfit = NetSales-COGS;
     var TotalOpEx = SE+GA;
     var OperatingIncome = GrossProfit-TotalOpEx;
     var OtherNet = IR+GAIN-IE;
-    var IncomeBeforeTax = OperatingIncome+OtherNet;
-    var TaxExpense = round(IncomeBeforeTax*t);
-    var NetIncome = IncomeBeforeTax-TaxExpense;
-    var EPS = round2(NetIncome/SH);
+    var ContIncomeBeforeTax = OperatingIncome+OtherNet;
+    var ContTaxExpense = round(ContIncomeBeforeTax*t);
+    var IncomeFromContinuingOps = ContIncomeBeforeTax-ContTaxExpense;
+    var DiscPretax = DISCGAIN-DISCLOSS;
+    var DiscTax = round(DiscPretax*t);
+    var DiscNetOfTax = DiscPretax-DiscTax;
+    var NetIncome = IncomeFromContinuingOps+DiscNetOfTax;
+    var EPSCont = round2(IncomeFromContinuingOps/SH);
+    var EPSDisc = round2(DiscNetOfTax/SH);
+    var EPSNet = round2(NetIncome/SH);
     var TotalOCI = UG+FX;
     var ComprehensiveIncome = NetIncome+TotalOCI;
 
     return { S:S, SRA:SRA, COGS:COGS, SE:SE, GA:GA, IR:IR, GAIN:GAIN, IE:IE, t:t, SH:SH, UG:UG, FX:FX,
+      DISCLOSS:DISCLOSS, DISCGAIN:DISCGAIN,
       NetSales:NetSales, GrossProfit:GrossProfit, TotalOpEx:TotalOpEx, OperatingIncome:OperatingIncome,
-      OtherNet:OtherNet, IncomeBeforeTax:IncomeBeforeTax, TaxExpense:TaxExpense, NetIncome:NetIncome, EPS:EPS,
+      OtherNet:OtherNet, ContIncomeBeforeTax:ContIncomeBeforeTax, ContTaxExpense:ContTaxExpense,
+      IncomeFromContinuingOps:IncomeFromContinuingOps, DiscPretax:DiscPretax, DiscTax:DiscTax, DiscNetOfTax:DiscNetOfTax,
+      NetIncome:NetIncome, EPSCont:EPSCont, EPSDisc:EPSDisc, EPSNet:EPSNet,
       TotalOCI:TotalOCI, ComprehensiveIncome:ComprehensiveIncome };
   }
 
@@ -365,6 +415,8 @@
     setText('sIE', money0(d.IE));
     setText('sUG', money0(d.UG));
     setText('sFX', money0(d.FX));
+    setText('sDISCLOSS', money0(d.DISCLOSS));
+    setText('sDISCGAIN', money0(d.DISCGAIN));
     setText('sRate', Math.round(d.t*100)+'%');
     setText('sSH', d.SH.toLocaleString('en-US'));
   }
@@ -397,7 +449,9 @@
   var LINE_ITEM_BANK = [
     'Comprehensive income','Cost of goods sold','Foreign currency translation adjustment',
     'Gain on sale of investments','General and administrative expenses','Gross profit',
-    'Income before income taxes','Income tax expense','Interest expense','Interest revenue',
+    'Income from continuing operations','Income from continuing operations before income taxes',
+    'Income from operations and disposal of discontinued component','Income on discontinued component, net of tax',
+    'Income tax expense','Interest expense','Interest revenue',
     'Less: Sales returns and allowances','Net income','Net sales','Operating income',
     'Other comprehensive income','Sales revenue','Selling expenses','Total operating expenses',
     'Total other income (expense), net','Unrealized holding gain (loss) on AFS debt securities'
@@ -474,7 +528,7 @@
         ['Gross profit', money0(d.GrossProfit)]
       ]; }
     },
-    { key:'p2', requiredIds:['p2-se-label','p2-se','p2-ga-label','p2-ga','p2-totalopex-label','p2-totalopex','p2-opinc-label','p2-opinc','p2-ir-label','p2-ir','p2-gain-label','p2-gain','p2-ie-label','p2-ie','p2-othernet-label','p2-othernet','p2-ibt-label','p2-ibt','p2-tax-label','p2-tax','p2-ni-label','p2-ni','p2-eps'], itemCount:23,
+    { key:'p2', requiredIds:['p2-se-label','p2-se','p2-ga-label','p2-ga','p2-totalopex-label','p2-totalopex','p2-opinc-label','p2-opinc','p2-ir-label','p2-ir','p2-gain-label','p2-gain','p2-ie-label','p2-ie','p2-othernet-label','p2-othernet','p2-ibt-label','p2-ibt','p2-tax-label','p2-tax','p2-cont-label','p2-cont'], itemCount:22,
       grade:function(d){ return [
         markSelect('p2-se-label'),
         markMoney('p2-se', d.SE),
@@ -493,12 +547,11 @@
         markSelect('p2-othernet-label'),
         markMoney('p2-othernet', d.OtherNet),
         markSelect('p2-ibt-label'),
-        markMoney('p2-ibt', d.IncomeBeforeTax),
+        markMoney('p2-ibt', d.ContIncomeBeforeTax),
         markSelect('p2-tax-label'),
-        markMoney('p2-tax', d.TaxExpense),
-        markSelect('p2-ni-label'),
-        markMoney('p2-ni', d.NetIncome),
-        markMoney('p2-eps', d.EPS, 0.01)
+        markMoney('p2-tax', d.ContTaxExpense),
+        markSelect('p2-cont-label'),
+        markMoney('p2-cont', d.IncomeFromContinuingOps)
       ]; },
       keyRows:function(d){ return [
         ['Selling expenses', money0(d.SE)],
@@ -509,24 +562,47 @@
         ['Gain on sale of investments', money0(d.GAIN)],
         ['Interest expense', money0(d.IE)],
         ['Total other income (expense), net', money0(d.OtherNet)],
-        ['Income before income taxes', money0(d.IncomeBeforeTax)],
-        ['Income tax expense ('+Math.round(d.t*100)+'%)', money0(d.TaxExpense)],
-        ['Net income', money0(d.NetIncome)],
-        ['Earnings per share', moneyCents(d.EPS)]
+        ['Income from continuing operations before income taxes', money0(d.ContIncomeBeforeTax)],
+        ['Income tax expense ('+Math.round(d.t*100)+'%)', money0(d.ContTaxExpense)],
+        ['Income from continuing operations', money0(d.IncomeFromContinuingOps)]
       ]; }
     },
-    { key:'p3', requiredIds:['p3-ni-label','p3-ni','p3-ug-label','p3-ug','p3-fx-label','p3-fx','p3-oci-label','p3-oci','p3-ci-label','p3-ci'], itemCount:10,
+    { key:'p3', requiredIds:['p3-discop-label','p3-discop','p3-disctax-label','p3-disctax','p3-discni-label','p3-discni','p3-ni-label','p3-ni','p3-eps-cont','p3-eps-disc','p3-eps-net'], itemCount:11,
       grade:function(d){ return [
+        markSelect('p3-discop-label'),
+        markMoney('p3-discop', d.DiscPretax),
+        markSelect('p3-disctax-label'),
+        markMoney('p3-disctax', d.DiscTax),
+        markSelect('p3-discni-label'),
+        markMoney('p3-discni', d.DiscNetOfTax),
         markSelect('p3-ni-label'),
         markMoney('p3-ni', d.NetIncome),
-        markSelect('p3-ug-label'),
-        markMoney('p3-ug', d.UG),
-        markSelect('p3-fx-label'),
-        markMoney('p3-fx', d.FX),
-        markSelect('p3-oci-label'),
-        markMoney('p3-oci', d.TotalOCI),
-        markSelect('p3-ci-label'),
-        markMoney('p3-ci', d.ComprehensiveIncome)
+        markMoney('p3-eps-cont', d.EPSCont, 0.01),
+        markMoney('p3-eps-disc', d.EPSDisc, 0.01),
+        markMoney('p3-eps-net', d.EPSNet, 0.01)
+      ]; },
+      keyRows:function(d){ return [
+        ['Income from operations and disposal of discontinued component', money0(d.DiscPretax)],
+        ['Income tax expense ('+Math.round(d.t*100)+'%)', money0(d.DiscTax)],
+        ['Income on discontinued component, net of tax', money0(d.DiscNetOfTax)],
+        ['Net income', money0(d.IncomeFromContinuingOps)+' + '+money0(d.DiscNetOfTax)+' = '+money0(d.NetIncome)],
+        ['EPS — Income from continuing operations', moneyCents(d.EPSCont)],
+        ['EPS — Discontinued operations', moneyCents(d.EPSDisc)],
+        ['EPS — Net income', moneyCents(d.EPSNet)]
+      ]; }
+    },
+    { key:'p4', requiredIds:['p4-ni-label','p4-ni','p4-ug-label','p4-ug','p4-fx-label','p4-fx','p4-oci-label','p4-oci','p4-ci-label','p4-ci'], itemCount:10,
+      grade:function(d){ return [
+        markSelect('p4-ni-label'),
+        markMoney('p4-ni', d.NetIncome),
+        markSelect('p4-ug-label'),
+        markMoney('p4-ug', d.UG),
+        markSelect('p4-fx-label'),
+        markMoney('p4-fx', d.FX),
+        markSelect('p4-oci-label'),
+        markMoney('p4-oci', d.TotalOCI),
+        markSelect('p4-ci-label'),
+        markMoney('p4-ci', d.ComprehensiveIncome)
       ]; },
       keyRows:function(d){ return [
         ['Net income', money0(d.NetIncome)],
@@ -690,7 +766,7 @@
       return new D.Table({ width:{size:widths.reduce(function(a,b){return a+b;},0),type:D.WidthType.DXA}, columnWidths:widths, rows:rows });
     }
     var children = [];
-    children.push(new D.Paragraph({ heading:D.HeadingLevel.TITLE, spacing:{after:60}, children:[new D.TextRun({text:'Whittier Company \u2014 Income Statement and Comprehensive Income', color:PURPLE, size:32, bold:true})] }));
+    children.push(new D.Paragraph({ heading:D.HeadingLevel.TITLE, spacing:{after:60}, children:[new D.TextRun({text:'Whittier Company \u2014 Income Statement, Discontinued Operations, and Comprehensive Income', color:PURPLE, size:32, bold:true})] }));
     children.push(p('Name: '+name+'     Student ID: '+sid, { bold:true }));
     children.push(p('ACCT 351  \u00b7  Income Statement  \u00b7  Chapter 4', { color:SLATE }));
     var scoreText = (document.getElementById('overallScore')||{}).textContent || '';
