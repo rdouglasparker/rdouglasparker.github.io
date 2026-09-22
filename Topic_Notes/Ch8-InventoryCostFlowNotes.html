@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inventory Cost Flow Assumptions — Reading Notes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+  :root {
+    --wcu-purple: #4B2E83; --wcu-purple-dark: #341f5c; --wcu-gold: #C8A24A;
+    --gold-light: #f4ecd8; --ink: #232023; --paper: #fdfcfb; --panel: #f7f3ec; --rule: #e2d9c8;
+    --blue: #2C5F8A; --blue-bg: #E9F1F8;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; line-height: 1.55; }
+  header { background: linear-gradient(135deg, var(--wcu-purple) 0%, var(--wcu-purple-dark) 100%); color: #fff; padding: 2.2rem 1.5rem 1.8rem; border-bottom: 6px solid var(--wcu-gold); }
+  header .eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--wcu-gold); margin-bottom: 0.4rem; }
+  header h1 { font-family: 'Source Serif 4', serif; font-weight: 700; font-size: 1.9rem; margin: 0 0 0.3rem; }
+  header p.sub { margin: 0; color: #e7e0f2; font-size: 0.98rem; }
+  main { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+  .lo-block { margin-bottom: 2.8rem; }
+  h2 { font-family: 'Source Serif 4', serif; font-size: 1.5rem; margin: 0 0 0.8rem; color: var(--wcu-purple-dark); border-bottom: 2px solid var(--rule); padding-bottom: 0.4rem; }
+  h3 { font-family: 'Source Serif 4', serif; font-size: 1.1rem; margin: 1.4rem 0 0.5rem; color: var(--wcu-purple-dark); }
+  p { margin: 0.6rem 0; }
+  .key-idea { background: var(--panel); border-left: 4px solid var(--wcu-gold); padding: 0.9rem 1.1rem; border-radius: 0 6px 6px 0; margin: 0.9rem 0; }
+  .key-idea strong { color: var(--wcu-purple-dark); }
+  .margin-note { background: var(--blue-bg); border-left: 4px solid var(--blue); padding: 0.8rem 1.1rem; border-radius: 0 6px 6px 0; margin: 0.9rem 0; font-size: 0.95rem; color: #1c3a52; }
+  .formula { font-family: 'IBM Plex Mono', monospace; background: var(--wcu-purple-dark); color: var(--gold-light); padding: 0.75rem 1rem; border-radius: 6px; margin: 0.8rem 0; font-size: 0.92rem; overflow-x: auto; text-align: center; }
+  .example { background: #fff; border: 1px solid var(--rule); border-radius: 8px; padding: 1rem 1.2rem; margin: 0.9rem 0; }
+  .example .ex-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--wcu-purple); margin-bottom: 0.4rem; }
+  .example .ex-answer { margin-top: 0.6rem; padding-top: 0.6rem; border-top: 1px dashed var(--rule); }
+  table.data { border-collapse: collapse; width: 100%; margin: 0.7rem 0; font-size: 0.92rem; }
+  table.data th, table.data td { border: 1px solid var(--rule); padding: 0.45rem 0.6rem; text-align: left; }
+  table.data th { background: var(--panel); color: var(--wcu-purple-dark); font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; }
+  table.data td.num, table.data th.num { text-align: right; }
+  table.compare { border-collapse: collapse; width: 100%; margin: 0.8rem 0; font-size: 0.92rem; }
+  table.compare th, table.compare td { border: 1px solid var(--rule); padding: 0.5rem 0.7rem; text-align: left; }
+  table.compare th { background: var(--panel); color: var(--wcu-purple-dark); font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.03em; }
+  ul, ol { padding-left: 1.4rem; }
+  li { margin-bottom: 0.35rem; }
+  footer { text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; color: #8a8380; padding: 1.5rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">ACCT 351 · Intermediate Accounting I</div>
+  <h1>Inventory Cost Flow Assumptions</h1>
+  <p class="sub">Reading Notes — FIFO, LIFO, Average Cost, and Choosing a Method</p>
+</header>
+
+<main>
+
+  <!-- ============================== SECTION 1 ============================== -->
+  <div class="lo-block">
+    <h2>FIFO, LIFO, and Average Cost</h2>
+
+    <p>When identical units are purchased at different prices throughout the year, a company needs some way to decide which costs belong in Cost of Goods Sold and which stay in Ending Inventory. That's what a <strong>cost flow assumption</strong> does — and importantly, it doesn't have to match how the units actually moved physically off the shelf.</p>
+
+    <div class="key-idea">
+      <strong>Goods available for sale</strong> = beginning inventory + purchases. This total dollar amount gets split between two places: Cost of Goods Sold and Ending Inventory. Every method starts from this same total — they just divide it up differently.
+    </div>
+
+    <h3>First-In, First-Out (FIFO)</h3>
+    <p>Assumes the <em>oldest</em> costs are sold first. Ending inventory is made up of the <em>most recently purchased</em> costs. FIFO gives the <strong>same answer</strong> whether a company uses a perpetual or periodic system — the oldest costs are the oldest costs no matter when during the year you check.</p>
+
+    <h3>Last-In, First-Out (LIFO)</h3>
+    <p>Assumes the <em>most recently purchased</em> costs are sold first. Ending inventory is left holding the <em>oldest</em> costs. Unlike FIFO, <strong>LIFO can give different answers under a perpetual system versus a periodic system</strong> — a perpetual system applies "last in" at the moment of each individual sale, while a periodic system waits until year-end and treats the whole year's purchases as one pool.</p>
+
+    <h3>Average Cost</h3>
+    <p>Instead of tracking specific cost layers, this method spreads the total cost evenly across all units.</p>
+    <div class="formula">Weighted-average unit cost = Cost of goods available for sale &divide; Total units available</div>
+    <p>Under a <strong>periodic</strong> system, this average is calculated once, at the end of the period (<em>weighted-average</em>). Under a <strong>perpetual</strong> system, a new average is recalculated after every purchase, and that new average costs the units sold until the next purchase (<em>moving-average</em>).</p>
+
+    <div class="example">
+      <div class="ex-label">Example 1 — FIFO, LIFO, and Average Cost (Periodic)</div>
+      <p>Whiteside Mountain Supply Co. has the following activity for its one product during the period:</p>
+      <table class="data">
+        <tr><th></th><th class="num">Units</th><th class="num">Unit Cost</th><th class="num">Total Cost</th></tr>
+        <tr><td>Beginning inventory</td><td class="num">500</td><td class="num">$10.00</td><td class="num">$5,000</td></tr>
+        <tr><td>Purchase 1</td><td class="num">300</td><td class="num">$12.00</td><td class="num">$3,600</td></tr>
+        <tr><td>Purchase 2</td><td class="num">400</td><td class="num">$13.00</td><td class="num">$5,200</td></tr>
+        <tr><td><strong>Goods available for sale</strong></td><td class="num"><strong>1,200</strong></td><td></td><td class="num"><strong>$13,800</strong></td></tr>
+      </table>
+      <p>900 units were sold, leaving 300 units on hand. Calculate ending inventory and cost of goods sold under FIFO, LIFO, and weighted-average.</p>
+      <div class="ex-answer">
+        <p><strong>FIFO:</strong> the 300 units on hand are assumed to be the most recently purchased — all from Purchase 2.<br>
+        Ending inventory = 300 &times; $13.00 = <strong>$3,900</strong>. COGS = $13,800 &minus; $3,900 = <strong>$9,900</strong>.</p>
+        <p><strong>LIFO:</strong> the 300 units on hand are assumed to be the oldest — all from beginning inventory.<br>
+        Ending inventory = 300 &times; $10.00 = <strong>$3,000</strong>. COGS = $13,800 &minus; $3,000 = <strong>$10,800</strong>.</p>
+        <p><strong>Weighted-average:</strong> unit cost = $13,800 &divide; 1,200 = $11.50.<br>
+        Ending inventory = 300 &times; $11.50 = <strong>$3,450</strong>. COGS = 900 &times; $11.50 = <strong>$10,350</strong>.</p>
+        <p>Notice the pattern: since unit costs were <em>rising</em> all year, FIFO produced the lowest COGS, LIFO the highest, and average cost fell in between. That pattern is worth remembering — it's the whole reason the method chosen matters.</p>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="ex-label">Example 2 — Perpetual LIFO vs. Periodic LIFO</div>
+      <p>A small boutique tracks one item. Beginning inventory is 100 units at $5.00. It sells 60 units, <em>then</em> purchases 80 units at $6.00, then sells another 70 units. (180 units available, 130 sold, 50 remain.)</p>
+      <div class="ex-answer">
+        <p><strong>Perpetual LIFO</strong> applies "last in, first out" at the moment of each sale:</p>
+        <ul>
+          <li>Sale of 60: only layer available is the beginning 100 @ $5.00, so all 60 come from there &rarr; $300. (40 units @ $5.00 remain.)</li>
+          <li>Purchase of 80 @ $6.00 is added.</li>
+          <li>Sale of 70: the most recent layer (80 @ $6.00) is used first &rarr; 70 &times; $6.00 = $420. (10 units @ $6.00 remain, plus the 40 @ $5.00.)</li>
+        </ul>
+        <p>Perpetual COGS = $300 + $420 = <strong>$720</strong>. Perpetual ending inventory = (40 &times; $5.00) + (10 &times; $6.00) = <strong>$260</strong>.</p>
+        <p><strong>Periodic LIFO</strong> ignores the timing and treats the whole period's purchases as one pool, applied only at year-end: 130 units sold are assumed to come from the <em>most recent</em> total purchases first — all 80 units @ $6.00, plus 50 more from the beginning layer @ $5.00.</p>
+        <p>Periodic COGS = (80 &times; $6.00) + (50 &times; $5.00) = $480 + $250 = <strong>$730</strong>. Periodic ending inventory = 50 &times; $5.00 = <strong>$250</strong>.</p>
+        <p>Same facts, two different answers ($720 vs. $730) — purely because of <em>when</em> LIFO gets applied, not because of any error. This is the one case in this chapter where the choice of perpetual vs. periodic actually changes a dollar amount, not just the bookkeeping mechanics.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================== SECTION 2 ============================== -->
+  <div class="lo-block">
+    <h2>Choosing an Inventory Method</h2>
+
+    <p>If every method starts from the same total cost of goods available for sale, why would a company prefer one over another? Three considerations drive the choice.</p>
+
+    <h3>Physical flow</h3>
+    <div class="margin-note">A company is <strong>not required</strong> to pick a method that matches how goods actually move off the shelf. FIFO happens to mirror physical flow for perishable goods (grocers really do try to sell the oldest milk first). Average cost fits commingled goods like fuel or grain, where individual units can't be told apart. Very few companies actually sell inventory in a true last-in-first-out pattern — LIFO is a reporting choice, not a physical description.</div>
+
+    <h3>Income taxes</h3>
+    <div class="margin-note">In a period of <strong>rising costs</strong>, LIFO assigns the newest (highest) costs to Cost of Goods Sold, which produces a <em>lower</em> reported taxable income than FIFO would — meaning lower taxes paid right now. This isn't a permanent tax savings, just a deferral: the tax will eventually catch up if inventory quantities or costs later decline. Still, deferring a tax payment has real value because of the time value of money. This is the single biggest reason companies choose LIFO. In a period of <em>falling</em> costs, the effect flips — LIFO would produce the <em>higher</em> taxable income, so the tax incentive disappears.</div>
+
+    <h3>Matching</h3>
+    <p>LIFO's supporters argue it does a better job matching current costs against current revenues on the income statement, since the most recently purchased (most current) costs flow to Cost of Goods Sold. Critics point out this comes at the cost of an outdated, unrealistic balance sheet, since ending inventory is left holding old, sometimes decades-old cost layers.</p>
+
+    <h3>Direction of the effect depends on which way costs are moving</h3>
+    <table class="compare">
+      <tr><th>Cost Trend</th><th>Higher COGS / Lower Income</th><th>Lower COGS / Higher Income</th></tr>
+      <tr><td>Rising costs</td><td>LIFO</td><td>FIFO</td></tr>
+      <tr><td>Falling costs</td><td>FIFO</td><td>LIFO</td></tr>
+    </table>
+
+    <div class="example">
+      <div class="ex-label">Example 1 — Rising Costs</div>
+      <p>Using the Whiteside Mountain Supply Co. data from Example 1 above (costs rose from $10 to $12 to $13 during the period), how much lower would taxable income be under LIFO than under FIFO?</p>
+      <div class="ex-answer">LIFO COGS ($10,800) &minus; FIFO COGS ($9,900) = <strong>$900</strong> lower income under LIFO. Because costs were rising, LIFO pushed more cost into COGS, shrinking reported income (and taxable income) by $900 compared to FIFO.</div>
+    </div>
+
+    <div class="example">
+      <div class="ex-label">Example 2 — Falling Costs</div>
+      <p>Now suppose Whiteside Mountain Supply Co.'s costs had instead been <em>falling</em> during the year:</p>
+      <table class="data">
+        <tr><th></th><th class="num">Units</th><th class="num">Unit Cost</th><th class="num">Total Cost</th></tr>
+        <tr><td>Beginning inventory</td><td class="num">500</td><td class="num">$13.00</td><td class="num">$6,500</td></tr>
+        <tr><td>Purchase 1</td><td class="num">300</td><td class="num">$12.00</td><td class="num">$3,600</td></tr>
+        <tr><td>Purchase 2</td><td class="num">400</td><td class="num">$10.00</td><td class="num">$4,000</td></tr>
+        <tr><td><strong>Goods available for sale</strong></td><td class="num"><strong>1,200</strong></td><td></td><td class="num"><strong>$14,100</strong></td></tr>
+      </table>
+      <p>Again, 900 units are sold and 300 remain. What is LIFO's cost of goods sold now, and is it higher or lower than FIFO's?</p>
+      <div class="ex-answer">
+        <p>LIFO ending inventory = 300 units from the <em>oldest</em> layer (beginning inventory @ $13.00) = $3,900. LIFO COGS = $14,100 &minus; $3,900 = <strong>$10,200</strong>.</p>
+        <p>FIFO ending inventory = 300 units from the <em>most recent</em> layer (Purchase 2 @ $10.00) = $3,000. FIFO COGS = $14,100 &minus; $3,000 = $11,100.</p>
+        <p>This time LIFO's COGS ($10,200) is <em>lower</em> than FIFO's ($11,100) — the direction flipped completely because costs were falling instead of rising. LIFO isn't "always" the low-income method; it depends entirely on which way prices are moving.</p>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>Inventory Cost Flow Assumptions · Reading Notes</footer>
+
+</body>
+</html>
