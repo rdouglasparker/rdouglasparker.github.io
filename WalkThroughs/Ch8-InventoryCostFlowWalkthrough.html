@@ -59,7 +59,7 @@
 
 <div class="progress-bar">
   <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-  <div class="progress-label" id="progressLabel">0 of 4 checked</div>
+  <div class="progress-label" id="progressLabel">0 of 7 checked</div>
 </div>
 
 <main>
@@ -109,6 +109,69 @@
         <div class="solution-label">Solution</div>
         <p>LIFO ending inventory = the 200 units on hand are assumed to be the oldest, from beginning inventory: 200 &times; $8.00 = $1,600.<br>
         COGS = $8,000 &minus; $1,600 = <strong>$6,400</strong></p>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="ex-label">Example 3 — FIFO (Perpetual)</div>
+      <p>Trailhead Goods Co. has the following activity for its one product: beginning inventory of 200 units at $4.00, then a sale of 120 units, then a purchase of 150 units at $5.00, then a sale of 100 units (350 units available, 220 sold, 130 remain).</p>
+      <p>Using <strong>FIFO</strong> and a <strong>perpetual</strong> system, what is cost of goods sold?</p>
+      <div class="input-row">
+        <label for="ans-1-3">Your answer:</label><span>$</span>
+        <input type="number" step="1" id="ans-1-3" placeholder="0">
+        <button onclick="checkAnswer('1-3', 900)">Check My Answer</button>
+      </div>
+      <div class="feedback" id="fb-1-3"></div>
+      <div class="solution" id="sol-1-3" hidden>
+        <div class="solution-label">Solution</div>
+        <p>Sale of 120: FIFO takes the oldest layer first &mdash; all 120 from beginning inventory @ $4.00 = $480. (80 units @ $4.00 remain.)<br>
+        Purchase of 150 @ $5.00 is added.<br>
+        Sale of 100: oldest layer first again &mdash; the remaining 80 @ $4.00 ($320) plus 20 @ $5.00 ($100) = $420.</p>
+        <p>COGS = $480 + $420 = <strong>$900</strong></p>
+        <p><strong>Note:</strong> if you worked this as a periodic problem instead &mdash; ignoring when the sales happened and just asking which 130 units are left at year-end &mdash; you'd get the exact same $900. FIFO always gives the same answer under perpetual or periodic, because "the oldest costs" doesn't depend on when during the year you check.</p>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="ex-label">Example 4 — LIFO (Perpetual)</div>
+      <p>Same Trailhead Goods Co. facts as Example 3. This time, using <strong>LIFO</strong> and a <strong>perpetual</strong> system, what is cost of goods sold?</p>
+      <div class="input-row">
+        <label for="ans-1-4">Your answer:</label><span>$</span>
+        <input type="number" step="1" id="ans-1-4" placeholder="0">
+        <button onclick="checkAnswer('1-4', 980)">Check My Answer</button>
+      </div>
+      <div class="feedback" id="fb-1-4"></div>
+      <div class="solution" id="sol-1-4" hidden>
+        <div class="solution-label">Solution</div>
+        <p>Sale of 120: only layer available is beginning inventory @ $4.00, so all 120 come from there = $480. (80 units @ $4.00 remain.)<br>
+        Purchase of 150 @ $5.00 is added.<br>
+        Sale of 100: LIFO takes the <em>most recent</em> layer first &mdash; the $5.00 layer &mdash; so 100 &times; $5.00 = $500.</p>
+        <p>COGS = $480 + $500 = <strong>$980</strong></p>
+        <p>Unlike FIFO, this is <em>not</em> the same number you'd get under periodic LIFO. Applied at year-end as one pool, periodic LIFO would assume the 220 units sold came from the most recent total purchases first (all 150 @ $5.00, plus 70 more from the $4.00 layer), giving COGS of $1,030 instead of $980. Same facts, two different LIFO answers &mdash; purely a timing issue.</p>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="ex-label">Example 5 — Weighted-Average (Periodic)</div>
+      <p>Sourwood Trading Co. has the following activity for its one product:</p>
+      <table class="data">
+        <tr><th></th><th class="num">Units</th><th class="num">Unit Cost</th><th class="num">Total Cost</th></tr>
+        <tr><td>Beginning inventory</td><td class="num">300</td><td class="num">$6.00</td><td class="num">$1,800</td></tr>
+        <tr><td>Purchase 1</td><td class="num">200</td><td class="num">$7.00</td><td class="num">$1,400</td></tr>
+        <tr><td>Purchase 2</td><td class="num">500</td><td class="num">$7.60</td><td class="num">$3,800</td></tr>
+        <tr><td><strong>Available for sale</strong></td><td class="num"><strong>1,000</strong></td><td></td><td class="num"><strong>$7,000</strong></td></tr>
+      </table>
+      <p>750 units were sold, leaving 250 units on hand. Using <strong>weighted-average cost</strong> and a periodic system, what is cost of goods sold?</p>
+      <div class="input-row">
+        <label for="ans-1-5">Your answer:</label><span>$</span>
+        <input type="number" step="1" id="ans-1-5" placeholder="0">
+        <button onclick="checkAnswer('1-5', 5250)">Check My Answer</button>
+      </div>
+      <div class="feedback" id="fb-1-5"></div>
+      <div class="solution" id="sol-1-5" hidden>
+        <div class="solution-label">Solution</div>
+        <p>Weighted-average unit cost = $7,000 &divide; 1,000 units = $7.00.<br>
+        COGS = 750 &times; $7.00 = <strong>$5,250</strong> (and ending inventory = 250 &times; $7.00 = $1,750, which checks out: $5,250 + $1,750 = $7,000).</p>
       </div>
     </div>
   </div>
@@ -164,7 +227,7 @@
 
 <script>
   var CHECKED = {};
-  var TOTAL = 4;
+  var TOTAL = 7;
   function updateProgress() {
     var count = Object.keys(CHECKED).length;
     document.getElementById('progressLabel').textContent = count + ' of ' + TOTAL + ' checked';
