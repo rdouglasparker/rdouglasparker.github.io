@@ -69,9 +69,11 @@
   table.stmt td:first-child{ text-align:left; }
   table.stmt td.indent{ padding-left:22px; }
   table.stmt input[type="text"]{ width:100%; text-align:right; font-family:'IBM Plex Mono', monospace; font-size:13.5px; padding:6px 8px; border:1px solid var(--line); border-radius:5px; background:var(--parchment); color:var(--ink); }
-  table.stmt input:focus, .work-line input:focus{ outline:none; border-color:var(--purple-mid); box-shadow:0 0 0 3px rgba(89,44,136,0.10); background:var(--paper); }
+  table.stmt select.line-select{ width:100%; font-family:'Inter',sans-serif; font-size:13.5px; padding:6px 8px; border:1px solid var(--line); border-radius:5px; background:var(--parchment); color:var(--ink); }
+  table.stmt input:focus, table.stmt select:focus, .work-line input:focus{ outline:none; border-color:var(--purple-mid); box-shadow:0 0 0 3px rgba(89,44,136,0.10); background:var(--paper); }
   table.stmt tr.subtotal-row td{ border-top:2px solid var(--purple); font-weight:600; }
   table.stmt tr.final-row td{ border-top:3px double var(--purple); font-weight:700; }
+  table.stmt tr.section-row td{ font-weight:600; color:var(--purple-deep); padding-top:16px; border-bottom:1px solid var(--line); background:none; }
   .stmt-hint{ font-size:12px; color:var(--slate); margin-top:6px; }
 
   .key{ margin-top:14px; background:var(--answer-bg); border:1px solid #B7D3BE; border-radius:8px; padding:14px 16px; color:var(--answer); font-size:13.5px; }
@@ -135,7 +137,7 @@
 <header>
   <p class="eyebrow">ACCT 351 &middot; Statement of Cash Flows &middot; Chapter 5</p>
   <h1 class="title">Canton Industries</h1>
-  <p class="subtitle">Prepare Canton's statement of cash flows for the year using the indirect method, one section at a time.</p>
+  <p class="subtitle">Prepare Canton's statement of cash flows for the year using the indirect method — identify each line item and compute its amount, one section at a time.</p>
 </header>
 
 <p class="print-name-line" id="printNameLine"></p>
@@ -179,27 +181,29 @@
   <div class="part" data-part-key="p1">
     <span class="part-label">Part 1</span>
     <h2>Cash flows from operating activities</h2>
-    <div class="req"><span class="letter">a.</span>Reconcile net income to net cash provided by operating activities.</div>
+    <div class="req"><span class="letter">a.</span>Reconcile net income to net cash provided by operating activities. For each row, select the correct line item from the dropdown and enter its dollar amount.</div>
     <table class="stmt">
       <thead><tr><th style="width:60%;">Line item</th><th style="width:40%;">Amount</th></tr></thead>
       <tbody>
-        <tr><td>Net income</td><td><input type="text" placeholder="$" id="p1-ni"></td></tr>
-        <tr><td class="indent">Depreciation expense</td><td><input type="text" placeholder="$" id="p1-dep"></td></tr>
-        <tr><td class="indent">Loss on sale of equipment</td><td><input type="text" placeholder="$" id="p1-loss"></td></tr>
-        <tr><td class="indent">Increase in accounts receivable</td><td><input type="text" placeholder="$ (negative)" id="p1-ar"></td></tr>
-        <tr><td class="indent">Decrease in inventory</td><td><input type="text" placeholder="$" id="p1-inv"></td></tr>
-        <tr><td class="indent">Increase in accounts payable</td><td><input type="text" placeholder="$" id="p1-ap"></td></tr>
-        <tr><td class="indent">Decrease in accrued liabilities</td><td><input type="text" placeholder="$ (negative)" id="p1-accr"></td></tr>
-        <tr class="final-row"><td>Net cash provided by operating activities</td><td><input type="text" placeholder="$" id="p1-total"></td></tr>
+        <tr><td><select class="line-select" id="p1-ni-label" data-answer="Net income"></select></td><td><input type="text" placeholder="$" id="p1-ni"></td></tr>
+        <tr class="section-row"><td colspan="2">Adjustments for noncash effects:</td></tr>
+        <tr><td class="indent"><select class="line-select" id="p1-dep-label" data-answer="Depreciation expense"></select></td><td><input type="text" placeholder="$" id="p1-dep"></td></tr>
+        <tr><td class="indent"><select class="line-select" id="p1-loss-label" data-answer="Loss on sale of equipment"></select></td><td><input type="text" placeholder="$" id="p1-loss"></td></tr>
+        <tr class="section-row"><td colspan="2">Changes in operating assets and liabilities:</td></tr>
+        <tr><td class="indent"><select class="line-select" id="p1-ar-label" data-answer="Increase in accounts receivable"></select></td><td><input type="text" placeholder="$" id="p1-ar"></td></tr>
+        <tr><td class="indent"><select class="line-select" id="p1-inv-label" data-answer="Decrease in inventory"></select></td><td><input type="text" placeholder="$" id="p1-inv"></td></tr>
+        <tr><td class="indent"><select class="line-select" id="p1-ap-label" data-answer="Increase in accounts payable"></select></td><td><input type="text" placeholder="$" id="p1-ap"></td></tr>
+        <tr><td class="indent"><select class="line-select" id="p1-accr-label" data-answer="Decrease in accrued liabilities"></select></td><td><input type="text" placeholder="$" id="p1-accr"></td></tr>
+        <tr class="final-row"><td><select class="line-select" id="p1-total-label" data-answer="Net cash provided by operating activities"></select></td><td><input type="text" placeholder="$" id="p1-total"></td></tr>
       </tbody>
     </table>
-    <p class="stmt-hint">An increase in a current asset or a decrease in a current liability is a use of cash — enter it as a negative number.</p>
+    <p class="stmt-hint">Some adjustments increase net cash from operations; others decrease it. Determine the sign of each item yourself based on the type of account and how it changed.</p>
 
     <div class="check-bar">
       <button class="btn-check" id="checkP1" type="button">Check my work</button>
       <span class="check-summary" id="p1Summary"></span>
       <span class="attempts-note" id="p1Attempts">3 attempts remaining</span>
-      <span class="check-disclaimer">This checks every reconciling item and the operating subtotal.</span>
+      <span class="check-disclaimer">This checks every line item you selected, every reconciling amount, and the operating subtotal.</span>
     </div>
     <div class="key" id="p1Key" style="display:none;"></div>
   </div>
@@ -208,13 +212,13 @@
   <div class="part" data-part-key="p2">
     <span class="part-label">Part 2</span>
     <h2>Cash flows from investing activities</h2>
-    <div class="req"><span class="letter">b.</span>Prepare the investing activities section.</div>
+    <div class="req"><span class="letter">b.</span>Prepare the investing activities section. For each row, select the correct line item from the dropdown and enter its dollar amount.</div>
     <table class="stmt">
       <thead><tr><th style="width:60%;">Line item</th><th style="width:40%;">Amount</th></tr></thead>
       <tbody>
-        <tr><td>Purchase of equipment</td><td><input type="text" placeholder="$ (negative)" id="p2-purchase"></td></tr>
-        <tr><td>Proceeds from sale of equipment</td><td><input type="text" placeholder="$" id="p2-sale"></td></tr>
-        <tr class="final-row"><td>Net cash used in investing activities</td><td><input type="text" placeholder="$ (negative)" id="p2-total"></td></tr>
+        <tr><td><select class="line-select" id="p2-purchase-label" data-answer="Purchase of equipment"></select></td><td><input type="text" placeholder="$" id="p2-purchase"></td></tr>
+        <tr><td><select class="line-select" id="p2-sale-label" data-answer="Proceeds from sale of equipment"></select></td><td><input type="text" placeholder="$" id="p2-sale"></td></tr>
+        <tr class="final-row"><td><select class="line-select" id="p2-total-label" data-answer="Net cash used in investing activities"></select></td><td><input type="text" placeholder="$" id="p2-total"></td></tr>
       </tbody>
     </table>
 
@@ -222,7 +226,7 @@
       <button class="btn-check" id="checkP2" type="button">Check my work</button>
       <span class="check-summary" id="p2Summary"></span>
       <span class="attempts-note" id="p2Attempts">3 attempts remaining</span>
-      <span class="check-disclaimer">This checks both line items and the investing subtotal.</span>
+      <span class="check-disclaimer">This checks the line items you selected, both amounts, and the investing subtotal.</span>
     </div>
     <div class="key" id="p2Key" style="display:none;"></div>
   </div>
@@ -231,35 +235,31 @@
   <div class="part" data-part-key="p3">
     <span class="part-label">Part 3</span>
     <h2>Financing activities and the cash reconciliation</h2>
-    <div class="req"><span class="letter">c.</span>Prepare the financing activities section, then reconcile to ending cash.</div>
+    <div class="req"><span class="letter">c.</span>Prepare the financing activities section, then reconcile to ending cash. For each row, select the correct line item from the dropdown and enter its dollar amount.</div>
     <table class="stmt">
       <thead><tr><th style="width:60%;">Line item</th><th style="width:40%;">Amount</th></tr></thead>
       <tbody>
-        <tr><td>Proceeds from issuance of long-term debt</td><td><input type="text" placeholder="$" id="p3-ltd"></td></tr>
-        <tr><td>Payment of cash dividends</td><td><input type="text" placeholder="$ (negative)" id="p3-div"></td></tr>
-        <tr><td>Repurchase of common stock</td><td><input type="text" placeholder="$ (negative)" id="p3-stk"></td></tr>
-        <tr class="final-row"><td>Net cash provided by financing activities</td><td><input type="text" placeholder="$" id="p3-total"></td></tr>
+        <tr><td><select class="line-select" id="p3-ltd-label" data-answer="Proceeds from issuance of long-term debt"></select></td><td><input type="text" placeholder="$" id="p3-ltd"></td></tr>
+        <tr><td><select class="line-select" id="p3-div-label" data-answer="Payment of cash dividends"></select></td><td><input type="text" placeholder="$" id="p3-div"></td></tr>
+        <tr><td><select class="line-select" id="p3-stk-label" data-answer="Repurchase of common stock"></select></td><td><input type="text" placeholder="$" id="p3-stk"></td></tr>
+        <tr class="final-row"><td><select class="line-select" id="p3-total-label" data-answer="Net cash provided by financing activities"></select></td><td><input type="text" placeholder="$" id="p3-total"></td></tr>
       </tbody>
     </table>
-    <div class="work-line" style="margin-top:14px;">
-      <label>Net increase (decrease) in cash:</label>
-      <input type="text" placeholder="$" id="p3-netchange">
-    </div>
-    <div class="work-line">
-      <label>Cash, beginning of year:</label>
-      <input type="text" placeholder="$" id="p3-begcash">
-    </div>
-    <div class="work-line">
-      <label>Cash, end of year:</label>
-      <input type="text" placeholder="$" id="p3-endcash">
-    </div>
+    <table class="stmt" style="margin-top:18px;">
+      <thead><tr><th style="width:60%;">Line item</th><th style="width:40%;">Amount</th></tr></thead>
+      <tbody>
+        <tr class="subtotal-row"><td><select class="line-select" id="p3-netchange-label" data-answer="Net increase (decrease) in cash"></select></td><td><input type="text" placeholder="$" id="p3-netchange"></td></tr>
+        <tr><td><select class="line-select" id="p3-begcash-label" data-answer="Cash, beginning of year"></select></td><td><input type="text" placeholder="$" id="p3-begcash"></td></tr>
+        <tr class="final-row"><td><select class="line-select" id="p3-endcash-label" data-answer="Cash, end of year"></select></td><td><input type="text" placeholder="$" id="p3-endcash"></td></tr>
+      </tbody>
+    </table>
     <p class="stmt-hint">Net increase (decrease) in cash = total operating + total investing + total financing (from Parts 1&ndash;3).</p>
 
     <div class="check-bar">
       <button class="btn-check" id="checkP3" type="button">Check my work</button>
       <span class="check-summary" id="p3Summary"></span>
       <span class="attempts-note" id="p3Attempts">3 attempts remaining</span>
-      <span class="check-disclaimer">This checks the financing items, the financing subtotal, and the full cash reconciliation.</span>
+      <span class="check-disclaimer">This checks the line items you selected, the financing amounts and subtotal, and the full cash reconciliation.</span>
     </div>
     <div class="key" id="p3Key" style="display:none;"></div>
   </div>
@@ -377,6 +377,14 @@
     if(!el.dataset.clearBound){ el.addEventListener('input', function(){ clearFieldState(el); }); el.dataset.clearBound='1'; }
     return ok;
   }
+  function markSelect(id){
+    var el = document.getElementById(id); if(!el) return null;
+    el.classList.remove('field-correct','field-incorrect');
+    var ok = !!el.value && el.value === el.dataset.answer;
+    el.classList.add(ok?'field-correct':'field-incorrect');
+    if(!el.dataset.clearBound){ el.addEventListener('change', function(){ clearFieldState(el); }); el.dataset.clearBound='1'; }
+    return ok;
+  }
   function fieldsFor(ids){ return ids.map(function(id){ return document.getElementById(id); }).filter(Boolean); }
   function findMissing(ids){ return fieldsFor(ids).filter(function(el){ return !el.value || !el.value.trim(); }); }
   function setMissing(ids, flag){ fieldsFor(ids).forEach(function(el){ el.classList.toggle('field-missing', flag); }); }
@@ -410,6 +418,26 @@
     html += '</table>'; return html;
   }
 
+  // ---------------- line-item dropdown bank ----------------
+  var LINE_ITEM_BANK = [
+    'Cash, beginning of year','Cash, end of year','Decrease in accrued liabilities','Decrease in inventory',
+    'Depreciation expense','Increase in accounts payable','Increase in accounts receivable','Loss on sale of equipment',
+    'Net cash provided by financing activities','Net cash provided by operating activities','Net cash used in investing activities',
+    'Net increase (decrease) in cash','Net income','Payment of cash dividends','Proceeds from issuance of long-term debt',
+    'Proceeds from sale of equipment','Purchase of equipment','Repurchase of common stock'
+  ];
+  document.querySelectorAll('select.line-select').forEach(function(sel){
+    var placeholder = document.createElement('option');
+    placeholder.value = ''; placeholder.textContent = 'Select the line item\u2026';
+    sel.appendChild(placeholder);
+    LINE_ITEM_BANK.forEach(function(item){
+      var opt = document.createElement('option');
+      opt.value = item; opt.textContent = item;
+      sel.appendChild(opt);
+    });
+    sel.value = '';
+  });
+
   // ---------------- PARTS CONFIG ----------------
   var MAX_ATTEMPTS = 3;
   var attempts = {}, locked = {}, scoreState = {};
@@ -417,15 +445,23 @@
   var currentScenario = null;
 
   var PARTS = [
-    { key:'p1', requiredIds:['p1-ni','p1-dep','p1-loss','p1-ar','p1-inv','p1-ap','p1-accr','p1-total'], itemCount:8,
+    { key:'p1', requiredIds:['p1-ni-label','p1-ni','p1-dep-label','p1-dep','p1-loss-label','p1-loss','p1-ar-label','p1-ar','p1-inv-label','p1-inv','p1-ap-label','p1-ap','p1-accr-label','p1-accr','p1-total-label','p1-total'], itemCount:16,
       grade:function(d){ return [
+        markSelect('p1-ni-label'),
         markMoney('p1-ni', d.NI),
+        markSelect('p1-dep-label'),
         markMoney('p1-dep', d.DEP),
+        markSelect('p1-loss-label'),
         markMoney('p1-loss', d.L),
+        markSelect('p1-ar-label'),
         markMoney('p1-ar', -d.dAR),
+        markSelect('p1-inv-label'),
         markMoney('p1-inv', d.dINV),
+        markSelect('p1-ap-label'),
         markMoney('p1-ap', d.dAP),
+        markSelect('p1-accr-label'),
         markMoney('p1-accr', -d.dACCR),
+        markSelect('p1-total-label'),
         markMoney('p1-total', d.NetOperating)
       ]; },
       keyRows:function(d){ return [
@@ -439,10 +475,13 @@
         ['Net cash provided by operating activities', money0(d.NetOperating)]
       ]; }
     },
-    { key:'p2', requiredIds:['p2-purchase','p2-sale','p2-total'], itemCount:3,
+    { key:'p2', requiredIds:['p2-purchase-label','p2-purchase','p2-sale-label','p2-sale','p2-total-label','p2-total'], itemCount:6,
       grade:function(d){ return [
+        markSelect('p2-purchase-label'),
         markMoney('p2-purchase', -d.PPEpurchase),
+        markSelect('p2-sale-label'),
         markMoney('p2-sale', d.PPEsale),
+        markSelect('p2-total-label'),
         markMoney('p2-total', d.NetInvesting)
       ]; },
       keyRows:function(d){ return [
@@ -451,14 +490,21 @@
         ['Net cash used in investing activities', money0(d.NetInvesting)]
       ]; }
     },
-    { key:'p3', requiredIds:['p3-ltd','p3-div','p3-stk','p3-total','p3-netchange','p3-begcash','p3-endcash'], itemCount:7,
+    { key:'p3', requiredIds:['p3-ltd-label','p3-ltd','p3-div-label','p3-div','p3-stk-label','p3-stk','p3-total-label','p3-total','p3-netchange-label','p3-netchange','p3-begcash-label','p3-begcash','p3-endcash-label','p3-endcash'], itemCount:14,
       grade:function(d){ return [
+        markSelect('p3-ltd-label'),
         markMoney('p3-ltd', d.LTDissue),
+        markSelect('p3-div-label'),
         markMoney('p3-div', -d.DIV),
+        markSelect('p3-stk-label'),
         markMoney('p3-stk', -d.STKrepurchase),
+        markSelect('p3-total-label'),
         markMoney('p3-total', d.NetFinancing),
+        markSelect('p3-netchange-label'),
         markMoney('p3-netchange', d.NetChange),
+        markSelect('p3-begcash-label'),
         markMoney('p3-begcash', d.CASH_BEG),
+        markSelect('p3-endcash-label'),
         markMoney('p3-endcash', d.CASH_END)
       ]; },
       keyRows:function(d){ return [
@@ -615,6 +661,12 @@
       var rows = [];
       if(theadCells.length){ rows.push(new D.TableRow({ children: theadCells.map(function(t){ return cellDocx(t,colWidth,{bold:true,shading:PURPLE,color:'FFFFFF'}); }) })); }
       bodyRows.forEach(function(tr){
+        if(tr.children.length===1 && tr.children[0].hasAttribute('colspan')){
+          var headText = tr.children[0].textContent.trim();
+          rows.push(new D.TableRow({ children: [ new D.TableCell({ columnSpan: colCount, width:{size:colWidth*colCount,type:D.WidthType.DXA},
+            margins:{top:60,bottom:60,left:90,right:90}, children:[new D.Paragraph({children:[new D.TextRun({text:headText,size:19,bold:true,color:PURPLE})]})] }) ] }));
+          return;
+        }
         var cells = Array.from(tr.children).map(function(td){
           var field = td.querySelector('input,select');
           var text = field ? blankIfEmpty(inputOrSelectValue(field)) : td.textContent.trim();
