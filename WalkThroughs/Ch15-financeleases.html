@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leases — Classification &amp; Finance/Sales-Type Leases</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --wcu-purple: #4B2E83;
+    --wcu-purple-dark: #341f5c;
+    --wcu-gold: #C8A24A;
+    --gold-light: #f4ecd8;
+    --ink: #232023;
+    --paper: #fdfcfb;
+    --panel: #f7f3ec;
+    --rule: #e2d9c8;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.55;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--wcu-purple) 0%, var(--wcu-purple-dark) 100%);
+    color: #fff;
+    padding: 2.2rem 1.5rem 1.8rem;
+    border-bottom: 6px solid var(--wcu-gold);
+  }
+
+  header .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--wcu-gold);
+    margin-bottom: 0.4rem;
+  }
+
+  header h1 {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 700;
+    font-size: 1.9rem;
+    margin: 0 0 0.3rem;
+  }
+
+  header p.sub {
+    margin: 0;
+    color: #e7e0f2;
+    font-size: 0.98rem;
+  }
+
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  .lo-block { margin-bottom: 2.8rem; }
+
+  h2 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.5rem;
+    margin: 0 0 0.8rem;
+    color: var(--wcu-purple-dark);
+    border-bottom: 2px solid var(--rule);
+    padding-bottom: 0.4rem;
+  }
+
+  h3 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.1rem;
+    margin: 1.4rem 0 0.5rem;
+    color: var(--wcu-purple-dark);
+  }
+
+  h4 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--wcu-purple);
+    margin: 1.1rem 0 0.4rem;
+  }
+
+  p { margin: 0.6rem 0; }
+
+  .key-idea {
+    background: var(--panel);
+    border-left: 4px solid var(--wcu-gold);
+    padding: 0.9rem 1.1rem;
+    border-radius: 0 6px 6px 0;
+    margin: 0.9rem 0;
+  }
+  .key-idea strong { color: var(--wcu-purple-dark); }
+
+  .formula {
+    font-family: 'IBM Plex Mono', monospace;
+    background: var(--wcu-purple-dark);
+    color: var(--gold-light);
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin: 0.8rem 0;
+    font-size: 0.92rem;
+    overflow-x: auto;
+  }
+
+  .example {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin: 0.9rem 0;
+  }
+  .example .ex-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--wcu-purple);
+    margin-bottom: 0.4rem;
+  }
+
+  ul, ol { padding-left: 1.4rem; }
+  li { margin-bottom: 0.35rem; }
+
+  .patterns {
+    background: var(--gold-light);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin: 0.8rem 0;
+  }
+  .patterns p { margin: 0.3rem 0; }
+
+  table.mini-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.4rem 0 0.9rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+  }
+  table.mini-table th, table.mini-table td {
+    border: 1px solid var(--rule);
+    padding: 0.4rem 0.55rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.mini-table th {
+    background: var(--panel);
+    color: var(--wcu-purple-dark);
+    font-weight: 600;
+  }
+
+  table.je-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.5rem 0 0.3rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.84rem;
+  }
+  table.je-table td { padding: 0.28rem 0.3rem; vertical-align: top; }
+  table.je-table td.je-debit-amt, table.je-table td.je-credit-amt {
+    text-align: right;
+    width: 100px;
+    white-space: nowrap;
+  }
+  table.je-table td.indent { padding-left: 1.8rem; }
+  .je-desc {
+    font-size: 0.8rem;
+    color: #6b6560;
+    font-style: italic;
+    margin: 0 0 1rem;
+  }
+
+  .thread-label {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #fff;
+    background: var(--wcu-purple-dark);
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+  }
+
+  footer {
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: #8a8380;
+    padding: 1.5rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">ACCT 351 · Leases — Chapter 15</div>
+  <h1>Lease Classification &amp; Finance/Sales-Type Leases</h1>
+  <p class="sub">Reading Notes</p>
+</header>
+
+<main>
+
+  <div class="lo-block">
+    <h2>Why Lease?</h2>
+
+    <p>Leases have become the single largest source of external financing for U.S. companies. A handful of reasons explain the popularity:</p>
+
+    <div class="patterns">
+      <p><strong>1. Less upfront cash</strong> — many leases require nothing beyond the first payment, avoiding the closing costs and fees that come with a purchase.</p>
+      <p><strong>2. Lower periodic payments</strong> — an installment purchase is priced off the asset's full value; a lease payment is priced off only the portion of value the asset is expected to use up during the lease term.</p>
+      <p><strong>3. Easier disposal</strong> — returning a leased asset at the end of the term is simple; selling an owned asset can be costly and slow.</p>
+      <p><strong>4. Protection from falling asset values</strong> — the lessor bears the risk (and any upside) of the asset's residual value.</p>
+      <p><strong>5. Possible tax advantages</strong> — a lessor with more capacity to use depreciation deductions can pass some of that benefit back to the lessee through lower payments.</p>
+    </div>
+
+    <div class="key-idea">
+      <strong>Substance over form:</strong> accounting for a lease depends on whether the arrangement is, in economic substance, an installment purchase or a temporary rental — regardless of what the contract is titled or who holds legal title. If the lessee ends up controlling substantially all the remaining benefits of the asset and takes on a purchase-like obligation, it's a <strong>finance lease</strong> (called a <strong>sales-type lease</strong> from the lessor's side). Otherwise, it's an <strong>operating lease</strong>.
+    </div>
+  </div>
+
+  <div class="lo-block">
+    <h2>The Five Classification Criteria</h2>
+    <p>A lease is a finance lease (sales-type from the lessor) if <strong>any one</strong> of these five criteria is met. If none is met, it's an operating lease.</p>
+
+    <table class="mini-table">
+      <tr><th style="width:8%;">#</th><th>Criterion</th></tr>
+      <tr><td>1</td><td>Ownership of the asset transfers to the lessee by the end of the lease.</td></tr>
+      <tr><td>2</td><td>The lease contains a purchase option the lessee is reasonably certain to exercise (a "bargain purchase option," or BPO).</td></tr>
+      <tr><td>3</td><td>The lease term is for the <strong>"major part"</strong> of the asset's remaining economic life (a common benchmark: 75% or more).</td></tr>
+      <tr><td>4</td><td>The present value of the lease payments equals or exceeds <strong>"substantially all"</strong> of the asset's fair value (a common benchmark: 90% or more).</td></tr>
+      <tr><td>5</td><td>The asset is so specialized it will have no alternative use to the lessor once the lease ends.</td></tr>
+    </table>
+
+    <p>Criteria 3 and 4 are the ones you'll calculate most often. Both use a discount rate: the lessor's <strong>rate implicit in the lease</strong> if the lessee knows it, otherwise the lessee's own <strong>incremental borrowing rate</strong> — what it would pay a bank to borrow and buy the asset outright.</p>
+
+    <div class="key-idea">
+      Before the current lease standard, many companies deliberately structured leases to fail all five criteria, keeping both the asset and the liability <strong>off the balance sheet</strong>. Current GAAP requires lessees to record a right-of-use asset and a lease liability for essentially all leases — finance <em>and</em> operating — which is why the finance/operating distinction now mainly affects the <em>income statement</em> pattern rather than whether the lease shows up on the balance sheet at all.
+    </div>
+  </div>
+
+  <div class="lo-block">
+    <h2>Finance Leases Work Like Installment Purchases</h2>
+    <p>A finance lease is accounted for the same way as buying the asset with a note payable: the lessee debits an asset and credits a liability for the present value of what it owes, then amortizes that liability with an effective-interest schedule exactly like a loan amortization table.</p>
+
+    <div class="formula">Right-of-use asset = Lease payable = Present value of the lease payments</div>
+
+    <p>Each lease payment is split into an interest piece (effective rate × outstanding balance) and a principal-reduction piece — identical mechanics to the installment notes from the previous chapter. Separately, the lessee <strong>amortizes the right-of-use asset</strong>, usually straight-line over the lease term (or over the asset's full useful life, if ownership transfers or a bargain purchase option is expected).</p>
+
+    <div class="example">
+      <div class="ex-label">Running example — Sans Serif Publishers &amp; First LeaseCorp</div>
+      <p>Sans Serif leases printing equipment for six annual payments of $100,000 (paid at the <em>beginning</em> of each year), a six-year term equal to the equipment's full useful life, and a 10% interest rate. First LeaseCorp paid $479,079 for the equipment — the same amount as the present value of the lease payments, so there's no selling profit involved (more on that below).</p>
+      <p>At least two of the five criteria are met (the lease term equals the full economic life, and the present value of payments equals the full fair value) — so this is a <strong>finance lease</strong> to Sans Serif and a <strong>sales-type lease</strong> to First LeaseCorp.</p>
+    </div>
+
+    <div class="thread-label">Beginning of the Lease</div>
+    <table class="je-table">
+      <tr><td>Right-of-use asset</td><td class="je-debit-amt">479,079</td><td></td></tr>
+      <tr><td class="indent">Lease payable</td><td></td><td class="je-credit-amt">479,079</td></tr>
+    </table>
+    <p class="je-desc">Sans Serif (lessee) — recorded at the present value of the lease payments.</p>
+    <table class="je-table">
+      <tr><td>Lease receivable</td><td class="je-debit-amt">479,079</td><td></td></tr>
+      <tr><td class="indent">Equipment (lessor's carrying amount)</td><td></td><td class="je-credit-amt">479,079</td></tr>
+    </table>
+    <p class="je-desc">First LeaseCorp (lessor) — the mirror image: a receivable replaces the derecognized asset.</p>
+
+    <div class="thread-label">First Payment (Jan. 1 — Beginning of the Lease)</div>
+    <table class="je-table">
+      <tr><td>Lease payable</td><td class="je-debit-amt">100,000</td><td></td></tr>
+      <tr><td class="indent">Cash</td><td></td><td class="je-credit-amt">100,000</td></tr>
+    </table>
+    <p class="je-desc">No interest has accrued yet, so the entire first payment reduces principal.</p>
+
+    <div class="thread-label">Second Payment (Dec. 31 — One Year Later)</div>
+    <table class="je-table">
+      <tr><td>Interest expense (10% × $379,079)</td><td class="je-debit-amt">37,908</td><td></td></tr>
+      <tr><td>Lease payable (difference)</td><td class="je-debit-amt">62,092</td><td></td></tr>
+      <tr><td class="indent">Cash</td><td></td><td class="je-credit-amt">100,000</td></tr>
+    </table>
+    <p class="je-desc">Sans Serif — every payment after the first includes interest on the outstanding balance.</p>
+
+    <div class="key-idea">
+      <strong>Amortizing the right-of-use asset:</strong> Sans Serif expenses $479,079 ÷ 6 years = <strong>$79,847</strong> of amortization each year — a separate entry from the interest/principal split above. In a finance lease, interest expense and amortization expense are reported <em>separately</em>, and because interest is highest early in the lease (front-loading), total expense is higher in the early years and lower in the later years.
+    </div>
+  </div>
+
+  <div class="lo-block">
+    <h2>Sales-Type Leases with a Selling Profit</h2>
+    <p>In the example above, First LeaseCorp is a financing intermediary — it bought the equipment for exactly what it's now financing, so its only income is interest revenue. But when the lessor is a manufacturer or dealer using the lease to <em>sell</em> its own product, the lessor typically earns a <strong>selling profit</strong> too.</p>
+
+    <div class="formula">Selling profit = Present value of lease payments (the "selling price") − Lessor's cost of the asset</div>
+
+    <p>The lessee's accounting is completely unaffected by whether the lessor has a selling profit — the lessee's entries look exactly the same either way. Only the lessor's <em>opening</em> entry changes.</p>
+
+    <div class="example">
+      <div class="ex-label">Same contract, different lessor</div>
+      <p>Suppose Sans Serif instead leased directly from CompuDec Corporation (the manufacturer), which built the equipment for $300,000. The present value of the lease payments is still $479,079, so CompuDec earns a gross profit of $479,079 − $300,000 = <strong>$179,079</strong>.</p>
+    </div>
+
+    <table class="je-table">
+      <tr><td>Lease receivable</td><td class="je-debit-amt">479,079</td><td></td></tr>
+      <tr><td>Cost of goods sold (lessor's cost)</td><td class="je-debit-amt">300,000</td><td></td></tr>
+      <tr><td class="indent">Sales revenue</td><td></td><td class="je-credit-amt">479,079</td></tr>
+      <tr><td class="indent">Equipment (lessor's cost)</td><td></td><td class="je-credit-amt">300,000</td></tr>
+    </table>
+    <p class="je-desc">CompuDec (lessor) at the beginning of the lease — this is the same structure as recording any product sale: one entry for revenue and receivable, another for cost of goods sold and inventory reduction.</p>
+
+    <div class="patterns">
+      <p>Every entry <em>after</em> this opening entry — interest revenue, receivable amortization — is identical to a sales-type lease with no selling profit. The selling profit only shows up once, at inception.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer>ACCT 351 · Leases · Classification &amp; Finance/Sales-Type Leases — Reading Notes</footer>
+
+</body>
+</html>
