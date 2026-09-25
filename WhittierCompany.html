@@ -244,13 +244,13 @@
     <table class="stmt">
       <thead><tr><th style="width:60%;">Line item</th><th style="width:40%;">Amount</th></tr></thead>
       <tbody>
-        <tr><td><select class="line-select" id="p3-discop-label" data-answer="Income from operations and disposal of discontinued component"></select></td><td><input type="text" placeholder="$" id="p3-discop"></td></tr>
-        <tr><td class="indent"><select class="line-select" id="p3-disctax-label" data-answer="Income tax expense"></select></td><td><input type="text" placeholder="$ (use a minus sign if a benefit)" id="p3-disctax"></td></tr>
-        <tr class="subtotal-row"><td><select class="line-select" id="p3-discni-label" data-answer="Income on discontinued component, net of tax"></select></td><td><input type="text" placeholder="$" id="p3-discni"></td></tr>
+        <tr><td><select class="line-select" id="p3-opnet-label" data-answer="Loss from operations of discontinued component, net of tax"></select></td><td><input type="text" placeholder="$ (use a minus sign)" id="p3-opnet"></td></tr>
+        <tr><td><select class="line-select" id="p3-dispnet-label" data-answer="Gain on disposal of discontinued component, net of tax"></select></td><td><input type="text" placeholder="$" id="p3-dispnet"></td></tr>
+        <tr class="subtotal-row"><td><select class="line-select" id="p3-discni-label" data-answer="Income from discontinued operations, net of tax"></select></td><td><input type="text" placeholder="$" id="p3-discni"></td></tr>
         <tr class="final-row"><td><select class="line-select" id="p3-ni-label" data-answer="Net income"></select></td><td><input type="text" placeholder="$" id="p3-ni"></td></tr>
       </tbody>
     </table>
-    <p class="stmt-hint">Income from continuing operations carries forward from Part 2.</p>
+    <p class="stmt-hint">Income from continuing operations carries forward from Part 2. Apply the tax rate separately to the operating loss and to the gain on disposal — each is its own net-of-tax line, not a single combined pretax amount with one tax expense line.</p>
     <div class="work-line" style="margin-top:14px;">
       <label>Earnings per share — Income from continuing operations:</label>
       <input type="text" placeholder="$0.00" id="p3-eps-cont">
@@ -285,13 +285,13 @@
       <thead><tr><th style="width:60%;">Line item</th><th style="width:40%;">Amount</th></tr></thead>
       <tbody>
         <tr><td><select class="line-select" id="p4-ni-label" data-answer="Net income"></select></td><td><input type="text" placeholder="$" id="p4-ni"></td></tr>
-        <tr><td class="indent"><select class="line-select" id="p4-ug-label" data-answer="Unrealized holding gain (loss) on AFS debt securities"></select></td><td><input type="text" placeholder="$ (use a minus sign if a loss)" id="p4-ug"></td></tr>
-        <tr><td class="indent"><select class="line-select" id="p4-fx-label" data-answer="Foreign currency translation adjustment"></select></td><td><input type="text" placeholder="$ (use a minus sign if negative)" id="p4-fx"></td></tr>
+        <tr><td class="indent"><select class="line-select" id="p4-ug-label" data-answer="Unrealized holding gain (loss) on AFS debt securities, net of tax"></select></td><td><input type="text" placeholder="$ (use a minus sign if a loss)" id="p4-ug"></td></tr>
+        <tr><td class="indent"><select class="line-select" id="p4-fx-label" data-answer="Foreign currency translation adjustment, net of tax"></select></td><td><input type="text" placeholder="$ (use a minus sign if negative)" id="p4-fx"></td></tr>
         <tr class="subtotal-row"><td><select class="line-select" id="p4-oci-label" data-answer="Other comprehensive income"></select></td><td><input type="text" placeholder="$" id="p4-oci"></td></tr>
         <tr class="final-row"><td><select class="line-select" id="p4-ci-label" data-answer="Comprehensive income"></select></td><td><input type="text" placeholder="$" id="p4-ci"></td></tr>
       </tbody>
     </table>
-    <p class="stmt-hint">Net income carries forward from Part 3.</p>
+    <p class="stmt-hint">Net income carries forward from Part 3. The unrealized holding gain (loss) and the foreign currency translation adjustment are given above at their pretax amounts — apply the income tax rate to each before entering it here.</p>
 
     <div class="check-bar">
       <button class="btn-check" id="checkP4" type="button">Check my work</button>
@@ -383,21 +383,40 @@
     var ContIncomeBeforeTax = OperatingIncome+OtherNet;
     var ContTaxExpense = round(ContIncomeBeforeTax*t);
     var IncomeFromContinuingOps = ContIncomeBeforeTax-ContTaxExpense;
-    var DiscPretax = DISCGAIN-DISCLOSS;
-    var DiscTax = round(DiscPretax*t);
-    var DiscNetOfTax = DiscPretax-DiscTax;
+
+    // Discontinued operations: the operating loss and the gain on disposal are each
+    // tax-effected separately and reported as two distinct net-of-tax line items,
+    // not combined into one pretax figure with a single income tax expense line.
+    var OpPretax = -DISCLOSS;
+    var OpTax = round(OpPretax*t);
+    var OpNetOfTax = OpPretax-OpTax;
+    var DisposalPretax = DISCGAIN;
+    var DisposalTax = round(DisposalPretax*t);
+    var DisposalNetOfTax = DisposalPretax-DisposalTax;
+    var DiscNetOfTax = OpNetOfTax+DisposalNetOfTax;
+
     var NetIncome = IncomeFromContinuingOps+DiscNetOfTax;
     var EPSCont = round2(IncomeFromContinuingOps/SH);
     var EPSDisc = round2(DiscNetOfTax/SH);
     var EPSNet = round2(NetIncome/SH);
-    var TotalOCI = UG+FX;
+
+    // Other comprehensive income items are given pretax and are also reported net of tax.
+    var UGTax = round(UG*t);
+    var UGNetOfTax = UG-UGTax;
+    var FXTax = round(FX*t);
+    var FXNetOfTax = FX-FXTax;
+    var TotalOCI = UGNetOfTax+FXNetOfTax;
     var ComprehensiveIncome = NetIncome+TotalOCI;
 
-    return { S:S, SRA:SRA, COGS:COGS, SE:SE, GA:GA, IR:IR, GAIN:GAIN, IE:IE, t:t, SH:SH, UG:UG, FX:FX,
+    return { S:S, SRA:SRA, COGS:COGS, SE:SE, GA:GA, IR:IR, GAIN:GAIN, IE:IE, t:t, SH:SH,
+      UG:UG, UGTax:UGTax, UGNetOfTax:UGNetOfTax, FX:FX, FXTax:FXTax, FXNetOfTax:FXNetOfTax,
       DISCLOSS:DISCLOSS, DISCGAIN:DISCGAIN,
       NetSales:NetSales, GrossProfit:GrossProfit, TotalOpEx:TotalOpEx, OperatingIncome:OperatingIncome,
       OtherNet:OtherNet, ContIncomeBeforeTax:ContIncomeBeforeTax, ContTaxExpense:ContTaxExpense,
-      IncomeFromContinuingOps:IncomeFromContinuingOps, DiscPretax:DiscPretax, DiscTax:DiscTax, DiscNetOfTax:DiscNetOfTax,
+      IncomeFromContinuingOps:IncomeFromContinuingOps,
+      OpPretax:OpPretax, OpTax:OpTax, OpNetOfTax:OpNetOfTax,
+      DisposalPretax:DisposalPretax, DisposalTax:DisposalTax, DisposalNetOfTax:DisposalNetOfTax,
+      DiscNetOfTax:DiscNetOfTax,
       NetIncome:NetIncome, EPSCont:EPSCont, EPSDisc:EPSDisc, EPSNet:EPSNet,
       TotalOCI:TotalOCI, ComprehensiveIncome:ComprehensiveIncome };
   }
@@ -447,14 +466,16 @@
   // shared list so choosing the right label also means correctly classifying
   // which section of the statement (or which subtotal) it belongs to.
   var LINE_ITEM_BANK = [
-    'Comprehensive income','Cost of goods sold','Foreign currency translation adjustment',
-    'Gain on sale of investments','General and administrative expenses','Gross profit',
+    'Comprehensive income','Cost of goods sold','Foreign currency translation adjustment, net of tax',
+    'Gain on disposal of discontinued component, net of tax','Gain on sale of investments',
+    'General and administrative expenses','Gross profit',
     'Income from continuing operations','Income from continuing operations before income taxes',
-    'Income from operations and disposal of discontinued component','Income on discontinued component, net of tax',
+    'Income from discontinued operations, net of tax',
     'Income tax expense','Interest expense','Interest revenue',
-    'Less: Sales returns and allowances','Net income','Net sales','Operating income',
+    'Less: Sales returns and allowances','Loss from operations of discontinued component, net of tax',
+    'Net income','Net sales','Operating income',
     'Other comprehensive income','Sales revenue','Selling expenses','Total operating expenses',
-    'Total other income (expense), net','Unrealized holding gain (loss) on AFS debt securities'
+    'Total other income (expense), net','Unrealized holding gain (loss) on AFS debt securities, net of tax'
   ];
   document.querySelectorAll('select.line-select').forEach(function(sel){
     var placeholder = document.createElement('option');
@@ -567,12 +588,12 @@
         ['Income from continuing operations', money0(d.IncomeFromContinuingOps)]
       ]; }
     },
-    { key:'p3', requiredIds:['p3-discop-label','p3-discop','p3-disctax-label','p3-disctax','p3-discni-label','p3-discni','p3-ni-label','p3-ni','p3-eps-cont','p3-eps-disc','p3-eps-net'], itemCount:11,
+    { key:'p3', requiredIds:['p3-opnet-label','p3-opnet','p3-dispnet-label','p3-dispnet','p3-discni-label','p3-discni','p3-ni-label','p3-ni','p3-eps-cont','p3-eps-disc','p3-eps-net'], itemCount:11,
       grade:function(d){ return [
-        markSelect('p3-discop-label'),
-        markMoney('p3-discop', d.DiscPretax),
-        markSelect('p3-disctax-label'),
-        markMoney('p3-disctax', d.DiscTax),
+        markSelect('p3-opnet-label'),
+        markMoney('p3-opnet', d.OpNetOfTax),
+        markSelect('p3-dispnet-label'),
+        markMoney('p3-dispnet', d.DisposalNetOfTax),
         markSelect('p3-discni-label'),
         markMoney('p3-discni', d.DiscNetOfTax),
         markSelect('p3-ni-label'),
@@ -582,9 +603,9 @@
         markMoney('p3-eps-net', d.EPSNet, 0.01)
       ]; },
       keyRows:function(d){ return [
-        ['Income from operations and disposal of discontinued component', money0(d.DiscPretax)],
-        ['Income tax expense ('+Math.round(d.t*100)+'%)', money0(d.DiscTax)],
-        ['Income on discontinued component, net of tax', money0(d.DiscNetOfTax)],
+        ['Loss from operations of discontinued component, net of tax ('+money0(d.OpPretax)+' pretax \u2212 '+money0(d.OpTax)+' tax)', money0(d.OpNetOfTax)],
+        ['Gain on disposal of discontinued component, net of tax ('+money0(d.DisposalPretax)+' pretax \u2212 '+money0(d.DisposalTax)+' tax)', money0(d.DisposalNetOfTax)],
+        ['Income from discontinued operations, net of tax', money0(d.OpNetOfTax)+' + '+money0(d.DisposalNetOfTax)+' = '+money0(d.DiscNetOfTax)],
         ['Net income', money0(d.IncomeFromContinuingOps)+' + '+money0(d.DiscNetOfTax)+' = '+money0(d.NetIncome)],
         ['EPS — Income from continuing operations', moneyCents(d.EPSCont)],
         ['EPS — Discontinued operations', moneyCents(d.EPSDisc)],
@@ -596,9 +617,9 @@
         markSelect('p4-ni-label'),
         markMoney('p4-ni', d.NetIncome),
         markSelect('p4-ug-label'),
-        markMoney('p4-ug', d.UG),
+        markMoney('p4-ug', d.UGNetOfTax),
         markSelect('p4-fx-label'),
-        markMoney('p4-fx', d.FX),
+        markMoney('p4-fx', d.FXNetOfTax),
         markSelect('p4-oci-label'),
         markMoney('p4-oci', d.TotalOCI),
         markSelect('p4-ci-label'),
@@ -606,8 +627,8 @@
       ]; },
       keyRows:function(d){ return [
         ['Net income', money0(d.NetIncome)],
-        ['Unrealized holding gain (loss) on AFS debt securities', money0(d.UG)],
-        ['Foreign currency translation adjustment', money0(d.FX)],
+        ['Unrealized holding gain (loss) on AFS debt securities, net of tax ('+money0(d.UG)+' pretax \u2212 '+money0(d.UGTax)+' tax)', money0(d.UGNetOfTax)],
+        ['Foreign currency translation adjustment, net of tax ('+money0(d.FX)+' pretax \u2212 '+money0(d.FXTax)+' tax)', money0(d.FXNetOfTax)],
         ['Other comprehensive income', money0(d.TotalOCI)],
         ['Comprehensive income', money0(d.NetIncome)+' + '+money0(d.TotalOCI)+' = '+money0(d.ComprehensiveIncome)]
       ]; }
