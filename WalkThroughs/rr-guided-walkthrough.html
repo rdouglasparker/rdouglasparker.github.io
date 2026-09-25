@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Introduction to Revenue Recognition — Guided Walk-Through</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --wcu-purple: #4B2E83;
+    --wcu-purple-dark: #341f5c;
+    --wcu-gold: #C8A24A;
+    --gold-light: #f4ecd8;
+    --ink: #232023;
+    --paper: #fdfcfb;
+    --panel: #f7f3ec;
+    --rule: #e2d9c8;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.55;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--wcu-purple) 0%, var(--wcu-purple-dark) 100%);
+    color: #fff;
+    padding: 2.2rem 1.5rem 1.8rem;
+    border-bottom: 6px solid var(--wcu-gold);
+  }
+
+  header .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--wcu-gold);
+    margin-bottom: 0.4rem;
+  }
+
+  header h1 {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 700;
+    font-size: 1.9rem;
+    margin: 0 0 0.3rem;
+  }
+
+  header p.sub {
+    margin: 0;
+    color: #e7e0f2;
+    font-size: 0.98rem;
+  }
+
+  main {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  h3 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.1rem;
+    margin: 1.4rem 0 0.5rem;
+    color: var(--wcu-purple-dark);
+  }
+
+  h4 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--wcu-purple);
+    margin: 1.1rem 0 0.4rem;
+  }
+
+  p { margin: 0.6rem 0; }
+
+  ol, ul { padding-left: 1.4rem; }
+  li { margin-bottom: 0.35rem; }
+
+  .patterns {
+    background: var(--gold-light);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin: 0.8rem 0;
+  }
+  .patterns p { margin: 0.3rem 0; }
+
+  table.data-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.4rem 0 0.9rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+  }
+  table.data-table caption {
+    text-align: left;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    color: #6b6560;
+    margin-bottom: 0.3rem;
+    caption-side: top;
+  }
+  table.data-table th, table.data-table td {
+    border: 1px solid var(--rule);
+    padding: 0.35rem 0.55rem;
+    text-align: center;
+  }
+  table.data-table td:first-child, table.data-table th:first-child { text-align: left; }
+  table.data-table th {
+    background: var(--panel);
+    color: var(--wcu-purple-dark);
+    font-weight: 600;
+  }
+
+  /* Try-first prompt */
+  .try-first {
+    background: #fff;
+    border: 1.5px dashed var(--wcu-purple);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin: 1rem 0 0.6rem;
+  }
+  .try-first .tf-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--wcu-purple);
+    margin-bottom: 0.45rem;
+  }
+  .try-first ol, .try-first ul { margin: 0.3rem 0 0; }
+
+  /* Reveal / details */
+  details.reveal {
+    margin: 0 0 1.3rem;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  details.reveal summary {
+    cursor: pointer;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--wcu-purple-dark);
+    background: var(--panel);
+    padding: 0.6rem 0.9rem;
+    list-style: revert;
+  }
+  details.reveal summary:hover { background: var(--gold-light); }
+  details.reveal .reveal-body {
+    padding: 1rem 1.1rem 1.1rem;
+    background: #fff;
+  }
+  details.reveal[open] summary { border-bottom: 1px solid var(--rule); }
+
+  /* Journal entries */
+  table.je-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.5rem 0 0.3rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.86rem;
+  }
+  table.je-table td { padding: 0.28rem 0.3rem; vertical-align: top; }
+  table.je-table td.je-debit-amt, table.je-table td.je-credit-amt {
+    text-align: right;
+    width: 100px;
+    white-space: nowrap;
+  }
+  table.je-table td.indent { padding-left: 1.8rem; }
+  .je-desc {
+    font-size: 0.82rem;
+    color: #6b6560;
+    font-style: italic;
+    margin: 0 0 1rem;
+  }
+
+  .scenario-tag {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 700;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #fff;
+    background: var(--wcu-purple-dark);
+    padding: 0.18rem 0.55rem;
+    border-radius: 4px;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+  }
+
+  .scenario-block {
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 1.2rem 1.3rem;
+    margin: 1.4rem 0;
+    background: #fff;
+  }
+
+  .checkpoint {
+    background: var(--panel);
+    border-radius: 8px;
+    padding: 0.8rem 1.1rem;
+    margin: 0.6rem 0 1.2rem;
+    font-size: 0.92rem;
+  }
+  .checkpoint strong { color: var(--wcu-purple-dark); }
+
+  footer {
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: #8a8380;
+    padding: 1.5rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">ACCT 351 · Revenue Recognition — Chapter 6, Part A</div>
+  <h1>Introduction to Revenue Recognition</h1>
+  <p class="sub">Guided Walk-Through</p>
+</header>
+
+<main>
+
+  <p>All three walk-throughs below follow <strong>TrueTech Industries</strong>, which sells the <strong>Tri-Box</strong> gaming console and <strong>Tri-Net</strong>, a subscription gaming platform. TrueTech sells a batch of 1,000 units to a retailer, CompStores, on January 1, <span class="yr0">2024</span> in each scenario — only the contract terms change. Work through the five steps yourself before opening each reveal.</p>
+
+  <div class="scenario-block">
+    <h3 style="margin-top:0;">Walk-Through A — A Single Obligation, Satisfied at a Point in Time<span class="scenario-tag">Point in Time</span></h3>
+    <p>CompStores orders 1,000 Tri-Box gaming consoles at $240 each. A Tri-Box is just the hardware module — no subscription, no other services bundled in.</p>
+
+    <table class="data-table">
+      <caption>Timeline</caption>
+      <thead><tr><th>Date</th><th>Event</th></tr></thead>
+      <tbody>
+        <tr><td>December 20, <span class="yrPrev">2023</span></td><td>CompStores places the order (payment due within 30 days of delivery)</td></tr>
+        <tr><td>January 1, <span class="yr0">2024</span></td><td>TrueTech delivers 1,000 Tri-Boxes; title transfers to CompStores</td></tr>
+        <tr><td>January 25, <span class="yr0">2024</span></td><td>TrueTech collects $240,000 in cash from CompStores</td></tr>
+      </tbody>
+    </table>
+
+    <div class="try-first">
+      <div class="tf-label">Your turn — before you open the reveal</div>
+      <ol>
+        <li>At which of the three dates should TrueTech recognize revenue? Use the control-transfer indicators to justify your answer.</li>
+        <li>How much revenue is recognized, and on what date?</li>
+        <li>What entry (if any) does TrueTech record on the other two dates?</li>
+      </ol>
+    </div>
+    <details class="reveal">
+      <summary>Reveal the reasoning</summary>
+      <div class="reveal-body">
+        <p><strong>December 20:</strong> no entry. An order has been placed, but TrueTech hasn't transferred control of anything yet — CompStores has no possession, no title, and no obligation to pay yet.</p>
+        <p><strong>January 1:</strong> revenue is recognized here. Once TrueTech delivers the consoles, CompStores has physical possession, legal title, the risks and rewards of ownership, and an obligation to pay — every control indicator points the same direction.</p>
+        <p><strong>January 25:</strong> no revenue impact. Collecting cash on an existing receivable doesn't create new revenue — the performance obligation was already satisfied on January 1.</p>
+        <p>Revenue recognized = 1,000 × $240 = <strong>$240,000</strong>, on January 1.</p>
+      </div>
+    </details>
+    <details class="reveal">
+      <summary>Reveal the journal entries</summary>
+      <div class="reveal-body">
+        <table class="je-table">
+          <tr><td>Accounts Receivable</td><td class="je-debit-amt">240,000</td><td></td></tr>
+          <tr><td class="indent">Sales Revenue</td><td></td><td class="je-credit-amt">240,000</td></tr>
+        </table>
+        <p class="je-desc">January 1 — to record revenue upon delivery. (TrueTech would also debit Cost of Goods Sold and credit Inventory here under a perpetual inventory system — not shown, since it doesn't affect revenue.)</p>
+        <table class="je-table">
+          <tr><td>Cash</td><td class="je-debit-amt">240,000</td><td></td></tr>
+          <tr><td class="indent">Accounts Receivable</td><td></td><td class="je-credit-amt">240,000</td></tr>
+        </table>
+        <p class="je-desc">January 25 — to record cash collection. No revenue account is touched.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="scenario-block">
+    <h3 style="margin-top:0;">Walk-Through B — A Single Obligation, Satisfied over Time<span class="scenario-tag">Over Time</span></h3>
+    <p>Instead of hardware, CompStores now buys 1,000 twelve-month subscriptions to the Tri-Net gaming platform at $60 each, sold on January 1, <span class="yr0">2024</span>.</p>
+
+    <div class="try-first">
+      <div class="tf-label">Your turn</div>
+      <ol>
+        <li>Does this performance obligation qualify for over-time recognition? Which of the three criteria does it meet?</li>
+        <li>What should TrueTech record on January 1 — and how much revenue is that?</li>
+        <li>How much revenue is recognized in each of the next 12 months?</li>
+      </ol>
+    </div>
+    <details class="reveal">
+      <summary>Reveal the reasoning</summary>
+      <div class="reveal-body">
+        <p>This meets the <strong>first criterion</strong> for over-time recognition: subscribers consume the benefit of platform access continuously as TrueTech provides it, day by day, over the year.</p>
+        <p>On January 1, TrueTech has been paid but hasn't yet provided any of that access — so <strong>no revenue</strong> is recognized on January 1. The $60,000 received is a liability (deferred revenue) representing TrueTech's obligation to provide access for the year.</p>
+        <p>TrueTech uses passage of time as its progress measure (an output measure), so revenue is recognized evenly: $60,000 ÷ 12 = <strong>$5,000 per month</strong>.</p>
+      </div>
+    </details>
+    <details class="reveal">
+      <summary>Reveal the journal entries</summary>
+      <div class="reveal-body">
+        <table class="je-table">
+          <tr><td>Cash</td><td class="je-debit-amt">60,000</td><td></td></tr>
+          <tr><td class="indent">Deferred Revenue</td><td></td><td class="je-credit-amt">60,000</td></tr>
+        </table>
+        <p class="je-desc">January 1 — cash received before the performance obligation is satisfied, so it's recorded as a liability, not revenue.</p>
+        <table class="je-table">
+          <tr><td>Deferred Revenue</td><td class="je-debit-amt">5,000</td><td></td></tr>
+          <tr><td class="indent">Service Revenue</td><td></td><td class="je-credit-amt">5,000</td></tr>
+        </table>
+        <p class="je-desc">Recorded at the end of each of the 12 months (January 31 through December 31). After the 12th entry, Deferred Revenue is back to zero and Service Revenue for the year totals the full $60,000.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="scenario-block">
+    <h3 style="margin-top:0;">Walk-Through C — Multiple Performance Obligations<span class="scenario-tag">Bundle</span></h3>
+    <p>Now TrueTech sells the two products together as the <strong>Tri-Box System</strong> — a module plus a 12-month Tri-Net subscription — as a package deal for $250 (instead of buying them separately for $240 + $60 = $300). TrueTech delivers 1,000 systems to CompStores on January 1, <span class="yr0">2024</span> for $250,000, collecting cash on January 25.</p>
+
+    <div class="try-first">
+      <div class="tf-label">Your turn — this one's harder</div>
+      <ol>
+        <li>Identify the performance obligation(s) in this bundle. Are the module and subscription distinct from each other?</li>
+        <li>Each performance obligation's stand-alone price is known ($240 and $60). What percentage of the combined $300 stand-alone value does each represent?</li>
+        <li>Apply those percentages to the $250,000 transaction price. How much is allocated to each performance obligation?</li>
+        <li>How much subscription revenue is recognized per month now, compared to Walk-Through B — and why is it different?</li>
+      </ol>
+    </div>
+    <details class="reveal">
+      <summary>Reveal the reasoning and allocation</summary>
+      <div class="reveal-body">
+        <p><strong>Step 1 — performance obligations:</strong> both the module and the subscription are capable of being distinct (each is sold on its own) and separately identifiable (they don't modify or depend on each other) — so this contract has <strong>two</strong> performance obligations: (1) delivery of the module, and (2) the one-year subscription.</p>
+        <p><strong>Step 2 — relative stand-alone prices:</strong> combined stand-alone value = $240 + $60 = $300. Module share = $240 ÷ $300 = <strong>80%</strong>. Subscription share = $60 ÷ $300 = <strong>20%</strong>.</p>
+        <p><strong>Step 3 — allocate the $250,000 transaction price:</strong> Module = $250,000 × 80% = <strong>$200,000</strong> (recognized January 1, at delivery). Subscription = $250,000 × 20% = <strong>$50,000</strong> (recognized over the 12-month term).</p>
+        <p><strong>Step 4 — monthly subscription revenue:</strong> $50,000 ÷ 12 = <strong>$4,167 per month</strong> — less than the $5,000/month from Walk-Through B, because the $50 combined discount (from bundling $300 of stand-alone value into a $250 price) is spread proportionally across both performance obligations. Bundling doesn't just discount the hardware — it quietly discounts the subscription revenue too.</p>
+      </div>
+    </details>
+    <details class="reveal">
+      <summary>Reveal the journal entries</summary>
+      <div class="reveal-body">
+        <table class="je-table">
+          <tr><td>Accounts Receivable</td><td class="je-debit-amt">250,000</td><td></td></tr>
+          <tr><td class="indent">Sales Revenue</td><td></td><td class="je-credit-amt">200,000</td></tr>
+          <tr><td class="indent">Deferred Revenue</td><td></td><td class="je-credit-amt">50,000</td></tr>
+        </table>
+        <p class="je-desc">January 1 — the module's allocated price is recognized immediately at delivery; the subscription's allocated price is deferred.</p>
+        <table class="je-table">
+          <tr><td>Cash</td><td class="je-debit-amt">250,000</td><td></td></tr>
+          <tr><td class="indent">Accounts Receivable</td><td></td><td class="je-credit-amt">250,000</td></tr>
+        </table>
+        <p class="je-desc">January 25 — cash collection; no revenue impact.</p>
+        <table class="je-table">
+          <tr><td>Deferred Revenue</td><td class="je-debit-amt">4,167</td><td></td></tr>
+          <tr><td class="indent">Service Revenue</td><td></td><td class="je-credit-amt">4,167</td></tr>
+        </table>
+        <p class="je-desc">Recorded at the end of each of the 12 months. After the 12th entry, the full $50,000 allocated to the subscription has been recognized as Service Revenue.</p>
+      </div>
+    </details>
+
+    <div class="checkpoint">
+      <strong>Compare all three:</strong> the same $240 module and $60 subscription generate different revenue depending on how they're sold. Sold separately, the module produces $240,000 at delivery (Walk-Through A) and the subscription produces $5,000/month (Walk-Through B). Bundled together for $250, the same items produce $200,000 at delivery and $4,167/month (Walk-Through C) — the price allocation, not the cost of providing the goods or services, drives the difference.
+    </div>
+  </div>
+
+</main>
+
+<footer>ACCT 351 · Revenue Recognition, Part A · Introduction to Revenue Recognition — Guided Walk-Through</footer>
+
+<script>
+  // Keeps the walk-through's dates current automatically — no recoding needed
+  // each year. yr0 is always the current calendar year; yrPrev is the year before.
+  (function () {
+    var yr0 = new Date().getFullYear();
+    var years = { yr0: yr0, yrPrev: yr0 - 1 };
+    Object.keys(years).forEach(function (cls) {
+      document.querySelectorAll('.' + cls).forEach(function (el) {
+        el.textContent = years[cls];
+      });
+    });
+  })();
+</script>
+</body>
+</html>
