@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Introduction to Revenue Recognition — Reading Notes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --wcu-purple: #4B2E83;
+    --wcu-purple-dark: #341f5c;
+    --wcu-gold: #C8A24A;
+    --gold-light: #f4ecd8;
+    --ink: #232023;
+    --paper: #fdfcfb;
+    --panel: #f7f3ec;
+    --rule: #e2d9c8;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.55;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--wcu-purple) 0%, var(--wcu-purple-dark) 100%);
+    color: #fff;
+    padding: 2.2rem 1.5rem 1.8rem;
+    border-bottom: 6px solid var(--wcu-gold);
+  }
+
+  header .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--wcu-gold);
+    margin-bottom: 0.4rem;
+  }
+
+  header h1 {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 700;
+    font-size: 1.9rem;
+    margin: 0 0 0.3rem;
+  }
+
+  header p.sub {
+    margin: 0;
+    color: #e7e0f2;
+    font-size: 0.98rem;
+  }
+
+  main {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  .lo-block { margin-bottom: 2.8rem; }
+
+  h2 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.5rem;
+    margin: 0 0 0.8rem;
+    color: var(--wcu-purple-dark);
+    border-bottom: 2px solid var(--rule);
+    padding-bottom: 0.4rem;
+  }
+
+  h3 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.1rem;
+    margin: 1.4rem 0 0.5rem;
+    color: var(--wcu-purple-dark);
+  }
+
+  p { margin: 0.6rem 0; }
+
+  .key-idea {
+    background: var(--panel);
+    border-left: 4px solid var(--wcu-gold);
+    padding: 0.9rem 1.1rem;
+    border-radius: 0 6px 6px 0;
+    margin: 0.9rem 0;
+  }
+
+  .key-idea strong { color: var(--wcu-purple-dark); }
+
+  .formula {
+    font-family: 'IBM Plex Mono', monospace;
+    background: var(--wcu-purple-dark);
+    color: var(--gold-light);
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin: 0.8rem 0;
+    font-size: 0.95rem;
+    overflow-x: auto;
+  }
+
+  .example {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin: 0.9rem 0;
+  }
+
+  .example .ex-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--wcu-purple);
+    margin-bottom: 0.4rem;
+  }
+
+  .example .ex-answer {
+    margin-top: 0.6rem;
+    padding-top: 0.6rem;
+    border-top: 1px dashed var(--rule);
+    font-weight: 500;
+  }
+
+  ul, ol { padding-left: 1.4rem; }
+  li { margin-bottom: 0.35rem; }
+
+  .patterns {
+    background: var(--gold-light);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin: 0.8rem 0;
+  }
+  .patterns p { margin: 0.3rem 0; }
+
+  table.mini-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.4rem 0 0.9rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+  }
+  table.mini-table caption {
+    text-align: left;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    color: #6b6560;
+    margin-bottom: 0.3rem;
+    caption-side: top;
+  }
+  table.mini-table th, table.mini-table td {
+    border: 1px solid var(--rule);
+    padding: 0.45rem 0.6rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.mini-table th {
+    background: var(--panel);
+    color: var(--wcu-purple-dark);
+    font-weight: 600;
+  }
+
+  table.je-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.5rem 0 0.3rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.86rem;
+  }
+  table.je-table td { padding: 0.28rem 0.3rem; vertical-align: top; }
+  table.je-table td.je-debit-amt, table.je-table td.je-credit-amt {
+    text-align: right;
+    width: 100px;
+    white-space: nowrap;
+  }
+  table.je-table td.indent { padding-left: 1.8rem; }
+  .je-desc {
+    font-size: 0.82rem;
+    color: #6b6560;
+    font-style: italic;
+    margin: 0 0 1rem;
+  }
+
+  footer {
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: #8a8380;
+    padding: 1.5rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">ACCT 351 · Revenue Recognition — Chapter 6, Part A</div>
+  <h1>Introduction to Revenue Recognition</h1>
+  <p class="sub">Reading Notes</p>
+</header>
+
+<main>
+
+  <div class="lo-block">
+    <h2>The Core Principle and the Five Steps</h2>
+
+    <div class="key-idea">
+      <strong>Core Revenue Recognition Principle:</strong> companies recognize revenue when goods or services are transferred to customers, for the amount the company expects to be entitled to receive in exchange for those goods or services.
+    </div>
+
+    <p>Every revenue recognition question — no matter how complicated the contract — gets worked through the same five steps:</p>
+
+    <table class="mini-table">
+      <tr><th style="width:20%;">Step</th><th>What it asks</th></tr>
+      <tr><td>1</td><td>Identify the contract with a customer.</td></tr>
+      <tr><td>2</td><td>Identify the performance obligation(s) in the contract.</td></tr>
+      <tr><td>3</td><td>Determine the transaction price.</td></tr>
+      <tr><td>4</td><td>Allocate the transaction price to each performance obligation.</td></tr>
+      <tr><td>5</td><td>Recognize revenue when (or as) each performance obligation is satisfied.</td></tr>
+    </table>
+
+    <p>A "contract" doesn't need to be written or signed — buying a coffee, a textbook, or a doctor's visit are all contracts for revenue recognition purposes, because an arrangement exists that specifies the legal rights and obligations of a seller and a customer.</p>
+
+    <div class="key-idea">
+      <strong>Performance obligations</strong> are promises by the seller to transfer goods or services to a customer. Revenue is recognized when the seller satisfies a performance obligation — that is, when the customer obtains <strong>control</strong> of the good or service (direct influence over its use, and its benefits).
+    </div>
+
+    <p>With only a single performance obligation, Steps 3 and 4 collapse: the whole transaction price is "allocated" to that one obligation, so the real question becomes just <em>when</em> control transfers (Step 5). Multiple performance obligations make Steps 2 and 4 the interesting ones — deciding what counts as separate promises, and splitting the price between them.</p>
+  </div>
+
+  <div class="lo-block">
+    <h2>Recognizing Revenue at a Single Point in Time</h2>
+
+    <p>When a contract has one performance obligation satisfied all at once, the question is simply: <em>when does control pass from seller to customer?</em> Usually that's obvious (delivery), but when it isn't, these indicators help:</p>
+
+    <div class="patterns">
+      <p>The customer is more likely to control a good or service if the customer has:</p>
+      <p>• An obligation to pay the seller</p>
+      <p>• Legal title to the asset</p>
+      <p>• Physical possession of the asset</p>
+      <p>• Assumed the risks and rewards of ownership</p>
+      <p>• Accepted the asset</p>
+    </div>
+
+    <div class="example">
+      <div class="ex-label">Why timing matters</div>
+      <p>An order placed, but not yet delivered, doesn't satisfy the performance obligation — no revenue yet, even though a contract exists. Once the seller delivers the good and the customer accepts it (gaining possession, title, and the obligation to pay), the performance obligation is satisfied and revenue is recognized — <strong>regardless of when cash actually changes hands.</strong> A seller that ships goods on credit recognizes revenue at delivery, not weeks later when payment arrives.</p>
+    </div>
+  </div>
+
+  <div class="lo-block">
+    <h2>Recognizing Revenue over a Period of Time</h2>
+
+    <p>Some performance obligations aren't satisfied all at once — think of a landlord renting an apartment, a bank lending money, or a gym selling a membership. Revenue is recognized <strong>over time</strong> if any one of these three criteria is met:</p>
+
+    <div class="key-idea">
+      <strong>1.</strong> The customer consumes the benefit of the seller's work as it's performed (e.g., a cleaning service).<br><br>
+      <strong>2.</strong> The customer controls the asset as it's being created (e.g., a contractor building an addition on a customer's existing building).<br><br>
+      <strong>3.</strong> The seller is creating an asset with <strong>no alternative use</strong> to the seller, and has the legal right to be paid for progress to date (e.g., a custom-built fighter jet for the Air Force).
+    </div>
+
+    <p>If none of the three criteria is met, revenue waits until the point in time when the performance obligation is completely satisfied — usually the end of the contract.</p>
+
+    <h3>Measuring progress toward completion</h3>
+    <p>When revenue is recognized over time, the seller needs some way to measure "how much" of the obligation has been satisfied so far:</p>
+    <div class="patterns">
+      <p><strong>Output measures:</strong> the proportion of goods or services actually transferred to date (units delivered, milestones reached, or — as with a subscription — simple passage of time).</p>
+      <p><strong>Input measures:</strong> the proportion of effort expended so far relative to total effort expected (costs incurred to date compared to total estimated costs — the "cost-to-cost ratio" used for long-term construction contracts in Part C).</p>
+    </div>
+
+    <p>Cash is frequently collected <em>before</em> the performance obligation is satisfied in these arrangements (a year's gym membership paid up front, for example). That up-front cash is recorded as a liability — <strong>deferred revenue</strong> — and worked down to zero as revenue is recognized over the life of the arrangement.</p>
+  </div>
+
+  <div class="lo-block">
+    <h2>Contracts with Multiple Performance Obligations</h2>
+
+    <p>The same contract can bundle several promises together — a phone, a warranty, and network service, for example — each of which might need to be recognized at a different time. The first question is always: <strong>are these promises actually separate performance obligations, or one combined obligation?</strong></p>
+
+    <div class="key-idea">
+      A good or service is <strong>distinct</strong> — and therefore its own performance obligation — only if it is <em>both</em>:<br><br>
+      <strong>(a) Capable of being distinct</strong> — the customer could use it on its own or combine it with things obtained elsewhere, <em>and</em><br>
+      <strong>(b) Separately identifiable</strong> — the seller is promising to deliver the items individually, rather than combining them into one output.
+    </div>
+
+    <p>That second condition is why a homebuilder's lumber, paint, and labor are <em>not</em> separate performance obligations — even though each is capable of being distinct, the builder's real promise is to deliver one finished house. This is the same reasoning that makes most long-term construction contracts (Part C) a single performance obligation.</p>
+
+    <h3>Allocating the transaction price</h3>
+    <p>Once the performance obligations are identified, the transaction price is split between them based on their relative <strong>stand-alone selling prices</strong> — what each item sells for on its own.</p>
+
+    <div class="formula">Allocated price (obligation X) = Transaction price × [Stand-alone price of X ÷ Sum of all stand-alone prices]</div>
+
+    <div class="patterns">
+      <p><strong>Bundled discounts:</strong> if a package is sold for less than the sum of its parts' stand-alone prices, and there's no evidence the discount belongs to just one item, the discount is spread proportionally across all performance obligations in the allocation. The practical effect: bundling means <em>less</em> revenue is recognized for each piece than if it had been sold on its own.</p>
+    </div>
+
+    <p>After the price is allocated, each performance obligation is recognized on its own timeline — some at a point in time, some over time — exactly as described in the two sections above.</p>
+  </div>
+
+</main>
+
+<footer>ACCT 351 · Revenue Recognition, Part A · Introduction to Revenue Recognition — Reading Notes</footer>
+
+</body>
+</html>
