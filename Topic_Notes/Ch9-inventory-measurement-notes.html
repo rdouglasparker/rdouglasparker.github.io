@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Measuring and Estimating Inventory — Reading Notes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --wcu-purple: #4B2E83;
+    --wcu-purple-dark: #341f5c;
+    --wcu-gold: #C8A24A;
+    --gold-light: #f4ecd8;
+    --ink: #232023;
+    --paper: #fdfcfb;
+    --panel: #f7f3ec;
+    --rule: #e2d9c8;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.55;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--wcu-purple) 0%, var(--wcu-purple-dark) 100%);
+    color: #fff;
+    padding: 2.2rem 1.5rem 1.8rem;
+    border-bottom: 6px solid var(--wcu-gold);
+  }
+
+  header .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--wcu-gold);
+    margin-bottom: 0.4rem;
+  }
+
+  header h1 {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 700;
+    font-size: 1.9rem;
+    margin: 0 0 0.3rem;
+  }
+
+  header p.sub {
+    margin: 0;
+    color: #e7e0f2;
+    font-size: 0.98rem;
+  }
+
+  main {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  .lo-block { margin-bottom: 2.8rem; }
+
+  h2 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.5rem;
+    margin: 0 0 0.8rem;
+    color: var(--wcu-purple-dark);
+    border-bottom: 2px solid var(--rule);
+    padding-bottom: 0.4rem;
+  }
+
+  h3 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.1rem;
+    margin: 1.4rem 0 0.5rem;
+    color: var(--wcu-purple-dark);
+  }
+
+  p { margin: 0.6rem 0; }
+
+  .key-idea {
+    background: var(--panel);
+    border-left: 4px solid var(--wcu-gold);
+    padding: 0.9rem 1.1rem;
+    border-radius: 0 6px 6px 0;
+    margin: 0.9rem 0;
+  }
+
+  .key-idea strong { color: var(--wcu-purple-dark); }
+
+  .formula {
+    font-family: 'IBM Plex Mono', monospace;
+    background: var(--wcu-purple-dark);
+    color: var(--gold-light);
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin: 0.8rem 0;
+    font-size: 0.95rem;
+    overflow-x: auto;
+  }
+
+  .example {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin: 0.9rem 0;
+  }
+
+  .example .ex-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--wcu-purple);
+    margin-bottom: 0.4rem;
+  }
+
+  .example .ex-answer {
+    margin-top: 0.6rem;
+    padding-top: 0.6rem;
+    border-top: 1px dashed var(--rule);
+    font-weight: 500;
+  }
+
+  ul, ol { padding-left: 1.4rem; }
+  li { margin-bottom: 0.35rem; }
+
+  .patterns {
+    background: var(--gold-light);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin: 0.8rem 0;
+  }
+  .patterns p { margin: 0.3rem 0; }
+
+  table.mini-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.4rem 0 0.9rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+  }
+  table.mini-table caption {
+    text-align: left;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    color: #6b6560;
+    margin-bottom: 0.3rem;
+    caption-side: top;
+  }
+  table.mini-table th, table.mini-table td {
+    border: 1px solid var(--rule);
+    padding: 0.45rem 0.6rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.mini-table th {
+    background: var(--panel);
+    color: var(--wcu-purple-dark);
+    font-weight: 600;
+  }
+  table.mini-table td.num, table.mini-table th.num { text-align: right; }
+
+  table.je-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.5rem 0 0.3rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.86rem;
+  }
+  table.je-table td { padding: 0.28rem 0.3rem; vertical-align: top; }
+  table.je-table td.je-debit-amt, table.je-table td.je-credit-amt {
+    text-align: right;
+    width: 100px;
+    white-space: nowrap;
+  }
+  table.je-table td.indent { padding-left: 1.8rem; }
+  .je-desc {
+    font-size: 0.82rem;
+    color: #6b6560;
+    font-style: italic;
+    margin: 0 0 1rem;
+  }
+
+  footer {
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: #8a8380;
+    padding: 1.5rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">ACCT 351 · Inventory Measurement</div>
+  <h1>Measuring and Estimating Inventory</h1>
+  <p class="sub">Reading Notes</p>
+</header>
+
+<main>
+
+  <div class="lo-block">
+    <h2>Why Inventory Needs a Second Look After Purchase</h2>
+
+    <p>Companies record inventory at cost when it's purchased or produced. But cost isn't always the right number to report at the <em>end</em> of a period. Damage, obsolescence, falling prices, or a shift in demand can mean the inventory on hand is no longer worth what was paid for it.</p>
+
+    <div class="key-idea">
+      <strong>Inventory write-down:</strong> when the expected benefit of unsold inventory has fallen below its cost, an end-of-period adjusting entry reduces both the reported amount of inventory and net income. This keeps a company from reporting inventory at more than the cash it can actually generate.
+    </div>
+
+    <p>There are two acceptable measurement approaches for this write-down, and which one applies depends on the cost flow method a company uses:</p>
+
+    <table class="mini-table">
+      <tr><th>Approach</th><th>Used by companies that use</th></tr>
+      <tr><td>Lower of cost or net realizable value (LCNRV)</td><td>FIFO, average cost, or any method other than LIFO or the retail inventory method</td></tr>
+      <tr><td>Lower of cost or market (LCM)</td><td>LIFO or the retail inventory method</td></tr>
+    </table>
+
+    <p>Both approaches share the same financial statement effect &mdash; reduce reported inventory, reduce net income &mdash; and the same conservative purpose. They differ only in <em>how</em> the write-down amount is measured.</p>
+  </div>
+
+  <div class="lo-block">
+    <h2>Lower of Cost or Net Realizable Value (LCNRV)</h2>
+
+    <div class="key-idea">
+      <strong>Net realizable value (NRV)</strong> is the estimated selling price of inventory in the ordinary course of business, reduced by reasonably predictable costs of completion, disposal, and transportation (sales commissions, shipping, etc.). Think of it as the net cash a company expects to collect from selling the item.
+    </div>
+
+    <div class="formula">NRV = Selling price − Costs to sell</div>
+
+    <p>After comparing cost to NRV, inventory is reported at whichever is lower:</p>
+    <ul>
+      <li>If <strong>NRV is lower than cost</strong>, an adjusting entry writes inventory down to NRV, which becomes the new carrying value.</li>
+      <li>If <strong>cost is lower than NRV</strong>, no entry is needed &mdash; inventory is already recorded correctly.</li>
+    </ul>
+
+    <h3>Applying LCNRV at different levels</h3>
+    <p>LCNRV can be applied (a) to individual items, (b) to major categories, or (c) to the entire inventory. Applying it to groups instead of item-by-item lets increases in some items offset decreases in others, which always produces a <em>higher</em> reported inventory value.</p>
+
+    <div class="example">
+      <div class="ex-label">Example — five inventory items</div>
+      <p>Items A and B form one category; items C, D, and E form another.</p>
+      <table class="mini-table">
+        <tr><th>Item</th><th class="num">Cost</th><th class="num">NRV</th></tr>
+        <tr><td>A</td><td class="num">$50,000</td><td class="num">$85,000</td></tr>
+        <tr><td>B</td><td class="num">100,000</td><td class="num">90,000</td></tr>
+        <tr><td>C</td><td class="num">80,000</td><td class="num">75,000</td></tr>
+        <tr><td>D</td><td class="num">90,000</td><td class="num">85,000</td></tr>
+        <tr><td>E</td><td class="num">95,000</td><td class="num">96,000</td></tr>
+        <tr><td><strong>Total</strong></td><td class="num"><strong>$415,000</strong></td><td class="num"><strong>$431,000</strong></td></tr>
+      </table>
+      <div class="ex-answer">
+        By individual item: $395,000 (each item is reported at whichever of cost/NRV is lower, then summed).<br>
+        By category: $406,000 ($150,000 for A+B at cost, since combined cost < combined NRV; $256,000 for C+D+E at NRV).<br>
+        By total inventory: $415,000 (total cost, since it's lower than total NRV of $431,000).
+      </div>
+    </div>
+
+    <h3>Recording the write-down</h3>
+    <p>Write-downs are usually included as part of cost of goods sold, since they're treated as a normal cost of holding inventory. If the write-down is substantial and unusual, it's recorded in a separate loss account instead and disclosed.</p>
+
+    <table class="je-table">
+      <tr><td>Cost of goods sold</td><td class="je-debit-amt">20,000</td><td></td></tr>
+      <tr><td class="indent">Inventory</td><td></td><td class="je-credit-amt">20,000</td></tr>
+    </table>
+    <p class="je-desc">Writing inventory down from $415,000 (cost) to $395,000 (NRV, individual-item basis).</p>
+
+    <div class="key-idea">
+      Once inventory is written down, the reduced amount becomes the new cost basis. If NRV later recovers before the item is sold, U.S. GAAP does not allow writing the value back up. (Under IFRS, a recovery <em>is</em> reversed if an inventory write-down is no longer appropriate — one of the few differences between the two standards on this topic.)
+    </div>
+  </div>
+
+  <div class="lo-block">
+    <h2>Lower of Cost or Market (LCM)</h2>
+
+    <p>Companies using LIFO or the retail inventory method use a different benchmark than NRV: <strong>market</strong>, which means current replacement cost &mdash; what it would cost to buy or reproduce the item today &mdash; subject to two limits:</p>
+
+    <div class="patterns">
+      <p><strong>Ceiling:</strong> market cannot be greater than NRV.</p>
+      <p><strong>Floor:</strong> market cannot be less than NRV minus a normal profit margin.</p>
+    </div>
+
+    <p>In other words, replacement cost is compared to the ceiling and floor, and whichever value falls in the middle becomes "market":</p>
+    <ul>
+      <li>If replacement cost is <strong>below the floor</strong>, the floor becomes market.</li>
+      <li>If replacement cost is <strong>above the ceiling</strong>, the ceiling becomes market.</li>
+      <li>If replacement cost falls <strong>between</strong> the ceiling and floor, replacement cost itself is market.</li>
+    </ul>
+
+    <p>Market is then compared to cost, and inventory is reported at the lower of the two.</p>
+
+    <div class="example">
+      <div class="ex-label">Example — determining market, then LCM</div>
+      <table class="mini-table">
+        <tr><th>Item</th><th class="num">Cost</th><th class="num">Replacement cost</th><th class="num">Ceiling (NRV)</th><th class="num">Floor (NRV − profit)</th><th class="num">Market</th><th class="num">LCM</th></tr>
+        <tr><td>A</td><td class="num">$50,000</td><td class="num">$55,000</td><td class="num">$85,000</td><td class="num">$65,000</td><td class="num">$65,000</td><td class="num">$50,000</td></tr>
+        <tr><td>B</td><td class="num">100,000</td><td class="num">97,000</td><td class="num">90,000</td><td class="num">66,000</td><td class="num">90,000</td><td class="num">90,000</td></tr>
+        <tr><td>C</td><td class="num">80,000</td><td class="num">70,000</td><td class="num">75,000</td><td class="num">57,000</td><td class="num">70,000</td><td class="num">70,000</td></tr>
+        <tr><td>D</td><td class="num">90,000</td><td class="num">95,000</td><td class="num">85,000</td><td class="num">65,000</td><td class="num">85,000</td><td class="num">85,000</td></tr>
+        <tr><td>E</td><td class="num">95,000</td><td class="num">92,000</td><td class="num">96,000</td><td class="num">74,000</td><td class="num">92,000</td><td class="num">92,000</td></tr>
+      </table>
+      <div class="ex-answer">
+        Item A: replacement cost ($55,000) is below the floor ($65,000), so market = floor.<br>
+        Item B: replacement cost ($97,000) is above the ceiling ($90,000), so market = ceiling.<br>
+        Items C and E: replacement cost falls between ceiling and floor, so market = replacement cost.<br>
+        Total LCM (individual items) = $387,000, a $28,000 write-down from the $415,000 recorded cost.
+      </div>
+    </div>
+
+    <p>Like LCNRV, LCM can be applied to individual items, categories, or total inventory, and grouping items together produces a higher reported value than an item-by-item approach.</p>
+  </div>
+
+  <div class="lo-block">
+    <h2>Estimating Inventory Without a Physical Count</h2>
+
+    <p>Sometimes counting every unit of inventory is impossible or impractical &mdash; think of a warehouse fire, a nationwide retail chain, or the need for a quick interim financial statement. Two techniques let a company estimate ending inventory and cost of goods sold without a physical count.</p>
+
+    <div class="key-idea">
+      Both techniques rely on the same relationship: <strong>beginning inventory + net purchases = cost of goods available for sale</strong>, and <strong>goods available for sale − cost of goods sold = ending inventory</strong>. Normally, a physical count gives us ending inventory and we <em>derive</em> cost of goods sold. When estimating, we do the reverse: estimate cost of goods sold first, then subtract it from goods available for sale to get ending inventory.
+    </div>
+  </div>
+
+  <div class="lo-block">
+    <h2>The Gross Profit Method</h2>
+
+    <p>The gross profit (or gross margin) method is useful for:</p>
+    <ul>
+      <li>Estimating inventory lost, destroyed, or stolen (for an insurance claim, for example)</li>
+      <li>Preparing interim financial statements without the cost of a full physical count</li>
+      <li>Auditors testing the reasonableness of a client's reported inventory</li>
+      <li>Budgeting and forecasting</li>
+    </ul>
+
+    <p>The method relies on a historical gross profit ratio &mdash; the relationship between net sales, cost of goods sold, and gross profit &mdash; to back into an estimate of cost of goods sold from known net sales.</p>
+
+    <div class="formula">Estimated COGS = Net sales × (1 − Gross profit ratio)</div>
+
+    <div class="example">
+      <div class="ex-label">Example — inventory destroyed by fire</div>
+      <p>Beginning inventory $600,000; net purchases $1,500,000; net sales $2,000,000 prior to the fire; historical gross profit ratio 40%.</p>
+      <table class="mini-table">
+        <tr><td>Beginning inventory</td><td class="num">$600,000</td></tr>
+        <tr><td>Plus: Net purchases</td><td class="num">1,500,000</td></tr>
+        <tr><td>Goods available for sale</td><td class="num">2,100,000</td></tr>
+        <tr><td>Less: Estimated cost of goods sold [$2,000,000 × (1 − 0.40)]</td><td class="num">(1,200,000)</td></tr>
+        <tr><td><strong>Estimated ending inventory (destroyed)</strong></td><td class="num"><strong>$900,000</strong></td></tr>
+      </table>
+    </div>
+
+    <div class="key-idea">
+      A gross profit ratio can also be expressed as a <strong>markup on cost</strong> instead of a percentage of sales. A 66⅔% markup on cost converts to a 40% gross profit ratio: markup% ÷ (1 + markup%) = gross profit ratio. Always check which way a percentage is stated before applying it.
+    </div>
+
+    <p>This method gives only an estimate, and its accuracy depends entirely on the reliability of the gross profit ratio used. It doesn't explicitly account for theft or spoilage (it assumes anything not sold is still on hand), and different products with different markups can distort a single blended ratio &mdash; grouping inventory into pools with similar margins improves accuracy. Because of these limitations, the gross profit method is not acceptable for annual financial statements, though it's fine for interim reporting and the other uses listed above.</p>
+  </div>
+
+  <div class="lo-block">
+    <h2>The Retail Inventory Method</h2>
+
+    <p>High-volume retailers selling many different items at low unit prices &mdash; think large chain stores &mdash; use the retail inventory method instead. Rather than tracking the cost of each item, the company tracks purchases at both cost <em>and</em> current selling (retail) prices, then uses the relationship between the two to convert ending inventory at retail back to an estimate of cost.</p>
+
+    <div class="key-idea">
+      Beginning inventory (at retail) + net purchases (at retail) − net sales = ending inventory at retail. Multiplying that by a <strong>cost-to-retail percentage</strong> (goods available for sale at cost ÷ goods available for sale at retail) converts it to an estimate of cost.
+    </div>
+
+    <div class="example">
+      <div class="ex-label">Example — Home Improvement Stores, June</div>
+      <table class="mini-table">
+        <tr><th></th><th class="num">Cost</th><th class="num">Retail</th></tr>
+        <tr><td>Beginning inventory</td><td class="num">$60,000</td><td class="num">$100,000</td></tr>
+        <tr><td>Plus: Net purchases</td><td class="num">287,200</td><td class="num">460,000</td></tr>
+        <tr><td>Goods available for sale</td><td class="num">347,200</td><td class="num">560,000</td></tr>
+        <tr><td>Less: Net sales</td><td class="num"></td><td class="num">(400,000)</td></tr>
+        <tr><td>Estimated ending inventory at retail</td><td class="num"></td><td class="num">$160,000</td></tr>
+      </table>
+      <div class="ex-answer">
+        Cost-to-retail percentage = $347,200 ÷ $560,000 = 62%.<br>
+        Estimated ending inventory at cost = $160,000 × 62% = $99,200.<br>
+        Estimated cost of goods sold = $347,200 − $99,200 = $248,000.
+      </div>
+    </div>
+
+    <p>The retail method tends to be more accurate than the gross profit method because it's based on a <em>current</em> cost-to-retail relationship rather than a historical gross profit ratio. It also lets a company approximate different cost flow assumptions (average cost or LIFO) within the estimate, and can be used for the same purposes as the gross profit method &mdash; plus, unlike the gross profit method, it's acceptable for annual financial reporting.</p>
+
+    <h3>Retail terminology: tracking price changes</h3>
+    <p>Selling prices rarely stay fixed once inventory is on the shelf. The retail method needs to track these movements to determine ending inventory at retail:</p>
+
+    <table class="mini-table">
+      <tr><th>Term</th><th>Meaning</th></tr>
+      <tr><td>Initial markup</td><td>Original amount of markup from cost to selling price</td></tr>
+      <tr><td>Additional markup</td><td>Increase in selling price after the initial markup</td></tr>
+      <tr><td>Markup cancellation</td><td>Elimination of an additional markup (not below the original price)</td></tr>
+      <tr><td>Markdown</td><td>Decrease in selling price below the original selling price</td></tr>
+      <tr><td>Markdown cancellation</td><td>Elimination of a markdown (not above the original price)</td></tr>
+    </table>
+
+    <p>The net effect of additional markups and markup cancellations is the <strong>net markup</strong>; the net effect of markdowns and markdown cancellations is the <strong>net markdown</strong>. Both must be included when determining ending inventory at retail.</p>
+  </div>
+
+  <div class="lo-block">
+    <h2>Retail Method Cost Flow Variations</h2>
+
+    <h3>Approximating average cost</h3>
+    <p>To approximate average cost, the cost-to-retail percentage is based on <em>all</em> goods available for sale &mdash; both net markups and net markdowns are included in the retail-column denominator before dividing.</p>
+
+    <div class="example">
+      <div class="ex-label">Example — Home Improvement Stores, July (average cost)</div>
+      <table class="mini-table">
+        <tr><th></th><th class="num">Cost</th><th class="num">Retail</th></tr>
+        <tr><td>Beginning inventory</td><td class="num">$99,200</td><td class="num">$160,000</td></tr>
+        <tr><td>Plus: Net purchases</td><td class="num">305,280</td><td class="num">470,000</td></tr>
+        <tr><td>Plus: Net markups</td><td class="num"></td><td class="num">10,000</td></tr>
+        <tr><td>Less: Net markdowns</td><td class="num"></td><td class="num">(8,000)</td></tr>
+        <tr><td>Goods available for sale</td><td class="num">404,480</td><td class="num">632,000</td></tr>
+        <tr><td>Less: Net sales</td><td class="num"></td><td class="num">(434,000)</td></tr>
+        <tr><td>Estimated ending inventory at retail</td><td class="num"></td><td class="num">$198,000</td></tr>
+      </table>
+      <div class="ex-answer">
+        Cost-to-retail percentage = $404,480 ÷ $632,000 = 64%.<br>
+        Estimated ending inventory at cost = $198,000 × 64% = $126,720.<br>
+        Estimated cost of goods sold = $404,480 − $126,720 = $277,760.
+      </div>
+    </div>
+
+    <h3>Approximating the lower of average cost or market — the conventional retail method</h3>
+    <p>Companies using the retail method report inventory at the lower of cost or market. The <strong>conventional retail method</strong> approximates this by <em>excluding net markdowns</em> from the cost-to-retail percentage calculation (markups are still included). Markdowns are subtracted from goods available for sale only <em>after</em> the percentage has been calculated.</p>
+
+    <div class="patterns">
+      <p>The logic: a markdown is evidence that obsolescence, overstocking, or falling prices has reduced the utility of the merchandise. Excluding it from the percentage recognizes that decline immediately, which produces a <em>lower</em> cost-to-retail percentage &mdash; and therefore a lower, more conservative estimate of ending inventory &mdash; whenever markdowns exist.</p>
+    </div>
+
+    <div class="example">
+      <div class="ex-label">Example — same data, conventional method</div>
+      <table class="mini-table">
+        <tr><th></th><th class="num">Cost</th><th class="num">Retail</th></tr>
+        <tr><td>Beginning inventory</td><td class="num">$99,200</td><td class="num">$160,000</td></tr>
+        <tr><td>Plus: Net purchases</td><td class="num">305,280</td><td class="num">470,000</td></tr>
+        <tr><td>Plus: Net markups</td><td class="num"></td><td class="num">10,000</td></tr>
+        <tr><td>Goods available for sale <em>(excluding markdowns)</em></td><td class="num">404,480</td><td class="num">640,000</td></tr>
+        <tr><td>Less: Net markdowns</td><td class="num"></td><td class="num">(8,000)</td></tr>
+        <tr><td>Goods available for sale <em>(including markdowns)</em></td><td class="num"></td><td class="num">632,000</td></tr>
+        <tr><td>Less: Net sales</td><td class="num"></td><td class="num">(434,000)</td></tr>
+        <tr><td>Estimated ending inventory at retail</td><td class="num"></td><td class="num">$198,000</td></tr>
+      </table>
+      <div class="ex-answer">
+        Cost-to-retail percentage = $404,480 ÷ $640,000 = 63.2% (lower than the 64% average-cost percentage, because markdowns were excluded from the denominator).<br>
+        Estimated ending inventory at cost = $198,000 × 63.2% = $125,136.<br>
+        Estimated cost of goods sold = $404,480 − $125,136 = $279,344.
+      </div>
+    </div>
+
+    <p>Note that ending inventory <em>at retail</em> ($198,000) is identical under every cost flow variation &mdash; it always reflects current retail prices. Only the cost-to-retail percentage applied to it changes.</p>
+  </div>
+
+</main>
+
+<footer>ACCT 351 · Measuring and Estimating Inventory — Reading Notes</footer>
+
+</body>
+</html>
