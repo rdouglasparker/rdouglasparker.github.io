@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Retail Inventory Method — Glenville Mercantile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --purple:#592C88; --purple-deep:#38195A; --purple-mid:#6E3FA3;
+    --gold:#B0925C; --gold-soft:#D6C398; --gold-pale:#F1E9D6;
+    --parchment:#F7F4EC; --paper:#FFFEFA; --ink:#221B2E; --slate:#5F5A6B;
+    --line:#DBD3E0; --line-soft:#EAE4EF; --answer:#1E5C34; --answer-bg:#E7F1E9;
+    --danger:#9C3B34; --shadow: 0 1px 2px rgba(56,25,90,0.07), 0 6px 18px rgba(56,25,90,0.08);
+  }
+  *{box-sizing:border-box;} html,body{margin:0;padding:0;}
+  body{ background:var(--parchment); color:var(--ink); font-family:'Inter',sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased; }
+  a{ color:inherit; }
+  header{ background: linear-gradient(180deg, var(--purple) 0%, var(--purple-deep) 100%); color:#F1E9D6; padding: 30px 6vw 24px; position:relative; }
+  header::after{ content:""; position:absolute; left:0; right:0; bottom:0; height:4px; background: linear-gradient(90deg, var(--gold-soft), var(--gold) 40%, var(--gold-soft) 70%, var(--gold)); }
+  .eyebrow{ font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold-soft); margin:0 0 10px; }
+  h1.title{ font-family:'Source Serif 4', serif; font-weight:600; font-size:clamp(24px,3.4vw,34px); margin:0 0 8px; letter-spacing:-0.01em; }
+  .subtitle{ font-size:14.5px; color:#D9CDE5; max-width:680px; margin:0; }
+  .id-bar{ max-width:900px; margin:0 auto; padding:18px 6vw 0; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .id-bar label{ font-size:13px; font-weight:600; color:var(--slate); }
+  .id-bar input[type="text"]{ font-family:'IBM Plex Mono', monospace; font-size:13.5px; padding:8px 11px; border:1px solid var(--line); border-radius:5px; background:var(--paper); color:var(--ink); width:180px; }
+  .id-bar input:focus{ outline:none; border-color:var(--purple-mid); box-shadow:0 0 0 3px rgba(89,44,136,0.10); }
+  .id-bar button{ font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600; border-radius:5px; padding:8px 15px; border:1px solid var(--purple); background:var(--purple); color:#fff; cursor:pointer; }
+  .id-bar button:hover{ background:var(--purple-mid); }
+  .rounding-note{ max-width:900px; margin:14px auto 0; padding:12px 6vw; font-size:12.5px; color:var(--slate); line-height:1.5; }
+  .rounding-note strong{ color:var(--purple); font-weight:600; }
+  main{ max-width:900px; margin:0 auto; padding:22px 6vw 90px; }
+  .part{ background:var(--paper); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); padding:24px 26px 26px; margin-top:26px; }
+  .part-label{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--gold); background:var(--purple); display:inline-block; padding:3px 9px; border-radius:4px; letter-spacing:.04em; margin-bottom:12px; }
+  .part h2{ font-family:'Source Serif 4', serif; font-size:21px; font-weight:600; color:var(--purple); margin:0 0 12px; }
+  .scenario{ background:var(--parchment); border-left:3px solid var(--gold); padding:14px 18px; border-radius:0 6px 6px 0; font-size:14.5px; color:var(--ink); margin-bottom:20px; }
+  .scenario p{ margin:0 0 10px; } .scenario p:last-child{ margin-bottom:0; }
+  .req{ font-weight:600; font-size:14.5px; color:var(--ink); margin:20px 0 10px; }
+  .req .letter{ font-family:'IBM Plex Mono', monospace; color:var(--purple); margin-right:6px; }
+  table.worksheet{ width:100%; border-collapse:collapse; font-size:13.5px; margin-bottom:8px; }
+  table.worksheet th{ text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.03em; color:var(--slate); border-bottom:2px solid var(--purple); padding:8px 6px; }
+  table.worksheet td{ border-bottom:1px solid var(--line); padding:8px 6px; vertical-align:middle; }
+  table.worksheet tr.total-row td{ border-top:2px solid var(--purple); border-bottom:none; font-weight:600; }
+  table.worksheet input[type="text"]{ width:100%; font-family:'IBM Plex Mono', monospace; font-size:13px; padding:6px 7px; border:1px solid var(--line); border-radius:5px; background:var(--parchment); color:var(--ink); }
+  table.worksheet input[type="text"]:focus{ outline:none; border-color:var(--purple-mid); box-shadow:0 0 0 3px rgba(89,44,136,0.10); background:var(--paper); }
+  table.worksheet td.given{ font-family:'IBM Plex Mono', monospace; color:var(--slate); }
+  .key{ margin-top:14px; background:var(--answer-bg); border:1px solid #B7D3BE; border-radius:8px; padding:14px 16px; color:var(--answer); font-size:13.5px; }
+  .key strong{ display:block; margin-bottom:6px; font-family:'Source Serif 4', serif; font-size:14.5px; }
+  .key table{ width:100%; border-collapse:collapse; font-size:13px; margin-top:4px; }
+  .key td{ padding:4px 6px; border-bottom:1px dashed #B7D3BE; }
+  .key tr:last-child td{ border-bottom:none; font-weight:600; }
+  .check-bar{ margin-top:20px; padding-top:16px; border-top:1px solid var(--line); display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  .btn-check{ font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600; border-radius:5px; padding:9px 18px; border:1px solid var(--purple); background:var(--purple); color:#fff; cursor:pointer; }
+  .btn-check:hover{ background:var(--purple-mid); }
+  .check-summary{ font-size:13.5px; font-weight:600; }
+  .check-summary.good{ color:var(--answer); } .check-summary.bad{ color:var(--danger); }
+  .check-disclaimer{ font-size:11.5px; color:var(--slate); width:100%; margin-top:2px; font-style:italic; }
+  .attempts-note{ font-size:12px; font-weight:600; color:var(--slate); }
+  .attempts-note.low{ color:var(--gold); } .attempts-note.locked{ color:var(--danger); }
+  input:disabled{ opacity:0.7; cursor:not-allowed; }
+  .score-bar{ margin-top:26px; background:var(--paper); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); padding:16px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+  .score-bar .score-label{ font-family:'Source Serif 4', serif; font-size:16px; font-weight:600; color:var(--purple); }
+  .score-bar .score-value{ font-family:'IBM Plex Mono', monospace; font-size:18px; font-weight:600; color:var(--ink); }
+  .score-bar .score-breakdown{ font-size:12.5px; color:var(--slate); width:100%; }
+  input.field-correct{ border-color:var(--answer) !important; background:var(--answer-bg) !important; }
+  input.field-incorrect{ border-color:var(--danger) !important; background:#F3E1DE !important; }
+  input.field-missing{ border-color:var(--gold) !important; background:var(--gold-pale) !important; }
+  .key-reveal-note{ margin-top:14px; background:var(--gold-pale); border:1px solid var(--gold-soft); border-radius:8px; padding:12px 16px; color:var(--purple-deep); font-size:13.5px; font-weight:600; display:none; }
+  .submit-bar{ background:var(--paper); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); padding:22px 26px 24px; margin-top:26px; }
+  .submit-bar h2{ font-family:'Source Serif 4', serif; font-size:19px; font-weight:600; color:var(--purple); margin:0 0 14px; }
+  .submit-row{ display:flex; align-items:center; gap:10px; margin-bottom:12px; flex-wrap:wrap; }
+  .submit-row label{ font-size:13px; font-weight:600; color:var(--slate); }
+  .submit-row input[type="text"]{ font-family:'Inter',sans-serif; font-size:13.5px; padding:8px 11px; border:1px solid var(--line); border-radius:5px; background:var(--parchment); color:var(--ink); width:240px; }
+  .submit-row input:focus{ outline:none; border-color:var(--purple-mid); box-shadow:0 0 0 3px rgba(89,44,136,0.10); }
+  .btn-submit{ font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600; border-radius:5px; padding:10px 18px; border:1px solid var(--purple); background:var(--purple); color:#fff; cursor:pointer; }
+  .btn-submit:hover{ background:var(--purple-mid); }
+  .btn-submit-outline{ background:var(--paper); color:var(--purple); } .btn-submit-outline:hover{ background:var(--parchment); }
+  .submit-status{ font-size:13px; font-weight:600; min-height:18px; margin:10px 0 0; color:var(--answer); }
+  .submit-status.error{ color:var(--danger); }
+  .submit-hint{ font-size:12px; color:var(--slate); margin:6px 0 0; }
+  @media print{
+    .print-hide, .id-bar, .check-bar, .rounding-note{ display:none !important; }
+    header{ background:none !important; color:var(--ink) !important; padding:0 0 14px !important; }
+    header::after{ display:none !important; }
+    .eyebrow{ color:var(--purple) !important; } .subtitle{ color:var(--slate) !important; }
+    body{ background:#fff !important; }
+    .part{ box-shadow:none !important; border:1px solid #999 !important; break-inside:avoid; }
+    .score-bar{ box-shadow:none !important; border:1.5px solid var(--purple) !important; break-inside:avoid; break-before:avoid; }
+    input[type="text"]{ border:none !important; border-bottom:1px solid #000 !important; background:transparent !important; border-radius:0 !important; color:#000 !important; -webkit-appearance:none; appearance:none; padding:2px 4px !important; }
+    .print-name-line{ display:block !important; }
+  }
+  .print-name-line{ display:none; font-size:13px; color:var(--ink); padding:0 6vw; margin:0 0 10px; }
+  footer{ text-align:center; padding:26px 6vw 40px; font-size:12px; color:var(--slate); }
+  @media (max-width:600px){ header, main, .id-bar{ padding-left:5vw; padding-right:5vw; } table.worksheet{ font-size:12.5px; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">ACCT 351 &middot; Inventory Measurement</p>
+  <h1 class="title">Glenville Mercantile</h1>
+  <p class="subtitle">The retail inventory method — approximating average cost, then approximating the lower of average cost or market (the conventional method).</p>
+</header>
+
+<p class="print-name-line" id="printNameLine"></p>
+<p class="print-name-line" id="printScoreLine" style="font-weight:600;"></p>
+
+<div class="id-bar">
+  <label for="studentId">Student ID</label>
+  <input type="text" id="studentId" placeholder="e.g. 92841016">
+  <button id="genBtn" type="button">Generate scenario</button>
+</div>
+
+<div class="rounding-note">
+  <strong>Rounding convention:</strong> round cost-to-retail percentages to two decimal places (e.g. 62.00%) and all dollar amounts to the nearest dollar.
+</div>
+
+<main>
+
+  <div class="part">
+    <span class="part-label">Part 1</span>
+    <h2>Approximating Average Cost</h2>
+    <div class="scenario">
+      <p>Glenville Mercantile uses a periodic inventory system and the retail inventory method to estimate ending inventory and cost of goods sold. The following data are available for the month:</p>
+    </div>
+    <table class="worksheet" id="scenarioTable">
+      <thead><tr><th style="width:40%;"></th><th style="width:30%;">Cost</th><th style="width:30%;">Retail</th></tr></thead>
+      <tbody>
+        <tr><td>Beginning inventory</td><td class="given" id="sBegCost"></td><td class="given" id="sBegRetail"></td></tr>
+        <tr><td>Net purchases</td><td class="given" id="sPurchCost"></td><td class="given" id="sPurchRetail"></td></tr>
+        <tr><td>Net markups</td><td></td><td class="given" id="sMarkups"></td></tr>
+        <tr><td>Net markdowns</td><td></td><td class="given" id="sMarkdowns"></td></tr>
+        <tr><td>Normal spoilage (at retail)</td><td></td><td class="given" id="sSpoilage"></td></tr>
+        <tr><td>Net sales</td><td></td><td class="given" id="sSales"></td></tr>
+      </tbody>
+    </table>
+
+    <div class="req"><span class="letter">a.</span>Using the <strong>average cost</strong> approach (include both net markups and net markdowns when calculating the percentage), compute goods available at cost, goods available at retail, and the cost-to-retail percentage.</div>
+    <table class="worksheet">
+      <tbody>
+        <tr><td style="width:60%;">Goods available for sale — at cost</td><td><input type="text" placeholder="$" id="p1-availcost" data-label="Goods available at cost"></td></tr>
+        <tr><td>Goods available for sale — at retail (average cost)</td><td><input type="text" placeholder="$" id="p1-availretail" data-label="Goods available at retail — average cost"></td></tr>
+        <tr><td>Cost-to-retail percentage (average cost)</td><td><input type="text" placeholder="%" id="p1-pct" data-label="Cost-to-retail % — average cost"></td></tr>
+      </tbody>
+    </table>
+
+    <div class="req"><span class="letter">b.</span>Deduct normal spoilage and net sales to find ending inventory at retail, then apply the percentage to estimate ending inventory and cost of goods sold at average cost.</div>
+    <table class="worksheet">
+      <tbody>
+        <tr><td style="width:60%;">Estimated ending inventory at retail</td><td><input type="text" placeholder="$" id="p1-endretail" data-label="Ending inventory at retail"></td></tr>
+        <tr><td>Estimated ending inventory at cost (average cost)</td><td><input type="text" placeholder="$" id="p1-endcost" data-label="Ending inventory at cost — average cost"></td></tr>
+        <tr><td>Estimated cost of goods sold (average cost)</td><td><input type="text" placeholder="$" id="p1-cogs" data-label="Estimated COGS — average cost"></td></tr>
+      </tbody>
+    </table>
+
+    <div class="check-bar">
+      <button class="btn-check" id="checkPart1" type="button">Check my work</button>
+      <span class="check-summary" id="part1Summary"></span>
+      <span class="attempts-note" id="part1Attempts">3 attempts remaining</span>
+      <span class="check-disclaimer">This checks whether the dollar amounts and percentages you entered match the key within a small rounding tolerance.</span>
+    </div>
+    <div class="key" id="part1Key" style="display:none;"></div>
+  </div>
+
+  <div class="part">
+    <span class="part-label">Part 2</span>
+    <h2>The Conventional Method (Approximating Lower of Average Cost or Market)</h2>
+    <div class="req"><span class="letter">c.</span>Now exclude net markdowns from the denominator (they're still subtracted from goods available afterward). Compute goods available at retail for this purpose and the conventional cost-to-retail percentage.</div>
+    <table class="worksheet">
+      <tbody>
+        <tr><td style="width:60%;">Goods available for sale — at retail, excluding net markdowns</td><td><input type="text" placeholder="$" id="p2-availretail" data-label="Goods available at retail — excluding markdowns"></td></tr>
+        <tr><td>Cost-to-retail percentage (conventional)</td><td><input type="text" placeholder="%" id="p2-pct" data-label="Cost-to-retail % — conventional"></td></tr>
+      </tbody>
+    </table>
+    <div class="req"><span class="letter">d.</span>Ending inventory at retail is the same figure as in Part 1(b). Apply the conventional percentage to estimate ending inventory and cost of goods sold.</div>
+    <table class="worksheet">
+      <tbody>
+        <tr><td style="width:60%;">Estimated ending inventory at cost (conventional)</td><td><input type="text" placeholder="$" id="p2-endcost" data-label="Ending inventory at cost — conventional"></td></tr>
+        <tr><td>Estimated cost of goods sold (conventional)</td><td><input type="text" placeholder="$" id="p2-cogs" data-label="Estimated COGS — conventional"></td></tr>
+      </tbody>
+    </table>
+    <div class="check-bar">
+      <button class="btn-check" id="checkPart2" type="button">Check my work</button>
+      <span class="check-summary" id="part2Summary"></span>
+      <span class="attempts-note" id="part2Attempts">3 attempts remaining</span>
+      <span class="check-disclaimer">This checks whether the dollar amounts and percentages you entered match the key within a small rounding tolerance.</span>
+    </div>
+    <div class="key" id="part2Key" style="display:none;"></div>
+  </div>
+
+  <div class="score-bar">
+    <span class="score-label">Assignment score</span>
+    <span class="score-value" id="overallScore">Check both parts to see your score</span>
+    <span class="score-breakdown" id="scoreBreakdown"></span>
+  </div>
+
+  <div class="key-reveal-note" id="keyRevealNote">You've used all 3 attempts on both parts — the answer key is now shown below each part, and a submission PDF has opened for you to save.</div>
+
+  <div class="submit-bar print-hide">
+    <h2>Ready to submit?</h2>
+    <div class="submit-row">
+      <label for="studentName">Your name</label>
+      <input type="text" id="studentName" placeholder="First and last name">
+    </div>
+    <div class="submit-row submit-actions">
+      <button class="btn-submit" id="printBtn" type="button">Print / Save as PDF</button>
+      <button class="btn-submit btn-submit-outline" id="downloadDocxBtn" type="button">Download as Word (.docx)</button>
+    </div>
+    <p class="submit-status" id="submitStatus"></p>
+    <p class="submit-hint">Both options capture exactly what's currently filled in above, including your generated scenario numbers. "Print / Save as PDF" works offline; "Download as Word" needs an internet connection to load the export tool.</p>
+  </div>
+
+</main>
+
+<footer>Glenville Mercantile &middot; The Retail Inventory Method &middot; ACCT 351 &middot; Western Carolina University</footer>
+
+<script>
+(function(){
+  function hashSeed(str){ var h=2166136261; for(var i=0;i<str.length;i++){ h ^= str.charCodeAt(i); h = Math.imul(h,16777619); } return h>>>0; }
+  function mulberry32(seed){ return function(){ seed |= 0; seed = seed + 0x6D2B79F5 | 0; var t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  function pick(rand, arr){ return arr[Math.floor(rand()*arr.length)]; }
+  function money0(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
+  function pct2(n){ return (Math.round(n*100)/100).toFixed(2) + '%'; }
+
+  function generateScenario(id){
+    var seedStr = (id || 'demo').trim().toLowerCase();
+    var rand = mulberry32(hashSeed(seedStr));
+
+    var begRetail = pick(rand, [80000,100000,120000,140000,160000]);
+    var purchRetail = pick(rand, [350000,400000,450000,500000,550000,600000]);
+    var ratio1 = pick(rand, [0.55,0.58,0.60,0.62,0.65]);
+    var avgPctTarget = pick(rand, [58,60,62,64,66,68]);
+    var markupsPct = pick(rand, [1.5,2,2.5,3]);
+    var markdownsPct = pick(rand, [1,1.5,2,2.5]);
+    var spoilage = pick(rand, [1000,1500,2000,2500,3000]);
+    var salesFraction = pick(rand, [0.65,0.68,0.70,0.72,0.75]);
+
+    var markups = Math.round(purchRetail*markupsPct/100);
+    var markdowns = Math.round(purchRetail*markdownsPct/100);
+    var begCost = Math.round(begRetail*ratio1);
+
+    var availRetailAvg = begRetail + purchRetail + markups - markdowns;
+    var availRetailConv = begRetail + purchRetail + markups;
+
+    var totalCostTarget = Math.round(availRetailAvg * avgPctTarget/100);
+    var purchCost = totalCostTarget - begCost;
+    var totalCost = begCost + purchCost;
+
+    var avgPct = totalCost/availRetailAvg*100;
+    var convPct = totalCost/availRetailConv*100;
+
+    var sales = Math.round((availRetailAvg - spoilage) * salesFraction);
+    var endRetail = availRetailAvg - spoilage - sales;
+
+    var endCostAvg = Math.round(endRetail * avgPct/100);
+    var cogsAvg = totalCost - endCostAvg;
+    var endCostConv = Math.round(endRetail * convPct/100);
+    var cogsConv = totalCost - endCostConv;
+
+    return {
+      begRetail:begRetail, purchRetail:purchRetail, begCost:begCost, purchCost:purchCost,
+      markups:markups, markdowns:markdowns, spoilage:spoilage, sales:sales,
+      totalCost:totalCost, availRetailAvg:availRetailAvg, availRetailConv:availRetailConv,
+      avgPct:avgPct, convPct:convPct, endRetail:endRetail,
+      endCostAvg:endCostAvg, cogsAvg:cogsAvg, endCostConv:endCostConv, cogsConv:cogsConv
+    };
+  }
+
+  function applyScenario(d){
+    document.getElementById('sBegCost').textContent = money0(d.begCost);
+    document.getElementById('sBegRetail').textContent = money0(d.begRetail);
+    document.getElementById('sPurchCost').textContent = money0(d.purchCost);
+    document.getElementById('sPurchRetail').textContent = money0(d.purchRetail);
+    document.getElementById('sMarkups').textContent = money0(d.markups);
+    document.getElementById('sMarkdowns').textContent = money0(d.markdowns);
+    document.getElementById('sSpoilage').textContent = money0(d.spoilage);
+    document.getElementById('sSales').textContent = money0(d.sales);
+  }
+
+  var idInput = document.getElementById('studentId');
+  var genBtn = document.getElementById('genBtn');
+  var currentScenario = null;
+  var scoreState = { part1:null, part2:null };
+  var MAX_ATTEMPTS = 3;
+  var attempts = { part1:0, part2:0 };
+  var locked = { part1:false, part2:false };
+  var keyRevealed = false;
+
+  function parseNum(s){ if(s===null||s===undefined) return NaN; var c=String(s).replace(/[^0-9.\-]/g,''); if(c===''||c==='-') return NaN; return parseFloat(c); }
+  function near(a,b,tol){ if(isNaN(a)||isNaN(b)) return false; return Math.abs(a-b) <= tol; }
+  function clearFieldState(el){ if(!el) return; el.classList.remove('field-correct','field-incorrect','field-missing'); }
+  function clearAllFieldStates(){ document.querySelectorAll('.field-correct,.field-incorrect,.field-missing').forEach(function(el){ el.classList.remove('field-correct','field-incorrect','field-missing'); }); }
+  function markField(id, correct, tol){
+    var el=document.getElementById(id); if(!el) return null;
+    el.classList.remove('field-correct','field-incorrect');
+    var val=parseNum(el.value); var ok=near(val,correct,tol===undefined?1:tol);
+    el.classList.add(ok?'field-correct':'field-incorrect');
+    if(!el.dataset.clearBound){ el.addEventListener('input', function(){ clearFieldState(el); }); el.dataset.clearBound='1'; }
+    return ok;
+  }
+  function updateSummary(elId, results, pointsPossible){
+    var el=document.getElementById(elId);
+    var graded=results.filter(function(r){return r!==null;}).length;
+    var correct=results.filter(function(r){return r===true;}).length;
+    var points=graded>0?(correct/graded)*pointsPossible:0;
+    el.textContent=correct+' of '+graded+' correct \u2014 '+points.toFixed(1)+' of '+pointsPossible.toFixed(1)+' pts';
+    el.classList.remove('good','bad'); el.classList.add(correct===graded && graded>0?'good':'bad');
+    return points;
+  }
+  function fieldsFor(ids){ return ids.map(function(id){return document.getElementById(id);}).filter(Boolean); }
+  function findMissing(ids){ return fieldsFor(ids).filter(function(el){ return !el.value || !el.value.trim(); }); }
+  function setMissing(ids, isMissing){ fieldsFor(ids).forEach(function(el){ el.classList.toggle('field-missing', isMissing); }); }
+
+  var PART1_IDS = ['p1-availcost','p1-availretail','p1-pct','p1-endretail','p1-endcost','p1-cogs'];
+  var PART2_IDS = ['p2-availretail','p2-pct','p2-endcost','p2-cogs'];
+
+  function buildKeyTable(title, rows){
+    var html='<strong>'+title+'</strong><table>';
+    rows.forEach(function(r){ html+='<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>'; });
+    html+='</table>'; return html;
+  }
+  function revealAnswerKeys(){
+    var d = currentScenario;
+    var p1Rows = [
+      ['Goods available at cost', money0(d.totalCost)],
+      ['Goods available at retail (average cost)', money0(d.availRetailAvg)],
+      ['Cost-to-retail % (average cost)', pct2(d.avgPct)],
+      ['Ending inventory at retail', money0(d.endRetail)],
+      ['Ending inventory at cost (average cost)', money0(d.endCostAvg)],
+      ['Estimated COGS (average cost)', money0(d.cogsAvg)]
+    ];
+    var p2Rows = [
+      ['Goods available at retail, excluding markdowns', money0(d.availRetailConv)],
+      ['Cost-to-retail % (conventional)', pct2(d.convPct)],
+      ['Ending inventory at cost (conventional)', money0(d.endCostConv)],
+      ['Estimated COGS (conventional)', money0(d.cogsConv)]
+    ];
+    document.getElementById('part1Key').innerHTML = buildKeyTable('Answer Key \u2014 Part 1', p1Rows);
+    document.getElementById('part2Key').innerHTML = buildKeyTable('Answer Key \u2014 Part 2', p2Rows);
+    document.getElementById('part1Key').style.display='block';
+    document.getElementById('part2Key').style.display='block';
+    var noteEl=document.getElementById('keyRevealNote'); if(noteEl) noteEl.style.display='block';
+  }
+  function lockPart(ids, checkBtnId){ fieldsFor(ids).forEach(function(el){ el.disabled=true; }); var btn=document.getElementById(checkBtnId); if(btn){ btn.disabled=true; btn.textContent='No attempts remaining'; } }
+  function unlockPart(ids, checkBtnId){ fieldsFor(ids).forEach(function(el){ el.disabled=false; }); var btn=document.getElementById(checkBtnId); if(btn){ btn.disabled=false; btn.textContent='Check my work'; } }
+  function updateAttemptsNote(elId, used){
+    var el=document.getElementById(elId); if(!el) return;
+    var remaining=MAX_ATTEMPTS-used; el.classList.remove('low','locked');
+    if(remaining<=0){ el.textContent='No attempts remaining \u2014 inputs locked'; el.classList.add('locked'); }
+    else { el.textContent=remaining+' attempt'+(remaining===1?'':'s')+' remaining'; if(remaining===1) el.classList.add('low'); }
+  }
+  function registerCheckAttempt(partKey, requiredIds, checkBtnId){
+    attempts[partKey]++;
+    var remaining=MAX_ATTEMPTS-attempts[partKey];
+    updateAttemptsNote(partKey==='part1'?'part1Attempts':'part2Attempts', attempts[partKey]);
+    if(remaining<=0){ locked[partKey]=true; lockPart(requiredIds, checkBtnId); }
+    if(locked.part1 && locked.part2 && !keyRevealed){ keyRevealed=true; revealAnswerKeys(); setTimeout(function(){ triggerPrint(); }, 350); }
+  }
+
+  var TOTAL_POINTS = 100;
+  var PART1_POSSIBLE = TOTAL_POINTS * (PART1_IDS.length/(PART1_IDS.length+PART2_IDS.length));
+  var PART2_POSSIBLE = TOTAL_POINTS - PART1_POSSIBLE;
+
+  function updateOverallScore(){
+    var el=document.getElementById('overallScore'); var breakdown=document.getElementById('scoreBreakdown');
+    if(scoreState.part1===null && scoreState.part2===null){ el.textContent='Check both parts to see your score'; breakdown.textContent=''; return; }
+    var p1 = scoreState.part1===null?0:scoreState.part1;
+    var p2 = scoreState.part2===null?0:scoreState.part2;
+    el.textContent=(p1+p2).toFixed(1)+' / '+TOTAL_POINTS.toFixed(1)+' pts';
+    breakdown.textContent = 'Part 1: '+(scoreState.part1===null?'not checked yet':scoreState.part1.toFixed(1)+' / '+PART1_POSSIBLE.toFixed(1)+' pts')+
+      '  \u00b7  Part 2: '+(scoreState.part2===null?'not checked yet':scoreState.part2.toFixed(1)+' / '+PART2_POSSIBLE.toFixed(1)+' pts');
+  }
+
+  function applyAndStore(id){
+    currentScenario = generateScenario(id);
+    applyScenario(currentScenario);
+    clearAllFieldStates();
+    scoreState.part1 = null; scoreState.part2 = null;
+    attempts.part1 = 0; attempts.part2 = 0;
+    locked.part1 = false; locked.part2 = false;
+    keyRevealed = false;
+    unlockPart(PART1_IDS, 'checkPart1'); unlockPart(PART2_IDS, 'checkPart2');
+    updateAttemptsNote('part1Attempts', 0); updateAttemptsNote('part2Attempts', 0);
+    ['part1Key','part2Key'].forEach(function(elId){ var el=document.getElementById(elId); if(el){ el.style.display='none'; el.innerHTML=''; } });
+    var noteEl=document.getElementById('keyRevealNote'); if(noteEl) noteEl.style.display='none';
+    ['part1Summary','part2Summary'].forEach(function(elId){ var el=document.getElementById(elId); if(el){ el.textContent=''; el.classList.remove('good','bad'); } });
+    updateOverallScore();
+  }
+
+  genBtn.addEventListener('click', function(){ applyAndStore(idInput.value); });
+  idInput.addEventListener('keydown', function(e){ if(e.key==='Enter') applyAndStore(idInput.value); });
+
+  document.getElementById('checkPart1').addEventListener('click', function(){
+    if(!currentScenario || locked.part1) return;
+    var missing = findMissing(PART1_IDS);
+    if(missing.length){ setMissing(PART1_IDS,false); setMissing(missing.map(function(el){return el.id;}),true);
+      var s=document.getElementById('part1Summary'); s.textContent='Please fill in every cell before checking your work \u2014 '+missing.length+' field'+(missing.length===1?'':'s')+' left blank.'; s.classList.remove('good'); s.classList.add('bad'); missing[0].focus(); return; }
+    setMissing(PART1_IDS, false);
+    var d = currentScenario;
+    var results = [
+      markField('p1-availcost', d.totalCost, 1),
+      markField('p1-availretail', d.availRetailAvg, 1),
+      markField('p1-pct', d.avgPct, 0.05),
+      markField('p1-endretail', d.endRetail, 1),
+      markField('p1-endcost', d.endCostAvg, 1),
+      markField('p1-cogs', d.cogsAvg, 1)
+    ];
+    scoreState.part1 = updateSummary('part1Summary', results, PART1_POSSIBLE);
+    updateOverallScore(); registerCheckAttempt('part1', PART1_IDS, 'checkPart1');
+  });
+
+  document.getElementById('checkPart2').addEventListener('click', function(){
+    if(!currentScenario || locked.part2) return;
+    var missing = findMissing(PART2_IDS);
+    if(missing.length){ setMissing(PART2_IDS,false); setMissing(missing.map(function(el){return el.id;}),true);
+      var s=document.getElementById('part2Summary'); s.textContent='Please fill in every cell before checking your work \u2014 '+missing.length+' field'+(missing.length===1?'':'s')+' left blank.'; s.classList.remove('good'); s.classList.add('bad'); missing[0].focus(); return; }
+    setMissing(PART2_IDS, false);
+    var d = currentScenario;
+    var results = [
+      markField('p2-availretail', d.availRetailConv, 1),
+      markField('p2-pct', d.convPct, 0.05),
+      markField('p2-endcost', d.endCostConv, 1),
+      markField('p2-cogs', d.cogsConv, 1)
+    ];
+    scoreState.part2 = updateSummary('part2Summary', results, PART2_POSSIBLE);
+    updateOverallScore(); registerCheckAttempt('part2', PART2_IDS, 'checkPart2');
+  });
+
+  // ---------------- Print ----------------
+  function val(id){ var el=document.getElementById(id); return el?el.value.trim():''; }
+  document.getElementById('printBtn').addEventListener('click', triggerPrint);
+  function triggerPrint(){
+    var name=val('studentName'); var id=val('studentId');
+    document.getElementById('printNameLine').textContent='Name: '+(name||'_______________________')+'     Student ID: '+(id||'_______________________');
+    var scoreText=document.getElementById('overallScore').textContent; var breakdownText=document.getElementById('scoreBreakdown').textContent;
+    document.getElementById('printScoreLine').textContent='Score: '+scoreText+(breakdownText?'  ('+breakdownText+')':'');
+    var oldTitle=document.title; document.title='Glenville-RetailMethod-'+(id||'submission'); window.print(); document.title=oldTitle;
+  }
+
+  // ---------------- Download as Word (.docx) ----------------
+  var docxLoadPromise = null;
+  function loadDocxLib(){
+    if(window.docx) return Promise.resolve();
+    if(docxLoadPromise) return docxLoadPromise;
+    docxLoadPromise = new Promise(function(resolve, reject){
+      var s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js';
+      s.onload = function(){ window.docx ? resolve() : reject(new Error('docx library did not load correctly')); };
+      s.onerror = function(){ reject(new Error('network error loading docx library')); };
+      document.head.appendChild(s);
+    });
+    return docxLoadPromise;
+  }
+  function blankIfEmpty(s){ return s && s.length ? s : '\u2014'; }
+  function buildAnswersDoc(){
+    var D = window.docx; var PURPLE='592C88', INK='221B2E', SLATE='5F5A6B';
+    var name = blankIfEmpty(val('studentName')); var sid = blankIfEmpty(val('studentId'));
+    function h(text){ return new D.Paragraph({spacing:{before:200,after:100}, children:[new D.TextRun({text:text,bold:true,color:PURPLE,size:26})]}); }
+    function p(text,opts){ opts=opts||{}; return new D.Paragraph({spacing:{before:60,after:60}, children:[new D.TextRun({text:text,size:20,color:opts.color||INK,bold:!!opts.bold})]}); }
+    function cell(text,width,opts){ opts=opts||{}; return new D.TableCell({width:{size:width,type:D.WidthType.DXA}, shading:opts.shading?{type:D.ShadingType.CLEAR,fill:opts.shading}:undefined, margins:{top:60,bottom:60,left:90,right:90}, children:[new D.Paragraph({children:[new D.TextRun({text:text,size:19,bold:!!opts.bold,color:opts.color||INK})]})]}); }
+    function row(cells){ return new D.TableRow({children:cells}); }
+    function table(widths, rows){ return new D.Table({width:{size:widths.reduce(function(a,b){return a+b;},0),type:D.WidthType.DXA}, columnWidths:widths, rows:rows}); }
+    var COLS = [5148,4102];
+    var children = [];
+    children.push(new D.Paragraph({heading:D.HeadingLevel.TITLE, spacing:{after:60}, children:[new D.TextRun({text:'Glenville Mercantile \u2014 The Retail Inventory Method', color:PURPLE, size:32, bold:true})]}));
+    children.push(p('Name: '+name+'     Student ID: '+sid, {bold:true}));
+    children.push(p('ACCT 351  \u00b7  Inventory Measurement', {color:SLATE}));
+    var scoreText=(document.getElementById('overallScore')||{}).textContent||'';
+    var breakdownText=(document.getElementById('scoreBreakdown')||{}).textContent||'';
+    children.push(new D.Paragraph({spacing:{before:200,after:60}, border:{top:{style:D.BorderStyle.SINGLE,size:6,color:PURPLE},bottom:{style:D.BorderStyle.SINGLE,size:6,color:PURPLE}}, children:[new D.TextRun({text:'Assignment score', bold:true, color:PURPLE, size:24})]}));
+    children.push(new D.Paragraph({spacing:{before:40,after:20}, children:[new D.TextRun({text:scoreText, bold:true, color:INK, size:24})]}));
+    if(breakdownText) children.push(new D.Paragraph({spacing:{after:100}, children:[new D.TextRun({text:breakdownText, color:SLATE, size:18})]}));
+    document.querySelectorAll('.part').forEach(function(partEl){
+      var labelEl=partEl.querySelector('.part-label'); var h2El=partEl.querySelector('h2');
+      var heading=(labelEl?labelEl.textContent+' \u2014 ':'')+(h2El?h2El.textContent:'');
+      children.push(h(heading));
+      var rows=[row([cell('Item',COLS[0],{bold:true,shading:PURPLE,color:'FFFFFF'}), cell('Your answer',COLS[1],{bold:true,shading:PURPLE,color:'FFFFFF'})])];
+      partEl.querySelectorAll('input[type="text"]').forEach(function(field){
+        var lbl = field.getAttribute('data-label') || field.id;
+        rows.push(row([cell(lbl,COLS[0]), cell(blankIfEmpty(field.value),COLS[1])]));
+      });
+      children.push(table(COLS, rows));
+    });
+    children.push(new D.Paragraph({spacing:{before:300}, alignment:D.AlignmentType.CENTER, children:[new D.TextRun({text:'Glenville Mercantile \u00b7 ACCT 351 \u00b7 Western Carolina University', size:16, italics:true, color:SLATE})]}));
+    return new D.Document({sections:[{properties:{page:{size:{width:12240,height:15840}, margin:{top:1440,bottom:1440,left:1440,right:1440}}}, children:children}]});
+  }
+  document.getElementById('downloadDocxBtn').addEventListener('click', function(){
+    var statusEl=document.getElementById('submitStatus'); statusEl.classList.remove('error'); statusEl.textContent='Preparing your Word document\u2026';
+    loadDocxLib().then(function(){ var doc=buildAnswersDoc(); return window.docx.Packer.toBlob(doc); }).then(function(blob){
+      var idPart=val('studentId')||'submission'; var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='Glenville-RetailMethod-'+idPart+'.docx';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      statusEl.textContent='Downloaded.'; setTimeout(function(){ statusEl.textContent=''; }, 4000);
+    }).catch(function(){ statusEl.classList.add('error'); statusEl.textContent='Could not load the Word export tool (needs internet access) \u2014 use Print / Save as PDF instead.'; });
+  });
+
+  applyAndStore('');
+})();
+</script>
+
+</body>
+</html>

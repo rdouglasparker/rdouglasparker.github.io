@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lower of Cost or Market — Wesser Creek Supply</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --purple:#592C88; --purple-deep:#38195A; --purple-mid:#6E3FA3;
+    --gold:#B0925C; --gold-soft:#D6C398; --gold-pale:#F1E9D6;
+    --parchment:#F7F4EC; --paper:#FFFEFA; --ink:#221B2E; --slate:#5F5A6B;
+    --line:#DBD3E0; --line-soft:#EAE4EF; --answer:#1E5C34; --answer-bg:#E7F1E9;
+    --danger:#9C3B34; --shadow: 0 1px 2px rgba(56,25,90,0.07), 0 6px 18px rgba(56,25,90,0.08);
+  }
+  *{box-sizing:border-box;} html,body{margin:0;padding:0;}
+  body{ background:var(--parchment); color:var(--ink); font-family:'Inter',sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased; }
+  a{ color:inherit; }
+  header{ background: linear-gradient(180deg, var(--purple) 0%, var(--purple-deep) 100%); color:#F1E9D6; padding: 30px 6vw 24px; position:relative; }
+  header::after{ content:""; position:absolute; left:0; right:0; bottom:0; height:4px; background: linear-gradient(90deg, var(--gold-soft), var(--gold) 40%, var(--gold-soft) 70%, var(--gold)); }
+  .eyebrow{ font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold-soft); margin:0 0 10px; }
+  h1.title{ font-family:'Source Serif 4', serif; font-weight:600; font-size:clamp(24px,3.4vw,34px); margin:0 0 8px; letter-spacing:-0.01em; }
+  .subtitle{ font-size:14.5px; color:#D9CDE5; max-width:680px; margin:0; }
+  .id-bar{ max-width:900px; margin:0 auto; padding:18px 6vw 0; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .id-bar label{ font-size:13px; font-weight:600; color:var(--slate); }
+  .id-bar input[type="text"]{ font-family:'IBM Plex Mono', monospace; font-size:13.5px; padding:8px 11px; border:1px solid var(--line); border-radius:5px; background:var(--paper); color:var(--ink); width:180px; }
+  .id-bar input:focus{ outline:none; border-color:var(--purple-mid); box-shadow:0 0 0 3px rgba(89,44,136,0.10); }
+  .id-bar button{ font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600; border-radius:5px; padding:8px 15px; border:1px solid var(--purple); background:var(--purple); color:#fff; cursor:pointer; }
+  .id-bar button:hover{ background:var(--purple-mid); }
+  .rounding-note{ max-width:900px; margin:14px auto 0; padding:12px 6vw; font-size:12.5px; color:var(--slate); line-height:1.5; }
+  .rounding-note strong{ color:var(--purple); font-weight:600; }
+  main{ max-width:900px; margin:0 auto; padding:22px 6vw 90px; }
+  .part{ background:var(--paper); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); padding:24px 26px 26px; margin-top:26px; }
+  .part-label{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--gold); background:var(--purple); display:inline-block; padding:3px 9px; border-radius:4px; letter-spacing:.04em; margin-bottom:12px; }
+  .part h2{ font-family:'Source Serif 4', serif; font-size:21px; font-weight:600; color:var(--purple); margin:0 0 12px; }
+  .scenario{ background:var(--parchment); border-left:3px solid var(--gold); padding:14px 18px; border-radius:0 6px 6px 0; font-size:14.5px; color:var(--ink); margin-bottom:20px; }
+  .scenario p{ margin:0 0 10px; } .scenario p:last-child{ margin-bottom:0; }
+  .scenario span.val{ font-weight:700; color:var(--purple-deep); }
+  .req{ font-weight:600; font-size:14.5px; color:var(--ink); margin:20px 0 10px; }
+  .req .letter{ font-family:'IBM Plex Mono', monospace; color:var(--purple); margin-right:6px; }
+  table.worksheet{ width:100%; border-collapse:collapse; font-size:13px; margin-bottom:8px; }
+  table.worksheet th{ text-align:left; font-size:10.5px; text-transform:uppercase; letter-spacing:.03em; color:var(--slate); border-bottom:2px solid var(--purple); padding:7px 5px; }
+  table.worksheet td{ border-bottom:1px solid var(--line); padding:7px 5px; vertical-align:middle; }
+  table.worksheet tr.total-row td{ border-top:2px solid var(--purple); border-bottom:none; font-weight:600; }
+  table.worksheet input[type="text"]{ width:100%; font-family:'IBM Plex Mono', monospace; font-size:12.5px; padding:5px 6px; border:1px solid var(--line); border-radius:5px; background:var(--parchment); color:var(--ink); }
+  table.worksheet input[type="text"]:focus{ outline:none; border-color:var(--purple-mid); box-shadow:0 0 0 3px rgba(89,44,136,0.10); background:var(--paper); }
+  table.worksheet td.given{ font-family:'IBM Plex Mono', monospace; color:var(--slate); }
+  table.je{ width:100%; border-collapse:collapse; font-size:13.5px; margin-top:6px; }
+  table.je th{ text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.03em; color:var(--slate); border-bottom:2px solid var(--purple); padding:8px 8px; }
+  table.je td{ border-bottom:1px solid var(--line); padding:8px 8px; }
+  table.je input[type="text"]{ width:100%; font-family:'IBM Plex Mono', monospace; font-size:13.5px; padding:6px 8px; border:1px solid var(--line); border-radius:5px; background:var(--parchment); color:var(--ink); }
+  table.je select.coa-select{ width:100%; font-family:'Inter',sans-serif; font-size:13.5px; padding:6px 8px; border:1px solid var(--line); border-radius:5px; background:var(--parchment); color:var(--ink); }
+  table.je select.coa-select:focus, table.je input[type="text"]:focus{ outline:none; border-color:var(--purple-mid); box-shadow:0 0 0 3px rgba(89,44,136,0.10); background:var(--paper); }
+  table.je td.indent select{ margin-left:0; } table.je td.indent input{ padding-left:22px; }
+  .je-hint{ font-size:12px; color:var(--slate); margin-top:6px; }
+  .key{ margin-top:14px; background:var(--answer-bg); border:1px solid #B7D3BE; border-radius:8px; padding:14px 16px; color:var(--answer); font-size:13.5px; }
+  .key strong{ display:block; margin-bottom:6px; font-family:'Source Serif 4', serif; font-size:14.5px; }
+  .key table{ width:100%; border-collapse:collapse; font-size:13px; margin-top:4px; }
+  .key td{ padding:4px 6px; border-bottom:1px dashed #B7D3BE; }
+  .key tr:last-child td{ border-bottom:none; font-weight:600; }
+  .check-bar{ margin-top:20px; padding-top:16px; border-top:1px solid var(--line); display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  .btn-check{ font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600; border-radius:5px; padding:9px 18px; border:1px solid var(--purple); background:var(--purple); color:#fff; cursor:pointer; }
+  .btn-check:hover{ background:var(--purple-mid); }
+  .check-summary{ font-size:13.5px; font-weight:600; }
+  .check-summary.good{ color:var(--answer); } .check-summary.bad{ color:var(--danger); }
+  .check-disclaimer{ font-size:11.5px; color:var(--slate); width:100%; margin-top:2px; font-style:italic; }
+  .attempts-note{ font-size:12px; font-weight:600; color:var(--slate); }
+  .attempts-note.low{ color:var(--gold); } .attempts-note.locked{ color:var(--danger); }
+  input:disabled, select:disabled{ opacity:0.7; cursor:not-allowed; }
+  .score-bar{ margin-top:26px; background:var(--paper); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); padding:16px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+  .score-bar .score-label{ font-family:'Source Serif 4', serif; font-size:16px; font-weight:600; color:var(--purple); }
+  .score-bar .score-value{ font-family:'IBM Plex Mono', monospace; font-size:18px; font-weight:600; color:var(--ink); }
+  .score-bar .score-breakdown{ font-size:12.5px; color:var(--slate); width:100%; }
+  input.field-correct, select.field-correct{ border-color:var(--answer) !important; background:var(--answer-bg) !important; }
+  input.field-incorrect, select.field-incorrect{ border-color:var(--danger) !important; background:#F3E1DE !important; }
+  input.field-missing, select.field-missing{ border-color:var(--gold) !important; background:var(--gold-pale) !important; }
+  .key-reveal-note{ margin-top:14px; background:var(--gold-pale); border:1px solid var(--gold-soft); border-radius:8px; padding:12px 16px; color:var(--purple-deep); font-size:13.5px; font-weight:600; display:none; }
+  .submit-bar{ background:var(--paper); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); padding:22px 26px 24px; margin-top:26px; }
+  .submit-bar h2{ font-family:'Source Serif 4', serif; font-size:19px; font-weight:600; color:var(--purple); margin:0 0 14px; }
+  .submit-row{ display:flex; align-items:center; gap:10px; margin-bottom:12px; flex-wrap:wrap; }
+  .submit-row label{ font-size:13px; font-weight:600; color:var(--slate); }
+  .submit-row input[type="text"]{ font-family:'Inter',sans-serif; font-size:13.5px; padding:8px 11px; border:1px solid var(--line); border-radius:5px; background:var(--parchment); color:var(--ink); width:240px; }
+  .submit-row input:focus{ outline:none; border-color:var(--purple-mid); box-shadow:0 0 0 3px rgba(89,44,136,0.10); }
+  .btn-submit{ font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600; border-radius:5px; padding:10px 18px; border:1px solid var(--purple); background:var(--purple); color:#fff; cursor:pointer; }
+  .btn-submit:hover{ background:var(--purple-mid); }
+  .btn-submit-outline{ background:var(--paper); color:var(--purple); } .btn-submit-outline:hover{ background:var(--parchment); }
+  .submit-status{ font-size:13px; font-weight:600; min-height:18px; margin:10px 0 0; color:var(--answer); }
+  .submit-status.error{ color:var(--danger); }
+  .submit-hint{ font-size:12px; color:var(--slate); margin:6px 0 0; }
+  @media print{
+    .print-hide, .id-bar, .check-bar, .rounding-note{ display:none !important; }
+    header{ background:none !important; color:var(--ink) !important; padding:0 0 14px !important; }
+    header::after{ display:none !important; }
+    .eyebrow{ color:var(--purple) !important; } .subtitle{ color:var(--slate) !important; }
+    body{ background:#fff !important; }
+    .part{ box-shadow:none !important; border:1px solid #999 !important; break-inside:avoid; }
+    .score-bar{ box-shadow:none !important; border:1.5px solid var(--purple) !important; break-inside:avoid; break-before:avoid; }
+    input[type="text"], select{ border:none !important; border-bottom:1px solid #000 !important; background:transparent !important; border-radius:0 !important; color:#000 !important; -webkit-appearance:none; appearance:none; padding:2px 4px !important; }
+    .print-name-line{ display:block !important; }
+  }
+  .print-name-line{ display:none; font-size:13px; color:var(--ink); padding:0 6vw; margin:0 0 10px; }
+  footer{ text-align:center; padding:26px 6vw 40px; font-size:12px; color:var(--slate); }
+  @media (max-width:600px){ header, main, .id-bar{ padding-left:5vw; padding-right:5vw; } table.worksheet, table.je{ font-size:12px; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">ACCT 351 &middot; Inventory Measurement</p>
+  <h1 class="title">Wesser Creek Supply</h1>
+  <p class="subtitle">Lower of Cost or Market — determining the ceiling, the floor, and market, then applying LCM to individual products and to total inventory.</p>
+</header>
+
+<p class="print-name-line" id="printNameLine"></p>
+<p class="print-name-line" id="printScoreLine" style="font-weight:600;"></p>
+
+<div class="id-bar">
+  <label for="studentId">Student ID</label>
+  <input type="text" id="studentId" placeholder="e.g. 92841016">
+  <button id="genBtn" type="button">Generate scenario</button>
+</div>
+
+<div class="rounding-note">
+  <strong>Rounding convention:</strong> round every extended (quantity &times; unit) dollar amount to the nearest dollar.
+</div>
+
+<main>
+
+  <div class="part">
+    <span class="part-label">Part 1</span>
+    <h2>Determining Market and Applying LCM to Individual Products</h2>
+    <div class="scenario">
+      <p>Wesser Creek Supply uses LIFO and reports inventory at the lower of cost or market. Wesser Creek has five products on hand at year-end. For each product, selling costs are <span class="val" id="sSellingCostPct">15%</span> of selling price and the normal profit margin is <span class="val" id="sNormalProfitPct">40%</span> of selling price. Quantity, unit cost, unit replacement cost, and unit selling price are given below.</p>
+    </div>
+    <div class="req"><span class="letter">a.</span>For each product, determine the ceiling (NRV), the floor (NRV &minus; normal profit), and market (replacement cost, bounded by the ceiling and floor). Then enter the lower of cost or market, extended for quantity.</div>
+    <table class="worksheet">
+      <thead>
+        <tr>
+          <th style="width:8%;">Prod.</th><th style="width:8%;">Qty</th><th style="width:10%;">Unit Cost</th><th style="width:10%;">Repl. Cost</th>
+          <th style="width:11%;">Ceiling</th><th style="width:11%;">Floor</th><th style="width:11%;">Market</th><th style="width:15%;">LCM (extended)</th>
+        </tr>
+      </thead>
+      <tbody id="p1-tbody"></tbody>
+      <tfoot>
+        <tr class="total-row"><td colspan="7">Total (individual items)</td><td><input type="text" placeholder="$" id="p1-endinv" data-label="Ending inventory — individual items"></td></tr>
+      </tfoot>
+    </table>
+    <div class="check-bar">
+      <button class="btn-check" id="checkPart1" type="button">Check my work</button>
+      <span class="check-summary" id="part1Summary"></span>
+      <span class="attempts-note" id="part1Attempts">3 attempts remaining</span>
+      <span class="check-disclaimer">This checks whether the dollar amounts you entered match the key within a small rounding tolerance.</span>
+    </div>
+    <div class="key" id="part1Key" style="display:none;"></div>
+  </div>
+
+  <div class="part">
+    <span class="part-label">Part 2</span>
+    <h2>LCM Applied to Total Inventory, and the Adjusting Entry</h2>
+    <div class="req"><span class="letter">b.</span>Using total cost and total market across all five products, what amount should be reported for ending inventory applying LCM to <em>total</em> inventory?</div>
+    <table class="worksheet">
+      <tbody>
+        <tr><td style="width:70%;">Ending inventory, LCM applied to total inventory</td><td><input type="text" placeholder="$" id="p2-endinvtotal" data-label="Ending inventory — total inventory"></td></tr>
+      </tbody>
+    </table>
+    <div class="req"><span class="letter">c.</span>Record any necessary year-end adjusting entry based on the total-inventory approach. (If no entry is needed, enter $0 for both the debit and the credit.)</div>
+    <table class="worksheet" style="margin-bottom:16px;">
+      <tbody>
+        <tr><td style="width:70%;">Amount of the write-down (enter $0 if none is needed)</td><td><input type="text" placeholder="$" id="p2-writedown" data-label="Write-down amount"></td></tr>
+      </tbody>
+    </table>
+    <table class="je">
+      <thead><tr><th style="width:55%;">Account</th><th style="width:22%;">Debit</th><th style="width:23%;">Credit</th></tr></thead>
+      <tbody>
+        <tr><td><select class="coa-select" id="p2-je1-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="p2-je1-debit"></td><td><input type="text" placeholder="$" id="p2-je1-credit"></td></tr>
+        <tr><td class="indent"><select class="coa-select" id="p2-je2-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="p2-je2-debit"></td><td><input type="text" placeholder="$" id="p2-je2-credit"></td></tr>
+      </tbody>
+    </table>
+    <p class="je-hint">Indent the credited account below the debited account, as usual.</p>
+    <div class="check-bar">
+      <button class="btn-check" id="checkPart2" type="button">Check my work</button>
+      <span class="check-summary" id="part2Summary"></span>
+      <span class="attempts-note" id="part2Attempts">3 attempts remaining</span>
+      <span class="check-disclaimer">This checks whether the accounts you selected and the dollar amounts you entered match the key within a small rounding tolerance.</span>
+    </div>
+    <div class="key" id="part2Key" style="display:none;"></div>
+  </div>
+
+  <div class="score-bar">
+    <span class="score-label">Assignment score</span>
+    <span class="score-value" id="overallScore">Check both parts to see your score</span>
+    <span class="score-breakdown" id="scoreBreakdown"></span>
+  </div>
+
+  <div class="key-reveal-note" id="keyRevealNote">You've used all 3 attempts on both parts — the answer key is now shown below each part, and a submission PDF has opened for you to save.</div>
+
+  <div class="submit-bar print-hide">
+    <h2>Ready to submit?</h2>
+    <div class="submit-row">
+      <label for="studentName">Your name</label>
+      <input type="text" id="studentName" placeholder="First and last name">
+    </div>
+    <div class="submit-row submit-actions">
+      <button class="btn-submit" id="printBtn" type="button">Print / Save as PDF</button>
+      <button class="btn-submit btn-submit-outline" id="downloadDocxBtn" type="button">Download as Word (.docx)</button>
+    </div>
+    <p class="submit-status" id="submitStatus"></p>
+    <p class="submit-hint">Both options capture exactly what's currently filled in above, including your generated scenario numbers. "Print / Save as PDF" works offline; "Download as Word" needs an internet connection to load the export tool.</p>
+  </div>
+
+</main>
+
+<footer>Wesser Creek Supply &middot; Lower of Cost or Market &middot; ACCT 351 &middot; Western Carolina University</footer>
+
+<script>
+(function(){
+  function hashSeed(str){ var h=2166136261; for(var i=0;i<str.length;i++){ h ^= str.charCodeAt(i); h = Math.imul(h,16777619); } return h>>>0; }
+  function mulberry32(seed){ return function(){ seed |= 0; seed = seed + 0x6D2B79F5 | 0; var t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  function pick(rand, arr){ return arr[Math.floor(rand()*arr.length)]; }
+  function money0(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
+  function money2(n){ var r = Math.round(n*100)/100; return '$' + r.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}); }
+
+  var CHART_OF_ACCOUNTS = {
+    'Assets': ['Cash','Accounts Receivable','Inventory'],
+    'Liabilities': ['Accounts Payable'],
+    'Revenues': ['Sales Revenue'],
+    'Expenses': ['Cost of Goods Sold','Loss on Inventory Write-Down']
+  };
+  function populateCoaSelects(){
+    var optHtml='<option value="">Select account\u2026</option>';
+    Object.keys(CHART_OF_ACCOUNTS).forEach(function(group){
+      optHtml+='<optgroup label="'+group+'">';
+      CHART_OF_ACCOUNTS[group].forEach(function(acct){ optHtml+='<option value="'+acct+'">'+acct+'</option>'; });
+      optHtml+='</optgroup>';
+    });
+    document.querySelectorAll('select.coa-select').forEach(function(sel){ if(!sel.dataset.populated){ sel.innerHTML=optHtml; sel.dataset.populated='1'; } });
+  }
+
+  // Position-based pattern for where replacement cost falls: below floor, above ceiling, between, above ceiling, between
+  var RC_TYPES = ['below','above','between','above','between'];
+
+  function generateScenario(id){
+    var seedStr = (id || 'demo').trim().toLowerCase();
+    var rand = mulberry32(hashSeed(seedStr));
+    var qty = [800, 1000, 1200, 900, 1100];
+    var priceList = [60,80,100,120,140,160,180,200,220,240,260,280,300,320,340,360];
+    var costFactorList = [0.85,0.90,0.95,1.00,1.05,1.10,1.15,1.20];
+    var letters = ['A','B','C','D','E'];
+
+    var items = letters.map(function(letter, i){
+      var sellingPrice = pick(rand, priceList);
+      var ceiling = Math.round(sellingPrice*0.85*100)/100;      // NRV
+      var floor = Math.round(sellingPrice*0.45*100)/100;        // NRV - 40% normal profit (0.85 - 0.40 = 0.45)
+      var type = RC_TYPES[i];
+      var replCost;
+      if(type === 'below'){ replCost = Math.round(floor * pick(rand,[0.80,0.85,0.90,0.95]) * 100)/100; }
+      else if(type === 'above'){ replCost = Math.round(ceiling * pick(rand,[1.05,1.10,1.15,1.20]) * 100)/100; }
+      else { var frac = pick(rand,[0.3,0.4,0.5,0.6,0.7]); replCost = Math.round((floor + (ceiling-floor)*frac)*100)/100; }
+      var market = Math.min(Math.max(replCost, floor), ceiling);
+      var unitCost = Math.round(market * pick(rand, costFactorList) * 100)/100;
+      var q = qty[i];
+      var cost = Math.round(q*unitCost*100)/100;
+      var marketExt = Math.round(q*market*100)/100;
+      return { letter:letter, qty:q, unitCost:unitCost, replCost:replCost, ceiling:ceiling, floor:floor, market:market,
+               cost:cost, marketExt:marketExt, lcm: Math.min(cost, marketExt) };
+    });
+
+    var endInvIndividual = items.reduce(function(s,it){return s+it.lcm;},0);
+    var totalCost = items.reduce(function(s,it){return s+it.cost;},0);
+    var totalMarket = items.reduce(function(s,it){return s+it.marketExt;},0);
+    var endInvTotal = Math.min(totalCost, totalMarket);
+    var writeDown = Math.max(0, totalCost-endInvTotal);
+
+    return { items:items, endInvIndividual:endInvIndividual, totalCost:totalCost, totalMarket:totalMarket, endInvTotal:endInvTotal, writeDown:writeDown };
+  }
+
+  function buildTableRows(d){
+    var tbody = document.getElementById('p1-tbody');
+    tbody.innerHTML = '';
+    d.items.forEach(function(it){
+      var tr = document.createElement('tr');
+      tr.innerHTML =
+        '<td class="given">'+it.letter+'</td>'+
+        '<td class="given">'+it.qty.toLocaleString('en-US')+'</td>'+
+        '<td class="given">'+money2(it.unitCost)+'</td>'+
+        '<td class="given">'+money2(it.replCost)+'</td>'+
+        '<td><input type="text" placeholder="$" id="p1-'+it.letter+'-ceil" data-label="Product '+it.letter+' — Ceiling"></td>'+
+        '<td><input type="text" placeholder="$" id="p1-'+it.letter+'-floor" data-label="Product '+it.letter+' — Floor"></td>'+
+        '<td><input type="text" placeholder="$" id="p1-'+it.letter+'-mkt" data-label="Product '+it.letter+' — Market"></td>'+
+        '<td><input type="text" placeholder="$" id="p1-'+it.letter+'-lcm" data-label="Product '+it.letter+' — LCM (extended)"></td>';
+      tbody.appendChild(tr);
+    });
+  }
+
+  var idInput = document.getElementById('studentId');
+  var genBtn = document.getElementById('genBtn');
+  var currentScenario = null;
+  var scoreState = { part1:null, part2:null };
+  var MAX_ATTEMPTS = 3;
+  var attempts = { part1:0, part2:0 };
+  var locked = { part1:false, part2:false };
+  var keyRevealed = false;
+
+  function parseMoney(s){ if(s===null||s===undefined) return NaN; var c=String(s).replace(/[^0-9.\-]/g,''); if(c===''||c==='-') return NaN; return parseFloat(c); }
+  function near(a,b,tol){ if(isNaN(a)||isNaN(b)) return false; return Math.abs(a-b) <= tol; }
+  function clearFieldState(el){ if(!el) return; el.classList.remove('field-correct','field-incorrect','field-missing'); }
+  function clearAllFieldStates(){ document.querySelectorAll('.field-correct,.field-incorrect,.field-missing').forEach(function(el){ el.classList.remove('field-correct','field-incorrect','field-missing'); }); }
+  function markMoney(id, correct, tol){
+    var el=document.getElementById(id); if(!el) return null;
+    el.classList.remove('field-correct','field-incorrect');
+    var val=parseMoney(el.value); var ok=near(val,correct,tol===undefined?1:tol);
+    el.classList.add(ok?'field-correct':'field-incorrect');
+    if(!el.dataset.clearBound){ el.addEventListener('input', function(){ clearFieldState(el); }); el.dataset.clearBound='1'; }
+    return ok;
+  }
+  function markSelect(id, correct){
+    var el=document.getElementById(id); if(!el) return null;
+    el.classList.remove('field-correct','field-incorrect');
+    var ok = el.value === correct;
+    el.classList.add(ok?'field-correct':'field-incorrect');
+    if(!el.dataset.clearBound){ el.addEventListener('change', function(){ clearFieldState(el); }); el.dataset.clearBound='1'; }
+    return ok;
+  }
+  function updateSummary(elId, results, pointsPossible){
+    var el=document.getElementById(elId);
+    var graded=results.filter(function(r){return r!==null;}).length;
+    var correct=results.filter(function(r){return r===true;}).length;
+    var points=graded>0?(correct/graded)*pointsPossible:0;
+    el.textContent=correct+' of '+graded+' correct \u2014 '+points.toFixed(1)+' of '+pointsPossible.toFixed(1)+' pts';
+    el.classList.remove('good','bad'); el.classList.add(correct===graded && graded>0?'good':'bad');
+    return points;
+  }
+  function fieldsFor(ids){ return ids.map(function(id){return document.getElementById(id);}).filter(Boolean); }
+  function findMissing(ids){ return fieldsFor(ids).filter(function(el){ return !el.value || !el.value.trim(); }); }
+  function setMissing(ids, isMissing){ fieldsFor(ids).forEach(function(el){ el.classList.toggle('field-missing', isMissing); }); }
+
+  function idsPart1(d){
+    var ids = ['p1-endinv'];
+    d.items.forEach(function(it){ ids.push('p1-'+it.letter+'-ceil','p1-'+it.letter+'-floor','p1-'+it.letter+'-mkt','p1-'+it.letter+'-lcm'); });
+    return ids;
+  }
+  var PART2_REQUIRED_IDS = ['p2-endinvtotal','p2-writedown','p2-je1-account','p2-je2-account','p2-je1-debit','p2-je2-credit'];
+
+  function buildKeyTable(title, rows){
+    var html='<strong>'+title+'</strong><table>';
+    rows.forEach(function(r){ html+='<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>'; });
+    html+='</table>'; return html;
+  }
+  function revealAnswerKeys(){
+    var d = currentScenario;
+    var p1Rows = [];
+    d.items.forEach(function(it){
+      p1Rows.push(['Product '+it.letter+' — Ceiling / Floor / Market', money2(it.ceiling)+' / '+money2(it.floor)+' / '+money2(it.market)]);
+      p1Rows.push(['Product '+it.letter+' — LCM (extended)', money0(it.lcm)]);
+    });
+    p1Rows.push(['Ending inventory (individual items)', money0(d.endInvIndividual)]);
+    var p2Rows = [
+      ['Ending inventory (total inventory approach)', money0(d.endInvTotal)],
+      ['Write-down amount', money0(d.writeDown)],
+      ['Journal entry \u2014 line 1', 'Debit Cost of Goods Sold '+money0(d.writeDown)],
+      ['Journal entry \u2014 line 2', 'Credit Inventory '+money0(d.writeDown)]
+    ];
+    document.getElementById('part1Key').innerHTML = buildKeyTable('Answer Key \u2014 Part 1', p1Rows);
+    document.getElementById('part2Key').innerHTML = buildKeyTable('Answer Key \u2014 Part 2', p2Rows);
+    document.getElementById('part1Key').style.display='block';
+    document.getElementById('part2Key').style.display='block';
+    var noteEl=document.getElementById('keyRevealNote'); if(noteEl) noteEl.style.display='block';
+  }
+  function lockPart(ids, checkBtnId){ fieldsFor(ids).forEach(function(el){ el.disabled=true; }); var btn=document.getElementById(checkBtnId); if(btn){ btn.disabled=true; btn.textContent='No attempts remaining'; } }
+  function unlockPart(ids, checkBtnId){ fieldsFor(ids).forEach(function(el){ el.disabled=false; }); var btn=document.getElementById(checkBtnId); if(btn){ btn.disabled=false; btn.textContent='Check my work'; } }
+  function updateAttemptsNote(elId, used){
+    var el=document.getElementById(elId); if(!el) return;
+    var remaining=MAX_ATTEMPTS-used; el.classList.remove('low','locked');
+    if(remaining<=0){ el.textContent='No attempts remaining \u2014 inputs locked'; el.classList.add('locked'); }
+    else { el.textContent=remaining+' attempt'+(remaining===1?'':'s')+' remaining'; if(remaining===1) el.classList.add('low'); }
+  }
+  function registerCheckAttempt(partKey, requiredIds, checkBtnId){
+    attempts[partKey]++;
+    var remaining=MAX_ATTEMPTS-attempts[partKey];
+    updateAttemptsNote(partKey==='part1'?'part1Attempts':'part2Attempts', attempts[partKey]);
+    if(remaining<=0){ locked[partKey]=true; lockPart(requiredIds, checkBtnId); }
+    if(locked.part1 && locked.part2 && !keyRevealed){ keyRevealed=true; revealAnswerKeys(); setTimeout(function(){ triggerPrint(); }, 350); }
+  }
+
+  var TOTAL_ITEM_COUNT = 29;
+  var PART1_ITEM_COUNT = 23; // 5 items x 4 fields + 3 totals... (5x4=20 +1 endinv =21) adjust below
+  var PART2_ITEM_COUNT = 6;
+  // Recompute exactly from arrays for accuracy at runtime instead of hardcoding:
+  var TOTAL_POINTS = 100;
+
+  function updateOverallScore(){
+    var el=document.getElementById('overallScore'); var breakdown=document.getElementById('scoreBreakdown');
+    if(scoreState.part1===null && scoreState.part2===null){ el.textContent='Check both parts to see your score'; breakdown.textContent=''; return; }
+    var p1 = scoreState.part1===null?0:scoreState.part1;
+    var p2 = scoreState.part2===null?0:scoreState.part2;
+    el.textContent=(p1+p2).toFixed(1)+' / '+TOTAL_POINTS.toFixed(1)+' pts';
+    breakdown.textContent = 'Part 1: '+(scoreState.part1===null?'not checked yet':scoreState.part1.toFixed(1)+' / '+PART1_POSSIBLE.toFixed(1)+' pts')+
+      '  \u00b7  Part 2: '+(scoreState.part2===null?'not checked yet':scoreState.part2.toFixed(1)+' / '+PART2_POSSIBLE.toFixed(1)+' pts');
+  }
+
+  var PART1_POSSIBLE, PART2_POSSIBLE;
+
+  function applyAndStore(id){
+    currentScenario = generateScenario(id);
+    buildTableRows(currentScenario);
+    var p1ids = idsPart1(currentScenario);
+    var totalCount = p1ids.length + PART2_REQUIRED_IDS.length;
+    var pointsPerItem = TOTAL_POINTS/totalCount;
+    PART1_POSSIBLE = p1ids.length*pointsPerItem;
+    PART2_POSSIBLE = PART2_REQUIRED_IDS.length*pointsPerItem;
+    clearAllFieldStates();
+    scoreState.part1 = null; scoreState.part2 = null;
+    attempts.part1 = 0; attempts.part2 = 0;
+    locked.part1 = false; locked.part2 = false;
+    keyRevealed = false;
+    unlockPart(p1ids, 'checkPart1'); unlockPart(PART2_REQUIRED_IDS, 'checkPart2');
+    updateAttemptsNote('part1Attempts', 0); updateAttemptsNote('part2Attempts', 0);
+    ['part1Key','part2Key'].forEach(function(elId){ var el=document.getElementById(elId); if(el){ el.style.display='none'; el.innerHTML=''; } });
+    var noteEl=document.getElementById('keyRevealNote'); if(noteEl) noteEl.style.display='none';
+    ['part1Summary','part2Summary'].forEach(function(elId){ var el=document.getElementById(elId); if(el){ el.textContent=''; el.classList.remove('good','bad'); } });
+    updateOverallScore();
+  }
+
+  genBtn.addEventListener('click', function(){ applyAndStore(idInput.value); });
+  idInput.addEventListener('keydown', function(e){ if(e.key==='Enter') applyAndStore(idInput.value); });
+
+  document.getElementById('checkPart1').addEventListener('click', function(){
+    if(!currentScenario || locked.part1) return;
+    var ids = idsPart1(currentScenario);
+    var missing = findMissing(ids);
+    if(missing.length){ setMissing(ids,false); setMissing(missing.map(function(el){return el.id;}),true);
+      var s=document.getElementById('part1Summary'); s.textContent='Please fill in every cell before checking your work \u2014 '+missing.length+' field'+(missing.length===1?'':'s')+' left blank.'; s.classList.remove('good'); s.classList.add('bad'); missing[0].focus(); return; }
+    setMissing(ids, false);
+    var d = currentScenario;
+    var results = [];
+    d.items.forEach(function(it){
+      results.push(markMoney('p1-'+it.letter+'-ceil', it.ceiling, 0.02));
+      results.push(markMoney('p1-'+it.letter+'-floor', it.floor, 0.02));
+      results.push(markMoney('p1-'+it.letter+'-mkt', it.market, 0.02));
+      results.push(markMoney('p1-'+it.letter+'-lcm', it.lcm, 1));
+    });
+    results.push(markMoney('p1-endinv', d.endInvIndividual, 2));
+    scoreState.part1 = updateSummary('part1Summary', results, PART1_POSSIBLE);
+    updateOverallScore(); registerCheckAttempt('part1', ids, 'checkPart1');
+  });
+
+  document.getElementById('checkPart2').addEventListener('click', function(){
+    if(!currentScenario || locked.part2) return;
+    var missing = findMissing(PART2_REQUIRED_IDS);
+    if(missing.length){ setMissing(PART2_REQUIRED_IDS,false); setMissing(missing.map(function(el){return el.id;}),true);
+      var s=document.getElementById('part2Summary'); s.textContent='Please fill in every cell before checking your work \u2014 '+missing.length+' field'+(missing.length===1?'':'s')+' left blank.'; s.classList.remove('good'); s.classList.add('bad'); missing[0].focus(); return; }
+    setMissing(PART2_REQUIRED_IDS, false);
+    var d = currentScenario;
+    var results = [
+      markMoney('p2-endinvtotal', d.endInvTotal, 2),
+      markMoney('p2-writedown', d.writeDown, 2),
+      markSelect('p2-je1-account', 'Cost of Goods Sold'),
+      markSelect('p2-je2-account', 'Inventory'),
+      markMoney('p2-je1-debit', d.writeDown, 2),
+      markMoney('p2-je2-credit', d.writeDown, 2)
+    ];
+    scoreState.part2 = updateSummary('part2Summary', results, PART2_POSSIBLE);
+    updateOverallScore(); registerCheckAttempt('part2', PART2_REQUIRED_IDS, 'checkPart2');
+  });
+
+  // ---------------- Print ----------------
+  function val(id){ var el=document.getElementById(id); return el?el.value.trim():''; }
+  document.getElementById('printBtn').addEventListener('click', triggerPrint);
+  function triggerPrint(){
+    var name=val('studentName'); var id=val('studentId');
+    document.getElementById('printNameLine').textContent='Name: '+(name||'_______________________')+'     Student ID: '+(id||'_______________________');
+    var scoreText=document.getElementById('overallScore').textContent; var breakdownText=document.getElementById('scoreBreakdown').textContent;
+    document.getElementById('printScoreLine').textContent='Score: '+scoreText+(breakdownText?'  ('+breakdownText+')':'');
+    var oldTitle=document.title; document.title='WesserCreek-LCM-'+(id||'submission'); window.print(); document.title=oldTitle;
+  }
+
+  // ---------------- Download as Word (.docx) ----------------
+  var docxLoadPromise = null;
+  function loadDocxLib(){
+    if(window.docx) return Promise.resolve();
+    if(docxLoadPromise) return docxLoadPromise;
+    docxLoadPromise = new Promise(function(resolve, reject){
+      var s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js';
+      s.onload = function(){ window.docx ? resolve() : reject(new Error('docx library did not load correctly')); };
+      s.onerror = function(){ reject(new Error('network error loading docx library')); };
+      document.head.appendChild(s);
+    });
+    return docxLoadPromise;
+  }
+  function blankIfEmpty(s){ return s && s.length ? s : '\u2014'; }
+  function buildAnswersDoc(){
+    var D = window.docx; var PURPLE='592C88', INK='221B2E', SLATE='5F5A6B';
+    var name = blankIfEmpty(val('studentName')); var sid = blankIfEmpty(val('studentId'));
+    function h(text){ return new D.Paragraph({spacing:{before:200,after:100}, children:[new D.TextRun({text:text,bold:true,color:PURPLE,size:26})]}); }
+    function p(text,opts){ opts=opts||{}; return new D.Paragraph({spacing:{before:60,after:60}, children:[new D.TextRun({text:text,size:20,color:opts.color||INK,bold:!!opts.bold})]}); }
+    function cell(text,width,opts){ opts=opts||{}; return new D.TableCell({width:{size:width,type:D.WidthType.DXA}, shading:opts.shading?{type:D.ShadingType.CLEAR,fill:opts.shading}:undefined, margins:{top:60,bottom:60,left:90,right:90}, children:[new D.Paragraph({children:[new D.TextRun({text:text,size:19,bold:!!opts.bold,color:opts.color||INK})]})]}); }
+    function row(cells){ return new D.TableRow({children:cells}); }
+    function table(widths, rows){ return new D.Table({width:{size:widths.reduce(function(a,b){return a+b;},0),type:D.WidthType.DXA}, columnWidths:widths, rows:rows}); }
+    var COLS = [5148,4102];
+    var children = [];
+    children.push(new D.Paragraph({heading:D.HeadingLevel.TITLE, spacing:{after:60}, children:[new D.TextRun({text:'Wesser Creek Supply \u2014 Lower of Cost or Market', color:PURPLE, size:32, bold:true})]}));
+    children.push(p('Name: '+name+'     Student ID: '+sid, {bold:true}));
+    children.push(p('ACCT 351  \u00b7  Inventory Measurement', {color:SLATE}));
+    var scoreText=(document.getElementById('overallScore')||{}).textContent||'';
+    var breakdownText=(document.getElementById('scoreBreakdown')||{}).textContent||'';
+    children.push(new D.Paragraph({spacing:{before:200,after:60}, border:{top:{style:D.BorderStyle.SINGLE,size:6,color:PURPLE},bottom:{style:D.BorderStyle.SINGLE,size:6,color:PURPLE}}, children:[new D.TextRun({text:'Assignment score', bold:true, color:PURPLE, size:24})]}));
+    children.push(new D.Paragraph({spacing:{before:40,after:20}, children:[new D.TextRun({text:scoreText, bold:true, color:INK, size:24})]}));
+    if(breakdownText) children.push(new D.Paragraph({spacing:{after:100}, children:[new D.TextRun({text:breakdownText, color:SLATE, size:18})]}));
+    document.querySelectorAll('.part').forEach(function(partEl){
+      var labelEl=partEl.querySelector('.part-label'); var h2El=partEl.querySelector('h2');
+      var heading=(labelEl?labelEl.textContent+' \u2014 ':'')+(h2El?h2El.textContent:'');
+      children.push(h(heading));
+      var rows=[row([cell('Item',COLS[0],{bold:true,shading:PURPLE,color:'FFFFFF'}), cell('Your answer',COLS[1],{bold:true,shading:PURPLE,color:'FFFFFF'})])];
+      partEl.querySelectorAll('input[type="text"], select').forEach(function(field){
+        var lbl = field.getAttribute('data-label') || field.id;
+        var v;
+        if(field.tagName==='SELECT'){ var opt=field.options[field.selectedIndex]; v = opt?opt.textContent:''; }
+        else { v = field.value; }
+        rows.push(row([cell(lbl,COLS[0]), cell(blankIfEmpty(v),COLS[1])]));
+      });
+      children.push(table(COLS, rows));
+    });
+    children.push(new D.Paragraph({spacing:{before:300}, alignment:D.AlignmentType.CENTER, children:[new D.TextRun({text:'Wesser Creek Supply \u00b7 ACCT 351 \u00b7 Western Carolina University', size:16, italics:true, color:SLATE})]}));
+    return new D.Document({sections:[{properties:{page:{size:{width:12240,height:15840}, margin:{top:1440,bottom:1440,left:1440,right:1440}}}, children:children}]});
+  }
+  document.getElementById('downloadDocxBtn').addEventListener('click', function(){
+    var statusEl=document.getElementById('submitStatus'); statusEl.classList.remove('error'); statusEl.textContent='Preparing your Word document\u2026';
+    loadDocxLib().then(function(){ var doc=buildAnswersDoc(); return window.docx.Packer.toBlob(doc); }).then(function(blob){
+      var idPart=val('studentId')||'submission'; var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='WesserCreek-LCM-'+idPart+'.docx';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      statusEl.textContent='Downloaded.'; setTimeout(function(){ statusEl.textContent=''; }, 4000);
+    }).catch(function(){ statusEl.classList.add('error'); statusEl.textContent='Could not load the Word export tool (needs internet access) \u2014 use Print / Save as PDF instead.'; });
+  });
+
+  populateCoaSelects();
+  applyAndStore('');
+})();
+</script>
+
+</body>
+</html>
