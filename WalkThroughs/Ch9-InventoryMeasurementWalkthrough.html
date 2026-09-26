@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Measuring and Estimating Inventory — Guided Walkthrough</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+  :root {
+    --wcu-purple: #4B2E83; --wcu-purple-dark: #341f5c; --wcu-gold: #C8A24A;
+    --ink: #232023; --paper: #fdfcfb; --panel: #f7f3ec; --rule: #e2d9c8;
+    --good: #2E6B45; --good-bg: #E7F3EB; --bad: #9C4221; --bad-bg: #FBEAE2; --warn: #8a6d1a; --warn-bg: #FBF3DC;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; line-height: 1.55; }
+  header { background: linear-gradient(135deg, var(--wcu-purple) 0%, var(--wcu-purple-dark) 100%); color: #fff; padding: 2.2rem 1.5rem 1.8rem; border-bottom: 6px solid var(--wcu-gold); }
+  header .eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--wcu-gold); margin-bottom: 0.4rem; }
+  header h1 { font-family: 'Source Serif 4', serif; font-weight: 700; font-size: 1.9rem; margin: 0 0 0.3rem; }
+  header p.sub { margin: 0; color: #e7e0f2; font-size: 0.98rem; }
+  .progress-bar { max-width: 780px; margin: 0 auto; padding: 0.8rem 1.5rem 0; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .progress-track { flex: 1; height: 8px; background: var(--rule); border-radius: 4px; overflow: hidden; }
+  .progress-fill { height: 100%; width: 0%; background: var(--wcu-gold); transition: width 0.3s ease; }
+  .progress-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: #6b6560; white-space: nowrap; }
+  main { max-width: 780px; margin: 0 auto; padding: 1.2rem 1.5rem 4rem; }
+  .lo-block { margin-bottom: 2.8rem; }
+  .lo-tag { display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.05em; color: #fff; background: var(--wcu-purple); padding: 0.25rem 0.6rem; border-radius: 3px; margin-bottom: 0.6rem; }
+  h2 { font-family: 'Source Serif 4', serif; font-size: 1.5rem; margin: 0 0 0.8rem; color: var(--wcu-purple-dark); border-bottom: 2px solid var(--rule); padding-bottom: 0.4rem; }
+  p { margin: 0.6rem 0; }
+  .key-idea { background: var(--panel); border-left: 4px solid var(--wcu-gold); padding: 0.9rem 1.1rem; border-radius: 0 6px 6px 0; margin: 0.9rem 0; }
+  .example { background: #fff; border: 1px solid var(--rule); border-radius: 8px; padding: 1rem 1.2rem 1.2rem; margin: 1.1rem 0; }
+  .example .ex-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--wcu-purple); margin-bottom: 0.4rem; }
+  .example table.mini { border-collapse: collapse; width: 100%; margin: 0.6rem 0; font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem; }
+  .example table.mini th, .example table.mini td { border: 1px solid var(--rule); padding: 0.35rem 0.55rem; text-align: right; }
+  .example table.mini th:first-child, .example table.mini td:first-child { text-align: left; }
+  .example table.mini th { background: var(--panel); color: var(--wcu-purple-dark); }
+  .input-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem; margin: 0.9rem 0 0.6rem; padding: 0.8rem; background: var(--panel); border-radius: 6px; }
+  .input-row label { font-size: 0.9rem; font-weight: 600; color: var(--wcu-purple-dark); white-space: nowrap; }
+  .input-row input[type="number"] { font-family: 'IBM Plex Mono', monospace; font-size: 0.95rem; padding: 0.45rem 0.6rem; border: 1px solid var(--rule); border-radius: 5px; width: 150px; background: #fff; color: var(--ink); }
+  .input-row input[type="number"]:focus { outline: none; border-color: var(--wcu-purple); box-shadow: 0 0 0 3px rgba(75,46,131,0.12); }
+  .input-row button { font-family: 'Inter', sans-serif; font-size: 0.88rem; font-weight: 600; color: #fff; background: var(--wcu-purple); border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; }
+  .input-row button:hover { background: var(--wcu-purple-dark); }
+  .feedback { display: none; font-weight: 600; padding: 0.6rem 0.9rem; border-radius: 6px; margin: 0.4rem 0 0.2rem; font-size: 0.92rem; }
+  .feedback.good { display: block; color: var(--good); background: var(--good-bg); }
+  .feedback.bad { display: block; color: var(--bad); background: var(--bad-bg); }
+  .feedback.warn { display: block; color: var(--warn); background: var(--warn-bg); }
+  .solution { margin-top: 0.7rem; padding-top: 0.8rem; border-top: 1px dashed var(--rule); }
+  .solution-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--wcu-purple); margin-bottom: 0.5rem; }
+  .final-answer { font-size: 1rem; margin-top: 0.5rem; }
+  .final-answer strong { color: var(--wcu-purple-dark); font-size: 1.05rem; }
+  .je { font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; padding: 0.7rem 0.9rem; margin: 0.4rem 0; }
+  .je .je-row { display: flex; justify-content: space-between; padding: 0.1rem 0; }
+  .je .je-cr { padding-left: 1.4rem; }
+  footer { text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; color: #8a8380; padding: 1.5rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Guided Walkthrough · Not Graded</div>
+  <h1>Measuring and Estimating Inventory</h1>
+  <p class="sub">Practice each calculation, then check yourself.</p>
+</header>
+
+<div class="progress-bar">
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-label" id="progressLabel">0 of 15 checked</div>
+</div>
+
+<main>
+
+  <div class="key-idea">
+    <strong>How this works:</strong> Work each problem out, type your answer, and click <strong>Check My Answer</strong>. You'll immediately see whether you're close, along with the full solution — right or wrong. This page isn't graded and doesn't get submitted anywhere; it's just for practice.
+  </div>
+
+  <!-- ============================== SECTION 1: LCNRV ============================== -->
+  <div class="lo-block">
+    <span class="lo-tag">Lower of Cost or Net Realizable Value</span>
+    <h2>LCNRV</h2>
+
+    <div class="example">
+      <div class="ex-label">Example 1 — Single Product</div>
+      <p>Sapphire Valley Outfitters carries a hiking tent in ending inventory. Cost is $24 per unit, selling price is $35 per unit, and estimated selling costs are $5 per unit. What unit value should Sapphire Valley use for this item when applying LCNRV?</p>
+      <div class="input-row">
+        <label for="ans-1-1">Your answer:</label><span>$</span>
+        <input type="number" step="0.01" id="ans-1-1" placeholder="0">
+        <button onclick="checkAnswer('1-1', 24)">Check My Answer</button>
+      </div>
+      <div class="feedback" id="fb-1-1"></div>
+      <div class="solution" id="sol-1-1" hidden>
+        <div class="solution-label">Solution</div>
+        <p>NRV = Selling price − Selling costs = $35 − $5 = $30.<br>
+        Cost ($24) is lower than NRV ($30), so no write-down is needed — the item is reported at its already-recorded cost.</p>
+        <p class="final-answer">LCNRV unit value = <strong>$24</strong></p>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="ex-label">Example 2 — Applying LCNRV at Different Levels of Aggregation</div>
+      <p>At the end of the fiscal year, December 31, <span class="yr"></span>, Sapphire Valley Outfitters has five products on hand. Products A and B are a collection of similar items (Category 1); products C, D, and E are another collection of similar items (Category 2):</p>
+      <table class="mini">
+        <tr><th>Product</th><th>Cost</th><th>NRV</th></tr>
+        <tr><td>A</td><td>$40,000</td><td>$68,000</td></tr>
+        <tr><td>B</td><td>80,000</td><td>72,000</td></tr>
+        <tr><td>C</td><td>64,000</td><td>60,000</td></tr>
+        <tr><td>D</td><td>72,000</td><td>68,000</td></tr>
+        <tr><td>E</td><td>76,000</td><td>77,000</td></tr>
+      </table>
+
+      <p><strong>a) By individual items</strong> — what total amount should be reported for ending inventory?</p>
+      <div class="input-row">
+        <label for="ans-1-2a">Your answer:</label><span>$</span>
+        <input type="number" step="1" id="ans-1-2a" placeholder="0">
+        <button onclick="checkAnswer('1-2a', 316000)">Check My Answer</button>
+      </div>
+      <div class="feedback" id="fb-1-2a"></div>
+      <div class="solution" id="sol-1-2a" hidden>
+        <div class="solution-label">Solution</div>
+        <p>Take the lower of cost or NRV for each product, then sum:</p>
+        <table class="mini">
+          <tr><th>Product</th><th>Cost</th><th>NRV</th><th>Lower</th></tr>
+          <tr><td>A</td><td>$40,000</td><td>$68,000</td><td>$40,000</td></tr>
+          <tr><td>B</td><td>80,000</td><td>72,000</td><td>72,000</td></tr>
+          <tr><td>C</td><td>64,000</td><td>60,000</td><td>60,000</td></tr>
+          <tr><td>D</td><td>72,000</td><td>68,000</td><td>68,000</td></tr>
+          <tr><td>E</td><td>76,000</td><td>77,000</td><td>76,000</td></tr>
+          <tr><td><strong>Total</strong></td><td><strong>$332,000</strong></td><td><strong>$345,000</strong></td><td><strong>$316,000</strong></td></tr>
+        </table>
+        <p class="final-answer">Ending inventory (individual items) = <strong>$316,000</strong></p>
+      </div>
+
+      <p><strong>b) By major category</strong> — what total amount should be reported for ending inventory?</p>
+      <div class="input-row">
+        <label for="ans-1-2b">Your answer:</label><span>$</span>
+        <input type="number" step="1" id="ans-1-2b" placeholder="0">
+        <button onclick="checkAnswer('1-2b', 325000)">Check My Answer</button>
+      </div>
+      <div class="feedback" id="fb-1-2b"></div>
+      <div class="solution" id="sol-1-2b" hidden>
+        <div class="solution-label">Solution</div>
+        <p>Combine cost and NRV within each category first, then take the lower of the two combined amounts:</p>
+        <table class="mini">
+          <tr><th>Category</th><th>Cost</th><th>NRV</th><th>Lower</th></tr>
+          <tr><td>1 (A + B)</td><td>$120,000</td><td>$140,000</td><td>$120,000</td></tr>
+          <tr><td>2 (C + D + E)</td><td>212,000</td><td>205,000</td><td>205,000</td></tr>
+          <tr><td><strong>Total</strong></td><td><strong>$332,000</strong></td><td><strong>$345,000</strong></td><td><strong>$325,000</strong></td></tr>
+        </table>
+        <p>Category 1's combined cost ($120,000) is lower than its combined NRV ($140,000), so it's reported at cost. Category 2's combined NRV ($205,000) is lower than its combined cost ($212,000), so it's reported at NRV.</p>
+        <p class="final-answer">Ending inventory (by category) = <strong>$325,000</strong></p>
+      </div>
+
+      <p><strong>c) By total inventory</strong> — what total amount should be reported for ending inventory?</p>
+      <div class="input-row">
+        <label for="ans-1-2c">Your answer:</label><span>$</span>
+        <input type="number" step="1" id="ans-1-2c" placeholder="0">
+        <button onclick="checkAnswer('1-2c', 332000)">Check My Answer</button>
+      </div>
+      <div class="feedback" id="fb-1-2c"></div>
+      <div class="solution" id="sol-1-2c" hidden>
+        <div class="solution-label">Solution</div>
+        <p>Total cost = $332,000; total NRV = $345,000. Since total cost is lower, no write-down is needed at all.</p>
+        <p class="final-answer">Ending inventory (total inventory) = <strong>$332,000</strong></p>
+        <div class="key-idea">
+          Notice the pattern: $316,000 (individual) &lt; $325,000 (category) &lt; $332,000 (total). Grouping items together always lets increases in some items offset decreases in others, so a broader level of aggregation never produces a <em>lower</em> reported inventory value.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================== SECTION 2: LCM ============================== -->
+  <div class="lo-block">
+    <span class="lo-tag">Lower of Cost or Market</span>
+    <h2>LCM (Ceiling and Floor)</h2>
+
+    <div class="example">
+      <div class="ex-label">Example 1 — Replacement Cost Between the Ceiling and Floor</div>
+      <p>Balsam Ridge Distributors uses LIFO and reports inventory at LCM. One product has a year-end selling price of $96,000, estimated selling costs of $12,000, and a normal profit margin of 20% of selling price. Replacement cost is $70,000, and recorded cost is $65,000. What amount should Balsam Ridge report for this item?</p>
+      <div class="input-row">
+        <label for="ans-2-1">Your answer:</label><span>$</span>
+        <input type="number" step="1" id="ans-2-1" placeholder="0">
+        <button onclick="checkAnswer('2-1', 65000)">Check My Answer</button>
+      </div>
+      <div class="feedback" id="fb-2-1"></div>
+      <div class="solution" id="sol-2-1" hidden>
+        <div class="solution-label">Solution</div>
+        <p>Ceiling (NRV) = $96,000 − $12,000 = $84,000.<br>
+        Normal profit = $96,000 × 20% = $19,200.<br>
+        Floor (NRV − normal profit) = $84,000 − $19,200 = $64,800.<br>
+        Replacement cost ($70,000) falls between the floor and the ceiling, so market = replacement cost = $70,000.<br>
+        Compare market ($70,000) to cost ($65,000) — cost is lower.</p>
+        <p class="final-answer">LCM value = <strong>$65,000</strong></p>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="ex-label">Example 2 — Replacement Cost Above the Ceiling</div>
+      <p>A second product at Balsam Ridge has a selling price of $50,000, estimated selling costs of $5,000, and a normal profit margin of 25% of selling price. Replacement cost is $54,000, and recorded cost is $40,000. What amount should Balsam Ridge report for this item?</p>
+      <div class="input-row">
+        <label for="ans-2-2">Your answer:</label><span>$</span>
+        <input type="number" step="1" id="ans-2-2" placeholder="0">
+        <button onclick="checkAnswer('2-2', 40000)">Check My Answer</button>
+      </div>
+      <div class="feedback" id="fb-2-2"></div>
+      <div class="solution" id="sol-2-2" hidden>
+        <div class="solution-label">Solution</div>
+        <p>Ceiling (NRV) = $50,000 − $5,000 = $45,000.<br>
+        Normal profit = $50,000 × 25% = $12,500.<br>
+        Floor = $45,000 − $12,500 = $32,500.<br>
+        Replacement cost ($54,000) is above the ceiling, so market = the ceiling = $45,000.<br>
+        Compare market ($45,000) to cost ($40,000) — cost is lower.</p>
+        <p class="final-answer">LCM value = <strong>$40,000</strong></p>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="ex-label">Example 3 — Applying LCM at Different Levels of Aggregation</div>
+      <p>Balsam Ridge Distributors has five products on hand at year-end. For each, market (replacement cost, already bounded by its ceiling and floor as in Examples 1 and 2) has been determined below. Products A and B are a collection of similar items (Category 1); products C, D, and E are another collection of similar items (Category 2):</p>
+      <table class="mini">
+        <tr><th>Product</th><th>Cost</th><th>Market</th></tr>
+        <tr><td>A</td><td>$45,000</td><td>$58,000</td></tr>
+        <tr><td>B</td><td>90,000</td><td>80,000</td></tr>
+        <tr><td>C</td><td>72,000</td><td>64,000</td></tr>
+        <tr><td>D</td><td>80,000</td><td>76,000</td></tr>
+        <tr><td>E</td><td>85,000</td><td>92,000</td></tr>
+      </table>
+
+      <p><strong>a) By individual items</strong> — what total amount should be reported for ending inventory?</p>
+      <div class="input-row">
+        <label for="ans-2-3a">Your answer:</label><span>$</span>
+        <input type="number" step="1" id="ans-2-3a" placeholder="0">
+        <button onclick="checkAnswer('2-3a', 350000)">Check My Answer</button>
+      </div>
+      <div class="feedback" id="fb-2-3a"></div>
+      <div class="solution" id="sol-2-3a" hidden>
+        <div class="solution-label">Solution</div>
+        <table class="mini">
+          <tr><th>Product</th><th>Cost</th><th>Market</th><th>Lower</th></tr>
+          <tr><td>A</td><td>$45,000</td><td>$58,000</td><td>$45,000</td></tr>
+          <tr><td>B</td><td>90,000</td><td>80,000</td><td>80,000</td></tr>
+          <tr><td>C</td><td>72,000</td><td>64,000</td><td>64,000</td></tr>
+          <tr><td>D</td><td>80,000</td><td>76,000</td><td>76,000</td></tr>
+          <tr><td>E</td><td>85,000</td><td>92,000</td><td>85,000</td></tr>
+          <tr><td><strong>Total</strong></td><td><strong>$372,000</strong></td><td><strong>$370,000</strong></td><td><strong>$350,000</strong></td></tr>
+        </table>
+        <p class="final-answer">Ending inventory (individual items) = <strong>$350,000</strong></p>
+      </div>
+
+      <p><strong>b) By major category</strong> — what total amount should be reported for ending inventory?</p>
+      <div class="input-row">
+        <label for="ans-2-3b">Your answer:</label><span>$</span>
+        <input type="number" step="1" id="ans-2-3b" placeholder="0">
+        <button onclick="checkAnswer('2-3b', 367000)">Check My Answer</button>
+      </div>
+      <div class="feedback" id="fb-2-3b"></div>
+      <div class="solution" id="sol-2-3b" hidden>
+        <div class="solution-label">Solution</div>
+        <table class="mini">
+          <tr><th>Category</th><th>Cost</th><th>Market</th><th>Lower</th></tr>
+          <tr><td>1 (A + B)</td><td>$135,000</td><td>$138,000</td><td>$135,000</td></tr>
+          <tr><td>2 (C + D + E)</td><td>237,000</td><td>232,000</td><td>232,000</td></tr>
+          <tr><td><strong>Total</strong></td><td><strong>$372,000</strong></td><td><strong>$370,000</strong></td><td><strong>$367,000</strong></td></tr>
+        </table>
+        <p>Category 1's combined cost ($135,000) is lower than its combined market ($138,000), so it's reported at cost. Category 2's combined market ($232,000) is lower than its combined cost ($237,000), so it's reported at market.</p>
+        <p class="final-answer">Ending inventory (by category) = <strong>$367,000</strong></p>
+      </div>
+
+      <p><strong>c) By total inventory</strong> — what total amount should be reported for ending inventory?</p>
+      <div class="input-row">
+        <label for="ans-2-3c">Your answer:</label><span>$</span>
+        <input type="number" step="1" id="ans-2-3c" placeholder="0">
+        <button onclick="checkAnswer('2-3c', 370000)">Check My Answer</button>
+      </div>
+      <div class="feedback" id="fb-2-3c"></div>
+      <div class="solution" id="sol-2-3c" hidden>
+        <div class="solution-label">Solution</div>
+        <p>Total cost = $372,000; total market = $370,000. Since total market is lower, the entire inventory is written down to market at the total level.</p>
+        <p class="final-answer">Ending inventory (total inventory) = <strong>$370,000</strong></p>
+        <div class="key-idea">
+          Same pattern as LCNRV: $350,000 (individual) &lt; $367,000 (category) &lt; $370,000 (total). The broader the grouping, the more increases in some items can offset decreases in others, so reported inventory rises (or at least never falls) as the level of aggregation widens.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================== SECTION 3: GROSS PROFIT METHOD ============================== -->
+  <div class="lo-block">
+    <span class="lo-tag">Estimating Inventory</span>
+    <h2>The Gross Profit Method</h2>
+
+    <div class="example">
+      <div class="ex-label">Example 1 — Estimating a Loss</div>
+      <p>On March 14, <span class="yr"></span>, a fire destroyed the entire inventory in a warehouse owned by Maggie Valley Mercantile. The company's periodic accounting records show beginning inventory of $84,000, net purchases of $210,000, and net sales of $360,000 through the date of the fire. The gross profit ratio has averaged 35% over the past three years. Estimate the cost of the inventory destroyed.</p>
+      <div class="input-row">
+        <label for="ans-3-1">Your answer:</label><span>$</span>
+        <input type="number" step="1" id="ans-3-1" placeholder="0">
+        <button onclick="checkAnswer('3-1', 60000)">Check My Answer</button>
+      </div>
+      <div class="feedback" id="fb-3-1"></div>
+      <div class="solution" id="sol-3-1" hidden>
+        <div class="solution-label">Solution</div>
+        <p>Goods available for sale = $84,000 + $210,000 = $294,000.<br>
+        Estimated COGS = $360,000 × (1 − 0.35) = $234,000.<br>
+        Estimated ending inventory (destroyed) = $294,000 − $234,000 = <strong>$60,000</strong></p>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="ex-label">Example 2 — Solving for the Gross Profit Ratio</div>
+      <p>Cashiers Creek Supply estimates that $60,000 of inventory was lost in a flood in <span class="yr"></span>. Its periodic records show beginning inventory of $70,000, net purchases of $200,000, and net sales of $300,000 for the period. What is the company's gross profit ratio? (Enter as a percentage, e.g., enter 35 for 35%.)</p>
+      <div class="input-row">
+        <label for="ans-3-2">Your answer:</label>
+        <input type="number" step="0.1" id="ans-3-2" placeholder="0"><span>%</span>
+        <button onclick="checkAnswer('3-2', 30)">Check My Answer</button>
+      </div>
+      <div class="feedback" id="fb-3-2"></div>
+      <div class="solution" id="sol-3-2" hidden>
+        <div class="solution-label">Solution</div>
+        <p>Goods available for sale = $70,000 + $200,000 = $270,000.<br>
+        Estimated COGS = Goods available − Ending inventory (lost) = $270,000 − $60,000 = $210,000.<br>
+        Estimated gross profit = Sales − COGS = $300,000 − $210,000 = $90,000.<br>
+        Gross profit ratio = $90,000 ÷ $300,000 = <strong>30%</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================== SECTION 4: RETAIL METHOD — AVERAGE COST ============================== -->
+  <div class="lo-block">
+    <span class="lo-tag">Retail Inventory Method</span>
+    <h2>Approximating Average Cost</h2>
+    <p>Dillsboro Dry Goods uses a periodic inventory system and the retail inventory method. The following data are available for the month of October, <span class="yr"></span>:</p>
+    <table class="mini">
+      <tr><th></th><th>Cost</th><th>Retail</th></tr>
+      <tr><td>Beginning inventory</td><td>$84,000</td><td>$140,000</td></tr>
+      <tr><td>Net purchases</td><td>258,240</td><td>410,000</td></tr>
+      <tr><td>Net markups</td><td></td><td>8,000</td></tr>
+      <tr><td>Net markdowns</td><td></td><td>6,000</td></tr>
+      <tr><td>Net sales</td><td></td><td>378,000</td></tr>
+    </table>
+
+    <div class="example">
+      <div class="ex-label">Example 1 — Cost-to-Retail Percentage</div>
+      <p>Using the <strong>average cost</strong> approach (net markups and net markdowns both included when calculating the percentage), what is the cost-to-retail percentage? (Enter as a percentage, e.g., enter 55 for 55%.)</p>
+      <div class="input-row">
+        <label for="ans-4-1">Your answer:</label>
+        <input type="number" step="0.01" id="ans-4-1" placeholder="0"><span>%</span>
+        <button onclick="checkAnswer('4-1', 62)">Check My Answer</button>
+      </div>
+      <div class="feedback" id="fb-4-1"></div>
+      <div class="solution" id="sol-4-1" hidden>
+        <div class="solution-label">Solution</div>
+        <p>Goods available at cost = $84,000 + $258,240 = $342,240.<br>
+        Goods available at retail = $140,000 + $410,000 + $8,000 − $6,000 = $552,000.<br>
+        Cost-to-retail % = $342,240 ÷ $552,000 = <strong>62%</strong></p>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="ex-label">Example 2 — Estimated Ending Inventory at Cost</div>
+      <p>Using the 62% cost-to-retail percentage from Example 1, what is the estimated ending inventory at cost?</p>
+      <div class="input-row">
+        <label for="ans-4-2">Your answer:</label><span>$</span>
+        <input type="number" step="1" id="ans-4-2" placeholder="0">
+        <button onclick="checkAnswer('4-2', 107880)">Check My Answer</button>
+      </div>
+      <div class="feedback" id="fb-4-2"></div>
+      <div class="solution" id="sol-4-2" hidden>
+        <div class="solution-label">Solution</div>
+        <p>Ending inventory at retail = $552,000 (goods available at retail) − $378,000 (net sales) = $174,000.<br>
+        Ending inventory at cost = $174,000 × 62% = <strong>$107,880</strong><br>
+        (Estimated cost of goods sold = $342,240 − $107,880 = $234,360.)</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================== SECTION 5: RETAIL METHOD — CONVENTIONAL ============================== -->
+  <div class="lo-block">
+    <span class="lo-tag">Retail Inventory Method</span>
+    <h2>The Conventional Method (Approximating Lower of Average Cost or Market)</h2>
+    <p>Using the <em>same</em> October data for Dillsboro Dry Goods, now apply the <strong>conventional retail method</strong>, which excludes net markdowns from the cost-to-retail percentage calculation (markdowns are subtracted only after the percentage is calculated).</p>
+
+    <div class="example">
+      <div class="ex-label">Example 1 — Conventional Cost-to-Retail Percentage</div>
+      <p>What is the cost-to-retail percentage under the conventional method? (Enter as a percentage, rounded to two decimals — e.g., enter 55.25 for 55.25%.)</p>
+      <div class="input-row">
+        <label for="ans-5-1">Your answer:</label>
+        <input type="number" step="0.01" id="ans-5-1" placeholder="0"><span>%</span>
+        <button onclick="checkAnswer('5-1', 61.33)">Check My Answer</button>
+      </div>
+      <div class="feedback" id="fb-5-1"></div>
+      <div class="solution" id="sol-5-1" hidden>
+        <div class="solution-label">Solution</div>
+        <p>Goods available at cost (unchanged) = $342,240.<br>
+        Goods available at retail, <em>excluding</em> net markdowns = $140,000 + $410,000 + $8,000 = $558,000.<br>
+        Cost-to-retail % = $342,240 ÷ $558,000 = <strong>61.33%</strong> (rounded)<br>
+        Notice this is lower than the 62% average-cost percentage from the previous section — excluding markdowns from the denominator always produces a lower (more conservative) percentage whenever markdowns exist.</p>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="ex-label">Example 2 — Estimated Cost of Goods Sold</div>
+      <p>Now subtract net markdowns and net sales to find ending inventory at retail, then apply the 61.33% conventional percentage. What is the estimated cost of goods sold for October?</p>
+      <div class="input-row">
+        <label for="ans-5-2">Your answer:</label><span>$</span>
+        <input type="number" step="1" id="ans-5-2" placeholder="0">
+        <button onclick="checkAnswer('5-2', 235520)">Check My Answer</button>
+      </div>
+      <div class="feedback" id="fb-5-2"></div>
+      <div class="solution" id="sol-5-2" hidden>
+        <div class="solution-label">Solution</div>
+        <p>Goods available at retail (including markdowns) = $558,000 − $6,000 = $552,000.<br>
+        Ending inventory at retail = $552,000 − $378,000 (net sales) = $174,000 — the same retail-value figure as the average cost method; only the percentage applied to it changes.<br>
+        Ending inventory at cost = $174,000 × 61.33% ≈ $106,720.<br>
+        Estimated cost of goods sold = $342,240 − $106,720 = <strong>$235,520</strong></p>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>Measuring and Estimating Inventory · Guided Walkthrough (Ungraded)</footer>
+
+<script>
+  var CHECKED = {};
+  var TOTAL = 15;
+  function updateProgress() {
+    var count = Object.keys(CHECKED).length;
+    document.getElementById('progressLabel').textContent = count + ' of ' + TOTAL + ' checked';
+    document.getElementById('progressFill').style.width = (count / TOTAL * 100) + '%';
+  }
+  function checkAnswer(id, correct) {
+    var input = document.getElementById('ans-' + id);
+    var fb = document.getElementById('fb-' + id);
+    var sol = document.getElementById('sol-' + id);
+    var val = parseFloat(input.value);
+    if (isNaN(val)) {
+      fb.className = 'feedback warn';
+      fb.textContent = 'Enter a number first, then click Check My Answer.';
+      fb.style.display = 'block';
+      return;
+    }
+    var tolerance = Math.max(1, Math.abs(correct) * 0.005);
+    var diff = Math.abs(val - correct);
+    if (diff <= tolerance) {
+      fb.className = 'feedback good';
+      fb.textContent = '\u2713 Correct! Here\'s the full solution for reference:';
+    } else {
+      fb.className = 'feedback bad';
+      fb.textContent = 'Not quite \u2014 here\'s the full solution. Compare it to your work to see where things diverged:';
+    }
+    fb.style.display = 'block';
+    sol.hidden = false;
+    CHECKED[id] = true;
+    updateProgress();
+  }
+
+  // Auto-update any year references so this page never goes stale
+  (function () {
+    var currentYear = new Date().getFullYear();
+    var yearSpans = document.querySelectorAll('.yr');
+    for (var i = 0; i < yearSpans.length; i++) {
+      yearSpans[i].textContent = currentYear;
+    }
+  })();
+</script>
+
+</body>
+</html>
