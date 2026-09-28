@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lease Classification &amp; Finance/Sales-Type Leases — Reading Notes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --wcu-purple: #4B2E83;
+    --wcu-purple-dark: #341f5c;
+    --wcu-gold: #C8A24A;
+    --gold-light: #f4ecd8;
+    --ink: #232023;
+    --paper: #fdfcfb;
+    --panel: #f7f3ec;
+    --rule: #e2d9c8;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.55;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--wcu-purple) 0%, var(--wcu-purple-dark) 100%);
+    color: #fff;
+    padding: 2.2rem 1.5rem 1.8rem;
+    border-bottom: 6px solid var(--wcu-gold);
+  }
+  header .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--wcu-gold);
+    margin-bottom: 0.4rem;
+  }
+  header h1 {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 700;
+    font-size: 1.9rem;
+    margin: 0 0 0.3rem;
+  }
+  header p.sub { margin: 0; color: #e7e0f2; font-size: 0.98rem; }
+
+  main { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  .lo-block { margin-bottom: 2.8rem; }
+
+  h2 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.5rem;
+    margin: 0 0 0.8rem;
+    color: var(--wcu-purple-dark);
+    border-bottom: 2px solid var(--rule);
+    padding-bottom: 0.4rem;
+  }
+  h3 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.1rem;
+    margin: 1.4rem 0 0.5rem;
+    color: var(--wcu-purple-dark);
+  }
+
+  p { margin: 0.6rem 0; }
+  ul, ol { padding-left: 1.4rem; }
+  li { margin-bottom: 0.4rem; }
+
+  .key-idea {
+    background: var(--panel);
+    border-left: 4px solid var(--wcu-gold);
+    padding: 0.9rem 1.1rem;
+    border-radius: 0 6px 6px 0;
+    margin: 0.9rem 0;
+  }
+  .key-idea strong { color: var(--wcu-purple-dark); }
+
+  .formula {
+    font-family: 'IBM Plex Mono', monospace;
+    background: var(--wcu-purple-dark);
+    color: var(--gold-light);
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin: 0.8rem 0;
+    font-size: 0.92rem;
+    overflow-x: auto;
+  }
+
+  .example {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin: 0.9rem 0;
+  }
+  .example .ex-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--wcu-purple);
+    margin-bottom: 0.4rem;
+  }
+
+  .patterns {
+    background: var(--gold-light);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin: 0.8rem 0;
+  }
+  .patterns p { margin: 0.35rem 0; }
+
+  table.mini-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.4rem 0 0.9rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+  }
+  table.mini-table th, table.mini-table td {
+    border: 1px solid var(--rule);
+    padding: 0.4rem 0.55rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.mini-table th {
+    background: var(--panel);
+    color: var(--wcu-purple-dark);
+    font-weight: 600;
+  }
+  table.mini-table td.num, table.mini-table th.num { text-align: right; }
+  table.mini-table tr.total-row td { background: var(--panel); font-weight: 700; }
+
+  table.je-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.5rem 0 0.3rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.84rem;
+  }
+  table.je-table td { padding: 0.28rem 0.3rem; vertical-align: top; }
+  table.je-table td.je-debit-amt, table.je-table td.je-credit-amt {
+    text-align: right;
+    width: 100px;
+    white-space: nowrap;
+  }
+  table.je-table td.indent { padding-left: 1.8rem; }
+  .je-desc {
+    font-size: 0.8rem;
+    color: #6b6560;
+    font-style: italic;
+    margin: 0 0 1rem;
+  }
+
+  .thread-label {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #fff;
+    background: var(--wcu-purple-dark);
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+  }
+
+  footer {
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: #8a8380;
+    padding: 1.5rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">ACCT 351 · Leases — Chapter 15</div>
+  <h1>Lease Classification &amp; Finance/Sales-Type Leases</h1>
+  <p class="sub">Reading Notes</p>
+</header>
+
+<main>
+
+  <div class="lo-block">
+    <h2>Why Companies Lease</h2>
+    <p>Leasing has become one of the most common ways for companies to obtain the use of an asset. Several operational, financial, and tax incentives explain why:</p>
+
+    <div class="patterns">
+      <p><strong>1. Less up-front cash.</strong> Buying an asset can trigger loan origination fees, closing costs, brokerage fees, and taxes. Many leases begin with nothing more than the first periodic payment. Newer or higher-credit-risk companies may find leasing is their <em>only</em> way to acquire an asset.</p>
+      <p><strong>2. Lower periodic payments.</strong> Installment payments are based on the asset's full fair value. Lease payments are often tied only to the portion of value expected to decline during the lease, and the lease period can be shorter than the asset's life.</p>
+      <p><strong>3. Flexibility and lower disposal cost.</strong> Returning a leased asset takes little effort or cost. Selling an owned asset can be difficult (thin markets for unique assets) and expensive (a real estate agent may charge up to 6%).</p>
+      <p><strong>4. Protection against declining asset values.</strong> The lessee avoids the risk that the asset's value falls, though it also gives up any increase in value.</p>
+      <p><strong>5. Possible tax advantages.</strong> A company with little taxable income gets little benefit from depreciation deductions. By letting the lessor keep ownership (and the deductions), the lessee can often negotiate lower lease payments.</p>
+    </div>
+  </div>
+
+  <div class="lo-block">
+    <h2>Classifying a Lease: Substance over Form</h2>
+
+    <p>How a lease is accounted for depends on whether it more naturally resembles <strong>the purchase of an asset with debt financing</strong> or a <strong>rental agreement</strong>. Sometimes that's obvious: a 10-year noncancelable lease of a computer with a 10-year life, with title passing to the lessee at the end, is clearly a purchase in disguise. A 10-day rental of the same computer is clearly a rental.</p>
+
+    <table class="mini-table">
+      <tr><th>Lessee</th><th>Lessor</th></tr>
+      <tr><td>Finance lease</td><td>Sales-type lease (without selling profit, or with selling profit)</td></tr>
+      <tr><td>Operating lease</td><td>Operating lease</td></tr>
+    </table>
+
+    <div class="key-idea">
+      <strong>Substance over form:</strong> from an accounting perspective, <em>legal ownership is irrelevant</em> to classification. The lease is classified by its economic substance, even when that conflicts with its legal form.
+    </div>
+
+    <p>A finance lease is not literally identical to buying the asset (a lessee can't sell a leased asset, for example). But it is economically similar to a purchase because its terms (a) normally let the lessee direct the use of the asset so that it receives substantially all of the remaining benefits, and (b) create obligations similar to those of financing a purchase. An operating lease lacks those characteristics.</p>
+
+    <p>Between the two extremes is a gray area: a lease that doesn't transfer title but covers six years of an 8-year life, or one where the present value of the payments is <em>nearly</em> equal to the asset's value. Because pure judgment leads to inconsistent practice, the FASB provides five criteria to guide the decision.</p>
+  </div>
+
+  <div class="lo-block">
+    <h2>The Five Classification Criteria</h2>
+    <p>A lease is a <strong>finance lease</strong> (a <strong>sales-type lease</strong> to the lessor) if <strong>one or more</strong> of these five criteria is met. If none is met, it's an operating lease.</p>
+
+    <table class="mini-table">
+      <tr><th style="width:6%;">#</th><th style="width:30%;">Criterion</th><th>Common guideline / what to remember</th></tr>
+      <tr><td>1</td><td>Ownership transfers to the lessee.</td><td>Self-evident: if title passes during or at the end of the lease, the ownership attributes have transferred.</td></tr>
+      <tr><td>2</td><td>Purchase option the lessee is reasonably certain to exercise.</td><td>Often called a <strong>bargain purchase option (BPO)</strong>. The exercise price is low enough, relative to expected fair value, that exercise is reasonably certain.</td></tr>
+      <tr><td>3</td><td>Lease term is for the "major part" of the asset's remaining economic life.</td><td>One reasonable approach: <strong>75% or more</strong> of the remaining economic life.</td></tr>
+      <tr><td>4</td><td>Present value of lease payments equals or exceeds "substantially all" of the asset's fair value.</td><td>One reasonable approach: <strong>90% or more</strong> of fair value.</td></tr>
+      <tr><td>5</td><td>Asset is so specialized it has no alternative use to the lessor at the end of the lease.</td><td>Only the lessee can derive the risks and rewards of ownership, and the lessor earns its return only through this lease.</td></tr>
+    </table>
+
+    <h3>Working through the details</h3>
+
+    <p><strong>Criterion 2 — a bargain purchase option.</strong> Suppose a food truck is leased for $18,000 per year for four years, with an option at the end to buy it for $6,000. If the truck is expected to be worth about $15,000 in four years, $6,000 is a bargain price, so exercise is reasonably certain and the criterion is met. The logic mirrors criterion 1: we expect title to transfer.</p>
+
+    <p><strong>Criterion 3 — the major part of economic life.</strong> The 75% figure is only <em>one</em> approach, not a precise indicator. Three implementation issues come up:</p>
+    <ul>
+      <li><strong>Uncertain lease term.</strong> If the lease has renewal options or can be canceled after a noncancelable period, you must judge whether a change in the term is <em>reasonably certain</em>. Periods covered by a renewal option are <strong>not</strong> included in the lease term if a bargain purchase option is present, because the term can't extend beyond the date a purchase option is exercised.</li>
+      <li><strong>Estimating economic life.</strong> Economic life is the remaining time the asset is expected to be economically usable with normal maintenance. It's an estimate, which creates room to arrive at a figure that keeps this criterion from being met.</li>
+      <li><strong>Leases near the end of an asset's life.</strong> If the lease begins at or near the end of the asset's economic life, criterion 3 is not used, because most of the risks and rewards of ownership occurred before then. (One reasonable approach treats the final 25% of economic life as "at or near the end.")</li>
+    </ul>
+
+    <p><strong>Criterion 4 — present value of payments.</strong> If the lease payments have a present value that represents substantially all of the asset's fair value, the lessee has effectively paid enough to have purchased it. The payments counted for classification are those the lessee is <em>required</em> to make in connection with the lease, including any residual value of the asset that the lessee guarantees (covered later in the chapter).</p>
+
+    <div class="key-idea">
+      <strong>Only one criterion has to be met.</strong> A lease that fails four of the five tests and passes one is still a finance/sales-type lease. To be an operating lease, a lease must fail <em>all five</em>.
+    </div>
+
+    <div class="patterns">
+      <p><strong>Why classification still matters.</strong> Before the current lease guidance, a lessee that could structure a lease as an operating lease kept both the asset and the liability off its balance sheet, helping it avoid limits in debt covenants (such as a maximum debt-to-equity ratio). Today, GAAP requires lessees to record an asset and a liability for all but short-term leases, and curtailing off-balance-sheet financing was the main reason for the change.</p>
+      <p>Managers are still motivated to structure leases as operating leases because of the more favorable income statement effects. Tactics such as making payments depend on some future event (variable payments aren't included in the lease liability) are common, so analysts should watch for them when comparing companies' profits.</p>
+    </div>
+  </div>
+
+  <div class="lo-block">
+    <h2>A Finance Lease Is Like an Installment Purchase</h2>
+    <p>You already know how to account for an installment note. A finance lease follows the same logic, because in substance it <em>is</em> an installment purchase. Compare two versions of the same deal: Trailhead Printing either buys a $245,866 digital press from Summit Machinery Corporation with a three-year installment note, or leases it under a three-year lease. Either way there are six semiannual payments of $50,000 at 12% annual interest (6% per period), with payments at the end of each period.</p>
+
+    <div class="thread-label">At the Beginning</div>
+    <table class="mini-table">
+      <tr><th style="width:50%;">Installment note</th><th>Finance lease</th></tr>
+      <tr><td>Machinery — 245,866<br>&nbsp;&nbsp;&nbsp;&nbsp;Notes payable — 245,866</td><td>Right-of-use asset — 245,866<br>&nbsp;&nbsp;&nbsp;&nbsp;Lease payable — 245,866</td></tr>
+    </table>
+
+    <div class="thread-label">At the First Semiannual Payment</div>
+    <table class="mini-table">
+      <tr><th style="width:50%;">Installment note</th><th>Finance lease</th></tr>
+      <tr><td>Interest expense (6% × $245,866) — 14,752<br>Notes payable (difference) — 35,248<br>&nbsp;&nbsp;&nbsp;&nbsp;Cash — 50,000</td><td>Interest expense (6% × $245,866) — 14,752<br>Lease payable (difference) — 35,248<br>&nbsp;&nbsp;&nbsp;&nbsp;Cash — 50,000</td></tr>
+    </table>
+
+    <div class="key-idea">
+      In both cases we debit an asset and credit a liability at the present value of the payments, and each payment is part interest (effective rate × outstanding balance) and part reduction of principal. The <strong>amortization schedule is identical</strong>: total payments of $300,000 = $245,866 for the press + $54,134 of interest. Only the account titles change.
+    </div>
+  </div>
+
+  <div class="lo-block">
+    <h2>Finance Lease / Sales-Type Lease: No Selling Profit</h2>
+
+    <div class="example">
+      <div class="ex-label">The running example — Balsam Ridge Bakery &amp; Mountain Trust Leasing</div>
+      <p>On January 1, Year 1, Balsam Ridge Bakery leases a commercial baking oven from Mountain Trust Leasing. Mountain Trust Leasing bought the equipment from Ridgeline Ovens Corporation for <strong>$360,376</strong>.</p>
+      <ul>
+        <li>Five annual payments of <strong>$85,000</strong>: the first on January 1 (the beginning of the lease), then on each December 31 for the next four years.</li>
+        <li>The five-year lease term equals the oven's estimated useful life.</li>
+        <li>Mountain Trust Leasing routinely acquires commercial kitchen equipment to lease to other food-service businesses.</li>
+        <li>The interest rate in these financing arrangements is 9%.</li>
+      </ul>
+    </div>
+
+    <p>This is more realistic than the Trailhead Printing example because the payments are made at the <strong>beginning</strong> of each period (an <em>annuity due</em>).</p>
+
+    <h3>Step 1 — Apply the five criteria</h3>
+    <table class="mini-table">
+      <tr><th style="width:6%;">#</th><th style="width:12%;">Met?</th><th>Reasoning</th></tr>
+      <tr><td>1</td><td>No</td><td>The agreement doesn't transfer ownership.</td></tr>
+      <tr><td>2</td><td>No</td><td>No purchase option.</td></tr>
+      <tr><td>3</td><td>Yes</td><td>5-year lease term = 5-year economic life.</td></tr>
+      <tr><td>4</td><td>Yes</td><td>Present value of payments ($360,376) = fair value ($360,376).</td></tr>
+      <tr><td>5</td><td>No</td><td>Mountain Trust Leasing routinely leases this type of equipment, so it has alternative uses.</td></tr>
+    </table>
+    <p>At least one criterion is met (two here), so this is a <strong>finance lease</strong> to Balsam Ridge and a <strong>sales-type lease</strong> to Mountain Trust Leasing.</p>
+
+    <h3>Step 2 — Measure the lease at the present value of the payments</h3>
+    <div class="formula">$85,000 × 4.23972* = $360,376</div>
+    <p style="font-size:0.85rem;color:#6b6560;">*Present value of an annuity due of $1: n = 5, i = 9%. Calculator: BEG mode, N = 5, I = 9, PMT = −85,000, solve for PV. Excel: =PV(.09,5,-85000,1).</p>
+    <p>The lessee records the right to use the equipment (an asset) and the obligation to pay (a liability), just as with an installment purchase. The lessor records a receivable and <strong>derecognizes</strong> the equipment. The lessor's entry is the flip side of the lessee's.</p>
+
+    <div class="thread-label">Beginning of the Lease</div>
+    <table class="je-table">
+      <tr><td><strong>Balsam Ridge (Lessee)</strong></td><td></td><td></td></tr>
+      <tr><td>Right-of-use asset (PV of lease payments)</td><td class="je-debit-amt">360,376</td><td></td></tr>
+      <tr><td class="indent">Lease payable (PV of lease payments)</td><td></td><td class="je-credit-amt">360,376</td></tr>
+      <tr><td><strong>Mountain Trust Leasing (Lessor)</strong></td><td></td><td></td></tr>
+      <tr><td>Lease receivable (PV of lease payments)</td><td class="je-debit-amt">360,376</td><td></td></tr>
+      <tr><td class="indent">Equipment (lessor's cost: carrying amount)</td><td></td><td class="je-credit-amt">360,376</td></tr>
+    </table>
+
+    <h3>Step 3 — Record the payments and interest</h3>
+    <div class="thread-label">First Payment (Beginning of the Lease)</div>
+    <table class="je-table">
+      <tr><td><strong>Balsam Ridge (Lessee)</strong></td><td></td><td></td></tr>
+      <tr><td>Lease payable</td><td class="je-debit-amt">85,000</td><td></td></tr>
+      <tr><td class="indent">Cash (lease payment)</td><td></td><td class="je-credit-amt">85,000</td></tr>
+      <tr><td><strong>Mountain Trust Leasing (Lessor)</strong></td><td></td><td></td></tr>
+      <tr><td>Cash (lease payment)</td><td class="je-debit-amt">85,000</td><td></td></tr>
+      <tr><td class="indent">Lease receivable</td><td></td><td class="je-credit-amt">85,000</td></tr>
+    </table>
+    <p class="je-desc">The payment occurs on day one, so no interest has accrued. The entire $85,000 reduces principal. (Think of it as a down payment, with the remaining $275,376 financed by four year-end payments.)</p>
+
+    <div class="thread-label">Second Payment (December 31, End of Year 1)</div>
+    <table class="je-table">
+      <tr><td><strong>Balsam Ridge (Lessee)</strong></td><td></td><td></td></tr>
+      <tr><td>Interest expense [9% × ($360,376 − $85,000)]</td><td class="je-debit-amt">24,784</td><td></td></tr>
+      <tr><td>Lease payable (difference)</td><td class="je-debit-amt">60,216</td><td></td></tr>
+      <tr><td class="indent">Cash (lease payment)</td><td></td><td class="je-credit-amt">85,000</td></tr>
+      <tr><td><strong>Mountain Trust Leasing (Lessor)</strong></td><td></td><td></td></tr>
+      <tr><td>Cash (lease payment)</td><td class="je-debit-amt">85,000</td><td></td></tr>
+      <tr><td class="indent">Lease receivable (difference)</td><td></td><td class="je-credit-amt">60,216</td></tr>
+      <tr><td class="indent">Interest revenue</td><td></td><td class="je-credit-amt">24,784</td></tr>
+    </table>
+    <p class="je-desc">Interest accrues at the effective rate on the balance outstanding during the year. Because the balance declines with each payment, interest decreases each period.</p>
+
+    <h3>The amortization schedule</h3>
+    <p>Both parties use the same schedule: the lessee to record interest expense, the lessor to record interest revenue.</p>
+    <table class="mini-table">
+      <tr><th>Point in time</th><th class="num">Payment</th><th class="num">Interest (9% × balance)</th><th class="num">Decrease in balance</th><th class="num">Outstanding balance</th></tr>
+      <tr><td>Lease start</td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num">360,376</td></tr>
+      <tr><td>Lease start (payment 1)</td><td class="num">85,000</td><td class="num">—</td><td class="num">85,000</td><td class="num">275,376</td></tr>
+      <tr><td>End of year 1 (payment 2)</td><td class="num">85,000</td><td class="num">24,784</td><td class="num">60,216</td><td class="num">215,160</td></tr>
+      <tr><td>End of year 2 (payment 3)</td><td class="num">85,000</td><td class="num">19,364</td><td class="num">65,636</td><td class="num">149,524</td></tr>
+      <tr><td>End of year 3 (payment 4)</td><td class="num">85,000</td><td class="num">13,457</td><td class="num">71,543</td><td class="num">77,981</td></tr>
+      <tr><td>End of year 4 (payment 5)</td><td class="num">85,000</td><td class="num">7,019*</td><td class="num">77,981</td><td class="num">0</td></tr>
+      <tr class="total-row"><td>Total</td><td class="num">425,000</td><td class="num">64,624</td><td class="num">360,376</td><td></td></tr>
+    </table>
+    <p style="font-size:0.85rem;color:#6b6560;">*Adjusted for rounding. The $425,000 of total cash payments provides for (1) payment for the equipment's use ($360,376) and (2) interest of $64,624 at an effective rate of 9%.</p>
+
+    <h3>Step 4 — The lessee amortizes the right-of-use asset</h3>
+    <p>Like other noncurrent assets, the right-of-use asset provides economic benefit over the lease term, so the lessee amortizes it, usually straight-line, unless its pattern of use is different. (Output measures such as units produced, or input measures such as hours used, may sometimes reflect the asset's consumption better.)</p>
+    <table class="je-table">
+      <tr><td>Amortization expense ($360,376 ÷ 5 years)</td><td class="je-debit-amt">72,075</td><td></td></tr>
+      <tr><td class="indent">Right-of-use asset</td><td></td><td class="je-credit-amt">72,075</td></tr>
+    </table>
+    <p class="je-desc">Recorded each December 31 for the five years of the lease term. This is a separate entry from the interest/principal entries above.</p>
+
+    <div class="key-idea">
+      <strong>Which period?</strong> The lessee normally amortizes the right-of-use asset over the <em>lease term</em>. But if ownership transfers or a purchase option is reasonably certain to be exercised (criterion 1 or 2 is met), the lessee will keep the asset beyond the lease term, so it amortizes over the asset's <strong>useful life</strong> instead.
+    </div>
+
+    <div class="patterns">
+      <p><strong>The lessor's role.</strong> Mountain Trust Leasing is a <em>financial intermediary</em>: it acquires the asset and leases it, so its only income from the lease is interest revenue over the lease term ($64,624 in total). Some lessors, though, use leasing as an alternative way to <em>sell</em> their products. That's next.</p>
+    </div>
+  </div>
+
+  <div class="lo-block">
+    <h2>Sales-Type Lease with a Selling Profit</h2>
+    <p>When the lessor is a manufacturer or retailer using a lease as a means of "selling" its products, it earns a <strong>selling profit</strong> in addition to interest revenue. Selling profit exists when the fair value of the asset (usually the present value of the lease payments, or "selling price") exceeds the asset's cost or carrying value.</p>
+
+    <div class="formula">Selling profit = Sales revenue (PV of lease payments) − Cost of goods sold (lessor's cost)</div>
+
+    <div class="example">
+      <div class="ex-label">Modify the running example</div>
+      <p>All facts are the same, except Balsam Ridge leases the equipment <strong>directly from Ridgeline Ovens Corporation</strong>, the manufacturer, instead of through Mountain Trust Leasing. Ridgeline's cost of the equipment was <strong>$270,000</strong>. The present value of the payments is still $360,376, so Ridgeline's gross profit is $360,376 − $270,000 = <strong>$90,376</strong>.</p>
+    </div>
+
+    <div class="thread-label">Beginning of the Lease</div>
+    <table class="je-table">
+      <tr><td><strong>Ridgeline Ovens Corporation (Lessor)</strong></td><td></td><td></td></tr>
+      <tr><td>Lease receivable (PV of lease payments)</td><td class="je-debit-amt">360,376</td><td></td></tr>
+      <tr><td>Cost of goods sold (lessor's cost)</td><td class="je-debit-amt">270,000</td><td></td></tr>
+      <tr><td class="indent">Sales revenue (PV of lease payments)</td><td></td><td class="je-credit-amt">360,376</td></tr>
+      <tr><td class="indent">Equipment (lessor's cost)</td><td></td><td class="je-credit-amt">270,000</td></tr>
+    </table>
+
+    <div class="key-idea">
+      <strong>It's an ordinary sale, recorded in two pieces.</strong> Suppose a customer buys an $850 commercial mixer from a restaurant-supply store on the store's credit account, and the store paid $520 wholesale. The store debits Accounts receivable and credits Sales revenue for $850, then debits Cost of goods sold and credits Inventory for $520. Ridgeline's entry has exactly the same structure, with a lease receivable in place of the account receivable and equipment in place of inventory.
+    </div>
+
+    <div class="patterns">
+      <p><strong>Everything after day one is unchanged.</strong> Except for the entry at the beginning of the lease that includes the selling profit, all of the lessor's entries (first payment, interest revenue, receivable reduction) are <em>precisely the same</em> as for a sales-type lease without selling profit. The receivable is $360,376 either way, so the same schedule applies.</p>
+      <p><strong>The lessee is unaffected.</strong> Balsam Ridge's entries are exactly the same whether its lessor earns a profit or not.</p>
+      <p><strong>A selling loss is possible.</strong> If the asset's carrying value exceeds its fair value, the lessor records a selling loss instead.</p>
+      <p><strong>Reporting.</strong> Sales-type leases must be separately distinguished from nonlease sales in the financial statements. For example, Dell Technologies records revenue from equipment sold under sales-type leases at the present value of the lease payments at inception, plus financing income recognized at effective rates over the lease term.</p>
+    </div>
+  </div>
+
+  <div class="lo-block">
+    <h2>Quick Reference</h2>
+    <table class="mini-table">
+      <tr><th>Event</th><th>Balsam Ridge (finance lease)</th><th>Mountain Trust Leasing (no selling profit)</th><th>Ridgeline (with selling profit)</th></tr>
+      <tr><td>Beginning of lease</td><td>Dr Right-of-use asset<br>Cr Lease payable<br>(360,376)</td><td>Dr Lease receivable<br>Cr Equipment<br>(360,376)</td><td>Dr Lease receivable 360,376<br>Dr COGS 270,000<br>Cr Sales revenue 360,376<br>Cr Equipment 270,000</td></tr>
+      <tr><td>First payment</td><td>Dr Lease payable<br>Cr Cash (85,000)</td><td>Dr Cash<br>Cr Lease receivable (85,000)</td><td>Same as Mountain Trust Leasing</td></tr>
+      <tr><td>Later payments</td><td>Dr Interest expense<br>Dr Lease payable<br>Cr Cash</td><td>Dr Cash<br>Cr Lease receivable<br>Cr Interest revenue</td><td>Same as Mountain Trust Leasing</td></tr>
+      <tr><td>Each year</td><td>Dr Amortization expense<br>Cr Right-of-use asset</td><td>— (no equivalent)</td><td>— (no equivalent)</td></tr>
+      <tr><td>Income over the lease</td><td>Interest expense + amortization expense</td><td>Interest revenue only</td><td>Selling profit (at start) + interest revenue</td></tr>
+    </table>
+  </div>
+
+</main>
+
+<footer>ACCT 351 · Leases · Lease Classification &amp; Finance/Sales-Type Leases — Reading Notes</footer>
+
+</body>
+</html>
