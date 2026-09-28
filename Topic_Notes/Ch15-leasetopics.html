@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leases — Uncertainties, Other Issues &amp; Reporting</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --wcu-purple: #4B2E83;
+    --wcu-purple-dark: #341f5c;
+    --wcu-gold: #C8A24A;
+    --gold-light: #f4ecd8;
+    --ink: #232023;
+    --paper: #fdfcfb;
+    --panel: #f7f3ec;
+    --rule: #e2d9c8;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.55;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--wcu-purple) 0%, var(--wcu-purple-dark) 100%);
+    color: #fff;
+    padding: 2.2rem 1.5rem 1.8rem;
+    border-bottom: 6px solid var(--wcu-gold);
+  }
+
+  header .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--wcu-gold);
+    margin-bottom: 0.4rem;
+  }
+
+  header h1 {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 700;
+    font-size: 1.9rem;
+    margin: 0 0 0.3rem;
+  }
+
+  header p.sub {
+    margin: 0;
+    color: #e7e0f2;
+    font-size: 0.98rem;
+  }
+
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  .lo-block { margin-bottom: 2.8rem; }
+
+  h2 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.5rem;
+    margin: 0 0 0.8rem;
+    color: var(--wcu-purple-dark);
+    border-bottom: 2px solid var(--rule);
+    padding-bottom: 0.4rem;
+  }
+
+  h3 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.1rem;
+    margin: 1.4rem 0 0.5rem;
+    color: var(--wcu-purple-dark);
+  }
+
+  h4 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--wcu-purple);
+    margin: 1.1rem 0 0.4rem;
+  }
+
+  p { margin: 0.6rem 0; }
+
+  .key-idea {
+    background: var(--panel);
+    border-left: 4px solid var(--wcu-gold);
+    padding: 0.9rem 1.1rem;
+    border-radius: 0 6px 6px 0;
+    margin: 0.9rem 0;
+  }
+  .key-idea strong { color: var(--wcu-purple-dark); }
+
+  .formula {
+    font-family: 'IBM Plex Mono', monospace;
+    background: var(--wcu-purple-dark);
+    color: var(--gold-light);
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin: 0.8rem 0;
+    font-size: 0.92rem;
+    overflow-x: auto;
+  }
+
+  .example {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin: 0.9rem 0;
+  }
+  .example .ex-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--wcu-purple);
+    margin-bottom: 0.4rem;
+  }
+
+  ul, ol { padding-left: 1.4rem; }
+  li { margin-bottom: 0.35rem; }
+
+  .patterns {
+    background: var(--gold-light);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin: 0.8rem 0;
+  }
+  .patterns p { margin: 0.3rem 0; }
+
+  .ifrs {
+    background: #eef2fb;
+    border-left: 4px solid #3a5a9e;
+    border-radius: 0 6px 6px 0;
+    padding: 0.9rem 1.1rem;
+    margin: 0.9rem 0;
+  }
+  .ifrs .ifrs-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #3a5a9e;
+    margin-bottom: 0.4rem;
+  }
+
+  table.mini-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.4rem 0 0.9rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.76rem;
+  }
+  table.mini-table th, table.mini-table td {
+    border: 1px solid var(--rule);
+    padding: 0.4rem 0.55rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.mini-table th {
+    background: var(--panel);
+    color: var(--wcu-purple-dark);
+    font-weight: 600;
+  }
+
+  table.je-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.5rem 0 0.3rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.84rem;
+  }
+  table.je-table td { padding: 0.28rem 0.3rem; vertical-align: top; }
+  table.je-table td.je-debit-amt, table.je-table td.je-credit-amt {
+    text-align: right;
+    width: 100px;
+    white-space: nowrap;
+  }
+  table.je-table td.indent { padding-left: 1.8rem; }
+  .je-desc {
+    font-size: 0.8rem;
+    color: #6b6560;
+    font-style: italic;
+    margin: 0 0 1rem;
+  }
+
+  footer {
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: #8a8380;
+    padding: 1.5rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">ACCT 351 · Leases — Chapter 15</div>
+  <h1>Lease Uncertainties, Other Issues &amp; Reporting</h1>
+  <p class="sub">Reading Notes</p>
+</header>
+
+<main>
+
+  <div class="lo-block">
+    <h2>An Uncertain Lease Term</h2>
+    <p>The "lease term" isn't always just the number written in the contract.</p>
+
+    <div class="formula">Lease term = Noncancelable period + renewal periods "reasonably certain" to be exercised − periods after a termination option "reasonably certain" to be exercised</div>
+
+    <p>An option only adjusts the lease term if it's <strong>reasonably certain</strong> to be exercised — a high bar, roughly "reasonably assured." Once set at the beginning of the lease, the term is only <strong>reassessed</strong> when some new triggering event changes the economic incentive to exercise an option (for example, the lessee makes major improvements to the asset that only pay off if the lease is extended).</p>
+
+    <div class="key-idea">
+      When the lease term is reassessed, the lessee remeasures the lease liability as the present value of the <em>remaining</em> payments — using the lessee's <strong>current</strong> incremental borrowing rate, not the original rate. The remeasurement can also trigger a reclassification (e.g., an operating lease that now spans most of the asset's life may need to become a finance lease). A lessor, by contrast, never reassesses its original lease term or discount rate.
+    </div>
+  </div>
+
+  <div class="lo-block">
+    <h2>Uncertain (Variable) Lease Payments</h2>
+    <p>Payments that vary with sales, usage, or an index are common — but because they're uncertain, they're generally <strong>excluded</strong> from the present-value calculation used to record the initial right-of-use asset, lease liability, and lease receivable. When they occur, they're simply expensed/recognized as revenue in the period incurred.</p>
+
+    <div class="patterns">
+      <p><strong>Exception 1 — in-substance fixed payments:</strong> if a "variable" payment actually has a guaranteed minimum (e.g., "the greater of $250 or 0.5% of sales"), that guaranteed floor is fixed in substance and <em>is</em> included in the initial present value.</p>
+      <p><strong>Exception 2 — payments tied to an index or rate:</strong> when payments move with something like the CPI or a market interest rate, the <em>current</em> index/rate value is used to calculate the initial present value. Future changes in the index don't trigger a remeasurement on their own — only a remeasurement for some other reason (like a lease-term reassessment or a modification) would update the index-based amount.</p>
+    </div>
+  </div>
+
+  <div class="lo-block">
+    <h2>Lease Modifications</h2>
+    <p>When the parties agree to change a lease's terms mid-stream, there are two possibilities:</p>
+    <div class="key-idea">
+      <strong>Grants an additional right of use</strong> → treated as terminating the old lease and creating a brand-new one.<br><br>
+      <strong>Alters the existing right of use</strong> (a change in term or payments, say) → adjust the existing right-of-use asset and lease liability to the new terms, and reassess classification — a modification can push an operating lease into finance-lease territory, or vice versa.
+    </div>
+    <p>On the lessor's side, a modification that reclassifies the lease as a sales-type lease means recording a new receivable (at the present value of the remaining payments), derecognizing the asset, and recognizing any resulting selling profit — exactly like initiating a brand-new sales-type lease.</p>
+  </div>
+
+  <div class="lo-block">
+    <h2>Residual Value</h2>
+    <p>The residual value is the leased asset's expected commercial value when it's returned to the lessor at the end of the term. It matters in three ways.</p>
+
+    <h3>1. It reduces the size of lease payments</h3>
+    <p>If the lessor expects to recover part of its investment from the asset itself (rather than entirely from the lessee's payments), lease payments can be smaller.</p>
+    <div class="formula">Amount to recover through lease payments = Fair value of asset − PV of the residual value</div>
+    <p>That smaller "amount to recover" is then divided by the annuity factor to get the periodic payment — exactly as in Illustration 15-4, just starting from a lower number.</p>
+
+    <h3>2. Guaranteed vs. unguaranteed — how it's recorded</h3>
+    <table class="mini-table">
+      <tr><th>Residual value</th><th>Lessor's lease receivable</th><th>Lessor's sales revenue (if selling profit)</th></tr>
+      <tr><td><strong>Unguaranteed</strong></td><td>Included (lessor still expects to collect it as an asset)</td><td>Excluded — only the payments are "sold"</td></tr>
+      <tr><td><strong>Guaranteed by lessee</strong></td><td>Included</td><td>Included</td></tr>
+    </table>
+    <p>Either way, the lessor's receivable includes the present value of the residual (its "net investment in the lease"); the total of all future cash/asset flows the lessor will receive is called its <strong>gross investment in the lease</strong>.</p>
+
+    <h3>3. It can affect classification</h3>
+    <p>Classification criterion 4 compares the present value of lease payments to the fair value of the asset — and any residual value the <em>lessee</em> guarantees counts as an additional payment for that comparison. An unguaranteed residual value (or one guaranteed only by an unrelated third party) does not count toward the lessee's side of that test.</p>
+
+    <div class="key-idea">
+      <strong>If the guarantee exceeds the expected residual value:</strong> the excess (expected guaranteed amount − expected actual residual value) is treated as an additional lease payment. Its present value is added to the lessee's right-of-use asset/lease liability <em>and</em> to the lessor's lease receivable and sales revenue.
+    </div>
+  </div>
+
+  <div class="lo-block">
+    <h2>Purchase Options &amp; Termination Penalties</h2>
+    <p>Both are handled the same conceptual way: if exercise is <strong>reasonably certain</strong>, the associated cash flow is added to the payments used in present-value calculations, and the lease term is cut off at the point the option becomes exercisable (or the termination date).</p>
+
+    <div class="key-idea">
+      <strong>Bargain purchase option (BPO):</strong> the present value of the exercise price is added to both the lessee's right-of-use asset/liability and the lessor's lease receivable — mechanically identical to how a residual value is handled, because in both cases the lessor is "recovering" part of its investment through something other than the periodic payments. The key difference: with a BPO, title passes to the lessee, so the amortization period extends to the asset's full <strong>useful life</strong> rather than stopping at the lease term.
+    </div>
+  </div>
+
+  <table class="mini-table">
+    <caption style="font-family:'Inter',sans-serif;font-size:0.78rem;color:#6b6560;text-align:left;margin-bottom:0.4rem;">What's included in the lease term vs. the lease payments</caption>
+    <tr><th>Lease term includes</th><th>Lease payments include</th></tr>
+    <tr>
+      <td>Noncancelable period, plus renewal periods reasonably certain to be exercised (or under the lessor's control), minus periods after a termination option reasonably certain to be exercised</td>
+      <td>Fixed payments, plus the exercise price of a reasonably-certain purchase option, plus a reasonably-certain termination penalty, plus in-substance-fixed or index/rate-based variable payments, plus any excess of a guaranteed residual value over the expected residual value</td>
+    </tr>
+  </table>
+
+  <div class="lo-block">
+    <h2>Is It Even a Lease?</h2>
+    <p>Before any of the above applies, a contract must actually meet the definition of a lease. Two criteria, both required:</p>
+    <ol>
+      <li><strong>An identified asset</strong> — property, plant, or equipment (not inventory or an intangible), specified either explicitly (a serial number) or implicitly (enough detail to identify the physical asset).</li>
+      <li><strong>The customer controls the use of that asset</strong> — meaning the customer gets substantially all the economic benefit from using it, directs how it's used, <em>and</em> the supplier has no right to substitute a different asset for its own economic benefit (a "substantive substitution right").</li>
+    </ol>
+    <div class="key-idea">
+      A supplier who merely has to <em>replace a malfunctioning</em> asset hasn't retained a substantive substitution right — that's just ordinary maintenance, not the kind of discretionary swap that would mean the customer never really controlled a specific asset. If either criterion fails, there's no lease — the arrangement is a <strong>service contract</strong>, and each payment is simply expensed as incurred.
+    </div>
+  </div>
+
+  <div class="lo-block">
+    <h2>Other Payment &amp; Cost Issues</h2>
+
+    <h3>Nonlease components</h3>
+    <p>A lease payment sometimes bundles in something besides the right to use the asset — maintenance, for example. If that extra piece transfers a separate good or service to the lessee, it's a <strong>nonlease component</strong> and is expensed separately rather than baked into the right-of-use asset and lease liability.</p>
+    <div class="patterns">
+      <p><strong>Maintenance</strong> paid by the lessor but embedded in the payment → nonlease component, expensed by the lessee as incurred (it's effectively paid indirectly by the lessee).</p>
+      <p><strong>Insurance or property taxes</strong> embedded in the payment → <em>not</em> a nonlease component — these are treated as part of the lease payment itself, because they don't transfer a distinct good or service.</p>
+    </div>
+    <p>As a practical expedient, both lessees and lessors may elect not to separate nonlease components at all, and instead account for the whole arrangement as a single lease.</p>
+
+    <h3>Initial direct costs</h3>
+    <p>Costs directly tied to executing the lease (legal fees, commissions) that wouldn't have been incurred otherwise:</p>
+    <table class="mini-table">
+      <tr><th>Who/what</th><th>Treatment</th></tr>
+      <tr><td>Lessee</td><td>Added to the right-of-use asset</td></tr>
+      <tr><td>Lessor — sales-type lease <em>with</em> selling profit</td><td>Expensed immediately (at the "sale")</td></tr>
+      <tr><td>Lessor — sales-type lease with <em>no</em> selling profit</td><td>Deferred and effectively spread over the lease term (folded into the receivable, which lowers the implicit rate)</td></tr>
+      <tr><td>Lessor — operating lease</td><td>Deferred and expensed over the lease term, generally straight-line</td></tr>
+    </table>
+
+    <h3>Advance payments &amp; leasehold improvements</h3>
+    <p>Advance (prepaid) rent is included with the other payments when computing present value. A lessee's own improvements to leased property (a build-out, for example) are capitalized like any other asset and depreciated over the <strong>shorter of</strong> the improvement's useful life or the lease term — and a significant leasehold improvement can itself be evidence that a renewal option is reasonably certain to be exercised (since abandoning the improvement early would be costly).</p>
+  </div>
+
+  <div class="lo-block">
+    <h2>Statement of Cash Flows</h2>
+    <table class="mini-table">
+      <tr><th>Lease type</th><th>Cash flow classification</th></tr>
+      <tr><td>Operating lease (lessee and lessor)</td><td>Operating activities (it's rent expense/revenue, in net income)</td></tr>
+      <tr><td>Finance lease — lessee, interest portion</td><td>Operating activities</td></tr>
+      <tr><td>Finance lease — lessee, principal portion</td><td>Financing activities</td></tr>
+      <tr><td>Sales-type lease — lessor, all cash received</td><td>Operating activities</td></tr>
+    </table>
+    <p>At the very beginning of any finance or sales-type lease, the right-of-use asset/receivable and the offsetting liability are disclosed as a <strong>noncash investing/financing activity</strong> in the notes — no cash actually changed hands yet.</p>
+  </div>
+
+  <div class="lo-block">
+    <h2>Disclosures</h2>
+    <p>Disclosure requirements are extensive, aimed at letting statement users judge the amount, timing, and uncertainty of lease-related cash flows. Key quantitative items lessees must disclose include the present value of right-of-use assets/liabilities, finance lease interest and amortization (shown separately), operating lease expense, short-term and variable lease costs, weighted-average lease term and discount rate, and a table of future lease payments for each of the next five years plus a total thereafter.</p>
+    <div class="key-idea">
+      Without a disclosed discount rate, analysts can't judge whether a company's reported lease obligation is reasonable — a lower discount rate produces a larger present value (and liability), so the choice of rate is itself a place where reported numbers can be shaped.
+    </div>
+  </div>
+
+  <div class="lo-block">
+    <h2>GAAP vs. IFRS</h2>
+    <div class="ifrs">
+      <div class="ifrs-label">No Lessee Operating Leases Under IFRS</div>
+      <p>IFRS uses a <strong>one-model approach</strong>: from the lessee's side, every lease is accounted for as a finance lease — there's no operating-lease category for lessees at all. Only lessors classify leases as finance vs. operating under IFRS. So even for a lease that would qualify as an operating lease under U.S. GAAP, an IFRS lessee straight-line-amortizes the right-of-use asset (no "plugging") — producing a front-loaded expense pattern instead of the flat, straight-line expense a U.S. GAAP operating lease shows.</p>
+    </div>
+    <div class="ifrs">
+      <div class="ifrs-label">Short-Term / Small-Ticket Shortcut</div>
+      <p>IFRS offers the same short-term shortcut as U.S. GAAP, but is stricter about what counts as "short-term" — any purchase option disqualifies a lease from the shortcut under IFRS, even one the lessee isn't reasonably certain to exercise. IFRS also extends the shortcut to <strong>small-ticket leases</strong> (assets valued at $5,000 or less), which U.S. GAAP has no equivalent for.</p>
+    </div>
+    <div class="ifrs">
+      <div class="ifrs-label">Remeasuring for Index/Rate Changes</div>
+      <p>Under U.S. GAAP, a variable payment tied to an index or rate is only updated when the lease is remeasured for some <em>other</em> reason. Under IFRS, the lessee remeasures those payments <strong>every time</strong> the index or rate itself changes — not just when another triggering event forces a remeasurement.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer>ACCT 351 · Leases · Uncertainties, Other Issues &amp; Reporting — Reading Notes</footer>
+
+</body>
+</html>
