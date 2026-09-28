@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Finance &amp; Sales-Type Leases — Guided Walkthrough</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+  :root {
+    --wcu-purple: #4B2E83; --wcu-purple-dark: #341f5c; --wcu-gold: #C8A24A;
+    --ink: #232023; --paper: #fdfcfb; --panel: #f7f3ec; --rule: #e2d9c8; --gold-light: #f4ecd8;
+    --warn: #8a6d1a; --warn-bg: #FBF3DC;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; line-height: 1.55; }
+  header { background: linear-gradient(135deg, var(--wcu-purple) 0%, var(--wcu-purple-dark) 100%); color: #fff; padding: 2.2rem 1.5rem 1.8rem; border-bottom: 6px solid var(--wcu-gold); }
+  header .eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--wcu-gold); margin-bottom: 0.4rem; }
+  header h1 { font-family: 'Source Serif 4', serif; font-weight: 700; font-size: 1.9rem; margin: 0 0 0.3rem; }
+  header p.sub { margin: 0; color: #e7e0f2; font-size: 0.98rem; }
+  .progress-bar { max-width: 780px; margin: 0 auto; padding: 0.8rem 1.5rem 0; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .progress-track { flex: 1; height: 8px; background: var(--rule); border-radius: 4px; overflow: hidden; }
+  .progress-fill { height: 100%; width: 0%; background: var(--wcu-gold); transition: width 0.3s ease; }
+  .progress-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: #6b6560; white-space: nowrap; }
+  main { max-width: 780px; margin: 0 auto; padding: 1.2rem 1.5rem 4rem; }
+  .lo-block { margin-bottom: 2.8rem; }
+  h2 { font-family: 'Source Serif 4', serif; font-size: 1.5rem; margin: 0 0 0.8rem; color: var(--wcu-purple-dark); border-bottom: 2px solid var(--rule); padding-bottom: 0.4rem; }
+  p { margin: 0.6rem 0; }
+  ul, ol { padding-left: 1.4rem; }
+  li { margin-bottom: 0.4rem; }
+  .key-idea { background: var(--panel); border-left: 4px solid var(--wcu-gold); padding: 0.9rem 1.1rem; border-radius: 0 6px 6px 0; margin: 0.9rem 0; }
+  .key-idea strong { color: var(--wcu-purple-dark); }
+  .facts { background: #fff; border: 1px solid var(--rule); border-radius: 8px; padding: 1rem 1.2rem; margin: 1rem 0 1.6rem; }
+  .facts .ex-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--wcu-purple); margin-bottom: 0.4rem; }
+  .facts ul { margin: 0.4rem 0 0; }
+  .example { background: #fff; border: 1px solid var(--rule); border-radius: 8px; padding: 1rem 1.2rem 1.2rem; margin: 1.1rem 0; }
+  .example .ex-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--wcu-purple); margin-bottom: 0.4rem; }
+  table.data { border-collapse: collapse; width: 100%; margin: 0.7rem 0; font-size: 0.88rem; }
+  table.data th, table.data td { border: 1px solid var(--rule); padding: 0.4rem 0.55rem; text-align: left; }
+  table.data th { background: var(--panel); color: var(--wcu-purple-dark); font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; text-transform: uppercase; }
+  table.data td.num, table.data th.num { text-align: right; font-family: 'IBM Plex Mono', monospace; }
+  table.data tr.total-row td { background: var(--panel); font-weight: 700; }
+
+  .input-block { display: flex; flex-direction: column; gap: 0.6rem; margin: 0.9rem 0 0.6rem; padding: 0.9rem; background: var(--panel); border-radius: 6px; }
+  .input-item { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+  .input-item label { flex: 1 1 280px; font-size: 0.9rem; font-weight: 600; color: var(--wcu-purple-dark); }
+  .input-item .unit { font-family: 'IBM Plex Mono', monospace; color: #6b6560; }
+  .input-item input[type="number"], .input-item select { font-family: 'IBM Plex Mono', monospace; font-size: 0.92rem; padding: 0.45rem 0.6rem; border: 1px solid var(--rule); border-radius: 5px; background: #fff; color: var(--ink); }
+  .input-item input[type="number"] { width: 150px; }
+  .input-item select { min-width: 190px; font-family: 'Inter', sans-serif; }
+  .input-item input:focus, .input-item select:focus { outline: none; border-color: var(--wcu-purple); box-shadow: 0 0 0 3px rgba(75,46,131,0.12); }
+  .reveal-btn { align-self: flex-start; font-family: 'Inter', sans-serif; font-size: 0.88rem; font-weight: 600; color: #fff; background: var(--wcu-purple); border: none; padding: 0.55rem 1.1rem; border-radius: 5px; cursor: pointer; margin-top: 0.2rem; }
+  .reveal-btn:hover { background: var(--wcu-purple-dark); }
+
+  .feedback { display: none; font-weight: 600; padding: 0.6rem 0.9rem; border-radius: 6px; margin: 0.4rem 0 0.2rem; font-size: 0.92rem; }
+  .feedback.warn { display: block; color: var(--warn); background: var(--warn-bg); }
+
+  .solution { margin-top: 0.9rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule); }
+  .solution[hidden] { display: none; }
+  .solution-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--wcu-purple); margin: 0.9rem 0 0.4rem; }
+  .solution-label:first-child { margin-top: 0; }
+  .final-answer { font-size: 1rem; margin-top: 0.6rem; }
+  .final-answer strong { color: var(--wcu-purple-dark); }
+
+  table.je-table { border-collapse: collapse; width: 100%; margin: 0.4rem 0 0.2rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.83rem; }
+  table.je-table td { padding: 0.26rem 0.3rem; vertical-align: top; }
+  table.je-table td.je-debit-amt, table.je-table td.je-credit-amt { text-align: right; width: 95px; white-space: nowrap; }
+  table.je-table td.indent { padding-left: 1.8rem; }
+  table.je-table td.who { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--wcu-purple-dark); padding-top: 0.6rem; }
+  .je-desc { font-size: 0.82rem; color: #6b6560; font-style: italic; margin: 0 0 0.9rem; }
+  .date-tag { display: inline-block; font-family: 'IBM Plex Mono', monospace; font-weight: 700; font-size: 0.75rem; color: #fff; background: var(--wcu-purple-dark); padding: 0.12rem 0.5rem; border-radius: 4px; margin-top: 0.4rem; }
+
+  footer { text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; color: #8a8380; padding: 1.5rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Guided Walkthrough · Not Graded</div>
+  <h1>Finance &amp; Sales-Type Leases</h1>
+  <p class="sub">Test the five classification criteria, then account for both sides of the lease.</p>
+</header>
+
+<div class="progress-bar">
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-label" id="progressLabel">0 of 10 revealed</div>
+</div>
+
+<main>
+
+  <div class="key-idea">
+    <strong>How this works:</strong> Work each problem on your own first and enter your answer in every box. Then click <strong>Reveal Answer</strong> to see the correct answer next to yours, along with a detailed explanation and the journal entries. This page isn't graded and doesn't get submitted anywhere; it's just for practice.
+  </div>
+
+  <div class="facts">
+    <div class="ex-label">The lease used in Problems 1 and 3&ndash;8</div>
+    <p>On January 1, <span class="yr0">2024</span>, <strong>Balsam Ridge Bakery</strong> leased a commercial baking oven from <strong>Mountain Trust Leasing</strong>. Mountain Trust Leasing purchased the equipment from Ridgeline Ovens Corporation at a cost of <strong>$360,376</strong>, which is also the oven's fair value.</p>
+    <ul>
+      <li>The lease agreement specifies five annual payments of <strong>$85,000</strong> beginning January 1, <span class="yr0">2024</span> (the beginning of the lease), and on each December 31 from <span class="yr0">2024</span> through <span class="yr3">2027</span>.</li>
+      <li>The five-year lease term, ending December 31, <span class="yr4">2028</span>, is equal to the estimated useful life of the oven.</li>
+      <li>The agreement does not transfer ownership and contains no purchase option.</li>
+      <li>Mountain Trust Leasing routinely acquires commercial kitchen equipment for lease to other food-service businesses.</li>
+      <li>The interest rate in these financing arrangements is 9%.</li>
+    </ul>
+  </div>
+
+  <!-- ============================== SECTION 1 ============================== -->
+  <div class="lo-block">
+    <h2>Testing the Five Classification Criteria</h2>
+
+    <div class="example" id="p1">
+      <div class="ex-label">Problem 1 &mdash; Balsam Ridge's Lease</div>
+      <p>Apply the five classification criteria to the Balsam Ridge lease above. The present value of the lease payments is $360,376 ($85,000 &times; 4.23972, present value of an annuity due, n = 5, i = 9%). Use 75% and 90% as the guidelines for &ldquo;major part&rdquo; and &ldquo;substantially all.&rdquo;</p>
+      <div class="input-block">
+        <div class="input-item"><label for="p1-a">1. Does the agreement specify that ownership transfers to the lessee?</label>
+          <select id="p1-a" class="ans" data-label="1. Ownership transfers" data-answer="No"><option value="">Select&hellip;</option><option>Yes</option><option>No</option></select></div>
+        <div class="input-item"><label for="p1-b">2. Does the agreement contain a purchase option the lessee is reasonably certain to exercise?</label>
+          <select id="p1-b" class="ans" data-label="2. Purchase option" data-answer="No"><option value="">Select&hellip;</option><option>Yes</option><option>No</option></select></div>
+        <div class="input-item"><label for="p1-c">3. Is the lease term for the &ldquo;major part&rdquo; of the asset's economic life?</label>
+          <select id="p1-c" class="ans" data-label="3. Major part of economic life" data-answer="Yes"><option value="">Select&hellip;</option><option>Yes</option><option>No</option></select></div>
+        <div class="input-item"><label for="p1-d">4. Is the present value of the payments &ldquo;substantially all&rdquo; of the asset's fair value?</label>
+          <select id="p1-d" class="ans" data-label="4. PV of payments" data-answer="Yes"><option value="">Select&hellip;</option><option>Yes</option><option>No</option></select></div>
+        <div class="input-item"><label for="p1-e">5. Is the asset so specialized it has no alternative use to the lessor?</label>
+          <select id="p1-e" class="ans" data-label="5. Specialized asset" data-answer="No"><option value="">Select&hellip;</option><option>Yes</option><option>No</option></select></div>
+        <div class="input-item"><label for="p1-f">Classification by the lessee (Balsam Ridge):</label>
+          <select id="p1-f" class="ans" data-label="Lessee classification" data-answer="Finance lease"><option value="">Select&hellip;</option><option>Finance lease</option><option>Operating lease</option></select></div>
+        <div class="input-item"><label for="p1-g">Classification by the lessor (Mountain Trust Leasing):</label>
+          <select id="p1-g" class="ans" data-label="Lessor classification" data-answer="Sales-type lease"><option value="">Select&hellip;</option><option>Sales-type lease</option><option>Operating lease</option></select></div>
+        <button class="reveal-btn" onclick="reveal('p1')">Reveal Answer</button>
+      </div>
+      <div class="feedback"></div>
+      <div class="solution" hidden>
+        <div class="solution-label">Your answers vs. the answers</div>
+        <table class="data"><tr><th>Item</th><th>Your answer</th><th>Answer</th></tr><tbody class="compare-body"></tbody></table>
+        <div class="solution-label">Explanation</div>
+        <ol>
+          <li><strong>Ownership transfer &mdash; No.</strong> Nothing in the agreement says title passes to Balsam Ridge.</li>
+          <li><strong>Purchase option &mdash; No.</strong> The agreement contains no purchase option at all, so there's nothing to be &ldquo;reasonably certain&rdquo; about.</li>
+          <li><strong>Major part of economic life &mdash; Yes.</strong> The 5-year lease term covers the oven's entire 5-year life: 5 &divide; 5 = 100%, well above the 75% guideline.</li>
+          <li><strong>Present value of payments &mdash; Yes.</strong> $360,376 &divide; $360,376 fair value = 100%, well above the 90% guideline. In effect, Balsam Ridge is paying for the whole asset.</li>
+          <li><strong>Specialized asset &mdash; No.</strong> Mountain Trust Leasing routinely acquires and leases this type of equipment, so the equipment would have alternative uses to it once this lease ends.</li>
+        </ol>
+        <p class="final-answer"><strong>Decision:</strong> at least one criterion is met (two here: criteria 3 and 4), so this is a <strong>finance lease</strong> to Balsam Ridge and a <strong>sales-type lease</strong> to Mountain Trust Leasing.</p>
+        <p>Notice that only <em>one</em> criterion is needed. Criteria 1, 2, and 5 all failed, and it didn't matter. Also notice that the two parties classify the same lease from opposite sides: a finance lease for the lessee is a sales-type lease for the lessor.</p>
+      </div>
+    </div>
+
+    <div class="example" id="p2">
+      <div class="ex-label">Problem 2 &mdash; A Lease That Falls Short</div>
+      <p><strong>Cataloochee Precision Works</strong> leases a CNC machining center from <strong>Tuckasegee Equipment Finance</strong>.</p>
+      <ul>
+        <li>Fair value of the machine: $500,000. Estimated remaining economic life: 8 years.</li>
+        <li>Lease term: 5 years, with payments at the beginning of each year.</li>
+        <li>The present value of the lease payments is $431,213.</li>
+        <li>Title does not transfer, and there is no purchase option.</li>
+        <li>The machine is a standard model that Tuckasegee can readily lease to other customers.</li>
+      </ul>
+      <div class="input-block">
+        <div class="input-item"><label for="p2-a">Lease term as a percentage of economic life (enter 62.5 for 62.5%):</label>
+          <input type="number" step="any" id="p2-a" class="ans" data-label="Lease term &divide; economic life" data-answer="62.5" data-unit="%" placeholder="0"><span class="unit">%</span></div>
+        <div class="input-item"><label for="p2-b">Present value of payments as a percentage of fair value (one decimal):</label>
+          <input type="number" step="any" id="p2-b" class="ans" data-label="PV of payments &divide; fair value" data-answer="86.2" data-unit="%" placeholder="0"><span class="unit">%</span></div>
+        <div class="input-item"><label for="p2-c">Classification by the lessee (Cataloochee):</label>
+          <select id="p2-c" class="ans" data-label="Lessee classification" data-answer="Operating lease"><option value="">Select&hellip;</option><option>Finance lease</option><option>Operating lease</option></select></div>
+        <div class="input-item"><label for="p2-d">Classification by the lessor (Tuckasegee):</label>
+          <select id="p2-d" class="ans" data-label="Lessor classification" data-answer="Operating lease"><option value="">Select&hellip;</option><option>Sales-type lease</option><option>Operating lease</option></select></div>
+        <button class="reveal-btn" onclick="reveal('p2')">Reveal Answer</button>
+      </div>
+      <div class="feedback"></div>
+      <div class="solution" hidden>
+        <div class="solution-label">Your answers vs. the answers</div>
+        <table class="data"><tr><th>Item</th><th>Your answer</th><th>Answer</th></tr><tbody class="compare-body"></tbody></table>
+        <div class="solution-label">Explanation</div>
+        <p><strong>Criteria 1, 2, and 5</strong> are answered directly by the facts: title doesn't transfer, there's no purchase option, and the machine is a standard model with alternative uses to the lessor. None is met.</p>
+        <p><strong>Criterion 3:</strong> 5-year lease term &divide; 8-year economic life = <strong>62.5%</strong>. That's below the 75% guideline, so the lease term is not the &ldquo;major part&rdquo; of the machine's life.</p>
+        <p><strong>Criterion 4:</strong> $431,213 &divide; $500,000 = <strong>86.2%</strong>. That's below the 90% guideline, so the payments are not &ldquo;substantially all&rdquo; of fair value.</p>
+        <p class="final-answer"><strong>Decision:</strong> none of the five criteria is met, so this is an <strong>operating lease</strong> to both the lessee and the lessor.</p>
+        <p>To be an operating lease, a lease must fail <em>all five</em> tests. Also notice that 86.2% is close to the 90% guideline. The 75% and 90% figures are one reasonable approach, not bright lines, so leases that land near a threshold are where estimates of economic life and fair value (and management's incentives to shade them) matter most.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================== SECTION 2 ============================== -->
+  <div class="lo-block">
+    <h2>The Lessee's Finance Lease (Balsam Ridge Bakery)</h2>
+
+    <div class="example" id="p3">
+      <div class="ex-label">Problem 3 &mdash; Beginning of the Lease</div>
+      <p>Balsam Ridge's lease is a finance lease. Calculate the present value of the five lease payments, which is the amount Balsam Ridge records for its right-of-use asset and its lease payable. Use the present value of an annuity due of $1 (n = 5, i = 9%) of <strong>4.23972</strong>.</p>
+      <div class="input-block">
+        <div class="input-item"><label for="p3-a">Present value of the lease payments:</label><span class="unit">$</span>
+          <input type="number" step="any" id="p3-a" class="ans" data-label="Right-of-use asset and lease payable" data-answer="360376" data-unit="$" placeholder="0"></div>
+        <button class="reveal-btn" onclick="reveal('p3')">Reveal Answer</button>
+      </div>
+      <div class="feedback"></div>
+      <div class="solution" hidden>
+        <div class="solution-label">Your answer vs. the answer</div>
+        <table class="data"><tr><th>Item</th><th>Your answer</th><th>Answer</th></tr><tbody class="compare-body"></tbody></table>
+        <div class="solution-label">Explanation</div>
+        <p>The lessee pays for the right to control the use of the equipment, and that price is the present value of the lease payments:</p>
+        <p class="final-answer"><strong>$85,000 &times; 4.23972 = $360,376</strong></p>
+        <p>Because the first payment is due at the <em>beginning</em> of the lease, the payments are an <strong>annuity due</strong>, so you use the annuity-due factor. (With an ordinary annuity factor of 3.88965 you'd get $330,620, which is too low by one period of interest: $330,620 &times; 1.09 &asymp; $360,376.) On a calculator, use BEG mode with N = 5, I = 9, PMT = &minus;85,000 and solve for PV. In Excel: <code>=PV(.09,5,-85000,1)</code>.</p>
+        <p>Just as with an installment purchase, Balsam Ridge debits an asset and credits a liability for the present value of what it owes:</p>
+        <div class="date-tag">Jan. 1, <span class="yr0">2024</span></div>
+        <table class="je-table">
+          <tr><td>Right-of-use asset (present value of lease payments)</td><td class="je-debit-amt">360,376</td><td></td></tr>
+          <tr><td class="indent">Lease payable (present value of lease payments)</td><td></td><td class="je-credit-amt">360,376</td></tr>
+        </table>
+        <p class="je-desc">Balsam Ridge doesn't have legal ownership of the equipment, but it has acquired the <em>right to use</em> it. That's why the asset is called a right-of-use asset.</p>
+      </div>
+    </div>
+
+    <div class="example" id="p4">
+      <div class="ex-label">Problem 4 &mdash; The First Payment</div>
+      <p>Balsam Ridge makes the first $85,000 payment on January 1, <span class="yr0">2024</span>, the same day the lease begins. How much interest expense does it record on this payment, and what is the lease payable balance immediately afterward?</p>
+      <div class="input-block">
+        <div class="input-item"><label for="p4-a">Interest expense recorded with the first payment:</label><span class="unit">$</span>
+          <input type="number" step="any" id="p4-a" class="ans" data-label="Interest expense" data-answer="0" data-unit="$" placeholder="0"></div>
+        <div class="input-item"><label for="p4-b">Lease payable balance after the first payment:</label><span class="unit">$</span>
+          <input type="number" step="any" id="p4-b" class="ans" data-label="Lease payable balance" data-answer="275376" data-unit="$" placeholder="0"></div>
+        <button class="reveal-btn" onclick="reveal('p4')">Reveal Answer</button>
+      </div>
+      <div class="feedback"></div>
+      <div class="solution" hidden>
+        <div class="solution-label">Your answers vs. the answers</div>
+        <table class="data"><tr><th>Item</th><th>Your answer</th><th>Answer</th></tr><tbody class="compare-body"></tbody></table>
+        <div class="solution-label">Explanation</div>
+        <p>Interest accrues over time on the balance outstanding. The first payment is made on day one, so <strong>no interest has accrued yet</strong> and the entire $85,000 reduces the lease payable:</p>
+        <div class="date-tag">Jan. 1, <span class="yr0">2024</span></div>
+        <table class="je-table">
+          <tr><td>Lease payable</td><td class="je-debit-amt">85,000</td><td></td></tr>
+          <tr><td class="indent">Cash (lease payment)</td><td></td><td class="je-credit-amt">85,000</td></tr>
+        </table>
+        <p class="je-desc">Balance after the payment: $360,376 &minus; $85,000 = <strong>$275,376</strong>.</p>
+        <p>Another way to see it: the first $85,000 is like a down payment, and the remaining $275,376 is financed by four year-end payments. That is why the interest for the first year is calculated on $275,376, not on $360,376.</p>
+      </div>
+    </div>
+
+    <div class="example" id="p5">
+      <div class="ex-label">Problem 5 &mdash; The Second Payment</div>
+      <p>On December 31, <span class="yr0">2024</span>, Balsam Ridge makes the second $85,000 payment. Split the payment between interest expense and reduction of the lease payable, and find the balance afterward.</p>
+      <div class="input-block">
+        <div class="input-item"><label for="p5-a">Interest expense (9% of the outstanding balance):</label><span class="unit">$</span>
+          <input type="number" step="any" id="p5-a" class="ans" data-label="Interest expense" data-answer="24784" data-unit="$" placeholder="0"></div>
+        <div class="input-item"><label for="p5-b">Reduction of the lease payable:</label><span class="unit">$</span>
+          <input type="number" step="any" id="p5-b" class="ans" data-label="Reduction of lease payable" data-answer="60216" data-unit="$" placeholder="0"></div>
+        <div class="input-item"><label for="p5-c">Lease payable balance after the payment:</label><span class="unit">$</span>
+          <input type="number" step="any" id="p5-c" class="ans" data-label="Lease payable balance" data-answer="215160" data-unit="$" placeholder="0"></div>
+        <button class="reveal-btn" onclick="reveal('p5')">Reveal Answer</button>
+      </div>
+      <div class="feedback"></div>
+      <div class="solution" hidden>
+        <div class="solution-label">Your answers vs. the answers</div>
+        <table class="data"><tr><th>Item</th><th>Your answer</th><th>Answer</th></tr><tbody class="compare-body"></tbody></table>
+        <div class="solution-label">Explanation</div>
+        <p>One year has passed, so interest has accrued at the effective rate (9%) on the balance that was outstanding during the year, $275,376:</p>
+        <p><strong>Interest expense</strong> = 9% &times; ($360,376 &minus; $85,000) = 9% &times; $275,376 = <strong>$24,784</strong><br>
+        <strong>Reduction of lease payable</strong> = $85,000 &minus; $24,784 = <strong>$60,216</strong><br>
+        <strong>New balance</strong> = $275,376 &minus; $60,216 = <strong>$215,160</strong></p>
+        <div class="date-tag">Dec. 31, <span class="yr0">2024</span></div>
+        <table class="je-table">
+          <tr><td>Interest expense [9% &times; ($360,376 &minus; $85,000)]</td><td class="je-debit-amt">24,784</td><td></td></tr>
+          <tr><td>Lease payable (difference)</td><td class="je-debit-amt">60,216</td><td></td></tr>
+          <tr><td class="indent">Cash (lease payment)</td><td></td><td class="je-credit-amt">85,000</td></tr>
+        </table>
+        <p class="je-desc">This is the same effective-interest method used for an installment note. Because the balance shrinks with each payment, interest expense declines each period.</p>
+        <div class="solution-label">The full amortization schedule</div>
+        <table class="data">
+          <tr><th>Date</th><th class="num">Payment</th><th class="num">Interest (9%)</th><th class="num">Decrease in balance</th><th class="num">Balance</th></tr>
+          <tr><td>1/1/<span class="yr0">2024</span></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num">360,376</td></tr>
+          <tr><td>1/1/<span class="yr0">2024</span></td><td class="num">85,000</td><td class="num">&mdash;</td><td class="num">85,000</td><td class="num">275,376</td></tr>
+          <tr><td>12/31/<span class="yr0">2024</span></td><td class="num">85,000</td><td class="num">24,784</td><td class="num">60,216</td><td class="num">215,160</td></tr>
+          <tr><td>12/31/<span class="yr1">2025</span></td><td class="num">85,000</td><td class="num">19,364</td><td class="num">65,636</td><td class="num">149,524</td></tr>
+          <tr><td>12/31/<span class="yr2">2026</span></td><td class="num">85,000</td><td class="num">13,457</td><td class="num">71,543</td><td class="num">77,981</td></tr>
+          <tr><td>12/31/<span class="yr3">2027</span></td><td class="num">85,000</td><td class="num">7,019*</td><td class="num">77,981</td><td class="num">0</td></tr>
+          <tr class="total-row"><td>Total</td><td class="num">425,000</td><td class="num">64,624</td><td class="num">360,376</td><td></td></tr>
+        </table>
+        <p class="je-desc">*Adjusted for rounding. The $425,000 of cash payments covers $360,376 for the equipment's use plus $64,624 of interest.</p>
+      </div>
+    </div>
+
+    <div class="example" id="p6">
+      <div class="ex-label">Problem 6 &mdash; Amortizing the Right-of-Use Asset</div>
+      <p>Separately from the interest and principal entries, Balsam Ridge must also amortize its right-of-use asset. Assume straight-line amortization over the lease term.</p>
+      <div class="input-block">
+        <div class="input-item"><label for="p6-a">Annual amortization expense:</label><span class="unit">$</span>
+          <input type="number" step="any" id="p6-a" class="ans" data-label="Annual amortization expense" data-answer="72075" data-unit="$" placeholder="0"></div>
+        <div class="input-item"><label for="p6-b">If the lease had included a purchase option the lessee is reasonably certain to exercise, over what period would Balsam Ridge amortize the asset?</label>
+          <select id="p6-b" class="ans" data-label="Amortization period with a purchase option" data-answer="The asset's useful life"><option value="">Select&hellip;</option><option>The lease term</option><option>The asset's useful life</option></select></div>
+        <button class="reveal-btn" onclick="reveal('p6')">Reveal Answer</button>
+      </div>
+      <div class="feedback"></div>
+      <div class="solution" hidden>
+        <div class="solution-label">Your answers vs. the answers</div>
+        <table class="data"><tr><th>Item</th><th>Your answer</th><th>Answer</th></tr><tbody class="compare-body"></tbody></table>
+        <div class="solution-label">Explanation</div>
+        <p>Like any noncurrent asset, the right-of-use asset provides an economic benefit (the right to use a productive asset) over the period covered by the lease term, so the lessee amortizes it. Straight-line amortization over five years:</p>
+        <p class="final-answer"><strong>$360,376 &divide; 5 years = $72,075 per year</strong></p>
+        <div class="date-tag">Dec. 31, <span class="yr0">2024</span>, and each of the next four years</div>
+        <table class="je-table">
+          <tr><td>Amortization expense ($360,376 &divide; 5 years)</td><td class="je-debit-amt">72,075</td><td></td></tr>
+          <tr><td class="indent">Right-of-use asset</td><td></td><td class="je-credit-amt">72,075</td></tr>
+        </table>
+        <p class="je-desc">In a finance lease, interest expense and amortization expense are recorded and reported separately.</p>
+        <p><strong>The amortization period.</strong> A lessee normally amortizes over the <em>lease term</em>. But if ownership transfers, or a purchase option is reasonably certain to be exercised (criterion 1 or 2 is met), the lessee will still have the asset after the lease ends. In that case it amortizes over the asset's <strong>useful life</strong>. In Balsam Ridge's lease the two periods happen to be the same five years, which is why the question above asks about a hypothetical purchase option.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================== SECTION 3 ============================== -->
+  <div class="lo-block">
+    <h2>The Lessor's Sales-Type Lease</h2>
+
+    <div class="example" id="p7">
+      <div class="ex-label">Problem 7 &mdash; Mountain Trust Leasing at the Beginning of the Lease</div>
+      <p>Mountain Trust Leasing paid $360,376 for the equipment and will lease it to Balsam Ridge on the terms above. What amount does Mountain Trust Leasing record as its lease receivable, and how much selling profit does it recognize at the beginning of the lease?</p>
+      <div class="input-block">
+        <div class="input-item"><label for="p7-a">Lease receivable:</label><span class="unit">$</span>
+          <input type="number" step="any" id="p7-a" class="ans" data-label="Lease receivable" data-answer="360376" data-unit="$" placeholder="0"></div>
+        <div class="input-item"><label for="p7-b">Selling profit at the beginning of the lease:</label><span class="unit">$</span>
+          <input type="number" step="any" id="p7-b" class="ans" data-label="Selling profit" data-answer="0" data-unit="$" placeholder="0"></div>
+        <button class="reveal-btn" onclick="reveal('p7')">Reveal Answer</button>
+      </div>
+      <div class="feedback"></div>
+      <div class="solution" hidden>
+        <div class="solution-label">Your answers vs. the answers</div>
+        <table class="data"><tr><th>Item</th><th>Your answer</th><th>Answer</th></tr><tbody class="compare-body"></tbody></table>
+        <div class="solution-label">Explanation</div>
+        <p>The lessor records a receivable for the <strong>present value of the payments to be received</strong> ($360,376), the mirror image of the lessee's liability. It also removes (derecognizes) the asset being leased from its books. Because the "selling price" (the present value of the payments) equals Mountain Trust Leasing's cost ($360,376), there is no gap and therefore <strong>no selling profit</strong>.</p>
+        <div class="date-tag">Jan. 1, <span class="yr0">2024</span></div>
+        <table class="je-table">
+          <tr><td>Lease receivable (present value of lease payments)</td><td class="je-debit-amt">360,376</td><td></td></tr>
+          <tr><td class="indent">Equipment (lessor's cost: carrying amount)</td><td></td><td class="je-credit-amt">360,376</td></tr>
+        </table>
+        <p class="je-desc">Mountain Trust Leasing is a financial intermediary: it acquired the asset and financed it for Balsam Ridge. Its only income from the lease will be interest revenue over the lease term.</p>
+      </div>
+    </div>
+
+    <div class="example" id="p8">
+      <div class="ex-label">Problem 8 &mdash; Mountain Trust Leasing Collects the Second Payment</div>
+      <p>On December 31, <span class="yr0">2024</span>, Mountain Trust Leasing collects the second $85,000 payment. How much of it is interest revenue, and how much reduces the lease receivable?</p>
+      <div class="input-block">
+        <div class="input-item"><label for="p8-a">Interest revenue:</label><span class="unit">$</span>
+          <input type="number" step="any" id="p8-a" class="ans" data-label="Interest revenue" data-answer="24784" data-unit="$" placeholder="0"></div>
+        <div class="input-item"><label for="p8-b">Reduction of the lease receivable:</label><span class="unit">$</span>
+          <input type="number" step="any" id="p8-b" class="ans" data-label="Reduction of lease receivable" data-answer="60216" data-unit="$" placeholder="0"></div>
+        <button class="reveal-btn" onclick="reveal('p8')">Reveal Answer</button>
+      </div>
+      <div class="feedback"></div>
+      <div class="solution" hidden>
+        <div class="solution-label">Your answers vs. the answers</div>
+        <table class="data"><tr><th>Item</th><th>Your answer</th><th>Answer</th></tr><tbody class="compare-body"></tbody></table>
+        <div class="solution-label">Explanation</div>
+        <p>The lessor's numbers are the mirror image of the lessee's. After the first payment (collected on day one, with no interest), the receivable is $360,376 &minus; $85,000 = $275,376. One year of interest at 9%:</p>
+        <p><strong>Interest revenue</strong> = 9% &times; $275,376 = <strong>$24,784</strong><br>
+        <strong>Reduction of lease receivable</strong> = $85,000 &minus; $24,784 = <strong>$60,216</strong></p>
+        <div class="date-tag">Dec. 31, <span class="yr0">2024</span></div>
+        <table class="je-table">
+          <tr><td>Cash (lease payment)</td><td class="je-debit-amt">85,000</td><td></td></tr>
+          <tr><td class="indent">Lease receivable (difference)</td><td></td><td class="je-credit-amt">60,216</td></tr>
+          <tr><td class="indent">Interest revenue [9% &times; ($360,376 &minus; $85,000)]</td><td></td><td class="je-credit-amt">24,784</td></tr>
+        </table>
+        <p class="je-desc">Both companies use the <em>same</em> amortization schedule from Problem 5. The lessee records interest expense where the lessor records interest revenue. Over the whole lease, Mountain Trust Leasing earns $64,624 of interest revenue and nothing more.</p>
+      </div>
+    </div>
+
+    <div class="example" id="p9">
+      <div class="ex-label">Problem 9 &mdash; A Sales-Type Lease with a Selling Profit</div>
+      <p>Now change one fact. Balsam Ridge leases the equipment <strong>directly from Ridgeline Ovens Corporation</strong>, the manufacturer, instead of through Mountain Trust Leasing. Ridgeline manufactured the equipment at a cost of <strong>$270,000</strong>. All other lease terms are unchanged, so the present value of the lease payments is still $360,376. What does Ridgeline record at the beginning of the lease?</p>
+      <div class="input-block">
+        <div class="input-item"><label for="p9-a">Sales revenue:</label><span class="unit">$</span>
+          <input type="number" step="any" id="p9-a" class="ans" data-label="Sales revenue" data-answer="360376" data-unit="$" placeholder="0"></div>
+        <div class="input-item"><label for="p9-b">Cost of goods sold:</label><span class="unit">$</span>
+          <input type="number" step="any" id="p9-b" class="ans" data-label="Cost of goods sold" data-answer="270000" data-unit="$" placeholder="0"></div>
+        <div class="input-item"><label for="p9-c">Selling profit:</label><span class="unit">$</span>
+          <input type="number" step="any" id="p9-c" class="ans" data-label="Selling profit" data-answer="90376" data-unit="$" placeholder="0"></div>
+        <button class="reveal-btn" onclick="reveal('p9')">Reveal Answer</button>
+      </div>
+      <div class="feedback"></div>
+      <div class="solution" hidden>
+        <div class="solution-label">Your answers vs. the answers</div>
+        <table class="data"><tr><th>Item</th><th>Your answer</th><th>Answer</th></tr><tbody class="compare-body"></tbody></table>
+        <div class="solution-label">Explanation</div>
+        <p>Selling profit exists when the &ldquo;selling price&rdquo; (the present value of the lease payments) exceeds the cost of the asset sold:</p>
+        <p class="final-answer"><strong>$360,376 sales revenue &minus; $270,000 cost of goods sold = $90,376 selling profit</strong></p>
+        <div class="date-tag">Jan. 1, <span class="yr0">2024</span></div>
+        <table class="je-table">
+          <tr><td>Lease receivable (present value of lease payments)</td><td class="je-debit-amt">360,376</td><td></td></tr>
+          <tr><td>Cost of goods sold (lessor's cost)</td><td class="je-debit-amt">270,000</td><td></td></tr>
+          <tr><td class="indent">Sales revenue (present value of lease payments)</td><td></td><td class="je-credit-amt">360,376</td></tr>
+          <tr><td class="indent">Equipment (lessor's cost)</td><td></td><td class="je-credit-amt">270,000</td></tr>
+        </table>
+        <p class="je-desc">This is recorded just like any sale of a product, in two pieces: one for the receivable and revenue, one for cost of goods sold and the reduction of inventory.</p>
+        <p><strong>Compare it with an ordinary sale.</strong> If a restaurant-supply store sells you an $850 commercial mixer on its credit account and paid $520 wholesale, it debits Accounts receivable and credits Sales revenue for $850, then debits Cost of goods sold and credits Inventory for $520. Ridgeline's entry has the same structure, with a lease receivable in place of the account receivable and equipment in place of inventory. Leases are just one of the arrangements sellers use to help customers buy their products.</p>
+        <p>(If the asset's carrying value had <em>exceeded</em> its fair value, the lessor would record a selling loss instead.)</p>
+      </div>
+    </div>
+
+    <div class="example" id="p10">
+      <div class="ex-label">Problem 10 &mdash; Everything After Day One</div>
+      <p>Using the Ridgeline lease from Problem 9, answer two final questions about the entries that follow the opening entry.</p>
+      <div class="input-block">
+        <div class="input-item"><label for="p10-a">Interest revenue Ridgeline records when it collects the second payment on December 31, <span class="yr0">2024</span>:</label><span class="unit">$</span>
+          <input type="number" step="any" id="p10-a" class="ans" data-label="Ridgeline's interest revenue" data-answer="24784" data-unit="$" placeholder="0"></div>
+        <div class="input-item"><label for="p10-b">Do Balsam Ridge's (the lessee's) entries change because its lessor is Ridgeline, with a selling profit, instead of Mountain Trust Leasing?</label>
+          <select id="p10-b" class="ans" data-label="Lessee's entries change?" data-answer="No, the lessee's entries are identical"><option value="">Select&hellip;</option><option>Yes, the lessee's entries change</option><option>No, the lessee's entries are identical</option></select></div>
+        <button class="reveal-btn" onclick="reveal('p10')">Reveal Answer</button>
+      </div>
+      <div class="feedback"></div>
+      <div class="solution" hidden>
+        <div class="solution-label">Your answers vs. the answers</div>
+        <table class="data"><tr><th>Item</th><th>Your answer</th><th>Answer</th></tr><tbody class="compare-body"></tbody></table>
+        <div class="solution-label">Explanation</div>
+        <p>Ridgeline's lease receivable is $360,376, exactly the same as Mountain Trust Leasing's. The same payments, the same 9% rate, and the same schedule apply, so its interest revenue on December 31, <span class="yr0">2024</span> is 9% &times; $275,376 = <strong>$24,784</strong>, and the receivable is reduced by $60,216. The selling profit is recognized <em>once</em>, at the beginning of the lease. After that, every lessor entry is <strong>precisely the same</strong> as in a sales-type lease without selling profit.</p>
+        <p>The lessee's accounting doesn't depend on whether the lessor earns a profit. Balsam Ridge still records a right-of-use asset and lease payable of $360,376, the same interest expense, and the same $72,075 of annual amortization.</p>
+        <div class="solution-label">Putting it together</div>
+        <table class="data">
+          <tr><th></th><th>Balsam Ridge (lessee)</th><th>Mountain Trust Leasing (lessor, no profit)</th><th>Ridgeline (lessor, with profit)</th></tr>
+          <tr><td>Beginning of lease</td><td>Dr Right-of-use asset 360,376<br>Cr Lease payable 360,376</td><td>Dr Lease receivable 360,376<br>Cr Equipment 360,376</td><td>Dr Lease receivable 360,376<br>Dr COGS 270,000<br>Cr Sales revenue 360,376<br>Cr Equipment 270,000</td></tr>
+          <tr><td>Second payment</td><td>Dr Interest expense 24,784<br>Dr Lease payable 60,216<br>Cr Cash 85,000</td><td>Dr Cash 85,000<br>Cr Lease receivable 60,216<br>Cr Interest revenue 24,784</td><td>Same as Mountain Trust Leasing</td></tr>
+          <tr><td>Income over the lease</td><td>Interest expense + amortization expense</td><td>Interest revenue only ($64,624)</td><td>$90,376 selling profit at the start + $64,624 interest revenue</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>Finance &amp; Sales-Type Leases · Guided Walkthrough (Ungraded)</footer>
+
+<script>
+  var REVEALED = {};
+  var TOTAL = 10;
+
+  function updateProgress() {
+    var count = Object.keys(REVEALED).length;
+    document.getElementById('progressLabel').textContent = count + ' of ' + TOTAL + ' revealed';
+    document.getElementById('progressFill').style.width = (count / TOTAL * 100) + '%';
+  }
+
+  function fmt(val, unit) {
+    var n = Number(val);
+    if (unit === '$') {
+      return '$' + n.toLocaleString('en-US', { maximumFractionDigits: 2 });
+    }
+    if (unit === '%') {
+      return n.toLocaleString('en-US', { maximumFractionDigits: 2 }) + '%';
+    }
+    return String(val);
+  }
+
+  function reveal(id) {
+    var box = document.getElementById(id);
+    var inputs = box.querySelectorAll('.ans');
+    var fb = box.querySelector('.feedback');
+    var missing = false;
+    inputs.forEach(function (el) {
+      if (el.value === '' || el.value === null) { missing = true; }
+    });
+    if (missing) {
+      fb.className = 'feedback warn';
+      fb.textContent = 'Enter an answer in every box first, then click Reveal Answer.';
+      return;
+    }
+    fb.className = 'feedback';
+    fb.textContent = '';
+
+    var rows = '';
+    inputs.forEach(function (el) {
+      var label = el.getAttribute('data-label');
+      var unit = el.getAttribute('data-unit') || '';
+      var yours, answer;
+      if (el.tagName === 'SELECT') {
+        yours = el.value;
+        answer = el.getAttribute('data-answer');
+      } else {
+        yours = fmt(el.value, unit);
+        answer = fmt(el.getAttribute('data-answer'), unit);
+      }
+      rows += '<tr><td>' + label + '</td><td>' + yours + '</td><td><strong>' + answer + '</strong></td></tr>';
+    });
+    box.querySelector('.compare-body').innerHTML = rows;
+    box.querySelector('.solution').hidden = false;
+    REVEALED[id] = true;
+    updateProgress();
+  }
+
+  // Keeps the lease dates current automatically, with no recoding needed each year.
+  // yr0 is always the current calendar year; yr1 through yr4 follow.
+  (function () {
+    var yr0 = new Date().getFullYear();
+    var years = { yr0: yr0, yr1: yr0 + 1, yr2: yr0 + 2, yr3: yr0 + 3, yr4: yr0 + 4 };
+    Object.keys(years).forEach(function (cls) {
+      document.querySelectorAll('.' + cls).forEach(function (el) {
+        el.textContent = years[cls];
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
