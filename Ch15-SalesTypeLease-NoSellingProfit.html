@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sales-Type Lease with No Selling Profit: Lessor Schedule and Entries</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+  :root {
+    --wcu-purple: #4B2E83; --wcu-purple-dark: #341f5c; --wcu-gold: #C8A24A;
+    --ink: #232023; --paper: #fdfcfb; --panel: #f7f3ec; --rule: #e2d9c8;
+    --good: #2E6B45; --good-bg: #E7F3EB; --bad: #9C4221; --bad-bg: #FBEAE2;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; line-height: 1.55; }
+  header { background: linear-gradient(135deg, var(--wcu-purple) 0%, var(--wcu-purple-dark) 100%); color: #fff; padding: 2.2rem 1.5rem 1.8rem; border-bottom: 6px solid var(--wcu-gold); }
+  header .eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--wcu-gold); margin-bottom: 0.4rem; }
+  header h1 { font-family: 'Source Serif 4', serif; font-weight: 700; font-size: 1.7rem; margin: 0 0 0.3rem; }
+  header p.sub { margin: 0; color: #e7e0f2; font-size: 0.95rem; }
+  main { max-width: 900px; margin: 0 auto; padding: 1.6rem 1.5rem 4rem; }
+  h2 { font-family: 'Source Serif 4', serif; font-size: 1.4rem; margin: 2.2rem 0 0.8rem; color: var(--wcu-purple-dark); border-bottom: 2px solid var(--rule); padding-bottom: 0.4rem; }
+  h3 { font-family: 'Source Serif 4', serif; font-size: 1.1rem; margin: 1.4rem 0 0.6rem; color: var(--wcu-purple-dark); }
+  p { margin: 0.6rem 0; }
+  .meta-bar { display: flex; flex-wrap: wrap; gap: 0.8rem; align-items: center; background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 0.9rem 1.1rem; margin-top: 1.2rem; }
+  .meta-bar label { font-size: 0.88rem; font-weight: 600; color: var(--wcu-purple-dark); }
+  .meta-bar input[type="text"] { font-family: 'IBM Plex Mono', monospace; padding: 0.4rem 0.6rem; border: 1px solid var(--rule); border-radius: 5px; width: 160px; }
+  .meta-bar button { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.88rem; color: #fff; background: var(--wcu-purple); border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; }
+  .meta-bar button:hover { background: var(--wcu-purple-dark); }
+  .meta-bar .year-note { font-size: 0.82rem; color: #6b6560; }
+  .rounding-note { font-size: 0.88rem; background: #fff; border: 1px solid var(--rule); border-radius: 6px; padding: 0.7rem 1rem; margin-top: 1rem; }
+  .background-box { background: #fff; border: 1px solid var(--rule); border-radius: 8px; padding: 1rem 1.2rem; margin-top: 1rem; }
+  .background-box table.lease-terms { border-collapse: collapse; width: 100%; margin: 0.8rem 0 0.4rem; font-size: 0.92rem; }
+  .background-box table.lease-terms td { border: 1px solid var(--rule); padding: 0.4rem 0.6rem; }
+  .background-box table.lease-terms td:first-child { background: var(--panel); color: var(--wcu-purple-dark); font-weight: 600; width: 55%; }
+  .background-box table.lease-terms td:last-child { font-family: 'IBM Plex Mono', monospace; }
+  .part-instructions { font-style: italic; color: #4a453f; margin-bottom: 1rem; }
+  .party-header { font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #fff; background: var(--wcu-purple); padding: 0.5rem 0.9rem; border-radius: 5px; margin: 1.4rem 0 0.8rem; }
+  .entry-block { background: #fff; border: 1px solid var(--rule); border-left: 5px solid var(--rule); border-radius: 8px; padding: 0.9rem 1.1rem; margin-bottom: 1rem; transition: border-color 0.2s ease; }
+  .entry-block.entry-correct { border-left-color: var(--good); }
+  .entry-block.entry-incorrect { border-left-color: var(--bad); }
+  .entry-desc { font-size: 0.94rem; margin-bottom: 0.7rem; }
+  .tx-recap { font-size: 0.9rem; background: var(--panel); border-radius: 6px; padding: 0.6rem 0.8rem; margin-bottom: 0.6rem; color: #4a453f; }
+  .tx-recap .letter { font-weight: 700; color: var(--wcu-purple-dark); }
+  table.je-table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+  table.je-table th, table.je-table td { border: 1px solid var(--rule); padding: 0.4rem 0.5rem; }
+  table.je-table th { background: var(--panel); font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--wcu-purple-dark); }
+  table.je-table select { width: 100%; font-family: 'Inter', sans-serif; font-size: 0.88rem; padding: 0.3rem; border: 1px solid var(--rule); border-radius: 4px; background: #fff; }
+  table.je-table input[type="number"] { width: 100%; font-family: 'IBM Plex Mono', monospace; font-size: 0.88rem; padding: 0.3rem 0.4rem; border: 1px solid var(--rule); border-radius: 4px; }
+  table.q-table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+  table.q-table td { border: 1px solid var(--rule); padding: 0.4rem 0.6rem; vertical-align: middle; }
+  table.q-table td:first-child { width: 62%; }
+  table.q-table select { width: 100%; font-family: 'Inter', sans-serif; font-size: 0.88rem; padding: 0.3rem; border: 1px solid var(--rule); border-radius: 4px; background: #fff; }
+  table.q-table input[type="number"] { width: 100%; font-family: 'IBM Plex Mono', monospace; font-size: 0.88rem; padding: 0.3rem 0.4rem; border: 1px solid var(--rule); border-radius: 4px; }
+  td.mark-cell { width: 2.2rem; text-align: center; font-family: 'IBM Plex Mono', monospace; font-weight: 800; font-size: 1.1rem; color: var(--bad); border: none !important; background: transparent; }
+  th.mark-th { width: 2.2rem; border: none !important; background: transparent !important; }
+  .attempts { font-size: 0.82rem; color: #6b6560; }
+  .attempts.out { color: var(--bad); font-weight: 600; }
+  .check-row button:disabled { opacity: 0.45; cursor: not-allowed; filter: none; }
+  .check-note { font-size: 0.88rem; background: #fff; border: 1px solid var(--rule); border-left: 5px solid var(--wcu-gold); border-radius: 6px; padding: 0.7rem 1rem; margin-top: 0.8rem; }
+  .entry-result { font-size: 0.82rem; font-weight: 600; margin-top: 0.4rem; }
+  .entry-result.ok { color: var(--good); }
+  .entry-result.no { color: var(--bad); }
+  .check-row { display: flex; align-items: center; gap: 1rem; margin: 1.2rem 0 2rem; }
+  .check-row button { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.92rem; color: #fff; background: var(--wcu-gold); border: none; padding: 0.65rem 1.3rem; border-radius: 6px; cursor: pointer; }
+  .check-row button:hover { filter: brightness(0.95); }
+  .part-score { font-family: 'IBM Plex Mono', monospace; font-weight: 700; font-size: 0.95rem; color: var(--wcu-purple-dark); }
+  .overall-score { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 1.1rem 1.3rem; margin-top: 2rem; font-size: 1rem; }
+  .overall-score strong { color: var(--wcu-purple-dark); }
+  .submit-box { margin-top: 2rem; padding: 1.2rem; background: #fff; border: 1px solid var(--rule); border-radius: 8px; }
+  .submit-box input[type="text"] { font-family: 'Inter', sans-serif; padding: 0.5rem 0.7rem; border: 1px solid var(--rule); border-radius: 5px; width: 260px; margin-right: 0.8rem; }
+  .submit-box button { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.9rem; color: var(--wcu-purple-dark); background: #fff; border: 2px solid var(--wcu-purple); padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; }
+  footer { text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; color: #8a8380; padding: 1.5rem; }
+  @media print {
+    .meta-bar button, .check-row button, .submit-box button { display: none; }
+  }
+
+  table.lease-grid { border-collapse: collapse; width: 100%; margin: 0.8rem 0 0.6rem; font-size: 0.88rem; }
+  table.lease-grid th, table.lease-grid td { border: 1px solid var(--rule); padding: 0.4rem 0.55rem; text-align: left; vertical-align: top; }
+  table.lease-grid th { background: var(--panel); color: var(--wcu-purple-dark); font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; text-transform: uppercase; }
+  table.lease-grid td:nth-child(n+3) { font-family: 'IBM Plex Mono', monospace; }
+  table.sch-table { border-collapse: collapse; width: 100%; font-size: 0.88rem; min-width: 640px; }
+  table.sch-table th, table.sch-table td { border: 1px solid var(--rule); padding: 0.3rem 0.4rem; }
+  table.sch-table th { background: var(--panel); font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--wcu-purple-dark); }
+  td.sch-date { font-size: 0.85rem; white-space: nowrap; }
+  td.sch-na { text-align: center; color: #a39c94; background: var(--panel); }
+  td.sch-cell { position: relative; }
+  td.sch-cell input { width: 100%; font-family: 'IBM Plex Mono', monospace; font-size: 0.88rem; padding: 0.28rem 1.5rem 0.28rem 0.4rem; border: 1px solid var(--rule); border-radius: 4px; }
+  span.cellx { position: absolute; right: 0.6rem; top: 50%; transform: translateY(-50%); color: var(--bad); font-weight: 800; font-family: 'IBM Plex Mono', monospace; pointer-events: none; }
+  tr.sch-total td { background: var(--panel); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">ACCT 351 &middot; Intermediate Accounting I</div>
+  <h1>Sales-Type Lease with No Selling Profit: Lessor Schedule and Entries</h1>
+  <p class="sub">Amortization Schedule (Part 1) and Lessor Journal Entries (Part 2)</p>
+</header>
+
+<main>
+
+  <div class="meta-bar">
+    <label for="studentId">Student ID</label>
+    <input type="text" id="studentId" placeholder="e.g. 920123456" maxlength="20">
+    <button onclick="regenerate()">Generate Scenario</button>
+    <span class="year-note" id="yearNote"></span>
+  </div>
+
+  <div class="rounding-note" id="noteCalc"></div>
+
+  <div class="check-note">
+    <strong>Checking your work:</strong> you have <strong>3 attempts per part</strong>. Each time you click <em>Check My Work</em>, a red <strong style="color:#9C4221;">&#10007;</strong> appears next to every line, amount, or item that is incorrect, so you can fix it and check again. Your attempts are saved in this browser for your Student ID, and regenerating the scenario will not reset them. After your third attempt, that part is locked.
+  </div>
+
+  <h2>Background</h2>
+  <div class="background-box" id="bgText">Click "Generate Scenario" above to build your version of this problem.</div>
+
+  <div id="parts"></div>
+
+  <div class="overall-score" id="overallScore">Check every part above to see your combined score.</div>
+
+  <div class="submit-box">
+    <label for="studentName">Your name:</label>
+    <input type="text" id="studentName" placeholder="Full name">
+    <button onclick="window.print()">Print / Save as PDF</button>
+  </div>
+
+</main>
+
+<footer>Sales-Type Lease with No Selling Profit: Lessor Schedule and Entries &middot; E15-7 &middot; ACCT 351 &middot; Western Carolina University</footer>
+
+<script>
+/* ---------------------------------------------------------------------
+   SHARED SCENARIO FOR THE CANNING-LINE LEASE (quarterly payments at the beginning of each quarter)
+--------------------------------------------------------------------- */
+const TOL_DOLLARS = 3;   // schedule amounts can drift a few dollars depending on whether a student rounds each row
+const LESSEE = 'Wayah Valley Brewing Company';
+const FINLESSOR = 'Tellico Equipment Finance';
+const MANUFACTURER = 'Cowee Mountain Automation, Inc.';
+const ASSET = 'automated canning line';
+
+const MON = ['Jan.', 'Apr.', 'Jul.', 'Oct.'];
+const MONFULL = ['January', 'April', 'July', 'October'];
+function payDateShort(k) { const q = k - 1; return MON[q % 4] + ' 1, ' + (YEAR + Math.floor(q / 4)); }
+function payDateLong(k) { const q = k - 1; return MONFULL[q % 4] + ' 1, ' + (YEAR + Math.floor(q / 4)); }
+
+function buildScenario(studentId) {
+  const last6 = last6Of(studentId);
+  const rng = mulberry32(seedFromString('canning-' + last6));
+  const annualRate = pick(rng, [6, 8, 10, 12]);
+  const years = pick(rng, [2, 3]);
+  const n = years * 4;
+  const r = annualRate / 100 / 4;
+  const pmt = pick(rng, [12, 13, 14, 15, 16, 17, 18, 19, 20, 22]) * 1000 + pick(rng, [0, 500]);
+  const factor = annuityDue(r, n);
+  const PV = Math.round(pmt * factor);                    // = fair value = financing lessor's cost (calculator precision)
+  const costRatio = pick(rng, [0.72, 0.76, 0.80]);
+  const mfgCost = Math.round(PV * costRatio / 500) * 500;
+
+  // amortization schedule (whole dollars, balance carried row to row, final interest adjusted for rounding)
+  const rows = [{ label: 'Jan. 1, ' + YEAR + ' (lease begins)', bal: PV }];
+  let bal = PV, totPay = 0, totInt = 0, totDec = 0;
+  for (let k = 1; k <= n; k++) {
+    let interest = k === 1 ? 0 : Math.round(bal * r);
+    let dec = pmt - interest;
+    if (k === n) { dec = bal; interest = pmt - dec; }
+    bal = bal - dec;
+    rows.push({ label: payDateShort(k) + ' (payment ' + k + ')', pay: pmt, int: interest, dec: dec, bal: bal });
+    totPay += pmt; totInt += interest; totDec += dec;
+  }
+  const amort = Math.round(PV / years);
+  return { last6, annualRate, years, n, r, pmt, factor, PV, mfgCost, rows, totals: { pay: totPay, int: totInt, dec: totDec }, amort };
+}
+
+const NOTE_CALC = '<strong>Use a calculator, not a table:</strong> compute present values with a financial calculator (set to <em>BEG</em> mode for payments at the beginning of each period) or a spreadsheet function such as <code>PV</code>. Do <strong>not</strong> use a rounded present value factor from a table. Payments are quarterly, so convert the annual rate and the term to quarters. Round each dollar amount to the nearest whole dollar; when you build the schedule, carry each balance forward from the row above, and the interest in the last row is adjusted for rounding. Answers are accepted within $3 to allow for rounding differences that build up down the schedule. This scenario is generated from the last six digits of the Student ID entered above &mdash; the same ID always produces the same numbers, and the dates update automatically to the current year.';
+
+function termsTable(s, payLabel) {
+  return '<table class="lease-terms">' +
+    '<tr><td>Lease term</td><td>' + s.years + ' years (' + s.n + ' quarterly periods)</td></tr>' +
+    '<tr><td>Quarterly rental payments</td><td>' + payLabel + '</td></tr>' +
+    '<tr><td>Economic life of asset</td><td>' + s.years + ' years</td></tr>' +
+    '<tr><td>Fair value of asset</td><td>' + fmt(s.PV) + '</td></tr>' +
+    '<tr><td>Implicit interest rate</td><td>' + s.annualRate + '% per year (' + (s.annualRate / 4) + '% per quarter)</td></tr>' +
+    '<tr><td>&nbsp;&nbsp;(Also lessee\'s incremental borrowing rate)</td><td></td></tr>' +
+    '</table>';
+}
+function schedulePart(s) {
+  return { id: 'sched', short: 'Schedule', title: 'Lease Amortization Schedule', kind: 'schedule',
+    rateLabel: (s.annualRate / 4) + '%', rows: s.rows, totals: s.totals,
+    instructions: 'Complete the lease amortization schedule. Payments are made at the <strong>beginning</strong> of each quarter, so the first payment (at the start of the lease) includes no interest &mdash; enter 0 or leave it blank. Interest for each later payment is the quarterly rate times the balance outstanding after the previous payment. The final balance is zero, so you may leave it blank or enter 0. Fill in the totals row as well.' };
+}
+function txPay(k, s, showAmt) {
+  return payDateLong(k) + ' &mdash; The ' + ['first','second','third','fourth','fifth'][k - 1] + ' quarterly lease payment' + (showAmt ? ' of ' + fmt(s.pmt) : '') + ' is made' + (k === 1 ? ' at the beginning of the lease.' : '.');
+}
+
+const EX_CODE = 'E15-7';
+function renderBackground(s) {
+  return '<p><strong>' + FINLESSOR + '</strong> leased an ' + ASSET + ' to <strong>' + LESSEE + '</strong> on January 1, ' + YEAR + '. ' +
+    FINLESSOR + ' purchased the equipment from ' + MANUFACTURER + ' at a cost of <strong>' + fmt(s.PV) + '</strong> and routinely buys equipment to lease to other businesses.</p>' +
+    termsTable(s, fmt(s.pmt) + ' at the beginning of each period') +
+    '<p style="font-size:0.9rem;color:#4a453f;">Payments are made on January 1, April 1, July 1, and October 1 of each year. ' + FINLESSOR + '\'s fiscal year ends December 31.</p>' +
+    '<p><strong>Required:</strong> Prepare a lease amortization schedule and the appropriate entries for ' + FINLESSOR + ' from the beginning of the lease through January 1, ' + (YEAR + 1) + '.</p>';
+}
+function buildModel(s) {
+  const R = s.rows, P = s.pmt, PV = s.PV;
+  const blocks = [
+    { key: 'a', tx: 'January 1, ' + YEAR + ' &mdash; The lease begins.', desc: 'Record ' + FINLESSOR + '\'s entry at the beginning of the lease.',
+      lines: [ {a:'Lease receivable', side:'debit', amt:PV}, {a:'Equipment', side:'credit', amt:PV} ] },
+    { key: 'b', tx: txPay(1, s, true), desc: 'Record ' + FINLESSOR + '\'s receipt of the first lease payment.',
+      lines: [ {a:'Cash', side:'debit', amt:P}, {a:'Lease receivable', side:'credit', amt:P} ] }
+  ];
+  [2, 3, 4].forEach(function(k, i) {
+    blocks.push({ key: 'cde'[i], tx: txPay(k, s, true), desc: 'Record ' + FINLESSOR + '\'s receipt of the ' + ['second','third','fourth'][i] + ' lease payment (include the interest that has been earned).',
+      lines: [ {a:'Cash', side:'debit', amt:P}, {a:'Lease receivable', side:'credit', amt:R[k].dec}, {a:'Interest revenue', side:'credit', amt:R[k].int} ] });
+  });
+  blocks.push({ key: 'f', tx: 'December 31, ' + YEAR + ' &mdash; Fiscal year-end.', desc: 'Record ' + FINLESSOR + '\'s adjusting entry for the interest earned since the October 1 payment.',
+    lines: [ {a:'Interest receivable', side:'debit', amt:R[5].int}, {a:'Interest revenue', side:'credit', amt:R[5].int} ] });
+  blocks.push({ key: 'g', tx: 'January 1, ' + (YEAR + 1) + ' &mdash; The fifth quarterly lease payment of ' + fmt(P) + ' is received.', desc: 'Record ' + FINLESSOR + '\'s receipt of the fifth lease payment. The interest in this payment was already accrued at year-end.',
+    lines: [ {a:'Cash', side:'debit', amt:P}, {a:'Interest receivable', side:'credit', amt:R[5].int}, {a:'Lease receivable', side:'credit', amt:R[5].dec} ] });
+  return { parts: [ schedulePart(s),
+    { id: 'je', short: 'Journal Entries', title: 'Lessor Journal Entries', kind: 'entries',
+      instructions: 'Prepare the journal entries for ' + FINLESSOR + ' from the beginning of the lease through January 1, ' + (YEAR + 1) + '. Use the amounts from your schedule. Pick the account for each line first, then enter the amount in the debit or credit column. Leave extra rows blank.',
+      groups: [ { id: 'lessor', header: FINLESSOR + ' (Lessor &mdash; Financing Company)', blocks: blocks } ] } ] };
+}
+
+/* ---------------------------------------------------------------------
+   ENGINE (shared): seeded scenario, part rendering, X-mark grading,
+   3-attempt limit saved per Student ID in this browser
+--------------------------------------------------------------------- */
+const YEAR = new Date().getFullYear();
+const MAX_ATTEMPTS = 3;
+const TOL = (typeof TOL_DOLLARS !== 'undefined') ? TOL_DOLLARS : 2;   // dollars of rounding allowed on every amount
+
+const ACCOUNTS = [
+  'Cash','Lease receivable','Lease payable','Right-of-use asset','Equipment','Inventory',
+  'Sales revenue','Cost of goods sold','Interest revenue','Interest expense',
+  'Interest receivable','Interest payable','Amortization expense','Lease expense',
+  'Lease revenue','Accounts Payable','No Entry Required'
+];
+
+function seedFromString(str) {
+  let h = 2166136261 >>> 0;
+  for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
+  return h >>> 0;
+}
+function mulberry32(a) {
+  return function() {
+    a |= 0; a = (a + 0x6D2B79F5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+function pick(rng, arr) { return arr[Math.floor(rng() * arr.length)]; }
+function last6Of(id) { return String(id).replace(/\D/g, '').slice(-6).padStart(6, '0'); }
+function fmt(n) { return '$' + Number(n).toLocaleString('en-US'); }
+function annuityDue(i, n) { return (1 - Math.pow(1 + i, -n)) / i * (1 + i); }
+
+document.getElementById('yearNote').textContent = 'Dates are in ' + YEAR + ' and roll forward automatically next year.';
+
+/* ---------------------------------------------------------------------
+   ATTEMPT LIMIT
+--------------------------------------------------------------------- */
+const memAttempts = {};
+function attemptKey(part, last6) { return 'ch15hw-' + EX_CODE + '-attempts-' + last6 + '-' + part; }
+function getAttempts(part, last6) {
+  const key = attemptKey(part, last6 || SCN.last6);
+  let stored = 0;
+  try { stored = parseInt(window.localStorage.getItem(key) || '0', 10) || 0; } catch (e) { /* storage blocked */ }
+  return Math.max(stored, memAttempts[key] || 0);
+}
+function setAttempts(part, n) {
+  const key = attemptKey(part, SCN.last6);
+  memAttempts[key] = n;
+  try { window.localStorage.setItem(key, String(n)); } catch (e) { /* storage blocked */ }
+}
+function lockPart(part, locked) {
+  document.getElementById('part-' + part).querySelectorAll('select, input').forEach(function(el) { el.disabled = locked; });
+}
+function updateAttemptsUI(part) {
+  const used = getAttempts(part);
+  const btn = document.getElementById('btn-' + part);
+  const lab = document.getElementById('attempts-' + part);
+  if (used >= MAX_ATTEMPTS) {
+    btn.disabled = true;
+    lab.className = 'attempts out';
+    lab.textContent = 'No attempts remaining (' + MAX_ATTEMPTS + ' of ' + MAX_ATTEMPTS + ' used). This part is locked.';
+    lockPart(part, true);
+  } else {
+    btn.disabled = false;
+    lab.className = 'attempts';
+    lab.textContent = 'Attempts used: ' + used + ' of ' + MAX_ATTEMPTS;
+    lockPart(part, false);
+  }
+}
+
+/* ---------------------------------------------------------------------
+   RENDERING
+--------------------------------------------------------------------- */
+let SCN = null;
+let MODEL = null;
+
+function generateScenario() {
+  const raw = document.getElementById('studentId').value.trim();
+  SCN = buildScenario(raw || '920123456');
+  MODEL = buildModel(SCN);
+  document.getElementById('bgText').innerHTML = renderBackground(SCN);
+  renderAll();
+  MODEL.parts.forEach(function(p) { document.getElementById('score-' + p.id).textContent = ''; updateAttemptsUI(p.id); });
+  document.getElementById('overallScore').textContent = 'Check every part above to see your combined score.';
+}
+
+function regenerate() {
+  const raw = document.getElementById('studentId').value.trim();
+  const l6 = last6Of(raw || '920123456');
+  const used = MODEL.parts.reduce(function(sum, p) { return sum + getAttempts(p.id, l6); }, 0);
+  if (used > 0 && !window.confirm('Regenerating the scenario will clear everything you have typed. Attempts you have already used will still count. Continue?')) return;
+  generateScenario();
+}
+
+function acctOptions() {
+  return ACCOUNTS.map(function(a) { return '<option value="' + a + '">' + a + '</option>'; }).join('');
+}
+
+function renderAll() {
+  let html = '';
+  MODEL.parts.forEach(function(p, idx) {
+    html += '<h2>Part ' + (idx + 1) + ' of ' + MODEL.parts.length + ' &mdash; ' + p.title + '</h2>';
+    html += '<p class="part-instructions">' + p.instructions + '</p>';
+    let body = '';
+    if (p.kind === 'entries') body = renderEntries(p);
+    else if (p.kind === 'schedule') body = renderSchedule(p);
+    else body = renderFields(p);
+    html += '<div id="part-' + p.id + '">' + body + '</div>';
+    html += '<div class="check-row"><button id="btn-' + p.id + '" onclick="checkPart(\'' + p.id + '\')">Check My Work &mdash; Part ' + (idx + 1) + '</button>' +
+            '<span class="part-score" id="score-' + p.id + '"></span><span class="attempts" id="attempts-' + p.id + '"></span></div>';
+  });
+  document.getElementById('parts').innerHTML = html;
+}
+
+/* ---- journal entries ---- */
+function renderEntries(p) {
+  let html = '';
+  p.groups.forEach(function(g) {
+    html += '<div class="party-header">' + g.header + '</div>';
+    g.blocks.forEach(function(b) {
+      const uid = g.id + '-' + b.key;
+      let rows = '';
+      for (let i = 0; i < b.lines.length + 1; i++) {     // one spare row so line counts do not give away the answer
+        rows += '<tr>' +
+          '<td><select id="' + uid + '-acct-' + i + '"><option value="">Select account\u2026</option>' + acctOptions() + '</select></td>' +
+          '<td><input type="number" step="1" id="' + uid + '-dr-' + i + '"></td>' +
+          '<td><input type="number" step="1" id="' + uid + '-cr-' + i + '"></td>' +
+          '<td class="mark-cell" id="mark-' + uid + '-' + i + '"></td></tr>';
+      }
+      html += '<div class="entry-block" id="block-' + uid + '">' +
+        '<div class="tx-recap"><span class="letter">(' + b.key + ')</span> ' + b.tx + '</div>' +
+        '<div class="entry-desc">' + b.desc + '</div>' +
+        '<table class="je-table"><thead><tr><th style="width:55%">Account</th><th>Debit</th><th>Credit</th><th class="mark-th"></th></tr></thead>' +
+        '<tbody>' + rows + '</tbody></table><div class="entry-result" id="result-' + uid + '"></div></div>';
+    });
+  });
+  return html;
+}
+
+function checkEntry(uid, expectedLines) {
+  const remaining = expectedLines.slice();
+  let correct = 0, badRows = 0;
+  for (let i = 0; i < expectedLines.length + 1; i++) {
+    const acct = document.getElementById(uid + '-acct-' + i).value;
+    const drRaw = document.getElementById(uid + '-dr-' + i).value;
+    const crRaw = document.getElementById(uid + '-cr-' + i).value;
+    const mark = document.getElementById('mark-' + uid + '-' + i);
+    const dr = parseFloat(drRaw), cr = parseFloat(crRaw);
+    const hasDr = !isNaN(dr) && dr > 0, hasCr = !isNaN(cr) && cr > 0;
+    mark.textContent = ''; mark.removeAttribute('title');
+    if (acct === '' && drRaw === '' && crRaw === '') continue;
+    let ok = false;
+    if (acct && hasDr !== hasCr) {
+      const side = hasDr ? 'debit' : 'credit';
+      const amt = hasDr ? dr : cr;
+      const idx = remaining.findIndex(function(exp) { return exp.a === acct && exp.side === side && Math.abs(exp.amt - amt) <= TOL; });
+      if (idx >= 0) { ok = true; correct++; remaining.splice(idx, 1); }
+    }
+    if (!ok) { badRows++; mark.textContent = '\u2717'; mark.title = 'Incorrect'; }
+  }
+  const n = expectedLines.length;
+  const block = document.getElementById('block-' + uid);
+  const resultEl = document.getElementById('result-' + uid);
+  if (correct === n && badRows === 0) {
+    block.className = 'entry-block entry-correct';
+    resultEl.className = 'entry-result ok';
+    resultEl.textContent = '\u2713 All ' + n + ' lines correct.';
+  } else {
+    block.className = 'entry-block entry-incorrect';
+    resultEl.className = 'entry-result no';
+    let msg = correct + ' of ' + n + ' lines correct.';
+    if (badRows) msg += ' Fix the line' + (badRows > 1 ? 's' : '') + ' marked \u2717.';
+    const missing = n - correct - badRows;
+    if (missing > 0) msg += ' ' + missing + ' more line' + (missing > 1 ? 's are' : ' is') + ' needed.';
+    resultEl.textContent = msg;
+  }
+  return { correct: correct, total: n };
+}
+
+function gradeEntries(p) {
+  let c = 0, t = 0;
+  p.groups.forEach(function(g) { g.blocks.forEach(function(b) {
+    const r = checkEntry(g.id + '-' + b.key, b.lines); c += r.correct; t += r.total;
+  }); });
+  return { correct: c, total: t, unit: 'lines' };
+}
+
+/* ---- amortization schedule ---- */
+const SCH_COLS = [['pay', 'Payment'], ['int', p => 'Interest (' + p.rateLabel + ' &times; balance)'], ['dec', 'Decrease in balance'], ['bal', 'Outstanding balance']];
+function schedCell(id) {
+  return '<td class="sch-cell"><input type="number" step="1" id="' + id + '"><span class="cellx" id="x-' + id + '"></span></td>';
+}
+function renderSchedule(p) {
+  let head = '<tr><th style="width:26%">Date</th>';
+  SCH_COLS.forEach(function(c) { head += '<th>' + (typeof c[1] === 'function' ? c[1](p) : c[1]) + '</th>'; });
+  head += '</tr>';
+  let body = '';
+  p.rows.forEach(function(r, i) {
+    body += '<tr><td class="sch-date">' + r.label + '</td>';
+    SCH_COLS.forEach(function(c) {
+      if (i === 0 && c[0] !== 'bal') body += '<td class="sch-na">&mdash;</td>';
+      else body += schedCell('sch-' + i + '-' + c[0]);
+    });
+    body += '</tr>';
+  });
+  body += '<tr class="sch-total"><td>Total</td>' + schedCell('sch-tot-pay') + schedCell('sch-tot-int') + schedCell('sch-tot-dec') + '<td class="sch-na">&mdash;</td></tr>';
+  return '<div class="entry-block" id="block-' + p.id + '"><div style="overflow-x:auto"><table class="sch-table"><thead>' + head + '</thead><tbody>' + body + '</tbody></table></div>' +
+         '<div class="entry-result" id="result-' + p.id + '"></div></div>';
+}
+function gradeSchedule(p) {
+  let correct = 0, total = 0, wrong = 0;
+  function cell(id, expected) {
+    const el = document.getElementById(id), x = document.getElementById('x-' + id);
+    const raw = el.value, v = parseFloat(raw);
+    x.textContent = ''; x.removeAttribute('title');
+    if (expected === 0) {                               // a zero (no interest yet, or a final zero balance) may be left blank or entered as 0
+      if (raw !== '' && !(Math.abs(v) <= TOL)) { wrong++; x.textContent = '\u2717'; x.title = 'Incorrect'; }
+      return;
+    }
+    total++;
+    if (!isNaN(v) && Math.abs(v - expected) <= TOL) { correct++; }
+    else { wrong++; x.textContent = '\u2717'; x.title = 'Incorrect'; }
+  }
+  p.rows.forEach(function(r, i) {
+    if (i === 0) { cell('sch-0-bal', r.bal); return; }
+    cell('sch-' + i + '-pay', r.pay); cell('sch-' + i + '-int', r.int);
+    cell('sch-' + i + '-dec', r.dec); cell('sch-' + i + '-bal', r.bal);
+  });
+  cell('sch-tot-pay', p.totals.pay); cell('sch-tot-int', p.totals.int); cell('sch-tot-dec', p.totals.dec);
+  const block = document.getElementById('block-' + p.id), res = document.getElementById('result-' + p.id);
+  if (correct === total && wrong === 0) {
+    block.className = 'entry-block entry-correct'; res.className = 'entry-result ok';
+    res.textContent = '\u2713 All ' + total + ' amounts correct.';
+  } else {
+    block.className = 'entry-block entry-incorrect'; res.className = 'entry-result no';
+    res.textContent = correct + ' of ' + total + ' amounts correct. Fix the cells marked \u2717 (rows below an error may also be off because balances carry forward).';
+  }
+  return { correct: correct, total: total, unit: 'amounts' };
+}
+
+/* ---- fill-in items (selects and numbers) ---- */
+function renderFields(p) {
+  let rows = '';
+  p.items.forEach(function(it, i) {
+    let ctl;
+    const id = 'f-' + p.id + '-' + i;
+    if (it.type === 'select') {
+      ctl = '<select id="' + id + '"><option value="">Select&hellip;</option>' +
+        it.options.map(function(o) { return '<option value="' + o + '">' + o + '</option>'; }).join('') + '</select>';
+    } else {
+      ctl = '<input type="number" step="any" id="' + id + '" placeholder="' + (it.placeholder || '$') + '">';
+    }
+    rows += '<tr><td>' + it.label + '</td><td>' + ctl + '</td><td class="mark-cell" id="mark-' + id + '"></td></tr>';
+  });
+  return '<div class="entry-block" id="block-' + p.id + '"><table class="q-table"><tbody>' + rows + '</tbody></table>' +
+         '<div class="entry-result" id="result-' + p.id + '"></div></div>';
+}
+function gradeFields(p) {
+  let correct = 0;
+  p.items.forEach(function(it, i) {
+    const id = 'f-' + p.id + '-' + i;
+    const el = document.getElementById(id), mark = document.getElementById('mark-' + id);
+    let ok;
+    if (it.type === 'select') ok = el.value === it.answer;
+    else { const v = parseFloat(el.value); ok = !isNaN(v) && Math.abs(v - it.answer) <= (it.tol === undefined ? TOL : it.tol); }
+    if (ok) correct++;
+    mark.textContent = ok ? '' : '\u2717';
+    if (ok) mark.removeAttribute('title'); else mark.title = 'Incorrect';
+  });
+  const n = p.items.length;
+  const block = document.getElementById('block-' + p.id), res = document.getElementById('result-' + p.id);
+  if (correct === n) {
+    block.className = 'entry-block entry-correct'; res.className = 'entry-result ok';
+    res.textContent = '\u2713 All ' + n + ' items correct.';
+  } else {
+    block.className = 'entry-block entry-incorrect'; res.className = 'entry-result no';
+    res.textContent = correct + ' of ' + n + ' items correct. Fix the items marked \u2717.';
+  }
+  return { correct: correct, total: n, unit: 'items' };
+}
+
+/* ---------------------------------------------------------------------
+   CHECKING
+--------------------------------------------------------------------- */
+function partHasInput(part) {
+  let any = false;
+  document.getElementById('part-' + part).querySelectorAll('select, input').forEach(function(el) { if (el.value !== '') any = true; });
+  return any;
+}
+
+function checkPart(partId) {
+  if (!MODEL) { alert('Click "Generate Scenario" first.'); return; }
+  const p = MODEL.parts.find(function(x) { return x.id === partId; });
+  if (getAttempts(partId) >= MAX_ATTEMPTS) { updateAttemptsUI(partId); return; }
+  if (!partHasInput(partId)) {
+    document.getElementById('score-' + partId).textContent = 'Enter your answers first. This did not use an attempt.';
+    return;
+  }
+  const attempt = getAttempts(partId) + 1;
+  setAttempts(partId, attempt);
+  const r = p.kind === 'entries' ? gradeEntries(p) : (p.kind === 'schedule' ? gradeSchedule(p) : gradeFields(p));
+  document.getElementById('score-' + partId).textContent = r.correct + ' of ' + r.total + ' ' + r.unit + ' correct (attempt ' + attempt + ' of ' + MAX_ATTEMPTS + ')';
+  updateAttemptsUI(partId);
+  updateOverall();
+}
+
+function updateOverall() {
+  const texts = MODEL.parts.map(function(p) { return document.getElementById('score-' + p.id).textContent; });
+  const done = texts.filter(function(t) { return /attempt \d of/.test(t); }).length;
+  if (done === MODEL.parts.length) {
+    document.getElementById('overallScore').innerHTML = MODEL.parts.map(function(p, i) {
+      return '<strong>Part ' + (i + 1) + ' (' + p.short + '):</strong> ' + texts[i];
+    }).join(' &nbsp;&nbsp; ');
+  } else if (done > 0) {
+    document.getElementById('overallScore').textContent = 'Check the remaining parts to see your combined score.';
+  }
+}
+
+/* Editing a cell or row clears its red X until the next check */
+function clearMark(e) {
+  const t = e.target;
+  if (!t || !t.closest) return;
+  const cell = t.closest('td.sch-cell');
+  if (cell) { const x = cell.querySelector('.cellx'); if (x) { x.textContent = ''; x.removeAttribute('title'); } return; }
+  const tr = t.closest('tr');
+  if (!tr) return;
+  const m = tr.querySelector('.mark-cell');
+  if (m) { m.textContent = ''; m.removeAttribute('title'); }
+}
+document.addEventListener('input', clearMark);
+document.addEventListener('change', clearMark);
+
+document.getElementById('noteCalc').innerHTML = NOTE_CALC;
+
+/* init */
+generateScenario();
+</script>
+
+</body>
+</html>
