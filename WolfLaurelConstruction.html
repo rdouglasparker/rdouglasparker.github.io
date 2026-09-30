@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wolf Laurel Construction Company — Blue Ridge Parkway Bridge Contract: Revenue, Cost of Construction, Gross Profit, and Journal Entries</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --purple:#592C88; --purple-deep:#38195A; --purple-mid:#6E3FA3;
+    --gold:#B0925C; --gold-soft:#D6C398; --gold-pale:#F1E9D6;
+    --parchment:#F7F4EC; --paper:#FFFEFA; --ink:#221B2E; --slate:#5F5A6B;
+    --line:#DBD3E0; --answer:#1E5C34; --answer-bg:#E7F1E9; --danger:#9C3B34;
+    --shadow: 0 1px 2px rgba(56,25,90,0.07), 0 6px 18px rgba(56,25,90,0.08);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{ background:var(--parchment); color:var(--ink); font-family:'Inter',sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased; }
+  a{ color:inherit; }
+
+  header{ background: linear-gradient(180deg, var(--purple) 0%, var(--purple-deep) 100%); color:#F1E9D6; padding: 30px 6vw 24px; position:relative; }
+  header::after{ content:""; position:absolute; left:0; right:0; bottom:0; height:4px; background: linear-gradient(90deg, var(--gold-soft), var(--gold) 40%, var(--gold-soft) 70%, var(--gold)); }
+  .eyebrow{ font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold-soft); margin:0 0 10px; }
+  h1.title{ font-family:'Source Serif 4', serif; font-weight:600; font-size:clamp(24px,3.4vw,34px); margin:0 0 8px; letter-spacing:-0.01em; }
+  .subtitle{ font-size:14.5px; color:#D9CDE5; max-width:680px; margin:0; }
+
+  .id-bar{ max-width:900px; margin:0 auto; padding:18px 6vw 0; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .id-bar label{ font-size:13px; font-weight:600; color:var(--slate); }
+  .id-bar input[type="text"]{ font-family:'IBM Plex Mono', monospace; font-size:13.5px; padding:8px 11px; border:1px solid var(--line); border-radius:5px; background:var(--paper); color:var(--ink); width:180px; }
+  .id-bar input:focus{ outline:none; border-color:var(--purple-mid); box-shadow:0 0 0 3px rgba(89,44,136,0.10); }
+  .id-bar button{ font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600; border-radius:5px; padding:8px 15px; border:1px solid var(--purple); background:var(--purple); color:#fff; cursor:pointer; }
+  .id-bar button:hover{ background:var(--purple-mid); }
+  .id-hint{ font-size:12px; color:var(--slate); width:100%; margin-top:2px; }
+
+  .rounding-note{ max-width:900px; margin:14px auto 0; padding:12px 6vw; font-size:12.5px; color:var(--slate); line-height:1.5; }
+  .rounding-note strong{ color:var(--purple); font-weight:600; }
+  .rounding-note p{ margin:0 0 6px; } .rounding-note p:last-child{ margin-bottom:0; }
+
+  main{ max-width:900px; margin:0 auto; padding:10px 6vw 90px; }
+
+  .facts{ background:var(--paper); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); padding:18px 22px; margin-top:20px; font-size:14.5px; }
+  .facts h2{ font-family:'Source Serif 4', serif; font-size:19px; color:var(--purple); margin:0 0 10px; }
+  .facts p{ margin:0 0 10px; } .facts p:last-child{ margin-bottom:0; }
+  .facts span.val{ font-weight:700; color:var(--purple-deep); }
+  .facts h3{ font-family:'Source Serif 4', serif; font-size:15.5px; font-weight:600; color:var(--purple); margin:16px 0 4px; }
+  .facts table.items-ref{ width:100%; border-collapse:collapse; font-size:13.5px; margin-top:6px; }
+  .facts table.items-ref th{ text-align:right; font-size:11.5px; text-transform:uppercase; color:var(--slate); border-bottom:2px solid var(--purple); padding:6px 8px; }
+  .facts table.items-ref th:first-child{ text-align:left; }
+  .facts table.items-ref td{ text-align:right; padding:6px 8px; border-bottom:1px solid var(--line); }
+  .facts table.items-ref td:first-child{ text-align:left; }
+
+  .part{ background:var(--paper); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); padding:24px 26px 26px; margin-top:26px; }
+  .part-label{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--gold); background:var(--purple); display:inline-block; padding:3px 9px; border-radius:4px; letter-spacing:.04em; margin-bottom:12px; }
+  .part h2{ font-family:'Source Serif 4', serif; font-size:21px; font-weight:600; color:var(--purple); margin:0 0 12px; }
+  .scenario{ background:var(--parchment); border-left:3px solid var(--gold); padding:14px 18px; border-radius:0 6px 6px 0; font-size:14.5px; color:var(--ink); margin-bottom:20px; }
+  .scenario p{ margin:0 0 10px; } .scenario p:last-child{ margin-bottom:0; }
+
+  .req{ font-weight:600; font-size:14.5px; color:var(--ink); margin:20px 0 10px; }
+  .req .letter{ font-family:'IBM Plex Mono', monospace; color:var(--purple); margin-right:6px; }
+
+  .stmt-head{ text-align:center; margin:4px 0 10px; padding:10px 8px; border-top:2px solid var(--purple); border-bottom:1px solid var(--line); }
+  .stmt-head .co{ display:block; font-family:'Source Serif 4', serif; font-weight:700; font-size:16.5px; color:var(--purple-deep); }
+  .stmt-head .st{ display:block; font-family:'Source Serif 4', serif; font-weight:600; font-size:14.5px; color:var(--ink); }
+  .stmt-head .dt{ display:block; font-size:13px; color:var(--ink); }
+  .stmt-head .un{ display:block; font-size:12px; color:var(--slate); font-style:italic; }
+
+  .work-line{ display:flex; align-items:center; gap:8px; font-size:13.5px; margin:6px 0; flex-wrap:wrap; }
+  .work-line label{ color:var(--slate); min-width:auto; }
+  .work-line input[type="text"]{ font-family:'IBM Plex Mono', monospace; font-size:13.5px; padding:6px 8px; border:1px solid var(--line); border-radius:5px; background:var(--parchment); color:var(--ink); width:150px; text-align:right; }
+
+  table.stmt{ width:100%; border-collapse:collapse; font-size:13.5px; margin-top:6px; }
+  table.stmt th{ text-align:right; font-size:11.5px; text-transform:uppercase; letter-spacing:.03em; color:var(--slate); border-bottom:2px solid var(--purple); padding:8px 8px; }
+  table.stmt th:first-child{ text-align:left; }
+  table.stmt td{ border-bottom:1px solid var(--line); padding:7px 8px; text-align:right; }
+  table.stmt td:first-child{ text-align:left; }
+  table.stmt td.indent{ padding-left:22px; }
+  table.stmt input[type="text"]{ width:100%; text-align:right; font-family:'IBM Plex Mono', monospace; font-size:13.5px; padding:6px 8px; border:1px solid var(--line); border-radius:5px; background:var(--parchment); color:var(--ink); }
+  table.stmt select.line-select{ width:100%; font-family:'Inter',sans-serif; font-size:13.5px; padding:6px 8px; border:1px solid var(--line); border-radius:5px; background:var(--parchment); color:var(--ink); }
+  table.stmt input:focus, table.stmt select:focus, .work-line input:focus{ outline:none; border-color:var(--purple-mid); box-shadow:0 0 0 3px rgba(89,44,136,0.10); background:var(--paper); }
+  table.stmt tr.subtotal-row td{ border-top:2px solid var(--purple); font-weight:600; }
+  table.stmt tr.final-row td{ border-top:3px double var(--purple); font-weight:700; }
+  table.stmt tr.section-row td{ font-family:'Source Serif 4', serif; font-weight:600; color:var(--purple); background:var(--gold-pale); border-bottom:1px solid var(--gold-soft); text-align:left; padding:6px 8px; }
+  table.stmt.sep td.rowlabel{ font-weight:500; }
+  .stmt-hint{ font-size:12px; color:var(--slate); margin-top:6px; }
+
+  .key{ margin-top:14px; background:var(--answer-bg); border:1px solid #B7D3BE; border-radius:8px; padding:14px 16px; color:var(--answer); font-size:13.5px; }
+  .key strong{ display:block; margin-bottom:6px; font-family:'Source Serif 4', serif; font-size:14.5px; }
+  .key table{ width:100%; border-collapse:collapse; font-size:13px; margin-top:4px; }
+  .key td{ padding:4px 6px; border-bottom:1px dashed #B7D3BE; }
+  .key tr:last-child td{ border-bottom:none; font-weight:600; }
+
+  .check-bar{ margin-top:20px; padding-top:16px; border-top:1px solid var(--line); display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  .btn-check{ font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600; border-radius:5px; padding:9px 18px; border:1px solid var(--purple); background:var(--purple); color:#fff; cursor:pointer; }
+  .btn-check:hover{ background:var(--purple-mid); }
+  .check-summary{ font-size:13.5px; font-weight:600; }
+  .check-summary.good{ color:var(--answer); } .check-summary.bad{ color:var(--danger); }
+  .check-disclaimer{ font-size:11.5px; color:var(--slate); width:100%; margin-top:2px; font-style:italic; }
+  .attempts-note{ font-size:12px; font-weight:600; color:var(--slate); }
+  .attempts-note.low{ color:var(--gold); } .attempts-note.locked{ color:var(--danger); }
+  input:disabled, select:disabled{ opacity:0.7; cursor:not-allowed; }
+
+  .score-bar{ margin-top:26px; background:var(--paper); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); padding:16px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+  .score-bar .score-label{ font-family:'Source Serif 4', serif; font-size:16px; font-weight:600; color:var(--purple); }
+  .score-bar .score-value{ font-family:'IBM Plex Mono', monospace; font-size:18px; font-weight:600; color:var(--ink); }
+  .score-bar .score-breakdown{ font-size:12px; color:var(--slate); width:100%; }
+  .key-reveal-note{ margin-top:14px; background:var(--gold-pale); border:1px solid var(--gold-soft); border-radius:8px; padding:12px 16px; color:var(--purple-deep); font-size:13.5px; font-weight:600; display:none; }
+
+  .submit-bar{ background:var(--paper); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); padding:22px 26px 24px; margin-top:26px; }
+  .submit-bar h2{ font-family:'Source Serif 4', serif; font-size:19px; font-weight:600; color:var(--purple); margin:0 0 14px; }
+  .submit-row{ display:flex; align-items:center; gap:10px; margin-bottom:12px; flex-wrap:wrap; }
+  .submit-row label{ font-size:13px; font-weight:600; color:var(--slate); }
+  .submit-row input[type="text"]{ font-family:'Inter',sans-serif; font-size:13.5px; padding:8px 11px; border:1px solid var(--line); border-radius:5px; background:var(--parchment); color:var(--ink); width:240px; }
+  .submit-row input:focus{ outline:none; border-color:var(--purple-mid); box-shadow:0 0 0 3px rgba(89,44,136,0.10); }
+  .btn-submit{ font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600; border-radius:5px; padding:10px 18px; border:1px solid var(--purple); background:var(--purple); color:#fff; cursor:pointer; }
+  .btn-submit:hover{ background:var(--purple-mid); }
+  .btn-submit-outline{ background:var(--paper); color:var(--purple); }
+  .btn-submit-outline:hover{ background:var(--parchment); }
+  .submit-status{ font-size:13px; font-weight:600; min-height:18px; margin:10px 0 0; color:var(--answer); }
+  .submit-status.error{ color:var(--danger); }
+  .submit-hint{ font-size:12px; color:var(--slate); margin:6px 0 0; }
+
+  @media print{
+    .print-hide, .id-bar, .check-bar, .rounding-note{ display:none !important; }
+    header{ background:none !important; color:var(--ink) !important; padding:0 0 14px !important; }
+    header::after{ display:none !important; }
+    .eyebrow{ color:var(--purple) !important; } .subtitle{ color:var(--slate) !important; }
+    body{ background:#fff !important; }
+    .part, .facts{ box-shadow:none !important; border:1px solid #999 !important; break-inside:avoid; }
+    .score-bar{ box-shadow:none !important; border:1.5px solid var(--purple) !important; break-inside:avoid; break-before:avoid; }
+    input[type="text"], select{ border:none !important; border-bottom:1px solid #000 !important; background:transparent !important; border-radius:0 !important; color:#000 !important; -webkit-appearance:none; appearance:none; padding:2px 4px !important; }
+    .print-name-line{ display:block !important; }
+  }
+  .print-name-line{ display:none; font-size:13px; color:var(--ink); padding:0 6vw; margin:0 0 10px; }
+  footer{ text-align:center; padding:26px 6vw 40px; font-size:12px; color:var(--slate); }
+  @media (max-width:600px){ header, main, .id-bar{ padding-left:5vw; padding-right:5vw; } table.stmt{ font-size:12.5px; } }
+
+  /* ---- additions for journal-entry tables and the multi-year chart ---- */
+  .je-year{ font-family:'Source Serif 4', serif; font-size:17px; font-weight:600; color:var(--purple-deep); margin:28px 0 2px; padding:6px 10px; background:var(--gold-pale); border-left:4px solid var(--gold); border-radius:0 6px 6px 0; }
+  .je-title{ display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin:16px 0 4px; font-size:14px; font-weight:600; color:var(--ink); }
+  .je-title .je-letter{ font-family:'IBM Plex Mono', monospace; color:var(--purple); }
+  .je-noentry{ margin-left:auto; display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:500; color:var(--slate); cursor:pointer; }
+  .je-noentry input{ width:16px; height:16px; accent-color:var(--purple); cursor:pointer; }
+  table.stmt.je th:first-child{ width:52%; }
+  table.stmt.je th:not(:first-child){ width:24%; }
+  table.stmt.je td.acct{ text-align:left; }
+  .facts table.items-ref td.lbl{ text-align:left; }
+  table.stmt td.rowlab{ text-align:left; font-weight:500; }
+  .key table td:first-child{ width:46%; }
+  .key .key-sub td{ font-family:'Source Serif 4', serif; font-weight:600; background:rgba(255,255,255,0.45); }
+  /* Feedback markers: a red X (or gold ! for a blank field) beside the cell instead of cell highlighting */
+  .cellwrap{ display:flex; align-items:center; gap:6px; }
+  .cellwrap > input, .cellwrap > select{ flex:1 1 auto; min-width:0; }
+  .mark{ flex:0 0 20px; width:20px; text-align:center; font-family:'Inter',sans-serif; font-weight:700; font-size:17px; line-height:1; visibility:hidden; }
+  .mark.x{ visibility:visible; color:var(--danger); }
+  .mark.blank{ visibility:visible; color:var(--gold); }
+  .je-noentry .mark{ flex:none; }
+  #p1Table input[type="text"]{ font-size:12.5px; padding:6px 5px; }
+  #p1Table .cellwrap{ gap:3px; }
+  #p1Table .mark{ flex-basis:16px; width:16px; font-size:15px; }
+  @media (max-width:600px){
+    table.stmt.je th:first-child{ width:40%; }
+    table.stmt.je th:not(:first-child){ width:30%; }
+    table.stmt.je td, table.stmt.je th{ padding-left:3px; padding-right:3px; }
+    table.stmt.je input[type="text"], table.stmt.je select.line-select{ font-size:11.5px; padding:6px 4px; }
+    table.stmt.je .cellwrap{ gap:1px; }
+    table.stmt.je .mark{ flex-basis:13px; width:13px; font-size:13px; }
+    #p1Table input[type="text"]{ font-size:11px; padding:6px 2px; }
+    #p1Table .mark{ flex-basis:12px; width:12px; font-size:12px; }
+    #p1Table th, #p1Table td{ padding-left:2px; padding-right:2px; }
+    .je-noentry{ margin-left:0; }
+  }
+  .year-block{ margin-top:6px; }
+  .year-block .check-bar{ margin-top:14px; }
+  @media print{ .je-noentry{ display:inline-flex !important; } .je-year{ break-after:avoid; } .mark.x{ color:#b00000 !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">ACCT 351 &middot; Long-Term Contracts &middot; Chapter 6</p>
+  <h1 class="title">Wolf Laurel Construction Company</h1>
+  <p class="subtitle">Recognize revenue over time on a Blue Ridge Parkway bridge contract when revised cost estimates push total costs above the contract price. Calculate revenue, cost of construction, and gross profit (loss) for each year, then prepare the journal entries.</p>
+</header>
+
+<p class="print-name-line" id="printNameLine"></p>
+<p class="print-name-line" id="printScoreLine" style="font-weight:600;"></p>
+
+<div class="id-bar">
+  <label for="studentId">Student ID</label>
+  <input type="text" id="studentId" placeholder="e.g. 92841016">
+  <button id="genBtn" type="button">Generate scenario</button>
+  <span class="id-hint">Your ID determines your numbers &mdash; everyone gets a different but equally solvable version of this problem.</span>
+</div>
+
+<div class="rounding-note">
+  <p><strong>Units:</strong> all amounts are in whole dollars. Carry the percentage of completion at full calculator precision (do not round it), and round each dollar amount to the nearest dollar. Answers within $2 of the key are accepted to allow for rounding.</p>
+  <p><strong>Signs:</strong> in Part 1, use a minus sign for a gross loss. In Part 2, enter every amount as a positive number in either the Debit or the Credit column.</p>
+</div>
+
+<main>
+
+  <div class="facts">
+    <h2>The facts</h2>
+    <p>Lena Raby, Controller of Wolf Laurel Construction Company, is closing the books on the company's Blue Ridge Parkway bridge contract and needs the accounting for each year documented. In <span class="val y1"></span>, Wolf Laurel Construction signed a fixed-price contract with the National Park Service to build the <span class="val" id="fRoad">Sherrill Cove Bridge</span> on the Blue Ridge Parkway for <span class="val" id="fP">$10,000,000</span>. The bridge was completed in <span class="val y3"></span>. Information related to the contract:</p>
+    <table class="items-ref">
+      <thead><tr><th>Item</th><th class="y1"></th><th class="y2"></th><th class="y3"></th></tr></thead>
+      <tbody>
+        <tr><td class="lbl">Cost incurred during the year</td><td id="fc1"></td><td id="fc2"></td><td id="fc3"></td></tr>
+        <tr><td class="lbl">Estimated costs to complete as of year-end</td><td id="fe1"></td><td id="fe2"></td><td id="fe3"></td></tr>
+        <tr><td class="lbl">Billings during the year</td><td id="fb1"></td><td id="fb2"></td><td id="fb3"></td></tr>
+        <tr><td class="lbl">Cash collections during the year</td><td id="fk1"></td><td id="fk2"></td><td id="fk3"></td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:12px;">Wolf Laurel Construction recognizes revenue on this contract over time according to percentage of completion, using the cost-to-cost ratio to measure progress.</p>
+  </div>
+
+  <!-- ============================ PART 1: Revenue, cost, gross profit ============================ -->
+  <div class="part" data-part-key="p1">
+    <span class="part-label">Part 1</span>
+    <h2>Revenue, cost of construction, and gross profit</h2>
+    <div class="scenario">
+      <p>Wolf Laurel Construction recognizes revenue over time according to percentage of completion, measured with the cost-to-cost ratio. Revenue for a year is the contract price multiplied by the cumulative percentage of completion, less the revenue already recognized in earlier years. Cost of construction is the contract’s equivalent of cost of goods sold.</p>
+    </div>
+    <div class="req"><span class="letter">a.</span>Calculate the amount of revenue, cost of construction, and gross profit (loss) to be recognized in each of the three years, and enter the three-year totals. Enter 0 where nothing is recognized.</div>
+    <table class="stmt" id="p1Table">
+      <thead><tr><th style="width:20%;">Item</th><th class="y1"></th><th class="y2"></th><th class="y3"></th><th>Total</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <p class="stmt-hint">Percentage of completion = cumulative costs incurred &divide; (cumulative costs incurred + estimated costs to complete at year-end). Cumulative gross profit = percentage of completion &times; total estimated gross profit (contract price less total estimated costs); each year's gross profit is the change in that cumulative amount.</p>
+    <p class="stmt-hint">Gross profit (loss) is revenue less cost of construction, and cost of construction is the contract's equivalent of cost of goods sold. If the entire contract is expected to lose money, the entire expected loss is recognized in the first year that loss is anticipated, so cost of construction for a year can differ from the costs incurred in that year. In that situation, cost of construction equals revenue plus the loss recognized.</p>
+
+    <div class="check-bar">
+      <button class="btn-check" id="checkP1" type="button">Check my work</button>
+      <span class="check-summary" id="p1Summary"></span>
+      <span class="attempts-note" id="p1Attempts">3 attempts remaining</span>
+      <span class="check-disclaimer">This checks all 12 amounts: revenue, cost of construction, and gross profit (loss) for each year and for the three-year total. A red &#10007; beside a cell means it is incorrect.</span>
+    </div>
+    <div class="key" id="p1Key" style="display:none;"></div>
+  </div>
+
+  <!-- ============================ PART 2: Journal entries (checked one year at a time) ============================ -->
+  <div class="part" data-part-key="p2">
+    <span class="part-label">Part 2</span>
+    <h2>Journal entries</h2>
+    <div class="scenario">
+      <p>Record every entry for each of the three years. Construction costs are debited to Construction in progress (CIP), the contractor's work-in-process account. Progress billings create an account receivable and are credited to Billings on construction contract. The entry that recognizes revenue and cost of construction also adds the gross profit to CIP (or subtracts a loss from it). When the bridge is completed in the final year, close out the billings and CIP accounts.</p>
+    </div>
+    <div class="req"><span class="letter">b.</span>Prepare all necessary journal entries for each of the three years. For each line, select the account from the dropdown and enter the amount in the Debit or the Credit column. List debits first, then credits. Credit &ldquo;Cash, materials, etc.&rdquo; for construction costs incurred. If an entry is not required, check the &ldquo;No entry required&rdquo; box for that entry. Each year has its own <strong>Check my work</strong> button, so you can finish and check one year before moving to the next.</div>
+    <p class="stmt-hint">Progress billings are credited to Billings on construction contract, which is contra to Construction in progress (CIP). Gross profit recognized is added to CIP; a loss recognized is subtracted from CIP. A red &#10007; beside a cell means that cell is incorrect; a gold ! means it was left blank.</p>
+
+    <div class="year-block" id="p2aBlock">
+      <div class="je-year">Year <span class="y1"></span></div>
+      <div id="p2aEntries" class="je-container"></div>
+      <div class="check-bar">
+        <button class="btn-check" id="checkP2a" type="button">Check my work &mdash; <span class="y1"></span></button>
+        <span class="check-summary" id="p2aSummary"></span>
+        <span class="attempts-note" id="p2aAttempts">3 attempts remaining</span>
+        <span class="check-disclaimer">This checks every account you selected and every amount you entered for <span class="y1"></span>, and whether each amount is in the correct column. Each year has its own 3 attempts, so you can check one year before starting the next.</span>
+      </div>
+      <div class="key" id="p2aKey" style="display:none;"></div>
+    </div>
+
+    <div class="year-block" id="p2bBlock">
+      <div class="je-year">Year <span class="y2"></span></div>
+      <div id="p2bEntries" class="je-container"></div>
+      <div class="check-bar">
+        <button class="btn-check" id="checkP2b" type="button">Check my work &mdash; <span class="y2"></span></button>
+        <span class="check-summary" id="p2bSummary"></span>
+        <span class="attempts-note" id="p2bAttempts">3 attempts remaining</span>
+        <span class="check-disclaimer">This checks every account you selected and every amount you entered for <span class="y2"></span>, and whether each amount is in the correct column. Each year has its own 3 attempts, so you can check one year before starting the next.</span>
+      </div>
+      <div class="key" id="p2bKey" style="display:none;"></div>
+    </div>
+
+    <div class="year-block" id="p2cBlock">
+      <div class="je-year">Year <span class="y3"></span></div>
+      <div id="p2cEntries" class="je-container"></div>
+      <div class="check-bar">
+        <button class="btn-check" id="checkP2c" type="button">Check my work &mdash; <span class="y3"></span></button>
+        <span class="check-summary" id="p2cSummary"></span>
+        <span class="attempts-note" id="p2cAttempts">3 attempts remaining</span>
+        <span class="check-disclaimer">This checks every account you selected and every amount you entered for <span class="y3"></span>, and whether each amount is in the correct column. Each year has its own 3 attempts, so you can check one year before starting the next.</span>
+      </div>
+      <div class="key" id="p2cKey" style="display:none;"></div>
+    </div>
+  </div>
+
+  <div class="score-bar">
+    <span class="score-label">Assignment score</span>
+    <span class="score-value" id="overallScore">Check each part to see your score</span>
+    <span class="score-breakdown" id="scoreBreakdown"></span>
+  </div>
+
+  <div class="key-reveal-note" id="keyRevealNote">You've used all 3 attempts on every part and every year &mdash; the answer key is now shown below each part, and a submission PDF has opened for you to save.</div>
+
+  <div class="submit-bar print-hide">
+    <h2>Ready to submit?</h2>
+    <div class="submit-row">
+      <label for="studentName">Your name</label>
+      <input type="text" id="studentName" placeholder="First and last name">
+    </div>
+    <div class="submit-row submit-actions">
+      <button class="btn-submit" id="printBtn" type="button">Print / Save as PDF</button>
+      <button class="btn-submit btn-submit-outline" id="downloadDocxBtn" type="button">Download as Word (.docx)</button>
+    </div>
+    <p class="submit-status" id="submitStatus"></p>
+    <p class="submit-hint">Both options capture exactly what's currently filled in above, including your generated scenario numbers. "Print / Save as PDF" works offline; "Download as Word" needs an internet connection to load the export tool.</p>
+  </div>
+
+</main>
+
+<footer>Wolf Laurel Construction Company &middot; Long-Term Contracts &middot; ACCT 351 &middot; Western Carolina University</footer>
+
+<script>
+(function(){
+  var CFG = {"type": "C", "seedPrefix": "WLC-", "company": "Wolf Laurel Construction Company", "fileTag": "WolfLaurel"};
+
+  // ---------------- year auto-update ----------------
+  // The contract always runs three consecutive years and finishes in the current calendar year,
+  // read from the student's device clock each time the page loads (so the years roll forward on January 1).
+  // To end the contract in a different year, change LAST_YEAR_OFFSET (e.g., -1 = last year).
+  var LAST_YEAR_OFFSET = 0;
+  var YEAR = new Date().getFullYear() + LAST_YEAR_OFFSET;
+  var Y = [YEAR-2, YEAR-1, YEAR];
+  [0,1,2].forEach(function(i){
+    document.querySelectorAll('.y'+(i+1)).forEach(function(el){ el.textContent = Y[i]; });
+  });
+
+  function money0(n){ var r=Math.round(n); var sign=r<0?'\u2212':''; return sign+'$'+Math.abs(r).toLocaleString('en-US'); }
+  function moneyPlain(n){ return Math.round(n).toLocaleString('en-US'); }
+
+  // BEGIN CORE
+  // ---------------- seeding ----------------
+  function hashSeed(str){
+    var h = 2166136261;
+    for(var i=0;i<str.length;i++){ h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
+    return h >>> 0;
+  }
+  function mulberry32(seed){
+    return function(){
+      seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+      var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  function pick(rand, arr){ return arr[Math.floor(rand()*arr.length)]; }
+
+  // ---------------- scenario generation ----------------
+  // Generation works in units of $100,000, so every input amount is a multiple of $100,000.
+  var U = 100000;
+
+  function genBillingsAndCollections(rand, P){
+    var b1 = Math.round(P*pick(rand,[0.15,0.20,0.25]));
+    var b2 = Math.round(P*pick(rand,[0.35,0.40,0.45]));
+    var b3 = P - b1 - b2;
+    var k1 = Math.round(b1*pick(rand,[0.80,0.90]));
+    var k2 = Math.round(b2*pick(rand,[0.80,0.90]));
+    var k3 = P - k1 - k2;
+    return { b:[b1,b2,b3], k:[k1,k2,k3] };
+  }
+
+  // Type A / D: estimated total cost stays the same in years 1 and 2; year 3 overruns slightly.
+  function drawBase(rand){
+    var P = pick(rand,[80,90,100,110,120,140]);
+    var E0 = P - pick(rand,[15,20,25,30]);
+    var c1 = Math.round(E0*pick(rand,[0.25,0.30,0.35]));
+    var c2 = Math.round(E0*pick(rand,[0.35,0.40,0.45]));
+    var e1 = E0 - c1, e2 = E0 - c1 - c2;
+    var c3 = e2 + pick(rand,[1,2,3,4]);
+    return { P:P, c:[c1,c2,c3], e:[e1,e2] };
+  }
+  // Type B: estimate rises in year 2 but the contract still earns a profit overall.
+  function drawRevised(rand){
+    var P = pick(rand,[80,90,100,110,120,140]);
+    var E0 = P - pick(rand,[15,20,25,30]);
+    var E1 = P - pick(rand,[5,7,10]);
+    var c1 = Math.round(E0*pick(rand,[0.25,0.30,0.35]));
+    var cum2 = Math.round(E1*pick(rand,[0.62,0.66,0.70]));
+    var c2 = cum2 - c1;
+    var e1 = E0 - c1, e2 = E1 - cum2;
+    var c3 = e2 + pick(rand,[1,2,3]);
+    return { P:P, c:[c1,c2,c3], e:[e1,e2] };
+  }
+  // Type C: estimate rises above the contract price in year 2 (loss projected); the final loss is smaller.
+  function drawLoss(rand){
+    var P = pick(rand,[80,90,100,110,120,140]);
+    var E0 = P - pick(rand,[15,20,25,30]);
+    var L1 = pick(rand,[3,4,5]), L2 = pick(rand,[1,2]);
+    var E1 = P + L1;
+    var c1 = Math.round(E0*pick(rand,[0.25,0.30,0.35]));
+    var cum2 = Math.round(E1*pick(rand,[0.58,0.60,0.62]));
+    var c2 = cum2 - c1;
+    var e1 = E0 - c1, e2 = E1 - cum2;
+    var c3 = e2 - (L1 - L2);
+    return { P:P, c:[c1,c2,c3], e:[e1,e2] };
+  }
+
+  // Revenue / cost / gross profit for the whole contract.
+  function computeContract(x, method){
+    var P = x.P, c = x.c, e = x.e;
+    var cum = [c[0], c[0]+c[1], c[0]+c[1]+c[2]];
+    var A = cum[2];
+    var est = [cum[0]+e[0], cum[1]+e[1], A];
+    var out = { P:P, c:c, e:e, b:x.b, k:x.k, cum:cum, est:est, A:A, method:method };
+    out.rev = [0,0,0]; out.cost = [0,0,0]; out.gp = [0,0,0];
+    out.pct = [0,0,0]; out.cumRev = [0,0,0]; out.cumGP = [0,0,0]; out.tp = [0,0,0]; out.lossMode = [false,false,false];
+    if(method === 'completion'){
+      out.rev = [0,0,P]; out.cost = [0,0,A]; out.gp = [0,0,P-A];
+      out.cumRev = [0,0,P]; out.cumGP = [0,0,P-A];
+    } else {
+      var prevRev = 0, prevGP = 0, prevCC = 0;
+      for(var y=0;y<3;y++){
+        var pct = cum[y]/est[y];
+        var cumRev = (y===2) ? P : Math.round(P*pct);
+        var tp = P - est[y];
+        var cumGP, CC;
+        if(tp >= 0){ CC = cum[y]; cumGP = cumRev - CC; }
+        else { cumGP = tp; CC = cumRev - cumGP; out.lossMode[y] = true; }
+        out.pct[y] = pct; out.cumRev[y] = cumRev; out.tp[y] = tp; out.cumGP[y] = cumGP;
+        out.rev[y] = cumRev - prevRev;
+        out.gp[y] = cumGP - prevGP;
+        out.cost[y] = CC - prevCC;
+        prevRev = cumRev; prevGP = cumGP; prevCC = CC;
+      }
+    }
+    out.totRev = out.rev[0]+out.rev[1]+out.rev[2];
+    out.totCost = out.cost[0]+out.cost[1]+out.cost[2];
+    out.totGP = out.gp[0]+out.gp[1]+out.gp[2];
+    return out;
+  }
+
+  function valid(d, type){
+    if(d.c.some(function(v){ return v<=0; })) return false;
+    if(d.e.some(function(v){ return v<=0; })) return false;
+    if(d.gp[2] <= 0 && type!=='D') { /* year 3 always earns a profit in A, B, C */ return false; }
+    // avoid degenerate near-zero gross profit figures in any year that recognizes revenue
+    if(d.gp.some(function(g){ return g!==0 && Math.abs(g) < 25000; })) return false;
+    if(type==='A'){ return d.gp.every(function(g){ return g>0; }); }
+    if(type==='B'){ return d.gp[0]>0 && d.gp[1]<0 && d.gp[2]>0 && d.est[1] < d.P; }
+    if(type==='C'){ return d.gp[0]>0 && d.gp[1]<0 && d.gp[2]>0 && d.est[1] > d.P && d.A > d.P; }
+    if(type==='D'){ return d.gp[2] > 0; }
+    return false;
+  }
+
+  function buildScenario(rand, type){
+    var draw = { A:drawBase, B:drawRevised, C:drawLoss, D:drawBase }[type];
+    var method = (type==='D') ? 'completion' : 'over';
+    for(var tries=0; tries<500; tries++){
+      var x = draw(rand);
+      var bc = genBillingsAndCollections(rand, x.P);
+      var scaled = {
+        P: x.P*U,
+        c: x.c.map(function(v){ return v*U; }),
+        e: x.e.map(function(v){ return v*U; }),
+        b: bc.b.map(function(v){ return v*U; }),
+        k: bc.k.map(function(v){ return v*U; })
+      };
+      var d = computeContract(scaled, method);
+      if(valid(d, type)) return d;
+    }
+    throw new Error('could not build a valid scenario');
+  }
+
+  // Journal entries expected for a scenario. Each entry: id, year index, letter, title, lines[{side,acct,amt}], none (no entry required)
+  var ACCT = {
+    CIP:'Construction in progress (CIP)', CASHM:'Cash, materials, etc.', AR:'Accounts receivable',
+    BILL:'Billings on construction contract', CASH:'Cash', COST:'Cost of construction', REV:'Revenue from long-term contracts'
+  };
+  function buildEntries(d){
+    var entries = [];
+    for(var y=0;y<3;y++){
+      var yr = 'y'+(y+1);
+      entries.push({ id:yr+'a', y:y, letter:'a', title:'Record the construction costs incurred', nRows:2, none:false,
+        lines:[ {side:'Dr',acct:ACCT.CIP,amt:d.c[y]}, {side:'Cr',acct:ACCT.CASHM,amt:d.c[y]} ] });
+      entries.push({ id:yr+'b', y:y, letter:'b', title:'Record the progress billings', nRows:2, none:false,
+        lines:[ {side:'Dr',acct:ACCT.AR,amt:d.b[y]}, {side:'Cr',acct:ACCT.BILL,amt:d.b[y]} ] });
+      entries.push({ id:yr+'c', y:y, letter:'c', title:'Record the cash collections', nRows:2, none:false,
+        lines:[ {side:'Dr',acct:ACCT.CASH,amt:d.k[y]}, {side:'Cr',acct:ACCT.AR,amt:d.k[y]} ] });
+      var lines = [], none = false;
+      if(d.rev[y]===0 && d.cost[y]===0){ none = true; }
+      else if(d.gp[y] > 0){
+        lines = [ {side:'Dr',acct:ACCT.CIP,amt:d.gp[y]}, {side:'Dr',acct:ACCT.COST,amt:d.cost[y]}, {side:'Cr',acct:ACCT.REV,amt:d.rev[y]} ];
+      } else {
+        lines = [ {side:'Dr',acct:ACCT.COST,amt:d.cost[y]}, {side:'Cr',acct:ACCT.REV,amt:d.rev[y]}, {side:'Cr',acct:ACCT.CIP,amt:-d.gp[y]} ];
+      }
+      entries.push({ id:yr+'d', y:y, letter:'d', title:'Recognize revenue and cost of construction (record the gross profit or loss)', nRows:3, none:none, lines:lines });
+      if(y===2){
+        entries.push({ id:yr+'e', y:y, letter:'e', title:'Close the billings and CIP accounts', nRows:2, none:false,
+          lines:[ {side:'Dr',acct:ACCT.BILL,amt:d.P}, {side:'Cr',acct:ACCT.CIP,amt:d.P} ] });
+      }
+    }
+    return entries;
+  }
+  // END CORE
+
+  function generateScenario(id){
+    var seedStr = (id || 'demo').trim().toLowerCase();
+    var rand = mulberry32(hashSeed(CFG.seedPrefix + seedStr));
+    return buildScenario(rand, CFG.type);
+  }
+
+  function setText(id, text){ var el = document.getElementById(id); if(el) el.textContent = text; }
+
+  function applyScenario(d){
+    setText('fP', money0(d.P));
+    for(var i=0;i<3;i++){
+      setText('fc'+(i+1), money0(d.c[i]));
+      setText('fe'+(i+1), i===2 ? money0(0) : money0(d.e[i]));
+      setText('fb'+(i+1), money0(d.b[i]));
+      setText('fk'+(i+1), money0(d.k[i]));
+    }
+  }
+
+  // ---------------- shared grading helpers ----------------
+  function parseMoney(s){
+    if(s===null||s===undefined) return NaN;
+    var str = String(s).replace(/\u2212/g,'-');
+    var neg = /^\s*\(.*\)\s*$/.test(str) || /^\s*-/.test(str.replace(/[$\s]/g,'')) ;
+    var c = str.replace(/[^0-9.]/g,'');
+    if(c==='' || c==='.') return NaN;
+    var v = parseFloat(c);
+    return neg ? -v : v;
+  }
+  function near(a,b,tol){ if(isNaN(a)||isNaN(b)) return false; return Math.abs(a-b)<=tol; }
+  var TOL = 2;
+  // Feedback lives in a small marker beside each cell: red X = incorrect, gold ! = left blank.
+  function markerOf(el){ var m = el && el.nextElementSibling; return (m && m.classList.contains('mark')) ? m : null; }
+  function setMarker(m, kind){
+    if(!m) return;
+    m.className = 'mark' + (kind ? ' '+kind : '');
+    m.textContent = kind==='blank' ? '!' : '\u2717';
+  }
+  function clearFieldState(el){ setMarker(markerOf(el), null); }
+  function makeCell(el){
+    var wrap = document.createElement('div'); wrap.className = 'cellwrap';
+    wrap.appendChild(el);
+    var m = document.createElement('span'); m.className = 'mark'; m.textContent = '\u2717'; m.setAttribute('aria-hidden','true');
+    wrap.appendChild(m);
+    var evt = (el.tagName==='SELECT') ? 'change' : 'input';
+    el.addEventListener(evt, function(){ clearFieldState(el); });
+    return wrap;
+  }
+  function markEl(el, ok){
+    if(!el) return null;
+    setMarker(markerOf(el), ok ? null : 'x');
+    return ok;
+  }
+  function markMoney(id, correct){
+    var el = document.getElementById(id); if(!el) return null;
+    return markEl(el, near(parseMoney(el.value), correct, TOL));
+  }
+
+  // ---------------- Part 1 chart ----------------
+  var P1_ROWS = [
+    { k:'rev',  label:'Revenue recognized',            field:'rev',  tot:'totRev'  },
+    { k:'cost', label:'Cost of construction',          field:'cost', tot:'totCost' },
+    { k:'gp',   label:'Gross profit (loss)',           field:'gp',   tot:'totGP'   }
+  ];
+  var p1Body = document.querySelector('#p1Table tbody');
+  var p1Ids = [];
+  P1_ROWS.forEach(function(r){
+    var tr = document.createElement('tr');
+    var td0 = document.createElement('td'); td0.className = 'rowlab'; td0.textContent = r.label; tr.appendChild(td0);
+    ['1','2','3','T'].forEach(function(col){
+      var td = document.createElement('td');
+      var inp = document.createElement('input');
+      inp.type = 'text'; inp.placeholder = '$'; inp.id = 'p1-'+r.k+'-'+col;
+      td.appendChild(makeCell(inp)); tr.appendChild(td);
+      p1Ids.push(inp.id);
+    });
+    p1Body.appendChild(tr);
+  });
+
+  // ---------------- chart of accounts (dropdown bank) ----------------
+  var CHART = [
+    { group:'Assets',                       items:['Accounts receivable','Cash','Cash, materials, etc.','Construction in progress (CIP)','Contract asset','Inventory'] },
+    { group:'Liabilities and contra accounts', items:['Billings on construction contract','Contract liability','Unearned revenue'] },
+    { group:'Revenues',                     items:['Revenue from long-term contracts','Sales revenue'] },
+    { group:'Expenses and losses',          items:['Cost of construction','Cost of goods sold','Loss on long-term contracts'] }
+  ];
+  function makeAcctSelect(id){
+    var sel = document.createElement('select');
+    sel.className = 'line-select'; sel.id = id;
+    var ph = document.createElement('option'); ph.value=''; ph.textContent='Select the account\u2026'; sel.appendChild(ph);
+    CHART.forEach(function(g){
+      var og = document.createElement('optgroup'); og.label = g.group;
+      g.items.slice().sort().forEach(function(name){
+        var o = document.createElement('option'); o.value = name; o.textContent = name; og.appendChild(o);
+      });
+      sel.appendChild(og);
+    });
+    sel.value = '';
+    return sel;
+  }
+
+  // ---------------- Part 2 journal-entry tables (rebuilt for every scenario, one block per year) ----------------
+  var ENTRIES = [];
+  var p2Ids = [[],[],[]];
+  var YKEY = ['a','b','c'];
+  function entriesFor(yi){ return ENTRIES.filter(function(en){ return en.y===yi; }); }
+  function buildEntryTables(d){
+    ENTRIES = buildEntries(d);
+    p2Ids = [[],[],[]];
+    [0,1,2].forEach(function(yi){
+      var host = document.getElementById('p2'+YKEY[yi]+'Entries');
+      host.innerHTML = '';
+      entriesFor(yi).forEach(function(en){
+        var head = document.createElement('div'); head.className = 'je-title';
+        var lt = document.createElement('span'); lt.className = 'je-letter'; lt.textContent = '('+en.letter+')';
+        var tt = document.createElement('span'); tt.className = 'je-title-text'; tt.textContent = en.title;
+        head.appendChild(lt); head.appendChild(tt);
+        if(en.letter === 'd'){
+          var lab = document.createElement('label'); lab.className = 'je-noentry'; lab.id = en.id+'-nolabel';
+          var cb = document.createElement('input'); cb.type = 'checkbox'; cb.id = en.id+'-none';
+          lab.appendChild(cb); lab.appendChild(document.createTextNode('No entry required'));
+          var nm = document.createElement('span'); nm.className = 'mark'; nm.id = en.id+'-nomark'; nm.textContent = '\u2717'; nm.setAttribute('aria-hidden','true');
+          lab.appendChild(nm);
+          head.appendChild(lab);
+          p2Ids[yi].push(cb.id);
+          cb.addEventListener('change', function(){
+            setMarker(nm, null);
+            for(var r=0;r<en.nRows;r++){
+              ['acct','dr','cr'].forEach(function(f){
+                var el = document.getElementById(en.id+'-'+r+'-'+f);
+                if(cb.checked){ el.value=''; el.disabled = true; clearFieldState(el); } else { el.disabled = false; }
+              });
+            }
+          });
+        }
+        host.appendChild(head);
+        var tbl = document.createElement('table'); tbl.className = 'stmt je'; tbl.setAttribute('data-colw','5,2,2');
+        tbl.innerHTML = '<thead><tr><th>Account</th><th>Debit</th><th>Credit</th></tr></thead>';
+        var tb = document.createElement('tbody');
+        for(var r=0;r<en.nRows;r++){
+          var tr = document.createElement('tr');
+          var tdA = document.createElement('td'); tdA.className = 'acct';
+          var sel = makeAcctSelect(en.id+'-'+r+'-acct'); tdA.appendChild(makeCell(sel));
+          var tdD = document.createElement('td'), tdC = document.createElement('td');
+          var iD = document.createElement('input'); iD.type='text'; iD.placeholder='$'; iD.id = en.id+'-'+r+'-dr';
+          var iC = document.createElement('input'); iC.type='text'; iC.placeholder='$'; iC.id = en.id+'-'+r+'-cr';
+          tdD.appendChild(makeCell(iD)); tdC.appendChild(makeCell(iC));
+          tr.appendChild(tdA); tr.appendChild(tdD); tr.appendChild(tdC);
+          tb.appendChild(tr);
+          p2Ids[yi].push(sel.id, iD.id, iC.id);
+        }
+        tbl.appendChild(tb);
+        host.appendChild(tbl);
+      });
+    });
+  }
+  function itemCountFor(yi){
+    var n = 0;
+    entriesFor(yi).forEach(function(en){ n += en.lines.length ? en.nRows*2 : 1; });
+    return n;
+  }
+
+  function fieldsFor(ids){ return ids.map(function(id){ return document.getElementById(id); }).filter(Boolean); }
+  function setMissing(els, flag){ els.forEach(function(el){ setMarker(markerOf(el), flag ? 'blank' : null); }); }
+  function lockPart(ids, btnId){
+    fieldsFor(ids).forEach(function(el){ el.disabled = true; });
+    var btn = document.getElementById(btnId); if(btn){ btn.disabled = true; btn.textContent = 'No attempts remaining'; }
+  }
+  function unlockPart(ids, btnId){
+    fieldsFor(ids).forEach(function(el){ el.disabled = false; });
+    var btn = document.getElementById(btnId); if(btn){ btn.disabled = false; btn.textContent = 'Check my work'; }
+  }
+  function updateAttemptsNote(elId, used, max){
+    var el = document.getElementById(elId); if(!el) return;
+    var remaining = max - used;
+    el.classList.remove('low','locked');
+    if(remaining<=0){ el.textContent = 'No attempts remaining \u2014 inputs locked'; el.classList.add('locked'); }
+    else { el.textContent = remaining+' attempt'+(remaining===1?'':'s')+' remaining'; if(remaining===1) el.classList.add('low'); }
+  }
+  function updateSummary(elId, results, pointsPossible){
+    var el = document.getElementById(elId);
+    var graded = results.filter(function(r){ return r!==null; }).length;
+    var correct = results.filter(function(r){ return r===true; }).length;
+    var points = graded>0 ? (correct/graded)*pointsPossible : 0;
+    el.textContent = correct+' of '+graded+' correct \u2014 '+points.toFixed(1)+' of '+pointsPossible.toFixed(1)+' pts';
+    el.classList.remove('good','bad'); el.classList.add(correct===graded && graded>0 ? 'good':'bad');
+    return points;
+  }
+  function buildKeyTable(title, rows){
+    var html = '<strong>'+title+'</strong><table>';
+    rows.forEach(function(r){
+      if(r.length===1){ html += '<tr class="key-sub"><td colspan="2">'+r[0]+'</td></tr>'; }
+      else { html += '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>'; }
+    });
+    html += '</table>'; return html;
+  }
+
+  // ---------------- PARTS CONFIG ----------------
+  var MAX_ATTEMPTS = 3;
+  var attempts = {}, locked = {}, scoreState = {};
+  var keyRevealed = false;
+  var currentScenario = null;
+
+  function p1Explain(d, kind, y){
+    var Yr = Y[y];
+    if(kind==='rev'){
+      if(d.method==='completion') return y===2 ? 'Contract price recognized when the bridge is completed = '+money0(d.rev[y]) : 'Nothing is recognized before completion';
+      var pctTxt = (d.pct[y]*100).toFixed(4)+'%';
+      var ratio = y===2 ? '100%' : money0(d.cum[y])+' \u00f7 ('+money0(d.cum[y])+' + '+money0(d.e[y])+') = '+pctTxt;
+      var prev = y===0 ? 0 : d.cumRev[y-1];
+      return ratio+'; cumulative revenue '+money0(d.cumRev[y])+' \u2212 '+money0(prev)+' recognized earlier = '+money0(d.rev[y]);
+    }
+    if(kind==='cost'){
+      if(d.method==='completion') return y===2 ? 'Total construction costs incurred over the three years = '+money0(d.cost[y]) : 'Nothing is recognized before completion';
+      if(d.cost[y]===d.c[y]) return 'Equals the costs incurred in '+Yr+' = '+money0(d.cost[y]);
+      var lossNote = d.gp[y]<0 ? 'revenue '+money0(d.rev[y])+' + loss recognized '+money0(-d.gp[y]) : 'revenue '+money0(d.rev[y])+' \u2212 gross profit '+money0(d.gp[y]);
+      return lossNote+' = '+money0(d.cost[y]);
+    }
+    if(d.method==='completion') return y===2 ? money0(d.rev[y])+' \u2212 '+money0(d.cost[y])+' = '+money0(d.gp[y]) : 'No revenue or cost recognized, so no gross profit';
+    var prevGP = y===0 ? 0 : d.cumGP[y-1];
+    if(d.lossMode[y]) return 'Entire expected loss on the contract is recognized: cumulative '+money0(d.cumGP[y])+' \u2212 '+money0(prevGP)+' recognized earlier = '+money0(d.gp[y]);
+    return 'Cumulative gross profit '+money0(d.cumGP[y])+' \u2212 '+money0(prevGP)+' recognized earlier = '+money0(d.gp[y]);
+  }
+
+  function yearPart(yi){
+    return { key:'p2'+YKEY[yi], yi:yi, itemCount:0,
+      label:function(){ return 'Part 2 \u2014 '+Y[yi]; },
+      fieldIds:function(){ return p2Ids[yi]; },
+      missing:function(){
+        var out = [];
+        entriesFor(yi).forEach(function(en){
+          var box = document.getElementById(en.id+'-none');
+          if(box && box.checked) return;
+          for(var r=0;r<en.nRows;r++){
+            var sel = document.getElementById(en.id+'-'+r+'-acct');
+            var dr = document.getElementById(en.id+'-'+r+'-dr');
+            var cr = document.getElementById(en.id+'-'+r+'-cr');
+            if(!sel.value) out.push(sel);
+            if(!dr.value.trim() && !cr.value.trim()){ out.push(dr); out.push(cr); }
+          }
+        });
+        return out;
+      },
+      grade:function(d){
+        var out = [];
+        entriesFor(yi).forEach(function(en){
+          var box = document.getElementById(en.id+'-none');
+          var nm = document.getElementById(en.id+'-nomark');
+          var checked = !!(box && box.checked);
+          if(nm) setMarker(nm, null);
+          if(en.lines.length === 0){
+            if(nm && !checked) setMarker(nm, 'x');
+            out.push(checked);
+            for(var r0=0;r0<en.nRows;r0++){
+              ['acct','dr','cr'].forEach(function(f){
+                var el0 = document.getElementById(en.id+'-'+r0+'-'+f);
+                clearFieldState(el0);
+                if(!checked && el0.value) markEl(el0, false);
+              });
+            }
+            return;
+          }
+          if(nm && checked) setMarker(nm, 'x');
+          var used = [];
+          for(var r=0;r<en.nRows;r++){
+            var sel = document.getElementById(en.id+'-'+r+'-acct');
+            var dr = document.getElementById(en.id+'-'+r+'-dr');
+            var cr = document.getElementById(en.id+'-'+r+'-cr');
+            var j = -1;
+            if(!checked){
+              for(var k=0;k<en.lines.length;k++){
+                if(!used[k] && en.lines[k].acct === sel.value){ j = k; used[k] = true; break; }
+              }
+            }
+            var acctOK = j >= 0;
+            markEl(sel, acctOK); out.push(acctOK);
+            var amtOK = false;
+            if(j >= 0){
+              var L = en.lines[j];
+              var vd = parseMoney(dr.value), vc = parseMoney(cr.value);
+              var mine = L.side==='Dr' ? vd : vc, other = L.side==='Dr' ? vc : vd;
+              amtOK = near(mine, L.amt, TOL) && (isNaN(other) || other === 0);
+            }
+            clearFieldState(dr); clearFieldState(cr);
+            if(!amtOK){
+              var any = false;
+              [dr,cr].forEach(function(el){ if(el.value.trim()){ markEl(el, false); any = true; } });
+              if(!any){ markEl(dr, false); markEl(cr, false); }
+            }
+            out.push(amtOK);
+          }
+        });
+        return out;
+      },
+      keyRows:function(d){
+        var rows = [];
+        entriesFor(yi).forEach(function(en){
+          rows.push(['('+en.letter+') '+en.title, en.lines.length ? '' : '<em>No entry required</em>']);
+          en.lines.forEach(function(L){
+            rows.push([(L.side==='Dr' ? '&nbsp;&nbsp;&nbsp;Dr &nbsp;' : '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cr &nbsp;')+L.acct, money0(L.amt)]);
+          });
+        });
+        return rows;
+      }
+    };
+  }
+
+  var PARTS = [
+    { key:'p1', itemCount:p1Ids.length,
+      label:function(){ return 'Part 1'; },
+      fieldIds:function(){ return p1Ids; },
+      missing:function(){ return fieldsFor(p1Ids).filter(function(el){ return !el.value || !el.value.trim(); }); },
+      grade:function(d){
+        var out = [];
+        P1_ROWS.forEach(function(r){
+          for(var y=0;y<3;y++){ out.push(markMoney('p1-'+r.k+'-'+(y+1), d[r.field][y])); }
+          out.push(markMoney('p1-'+r.k+'-T', d[r.tot]));
+        });
+        return out;
+      },
+      keyRows:function(d){
+        var rows = [];
+        P1_ROWS.forEach(function(r){
+          rows.push([r.label]);
+          for(var y=0;y<3;y++){ rows.push([Y[y], money0(d[r.field][y])+'<br><span style="font-weight:400;font-size:12px;">'+p1Explain(d, r.k, y)+'</span>']); }
+          rows.push(['Three-year total', money0(d[r.tot])]);
+        });
+        return rows;
+      }
+    },
+    yearPart(0), yearPart(1), yearPart(2)
+  ];
+
+  var TOTAL_POINTS = 100;
+  function recomputePoints(){
+    [0,1,2].forEach(function(yi){ PARTS[yi+1].itemCount = itemCountFor(yi); });
+    var totalItems = PARTS.reduce(function(s,p){ return s+p.itemCount; }, 0);
+    var per = TOTAL_POINTS/totalItems;
+    PARTS.forEach(function(p){ p.possible = p.itemCount*per; });
+  }
+
+  function checkBtnId(part){ return 'check'+part.key.charAt(0).toUpperCase()+part.key.slice(1); }
+
+  function clearAllFieldStates(){
+    document.querySelectorAll('.mark').forEach(function(m){ setMarker(m, null); });
+  }
+
+  function updateOverallScore(){
+    var el = document.getElementById('overallScore');
+    var breakdown = document.getElementById('scoreBreakdown');
+    var anyChecked = PARTS.some(function(p){ return scoreState[p.key] !== null && scoreState[p.key] !== undefined; });
+    if(!anyChecked){ el.textContent = 'Check each part to see your score'; breakdown.textContent=''; return; }
+    var total = PARTS.reduce(function(s,p){ return s + (scoreState[p.key]||0); }, 0);
+    el.textContent = total.toFixed(1)+' / '+TOTAL_POINTS.toFixed(1)+' pts';
+    breakdown.textContent = PARTS.map(function(p){
+      return p.label()+': '+(scoreState[p.key]==null ? 'not checked yet' : scoreState[p.key].toFixed(1)+' / '+p.possible.toFixed(1)+' pts');
+    }).join('  \u00b7  ');
+  }
+
+  function revealAllKeys(){
+    if(!currentScenario) return;
+    PARTS.forEach(function(p){
+      var keyEl = document.getElementById(p.key+'Key');
+      if(keyEl){ keyEl.innerHTML = buildKeyTable('Answer Key \u2014 '+p.label(), p.keyRows(currentScenario)); keyEl.style.display='block'; }
+    });
+    var noteEl = document.getElementById('keyRevealNote'); if(noteEl) noteEl.style.display='block';
+  }
+
+  function registerCheckAttempt(part){
+    attempts[part.key]++;
+    var remaining = MAX_ATTEMPTS - attempts[part.key];
+    updateAttemptsNote(part.key+'Attempts', attempts[part.key], MAX_ATTEMPTS);
+    if(remaining<=0){ locked[part.key]=true; lockPart(part.fieldIds(), checkBtnId(part)); }
+    if(PARTS.every(function(p){ return locked[p.key]; }) && !keyRevealed){
+      keyRevealed = true; revealAllKeys(); setTimeout(function(){ triggerPrint(); }, 350);
+    }
+  }
+
+  PARTS.forEach(function(part){
+    var btn = document.getElementById(checkBtnId(part));
+    var summaryId = part.key+'Summary';
+    btn.addEventListener('click', function(){
+      if(!currentScenario || locked[part.key]) return;
+      var missing = part.missing();
+      setMissing(fieldsFor(part.fieldIds()), false);
+      if(missing.length){
+        setMissing(missing, true);
+        var summaryEl = document.getElementById(summaryId);
+        summaryEl.textContent = 'Please complete every line before checking your work \u2014 '+missing.length+' field'+(missing.length===1?'':'s')+' left blank.';
+        summaryEl.classList.remove('good'); summaryEl.classList.add('bad');
+        missing[0].focus();
+        return;
+      }
+      var results = part.grade(currentScenario);
+      scoreState[part.key] = updateSummary(summaryId, results, part.possible);
+      updateOverallScore();
+      registerCheckAttempt(part);
+    });
+  });
+
+  function applyAndStore(id){
+    currentScenario = generateScenario(id);
+    applyScenario(currentScenario);
+    buildEntryTables(currentScenario);
+    recomputePoints();
+    clearAllFieldStates();
+    PARTS.forEach(function(p){ attempts[p.key]=0; locked[p.key]=false; scoreState[p.key]=null;
+      fieldsFor(p1Ids).forEach(function(el){ el.value=''; });
+      unlockPart(p.fieldIds(), checkBtnId(p));
+      updateAttemptsNote(p.key+'Attempts', 0, MAX_ATTEMPTS);
+      var keyEl = document.getElementById(p.key+'Key'); if(keyEl){ keyEl.style.display='none'; keyEl.innerHTML=''; }
+      var sumEl = document.getElementById(p.key+'Summary'); if(sumEl){ sumEl.textContent=''; sumEl.classList.remove('good','bad'); }
+    });
+    keyRevealed = false;
+    var noteEl = document.getElementById('keyRevealNote'); if(noteEl) noteEl.style.display='none';
+    updateOverallScore();
+  }
+
+  var idInput = document.getElementById('studentId');
+  var genBtn = document.getElementById('genBtn');
+  genBtn.addEventListener('click', function(){ applyAndStore(idInput.value); });
+  idInput.addEventListener('keydown', function(e){ if(e.key==='Enter') applyAndStore(idInput.value); });
+
+  // ---------------- Print ----------------
+  function val(id){ var el=document.getElementById(id); return el?el.value.trim():''; }
+  document.getElementById('printBtn').addEventListener('click', triggerPrint);
+  function triggerPrint(){
+    var name = val('studentName'), id = val('studentId');
+    document.getElementById('printNameLine').textContent = 'Name: '+(name||'_______________________')+'     Student ID: '+(id||'_______________________');
+    var scoreText = document.getElementById('overallScore').textContent;
+    var breakdownText = document.getElementById('scoreBreakdown').textContent;
+    document.getElementById('printScoreLine').textContent = 'Score: '+scoreText+(breakdownText?'  ('+breakdownText+')':'');
+    var oldTitle = document.title;
+    document.title = CFG.fileTag+'-'+(id||'submission');
+    window.print();
+    document.title = oldTitle;
+  }
+
+  // ---------------- Download as Word (.docx) ----------------
+  var docxLoadPromise = null;
+  function loadDocxLib(){
+    if(window.docx) return Promise.resolve();
+    if(docxLoadPromise) return docxLoadPromise;
+    docxLoadPromise = new Promise(function(resolve, reject){
+      var s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js';
+      s.onload = function(){ window.docx ? resolve() : reject(new Error('docx library did not load correctly')); };
+      s.onerror = function(){ reject(new Error('network error loading docx library')); };
+      document.head.appendChild(s);
+    });
+    return docxLoadPromise;
+  }
+  function blankIfEmpty(s){ return s && s.length ? s : '\u2014'; }
+  function inputOrSelectValue(el){
+    var txt = '';
+    if(el.tagName==='SELECT'){ var opt=el.options[el.selectedIndex]; txt = opt&&el.value?opt.textContent:''; }
+    else if(el.tagName==='INPUT'){ txt = el.value || ''; }
+    else txt = el.textContent || '';
+    var m = markerOf(el);
+    if(txt && m && m.classList.contains('x')) txt += '  \u2717';
+    return txt;
+  }
+  function buildAnswersDoc(){
+    var D = window.docx;
+    var PURPLE='592C88', INK='221B2E', SLATE='5F5A6B';
+    var name = blankIfEmpty(val('studentName'));
+    var sid = blankIfEmpty(val('studentId'));
+    function h(text){ return new D.Paragraph({ spacing:{before:220,after:100}, children:[new D.TextRun({text:text,bold:true,color:PURPLE,size:26})] }); }
+    function p(text, opts){ opts=opts||{}; return new D.Paragraph({ spacing:{before:60,after:60}, alignment:opts.center?D.AlignmentType.CENTER:undefined, children:[new D.TextRun({text:text,size:20,color:opts.color||INK,bold:!!opts.bold,italics:!!opts.italics})] }); }
+    function cellDocx(text,width,opts){
+      opts=opts||{};
+      return new D.TableCell({ width:{size:width,type:D.WidthType.DXA}, shading:opts.shading?{type:D.ShadingType.CLEAR,fill:opts.shading}:undefined,
+        margins:{top:60,bottom:60,left:90,right:90}, children:[new D.Paragraph({children:[new D.TextRun({text:text,size:19,bold:!!opts.bold,color:opts.color||INK})]})] });
+    }
+    function tableFromEl(tableEl){
+      var theadCells = Array.from(tableEl.querySelectorAll('thead th')).map(function(th){ return th.textContent.trim(); });
+      var bodyRows = Array.from(tableEl.querySelectorAll('tbody tr'));
+      var colCount = theadCells.length || (bodyRows[0]?bodyRows[0].children.length:1);
+      var widths;
+      var wAttr = tableEl.getAttribute('data-colw');
+      if(wAttr){
+        var parts = wAttr.split(',').map(Number); var sum = parts.reduce(function(a,b){return a+b;},0);
+        widths = parts.map(function(w){ return Math.floor(9000*w/sum); });
+      } else {
+        widths = new Array(colCount).fill(Math.floor(9000/colCount));
+        if(colCount===5){ widths = [2600,1600,1600,1600,1600]; }
+      }
+      var rows = [];
+      if(theadCells.length){ rows.push(new D.TableRow({ children: theadCells.map(function(t,i){ return cellDocx(t,widths[i],{bold:true,shading:PURPLE,color:'FFFFFF'}); }) })); }
+      bodyRows.forEach(function(tr){
+        var cells = Array.from(tr.children).map(function(td,i){
+          var field = td.querySelector('input,select');
+          var text = field ? blankIfEmpty(inputOrSelectValue(field)) : td.textContent.trim();
+          return cellDocx(text, widths[i], { bold: tr.classList.contains('subtotal-row') || tr.classList.contains('final-row') });
+        });
+        rows.push(new D.TableRow({ children: cells }));
+      });
+      return new D.Table({ width:{size:widths.reduce(function(a,b){return a+b;},0),type:D.WidthType.DXA}, columnWidths:widths, rows:rows });
+    }
+    var children = [];
+    children.push(new D.Paragraph({ heading:D.HeadingLevel.TITLE, spacing:{after:60}, children:[new D.TextRun({text:CFG.company+' \u2014 Blue Ridge Parkway Bridge Contract', color:PURPLE, size:32, bold:true})] }));
+    children.push(p('Name: '+name+'     Student ID: '+sid, { bold:true }));
+    children.push(p('ACCT 351  \u00b7  Long-Term Contracts  \u00b7  Chapter 6', { color:SLATE }));
+    var scoreText = (document.getElementById('overallScore')||{}).textContent || '';
+    var breakdownText = (document.getElementById('scoreBreakdown')||{}).textContent || '';
+    children.push(new D.Paragraph({ spacing:{before:200,after:60}, border:{ top:{style:D.BorderStyle.SINGLE,size:6,color:PURPLE}, bottom:{style:D.BorderStyle.SINGLE,size:6,color:PURPLE} },
+      children:[new D.TextRun({text:'Assignment score', bold:true, color:PURPLE, size:24})] }));
+    children.push(new D.Paragraph({ spacing:{before:40,after:20}, children:[new D.TextRun({text:scoreText, bold:true, color:INK, size:24})] }));
+    if(breakdownText) children.push(new D.Paragraph({ spacing:{after:100}, children:[new D.TextRun({text:breakdownText, color:SLATE, size:18})] }));
+
+    // the facts (so the submission shows the generated numbers)
+    var factsEl = document.querySelector('.facts');
+    children.push(h('The facts'));
+    Array.from(factsEl.children).forEach(function(child){
+      if(child.tagName==='P'){ children.push(p(child.textContent.trim())); }
+      else if(child.tagName==='TABLE'){ children.push(tableFromEl(child)); children.push(new D.Paragraph({ spacing:{after:80}, children:[] })); }
+    });
+
+    function walk(container){
+      Array.from(container.children).forEach(function(child){
+        if(child.classList.contains('part-label') || child.tagName==='H2') return;
+        if(child.classList.contains('scenario')){ child.querySelectorAll('p').forEach(function(pp){ children.push(p(pp.textContent)); }); }
+        else if(child.classList.contains('req')){ children.push(p(child.textContent.trim(), { bold:true })); }
+        else if(child.classList.contains('je-container') || child.classList.contains('year-block')){ walk(child); }
+        else if(child.classList.contains('je-year')){ children.push(h(child.textContent.trim())); }
+        else if(child.classList.contains('je-title')){
+          var cb = child.querySelector('input[type=checkbox]');
+          var t = child.querySelector('.je-letter').textContent+' '+child.querySelector('.je-title-text').textContent;
+          if(cb){ var nmk = child.querySelector('.mark'); t += '     ['+(cb.checked?'X':' ')+'] No entry required'+(nmk && nmk.classList.contains('x') ? '  \u2717' : ''); }
+          children.push(p(t, { bold:true }));
+        }
+        else if(child.tagName==='TABLE'){ children.push(tableFromEl(child)); children.push(new D.Paragraph({ spacing:{after:80}, children:[] })); }
+      });
+    }
+    document.querySelectorAll('.part').forEach(function(partEl, idx){
+      var h2El = partEl.querySelector('h2');
+      children.push(h('Part '+(idx+1)+' \u2014 '+(h2El?h2El.textContent:'')));
+      walk(partEl);
+    });
+    children.push(new D.Paragraph({ spacing:{before:300}, alignment:D.AlignmentType.CENTER, children:[new D.TextRun({text:CFG.company+' \u00b7 ACCT 351 \u00b7 Western Carolina University', size:16, italics:true, color:SLATE})] }));
+    return new D.Document({ sections:[{ properties:{ page:{ size:{width:12240,height:15840}, margin:{top:1440,bottom:1440,left:1440,right:1440} } }, children:children }] });
+  }
+  document.getElementById('downloadDocxBtn').addEventListener('click', function(){
+    var statusEl = document.getElementById('submitStatus');
+    statusEl.classList.remove('error'); statusEl.textContent = 'Preparing your Word document\u2026';
+    loadDocxLib().then(function(){ var doc=buildAnswersDoc(); return window.docx.Packer.toBlob(doc); })
+    .then(function(blob){
+      var idPart = val('studentId') || 'submission';
+      var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = CFG.fileTag+'-'+idPart+'.docx';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      statusEl.textContent = 'Downloaded.'; setTimeout(function(){ statusEl.textContent=''; }, 4000);
+    }).catch(function(err){
+      statusEl.classList.add('error'); statusEl.textContent = 'Could not load the Word export tool (needs internet access) \u2014 use Print / Save as PDF instead.';
+    });
+  });
+
+  applyAndStore('');
+})();
+</script>
+</body>
+</html>
