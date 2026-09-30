@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Part 4 of 4: Self-Constructed Assets, R&amp;D, and Oil and Gas — Lecture Notes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --wcu-purple: #4B2E83;
+    --wcu-purple-dark: #341f5c;
+    --wcu-gold: #C8A24A;
+    --gold-light: #f4ecd8;
+    --ink: #232023;
+    --paper: #fdfcfb;
+    --panel: #f7f3ec;
+    --rule: #e2d9c8;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.55;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--wcu-purple) 0%, var(--wcu-purple-dark) 100%);
+    color: #fff;
+    padding: 2.2rem 1.5rem 1.8rem;
+    border-bottom: 6px solid var(--wcu-gold);
+  }
+
+  header .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--wcu-gold);
+    margin-bottom: 0.4rem;
+  }
+
+  header h1 {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 700;
+    font-size: 1.9rem;
+    margin: 0 0 0.3rem;
+  }
+
+  header p.sub {
+    margin: 0;
+    color: #e7e0f2;
+    font-size: 0.98rem;
+  }
+
+  main {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  .lo-block { margin-bottom: 2.8rem; }
+
+  h2 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.5rem;
+    margin: 0 0 0.8rem;
+    color: var(--wcu-purple-dark);
+    border-bottom: 2px solid var(--rule);
+    padding-bottom: 0.4rem;
+  }
+
+  h3 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.1rem;
+    margin: 1.4rem 0 0.5rem;
+    color: var(--wcu-purple-dark);
+  }
+
+  p { margin: 0.6rem 0; }
+
+  .key-idea {
+    background: var(--panel);
+    border-left: 4px solid var(--wcu-gold);
+    padding: 0.9rem 1.1rem;
+    border-radius: 0 6px 6px 0;
+    margin: 0.9rem 0;
+  }
+
+  .key-idea strong { color: var(--wcu-purple-dark); }
+
+  .formula {
+    font-family: 'IBM Plex Mono', monospace;
+    background: var(--wcu-purple-dark);
+    color: var(--gold-light);
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin: 0.8rem 0;
+    font-size: 0.95rem;
+    overflow-x: auto;
+  }
+
+  .example {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin: 0.9rem 0;
+  }
+
+  .example .ex-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--wcu-purple);
+    margin-bottom: 0.4rem;
+  }
+
+  .example .ex-answer {
+    margin-top: 0.6rem;
+    padding-top: 0.6rem;
+    border-top: 1px dashed var(--rule);
+    font-weight: 500;
+  }
+
+  ul, ol { padding-left: 1.4rem; }
+  li { margin-bottom: 0.35rem; }
+
+  .patterns {
+    background: var(--gold-light);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin: 0.8rem 0;
+  }
+  .patterns p { margin: 0.3rem 0; }
+
+  table.mini-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.4rem 0 0.9rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+  }
+  table.mini-table caption {
+    text-align: left;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    color: #6b6560;
+    margin-bottom: 0.3rem;
+    caption-side: top;
+  }
+  table.mini-table th, table.mini-table td {
+    border: 1px solid var(--rule);
+    padding: 0.45rem 0.6rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.mini-table th {
+    background: var(--panel);
+    color: var(--wcu-purple-dark);
+    font-weight: 600;
+  }
+  table.mini-table td.num, table.mini-table th.num { text-align: right; }
+
+  table.je-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.5rem 0 0.3rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.86rem;
+  }
+  table.je-table td { padding: 0.28rem 0.3rem; vertical-align: top; }
+  table.je-table td.je-debit-amt, table.je-table td.je-credit-amt {
+    text-align: right;
+    width: 100px;
+    white-space: nowrap;
+  }
+  table.je-table td.indent { padding-left: 1.8rem; }
+  .je-desc {
+    font-size: 0.82rem;
+    color: #6b6560;
+    font-style: italic;
+    margin: 0 0 1rem;
+  }
+
+  footer {
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: #8a8380;
+    padding: 1.5rem;
+  }
+
+  .series-nav {
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem 0.6rem;
+    margin: 0 0 2.2rem;
+  }
+  .series-nav .sn-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--wcu-purple);
+    margin-bottom: 0.4rem;
+  }
+  .series-nav ol { list-style: none; margin: 0; padding: 0; }
+  .series-nav li { margin: 0; padding: 0.45rem 0; border-top: 1px dashed var(--rule); }
+  .series-nav li:first-child { border-top: none; }
+  .series-nav a { color: var(--wcu-purple-dark); font-weight: 600; text-decoration: none; }
+  .series-nav a:hover { text-decoration: underline; }
+  .series-nav .sn-desc { display: block; font-size: 0.85rem; color: #6b6560; margin-top: 0.1rem; }
+  .series-nav li.current { background: var(--gold-light); margin: 0 -0.6rem; padding: 0.45rem 0.6rem; border-radius: 6px; border-top-color: transparent; }
+  .series-nav li.current + li { border-top-color: transparent; }
+  .series-nav li.current .sn-name { font-weight: 700; color: var(--wcu-purple-dark); }
+  .series-nav .sn-here { display: block; font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #8a6d1f; margin: 0.1rem 0 0.15rem; }
+  .in-part { margin: 0 0 1.6rem; font-size: 0.9rem; color: #6b6560; }
+  .in-part strong { color: var(--wcu-purple-dark); }
+  .pager { display: flex; justify-content: space-between; gap: 1rem; margin: 2.4rem 0 0; flex-wrap: wrap; }
+  .pager a {
+    flex: 1 1 240px;
+    display: block;
+    text-decoration: none;
+    border: 1px solid var(--rule);
+    background: #fff;
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    color: var(--wcu-purple-dark);
+  }
+  .pager a:hover { border-color: var(--wcu-gold); background: var(--gold-light); }
+  .pager .pg-dir { display: block; font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--wcu-purple); }
+  .pager .pg-title { display: block; font-family: 'Source Serif 4', serif; font-weight: 600; margin-top: 0.15rem; }
+  .pager a.next { text-align: right; }
+  .pager .spacer { flex: 1 1 240px; }
+  @media print { .series-nav, .pager { display: none; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">ACCT 351 · Operating Assets: Acquisition · Part 4 of 4</div>
+  <h1>Self-Constructed Assets, R&amp;D, and Oil and Gas</h1>
+  <p class="sub">Lecture Notes</p>
+</header>
+
+<main>
+
+<nav class="series-nav" aria-label="Chapter 10 lecture notes">
+<div class="sn-label">Chapter 10 lecture notes — 4 parts</div>
+<ol>
+<li><a href="Ch10-acquisition-notes-part1-asset-costs.html"><span class="sn-name">Part 1: What Counts as Cost: Equipment, Land, and Buildings</span></a><span class="sn-desc">The long-lived asset groups, the capitalize-versus-expense test, and the cost of equipment, land, land improvements, and buildings.</span></li>
+<li><a href="Ch10-acquisition-notes-part2-resources-intangibles.html"><span class="sn-name">Part 2: Natural Resources, Intangibles, Goodwill, and Bundled Purchases</span></a><span class="sn-desc">Natural resources and asset retirement obligations, patents and other intangibles, goodwill, and splitting a lump-sum price among assets.</span></li>
+<li><a href="Ch10-acquisition-notes-part3-noncash-exchanges.html"><span class="sn-name">Part 3: Noncash Acquisitions, Exchanges, and Evaluating Fixed Assets</span></a><span class="sn-desc">Assets acquired with notes, stock, donations, or trade-ins, plus the capital budgeting decision and the fixed-asset turnover ratio.</span></li>
+<li class="current"><a href="Ch10-acquisition-notes-part4-construction-rd.html"><span class="sn-name">Part 4: Self-Constructed Assets, R&amp;D, and Oil and Gas</span></a><span class="sn-here">You are here</span><span class="sn-desc">Overhead and capitalized interest on assets a company builds, research and development and related costs, and oil and gas exploration methods.</span></li>
+</ol>
+</nav>
+<p class="in-part"><strong>In this part:</strong> Self-Constructed Assets: Interest and Overhead · Research and Development and Related Costs · Appendix: Oil and Gas Exploration Costs</p>
+<div class="lo-block">
+<h2>Self-Constructed Assets: Interest and Overhead</h2>
+
+<p>A company sometimes builds an asset for its own use, often acting as general contractor and hiring subcontractors. Two questions make this harder than buying: how much overhead to assign to the project, and what to do about interest incurred while construction is underway.</p>
+
+<h3>Overhead</h3>
+<p>One view charges the project only with <em>incremental</em> overhead, meaning costs that exist only because the company decided to build. The other assigns overhead to the project using the same cost driver applied to normal production (for example, labor hours). The second, the full-cost approach, is the generally accepted method.</p>
+
+<h3>Capitalizing interest</h3>
+<p>Until a self-constructed asset is ready, it is not yet producing anything, so the interest on money borrowed to build it is treated as part of its cost. Key rules:</p>
+<ul>
+  <li><strong>Qualifying assets:</strong> assets built for the company's own use, or discrete projects built for sale or lease. Routine, repetitive inventory production and assets already in use do not qualify.</li>
+  <li><strong>Capitalization period:</strong> begins when construction starts, spending has begun, and interest is being incurred. It ends when the asset is substantially complete and ready, or when interest stops.</li>
+  <li><strong>Amount:</strong> only interest that could have been avoided if the spending had not been made. Interest must be actual, not imputed.</li>
+</ul>
+
+<p>The calculation has three steps:</p>
+<ol>
+  <li>Find the <strong>weighted-average accumulated expenditures</strong> for the period by weighting each payment by the fraction of the period it was outstanding.</li>
+  <li>Apply interest rates to that average. Use the <strong>specific interest method</strong> (the rate on a construction loan) up to the amount of that loan, then the <strong>weighted-average rate</strong> on other debt for the rest.</li>
+  <li>Capitalize the <strong>lesser</strong> of calculated interest and actual interest incurred. Interest not capitalized is expensed.</li>
+</ol>
+
+<div class="example">
+<div class="ex-label">Example — Toe River Precision Tools builds a distribution center</div>
+<p>Construction started January 1, 2026 and finished June 30, 2027. Payments to subcontractors were:</p><table class="mini-table"><tr><th>Date</th><th class="num">Payment</th></tr><tr><td>January 1, 2026</td><td class="num">$800,000</td></tr><tr><td>April 1, 2026</td><td class="num">600,000</td></tr><tr><td>October 1, 2026</td><td class="num">900,000</td></tr><tr><td>February 1, 2027</td><td class="num">700,000</td></tr><tr><td>May 1, 2027</td><td class="num">400,000</td></tr></table><p>Toe River took out a $1,500,000 construction loan at 9% on January 1, 2026, outstanding throughout. Its other debt was a $3,000,000 note at 7% and a $5,000,000 bond at 11%, also outstanding throughout. Weighted-average rate on the other debt: ($210,000 + $550,000) ÷ $8,000,000 = 9.5%.</p>
+</div>
+
+<h3>2026</h3>
+<table class="mini-table"><tr><th>Payment</th><th class="num">Amount</th><th class="num">Fraction of year outstanding</th><th class="num">Weighted</th></tr><tr><td>January 1</td><td class="num">$800,000</td><td class="num">12/12</td><td class="num">$800,000</td></tr><tr><td>April 1</td><td class="num">600,000</td><td class="num">9/12</td><td class="num">450,000</td></tr><tr><td>October 1</td><td class="num">900,000</td><td class="num">3/12</td><td class="num">225,000</td></tr><tr><td><strong>Weighted-average expenditures</strong></td><td class="num"><strong>$2,300,000</strong></td><td class="num"></td><td class="num"><strong>$1,475,000</strong></td></tr></table>
+<p>The $1,500,000 construction loan covers the entire $1,475,000 average, so the specific rate applies to all of it: $1,475,000 × 9% = <strong>$132,750</strong>. Actual interest for 2026 was $135,000 + $210,000 + $550,000 = $895,000, well above that, so $132,750 is capitalized and $762,250 is expensed. Accumulated cost at December 31, 2026 is $2,300,000 + $132,750 = <strong>$2,432,750</strong>.</p>
+
+<h3>2027 (six months, to completion)</h3>
+<table class="mini-table"><tr><th>Item</th><th class="num">Amount</th><th class="num">Fraction of the six months</th><th class="num">Weighted</th></tr><tr><td>Beginning accumulated cost (including capitalized interest)</td><td class="num">$2,432,750</td><td class="num">6/6</td><td class="num">$2,432,750</td></tr><tr><td>February 1 payment</td><td class="num">700,000</td><td class="num">5/6</td><td class="num">583,333</td></tr><tr><td>May 1 payment</td><td class="num">400,000</td><td class="num">2/6</td><td class="num">133,333</td></tr><tr><td><strong>Weighted-average expenditures</strong></td><td class="num"></td><td class="num"></td><td class="num"><strong>$3,149,417</strong></td></tr></table>
+<p class="je-desc">Weighted amounts are shown rounded; the total is computed from the unrounded figures ($583,333.33 and $133,333.33).</p>
+<p>Calculated interest: the loan is not big enough to cover the average, so the two rates are layered:</p>
+<table class="mini-table"><tr><th>Portion</th><th class="num">Amount</th><th class="num">Rate</th><th class="num">Time</th><th class="num">Interest</th></tr><tr><td>Specific loan</td><td class="num">$1,500,000</td><td class="num">9%</td><td class="num">6/12</td><td class="num">$67,500</td></tr><tr><td>Excess ($3,149,417 − $1,500,000)</td><td class="num">1,649,417</td><td class="num">9.5%</td><td class="num">6/12</td><td class="num">78,347</td></tr><tr><td><strong>Calculated interest</strong></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"><strong>$145,847</strong></td></tr></table>
+<p>Actual interest for the six months: $67,500 + $105,000 + $275,000 = $447,500. The lesser amount, $145,847, is capitalized and $301,653 is expensed. The finished building is recorded at $2,432,750 + $700,000 + $400,000 + $145,847 = <strong>$3,678,597</strong>.</p>
+
+<p>A company that capitalizes interest must disclose how much it capitalized in the period. A typical note might say that interest of $4.1 million, $3.6 million, and $2.2 million was capitalized in 2026, 2025, and 2024.</p>
+
+<div class="example">
+<div class="ex-label">Check yourself</div>
+<p>In 2026 Sapphire Valley Foods began a cold-storage facility. It spent $1,800,000 on January 1, $3,600,000 on April 30, $3,000,000 on July 31, and $2,400,000 on November 30. It took a $3,000,000, 11% construction loan on January 1. Its other debt of $18,000,000 carries a weighted-average rate of 7%. How much interest is capitalized in 2026 using the specific interest method?</p>
+<div class="ex-answer">
+Weighted-average expenditures = ($1,800,000 × 12/12) + ($3,600,000 × 8/12) + ($3,000,000 × 5/12) + ($2,400,000 × 1/12) = $5,650,000.<br>
+Capitalized interest = ($3,000,000 × 11%) + ($2,650,000 × 7%) = $330,000 + $185,500 = $515,500.<br>
+Actual interest ($1,590,000) is higher, so the full $515,500 is capitalized.
+</div>
+</div>
+
+</div>
+
+
+<div class="lo-block">
+<h2>Research and Development and Related Costs</h2>
+
+<p>Companies spend heavily on R&amp;D hoping for future payoffs, but it is hard to know which projects will succeed, how large the benefits will be, or in which periods they will occur. Because of this uncertainty, U.S. GAAP takes the conservative route: R&amp;D costs are <strong>expensed as incurred</strong>.</p>
+
+<table class="mini-table"><tr><th>Term</th><th>Meaning</th></tr><tr><td>Research</td><td>Planned investigation aimed at discovering new knowledge that may lead to a new or improved product, service, process, or technique</td></tr><tr><td>Development</td><td>Turning research findings into a plan or design for a new or improved product or process</td></tr></table>
+
+<p>R&amp;D costs include labor for R&amp;D staff, materials consumed, services bought from others, and a reasonable share of indirect costs. The treatment of assets bought for R&amp;D depends on how they will be used:</p>
+<ul>
+  <li>An asset that serves <strong>only one</strong> R&amp;D project is expensed immediately, even though it lasts longer.</li>
+  <li>An asset with an <strong>alternative future use</strong> is capitalized and depreciated; only the depreciation for the periods used in R&amp;D is R&amp;D expense.</li>
+</ul>
+<p>R&amp;D ends where commercial production begins. Costs after that point, such as routine quality control and ongoing refinements, are not R&amp;D. They are expensed or included in inventory cost.</p>
+
+<table class="mini-table"><tr><th>Generally R&amp;D</th><th>Generally not R&amp;D</th></tr><tr><td>Laboratory work to discover new knowledge</td><td>Engineering follow-through early in commercial production</td></tr><tr><td>Finding applications for research results</td><td>Quality control and routine testing during production</td></tr><tr><td>Designing, building, and testing prototypes</td><td>Routine efforts to improve an existing product</td></tr><tr><td>Changing the design or formulation of a product or process</td><td>Adapting an existing product to a specific customer as part of ongoing business</td></tr></table>
+
+<div class="example">
+<div class="ex-label">Example — Cullasaja Composites develops a biodegradable packaging film (2026)</div>
+<table class="mini-table"><tr><th>Expenditure</th><th class="num">Amount</th></tr><tr><td>R&amp;D salaries</td><td class="num">$6,400,000</td></tr><tr><td>R&amp;D supplies consumed</td><td class="num">1,750,000</td></tr><tr><td>Equipment for R&amp;D (will be used on other projects)</td><td class="num">3,200,000</td></tr><tr><td>Patent filing and legal fees</td><td class="num">85,000</td></tr><tr><td>Payments to an outside laboratory</td><td class="num">900,000</td></tr><tr><td><strong>Total cash spent</strong></td><td class="num"><strong>$12,335,000</strong></td></tr></table><p>The film will enter production in 2027. The equipment has other uses, and 2026 depreciation on it was $320,000.</p>
+<div class="ex-answer">
+Expensed as R&amp;D: $6,400,000 + $1,750,000 + $900,000 = $9,050,000, plus $320,000 of equipment depreciation, for total R&amp;D expense of <strong>$9,370,000</strong> to disclose.<br>
+Capitalized: equipment $3,200,000 and patent $85,000.<br>
+Check: $9,050,000 + $3,200,000 + $85,000 = $12,335,000.
+</div>
+</div>
+
+<table class="je-table"><tr><td>R&amp;D expense</td><td class="je-debit-amt">9,050,000</td><td></td></tr><tr><td class="indent">Cash</td><td></td><td class="je-credit-amt">9,050,000</td></tr></table><p class="je-desc">Salaries, supplies, and outside services.</p>
+<table class="je-table"><tr><td>Equipment</td><td class="je-debit-amt">3,200,000</td><td></td></tr><tr><td class="indent">Cash</td><td></td><td class="je-credit-amt">3,200,000</td></tr></table><p class="je-desc">Purchase of equipment with alternative future use.</p>
+<table class="je-table"><tr><td>R&amp;D expense</td><td class="je-debit-amt">320,000</td><td></td></tr><tr><td class="indent">Accumulated depreciation—equipment</td><td></td><td class="je-credit-amt">320,000</td></tr></table><p class="je-desc">Depreciation attributable to R&amp;D use in 2026.</p>
+<table class="je-table"><tr><td>Patent</td><td class="je-debit-amt">85,000</td><td></td></tr><tr><td class="indent">Cash</td><td></td><td class="je-credit-amt">85,000</td></tr></table><p class="je-desc">Legal and filing fees for the patent are capitalized even though the research behind it was expensed.</p>
+
+<p>That last point shows the gap between internally developed and purchased intangibles: if Cullasaja later sold this patent, the buyer would capitalize the full purchase price, not just the filing fees.</p>
+
+<div class="key-idea">
+<strong>IFRS difference:</strong> IFRS separates research from development. Research is expensed as incurred, but development costs that meet specified criteria <em>can be capitalized</em> as an intangible asset. Under both U.S. GAAP and IFRS, the direct costs of securing a patent (legal and filing fees) are capitalized.
+</div>
+
+<h3>Software development</h3>
+<p>For software to be sold, leased, or marketed, the dividing line is <strong>technological feasibility</strong>, reached when planning, design, coding, and testing confirm the product can meet its specifications. Costs before that point are expensed like other R&amp;D. Costs after feasibility but before release to customers are capitalized. After release, costs such as maintenance and support are expensed (but not as R&amp;D). For software developed for internal use, including website development, costs in the preliminary planning stage are expensed and costs in the application-development stage are capitalized.</p>
+
+<h3>Cloud computing arrangements</h3>
+<p>A cloud arrangement is treated as a purchased intangible only if <em>both</em> conditions hold: the customer has a contractual right to take possession of the software without significant penalty, and the customer could run it on its own hardware or with an unrelated vendor. If either is missing, it is a service contract and the fees are expensed as incurred.</p>
+
+<h3>R&amp;D performed for others</h3>
+<p>Immediate expensing does not apply to a company that does research for clients under contract. Its costs are carried as inventory until the project is finished, because the benefit is the contract revenue that will be recognized.</p>
+
+<h3>R&amp;D acquired in a business combination</h3>
+<ul>
+  <li><strong>Developed technology</strong> (already technologically feasible) is capitalized at fair value and amortized as a finite-life intangible.</li>
+  <li><strong>In-process R&amp;D</strong> is capitalized at fair value as an <em>indefinite-life</em> intangible until the project succeeds or fails.</li>
+  <li>R&amp;D spending by the acquirer after the acquisition is expensed as incurred.</li>
+</ul>
+
+<h3>Start-up costs</h3>
+<p>The costs of launching a new product, service, territory, or customer relationship, and organization costs such as incorporation legal fees, are expensed in the period incurred rather than capitalized.</p>
+
+</div>
+
+
+<div class="lo-block">
+<h2>Appendix: Oil and Gas Exploration Costs</h2>
+
+<p>Companies may choose either of two accepted methods, and they must disclose which one they use.</p>
+<ul>
+  <li><strong>Successful efforts:</strong> costs of wells that turn out to be dry holes are expensed in the period incurred. Only the cost of successful wells is capitalized and later depleted.</li>
+  <li><strong>Full cost:</strong> all exploration costs within a large geographic area are capitalized and expensed gradually as production from the successful wells occurs.</li>
+</ul>
+
+<div class="example">
+<div class="ex-label">Example — Copperhead Energy drills eight exploratory wells in 2026</div>
+<p>Each well cost $1,500,000. Six were dry holes and two produced.</p>
+<div class="ex-answer">
+Total cost = 8 × $1,500,000 = $12,000,000.<br>
+Successful efforts: capitalize 2 × $1,500,000 = $3,000,000 and expense 6 × $1,500,000 = $9,000,000.<br>
+Full cost: capitalize the entire $12,000,000; no exploration expense this year.
+</div>
+</div>
+
+<p><strong>Successful efforts method</strong></p>
+<table class="je-table"><tr><td>Oil and gas properties</td><td class="je-debit-amt">3,000,000</td><td></td></tr><tr><td>Exploration expense</td><td class="je-debit-amt">9,000,000</td><td></td></tr><tr><td class="indent">Cash</td><td></td><td class="je-credit-amt">12,000,000</td></tr></table>
+<p><strong>Full-cost method</strong></p>
+<table class="je-table"><tr><td>Oil and gas properties</td><td class="je-debit-amt">12,000,000</td><td></td></tr><tr><td class="indent">Cash</td><td></td><td class="je-credit-amt">12,000,000</td></tr></table>
+
+<p>Full cost therefore reports higher assets and higher early income; successful efforts reports the dry-hole losses right away.</p>
+
+</div>
+
+
+<div class="pager">
+<a class="prev" href="Ch10-acquisition-notes-part3-noncash-exchanges.html"><span class="pg-dir">← Previous · Part 3</span><span class="pg-title">Noncash Acquisitions and Exchanges</span></a>
+<span class="spacer"></span>
+</div>
+
+</main>
+
+<footer>ACCT 351 · Part 4 of 4: Self-Constructed Assets, R&amp;D, and Oil and Gas — Lecture Notes</footer>
+
+</body>
+</html>

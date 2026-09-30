@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Part 2 of 4: Natural Resources, Intangibles, Goodwill, and Bundled Purchases — Lecture Notes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --wcu-purple: #4B2E83;
+    --wcu-purple-dark: #341f5c;
+    --wcu-gold: #C8A24A;
+    --gold-light: #f4ecd8;
+    --ink: #232023;
+    --paper: #fdfcfb;
+    --panel: #f7f3ec;
+    --rule: #e2d9c8;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.55;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--wcu-purple) 0%, var(--wcu-purple-dark) 100%);
+    color: #fff;
+    padding: 2.2rem 1.5rem 1.8rem;
+    border-bottom: 6px solid var(--wcu-gold);
+  }
+
+  header .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--wcu-gold);
+    margin-bottom: 0.4rem;
+  }
+
+  header h1 {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 700;
+    font-size: 1.9rem;
+    margin: 0 0 0.3rem;
+  }
+
+  header p.sub {
+    margin: 0;
+    color: #e7e0f2;
+    font-size: 0.98rem;
+  }
+
+  main {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  .lo-block { margin-bottom: 2.8rem; }
+
+  h2 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.5rem;
+    margin: 0 0 0.8rem;
+    color: var(--wcu-purple-dark);
+    border-bottom: 2px solid var(--rule);
+    padding-bottom: 0.4rem;
+  }
+
+  h3 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.1rem;
+    margin: 1.4rem 0 0.5rem;
+    color: var(--wcu-purple-dark);
+  }
+
+  p { margin: 0.6rem 0; }
+
+  .key-idea {
+    background: var(--panel);
+    border-left: 4px solid var(--wcu-gold);
+    padding: 0.9rem 1.1rem;
+    border-radius: 0 6px 6px 0;
+    margin: 0.9rem 0;
+  }
+
+  .key-idea strong { color: var(--wcu-purple-dark); }
+
+  .formula {
+    font-family: 'IBM Plex Mono', monospace;
+    background: var(--wcu-purple-dark);
+    color: var(--gold-light);
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin: 0.8rem 0;
+    font-size: 0.95rem;
+    overflow-x: auto;
+  }
+
+  .example {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin: 0.9rem 0;
+  }
+
+  .example .ex-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--wcu-purple);
+    margin-bottom: 0.4rem;
+  }
+
+  .example .ex-answer {
+    margin-top: 0.6rem;
+    padding-top: 0.6rem;
+    border-top: 1px dashed var(--rule);
+    font-weight: 500;
+  }
+
+  ul, ol { padding-left: 1.4rem; }
+  li { margin-bottom: 0.35rem; }
+
+  .patterns {
+    background: var(--gold-light);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin: 0.8rem 0;
+  }
+  .patterns p { margin: 0.3rem 0; }
+
+  table.mini-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.4rem 0 0.9rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+  }
+  table.mini-table caption {
+    text-align: left;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    color: #6b6560;
+    margin-bottom: 0.3rem;
+    caption-side: top;
+  }
+  table.mini-table th, table.mini-table td {
+    border: 1px solid var(--rule);
+    padding: 0.45rem 0.6rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.mini-table th {
+    background: var(--panel);
+    color: var(--wcu-purple-dark);
+    font-weight: 600;
+  }
+  table.mini-table td.num, table.mini-table th.num { text-align: right; }
+
+  table.je-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.5rem 0 0.3rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.86rem;
+  }
+  table.je-table td { padding: 0.28rem 0.3rem; vertical-align: top; }
+  table.je-table td.je-debit-amt, table.je-table td.je-credit-amt {
+    text-align: right;
+    width: 100px;
+    white-space: nowrap;
+  }
+  table.je-table td.indent { padding-left: 1.8rem; }
+  .je-desc {
+    font-size: 0.82rem;
+    color: #6b6560;
+    font-style: italic;
+    margin: 0 0 1rem;
+  }
+
+  footer {
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: #8a8380;
+    padding: 1.5rem;
+  }
+
+  .series-nav {
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem 0.6rem;
+    margin: 0 0 2.2rem;
+  }
+  .series-nav .sn-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--wcu-purple);
+    margin-bottom: 0.4rem;
+  }
+  .series-nav ol { list-style: none; margin: 0; padding: 0; }
+  .series-nav li { margin: 0; padding: 0.45rem 0; border-top: 1px dashed var(--rule); }
+  .series-nav li:first-child { border-top: none; }
+  .series-nav a { color: var(--wcu-purple-dark); font-weight: 600; text-decoration: none; }
+  .series-nav a:hover { text-decoration: underline; }
+  .series-nav .sn-desc { display: block; font-size: 0.85rem; color: #6b6560; margin-top: 0.1rem; }
+  .series-nav li.current { background: var(--gold-light); margin: 0 -0.6rem; padding: 0.45rem 0.6rem; border-radius: 6px; border-top-color: transparent; }
+  .series-nav li.current + li { border-top-color: transparent; }
+  .series-nav li.current .sn-name { font-weight: 700; color: var(--wcu-purple-dark); }
+  .series-nav .sn-here { display: block; font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #8a6d1f; margin: 0.1rem 0 0.15rem; }
+  .in-part { margin: 0 0 1.6rem; font-size: 0.9rem; color: #6b6560; }
+  .in-part strong { color: var(--wcu-purple-dark); }
+  .pager { display: flex; justify-content: space-between; gap: 1rem; margin: 2.4rem 0 0; flex-wrap: wrap; }
+  .pager a {
+    flex: 1 1 240px;
+    display: block;
+    text-decoration: none;
+    border: 1px solid var(--rule);
+    background: #fff;
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    color: var(--wcu-purple-dark);
+  }
+  .pager a:hover { border-color: var(--wcu-gold); background: var(--gold-light); }
+  .pager .pg-dir { display: block; font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--wcu-purple); }
+  .pager .pg-title { display: block; font-family: 'Source Serif 4', serif; font-weight: 600; margin-top: 0.15rem; }
+  .pager a.next { text-align: right; }
+  .pager .spacer { flex: 1 1 240px; }
+  @media print { .series-nav, .pager { display: none; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">ACCT 351 · Operating Assets: Acquisition · Part 2 of 4</div>
+  <h1>Natural Resources, Intangibles, Goodwill, and Bundled Purchases</h1>
+  <p class="sub">Lecture Notes</p>
+</header>
+
+<main>
+
+<nav class="series-nav" aria-label="Chapter 10 lecture notes">
+<div class="sn-label">Chapter 10 lecture notes — 4 parts</div>
+<ol>
+<li><a href="Ch10-acquisition-notes-part1-asset-costs.html"><span class="sn-name">Part 1: What Counts as Cost: Equipment, Land, and Buildings</span></a><span class="sn-desc">The long-lived asset groups, the capitalize-versus-expense test, and the cost of equipment, land, land improvements, and buildings.</span></li>
+<li class="current"><a href="Ch10-acquisition-notes-part2-resources-intangibles.html"><span class="sn-name">Part 2: Natural Resources, Intangibles, Goodwill, and Bundled Purchases</span></a><span class="sn-here">You are here</span><span class="sn-desc">Natural resources and asset retirement obligations, patents and other intangibles, goodwill, and splitting a lump-sum price among assets.</span></li>
+<li><a href="Ch10-acquisition-notes-part3-noncash-exchanges.html"><span class="sn-name">Part 3: Noncash Acquisitions, Exchanges, and Evaluating Fixed Assets</span></a><span class="sn-desc">Assets acquired with notes, stock, donations, or trade-ins, plus the capital budgeting decision and the fixed-asset turnover ratio.</span></li>
+<li><a href="Ch10-acquisition-notes-part4-construction-rd.html"><span class="sn-name">Part 4: Self-Constructed Assets, R&amp;D, and Oil and Gas</span></a><span class="sn-desc">Overhead and capitalized interest on assets a company builds, research and development and related costs, and oil and gas exploration methods.</span></li>
+</ol>
+</nav>
+<p class="in-part"><strong>In this part:</strong> Natural Resources and Asset Retirement Obligations · Intangible Assets · Goodwill · Lump-Sum Purchases</p>
+<div class="lo-block">
+<h2>Natural Resources and Asset Retirement Obligations</h2>
+
+<p>A natural resource is used up physically: a mineral deposit shrinks as it is mined. A building or machine, by contrast, stays physically intact while it produces. If a company buys a resource from someone else, cost is the price plus whatever is needed to get it ready. More often the company develops the resource itself, and cost can include four pieces:</p>
+<ul>
+  <li><strong>Acquisition:</strong> amounts paid for the right to explore or to extract proven reserves.</li>
+  <li><strong>Exploration:</strong> drilling, excavating, and other searching.</li>
+  <li><strong>Development:</strong> costs after discovery but before production, such as shafts, wells, and tunnels.</li>
+  <li><strong>Restoration:</strong> the cost of returning the land to an acceptable condition when extraction ends.</li>
+</ul>
+<p>Heavy equipment used at the site is usually not part of the resource's cost. It is depreciated as equipment, though equipment that cannot be moved and has no other use is depreciated over no longer than the resource will last.</p>
+
+<h3>Asset retirement obligations (AROs)</h3>
+<p>Restoration is one example of an <strong>asset retirement obligation</strong>: a legal duty to dismantle, remove, or restore something when a long-lived asset is retired. The accounting has three moving parts:</p>
+<ul>
+  <li>Recognize a liability in the period the obligation arises, measured at fair value when it can be reasonably estimated.</li>
+  <li>Fair value is usually the present value of the expected cash outflow. When several outcomes are possible, weight each by its probability and discount the expected amount at the credit-adjusted risk-free rate.</li>
+  <li>Add the liability's amount to the cost of the related asset.</li>
+</ul>
+
+<div class="example">
+<div class="ex-label">Example — Sugar Cove Quarry Company</div>
+<p>Sugar Cove paid $900,000 for the right to explore a 300-acre tract, spent $650,000 exploring, and spent $400,000 on access roads and a pit (development). It also bought $520,000 of excavation equipment. Its contract requires it to restore the land four years after extraction ends. Management sees three possible restoration outlays. The credit-adjusted risk-free rate is 7%.</p><table class="mini-table"><tr><th>Scenario</th><th class="num">Cash outflow</th><th class="num">Probability</th><th class="num">Weighted</th></tr><tr><td>A</td><td class="num">$400,000</td><td class="num">25%</td><td class="num">$100,000</td></tr><tr><td>B</td><td class="num">520,000</td><td class="num">55%</td><td class="num">286,000</td></tr><tr><td>C</td><td class="num">640,000</td><td class="num">20%</td><td class="num">128,000</td></tr><tr><td><strong>Expected outflow</strong></td><td class="num"></td><td class="num"></td><td class="num"><strong>$514,000</strong></td></tr></table><p>Present value of the obligation: $514,000 × 0.76290 = <strong>$392,131</strong> (present value of $1, n = 4, i = 7%).</p><table class="mini-table"><tr><td>Rights to explore</td><td class="num">$900,000</td></tr><tr><td>Exploration</td><td class="num">650,000</td></tr><tr><td>Development</td><td class="num">400,000</td></tr><tr><td>Restoration obligation (present value)</td><td class="num">392,131</td></tr><tr><td><strong>Capitalized cost of the quarry deposit</strong></td><td class="num"><strong>$2,342,131</strong></td></tr></table>
+<div class="ex-answer">
+The excavation equipment is recorded separately at $520,000 and depreciated. The deposit's cost will be depleted as stone is removed.
+</div>
+</div>
+
+<table class="je-table"><tr><td>Quarry deposit</td><td class="je-debit-amt">2,342,131</td><td></td></tr><tr><td class="indent">Cash</td><td></td><td class="je-credit-amt">1,950,000</td></tr><tr><td class="indent">Asset retirement liability</td><td></td><td class="je-credit-amt">392,131</td></tr></table><p class="je-desc">Acquiring and developing the deposit and recording the obligation.</p>
+<table class="je-table"><tr><td>Excavation equipment</td><td class="je-debit-amt">520,000</td><td></td></tr><tr><td class="indent">Cash</td><td></td><td class="je-credit-amt">520,000</td></tr></table><p class="je-desc">Buying the equipment.</p>
+
+<h3>Accretion and settlement</h3>
+<p>The liability starts at $392,131 but will have to grow to the $514,000 expected outlay. Each year the company records <strong>accretion expense</strong> equal to the current liability times the 7% rate, which raises the liability.</p>
+
+<table class="mini-table"><caption>*Final-year amount adjusted slightly so the liability lands exactly on $514,000 (table factors are rounded).</caption><tr><th>Year</th><th class="num">Accretion (7% × beginning liability)</th><th class="num">Ending liability</th></tr><tr><td>Start</td><td class="num"></td><td class="num">$392,131</td></tr><tr><td>1</td><td class="num">$27,449</td><td class="num">419,580</td></tr><tr><td>2</td><td class="num">29,371</td><td class="num">448,951</td></tr><tr><td>3</td><td class="num">31,427</td><td class="num">480,378</td></tr><tr><td>4</td><td class="num">33,622*</td><td class="num">514,000</td></tr></table>
+
+<table class="je-table"><tr><td>Accretion expense</td><td class="je-debit-amt">27,449</td><td></td></tr><tr><td class="indent">Asset retirement liability</td><td></td><td class="je-credit-amt">27,449</td></tr></table><p class="je-desc">Year 1 entry; later years follow the same pattern.</p>
+
+<p>When the work is finally done, any difference between the cash actually spent and the recorded liability is a gain or loss. If Sugar Cove pays $545,000 to restore the site:</p>
+<table class="je-table"><tr><td>Asset retirement liability</td><td class="je-debit-amt">514,000</td><td></td></tr><tr><td>Loss on settlement of ARO</td><td class="je-debit-amt">31,000</td><td></td></tr><tr><td class="indent">Cash</td><td></td><td class="je-credit-amt">545,000</td></tr></table><p class="je-desc">Loss = $545,000 − $514,000. A lower payment would produce a gain instead.</p>
+
+<div class="example">
+<div class="ex-label">Check yourself</div>
+<p>Jarrett Creek Mining paid $8,000,000 for mineral rights and spent $2,500,000 on exploration and development. It must restore the land in five years. Management estimates the restoration cost at either $1,000,000 (30% probability) or $2,000,000 (70% probability). The credit-adjusted risk-free rate is 6% (present value of $1, n = 5, i = 6% is 0.74726). What is the initial cost of the mine?</p>
+<div class="ex-answer">
+Expected outflow = ($1,000,000 × 30%) + ($2,000,000 × 70%) = $1,700,000.<br>
+Present value = $1,700,000 × 0.74726 = $1,270,342.<br>
+Cost of the mine = $8,000,000 + $2,500,000 + $1,270,342 = $11,770,342.
+</div>
+</div>
+
+</div>
+
+
+<div class="lo-block">
+<h2>Intangible Assets</h2>
+
+<p>Intangibles lack physical substance and usually represent exclusive rights. A company can <strong>buy</strong> them from someone else or <strong>develop</strong> them itself, and the accounting is very different:</p>
+<ul>
+  <li><strong>Purchased:</strong> recorded at cost (price plus legal and other costs to get them ready), just like PP&amp;E.</li>
+  <li><strong>Developed internally:</strong> the development costs are generally expensed as incurred, not capitalized. Uncertain future benefits are the reason: it is hard to show which spending will pay off, and when.</li>
+</ul>
+<p>Intangibles with a <strong>finite</strong> life are amortized over that life. Those with an <strong>indefinite</strong> life are not amortized. Both kinds are tested for impairment.</p>
+
+<table class="mini-table"><tr><th>Intangible</th><th>Legal protection</th><th>Costs capitalized</th></tr><tr><td>Patent</td><td>Exclusive right to make or use a product or process, granted for 20 years</td><td>Purchase price, legal and filing fees, and the cost of successfully defending it in court</td></tr><tr><td>Copyright</td><td>Exclusive right to a creative work, lasting the creator's life plus 70 years</td><td>Same approach as patents</td></tr><tr><td>Trademark (trade name)</td><td>Exclusive right to a distinguishing name, slogan, or symbol; registered for 10 years and renewable without limit</td><td>Purchase price, legal and filing fees; often acquired in a business combination</td></tr><tr><td>Franchise</td><td>Contractual right to use a franchisor's name and products for a set period</td><td>Initial franchise fee and legal costs; ongoing payments for the franchisor's services are expensed as incurred</td></tr></table>
+
+<p>Even when a company builds a patented product itself, the legal and filing fees to obtain the patent are capitalized. The research that produced the invention is not.</p>
+
+<div class="example">
+<div class="ex-label">Example — Elkmont Biotech buys and defends a patent</div>
+<p>Elkmont Biotech bought a patent for $350,000 and paid $22,000 in legal and filing fees to record the transfer. Two years later it spent $48,000 successfully defending the patent against an infringement claim.</p>
+<div class="ex-answer">
+Initial cost = $350,000 + $22,000 = $372,000.<br>
+The $48,000 defense cost is added to the patent account, bringing it to $420,000 to be amortized over the remaining life.
+</div>
+</div>
+<table class="je-table"><tr><td>Patent</td><td class="je-debit-amt">372,000</td><td></td></tr><tr><td class="indent">Cash</td><td></td><td class="je-credit-amt">372,000</td></tr></table><p class="je-desc">Purchase of the patent, including legal and filing fees.</p>
+<table class="je-table"><tr><td>Patent</td><td class="je-debit-amt">48,000</td><td></td></tr><tr><td class="indent">Cash</td><td></td><td class="je-credit-amt">48,000</td></tr></table><p class="je-desc">Successful defense of the patent.</p>
+
+</div>
+
+
+<div class="lo-block">
+<h2>Goodwill</h2>
+
+<p>Goodwill is what a company is worth beyond the sum of its identifiable assets. It comes from things like reputation, loyal customers, a skilled workforce, and a good location, and it cannot be separated from the business. As a result, it is recorded only when one company buys another.</p>
+
+<div class="formula">Goodwill = Price paid − (Fair value of identifiable assets − Fair value of liabilities assumed)</div>
+
+<p>Goodwill is a <strong>residual</strong>: what is left after every identifiable asset and liability is valued. Companies can build their own goodwill through advertising, training, and good service, but they must expense those costs as they are incurred. That is why a balance sheet can understate the real assets of a company that grew its reputation internally, and why comparing it with an acquirer that bought its goodwill is tricky.</p>
+
+<div class="example">
+<div class="ex-label">Example — Pigeon River Holdings acquires Linville Tool Works ($ in millions)</div>
+<p>Pigeon River paid $26.4 million in cash for all the stock of Linville and took over all of its liabilities, which have a fair value of $9.5 million. The fair values of Linville's identifiable assets are receivables of $4.1, inventory of $6.3, property, plant, and equipment of $12.8, and a patent of $3.6.</p><table class="mini-table"><tr><td>Consideration paid (cash)</td><td class="num">$26.4</td></tr><tr><td>Fair value of identifiable assets ($4.1 + $6.3 + $12.8 + $3.6)</td><td class="num">26.8</td></tr><tr><td>Less: liabilities assumed</td><td class="num">(9.5)</td></tr><tr><td>Fair value of identifiable net assets</td><td class="num">(17.3)</td></tr><tr><td><strong>Goodwill</strong></td><td class="num"><strong>$9.1</strong></td></tr></table>
+</div>
+
+<table class="je-table"><tr><td>Receivables</td><td class="je-debit-amt">4.1</td><td></td></tr><tr><td>Inventory</td><td class="je-debit-amt">6.3</td><td></td></tr><tr><td>Property, plant, and equipment</td><td class="je-debit-amt">12.8</td><td></td></tr><tr><td>Patent</td><td class="je-debit-amt">3.6</td><td></td></tr><tr><td>Goodwill</td><td class="je-debit-amt">9.1</td><td></td></tr><tr><td class="indent">Liabilities</td><td></td><td class="je-credit-amt">9.5</td></tr><tr><td class="indent">Cash</td><td></td><td class="je-credit-amt">26.4</td></tr></table><p class="je-desc">All amounts in millions; each asset is recorded at fair value and goodwill is the balancing figure.</p>
+
+<div class="example">
+<div class="ex-label">Check yourself</div>
+<p>Haywood Sportswear paid $3,400,000 for all of Waterrock Outfitters' stock. On the purchase date Waterrock's assets had fair values of $820,000 (current assets) and $2,150,000 (property, plant, and equipment), and it owed $610,000 in liabilities. How much goodwill does Haywood record?</p>
+<div class="ex-answer">
+Identifiable net assets = $820,000 + $2,150,000 − $610,000 = $2,360,000.<br>
+Goodwill = $3,400,000 − $2,360,000 = $1,040,000.
+</div>
+</div>
+
+</div>
+
+
+<div class="lo-block">
+<h2>Lump-Sum Purchases</h2>
+
+<p>Sometimes several assets are bought for one price. If the assets are identical, the answer is simple: eight identical trucks bought for $264,000 cost $33,000 each. If the assets are different (say land, a building, and equipment with different lives), the price must be divided among them, because each is depreciated or amortized differently.</p>
+
+<p>The split uses <strong>relative fair values</strong>. Each asset's share of the total fair value (usually from an appraisal) is applied to the price actually paid.</p>
+
+<div class="formula">Asset cost = Price paid × (Asset's fair value ÷ Total fair value of all assets)</div>
+
+<div class="example">
+<div class="ex-label">Example — Brasstown Machining buys a plant for $3,300,000</div>
+<p>The price covers the land, the building, installed equipment, a patent on a process the equipment uses, and a stock of inventory. An appraiser values the pieces as if bought separately:</p><table class="mini-table"><tr><th>Asset</th><th class="num">Fair value</th><th class="num">Share of total</th><th class="num">Allocated cost</th></tr><tr><td>Land</td><td class="num">$450,000</td><td class="num">12%</td><td class="num">$396,000</td></tr><tr><td>Building</td><td class="num">1,200,000</td><td class="num">32%</td><td class="num">1,056,000</td></tr><tr><td>Equipment</td><td class="num">900,000</td><td class="num">24%</td><td class="num">792,000</td></tr><tr><td>Patent</td><td class="num">600,000</td><td class="num">16%</td><td class="num">528,000</td></tr><tr><td>Inventory</td><td class="num">600,000</td><td class="num">16%</td><td class="num">528,000</td></tr><tr><td><strong>Total</strong></td><td class="num"><strong>$3,750,000</strong></td><td class="num"><strong>100%</strong></td><td class="num"><strong>$3,300,000</strong></td></tr></table>
+<div class="ex-answer">
+Because total fair value ($3,750,000) exceeds the price ($3,300,000), every asset is recorded at less than its appraised value. Land, for example, is $3,300,000 × 12% = $396,000.
+</div>
+</div>
+
+<table class="je-table"><tr><td>Land</td><td class="je-debit-amt">396,000</td><td></td></tr><tr><td>Building</td><td class="je-debit-amt">1,056,000</td><td></td></tr><tr><td>Equipment</td><td class="je-debit-amt">792,000</td><td></td></tr><tr><td>Patent</td><td class="je-debit-amt">528,000</td><td></td></tr><tr><td>Inventory</td><td class="je-debit-amt">528,000</td><td></td></tr><tr><td class="indent">Cash</td><td></td><td class="je-credit-amt">3,300,000</td></tr></table>
+
+<div class="example">
+<div class="ex-label">Check yourself</div>
+<p>Fairview Dairy bought a processing site for $21,000,000. Appraisals put the fair values at $15,000,000 for the building, $9,000,000 for the land, and $6,000,000 for land improvements. What is each asset's initial cost?</p>
+<div class="ex-answer">
+Total fair value = $30,000,000.<br>
+Building: 50% × $21,000,000 = $10,500,000. Land: 30% × $21,000,000 = $6,300,000. Land improvements: 20% × $21,000,000 = $4,200,000.
+</div>
+</div>
+
+</div>
+
+
+<div class="pager">
+<a class="prev" href="Ch10-acquisition-notes-part1-asset-costs.html"><span class="pg-dir">← Previous · Part 1</span><span class="pg-title">What Counts as Cost</span></a>
+<a class="next" href="Ch10-acquisition-notes-part3-noncash-exchanges.html"><span class="pg-dir">Next · Part 3 →</span><span class="pg-title">Noncash Acquisitions and Exchanges</span></a>
+</div>
+
+</main>
+
+<footer>ACCT 351 · Part 2 of 4: Natural Resources, Intangibles, Goodwill, and Bundled Purchases — Lecture Notes</footer>
+
+</body>
+</html>

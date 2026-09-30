@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Part 3 of 4: Noncash Acquisitions, Exchanges, and Evaluating Fixed Assets — Lecture Notes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --wcu-purple: #4B2E83;
+    --wcu-purple-dark: #341f5c;
+    --wcu-gold: #C8A24A;
+    --gold-light: #f4ecd8;
+    --ink: #232023;
+    --paper: #fdfcfb;
+    --panel: #f7f3ec;
+    --rule: #e2d9c8;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.55;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--wcu-purple) 0%, var(--wcu-purple-dark) 100%);
+    color: #fff;
+    padding: 2.2rem 1.5rem 1.8rem;
+    border-bottom: 6px solid var(--wcu-gold);
+  }
+
+  header .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--wcu-gold);
+    margin-bottom: 0.4rem;
+  }
+
+  header h1 {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 700;
+    font-size: 1.9rem;
+    margin: 0 0 0.3rem;
+  }
+
+  header p.sub {
+    margin: 0;
+    color: #e7e0f2;
+    font-size: 0.98rem;
+  }
+
+  main {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  .lo-block { margin-bottom: 2.8rem; }
+
+  h2 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.5rem;
+    margin: 0 0 0.8rem;
+    color: var(--wcu-purple-dark);
+    border-bottom: 2px solid var(--rule);
+    padding-bottom: 0.4rem;
+  }
+
+  h3 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.1rem;
+    margin: 1.4rem 0 0.5rem;
+    color: var(--wcu-purple-dark);
+  }
+
+  p { margin: 0.6rem 0; }
+
+  .key-idea {
+    background: var(--panel);
+    border-left: 4px solid var(--wcu-gold);
+    padding: 0.9rem 1.1rem;
+    border-radius: 0 6px 6px 0;
+    margin: 0.9rem 0;
+  }
+
+  .key-idea strong { color: var(--wcu-purple-dark); }
+
+  .formula {
+    font-family: 'IBM Plex Mono', monospace;
+    background: var(--wcu-purple-dark);
+    color: var(--gold-light);
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin: 0.8rem 0;
+    font-size: 0.95rem;
+    overflow-x: auto;
+  }
+
+  .example {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin: 0.9rem 0;
+  }
+
+  .example .ex-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--wcu-purple);
+    margin-bottom: 0.4rem;
+  }
+
+  .example .ex-answer {
+    margin-top: 0.6rem;
+    padding-top: 0.6rem;
+    border-top: 1px dashed var(--rule);
+    font-weight: 500;
+  }
+
+  ul, ol { padding-left: 1.4rem; }
+  li { margin-bottom: 0.35rem; }
+
+  .patterns {
+    background: var(--gold-light);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin: 0.8rem 0;
+  }
+  .patterns p { margin: 0.3rem 0; }
+
+  table.mini-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.4rem 0 0.9rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+  }
+  table.mini-table caption {
+    text-align: left;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    color: #6b6560;
+    margin-bottom: 0.3rem;
+    caption-side: top;
+  }
+  table.mini-table th, table.mini-table td {
+    border: 1px solid var(--rule);
+    padding: 0.45rem 0.6rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.mini-table th {
+    background: var(--panel);
+    color: var(--wcu-purple-dark);
+    font-weight: 600;
+  }
+  table.mini-table td.num, table.mini-table th.num { text-align: right; }
+
+  table.je-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.5rem 0 0.3rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.86rem;
+  }
+  table.je-table td { padding: 0.28rem 0.3rem; vertical-align: top; }
+  table.je-table td.je-debit-amt, table.je-table td.je-credit-amt {
+    text-align: right;
+    width: 100px;
+    white-space: nowrap;
+  }
+  table.je-table td.indent { padding-left: 1.8rem; }
+  .je-desc {
+    font-size: 0.82rem;
+    color: #6b6560;
+    font-style: italic;
+    margin: 0 0 1rem;
+  }
+
+  footer {
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: #8a8380;
+    padding: 1.5rem;
+  }
+
+  .series-nav {
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem 0.6rem;
+    margin: 0 0 2.2rem;
+  }
+  .series-nav .sn-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--wcu-purple);
+    margin-bottom: 0.4rem;
+  }
+  .series-nav ol { list-style: none; margin: 0; padding: 0; }
+  .series-nav li { margin: 0; padding: 0.45rem 0; border-top: 1px dashed var(--rule); }
+  .series-nav li:first-child { border-top: none; }
+  .series-nav a { color: var(--wcu-purple-dark); font-weight: 600; text-decoration: none; }
+  .series-nav a:hover { text-decoration: underline; }
+  .series-nav .sn-desc { display: block; font-size: 0.85rem; color: #6b6560; margin-top: 0.1rem; }
+  .series-nav li.current { background: var(--gold-light); margin: 0 -0.6rem; padding: 0.45rem 0.6rem; border-radius: 6px; border-top-color: transparent; }
+  .series-nav li.current + li { border-top-color: transparent; }
+  .series-nav li.current .sn-name { font-weight: 700; color: var(--wcu-purple-dark); }
+  .series-nav .sn-here { display: block; font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #8a6d1f; margin: 0.1rem 0 0.15rem; }
+  .in-part { margin: 0 0 1.6rem; font-size: 0.9rem; color: #6b6560; }
+  .in-part strong { color: var(--wcu-purple-dark); }
+  .pager { display: flex; justify-content: space-between; gap: 1rem; margin: 2.4rem 0 0; flex-wrap: wrap; }
+  .pager a {
+    flex: 1 1 240px;
+    display: block;
+    text-decoration: none;
+    border: 1px solid var(--rule);
+    background: #fff;
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    color: var(--wcu-purple-dark);
+  }
+  .pager a:hover { border-color: var(--wcu-gold); background: var(--gold-light); }
+  .pager .pg-dir { display: block; font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--wcu-purple); }
+  .pager .pg-title { display: block; font-family: 'Source Serif 4', serif; font-weight: 600; margin-top: 0.15rem; }
+  .pager a.next { text-align: right; }
+  .pager .spacer { flex: 1 1 240px; }
+  @media print { .series-nav, .pager { display: none; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">ACCT 351 · Operating Assets: Acquisition · Part 3 of 4</div>
+  <h1>Noncash Acquisitions, Exchanges, and Evaluating Fixed Assets</h1>
+  <p class="sub">Lecture Notes</p>
+</header>
+
+<main>
+
+<nav class="series-nav" aria-label="Chapter 10 lecture notes">
+<div class="sn-label">Chapter 10 lecture notes — 4 parts</div>
+<ol>
+<li><a href="Ch10-acquisition-notes-part1-asset-costs.html"><span class="sn-name">Part 1: What Counts as Cost: Equipment, Land, and Buildings</span></a><span class="sn-desc">The long-lived asset groups, the capitalize-versus-expense test, and the cost of equipment, land, land improvements, and buildings.</span></li>
+<li><a href="Ch10-acquisition-notes-part2-resources-intangibles.html"><span class="sn-name">Part 2: Natural Resources, Intangibles, Goodwill, and Bundled Purchases</span></a><span class="sn-desc">Natural resources and asset retirement obligations, patents and other intangibles, goodwill, and splitting a lump-sum price among assets.</span></li>
+<li class="current"><a href="Ch10-acquisition-notes-part3-noncash-exchanges.html"><span class="sn-name">Part 3: Noncash Acquisitions, Exchanges, and Evaluating Fixed Assets</span></a><span class="sn-here">You are here</span><span class="sn-desc">Assets acquired with notes, stock, donations, or trade-ins, plus the capital budgeting decision and the fixed-asset turnover ratio.</span></li>
+<li><a href="Ch10-acquisition-notes-part4-construction-rd.html"><span class="sn-name">Part 4: Self-Constructed Assets, R&amp;D, and Oil and Gas</span></a><span class="sn-desc">Overhead and capitalized interest on assets a company builds, research and development and related costs, and oil and gas exploration methods.</span></li>
+</ol>
+</nav>
+<p class="in-part"><strong>In this part:</strong> Acquiring Assets Without Paying Cash Up Front · Paying with Stock and Receiving Donated Assets · Exchanges of Nonmonetary Assets · Decision Makers' Perspective</p>
+<div class="lo-block">
+<h2>Acquiring Assets Without Paying Cash Up Front</h2>
+
+<p>Four common situations put an asset on the books without an immediate cash payment: signing a note, issuing stock, receiving a donation, and trading in another nonmonetary asset. One rule governs all of them: record the asset at its <strong>fair value</strong>, using whichever is more clearly determinable, the fair value of what was given up or the fair value of what was received.</p>
+
+<h3>Paying later with a note</h3>
+<p>A note payable is valued at the present value of its future payments. When the note carries a realistic stated interest rate, present value equals face value, and the asset is recorded at that amount.</p>
+
+<div class="example">
+<div class="ex-label">Case 1 — realistic stated rate</div>
+<p>On January 2, 2026, Catawba Valley Kilns bought equipment priced at $72,000 by signing a three-year, 8% note. Interest is paid each December 31, and the principal is due at the end of year three.</p>
+</div>
+<table class="je-table"><tr><td>Equipment</td><td class="je-debit-amt">72,000</td><td></td></tr><tr><td class="indent">Notes payable</td><td></td><td class="je-credit-amt">72,000</td></tr></table><p class="je-desc">January 2, 2026.</p>
+<table class="je-table"><tr><td>Interest expense</td><td class="je-debit-amt">5,760</td><td></td></tr><tr><td class="indent">Cash</td><td></td><td class="je-credit-amt">5,760</td></tr></table><p class="je-desc">Each December 31: $72,000 × 8%.</p>
+<table class="je-table"><tr><td>Notes payable</td><td class="je-debit-amt">72,000</td><td></td></tr><tr><td class="indent">Cash</td><td></td><td class="je-credit-amt">72,000</td></tr></table><p class="je-desc">December 31, 2028: repayment of principal.</p>
+
+<h3>A note with no stated interest</h3>
+<p>If a note says no interest but payment is years away, part of the face amount is really interest. The asset should be recorded at its cash-equivalent price, and the difference between that and the face amount goes into a contra-liability, <strong>discount on notes payable</strong>, which is amortized into interest expense over the note's life.</p>
+
+<div class="example">
+<div class="ex-label">Case 2 — fair value of the note is the better evidence</div>
+<p>On January 2, 2026, Pine Mountain Cabinetry bought a custom-built edge-banding line. The price was not published. Pine Mountain signed a noninterest-bearing note for $90,000 due December 31, 2028. A bank would have charged 9% on a loan of the same term.</p>
+<p>Present value = $90,000 × 0.77218 = <strong>$69,496</strong> (present value of $1, n = 3, i = 9%). Discount = $90,000 − $69,496 = $20,504.</p><table class="mini-table"><tr><th>Year</th><th class="num">Interest expense (9% × carrying amount)</th><th class="num">Carrying amount of note</th></tr><tr><td>Start</td><td class="num"></td><td class="num">$69,496</td></tr><tr><td>2026</td><td class="num">$6,255</td><td class="num">75,751</td></tr><tr><td>2027</td><td class="num">6,818</td><td class="num">82,569</td></tr><tr><td>2028</td><td class="num">7,431</td><td class="num">90,000</td></tr><tr><td><strong>Total interest</strong></td><td class="num"><strong>$20,504</strong></td><td class="num"></td></tr></table>
+</div>
+
+<table class="je-table"><tr><td>Equipment</td><td class="je-debit-amt">69,496</td><td></td></tr><tr><td>Discount on notes payable</td><td class="je-debit-amt">20,504</td><td></td></tr><tr><td class="indent">Notes payable</td><td></td><td class="je-credit-amt">90,000</td></tr></table><p class="je-desc">January 2, 2026.</p>
+<table class="je-table"><tr><td>Interest expense</td><td class="je-debit-amt">6,255</td><td></td></tr><tr><td class="indent">Discount on notes payable</td><td></td><td class="je-credit-amt">6,255</td></tr></table><p class="je-desc">December 31, 2026. The 2027 and 2028 entries use $6,818 and $7,431.</p>
+<table class="je-table"><tr><td>Notes payable</td><td class="je-debit-amt">90,000</td><td></td></tr><tr><td class="indent">Cash</td><td></td><td class="je-credit-amt">90,000</td></tr></table><p class="je-desc">December 31, 2028: settlement at face amount.</p>
+
+<div class="example">
+<div class="ex-label">Case 3 — fair value of the asset is known</div>
+<p>On January 2, 2026, Tessentee Creek Bakery acquired a spiral mixer and signed a noninterest-bearing $125,000 note due December 31, 2028. The dealer's price list shows the mixer sells for $93,914 cash. No rate was stated.</p>
+<div class="ex-answer">
+Here the asset's fair value is the stronger evidence, so the mixer is recorded at $93,914 and the discount is $125,000 − $93,914 = $31,086.<br>
+The implicit rate comes from $93,914 ÷ $125,000 = 0.75131, which matches the present value factor for n = 3 at 10%. Interest each year is then 10% of the note's carrying amount.
+</div>
+</div>
+<table class="je-table"><tr><td>Equipment</td><td class="je-debit-amt">93,914</td><td></td></tr><tr><td>Discount on notes payable</td><td class="je-debit-amt">31,086</td><td></td></tr><tr><td class="indent">Notes payable</td><td></td><td class="je-credit-amt">125,000</td></tr></table>
+
+<div class="example">
+<div class="ex-label">Check yourself</div>
+<p>On January 2, 2026, Lakeshore Dental bought a sterilization unit and signed a noninterest-bearing $150,000 note due in two years. The dealer's cash price is $126,000. At what amount is the unit recorded, and what is the discount?</p>
+<div class="ex-answer">
+The unit is recorded at the $126,000 cash price. The discount on notes payable is $150,000 − $126,000 = $24,000.
+</div>
+</div>
+
+</div>
+
+
+<div class="lo-block">
+<h2>Paying with Stock and Receiving Donated Assets</h2>
+
+<h3>Assets acquired for stock</h3>
+<p>This usually happens when a small business incorporates and its owners contribute assets in exchange for shares. If the stock is actively traded, its market value is the best measure of the exchange. If it is not (as with a new private corporation), the appraised value of the asset received is the better measure.</p>
+
+<div class="example">
+<div class="ex-label">Example — stock for land</div>
+<p>On March 31, 2026, Whitewater Falls Kayaks issued 12,500 shares of no-par common stock for a parcel of land. The stock was trading at $26 per share.</p>
+<div class="ex-answer">
+12,500 shares × $26 = $325,000. The land is recorded at $325,000 and common stock is credited for the same amount.
+</div>
+</div>
+<table class="je-table"><tr><td>Land</td><td class="je-debit-amt">325,000</td><td></td></tr><tr><td class="indent">Common stock</td><td></td><td class="je-credit-amt">325,000</td></tr></table>
+
+<div class="example">
+<div class="ex-label">Check yourself</div>
+<p>A founder contributed a patent to Appalachian Sensors in exchange for 40,000 shares of its actively traded common stock. The stock was trading at $31 per share. At what amount is the patent recorded?</p>
+<div class="ex-answer">
+40,000 × $31 = $1,240,000.
+</div>
+</div>
+
+<h3>Donated assets</h3>
+<p>A donation is usually an incentive: a city or development authority might pay part of a facility's cost to attract an employer. The company records the asset at its fair value (market price or appraisal). This is not a departure from historical cost; it is as if the donor gave cash and the company used it to buy the asset. Generally accepted accounting principles give no specific rules for businesses, so practice follows the guidance for not-for-profit organizations: the contribution is recognized as <strong>revenue</strong>.</p>
+
+<div class="example">
+<div class="ex-label">Example — a county helps pay for a building</div>
+<p>Blue Ridge Composites agreed to relocate its distribution center to Henderson County. The county agreed to pay 25% of the $8,000,000 construction cost. Blue Ridge paid its share in cash when the building was finished.</p>
+<div class="ex-answer">
+Donation = $8,000,000 × 25% = $2,000,000. Blue Ridge pays the remaining $6,000,000.
+</div>
+</div>
+<table class="je-table"><tr><td>Building</td><td class="je-debit-amt">8,000,000</td><td></td></tr><tr><td class="indent">Cash</td><td></td><td class="je-credit-amt">6,000,000</td></tr><tr><td class="indent">Revenue—donation of asset</td><td></td><td class="je-credit-amt">2,000,000</td></tr></table>
+
+<div class="key-idea">
+<strong>U.S. GAAP vs. IFRS on government grants:</strong> both value the donated asset at fair value, but IFRS does not allow the grant to be recorded as immediate revenue. A company may either (1) subtract the grant from the asset's cost, recording the building above at $6,000,000, or (2) record the building at $8,000,000 and credit a <em>deferred income</em> liability for $2,000,000 that is recognized in income systematically over the asset's useful life.
+</div>
+
+</div>
+
+
+<div class="lo-block">
+<h2>Exchanges of Nonmonetary Assets</h2>
+
+<p>Companies often acquire a new asset by handing over an old one, such as trading in a press for a newer model. Because the two assets rarely have equal value, cash usually changes hands to even things out. When the exchange has commercial substance and fair values can be determined, record it in four steps:</p>
+<ol>
+  <li><strong>Record the new asset at fair value</strong>: the fair value of what was given up plus any cash paid (minus any cash received). The fair value of what was received works equally well if it is clearer.</li>
+  <li><strong>Remove the old asset</strong> by crediting its cost and debiting its accumulated depreciation.</li>
+  <li><strong>Record the cash</strong> paid or received.</li>
+  <li><strong>Record the gain or loss</strong>: fair value of the old asset minus its book value. Fair value above book value is a gain; below is a loss.</li>
+</ol>
+
+<div class="example">
+<div class="ex-label">Example — a gain (Shoal Creek Printing trades presses)</div>
+<p>Shoal Creek traded in a press with a cost of $640,000 and accumulated depreciation of $500,000 (book value $140,000). The old press had a fair value of $185,000. Shoal Creek also paid $310,000 cash for the new press.</p>
+<div class="ex-answer">
+New press = $185,000 + $310,000 = $495,000.<br>
+Gain = $185,000 fair value − $140,000 book value = $45,000.
+</div>
+</div>
+<table class="je-table"><tr><td>Equipment—new</td><td class="je-debit-amt">495,000</td><td></td></tr><tr><td>Accumulated depreciation—old</td><td class="je-debit-amt">500,000</td><td></td></tr><tr><td class="indent">Equipment—old</td><td></td><td class="je-credit-amt">640,000</td></tr><tr><td class="indent">Cash</td><td></td><td class="je-credit-amt">310,000</td></tr><tr><td class="indent">Gain on exchange of assets</td><td></td><td class="je-credit-amt">45,000</td></tr></table>
+
+<div class="example">
+<div class="ex-label">Same trade, but the old press is worth only $110,000</div>
+<p>Now the new press is recorded at $110,000 + $310,000 = $420,000, and the loss is $110,000 − $140,000 = $30,000.</p>
+</div>
+<table class="je-table"><tr><td>Equipment—new</td><td class="je-debit-amt">420,000</td><td></td></tr><tr><td>Accumulated depreciation—old</td><td class="je-debit-amt">500,000</td><td></td></tr><tr><td>Loss on exchange of assets</td><td class="je-debit-amt">30,000</td><td></td></tr><tr><td class="indent">Equipment—old</td><td></td><td class="je-credit-amt">640,000</td></tr><tr><td class="indent">Cash</td><td></td><td class="je-credit-amt">310,000</td></tr></table>
+
+<h3>When fair value cannot be determined</h3>
+<p>If neither asset's fair value can be reliably measured, fair value cannot support the new asset's recorded amount. The new asset is recorded at the <em>book value</em> of the asset given plus cash paid, and no gain or loss is recognized. In the first example above, that would be $140,000 + $310,000 = $450,000.</p>
+<table class="je-table"><tr><td>Equipment—new</td><td class="je-debit-amt">450,000</td><td></td></tr><tr><td>Accumulated depreciation—old</td><td class="je-debit-amt">500,000</td><td></td></tr><tr><td class="indent">Equipment—old</td><td></td><td class="je-credit-amt">640,000</td></tr><tr><td class="indent">Cash</td><td></td><td class="je-credit-amt">310,000</td></tr></table>
+
+<h3>When the exchange lacks commercial substance</h3>
+<p>An exchange has <strong>commercial substance</strong> when it is expected to change the company's future cash flows, for example by trading for a newer model that raises output or cuts costs. The rule exists to stop companies from swapping essentially identical assets just to book a gain.</p>
+<ul>
+  <li><strong>Gain situation:</strong> fair value cannot be used to record the gain. The new asset is recorded at the old asset's book value plus cash paid (minus cash received), and no gain is recognized.</li>
+  <li><strong>Loss situation:</strong> the loss is recognized in full, and the new asset is recorded using fair value, just as in the commercial-substance case.</li>
+</ul>
+
+<div class="example">
+<div class="ex-label">Example — identical land swapped, no commercial substance</div>
+<p>Linville Gorge Vineyards traded a tract of land (book value $1,800,000, fair value $3,200,000) for a nearly identical tract owned by another grower and paid $350,000 cash.</p>
+<div class="ex-answer">
+New land = $1,800,000 + $350,000 = $2,150,000. The $1,400,000 unrealized gain is not recognized.
+</div>
+</div>
+<table class="je-table"><tr><td>Land—new</td><td class="je-debit-amt">2,150,000</td><td></td></tr><tr><td class="indent">Land—old</td><td></td><td class="je-credit-amt">1,800,000</td></tr><tr><td class="indent">Cash</td><td></td><td class="je-credit-amt">350,000</td></tr></table>
+
+<h3>Receiving cash in an exchange that lacks commercial substance</h3>
+<p>A gain may be partly recognized when the company <em>receives</em> cash, because part of the deal is then a sale. The recognized gain is:</p>
+<div class="formula">Recognized gain = (FV given − BV given) × (Cash received ÷ Total fair value received)</div>
+<p>If the cash received is at least 25% of the total fair value received, the entire gain is recognized. The new asset's amount is the book value given, minus cash received, plus the gain recognized.</p>
+
+<div class="example">
+<div class="ex-label">Example — land swap with cash received</div>
+<p>A company trades land (book value $1,800,000, fair value $3,200,000) for different land worth $2,800,000 and receives $400,000 in cash. The exchange lacks commercial substance.</p>
+<div class="ex-answer">
+Cash received is $400,000 ÷ $3,200,000 = 12.5% of total fair value received, less than 25%, so only part of the gain is recognized.<br>
+Recognized gain = ($3,200,000 − $1,800,000) × 12.5% = $175,000.<br>
+New land = $1,800,000 − $400,000 + $175,000 = $1,575,000.
+</div>
+</div>
+<table class="je-table"><tr><td>Land—new</td><td class="je-debit-amt">1,575,000</td><td></td></tr><tr><td>Cash</td><td class="je-debit-amt">400,000</td><td></td></tr><tr><td class="indent">Land—old</td><td></td><td class="je-credit-amt">1,800,000</td></tr><tr><td class="indent">Gain on exchange of land</td><td></td><td class="je-credit-amt">175,000</td></tr></table>
+
+<table class="mini-table"><caption>Summary of exchange treatments</caption><tr><th></th><th>Commercial substance and fair value determinable</th><th>Fair value not determinable</th><th>Lacks commercial substance</th></tr><tr><td>New asset recorded at</td><td>FV of asset given + cash paid (or − cash received)</td><td>BV of asset given + cash paid (or − cash received)</td><td>Gain: BV given + cash paid (or − cash received) + any gain recognized. Loss: FV given + cash paid</td></tr><tr><td>Gain or loss</td><td>FV given − BV given</td><td>None</td><td>Gain: none unless cash is received (partial rule above). Loss: recognized in full</td></tr></table>
+
+<div class="example">
+<div class="ex-label">Check yourself</div>
+<p>Carolina Courier traded in a delivery van (book value $18,000, fair value $21,000) for a new van and paid $26,000 cash. The exchange has commercial substance. At what amount is the new van recorded, and what gain is recognized?</p>
+<div class="ex-answer">
+New van = $21,000 + $26,000 = $47,000.<br>
+Gain = $21,000 − $18,000 = $3,000.
+</div>
+</div>
+
+</div>
+
+
+<div class="lo-block">
+<h2>Decision Makers' Perspective</h2>
+
+<h3>Deciding whether to acquire</h3>
+<p>Buying long-lived assets is among management's biggest decisions, often called <strong>capital budgeting</strong>. Managers forecast the net cash the asset will generate and compare it with what it costs. Under the net present value approach, the asset is worth buying when the present value of those future net cash flows is greater than the initial acquisition cost.</p>
+
+<h3>Measuring how well the assets are used</h3>
+<p>Analysts want to know how much revenue a company squeezes out of its PP&amp;E. The <strong>fixed-asset turnover ratio</strong> answers that question.</p>
+
+<div class="formula">Fixed-asset turnover = Net sales ÷ Average fixed assets (net carrying value)</div>
+
+<p>Average fixed assets is the beginning and ending carrying value added together and divided by two. A higher ratio means more sales per dollar invested in fixed assets. As with other turnover ratios, compare it with competitors, an industry average, or the same company's history.</p>
+
+<div class="example">
+<div class="ex-label">Example — two regional retailers ($ in millions)</div>
+<table class="mini-table"><tr><th></th><th class="num">Mountain Mercantile</th><th class="num">Trailhead Outfitters</th></tr><tr><td>PP&amp;E, net, 2026</td><td class="num">$1,840</td><td class="num">$2,310</td></tr><tr><td>PP&amp;E, net, 2025</td><td class="num">1,760</td><td class="num">2,190</td></tr><tr><td>Net sales, 2026</td><td class="num">$9,280</td><td class="num">$10,575</td></tr></table>
+<div class="ex-answer">
+Mountain Mercantile: $9,280 ÷ [($1,840 + $1,760) ÷ 2] = $9,280 ÷ $1,800 = <strong>5.16</strong>.<br>
+Trailhead Outfitters: $10,575 ÷ [($2,310 + $2,190) ÷ 2] = $10,575 ÷ $2,250 = <strong>4.70</strong>.<br>
+Mountain Mercantile produces about $0.46 more in sales for each dollar of fixed assets, even though Trailhead is larger.
+</div>
+</div>
+
+</div>
+
+
+<div class="pager">
+<a class="prev" href="Ch10-acquisition-notes-part2-resources-intangibles.html"><span class="pg-dir">← Previous · Part 2</span><span class="pg-title">Resources, Intangibles, and Goodwill</span></a>
+<a class="next" href="Ch10-acquisition-notes-part4-construction-rd.html"><span class="pg-dir">Next · Part 4 →</span><span class="pg-title">Construction, R&amp;D, and Oil and Gas</span></a>
+</div>
+
+</main>
+
+<footer>ACCT 351 · Part 3 of 4: Noncash Acquisitions, Exchanges, and Evaluating Fixed Assets — Lecture Notes</footer>
+
+</body>
+</html>

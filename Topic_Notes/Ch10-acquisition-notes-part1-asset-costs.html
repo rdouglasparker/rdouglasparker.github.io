@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Part 1 of 4: What Counts as Cost: Equipment, Land, and Buildings — Lecture Notes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --wcu-purple: #4B2E83;
+    --wcu-purple-dark: #341f5c;
+    --wcu-gold: #C8A24A;
+    --gold-light: #f4ecd8;
+    --ink: #232023;
+    --paper: #fdfcfb;
+    --panel: #f7f3ec;
+    --rule: #e2d9c8;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.55;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--wcu-purple) 0%, var(--wcu-purple-dark) 100%);
+    color: #fff;
+    padding: 2.2rem 1.5rem 1.8rem;
+    border-bottom: 6px solid var(--wcu-gold);
+  }
+
+  header .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--wcu-gold);
+    margin-bottom: 0.4rem;
+  }
+
+  header h1 {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 700;
+    font-size: 1.9rem;
+    margin: 0 0 0.3rem;
+  }
+
+  header p.sub {
+    margin: 0;
+    color: #e7e0f2;
+    font-size: 0.98rem;
+  }
+
+  main {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  .lo-block { margin-bottom: 2.8rem; }
+
+  h2 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.5rem;
+    margin: 0 0 0.8rem;
+    color: var(--wcu-purple-dark);
+    border-bottom: 2px solid var(--rule);
+    padding-bottom: 0.4rem;
+  }
+
+  h3 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.1rem;
+    margin: 1.4rem 0 0.5rem;
+    color: var(--wcu-purple-dark);
+  }
+
+  p { margin: 0.6rem 0; }
+
+  .key-idea {
+    background: var(--panel);
+    border-left: 4px solid var(--wcu-gold);
+    padding: 0.9rem 1.1rem;
+    border-radius: 0 6px 6px 0;
+    margin: 0.9rem 0;
+  }
+
+  .key-idea strong { color: var(--wcu-purple-dark); }
+
+  .formula {
+    font-family: 'IBM Plex Mono', monospace;
+    background: var(--wcu-purple-dark);
+    color: var(--gold-light);
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin: 0.8rem 0;
+    font-size: 0.95rem;
+    overflow-x: auto;
+  }
+
+  .example {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin: 0.9rem 0;
+  }
+
+  .example .ex-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--wcu-purple);
+    margin-bottom: 0.4rem;
+  }
+
+  .example .ex-answer {
+    margin-top: 0.6rem;
+    padding-top: 0.6rem;
+    border-top: 1px dashed var(--rule);
+    font-weight: 500;
+  }
+
+  ul, ol { padding-left: 1.4rem; }
+  li { margin-bottom: 0.35rem; }
+
+  .patterns {
+    background: var(--gold-light);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin: 0.8rem 0;
+  }
+  .patterns p { margin: 0.3rem 0; }
+
+  table.mini-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.4rem 0 0.9rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+  }
+  table.mini-table caption {
+    text-align: left;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    color: #6b6560;
+    margin-bottom: 0.3rem;
+    caption-side: top;
+  }
+  table.mini-table th, table.mini-table td {
+    border: 1px solid var(--rule);
+    padding: 0.45rem 0.6rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.mini-table th {
+    background: var(--panel);
+    color: var(--wcu-purple-dark);
+    font-weight: 600;
+  }
+  table.mini-table td.num, table.mini-table th.num { text-align: right; }
+
+  table.je-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.5rem 0 0.3rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.86rem;
+  }
+  table.je-table td { padding: 0.28rem 0.3rem; vertical-align: top; }
+  table.je-table td.je-debit-amt, table.je-table td.je-credit-amt {
+    text-align: right;
+    width: 100px;
+    white-space: nowrap;
+  }
+  table.je-table td.indent { padding-left: 1.8rem; }
+  .je-desc {
+    font-size: 0.82rem;
+    color: #6b6560;
+    font-style: italic;
+    margin: 0 0 1rem;
+  }
+
+  footer {
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: #8a8380;
+    padding: 1.5rem;
+  }
+
+  .series-nav {
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem 0.6rem;
+    margin: 0 0 2.2rem;
+  }
+  .series-nav .sn-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--wcu-purple);
+    margin-bottom: 0.4rem;
+  }
+  .series-nav ol { list-style: none; margin: 0; padding: 0; }
+  .series-nav li { margin: 0; padding: 0.45rem 0; border-top: 1px dashed var(--rule); }
+  .series-nav li:first-child { border-top: none; }
+  .series-nav a { color: var(--wcu-purple-dark); font-weight: 600; text-decoration: none; }
+  .series-nav a:hover { text-decoration: underline; }
+  .series-nav .sn-desc { display: block; font-size: 0.85rem; color: #6b6560; margin-top: 0.1rem; }
+  .series-nav li.current { background: var(--gold-light); margin: 0 -0.6rem; padding: 0.45rem 0.6rem; border-radius: 6px; border-top-color: transparent; }
+  .series-nav li.current + li { border-top-color: transparent; }
+  .series-nav li.current .sn-name { font-weight: 700; color: var(--wcu-purple-dark); }
+  .series-nav .sn-here { display: block; font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #8a6d1f; margin: 0.1rem 0 0.15rem; }
+  .in-part { margin: 0 0 1.6rem; font-size: 0.9rem; color: #6b6560; }
+  .in-part strong { color: var(--wcu-purple-dark); }
+  .pager { display: flex; justify-content: space-between; gap: 1rem; margin: 2.4rem 0 0; flex-wrap: wrap; }
+  .pager a {
+    flex: 1 1 240px;
+    display: block;
+    text-decoration: none;
+    border: 1px solid var(--rule);
+    background: #fff;
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    color: var(--wcu-purple-dark);
+  }
+  .pager a:hover { border-color: var(--wcu-gold); background: var(--gold-light); }
+  .pager .pg-dir { display: block; font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--wcu-purple); }
+  .pager .pg-title { display: block; font-family: 'Source Serif 4', serif; font-weight: 600; margin-top: 0.15rem; }
+  .pager a.next { text-align: right; }
+  .pager .spacer { flex: 1 1 240px; }
+  @media print { .series-nav, .pager { display: none; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">ACCT 351 · Operating Assets: Acquisition · Part 1 of 4</div>
+  <h1>What Counts as Cost: Equipment, Land, and Buildings</h1>
+  <p class="sub">Lecture Notes</p>
+</header>
+
+<main>
+
+<nav class="series-nav" aria-label="Chapter 10 lecture notes">
+<div class="sn-label">Chapter 10 lecture notes — 4 parts</div>
+<ol>
+<li class="current"><a href="Ch10-acquisition-notes-part1-asset-costs.html"><span class="sn-name">Part 1: What Counts as Cost: Equipment, Land, and Buildings</span></a><span class="sn-here">You are here</span><span class="sn-desc">The long-lived asset groups, the capitalize-versus-expense test, and the cost of equipment, land, land improvements, and buildings.</span></li>
+<li><a href="Ch10-acquisition-notes-part2-resources-intangibles.html"><span class="sn-name">Part 2: Natural Resources, Intangibles, Goodwill, and Bundled Purchases</span></a><span class="sn-desc">Natural resources and asset retirement obligations, patents and other intangibles, goodwill, and splitting a lump-sum price among assets.</span></li>
+<li><a href="Ch10-acquisition-notes-part3-noncash-exchanges.html"><span class="sn-name">Part 3: Noncash Acquisitions, Exchanges, and Evaluating Fixed Assets</span></a><span class="sn-desc">Assets acquired with notes, stock, donations, or trade-ins, plus the capital budgeting decision and the fixed-asset turnover ratio.</span></li>
+<li><a href="Ch10-acquisition-notes-part4-construction-rd.html"><span class="sn-name">Part 4: Self-Constructed Assets, R&amp;D, and Oil and Gas</span></a><span class="sn-desc">Overhead and capitalized interest on assets a company builds, research and development and related costs, and oil and gas exploration methods.</span></li>
+</ol>
+</nav>
+<p class="in-part"><strong>In this part:</strong> The Long-Lived Assets in This Chapter · What Goes Into an Asset's Cost · Cost of Equipment · Land, Land Improvements, and Buildings</p>
+<div class="lo-block">
+<h2>The Long-Lived Assets in This Chapter</h2>
+
+<p>Some assets are not bought to be sold or used up within a year. A company holds them for a long time because they help it earn revenue year after year. This chapter follows those assets from the day they are acquired. Chapter 11 picks up the story afterward: spreading their cost over time, handling repairs and upgrades, testing for impairment, and disposing of them.</p>
+
+<table class="mini-table"><tr><th>Group</th><th>What belongs in it</th><th>What sets it apart</th></tr><tr><td>Property, plant, and equipment</td><td>Land, land improvements, buildings, machinery, vehicles, computers, furniture, and fixtures</td><td>Physical assets whose cost is spread over their useful lives through <em>depreciation</em></td></tr><tr><td>Natural resources</td><td>Timber tracts, mineral deposits, and oil and gas reserves</td><td>Physically used up as they are harvested or extracted, so cost is spread through <em>depletion</em></td></tr><tr><td>Intangible assets</td><td>Patents, copyrights, trademarks, franchises, and goodwill</td><td>No physical form, and future benefits are less certain, so cost is spread through <em>amortization</em> (unless the life is indefinite)</td></tr></table>
+
+<p>Right-of-use assets created by operating leases also produce long-term benefits, but they are covered separately with leases in Chapter 15.</p>
+
+<h3>How these assets appear in the financial statements</h3>
+<p>Property, plant, and equipment is reported at historical cost less accumulated depreciation. The result is called the <strong>carrying value</strong> (or book value). Companies usually disclose the detail by category in a note. Intangibles are shown separately from PP&amp;E, and goodwill typically gets a line of its own.</p>
+
+<div class="example">
+<div class="ex-label">Example — Laurel Fork Logistics, property and equipment note ($ in thousands)</div>
+<table class="mini-table"><tr><th>December 31</th><th class="num">2026</th><th class="num">2025</th></tr><tr><td>Land</td><td class="num">$12,400</td><td class="num">$11,900</td></tr><tr><td>Buildings and improvements</td><td class="num">86,150</td><td class="num">79,600</td></tr><tr><td>Leasehold improvements</td><td class="num">9,320</td><td class="num">8,760</td></tr><tr><td>Equipment and software</td><td class="num">54,880</td><td class="num">49,300</td></tr><tr><td>Furniture and fixtures</td><td class="num">7,145</td><td class="num">6,820</td></tr><tr><td>Total, at cost</td><td class="num">169,895</td><td class="num">156,380</td></tr><tr><td>Less: accumulated depreciation</td><td class="num">(71,420)</td><td class="num">(63,170)</td></tr><tr><td><strong>Carrying value (net)</strong></td><td class="num"><strong>$98,475</strong></td><td class="num"><strong>$93,210</strong></td></tr></table>
+<div class="ex-answer">
+Carrying value at the end of 2026 is $169,895 − $71,420 = $98,475 thousand. Notice that total cost rose by $13,515 thousand during the year while carrying value rose by only $5,265 thousand, because accumulated depreciation also grew.
+</div>
+</div>
+
+<p>Intangibles come in many flavors, and companies group them in different ways: technology-based (patents, software), customer-related (customer lists and contracts), marketing-related (trademarks, domain names), contract-based (licenses, franchises), and artistic (copyrights on books, music, film).</p>
+
+</div>
+
+
+<div class="lo-block">
+<h2>What Goes Into an Asset's Cost</h2>
+
+<p>The starting point is the same idea used for inventory: an asset is recorded at everything it took to buy it and get it ready to work.</p>
+
+<div class="formula">Initial cost = Purchase price + All other costs to get the asset to its location and ready for use</div>
+
+<p>The real question for each dollar spent is whether it buys something that will help <em>future</em> periods or only the current one. Costs that help only the current period are expensed now. Costs that help future periods are <strong>capitalized</strong>: recorded as an asset first, then expensed gradually as the asset is used.</p>
+
+<div class="patterns">
+<p><strong>Capitalize it</strong> if the cost was needed to acquire the asset or to put it in place and working.</p>
+<p><strong>Expense it</strong> if it benefits only the current period, would have been incurred anyway, or cannot be tied reliably to the specific asset (employee training is the classic example).</p>
+</div>
+
+<table class="mini-table"><tr><th>Asset</th><th>What it is</th><th>Costs typically capitalized</th></tr><tr><td>Equipment</td><td>Machinery, computers, vehicles, furniture, and similar items</td><td>Net purchase price, sales tax, freight, installation, testing, title fees</td></tr><tr><td>Land</td><td>Real property used in operations (land held for speculation is an investment, not PP&amp;E)</td><td>Price, closing costs, commissions, back taxes assumed, clearing, grading, demolition of old structures</td></tr><tr><td>Land improvements</td><td>Parking lots, driveways, fences, landscaping, sprinklers</td><td>Their own separately identified costs</td></tr><tr><td>Buildings</td><td>Plants, warehouses, offices</td><td>Price, commissions, legal fees, reconditioning</td></tr><tr><td>Natural resources</td><td>Timber, minerals, oil and gas</td><td>Acquisition, exploration, development, and restoration costs</td></tr><tr><td>Patents, copyrights, trademarks</td><td>Exclusive legal rights</td><td>Purchase price, legal and filing fees (not internal R&amp;D)</td></tr><tr><td>Franchises</td><td>Right to use a franchisor's name and products</td><td>Initial franchise fee plus legal costs</td></tr><tr><td>Software</td><td>Programs to sell, lease, or use internally</td><td>Costs after technological feasibility (or after the application-development stage begins for internal-use software)</td></tr><tr><td>Goodwill</td><td>Value of an acquired company beyond its identifiable assets</td><td>Price paid minus fair value of identifiable net assets</td></tr></table>
+
+</div>
+
+
+<div class="lo-block">
+<h2>Cost of Equipment</h2>
+
+<p>Equipment covers machinery, computers, vehicles, furniture, and fixtures. Its cost includes the purchase price (net of discounts), sales tax, freight paid by the buyer, insurance while in transit, installation and testing, legal fees to establish title, and anything else required to make it ready for use. Any of these that can be identified and measured belongs in the asset rather than in expense.</p>
+
+<div class="example">
+<div class="ex-label">Example — Hiwassee Precision Machining buys a press</div>
+<p>Hiwassee bought a stamping press for its plant. The invoice price was $84,500, with 7% sales tax. Freight was $1,650 and transit insurance was $420. A concrete foundation built just for the press cost $2,300, and test runs (including scrapped material) cost $900. Hiwassee also paid $1,100 to train operators.</p><table class="mini-table"><tr><td>Invoice price</td><td class="num">$84,500</td></tr><tr><td>Sales tax (7% × $84,500)</td><td class="num">5,915</td></tr><tr><td>Freight</td><td class="num">1,650</td></tr><tr><td>Transit insurance</td><td class="num">420</td></tr><tr><td>Foundation</td><td class="num">2,300</td></tr><tr><td>Test runs</td><td class="num">900</td></tr><tr><td><strong>Capitalized cost of the press</strong></td><td class="num"><strong>$95,685</strong></td></tr></table>
+<div class="ex-answer">
+The $1,100 of operator training is expensed. It is hard to tie to a specific machine, and the skills stay with the employees rather than the asset.
+</div>
+</div>
+
+<table class="je-table"><tr><td>Equipment</td><td class="je-debit-amt">95,685</td><td></td></tr><tr><td class="indent">Cash</td><td></td><td class="je-credit-amt">95,685</td></tr></table><p class="je-desc">Recording the press.</p>
+<table class="je-table"><tr><td>Training expense</td><td class="je-debit-amt">1,100</td><td></td></tr><tr><td class="indent">Cash</td><td></td><td class="je-credit-amt">1,100</td></tr></table><p class="je-desc">Operator training is an expense of the period.</p>
+
+<div class="example">
+<div class="ex-label">Check yourself</div>
+<p>Ridgecrest Printing bought a bindery machine. The invoice price was $36,000, freight was $1,750, installation and wiring cost $2,900, testing and calibration cost $1,100, and operator training cost $800. At what amount is the machine recorded?</p>
+<div class="ex-answer">
+$36,000 + $1,750 + $2,900 + $1,100 = $41,750. The $800 of training is expensed.
+</div>
+</div>
+
+</div>
+
+
+<div class="lo-block">
+<h2>Land, Land Improvements, and Buildings</h2>
+
+<h3>Land</h3>
+<p>Land's cost covers the price plus the closing costs (attorney, title search and insurance, recording), broker commissions, any past-due taxes or liens the buyer takes on, and the work needed to prepare the site: clearing, grading, draining, and tearing down old buildings. If the buyer later sells salvage from a demolished building, the proceeds reduce the cost of the land.</p>
+
+<div class="example">
+<div class="ex-label">Example — Hemlock Valley Packaging buys a site</div>
+<p>Hemlock Valley paid $640,000 for eight acres with an aging warehouse, which it plans to demolish. At closing it also paid title insurance of $4,200, a broker commission of $19,200, $5,800 of delinquent property taxes owed by the seller, and $3,100 of property tax for the part of the current year after closing. Soon after, it paid $14,500 to demolish the warehouse and $6,300 to grade the lot, and it sold scrap steel from the demolition for $2,000.</p><table class="mini-table"><tr><td>Purchase price</td><td class="num">$640,000</td></tr><tr><td>Title insurance</td><td class="num">4,200</td></tr><tr><td>Broker commission</td><td class="num">19,200</td></tr><tr><td>Delinquent property taxes assumed</td><td class="num">5,800</td></tr><tr><td>Demolition</td><td class="num">14,500</td></tr><tr><td>Grading</td><td class="num">6,300</td></tr><tr><td>Less: proceeds from scrap steel</td><td class="num">(2,000)</td></tr><tr><td><strong>Capitalized cost of land</strong></td><td class="num"><strong>$688,000</strong></td></tr></table>
+<div class="ex-answer">
+The $3,100 of current-year property tax is not part of the land. It covers a period Hemlock Valley is operating, so it is property tax expense.
+</div>
+</div>
+
+<table class="je-table"><tr><td>Land</td><td class="je-debit-amt">688,000</td><td></td></tr><tr><td>Property tax expense</td><td class="je-debit-amt">3,100</td><td></td></tr><tr><td class="indent">Cash</td><td></td><td class="je-credit-amt">691,100</td></tr></table><p class="je-desc">Net cash paid: $640,000 + $4,200 + $19,200 + $5,800 + $3,100 + $14,500 + $6,300 − $2,000 = $691,100.</p>
+
+<h3>Land improvements</h3>
+<p>Parking lots, driveways, private roads, fences, and sprinkler systems are kept separate from land. Land lasts indefinitely, but these items wear out, so their cost is depreciated over the periods they serve.</p>
+
+<h3>Buildings</h3>
+<p>A purchased building is recorded at its price plus commissions and legal fees. If it has to be refurbished, remodeled, or reconditioned before the company can use it, those costs are added too.</p>
+
+</div>
+
+
+<div class="pager">
+<span class="spacer"></span>
+<a class="next" href="Ch10-acquisition-notes-part2-resources-intangibles.html"><span class="pg-dir">Next · Part 2 →</span><span class="pg-title">Resources, Intangibles, and Goodwill</span></a>
+</div>
+
+</main>
+
+<footer>ACCT 351 · Part 1 of 4: What Counts as Cost: Equipment, Land, and Buildings — Lecture Notes</footer>
+
+</body>
+</html>
