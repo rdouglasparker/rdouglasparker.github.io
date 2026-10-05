@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Operating and Short-Term Leases: Homework Packet (E15-17 and E15-18)</title>
-<meta name="description" content="Interactive homework packet: operating lease entries for the lessee and lessor (E15-17) and short-term lease entries for the lessee (E15-18).">
+<title>Operating and Short-Term Leases: Homework Packet</title>
+<meta name="description" content="Interactive homework packet: operating lease entries for the lessee and lessor, and short-term lease entries for the lessee.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -118,7 +118,7 @@
 <header>
   <div class="eyebrow">ACCT 352 &middot; Intermediate Accounting II</div>
   <h1>Operating and Short-Term Leases</h1>
-  <p class="sub">Exercise E15-17 (Operating Lease: Lessee and Lessor) and Exercise E15-18 (Short-Term Lease: Lessee)</p>
+  <p class="sub">Problem 1 (Operating Lease: Lessee and Lessor) and Problem 2 (Short-Term Lease: Lessee)</p>
 </header>
 
 <main id="main" tabindex="-1">
@@ -156,18 +156,18 @@
 
 </main>
 
-<footer>Operating and Short-Term Leases &middot; E15-17 and E15-18 &middot; ACCT 352 &middot; Western Carolina University</footer>
+<footer>Operating and Short-Term Leases &middot; ACCT 352 &middot; Western Carolina University</footer>
 
 <script>
 /* ---------------------------------------------------------------------
-   SCENARIO: E15-17 (operating lease, lessee and lessor) and E15-18 (short-term lease)
+   SCENARIO: operating lease (lessee and lessor) and short-term lease
    Numbers come from the last six digits of the Student ID; dates use the current year.
 --------------------------------------------------------------------- */
 const TOL_DOLLARS = 2;   // amounts are accepted within $2 to allow for rounding differences
 const YEAR = new Date().getFullYear();
 const MAX_ATTEMPTS = 3;
 const TOL = TOL_DOLLARS;
-const EX_CODE = 'E15-17-18';
+const EX_CODE = 'operating-shortterm';
 
 /* Fictitious company names */
 const LESSEE_A = 'Balsam Gap Software Training, Inc.';
@@ -207,7 +207,7 @@ function buildScenario(studentId) {
   const last6 = last6Of(studentId);
   const rng = mulberry32(seedFromString('oplease-' + last6));
 
-  /* ---- E15-17: operating lease, semiannual payments at the END of each period ---- */
+  /* ---- Problem 1: operating lease, semiannual payments at the END of each period ---- */
   const annualRate = pick(rng, [4, 6, 8, 10]);
   const years = pick(rng, [2, 3]);
   const n = years * 2;
@@ -225,7 +225,7 @@ function buildScenario(studentId) {
   const int2 = Math.round(bal1 * r);
   const dec2 = pmt - int2;
 
-  /* ---- E15-18: short-term lease ---- */
+  /* ---- Problem 2: short-term lease ---- */
   const spmt = pick(rng, [10, 12, 15, 18, 20, 24]) * 1000;
   const slife = pick(rng, [4, 5, 6]);
   const srate = pick(rng, [6, 8, 10]);
@@ -233,7 +233,7 @@ function buildScenario(studentId) {
   return { last6, annualRate, years, n, r, pmt, life, periods, dep, cost, PV, int1, dec1, bal1, int2, dec2, spmt, slife, srate };
 }
 
-const NOTE_CALC = '<strong>Use a calculator, not a table:</strong> compute present values with a financial calculator (set to <em>END</em> mode for payments made at the end of each period) or a spreadsheet function such as <code>PV</code>. Do <strong>not</strong> use a rounded present value factor from a table. Payments in E15-17 are semiannual, so convert the annual rate and the term to six-month periods. Round each dollar amount to the nearest whole dollar, and compute the second period&rsquo;s interest from the lease payable balance that remains after the first payment. Answers are accepted within $' + TOL + ' to allow for rounding differences. This scenario is generated from the last six digits of the Student ID entered above &mdash; the same ID always produces the same numbers, and the dates update automatically to the current year.';
+const NOTE_CALC = '<strong>Use a calculator, not a table:</strong> compute present values with a financial calculator (set to <em>END</em> mode for payments made at the end of each period) or a spreadsheet function such as <code>PV</code>. Do <strong>not</strong> use a rounded present value factor from a table. Payments in Problem 1 are semiannual, so convert the annual rate and the term to six-month periods. Round each dollar amount to the nearest whole dollar, and compute the second period&rsquo;s interest from the lease payable balance that remains after the first payment. Answers are accepted within $' + TOL + ' to allow for rounding differences. This scenario is generated from the last six digits of the Student ID entered above &mdash; the same ID always produces the same numbers, and the dates update automatically to the current year.';
 
 function termsTable(caption, rows) {
   return '<table class="lease-terms"><caption class="sr-only">' + caption + '</caption><tbody>' +
@@ -248,8 +248,7 @@ function backgroundA(s) {
       ['Rent payments', s.n + ' payments of ' + fmt(s.pmt) + ' each, payable semiannually on June 30 and December 31 of each year'],
       ['Lessor\u2019s cost of the computers', fmt(s.cost)],
       ['Useful life of the computers', s.life + ' years (' + s.periods + ' semiannual periods), no residual value'],
-      ['Interest rate charged by the lessor', s.annualRate + '% per year (' + (s.annualRate / 2) + '% per six months)'],
-      ['\u00A0\u00A0(Also the lessee\u2019s incremental borrowing rate)', '']
+      ['Interest rate charged by the lessor (also the lessee\u2019s incremental borrowing rate)', s.annualRate + '% per year (' + (s.annualRate / 2) + '% per six months)']
     ]) +
     '<p class="terms-note">Both firms record amortization and depreciation semiannually (on June 30 and December 31). Each firm&rsquo;s fiscal year ends December 31.</p>' +
     '<p><strong>Required:</strong> Prepare the appropriate entries for both (a) the lessee and (b) the lessor from the beginning of the lease through the end of ' + YEAR + '.</p>';
@@ -269,7 +268,7 @@ function backgroundB(s) {
 function buildModel(s) {
   const P = s.pmt;
 
-  /* E15-17 Part 1: lessee */
+  /* Problem 1, Part 1: lessee */
   const lesseeBlocks = [
     { key: 'a', tx: 'January 1, ' + YEAR + ' &mdash; The lease begins.', desc: 'Record ' + LESSEE_A + '\u2019s entry at the beginning of the lease.',
       lines: [ {a:'Right-of-use asset', side:'debit', amt:s.PV}, {a:'Lease payable', side:'credit', amt:s.PV} ] },
@@ -283,7 +282,7 @@ function buildModel(s) {
                {a:'Amortization expense', side:'debit', amt:s.dec2}, {a:'Right-of-use asset', side:'credit', amt:s.dec2} ] }
   ];
 
-  /* E15-17 Part 2: lessor */
+  /* Problem 1, Part 2: lessor */
   const lessorBlocks = ['June 30', 'December 31'].map(function(d, i) {
     return { key: 'ab'[i], tx: d + ', ' + YEAR + ' &mdash; The ' + ORD[i] + ' semiannual rent payment of ' + fmt(P) + ' is received, and semiannual depreciation is recorded.',
       desc: 'Record ' + LESSOR_A + '\u2019s entries for the rent received and for depreciation of the computers for the six months. The computers are depreciated straight-line over their useful life with no residual value.',
@@ -291,7 +290,7 @@ function buildModel(s) {
                {a:'Depreciation expense', side:'debit', amt:s.dep}, {a:'Accumulated depreciation', side:'credit', amt:s.dep} ] };
   });
 
-  /* E15-18 Part 3: short-term lease */
+  /* Problem 2, Part 3: short-term lease */
   const shortBlocks = [
     { key: 'a', tx: 'January 1, ' + YEAR + ' &mdash; The lease begins.', noEntry: true,
       desc: 'Record ' + LESSEE_B + '\u2019s entry, if any, to recognize a right-of-use asset and a lease payable at the beginning of the lease. If no entry is needed, select &ldquo;No Entry Required&rdquo; and leave the amounts blank.',
@@ -304,21 +303,21 @@ function buildModel(s) {
   });
 
   const parts = [
-    { id: 'lessee', ex: 0, short: 'E15-17 Lessee', title: 'Lessee Journal Entries (E15-17)', kind: 'entries',
+    { id: 'lessee', ex: 0, short: 'Problem 1 Lessee', title: 'Lessee Journal Entries', kind: 'entries',
       instructions: 'Prepare the journal entries for ' + LESSEE_A + ' (the lessee) from the beginning of the lease through December 31, ' + YEAR + '. Pick the account for each line first, then enter the amount in the debit or credit column. Leave extra rows blank.',
       groups: [ { id: 'lessee', header: LESSEE_A + ' (Lessee)', blocks: lesseeBlocks } ] },
-    { id: 'lessor', ex: 0, short: 'E15-17 Lessor', title: 'Lessor Journal Entries (E15-17)', kind: 'entries',
+    { id: 'lessor', ex: 0, short: 'Problem 1 Lessor', title: 'Lessor Journal Entries', kind: 'entries',
       instructions: 'Prepare the journal entries for ' + LESSOR_A + ' (the lessor) for the lease payments received through December 31, ' + YEAR + '. Pick the account for each line first, then enter the amount in the debit or credit column. Leave extra rows blank.',
       groups: [ { id: 'lessor', header: LESSOR_A + ' (Lessor)', blocks: lessorBlocks } ] },
-    { id: 'short', ex: 1, short: 'E15-18 Short-Term', title: 'Short-Term Lease Journal Entries (E15-18)', kind: 'entries',
+    { id: 'short', ex: 1, short: 'Problem 2 Short-Term', title: 'Short-Term Lease Journal Entries', kind: 'entries',
       instructions: 'Prepare the journal entries for ' + LESSEE_B + ' from the beginning of the lease through April 1, ' + YEAR + '. Pick the account for each line first, then enter the amount in the debit or credit column. Leave extra rows blank.',
       groups: [ { id: 'short', header: LESSEE_B + ' (Lessee)', blocks: shortBlocks } ] }
   ];
 
   return {
     exercises: [
-      { code: 'E15-17', title: 'Exercise E15-17: Operating Lease (Lessee and Lessor)', background: backgroundA(s), parts: [parts[0], parts[1]] },
-      { code: 'E15-18', title: 'Exercise E15-18: Short-Term Lease (Lessee)', background: backgroundB(s), parts: [parts[2]] }
+      { code: 'op', title: 'Problem 1: Operating Lease (Lessee and Lessor)', background: backgroundA(s), parts: [parts[0], parts[1]] },
+      { code: 'st', title: 'Problem 2: Short-Term Lease (Lessee)', background: backgroundB(s), parts: [parts[2]] }
     ],
     parts: parts
   };
