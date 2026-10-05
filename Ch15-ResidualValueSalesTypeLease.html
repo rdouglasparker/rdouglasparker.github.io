@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sales-Type Leases and Residual Values: Homework Packet</title>
-<meta name="description" content="Interactive homework packet: lessor and lessee amounts for sales-type and finance leases with residual values, and the lessor's first-year earnings and lease receivable for a sales-type lease.">
+<meta name="description" content="Interactive homework packet: lessor and lessee amounts for sales-type and finance leases with residual values, and the first-year earnings, lease receivable, and journal entries for a sales-type lease.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -85,6 +85,19 @@
   .cell-mark { display: block; margin-top: 0.25rem; font-size: 0.85rem; font-weight: 700; color: var(--bad); }
   .cell-mark:empty { display: none; }
 
+  .entry-desc { font-size: 0.97rem; margin-bottom: 0.7rem; }
+  .tx-recap { font-size: 0.95rem; background: var(--panel); border-radius: 6px; padding: 0.6rem 0.8rem; margin-bottom: 0.6rem; color: #4a453f; }
+  .tx-recap .letter { font-weight: 700; color: var(--wcu-purple-dark); }
+  table.je-table { border-collapse: collapse; width: 100%; min-width: 36rem; font-size: 0.95rem; }
+  table.je-table th, table.je-table td { border: 1px solid var(--field-border); padding: 0.4rem 0.5rem; }
+  table.je-table th { background: var(--panel); font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-size: 0.8rem; text-align: left; text-transform: uppercase; letter-spacing: 0.03em; color: var(--wcu-purple-dark); }
+  table.je-table select { width: 100%; font-family: 'Inter', system-ui, sans-serif; font-size: 1rem; padding: 0.3rem; min-height: 2.75rem; color: var(--ink); background: #fff; border: 1px solid var(--field-border); border-radius: 5px; }
+  table.je-table input[type="number"] { width: 100%; font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-size: 1rem; padding: 0.3rem 0.4rem; }
+  .mark-text { font-family: 'Inter', system-ui, sans-serif; font-size: 0.85rem; font-weight: 700; }
+  td.mark-cell { width: 7rem; text-align: center; font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-weight: 800; font-size: 1.15rem; color: var(--bad); border: none !important; background: transparent; }
+  th.mark-th { width: 7rem; border: none !important; background: transparent !important; }
+  table.je-table input[aria-invalid="true"], table.je-table select[aria-invalid="true"] { border: 2px solid var(--bad); }
+
   .entry-result { font-size: 0.9rem; font-weight: 600; margin-top: 0.7rem; }
   .entry-result.ok { color: var(--good); }
   .entry-result.no { color: var(--bad); }
@@ -123,7 +136,7 @@
 <header>
   <div class="eyebrow">ACCT 352 &middot; Intermediate Accounting II</div>
   <h1>Sales-Type Leases and Residual Values</h1>
-  <p class="sub">Problem 1 (Lessor and Lessee Amounts with Residual Values) and Problem 2 (Lessor Accounting for a Sales-Type Lease)</p>
+  <p class="sub">Problem 1 (Lessor and Lessee Amounts with Residual Values) and Problem 2 (Sales-Type Lease: Lessor Earnings and Receivable, and Journal Entries for Both Parties)</p>
 </header>
 
 <main id="main" tabindex="-1">
@@ -141,7 +154,7 @@
   <div class="rounding-note" id="noteCalc"></div>
 
   <div class="check-note">
-    <strong>Checking your work:</strong> you have <strong>3 attempts per part</strong>. Each time you select <em>Check My Work</em>, a <strong class="bad-mark" aria-hidden="true">&#10007;</strong> mark and the words &ldquo;Incorrect&rdquo; or &ldquo;Not answered&rdquo; appear next to every amount that is wrong or blank, so you can fix it and check again. A message under each table also tells you how many amounts are correct. Your attempts are saved in this browser for your Student ID, and regenerating the scenario will not reset them. After your third attempt, that part is locked.
+    <strong>Checking your work:</strong> you have <strong>3 attempts per part</strong>. Each time you select <em>Check My Work</em>, a <strong class="bad-mark" aria-hidden="true">&#10007;</strong> mark and the words &ldquo;Incorrect,&rdquo; &ldquo;Not answered,&rdquo; or &ldquo;Incorrect line&rdquo; appear next to every amount or journal entry line that is wrong, so you can fix it and check again. A message under each table also tells you how many amounts or lines are correct. Your attempts are saved in this browser for your Student ID, and regenerating the scenario will not reset them. After your third attempt, that part is locked.
   </div>
 
   <div id="problems">
@@ -174,6 +187,13 @@ const YEAR = new Date().getFullYear();
 const MAX_ATTEMPTS = 3;
 const TOL = TOL_DOLLARS;
 const EX_CODE = 'salestype-residual';
+
+const ACCOUNTS = [
+  'Cash','Lease receivable','Lease payable','Right-of-use asset','Equipment','Inventory',
+  'Sales revenue','Cost of goods sold','Interest revenue','Interest expense',
+  'Interest receivable','Interest payable','Amortization expense','Depreciation expense',
+  'Accumulated depreciation','Lease expense','Lease revenue','Accounts Payable'
+];
 
 /* Fictitious company names */
 const LESSOR_1 = 'Cheoah Ridge Leasing Company';
@@ -221,6 +241,14 @@ function calcSalesType(P, ratePct, cost) {
   return { int1: int1, reduce2: reduce2, endBal: cost - P - reduce2 };
 }
 
+/* Problem 2 first-year amounts for the lessee: lease payable measured at the present value of the payments only (no residual guarantee),
+   discounted at the lessor's rate; right-of-use asset amortized straight-line over the lease term */
+function calcLessee(P, ratePct, n) {
+  const pv = Math.round(P * annuityDue(ratePct / 100, n));
+  const int1 = Math.round(ratePct / 100 * (pv - P));
+  return { pv: pv, int1: int1, reduce2: P - int1, amort: Math.round(pv / n) };
+}
+
 function buildScenario(studentId) {
   const last6 = last6Of(studentId);
   const rng = mulberry32(seedFromString('residual-' + last6));
@@ -248,8 +276,9 @@ function buildScenario(studentId) {
   const P2 = Math.round((cost - residualSL * pvf2) / ad2 / 500) * 500;
   const RV2 = Math.round((cost - P2 * ad2) / pvf2);                    // residual value that lets the lessor recover its investment
   const res2 = calcSalesType(P2, rate2, cost);
+  const lessee = calcLessee(P2, rate2, n2);
 
-  return { last6, P1, sits, calc, cost, rate2, n2, life2, P2, RV2, lastPayYear: YEAR + n2 - 2, int1: res2.int1, reduce2: res2.reduce2, endBal: res2.endBal };
+  return { last6, P1, sits, calc, cost, rate2, n2, life2, P2, RV2, lastPayYear: YEAR + n2 - 2, int1: res2.int1, reduce2: res2.reduce2, endBal: res2.endBal, pvL: lessee.pv, intL: lessee.int1, redL: lessee.reduce2, amort: lessee.amort };
 }
 
 const NOTE_CALC = '<strong>Use a calculator, not a table:</strong> compute present values with a financial calculator (set to <em>BEG</em> mode for payments made at the beginning of each period) or a spreadsheet function such as <code>PV</code>. A residual value is a single future amount, so discount it separately at the interest rate for the number of years in the lease term. Do <strong>not</strong> use rounded present value factors from a table. Round each dollar amount to the nearest whole dollar. Answers are accepted within $' + TOL + ' to allow for rounding differences. This scenario is generated from the last six digits of the Student ID entered above &mdash; the same ID always produces the same numbers, and the dates update automatically to the current year.';
@@ -285,8 +314,8 @@ function backgroundB(s) {
       ['Expected residual value at the end of the lease term', fmt(s.RV2)],
       ['Return the lessor seeks on its lease investments', s.rate2 + '%']
     ]) +
-    '<p class="terms-note">Because the lease term is shorter than the equipment&rsquo;s life, the equipment has an expected residual value at the end of the lease term. Both the present value of the lease payments and the present value of the residual value are included in the lease receivable, because the two amounts combine to allow the lessor to recover its net investment. By this arrangement, the lease is deemed to be a finance lease to the lessee.</p>' +
-    '<p><strong>Required:</strong> (1) What will be the effect of the lease on ' + LESSOR_2 + '&rsquo;s earnings for the first year (ignore taxes)? (2) What will be the balance in the balance sheet account related to the lease at the end of the first year (ignore taxes)?</p>';
+    '<p class="terms-note">Because the lease term is shorter than the equipment&rsquo;s life, the equipment has an expected residual value at the end of the lease term. Both the present value of the lease payments and the present value of the residual value are included in the lease receivable, because the two amounts combine to allow the lessor to recover its net investment. By this arrangement, the lease is deemed to be a finance lease to the lessee. The lessee does not guarantee the residual value. The lessee knows the rate the lessor seeks and uses it to measure its lease payable, and it amortizes its right-of-use asset on a straight-line basis over the lease term, recording the amortization at year-end.</p>' +
+    '<p><strong>Required:</strong> (1) What will be the effect of the lease on ' + LESSOR_2 + '&rsquo;s earnings for the first year (ignore taxes)? (2) What will be the balance in the balance sheet account related to the lease at the end of the first year (ignore taxes)? (3) Prepare the journal entries for both ' + LESSOR_2 + ' (the lessor) and ' + LESSEE_2 + ' (the lessee) for the first year, from the beginning of the lease through December 31, ' + YEAR + '.</p>';
 }
 
 function buildModel(s) {
@@ -308,13 +337,42 @@ function buildModel(s) {
       rows: [ { label: 'Initial balance, January 1, ' + YEAR + ' (net investment in the lease)', ans: [s.cost] },
               { label: 'Reduction from the January 1, ' + YEAR + ' payment', ans: [s.P2] },
               { label: 'Reduction from the December 31, ' + YEAR + ' payment', ans: [s.reduce2] },
-              { label: 'Balance, December 31, ' + YEAR, ans: [s.endBal] } ] }
+              { label: 'Balance, December 31, ' + YEAR, ans: [s.endBal] } ] },
+    { id: 'lessorje', short: 'Problem 2 Lessor Entries', title: 'Lessor Journal Entries for the First Year', kind: 'entries', party: 'Lessor',
+      instructions: 'Prepare the journal entries for ' + LESSOR_2 + ' (the lessor) from the beginning of the lease through December 31, ' + YEAR + '. Pick the account for each line first, then enter the amount in the debit or credit column. Leave extra rows blank.',
+      blocks: [
+        { key: 'a', tx: 'January 1, ' + YEAR + ' &mdash; The lease begins.',
+          desc: 'Record ' + LESSOR_2 + '\u2019s entry at the beginning of the lease. The lease receivable is the lessor\u2019s net investment in the lease.',
+          lines: [ {a:'Lease receivable', side:'debit', amt:s.cost}, {a:'Equipment', side:'credit', amt:s.cost} ] },
+        { key: 'b', tx: 'January 1, ' + YEAR + ' &mdash; The first lease payment of ' + fmt(s.P2) + ' is received.',
+          desc: 'Record ' + LESSOR_2 + '\u2019s entry for the first lease payment.',
+          lines: [ {a:'Cash', side:'debit', amt:s.P2}, {a:'Lease receivable', side:'credit', amt:s.P2} ] },
+        { key: 'c', tx: 'December 31, ' + YEAR + ' &mdash; The second lease payment of ' + fmt(s.P2) + ' is received.',
+          desc: 'Record ' + LESSOR_2 + '\u2019s entry for the second lease payment. Interest revenue for the year is the lessor\u2019s rate times the lease receivable balance after the January 1 payment.',
+          lines: [ {a:'Cash', side:'debit', amt:s.P2}, {a:'Lease receivable', side:'credit', amt:s.reduce2}, {a:'Interest revenue', side:'credit', amt:s.int1} ] }
+      ] },
+    { id: 'lesseeje', short: 'Problem 2 Lessee Entries', title: 'Lessee Journal Entries for the First Year', kind: 'entries', party: 'Lessee',
+      instructions: 'Prepare the journal entries for ' + LESSEE_2 + ' (the lessee) from the beginning of the lease through December 31, ' + YEAR + '. Pick the account for each line first, then enter the amount in the debit or credit column. Leave extra rows blank.',
+      blocks: [
+        { key: 'a', tx: 'January 1, ' + YEAR + ' &mdash; The lease begins.',
+          desc: 'Record ' + LESSEE_2 + '\u2019s entry at the beginning of the lease. Use the present value of the lease payments.',
+          lines: [ {a:'Right-of-use asset', side:'debit', amt:s.pvL}, {a:'Lease payable', side:'credit', amt:s.pvL} ] },
+        { key: 'b', tx: 'January 1, ' + YEAR + ' &mdash; The first lease payment of ' + fmt(s.P2) + ' is made.',
+          desc: 'Record ' + LESSEE_2 + '\u2019s entry for the first lease payment.',
+          lines: [ {a:'Lease payable', side:'debit', amt:s.P2}, {a:'Cash', side:'credit', amt:s.P2} ] },
+        { key: 'c', tx: 'December 31, ' + YEAR + ' &mdash; The second lease payment of ' + fmt(s.P2) + ' is made.',
+          desc: 'Record ' + LESSEE_2 + '\u2019s entry for the second lease payment. Interest expense for the year is the interest rate times the lease payable balance after the January 1 payment.',
+          lines: [ {a:'Interest expense', side:'debit', amt:s.intL}, {a:'Lease payable', side:'debit', amt:s.redL}, {a:'Cash', side:'credit', amt:s.P2} ] },
+        { key: 'd', tx: 'December 31, ' + YEAR + ' &mdash; Amortization of the right-of-use asset for the year is recorded.',
+          desc: 'Record ' + LESSEE_2 + '\u2019s amortization of the right-of-use asset for ' + YEAR + '.',
+          lines: [ {a:'Amortization expense', side:'debit', amt:s.amort}, {a:'Right-of-use asset', side:'credit', amt:s.amort} ] }
+      ] }
   ];
 
   return {
     problems: [
       { code: 'rv', title: 'Problem 1: Lessor and Lessee Amounts with Residual Values', background: backgroundA(s), parts: [parts[0], parts[1]] },
-      { code: 'st', title: 'Problem 2: Sales-Type Lease with a Residual Value (Lessor)', background: backgroundB(s), parts: [parts[2], parts[3]] }
+      { code: 'st', title: 'Problem 2: Sales-Type Lease with a Residual Value (Lessor and Lessee)', background: backgroundB(s), parts: [parts[2], parts[3], parts[4], parts[5]] }
     ],
     parts: parts
   };
@@ -337,7 +395,7 @@ function setAttempts(part, n) {
   try { window.localStorage.setItem(key, String(n)); } catch (e) { /* storage blocked */ }
 }
 function lockPart(part, locked) {
-  document.getElementById('part-' + part).querySelectorAll('input').forEach(function(el) { el.disabled = locked; });
+  document.getElementById('part-' + part).querySelectorAll('input, select').forEach(function(el) { el.disabled = locked; });
 }
 function updateAttemptsUI(part) {
   const used = getAttempts(part);
@@ -401,7 +459,7 @@ function renderAll() {
       html += '<section aria-labelledby="part-h-' + p.id + '">';
       html += '<h3 id="part-h-' + p.id + '">Part ' + partNo + ' of ' + total + ' &mdash; ' + p.title + '</h3>';
       html += '<p class="part-instructions">' + p.instructions + '</p>';
-      html += '<div id="part-' + p.id + '">' + renderGrid(p) + '</div>';
+      html += '<div id="part-' + p.id + '">' + (p.kind === 'entries' ? renderEntries(p) : renderGrid(p)) + '</div>';
       html += '<div class="check-row"><button type="button" id="btn-' + p.id + '" data-part="' + p.id + '" aria-describedby="attempts-' + p.id + '">Check My Work &mdash; Part ' + partNo + '</button>' +
               '<div class="check-status"><span class="part-score" id="score-' + p.id + '" role="status"></span><span class="attempts" id="attempts-' + p.id + '"></span></div></div>';
       html += '</section>';
@@ -434,6 +492,91 @@ function renderGrid(p) {
   });
   return '<div class="entry-block" id="block-' + p.id + '"><div class="table-scroll"><table class="grid-table cols-' + p.cols.length + '"><caption class="sr-only">' + attrText(p.title) + '</caption>' +
          '<thead>' + head + '</thead><tbody>' + body + '</tbody></table></div><div class="entry-result" id="result-' + p.id + '"></div></div>';
+}
+
+/* ---- journal entries ---- */
+function acctOptions() {
+  return ACCOUNTS.map(function(a) { return '<option value="' + a + '">' + a + '</option>'; }).join('');
+}
+function stripTags(str) { return String(str).replace(/<[^>]+>/g, '').replace(/&mdash;/g, '\u2014').replace(/&ldquo;|&rdquo;/g, '"'); }
+
+function renderEntries(p) {
+  let html = '';
+  p.blocks.forEach(function(b) {
+    const uid = p.id + '-' + b.key;
+    const nRows = b.lines.length + 1;     // one spare row so the line count does not give away the answer
+    let rows = '';
+    for (let i = 0; i < nRows; i++) {
+      const ln = p.party + ' entry (' + b.key + '), line ' + (i + 1);
+      rows += '<tr>' +
+        '<td><select id="' + uid + '-acct-' + i + '" aria-label="' + ln + ', account" autocomplete="off"><option value="">Select account\u2026</option>' + acctOptions() + '</select></td>' +
+        '<td><input type="number" step="any" id="' + uid + '-dr-' + i + '" aria-label="' + ln + ', debit amount" autocomplete="off"></td>' +
+        '<td><input type="number" step="any" id="' + uid + '-cr-' + i + '" aria-label="' + ln + ', credit amount" autocomplete="off"></td>' +
+        '<td class="mark-cell" id="mark-' + uid + '-' + i + '"></td></tr>';
+    }
+    html += '<div class="entry-block" role="group" id="block-' + uid + '" aria-labelledby="recap-' + uid + '">' +
+      '<div class="tx-recap" id="recap-' + uid + '"><span class="letter">(' + b.key + ')</span> ' + b.tx + '</div>' +
+      '<div class="entry-desc">' + b.desc + '</div>' +
+      '<div class="table-scroll"><table class="je-table"><caption class="sr-only">' + p.party + ' journal entry (' + b.key + '): ' + stripTags(b.tx) + '</caption>' +
+      '<thead><tr><th scope="col" style="width:55%">Account</th><th scope="col">Debit</th><th scope="col">Credit</th><th scope="col" class="mark-th"><span class="sr-only">Status</span></th></tr></thead>' +
+      '<tbody>' + rows + '</tbody></table></div><div class="entry-result" id="result-' + uid + '"></div></div>';
+  });
+  return html;
+}
+
+function setEntryMark(uid, i, bad) {
+  const m = document.getElementById('mark-' + uid + '-' + i);
+  m.innerHTML = bad ? '<span aria-hidden="true">\u2717</span> <span class="mark-text">Incorrect line</span>' : '';
+  m.parentElement.querySelectorAll('select, input').forEach(function(el) {
+    if (bad) el.setAttribute('aria-invalid', 'true'); else el.removeAttribute('aria-invalid');
+  });
+}
+
+function checkEntry(uid, b) {
+  const expected = b.lines.slice();
+  const nRows = expected.length + 1;
+  const remaining = expected.slice();
+  let correct = 0, badRows = 0;
+  for (let i = 0; i < nRows; i++) {
+    const acct = document.getElementById(uid + '-acct-' + i).value;
+    const drRaw = document.getElementById(uid + '-dr-' + i).value;
+    const crRaw = document.getElementById(uid + '-cr-' + i).value;
+    const dr = parseFloat(drRaw), cr = parseFloat(crRaw);
+    const hasDr = !isNaN(dr) && dr > 0, hasCr = !isNaN(cr) && cr > 0;
+    setEntryMark(uid, i, false);
+    if (acct === '' && drRaw === '' && crRaw === '') continue;
+    let ok = false;
+    if (acct && hasDr !== hasCr) {
+      const side = hasDr ? 'debit' : 'credit';
+      const amt = hasDr ? dr : cr;
+      const idx = remaining.findIndex(function(exp) { return exp.a === acct && exp.side === side && Math.abs(exp.amt - amt) <= TOL; });
+      if (idx >= 0) { ok = true; correct++; remaining.splice(idx, 1); }
+    }
+    if (!ok) { badRows++; setEntryMark(uid, i, true); }
+  }
+  const n = expected.length;
+  const block = document.getElementById('block-' + uid);
+  const resultEl = document.getElementById('result-' + uid);
+  if (correct === n && badRows === 0) {
+    block.className = 'entry-block entry-correct';
+    resultEl.className = 'entry-result ok';
+    resultEl.innerHTML = '<span aria-hidden="true">\u2713</span> All ' + n + ' lines correct.';
+  } else {
+    block.className = 'entry-block entry-incorrect';
+    resultEl.className = 'entry-result no';
+    let msg = correct + ' of ' + n + ' lines correct.';
+    if (badRows) msg += ' Fix the line' + (badRows > 1 ? 's' : '') + ' marked \u201CIncorrect line\u201D.';
+    const missing = n - correct - badRows;
+    if (missing > 0) msg += ' ' + missing + ' more line' + (missing > 1 ? 's are' : ' is') + ' needed.';
+    resultEl.innerHTML = '<span aria-hidden="true">\u2717</span> ' + msg;
+  }
+  return { correct: correct, total: n };
+}
+
+function gradeEntries(p) {
+  let c = 0, t = 0;
+  p.blocks.forEach(function(b) { const r = checkEntry(p.id + '-' + b.key, b); c += r.correct; t += r.total; });
+  return { correct: c, total: t, unit: 'lines' };
 }
 
 function setMark(id, state) {          // state: '' | 'bad' | 'blank'
@@ -477,7 +620,7 @@ function gradeGrid(p) {
 --------------------------------------------------------------------- */
 function partHasInput(part) {
   let any = false;
-  document.getElementById('part-' + part).querySelectorAll('input').forEach(function(el) { if (el.value !== '') any = true; });
+  document.getElementById('part-' + part).querySelectorAll('input, select').forEach(function(el) { if (el.value !== '') any = true; });
   return any;
 }
 
@@ -492,7 +635,7 @@ function checkPart(partId) {
   }
   const attempt = getAttempts(partId) + 1;
   setAttempts(partId, attempt);
-  const r = gradeGrid(p);
+  const r = (p.kind === 'entries') ? gradeEntries(p) : gradeGrid(p);
   scoreEl.textContent = r.correct + ' of ' + r.total + ' ' + r.unit + ' correct (attempt ' + attempt + ' of ' + MAX_ATTEMPTS + ')';
   updateAttemptsUI(partId);
   updateOverall();
@@ -514,11 +657,22 @@ function updateOverall() {
 /* Editing an amount clears its Incorrect mark until the next check */
 function clearMark(e) {
   const t = e.target;
-  if (!t || !t.id || t.tagName !== 'INPUT' || t.id.indexOf('g-') !== 0) return;
-  const m = document.getElementById('m-' + t.id);
-  if (m && m.innerHTML !== '') setMark(t.id, '');
+  if (!t || !t.closest) return;
+  if (t.tagName === 'INPUT' && t.id && t.id.indexOf('g-') === 0) {          // answer grids
+    const m = document.getElementById('m-' + t.id);
+    if (m && m.innerHTML !== '') setMark(t.id, '');
+    return;
+  }
+  const tr = t.closest('tr');                                               // journal entry rows
+  if (!tr) return;
+  const mc = tr.querySelector('.mark-cell');
+  if (mc && mc.innerHTML !== '') {
+    mc.innerHTML = '';
+    tr.querySelectorAll('select, input').forEach(function(el) { el.removeAttribute('aria-invalid'); });
+  }
 }
 document.addEventListener('input', clearMark);
+document.addEventListener('change', clearMark);
 
 /* ---------------------------------------------------------------------
    INIT
