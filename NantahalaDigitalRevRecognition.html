@@ -618,8 +618,8 @@
     var readerRightEV = round2(discountAmt * redemptionPct/100);
 
     var totalStandalone = round2(standalonePrice + readerRightEV);
-    var tabletPct = round2((standalonePrice/totalStandalone) * 10000) / 100;
-    var readerPct = round2((readerRightEV/totalStandalone) * 10000) / 100;
+    var tabletPct = Math.round((standalonePrice/totalStandalone) * 10000) / 100;   // percent rounded to 2 decimal places (e.g., 96.60)
+    var readerPct = Math.round((readerRightEV/totalStandalone) * 10000) / 100;    // percent rounded to 2 decimal places (e.g., 3.40)
 
     var tabletAlloc = round2(packagePrice * tabletPct/100);
     var readerAlloc = round2(packagePrice * readerPct/100);
@@ -796,9 +796,9 @@
     results.push(markSelect('reader-po', 'yes'));
     results.push(markSelect('extwarranty-po', 'no'));
     results.push(markMoney('tablet-standalone', d.standalonePrice));
-    results.push(markMoney('tablet-allocated', d.tabletAlloc));
+    results.push(markMoney('tablet-allocated', d.tabletAlloc, 0.06));   // 6¢ accepts either a 2-decimal rounded % or an unrounded %
     results.push(markMoney('reader-standalone', d.readerRightEV));
-    results.push(markMoney('reader-allocated', d.readerAlloc));
+    results.push(markMoney('reader-allocated', d.readerAlloc, 0.06));
     results.push(markMoney('total-standalone', d.totalStandalone));
     results.push(markMoney('total-allocated', d.tabletAlloc + d.readerAlloc, 0.05));
     results.push(markMoney('reg-price', d.regularReaderPrice));
