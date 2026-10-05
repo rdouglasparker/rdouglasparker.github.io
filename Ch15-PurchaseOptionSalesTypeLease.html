@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sales-Type Lease with a Purchase Option: Homework Packet</title>
+<meta name="description" content="Interactive homework packet: how a lessor calculates the lease payment for a sales-type lease with a purchase option, the amortization schedule, and the journal entries for the lessor (Part A) and the lessee (Part B).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --wcu-purple: #4B2E83; --wcu-purple-dark: #341f5c; --wcu-gold: #C8A24A; --wcu-gold-light: #E8CF86;
+    --ink: #232023; --paper: #fdfcfb; --panel: #f7f3ec; --rule: #e2d9c8;
+    --field-border: #7a7168;          /* 4.8:1 on white (WCAG 1.4.11 non-text contrast for form controls) */
+    --muted: #5f5a56;                 /* 6.6:1 on paper */
+    --good: #2E6B45; --good-bg: #E7F3EB; --bad: #9C4221; --bad-bg: #FBEAE2;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-padding-top: 1rem; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif; font-size: 1rem; line-height: 1.55; }
+
+  /* ---- accessibility helpers ---- */
+  .sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+  .skip-link { position: absolute; left: 0.75rem; top: -4rem; z-index: 100; background: #fff; color: var(--wcu-purple-dark); font-weight: 700; padding: 0.7rem 1.1rem; border: 3px solid var(--wcu-purple-dark); border-radius: 6px; text-decoration: none; }
+  .skip-link:focus { top: 0.75rem; }
+  :focus-visible { outline: 3px solid var(--wcu-purple-dark); outline-offset: 2px; box-shadow: 0 0 0 2px #fff; }
+  main:focus { outline: none; }
+
+  header { background: linear-gradient(135deg, var(--wcu-purple) 0%, var(--wcu-purple-dark) 100%); color: #fff; padding: 2.2rem 1.5rem 1.8rem; border-bottom: 6px solid var(--wcu-gold); }
+  header .eyebrow { font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-size: 0.875rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--wcu-gold-light); margin-bottom: 0.4rem; }
+  header h1 { font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif; font-weight: 700; font-size: 1.7rem; line-height: 1.25; margin: 0 0 0.3rem; }
+  header p.sub { margin: 0; color: #ece6f6; font-size: 1rem; }
+  main { max-width: 900px; margin: 0 auto; padding: 1.6rem 1.5rem 4rem; }
+
+  h2 { font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif; font-size: 1.4rem; line-height: 1.3; margin: 2.2rem 0 0.8rem; color: var(--wcu-purple-dark); border-bottom: 2px solid var(--rule); padding-bottom: 0.4rem; }
+  h2.problem-title { background: var(--panel); border: 1px solid var(--rule); border-left: 8px solid var(--wcu-purple); border-radius: 6px; padding: 0.7rem 1rem; margin-top: 3rem; }
+  h3 { font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif; font-size: 1.25rem; line-height: 1.3; margin: 1.8rem 0 0.6rem; color: var(--wcu-purple-dark); border-bottom: 2px solid var(--rule); padding-bottom: 0.3rem; }
+  p { margin: 0.6rem 0; }
+
+  .meta-bar { display: flex; flex-wrap: wrap; gap: 0.8rem; align-items: center; background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 0.9rem 1.1rem; margin-top: 1.2rem; }
+  .meta-bar label { font-size: 0.95rem; font-weight: 600; color: var(--wcu-purple-dark); }
+  .meta-bar .year-note { font-size: 0.875rem; color: var(--muted); flex-basis: 100%; }
+  input[type="text"], input[type="number"] { font-size: 1rem; color: var(--ink); min-height: 2.75rem; border: 1px solid var(--field-border); border-radius: 5px; background: #fff; }
+  input[type="text"] { font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; padding: 0.4rem 0.6rem; }
+  input::placeholder { color: var(--muted); opacity: 1; }
+  .meta-bar input[type="text"] { width: 11rem; max-width: 100%; }
+  button { font-family: 'Inter', system-ui, sans-serif; font-weight: 700; font-size: 1rem; min-height: 2.75rem; padding: 0.55rem 1.2rem; border-radius: 6px; cursor: pointer; }
+  .meta-bar button { color: #fff; background: var(--wcu-purple); border: 2px solid var(--wcu-purple); }
+  .meta-bar button:hover { background: var(--wcu-purple-dark); border-color: var(--wcu-purple-dark); }
+
+  .rounding-note { font-size: 0.95rem; background: #fff; border: 1px solid var(--field-border); border-radius: 6px; padding: 0.7rem 1rem; margin-top: 1rem; }
+  .check-note { font-size: 0.95rem; background: #fff; border: 1px solid var(--rule); border-left: 5px solid var(--wcu-gold); border-radius: 6px; padding: 0.7rem 1rem; margin-top: 0.8rem; }
+  .bad-mark { color: var(--bad); font-weight: 800; }
+
+  .background-box { background: #fff; border: 1px solid var(--rule); border-radius: 8px; padding: 1rem 1.2rem; margin-top: 1rem; }
+  .table-scroll { overflow-x: auto; }
+  .background-box table.lease-terms { border-collapse: collapse; width: 100%; margin: 0.8rem 0 0.4rem; font-size: 0.95rem; }
+  .background-box table.lease-terms th, .background-box table.lease-terms td { border: 1px solid var(--field-border); padding: 0.4rem 0.6rem; text-align: left; }
+  .background-box table.lease-terms th { background: var(--panel); color: var(--wcu-purple-dark); font-weight: 600; }
+  .background-box table.lease-terms th[scope="row"] { width: 55%; }
+  .background-box table.lease-terms td { font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; }
+  .background-box table.situation-terms { min-width: 34rem; }
+  .background-box table.situation-terms th[scope="row"] { width: 40%; }
+  .background-box table.situation-terms td { text-align: right; }
+  .background-box table.situation-terms th[scope="col"] { text-align: right; }
+  .background-box table.situation-terms th[scope="col"]:first-child { text-align: left; }
+  .terms-note { font-size: 0.95rem; color: #4a453f; }
+
+  .part-instructions { font-style: italic; color: #4a453f; margin-bottom: 1rem; }
+
+  .entry-block { background: #fff; border: 1px solid var(--rule); border-left: 5px solid var(--field-border); border-radius: 8px; padding: 0.9rem 1.1rem; margin-bottom: 1rem; transition: border-color 0.2s ease; }
+  .entry-block.entry-correct { border-left-color: var(--good); }
+  .entry-block.entry-incorrect { border-left-color: var(--bad); }
+
+  table.grid-table { border-collapse: collapse; width: 100%; font-size: 0.95rem; }
+  table.grid-table.cols-4 { min-width: 40rem; }
+  table.grid-table.cols-1 { min-width: 26rem; }
+  table.grid-table th, table.grid-table td { border: 1px solid var(--field-border); padding: 0.45rem 0.55rem; vertical-align: top; }
+  table.grid-table thead th { background: var(--panel); font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-size: 0.8rem; text-align: left; text-transform: uppercase; letter-spacing: 0.03em; color: var(--wcu-purple-dark); }
+  table.grid-table tbody th[scope="row"] { background: var(--panel); text-align: left; font-weight: 600; color: var(--wcu-purple-dark); width: 34%; }
+  table.grid-table.cols-1 tbody th[scope="row"] { width: 62%; }
+  table.grid-table input[type="number"] { width: 100%; min-width: 7rem; font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-size: 1rem; padding: 0.3rem 0.4rem; }
+  table.grid-table input[aria-invalid="true"] { border: 2px solid var(--bad); }
+  .cell-mark { display: block; margin-top: 0.25rem; font-size: 0.85rem; font-weight: 700; color: var(--bad); }
+  .cell-mark:empty { display: none; }
+
+  .entry-desc { font-size: 0.97rem; margin-bottom: 0.7rem; }
+  .tx-recap { font-size: 0.95rem; background: var(--panel); border-radius: 6px; padding: 0.6rem 0.8rem; margin-bottom: 0.6rem; color: #4a453f; }
+  .tx-recap .letter { font-weight: 700; color: var(--wcu-purple-dark); }
+  table.je-table { border-collapse: collapse; width: 100%; min-width: 36rem; font-size: 0.95rem; }
+  table.je-table th, table.je-table td { border: 1px solid var(--field-border); padding: 0.4rem 0.5rem; }
+  table.je-table th { background: var(--panel); font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-size: 0.8rem; text-align: left; text-transform: uppercase; letter-spacing: 0.03em; color: var(--wcu-purple-dark); }
+  table.je-table select { width: 100%; font-family: 'Inter', system-ui, sans-serif; font-size: 1rem; padding: 0.3rem; min-height: 2.75rem; color: var(--ink); background: #fff; border: 1px solid var(--field-border); border-radius: 5px; }
+  table.je-table input[type="number"] { width: 100%; font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-size: 1rem; padding: 0.3rem 0.4rem; }
+  .mark-text { font-family: 'Inter', system-ui, sans-serif; font-size: 0.85rem; font-weight: 700; }
+  td.mark-cell { width: 7rem; text-align: center; font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-weight: 800; font-size: 1.15rem; color: var(--bad); border: none !important; background: transparent; }
+  th.mark-th { width: 7rem; border: none !important; background: transparent !important; }
+  table.je-table input[aria-invalid="true"], table.je-table select[aria-invalid="true"] { border: 2px solid var(--bad); }
+
+  .entry-result { font-size: 0.9rem; font-weight: 600; margin-top: 0.7rem; }
+  .entry-result.ok { color: var(--good); }
+  .entry-result.no { color: var(--bad); }
+
+  .check-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1rem; margin: 1.2rem 0 2rem; }
+  .check-row button { color: var(--ink); background: var(--wcu-gold); border: 2px solid var(--wcu-gold); }
+  .check-row button:hover:not(:disabled) { background: #d6b45f; border-color: #d6b45f; }
+  .check-row button:disabled { color: #4a453f; background: #e9e4dc; border-color: #bdb5aa; cursor: not-allowed; }
+  .check-status { display: flex; flex-direction: column; gap: 0.1rem; }
+  .part-score { font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-weight: 700; font-size: 0.95rem; color: var(--wcu-purple-dark); }
+  .attempts { font-size: 0.9rem; color: var(--muted); }
+  .attempts.out { color: var(--bad); font-weight: 600; }
+
+  .overall-score { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 1.1rem 1.3rem; margin-top: 2rem; font-size: 1rem; }
+  .overall-score strong { color: var(--wcu-purple-dark); }
+  .submit-box { margin-top: 2rem; padding: 1.2rem; background: #fff; border: 1px solid var(--rule); border-radius: 8px; }
+  .submit-box label { font-weight: 600; }
+  .submit-box input[type="text"] { font-family: 'Inter', system-ui, sans-serif; width: 16.5rem; max-width: 100%; margin: 0 0.8rem 0.5rem 0.3rem; }
+  .submit-box button { color: var(--wcu-purple-dark); background: #fff; border: 2px solid var(--wcu-purple); }
+  .submit-box button:hover { background: var(--panel); }
+  footer { text-align: center; font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-size: 0.8rem; color: var(--muted); padding: 1.5rem; }
+  noscript .js-warning { max-width: 900px; margin: 1.5rem auto; padding: 1rem 1.2rem; background: var(--bad-bg); border: 2px solid var(--bad); border-radius: 6px; }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+  @media (max-width: 480px) { header { padding: 1.6rem 1rem 1.4rem; } main { padding: 1.2rem 1rem 3rem; } .entry-block { padding: 0.8rem; } }
+  @media print {
+    .skip-link, .meta-bar button, .check-row button, .submit-box button { display: none; }
+    .table-scroll { overflow: visible; }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header>
+  <div class="eyebrow">ACCT 352 &middot; Intermediate Accounting II</div>
+  <h1>Sales-Type Lease with a Purchase Option</h1>
+  <p class="sub">Part A (Lessor: Lease Payment, Amortization Schedule, and Entries) and Part B (Lessee: Lease Payable and Entries)</p>
+</header>
+
+<main id="main" tabindex="-1">
+
+  <noscript><div class="js-warning" role="alert">This homework packet needs JavaScript. Please turn JavaScript on in your browser and reload the page.</div></noscript>
+
+  <section class="meta-bar" aria-labelledby="setupHeading">
+    <h2 id="setupHeading" class="sr-only">Set up your scenario</h2>
+    <label for="studentId">Student ID</label>
+    <input type="text" id="studentId" placeholder="e.g. 920123456" maxlength="20" inputmode="numeric" autocomplete="off" aria-describedby="yearNote">
+    <button type="button" id="btnGenerate">Generate Scenario</button>
+    <span class="year-note" id="yearNote"></span>
+  </section>
+
+  <div class="rounding-note" id="noteCalc"></div>
+
+  <div class="check-note">
+    <strong>Checking your work:</strong> you have <strong>3 attempts per part</strong>. Each time you select <em>Check My Work</em>, a <strong class="bad-mark" aria-hidden="true">&#10007;</strong> mark and the words &ldquo;Incorrect,&rdquo; &ldquo;Not answered,&rdquo; or &ldquo;Incorrect line&rdquo; appear next to every amount or journal entry line that is wrong, so you can fix it and check again. A message under each table also tells you how many amounts or lines are correct. Your attempts are saved in this browser for your Student ID, and regenerating the scenario will not reset them. After your third attempt, that part is locked.
+  </div>
+
+  <div id="problems">
+    <p>Select &ldquo;Generate Scenario&rdquo; above to build your version of this problem.</p>
+  </div>
+
+  <div class="overall-score" id="overallScore" role="status">Check every part above to see your combined score.</div>
+
+  <section class="submit-box" aria-labelledby="submitHeading">
+    <h2 id="submitHeading" class="sr-only">Name and printing</h2>
+    <label for="studentName">Your name:</label>
+    <input type="text" id="studentName" placeholder="Full name" autocomplete="name">
+    <button type="button" id="btnPrint">Print / Save as PDF</button>
+  </section>
+
+  <div id="announce" class="sr-only" role="status" aria-live="polite"></div>
+
+</main>
+
+<footer>Sales-Type Lease with a Purchase Option &middot; ACCT 352 &middot; Western Carolina University</footer>
+
+<script>
+/* ---------------------------------------------------------------------
+   SCENARIO: a sales-type lease with a purchase option that is reasonably certain to be exercised.
+   Part A: the lessor.  Part B: the lessee.
+   Numbers come from the last six digits of the Student ID; dates use the current year.
+--------------------------------------------------------------------- */
+const TOL_DOLLARS = 3;   // amounts are accepted within $3 to allow for rounding differences
+const YEAR = new Date().getFullYear();
+const MAX_ATTEMPTS = 3;
+const TOL = TOL_DOLLARS;
+const EX_CODE = 'purchase-option-lease';
+
+/* Fictitious company names */
+const LESSOR = 'Wayah Bald Leasing Company';
+const LESSEE = 'Laurel Fork Publishing Company';
+
+const ACCOUNTS = [
+  'Cash','Lease receivable','Lease payable','Right-of-use asset','Equipment','Inventory',
+  'Sales revenue','Cost of goods sold','Interest revenue','Interest expense',
+  'Interest receivable','Interest payable','Amortization expense','Depreciation expense',
+  'Accumulated depreciation','Lease expense','Lease revenue','Accounts Payable'
+];
+const ORD = ['first','second','third','fourth','fifth','sixth'];
+
+function seedFromString(str) {
+  let h = 2166136261 >>> 0;
+  for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
+  return h >>> 0;
+}
+function mulberry32(a) {
+  return function() {
+    a |= 0; a = (a + 0x6D2B79F5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+function pick(rng, arr) { return arr[Math.floor(rng() * arr.length)]; }
+function last6Of(id) { return String(id).replace(/\D/g, '').slice(-6).padStart(6, '0'); }
+function fmt(n) { return '$' + Number(n).toLocaleString('en-US'); }
+function annuityDue(i, n) { return (1 - Math.pow(1 + i, -n)) / i * (1 + i); }
+function pvFactor(i, n) { return Math.pow(1 + i, -n); }
+
+/* Amortization schedule for a lease with n payments (the first at the beginning of the lease, the rest on December 31)
+   followed by the purchase option exercise price at the end of the lease term. Rows: January 1, the December 31
+   payments, then the exercise date. The last row's interest is the amount that clears the remaining balance. */
+function buildSchedule(start, P, E, ratePct, n) {
+  const r = ratePct / 100;
+  const rows = [];
+  let bal = start - P;
+  rows.push({ pay: P, int: 0, dec: P, bal: bal });
+  for (let k = 1; k <= n - 1; k++) {
+    const interest = Math.round(r * bal);
+    const dec = P - interest;
+    bal -= dec;
+    rows.push({ pay: P, int: interest, dec: dec, bal: bal });
+  }
+  const balBefore = bal;
+  const intFinal = E - balBefore;
+  rows.push({ pay: E, int: intFinal, dec: balBefore, bal: 0 });
+  const totals = { pay: P * n + E, int: rows.reduce(function(s, x) { return s + x.int; }, 0), dec: start };
+  return { rows: rows, totals: totals, balBefore: balBefore, roundingGap: Math.abs(intFinal - Math.round(r * balBefore)) };
+}
+
+/* Find a payment and exercise price that let the lessor recover a round-dollar cost (a multiple of $100) */
+function findTerms(rng, ad, pvf) {
+  for (let tol = 0.5; tol <= 2.5; tol += 0.5) {
+    const cands = [];
+    for (let E = 8000; E <= 20000; E += 1000) {
+      for (let P = 5000; P <= 12000; P += 100) {
+        const exact = P * ad + E * pvf;
+        const c100 = Math.round(exact / 100) * 100;
+        if (Math.abs(exact - c100) <= tol) cands.push({ E: E, P: P, cost: c100 });
+      }
+    }
+    if (cands.length) return cands[Math.floor(rng() * cands.length)];
+  }
+  return { E: 12000, P: 8000, cost: 30900 };
+}
+
+function buildScenario(studentId) {
+  const last6 = last6Of(studentId);
+  const rng = mulberry32(seedFromString('purchaseopt-' + last6));
+  const n = pick(rng, [3, 4]);
+  const rate = pick(rng, [8, 9, 10, 12]);
+  const r = rate / 100;
+  const ad = annuityDue(r, n), pvf = pvFactor(r, n);
+  const t = findTerms(rng, ad, pvf);
+  const fv = Math.round(t.E * pick(rng, [1.25, 1.33, 1.4, 1.5]) / 1000) * 1000;   // expected fair value at the end of the lease term
+  const life = 2 * n;                                                              // lessee's total expected use, no salvage value
+
+  /* Part A: the lessor */
+  const pvE = Math.round(t.E * pvf);
+  const recover = t.cost - pvE;
+  const A = buildSchedule(t.cost, t.P, t.E, rate, n);
+
+  /* Part B: the lessee */
+  const pvP = Math.round(t.P * ad);
+  const pvL = pvP + pvE;
+  const B = buildSchedule(pvL, t.P, t.E, rate, n);
+  const amort = Math.round(pvL / life);
+  const reclass = pvL - amort * n;
+
+  return { last6, n, rate, cost: t.cost, P: t.P, E: t.E, fv, life, pvE, recover, A, pvP, pvL, B, amort, reclass, lastPayYear: YEAR + n - 2, endYear: YEAR + n - 1 };
+}
+
+const NOTE_CALC = '<strong>Use a calculator, not a table:</strong> compute present values with a financial calculator (set to <em>BEG</em> mode for payments made at the beginning of each period) or a spreadsheet function such as <code>PV</code>. The exercise price is a single future amount, so discount it separately at the interest rate for the number of years in the lease term. Do <strong>not</strong> use rounded present value factors from a table. Round each dollar amount to the nearest whole dollar. Answers are accepted within $' + TOL + ' to allow for rounding differences. This scenario is generated from the last six digits of the Student ID entered above &mdash; the same ID always produces the same numbers, and the dates update automatically to the current year.';
+
+function termsTable(caption, rows) {
+  return '<div class="table-scroll"><table class="lease-terms"><caption class="sr-only">' + caption + '</caption><tbody>' +
+    rows.map(function(r) { return '<tr><th scope="row">' + r[0] + '</th><td>' + r[1] + '</td></tr>'; }).join('') +
+    '</tbody></table></div>';
+}
+
+function backgroundMain(s) {
+  return '<p><strong>' + LESSOR + '</strong> leases digital printing equipment to a variety of businesses. The company&rsquo;s primary service is providing alternate financing by acquiring equipment and leasing it to customers under long-term sales-type leases. ' + LESSOR + ' earns interest under these arrangements at an annual rate of <strong>' + s.rate + '%</strong>.</p>' +
+    '<p>On December 31, ' + (YEAR - 1) + ', ' + LESSOR + ' purchased a commercial digital printing press for <strong>' + fmt(s.cost) + '</strong> and leased it to a local publisher, <strong>' + LESSEE + '</strong>. The lease contract has the following terms.</p>' +
+    termsTable('Terms of the printing press lease', [
+      ['Lease term', s.n + ' years, beginning January 1, ' + YEAR],
+      ['Annual lease payments', fmt(s.P) + ', payable January 1, ' + YEAR + ' (the beginning of the lease) and on each December 31 thereafter through ' + s.lastPayYear],
+      ['Lessor\u2019s cost of the printing press (equal to its fair value)', fmt(s.cost)],
+      ['Purchase option', 'The publisher may buy the press on December 31, ' + s.endYear + ' (the end of the lease term) for ' + fmt(s.E)],
+      ['Expected fair value of the press on that date', fmt(s.fv)],
+      ['Interest rate the lessor earns', s.rate + '%']
+    ]) +
+    '<p class="terms-note">The exercise price is far enough below the press&rsquo;s expected fair value that exercise of the purchase option seems reasonably certain. The lessor&rsquo;s cost equals the press&rsquo;s fair value, so the lease produces no selling profit. Both companies have a December 31 fiscal year-end.</p>';
+}
+
+function introA() {
+  return '<p><strong>Required (Part A, the lessor):</strong> (1) Show how ' + LESSOR + ' calculated the annual lease payments for this sales-type lease. (2) Prepare an amortization schedule that describes the pattern of interest revenue for ' + LESSOR + ' over the lease term. (3) Prepare the appropriate entries for ' + LESSOR + ' from the beginning of the lease through the end of the lease term.</p>';
+}
+function introB(s) {
+  return '<p><strong>' + LESSEE + '</strong> (the lessee) expects to use the printing press for a total of <strong>' + s.life + ' years</strong>, with no salvage value. Because it is reasonably certain to exercise the purchase option, the exercise price is part of its lease payments. ' + LESSEE + ' knows the interest rate that ' + LESSOR + ' earns and uses that rate to measure its lease payable. Because title is expected to pass to the lessee, it amortizes its right-of-use asset on a straight-line basis over the press&rsquo;s entire useful life, recording the amortization at each December 31.</p>' +
+    '<p><strong>Required (Part B, the lessee):</strong> (1) Determine the amounts ' + LESSEE + ' records at the beginning of the lease for its right-of-use asset and lease payable. (2) Prepare the appropriate entries for ' + LESSEE + ' from the beginning of the lease through the end of the lease term.</p>';
+}
+
+function schedRows(s, S) {
+  const labels = ['January 1, ' + YEAR];
+  for (let k = 1; k <= s.n - 1; k++) labels.push('December 31, ' + (YEAR + k - 1));
+  labels.push('December 31, ' + s.endYear + ' (purchase option exercised)');
+  const rows = [ { label: 'Beginning of the lease (initial balance)', ans: [null, null, null, S.start] } ];
+  S.rows.forEach(function(x, i) { rows.push({ label: labels[i], ans: [x.pay, x.int, x.dec, x.bal] }); });
+  rows.push({ label: 'Totals', ans: [S.totals.pay, S.totals.int, S.totals.dec, null] });
+  return rows;
+}
+
+function buildModel(s) {
+  /* ---------- Part A: lessor ---------- */
+  s.A.start = s.cost;
+  const lessorBlocks = [
+    { key: 'a', tx: 'January 1, ' + YEAR + ' &mdash; The lease begins.',
+      desc: 'Record ' + LESSOR + '\u2019s entry at the beginning of the lease. The lease receivable is the lessor\u2019s net investment in the lease.',
+      lines: [ {a:'Lease receivable', side:'debit', amt:s.cost}, {a:'Equipment', side:'credit', amt:s.cost} ] },
+    { key: 'b', tx: 'January 1, ' + YEAR + ' &mdash; The first lease payment of ' + fmt(s.P) + ' is received.',
+      desc: 'Record ' + LESSOR + '\u2019s entry for the first lease payment.',
+      lines: [ {a:'Cash', side:'debit', amt:s.P}, {a:'Lease receivable', side:'credit', amt:s.P} ] }
+  ];
+  for (let k = 1; k <= s.n - 1; k++) {
+    const x = s.A.rows[k];
+    lessorBlocks.push({ key: 'cdefg'[k - 1], tx: 'December 31, ' + (YEAR + k - 1) + ' &mdash; The ' + ORD[k] + ' lease payment of ' + fmt(s.P) + ' is received.',
+      desc: 'Record ' + LESSOR + '\u2019s entry for the ' + ORD[k] + ' lease payment. Interest revenue is the effective rate times the lease receivable balance outstanding.',
+      lines: [ {a:'Cash', side:'debit', amt:s.P}, {a:'Lease receivable', side:'credit', amt:x.dec}, {a:'Interest revenue', side:'credit', amt:x.int} ] });
+  }
+  const fa = s.A.rows[s.n];
+  lessorBlocks.push({ key: 'cdefg'[s.n - 1], tx: 'December 31, ' + s.endYear + ' &mdash; ' + LESSEE + ' exercises the purchase option and pays the exercise price of ' + fmt(s.E) + '.',
+    desc: 'Record ' + LESSOR + '\u2019s entry when the purchase option is exercised. The remaining lease receivable balance is collected, and the rest of the cash is interest revenue.',
+    lines: [ {a:'Cash', side:'debit', amt:s.E}, {a:'Lease receivable', side:'credit', amt:fa.dec}, {a:'Interest revenue', side:'credit', amt:fa.int} ] });
+
+  /* ---------- Part B: lessee ---------- */
+  s.B.start = s.pvL;
+  const lesseeBlocks = [
+    { key: 'a', tx: 'January 1, ' + YEAR + ' &mdash; The lease begins.',
+      desc: 'Record ' + LESSEE + '\u2019s entry at the beginning of the lease. Use the present value of the lease payments, which includes the exercise price.',
+      lines: [ {a:'Right-of-use asset', side:'debit', amt:s.pvL}, {a:'Lease payable', side:'credit', amt:s.pvL} ] },
+    { key: 'b', tx: 'January 1, ' + YEAR + ' &mdash; The first lease payment of ' + fmt(s.P) + ' is made.',
+      desc: 'Record ' + LESSEE + '\u2019s entry for the first lease payment.',
+      lines: [ {a:'Lease payable', side:'debit', amt:s.P}, {a:'Cash', side:'credit', amt:s.P} ] }
+  ];
+  for (let k = 1; k <= s.n - 1; k++) {
+    const x = s.B.rows[k];
+    lesseeBlocks.push({ key: 'cdefg'[k - 1], tx: 'December 31, ' + (YEAR + k - 1) + ' &mdash; The ' + ORD[k] + ' lease payment of ' + fmt(s.P) + ' is made, and amortization for the year is recorded.',
+      desc: 'Record ' + LESSEE + '\u2019s entry for the ' + ORD[k] + ' lease payment and for the year\u2019s amortization of the right-of-use asset over the press\u2019s ' + s.life + '-year useful life.',
+      lines: [ {a:'Amortization expense', side:'debit', amt:s.amort}, {a:'Right-of-use asset', side:'credit', amt:s.amort},
+               {a:'Interest expense', side:'debit', amt:x.int}, {a:'Lease payable', side:'debit', amt:x.dec}, {a:'Cash', side:'credit', amt:s.P} ] });
+  }
+  const fb = s.B.rows[s.n];
+  lesseeBlocks.push({ key: 'cdefg'[s.n - 1], tx: 'December 31, ' + s.endYear + ' &mdash; ' + LESSEE + ' exercises the purchase option and pays the exercise price of ' + fmt(s.E) + ', and amortization for the year is recorded.',
+    desc: 'Record ' + LESSEE + '\u2019s entry for the exercise price and for the year\u2019s amortization of the right-of-use asset.',
+    lines: [ {a:'Amortization expense', side:'debit', amt:s.amort}, {a:'Right-of-use asset', side:'credit', amt:s.amort},
+             {a:'Interest expense', side:'debit', amt:fb.int}, {a:'Lease payable', side:'debit', amt:fb.dec}, {a:'Cash', side:'credit', amt:s.E} ] });
+  lesseeBlocks.push({ key: 'cdefgh'[s.n], tx: 'December 31, ' + s.endYear + ' &mdash; Title to the printing press passes to ' + LESSEE + '.',
+    desc: 'Record the entry that moves the remaining right-of-use asset balance into the account for equipment the lessee now owns.',
+    lines: [ {a:'Equipment', side:'debit', amt:s.reclass}, {a:'Right-of-use asset', side:'credit', amt:s.reclass} ] });
+
+  const parts = [
+    { id: 'pmt', short: 'Part A, Step 1', heading: 'Part A &mdash; Step 1 of 3: Calculate the Lease Payment', btn: 'Check My Work \u2014 Part A, Step 1',
+      title: 'Calculation of the lessor\u2019s annual lease payment', kind: 'grid', corner: 'Item', cols: ['Amount'],
+      instructions: 'Show how ' + LESSOR + ' calculated the annual lease payment. Because exercise of the purchase option is reasonably certain, the exercise price is part of what the lessor expects to recover. Round to the nearest whole dollar.',
+      rows: [ { label: 'Present value of the exercise price', ans: [s.pvE] },
+              { label: 'Amount to be recovered through the periodic lease payments', ans: [s.recover] },
+              { label: 'Annual lease payment', ans: [s.P] } ] },
+    { id: 'sched', short: 'Part A, Step 2', heading: 'Part A &mdash; Step 2 of 3: Lessor\u2019s Amortization Schedule', btn: 'Check My Work \u2014 Part A, Step 2',
+      title: 'Lessor\u2019s lease amortization schedule', kind: 'grid', corner: 'Date', cols: ['Payment', 'Effective interest', 'Decrease in balance', 'Outstanding balance'],
+      instructions: 'Complete the schedule that describes the pattern of interest revenue for ' + LESSOR + '. Interest is the effective rate times the outstanding balance. Enter 0 where no interest accrues, and enter the final payment as the exercise price. Totals appear in the last row.',
+      rows: schedRows(s, s.A) },
+    { id: 'lessorje', short: 'Part A, Step 3', heading: 'Part A &mdash; Step 3 of 3: Lessor Journal Entries', btn: 'Check My Work \u2014 Part A, Step 3',
+      title: 'Lessor journal entries', kind: 'entries', party: 'Lessor',
+      instructions: 'Prepare the journal entries for ' + LESSOR + ' (the lessor) from the beginning of the lease through the end of the lease term. Pick the account for each line first, then enter the amount in the debit or credit column. Leave extra rows blank.',
+      blocks: lessorBlocks },
+    { id: 'lesseepv', short: 'Part B, Step 1', heading: 'Part B &mdash; Step 1 of 2: Lease Payable and Right-of-Use Asset', btn: 'Check My Work \u2014 Part B, Step 1',
+      title: 'Lessee\u2019s lease payable and right-of-use asset', kind: 'grid', corner: 'Item', cols: ['Amount'],
+      instructions: 'Determine the amounts ' + LESSEE + ' records at the beginning of the lease. Use the interest rate the lessor earns, and round to the nearest whole dollar.',
+      rows: [ { label: 'Present value of the annual lease payments', ans: [s.pvP] },
+              { label: 'Present value of the exercise price', ans: [s.pvE] },
+              { label: 'Right-of-use asset and lease payable at the beginning of the lease', ans: [s.pvL] } ] },
+    { id: 'lesseeje', short: 'Part B, Step 2', heading: 'Part B &mdash; Step 2 of 2: Lessee Journal Entries', btn: 'Check My Work \u2014 Part B, Step 2',
+      title: 'Lessee journal entries', kind: 'entries', party: 'Lessee',
+      instructions: 'Prepare the journal entries for ' + LESSEE + ' (the lessee) from the beginning of the lease through the end of the lease term. Pick the account for each line first, then enter the amount in the debit or credit column. Leave extra rows blank.',
+      blocks: lesseeBlocks }
+  ];
+
+  return {
+    background: backgroundMain(s),
+    sections: [
+      { id: 'a', title: 'Part A: The Lessor (' + LESSOR + ')', intro: introA(), parts: [parts[0], parts[1], parts[2]] },
+      { id: 'b', title: 'Part B: The Lessee (' + LESSEE + ')', intro: introB(s), parts: [parts[3], parts[4]] }
+    ],
+    parts: parts
+  };
+}
+
+/* ---------------------------------------------------------------------
+   ATTEMPT LIMIT (saved per Student ID in this browser)
+--------------------------------------------------------------------- */
+const memAttempts = {};
+function attemptKey(part, last6) { return 'ch15hw-' + EX_CODE + '-attempts-' + last6 + '-' + part; }
+function getAttempts(part, last6) {
+  const key = attemptKey(part, last6 || SCN.last6);
+  let stored = 0;
+  try { stored = parseInt(window.localStorage.getItem(key) || '0', 10) || 0; } catch (e) { /* storage blocked */ }
+  return Math.max(stored, memAttempts[key] || 0);
+}
+function setAttempts(part, n) {
+  const key = attemptKey(part, SCN.last6);
+  memAttempts[key] = n;
+  try { window.localStorage.setItem(key, String(n)); } catch (e) { /* storage blocked */ }
+}
+function lockPart(part, locked) {
+  document.getElementById('part-' + part).querySelectorAll('input, select').forEach(function(el) { el.disabled = locked; });
+}
+function updateAttemptsUI(part) {
+  const used = getAttempts(part);
+  const btn = document.getElementById('btn-' + part);
+  const lab = document.getElementById('attempts-' + part);
+  if (used >= MAX_ATTEMPTS) {
+    btn.disabled = true;
+    lab.className = 'attempts out';
+    lab.textContent = 'No attempts remaining (' + MAX_ATTEMPTS + ' of ' + MAX_ATTEMPTS + ' used). This part is locked.';
+    lockPart(part, true);
+  } else {
+    btn.disabled = false;
+    lab.className = 'attempts';
+    lab.textContent = 'Attempts used: ' + used + ' of ' + MAX_ATTEMPTS;
+    lockPart(part, false);
+  }
+}
+
+/* ---------------------------------------------------------------------
+   RENDERING
+--------------------------------------------------------------------- */
+let SCN = null;
+let MODEL = null;
+const DEFAULT_OVERALL = 'Check every part above to see your combined score.';
+
+function announce(msg) {
+  const el = document.getElementById('announce');
+  el.textContent = '';
+  window.setTimeout(function() { el.textContent = msg; }, 50);
+}
+
+function generateScenario(announceIt) {
+  const raw = document.getElementById('studentId').value.trim();
+  SCN = buildScenario(raw || '920123456');
+  MODEL = buildModel(SCN);
+  renderAll();
+  MODEL.parts.forEach(function(p) { updateAttemptsUI(p.id); });
+  const overall = document.getElementById('overallScore');
+  if (overall.textContent !== DEFAULT_OVERALL) overall.textContent = DEFAULT_OVERALL;
+  if (announceIt) announce('Scenario generated for the Student ID ending in ' + SCN.last6 + '. All answer fields are empty.');
+}
+
+function regenerate() {
+  const raw = document.getElementById('studentId').value.trim();
+  const l6 = last6Of(raw || '920123456');
+  const used = MODEL.parts.reduce(function(sum, p) { return sum + getAttempts(p.id, l6); }, 0);
+  if (used > 0 && !window.confirm('Regenerating the scenario will clear everything you have typed. Attempts you have already used will still count. Continue?')) return;
+  generateScenario(true);
+}
+
+function renderAll() {
+  let html = '';
+  html += '<section aria-labelledby="bg-h"><h2 class="problem-title" id="bg-h">Lease Background</h2><div class="background-box">' + MODEL.background + '</div></section>';
+  MODEL.sections.forEach(function(sec) {
+    html += '<section aria-labelledby="sec-h-' + sec.id + '">';
+    html += '<h2 class="problem-title" id="sec-h-' + sec.id + '">' + sec.title + '</h2>';
+    html += '<div class="background-box">' + sec.intro + '</div>';
+    sec.parts.forEach(function(p) {
+      html += '<section aria-labelledby="part-h-' + p.id + '">';
+      html += '<h3 id="part-h-' + p.id + '">' + p.heading + '</h3>';
+      html += '<p class="part-instructions">' + p.instructions + '</p>';
+      html += '<div id="part-' + p.id + '">' + (p.kind === 'entries' ? renderEntries(p) : renderGrid(p)) + '</div>';
+      html += '<div class="check-row"><button type="button" id="btn-' + p.id + '" data-part="' + p.id + '" aria-describedby="attempts-' + p.id + '">' + p.btn + '</button>' +
+              '<div class="check-status"><span class="part-score" id="score-' + p.id + '" role="status"></span><span class="attempts" id="attempts-' + p.id + '"></span></div></div>';
+      html += '</section>';
+    });
+    html += '</section>';
+  });
+  document.getElementById('problems').innerHTML = html;
+  document.querySelectorAll('#problems button[data-part]').forEach(function(b) {
+    b.addEventListener('click', function() { checkPart(b.getAttribute('data-part')); });
+  });
+}
+
+/* ---- answer grids (rows of items by columns, or a single Amount column) ---- */
+function attrText(s) { return String(s).replace(/<[^>]+>/g, '').replace(/&rsquo;/g, '\u2019').replace(/&mdash;/g, '\u2014').replace(/"/g, ''); }
+
+function cellId(p, i, j) { return 'g-' + p.id + '-' + i + '-' + j; }
+
+function renderGrid(p) {
+  const multi = p.cols.length > 1;
+  let head = '<tr><th scope="col">' + p.corner + '</th>' + p.cols.map(function(c) { return '<th scope="col">' + c + '</th>'; }).join('') + '</tr>';
+  let body = '';
+  p.rows.forEach(function(r, i) {
+    body += '<tr><th scope="row">' + r.label + '</th>';
+    r.ans.forEach(function(a, j) {
+      if (a === null) { body += '<td><span aria-hidden="true">\u2014</span><span class="sr-only">Not applicable</span></td>'; return; }
+      const label = attrText(r.label) + (multi ? ', ' + p.cols[j] : '');
+      body += '<td><input type="number" step="any" inputmode="decimal" autocomplete="off" id="' + cellId(p, i, j) + '" aria-label="' + label + '">' +
+              '<span class="cell-mark" id="m-' + cellId(p, i, j) + '"></span></td>';
+    });
+    body += '</tr>';
+  });
+  return '<div class="entry-block" id="block-' + p.id + '"><div class="table-scroll"><table class="grid-table cols-' + p.cols.length + '"><caption class="sr-only">' + attrText(p.title) + '</caption>' +
+         '<thead>' + head + '</thead><tbody>' + body + '</tbody></table></div><div class="entry-result" id="result-' + p.id + '"></div></div>';
+}
+
+/* ---- journal entries ---- */
+function acctOptions() {
+  return ACCOUNTS.map(function(a) { return '<option value="' + a + '">' + a + '</option>'; }).join('');
+}
+function stripTags(str) { return String(str).replace(/<[^>]+>/g, '').replace(/&mdash;/g, '\u2014').replace(/&ldquo;|&rdquo;/g, '"'); }
+
+function renderEntries(p) {
+  let html = '';
+  p.blocks.forEach(function(b) {
+    const uid = p.id + '-' + b.key;
+    const nRows = b.lines.length + 1;     // one spare row so the line count does not give away the answer
+    let rows = '';
+    for (let i = 0; i < nRows; i++) {
+      const ln = p.party + ' entry (' + b.key + '), line ' + (i + 1);
+      rows += '<tr>' +
+        '<td><select id="' + uid + '-acct-' + i + '" aria-label="' + ln + ', account" autocomplete="off"><option value="">Select account\u2026</option>' + acctOptions() + '</select></td>' +
+        '<td><input type="number" step="any" id="' + uid + '-dr-' + i + '" aria-label="' + ln + ', debit amount" autocomplete="off"></td>' +
+        '<td><input type="number" step="any" id="' + uid + '-cr-' + i + '" aria-label="' + ln + ', credit amount" autocomplete="off"></td>' +
+        '<td class="mark-cell" id="mark-' + uid + '-' + i + '"></td></tr>';
+    }
+    html += '<div class="entry-block" role="group" id="block-' + uid + '" aria-labelledby="recap-' + uid + '">' +
+      '<div class="tx-recap" id="recap-' + uid + '"><span class="letter">(' + b.key + ')</span> ' + b.tx + '</div>' +
+      '<div class="entry-desc">' + b.desc + '</div>' +
+      '<div class="table-scroll"><table class="je-table"><caption class="sr-only">' + p.party + ' journal entry (' + b.key + '): ' + stripTags(b.tx) + '</caption>' +
+      '<thead><tr><th scope="col" style="width:55%">Account</th><th scope="col">Debit</th><th scope="col">Credit</th><th scope="col" class="mark-th"><span class="sr-only">Status</span></th></tr></thead>' +
+      '<tbody>' + rows + '</tbody></table></div><div class="entry-result" id="result-' + uid + '"></div></div>';
+  });
+  return html;
+}
+
+function setEntryMark(uid, i, bad) {
+  const m = document.getElementById('mark-' + uid + '-' + i);
+  m.innerHTML = bad ? '<span aria-hidden="true">\u2717</span> <span class="mark-text">Incorrect line</span>' : '';
+  m.parentElement.querySelectorAll('select, input').forEach(function(el) {
+    if (bad) el.setAttribute('aria-invalid', 'true'); else el.removeAttribute('aria-invalid');
+  });
+}
+
+function checkEntry(uid, b) {
+  const expected = b.lines.slice();
+  const nRows = expected.length + 1;
+  const remaining = expected.slice();
+  let correct = 0, badRows = 0;
+  for (let i = 0; i < nRows; i++) {
+    const acct = document.getElementById(uid + '-acct-' + i).value;
+    const drRaw = document.getElementById(uid + '-dr-' + i).value;
+    const crRaw = document.getElementById(uid + '-cr-' + i).value;
+    const dr = parseFloat(drRaw), cr = parseFloat(crRaw);
+    const hasDr = !isNaN(dr) && dr > 0, hasCr = !isNaN(cr) && cr > 0;
+    setEntryMark(uid, i, false);
+    if (acct === '' && drRaw === '' && crRaw === '') continue;
+    let ok = false;
+    if (acct && hasDr !== hasCr) {
+      const side = hasDr ? 'debit' : 'credit';
+      const amt = hasDr ? dr : cr;
+      const idx = remaining.findIndex(function(exp) { return exp.a === acct && exp.side === side && Math.abs(exp.amt - amt) <= TOL; });
+      if (idx >= 0) { ok = true; correct++; remaining.splice(idx, 1); }
+    }
+    if (!ok) { badRows++; setEntryMark(uid, i, true); }
+  }
+  const n = expected.length;
+  const block = document.getElementById('block-' + uid);
+  const resultEl = document.getElementById('result-' + uid);
+  if (correct === n && badRows === 0) {
+    block.className = 'entry-block entry-correct';
+    resultEl.className = 'entry-result ok';
+    resultEl.innerHTML = '<span aria-hidden="true">\u2713</span> All ' + n + ' lines correct.';
+  } else {
+    block.className = 'entry-block entry-incorrect';
+    resultEl.className = 'entry-result no';
+    let msg = correct + ' of ' + n + ' lines correct.';
+    if (badRows) msg += ' Fix the line' + (badRows > 1 ? 's' : '') + ' marked \u201CIncorrect line\u201D.';
+    const missing = n - correct - badRows;
+    if (missing > 0) msg += ' ' + missing + ' more line' + (missing > 1 ? 's are' : ' is') + ' needed.';
+    resultEl.innerHTML = '<span aria-hidden="true">\u2717</span> ' + msg;
+  }
+  return { correct: correct, total: n };
+}
+
+function gradeEntries(p) {
+  let c = 0, t = 0;
+  p.blocks.forEach(function(b) { const r = checkEntry(p.id + '-' + b.key, b); c += r.correct; t += r.total; });
+  return { correct: c, total: t, unit: 'lines' };
+}
+
+function setMark(id, state) {          // state: '' | 'bad' | 'blank'
+  const m = document.getElementById('m-' + id), el = document.getElementById(id);
+  if (state) {
+    m.innerHTML = '<span aria-hidden="true">\u2717</span> ' + (state === 'blank' ? 'Not answered' : 'Incorrect');
+    el.setAttribute('aria-invalid', 'true');
+  } else {
+    m.innerHTML = '';
+    el.removeAttribute('aria-invalid');
+  }
+}
+
+function gradeGrid(p) {
+  let correct = 0, total = 0;
+  p.rows.forEach(function(r, i) {
+    r.ans.forEach(function(a, j) {
+      if (a === null) return;
+      total++;
+      const id = cellId(p, i, j);
+      const raw = document.getElementById(id).value;
+      const v = parseFloat(raw);
+      if (raw === '' || isNaN(v)) { setMark(id, 'blank'); return; }
+      if (Math.abs(v - a) <= TOL) { correct++; setMark(id, ''); }
+      else { setMark(id, 'bad'); }
+    });
+  });
+  const block = document.getElementById('block-' + p.id), res = document.getElementById('result-' + p.id);
+  if (correct === total) {
+    block.className = 'entry-block entry-correct'; res.className = 'entry-result ok';
+    res.innerHTML = '<span aria-hidden="true">\u2713</span> All ' + total + ' amounts correct.';
+  } else {
+    block.className = 'entry-block entry-incorrect'; res.className = 'entry-result no';
+    res.innerHTML = '<span aria-hidden="true">\u2717</span> ' + correct + ' of ' + total + ' amounts correct. Fix the amounts marked &ldquo;Incorrect&rdquo; or &ldquo;Not answered&rdquo;.';
+  }
+  return { correct: correct, total: total, unit: 'amounts' };
+}
+
+/* ---------------------------------------------------------------------
+   CHECKING
+--------------------------------------------------------------------- */
+function partHasInput(part) {
+  let any = false;
+  document.getElementById('part-' + part).querySelectorAll('input, select').forEach(function(el) { if (el.value !== '') any = true; });
+  return any;
+}
+
+function checkPart(partId) {
+  if (!MODEL) { return; }
+  const p = MODEL.parts.find(function(x) { return x.id === partId; });
+  if (getAttempts(partId) >= MAX_ATTEMPTS) { updateAttemptsUI(partId); return; }
+  const scoreEl = document.getElementById('score-' + partId);
+  if (!partHasInput(partId)) {
+    scoreEl.textContent = 'Enter your answers first. This did not use an attempt.';
+    return;
+  }
+  const attempt = getAttempts(partId) + 1;
+  setAttempts(partId, attempt);
+  const r = (p.kind === 'entries') ? gradeEntries(p) : gradeGrid(p);
+  scoreEl.textContent = r.correct + ' of ' + r.total + ' ' + r.unit + ' correct (attempt ' + attempt + ' of ' + MAX_ATTEMPTS + ')';
+  updateAttemptsUI(partId);
+  updateOverall();
+}
+
+function updateOverall() {
+  const texts = MODEL.parts.map(function(p) { return document.getElementById('score-' + p.id).textContent; });
+  const done = texts.filter(function(t) { return /attempt \d of/.test(t); }).length;
+  const el = document.getElementById('overallScore');
+  if (done === MODEL.parts.length) {
+    el.innerHTML = MODEL.parts.map(function(p, i) {
+      return '<strong>' + p.short + ':</strong> ' + texts[i];
+    }).join(' &nbsp;&nbsp; ');
+  } else if (done > 0) {
+    el.textContent = 'Check the remaining parts to see your combined score.';
+  }
+}
+
+/* Editing an amount or a journal entry line clears its Incorrect mark until the next check */
+function clearMark(e) {
+  const t = e.target;
+  if (!t || !t.closest) return;
+  if (t.tagName === 'INPUT' && t.id && t.id.indexOf('g-') === 0) {          // answer grids
+    const m = document.getElementById('m-' + t.id);
+    if (m && m.innerHTML !== '') setMark(t.id, '');
+    return;
+  }
+  const tr = t.closest('tr');                                               // journal entry rows
+  if (!tr) return;
+  const mc = tr.querySelector('.mark-cell');
+  if (mc && mc.innerHTML !== '') {
+    mc.innerHTML = '';
+    tr.querySelectorAll('select, input').forEach(function(el) { el.removeAttribute('aria-invalid'); });
+  }
+}
+document.addEventListener('input', clearMark);
+document.addEventListener('change', clearMark);
+
+/* ---------------------------------------------------------------------
+   INIT
+--------------------------------------------------------------------- */
+document.getElementById('yearNote').textContent = 'Dates are in ' + YEAR + ' and roll forward automatically next year.';
+document.getElementById('noteCalc').innerHTML = NOTE_CALC;
+document.getElementById('btnGenerate').addEventListener('click', regenerate);
+document.getElementById('btnPrint').addEventListener('click', function() { window.print(); });
+document.getElementById('studentId').addEventListener('keydown', function(e) { if (e.key === 'Enter') { e.preventDefault(); regenerate(); } });
+generateScenario(false);
+</script>
+
+</body>
+</html>
