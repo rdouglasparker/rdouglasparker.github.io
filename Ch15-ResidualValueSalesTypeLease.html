@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sales-Type Leases and Residual Values: Homework Packet</title>
+<meta name="description" content="Interactive homework packet: lessor and lessee amounts for sales-type and finance leases with residual values, and the lessor's first-year earnings and lease receivable for a sales-type lease.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --wcu-purple: #4B2E83; --wcu-purple-dark: #341f5c; --wcu-gold: #C8A24A; --wcu-gold-light: #E8CF86;
+    --ink: #232023; --paper: #fdfcfb; --panel: #f7f3ec; --rule: #e2d9c8;
+    --field-border: #7a7168;          /* 4.8:1 on white (WCAG 1.4.11 non-text contrast for form controls) */
+    --muted: #5f5a56;                 /* 6.6:1 on paper */
+    --good: #2E6B45; --good-bg: #E7F3EB; --bad: #9C4221; --bad-bg: #FBEAE2;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-padding-top: 1rem; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif; font-size: 1rem; line-height: 1.55; }
+
+  /* ---- accessibility helpers ---- */
+  .sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+  .skip-link { position: absolute; left: 0.75rem; top: -4rem; z-index: 100; background: #fff; color: var(--wcu-purple-dark); font-weight: 700; padding: 0.7rem 1.1rem; border: 3px solid var(--wcu-purple-dark); border-radius: 6px; text-decoration: none; }
+  .skip-link:focus { top: 0.75rem; }
+  :focus-visible { outline: 3px solid var(--wcu-purple-dark); outline-offset: 2px; box-shadow: 0 0 0 2px #fff; }
+  main:focus { outline: none; }
+
+  header { background: linear-gradient(135deg, var(--wcu-purple) 0%, var(--wcu-purple-dark) 100%); color: #fff; padding: 2.2rem 1.5rem 1.8rem; border-bottom: 6px solid var(--wcu-gold); }
+  header .eyebrow { font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-size: 0.875rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--wcu-gold-light); margin-bottom: 0.4rem; }
+  header h1 { font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif; font-weight: 700; font-size: 1.7rem; line-height: 1.25; margin: 0 0 0.3rem; }
+  header p.sub { margin: 0; color: #ece6f6; font-size: 1rem; }
+  main { max-width: 900px; margin: 0 auto; padding: 1.6rem 1.5rem 4rem; }
+
+  h2 { font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif; font-size: 1.4rem; line-height: 1.3; margin: 2.2rem 0 0.8rem; color: var(--wcu-purple-dark); border-bottom: 2px solid var(--rule); padding-bottom: 0.4rem; }
+  h2.problem-title { background: var(--panel); border: 1px solid var(--rule); border-left: 8px solid var(--wcu-purple); border-radius: 6px; padding: 0.7rem 1rem; margin-top: 3rem; }
+  h3 { font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif; font-size: 1.25rem; line-height: 1.3; margin: 1.8rem 0 0.6rem; color: var(--wcu-purple-dark); border-bottom: 2px solid var(--rule); padding-bottom: 0.3rem; }
+  p { margin: 0.6rem 0; }
+
+  .meta-bar { display: flex; flex-wrap: wrap; gap: 0.8rem; align-items: center; background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 0.9rem 1.1rem; margin-top: 1.2rem; }
+  .meta-bar label { font-size: 0.95rem; font-weight: 600; color: var(--wcu-purple-dark); }
+  .meta-bar .year-note { font-size: 0.875rem; color: var(--muted); flex-basis: 100%; }
+  input[type="text"], input[type="number"] { font-size: 1rem; color: var(--ink); min-height: 2.75rem; border: 1px solid var(--field-border); border-radius: 5px; background: #fff; }
+  input[type="text"] { font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; padding: 0.4rem 0.6rem; }
+  input::placeholder { color: var(--muted); opacity: 1; }
+  .meta-bar input[type="text"] { width: 11rem; max-width: 100%; }
+  button { font-family: 'Inter', system-ui, sans-serif; font-weight: 700; font-size: 1rem; min-height: 2.75rem; padding: 0.55rem 1.2rem; border-radius: 6px; cursor: pointer; }
+  .meta-bar button { color: #fff; background: var(--wcu-purple); border: 2px solid var(--wcu-purple); }
+  .meta-bar button:hover { background: var(--wcu-purple-dark); border-color: var(--wcu-purple-dark); }
+
+  .rounding-note { font-size: 0.95rem; background: #fff; border: 1px solid var(--field-border); border-radius: 6px; padding: 0.7rem 1rem; margin-top: 1rem; }
+  .check-note { font-size: 0.95rem; background: #fff; border: 1px solid var(--rule); border-left: 5px solid var(--wcu-gold); border-radius: 6px; padding: 0.7rem 1rem; margin-top: 0.8rem; }
+  .bad-mark { color: var(--bad); font-weight: 800; }
+
+  .background-box { background: #fff; border: 1px solid var(--rule); border-radius: 8px; padding: 1rem 1.2rem; margin-top: 1rem; }
+  .table-scroll { overflow-x: auto; }
+  .background-box table.lease-terms { border-collapse: collapse; width: 100%; margin: 0.8rem 0 0.4rem; font-size: 0.95rem; }
+  .background-box table.lease-terms th, .background-box table.lease-terms td { border: 1px solid var(--field-border); padding: 0.4rem 0.6rem; text-align: left; }
+  .background-box table.lease-terms th { background: var(--panel); color: var(--wcu-purple-dark); font-weight: 600; }
+  .background-box table.lease-terms th[scope="row"] { width: 55%; }
+  .background-box table.lease-terms td { font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; }
+  .background-box table.situation-terms { min-width: 34rem; }
+  .background-box table.situation-terms th[scope="row"] { width: 40%; }
+  .background-box table.situation-terms td { text-align: right; }
+  .background-box table.situation-terms th[scope="col"] { text-align: right; }
+  .background-box table.situation-terms th[scope="col"]:first-child { text-align: left; }
+  .terms-note { font-size: 0.95rem; color: #4a453f; }
+
+  .part-instructions { font-style: italic; color: #4a453f; margin-bottom: 1rem; }
+
+  .entry-block { background: #fff; border: 1px solid var(--rule); border-left: 5px solid var(--field-border); border-radius: 8px; padding: 0.9rem 1.1rem; margin-bottom: 1rem; transition: border-color 0.2s ease; }
+  .entry-block.entry-correct { border-left-color: var(--good); }
+  .entry-block.entry-incorrect { border-left-color: var(--bad); }
+
+  table.grid-table { border-collapse: collapse; width: 100%; font-size: 0.95rem; }
+  table.grid-table.cols-4 { min-width: 40rem; }
+  table.grid-table.cols-1 { min-width: 26rem; }
+  table.grid-table th, table.grid-table td { border: 1px solid var(--field-border); padding: 0.45rem 0.55rem; vertical-align: top; }
+  table.grid-table thead th { background: var(--panel); font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-size: 0.8rem; text-align: left; text-transform: uppercase; letter-spacing: 0.03em; color: var(--wcu-purple-dark); }
+  table.grid-table tbody th[scope="row"] { background: var(--panel); text-align: left; font-weight: 600; color: var(--wcu-purple-dark); width: 34%; }
+  table.grid-table.cols-1 tbody th[scope="row"] { width: 62%; }
+  table.grid-table input[type="number"] { width: 100%; min-width: 7rem; font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-size: 1rem; padding: 0.3rem 0.4rem; }
+  table.grid-table input[aria-invalid="true"] { border: 2px solid var(--bad); }
+  .cell-mark { display: block; margin-top: 0.25rem; font-size: 0.85rem; font-weight: 700; color: var(--bad); }
+  .cell-mark:empty { display: none; }
+
+  .entry-result { font-size: 0.9rem; font-weight: 600; margin-top: 0.7rem; }
+  .entry-result.ok { color: var(--good); }
+  .entry-result.no { color: var(--bad); }
+
+  .check-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1rem; margin: 1.2rem 0 2rem; }
+  .check-row button { color: var(--ink); background: var(--wcu-gold); border: 2px solid var(--wcu-gold); }
+  .check-row button:hover:not(:disabled) { background: #d6b45f; border-color: #d6b45f; }
+  .check-row button:disabled { color: #4a453f; background: #e9e4dc; border-color: #bdb5aa; cursor: not-allowed; }
+  .check-status { display: flex; flex-direction: column; gap: 0.1rem; }
+  .part-score { font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-weight: 700; font-size: 0.95rem; color: var(--wcu-purple-dark); }
+  .attempts { font-size: 0.9rem; color: var(--muted); }
+  .attempts.out { color: var(--bad); font-weight: 600; }
+
+  .overall-score { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 1.1rem 1.3rem; margin-top: 2rem; font-size: 1rem; }
+  .overall-score strong { color: var(--wcu-purple-dark); }
+  .submit-box { margin-top: 2rem; padding: 1.2rem; background: #fff; border: 1px solid var(--rule); border-radius: 8px; }
+  .submit-box label { font-weight: 600; }
+  .submit-box input[type="text"] { font-family: 'Inter', system-ui, sans-serif; width: 16.5rem; max-width: 100%; margin: 0 0.8rem 0.5rem 0.3rem; }
+  .submit-box button { color: var(--wcu-purple-dark); background: #fff; border: 2px solid var(--wcu-purple); }
+  .submit-box button:hover { background: var(--panel); }
+  footer { text-align: center; font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-size: 0.8rem; color: var(--muted); padding: 1.5rem; }
+  noscript .js-warning { max-width: 900px; margin: 1.5rem auto; padding: 1rem 1.2rem; background: var(--bad-bg); border: 2px solid var(--bad); border-radius: 6px; }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+  @media (max-width: 480px) { header { padding: 1.6rem 1rem 1.4rem; } main { padding: 1.2rem 1rem 3rem; } .entry-block { padding: 0.8rem; } }
+  @media print {
+    .skip-link, .meta-bar button, .check-row button, .submit-box button { display: none; }
+    .table-scroll { overflow: visible; }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header>
+  <div class="eyebrow">ACCT 352 &middot; Intermediate Accounting II</div>
+  <h1>Sales-Type Leases and Residual Values</h1>
+  <p class="sub">Problem 1 (Lessor and Lessee Amounts with Residual Values) and Problem 2 (Lessor Accounting for a Sales-Type Lease)</p>
+</header>
+
+<main id="main" tabindex="-1">
+
+  <noscript><div class="js-warning" role="alert">This homework packet needs JavaScript. Please turn JavaScript on in your browser and reload the page.</div></noscript>
+
+  <section class="meta-bar" aria-labelledby="setupHeading">
+    <h2 id="setupHeading" class="sr-only">Set up your scenario</h2>
+    <label for="studentId">Student ID</label>
+    <input type="text" id="studentId" placeholder="e.g. 920123456" maxlength="20" inputmode="numeric" autocomplete="off" aria-describedby="yearNote">
+    <button type="button" id="btnGenerate">Generate Scenario</button>
+    <span class="year-note" id="yearNote"></span>
+  </section>
+
+  <div class="rounding-note" id="noteCalc"></div>
+
+  <div class="check-note">
+    <strong>Checking your work:</strong> you have <strong>3 attempts per part</strong>. Each time you select <em>Check My Work</em>, a <strong class="bad-mark" aria-hidden="true">&#10007;</strong> mark and the words &ldquo;Incorrect&rdquo; or &ldquo;Not answered&rdquo; appear next to every amount that is wrong or blank, so you can fix it and check again. A message under each table also tells you how many amounts are correct. Your attempts are saved in this browser for your Student ID, and regenerating the scenario will not reset them. After your third attempt, that part is locked.
+  </div>
+
+  <div id="problems">
+    <p>Select &ldquo;Generate Scenario&rdquo; above to build your version of these problems.</p>
+  </div>
+
+  <div class="overall-score" id="overallScore" role="status">Check every part above to see your combined score.</div>
+
+  <section class="submit-box" aria-labelledby="submitHeading">
+    <h2 id="submitHeading" class="sr-only">Name and printing</h2>
+    <label for="studentName">Your name:</label>
+    <input type="text" id="studentName" placeholder="Full name" autocomplete="name">
+    <button type="button" id="btnPrint">Print / Save as PDF</button>
+  </section>
+
+  <div id="announce" class="sr-only" role="status" aria-live="polite"></div>
+
+</main>
+
+<footer>Sales-Type Leases and Residual Values &middot; ACCT 352 &middot; Western Carolina University</footer>
+
+<script>
+/* ---------------------------------------------------------------------
+   SCENARIO: Problem 1 (four independent sales-type / finance leases with residual values)
+             Problem 2 (lessor's sales-type lease with a residual value)
+   Numbers come from the last six digits of the Student ID; dates use the current year.
+--------------------------------------------------------------------- */
+const TOL_DOLLARS = 3;   // amounts are accepted within $3 to allow for rounding differences
+const YEAR = new Date().getFullYear();
+const MAX_ATTEMPTS = 3;
+const TOL = TOL_DOLLARS;
+const EX_CODE = 'salestype-residual';
+
+/* Fictitious company names */
+const LESSOR_1 = 'Cheoah Ridge Leasing Company';
+const LESSOR_2 = 'Tanasee Equipment Corporation';
+const LESSEE_2 = 'Hemlock Hollow Bistro, Inc.';
+
+function seedFromString(str) {
+  let h = 2166136261 >>> 0;
+  for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
+  return h >>> 0;
+}
+function mulberry32(a) {
+  return function() {
+    a |= 0; a = (a + 0x6D2B79F5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+function pick(rng, arr) { return arr[Math.floor(rng() * arr.length)]; }
+function last6Of(id) { return String(id).replace(/\D/g, '').slice(-6).padStart(6, '0'); }
+function fmt(n) { return '$' + Number(n).toLocaleString('en-US'); }
+function annuityDue(i, n) { return (1 - Math.pow(1 + i, -n)) / i * (1 + i); }
+function pvFactor(i, n) { return Math.pow(1 + i, -n); }
+
+/* Problem 1 amounts for one situation (payments at the beginning of each year) */
+function calcSituation(P, s) {
+  const r = s.rate / 100;
+  const ad = annuityDue(r, s.n), pvf = pvFactor(r, s.n);
+  const residual = Math.max(s.fv, s.g);          // residual value the lessor expects to recover (unguaranteed plus guaranteed)
+  const excess = Math.max(0, s.g - s.fv);        // lessee-guaranteed amount above the expected fair value
+  return {
+    lessorPay: P * s.n,
+    gross: P * s.n + residual,
+    net: Math.round(P * ad + residual * pvf),
+    lesseePay: P * s.n + excess,
+    rou: Math.round(P * ad + excess * pvf)
+  };
+}
+
+/* Problem 2 first-year amounts for the lessor */
+function calcSalesType(P, ratePct, cost) {
+  const int1 = Math.round(ratePct / 100 * (cost - P));        // interest for the year on the balance after the first payment
+  const reduce2 = P - int1;                                    // year-end payment less interest
+  return { int1: int1, reduce2: reduce2, endBal: cost - P - reduce2 };
+}
+
+function buildScenario(studentId) {
+  const last6 = last6Of(studentId);
+  const rng = mulberry32(seedFromString('residual-' + last6));
+
+  /* ---- Problem 1 ---- */
+  const P1 = pick(rng, [80000, 90000, 100000, 110000, 120000]);
+  const g3 = pick(rng, [6000, 8000, 10000, 12000]);
+  const f4 = pick(rng, [40000, 50000, 60000]);
+  const sits = [
+    { n: pick(rng, [6, 7, 8]), rate: pick(rng, [8, 9, 10]),   fv: 0,  g: 0 },
+    { n: pick(rng, [6, 7, 8]), rate: pick(rng, [10, 11, 12]), fv: pick(rng, [40000, 45000, 50000, 55000, 60000]), g: 0 },
+    { n: pick(rng, [7, 8, 9]), rate: pick(rng, [9, 10, 11]),  fv: g3, g: g3 },
+    { n: pick(rng, [7, 8, 9]), rate: pick(rng, [11, 12, 13]), fv: f4, g: f4 + pick(rng, [8000, 10000, 12000]) }
+  ];
+  const calc = sits.map(function(s) { return calcSituation(P1, s); });
+
+  /* ---- Problem 2 ---- */
+  const cost = pick(rng, [150000, 160000, 170000, 180000, 190000, 200000]);
+  const rate2 = pick(rng, [8, 9, 10, 12]);
+  const termLife = pick(rng, [[8, 10], [9, 12], [10, 12], [6, 8]]);   // lease term is at least 75% of the asset's life
+  const n2 = termLife[0], life2 = termLife[1];
+  const r2 = rate2 / 100;
+  const ad2 = annuityDue(r2, n2), pvf2 = pvFactor(r2, n2);
+  const residualSL = cost * (life2 - n2) / life2;                      // straight-line value at the end of the lease term
+  const P2 = Math.round((cost - residualSL * pvf2) / ad2 / 500) * 500;
+  const RV2 = Math.round((cost - P2 * ad2) / pvf2);                    // residual value that lets the lessor recover its investment
+  const res2 = calcSalesType(P2, rate2, cost);
+
+  return { last6, P1, sits, calc, cost, rate2, n2, life2, P2, RV2, lastPayYear: YEAR + n2 - 2, int1: res2.int1, reduce2: res2.reduce2, endBal: res2.endBal };
+}
+
+const NOTE_CALC = '<strong>Use a calculator, not a table:</strong> compute present values with a financial calculator (set to <em>BEG</em> mode for payments made at the beginning of each period) or a spreadsheet function such as <code>PV</code>. A residual value is a single future amount, so discount it separately at the interest rate for the number of years in the lease term. Do <strong>not</strong> use rounded present value factors from a table. Round each dollar amount to the nearest whole dollar. Answers are accepted within $' + TOL + ' to allow for rounding differences. This scenario is generated from the last six digits of the Student ID entered above &mdash; the same ID always produces the same numbers, and the dates update automatically to the current year.';
+
+function termsTable(caption, rows) {
+  return '<div class="table-scroll"><table class="lease-terms"><caption class="sr-only">' + caption + '</caption><tbody>' +
+    rows.map(function(r) { return '<tr><th scope="row">' + r[0] + '</th><td>' + r[1] + '</td></tr>'; }).join('') +
+    '</tbody></table></div>';
+}
+
+function backgroundA(s) {
+  const heads = [1, 2, 3, 4].map(function(i) { return '<th scope="col">Situation ' + i + '</th>'; }).join('');
+  function row(label, fn) { return '<tr><th scope="row">' + label + '</th>' + s.sits.map(function(x) { return '<td>' + fn(x) + '</td>'; }).join('') + '</tr>'; }
+  const table = '<div class="table-scroll"><table class="lease-terms situation-terms"><caption class="sr-only">Lease terms and residual values for the four situations</caption>' +
+    '<thead><tr><th scope="col">Item</th>' + heads + '</tr></thead><tbody>' +
+    row('Lease term (years)', function(x) { return x.n; }) +
+    row('Lessor\u2019s and lessee\u2019s interest rate', function(x) { return x.rate + '%'; }) +
+    row('Residual value at the end of the lease: estimated fair value', function(x) { return fmt(x.fv); }) +
+    row('Residual value at the end of the lease: guaranteed by lessee', function(x) { return fmt(x.g); }) +
+    '</tbody></table></div>';
+  return '<p><strong>' + LESSOR_1 + '</strong> (the lessor) enters into four independent sales-type leases of equipment. In each situation, annual lease payments of <strong>' + fmt(s.P1) + '</strong> are payable at the <strong>beginning</strong> of each year, and the lease is a finance lease for the lessee.</p>' +
+    table +
+    '<p><strong>Required:</strong> Determine the following amounts at the beginning of the lease for each situation: (A) the lessor&rsquo;s lease payments, gross investment in the lease, and net investment in the lease; and (B) the lessee&rsquo;s lease payments, right-of-use asset, and lease liability.</p>';
+}
+
+function backgroundB(s) {
+  return '<p>On January 1, ' + YEAR + ', <strong>' + LESSEE_2 + '</strong> leased restaurant equipment from <strong>' + LESSOR_2 + '</strong> under a ' + s.n2 + '-year lease agreement. Both companies have a December 31 fiscal year-end.</p>' +
+    termsTable('Terms of the restaurant equipment lease', [
+      ['Lease term', s.n2 + ' years'],
+      ['Annual lease payments', fmt(s.P2) + ', payable January 1, ' + YEAR + ' (the beginning of the lease) and on each December 31 thereafter through ' + s.lastPayYear],
+      ['Lessor\u2019s cost of the equipment (equal to its fair value)', fmt(s.cost)],
+      ['Useful life of the equipment', s.life2 + ' years, with no salvage value'],
+      ['Expected residual value at the end of the lease term', fmt(s.RV2)],
+      ['Return the lessor seeks on its lease investments', s.rate2 + '%']
+    ]) +
+    '<p class="terms-note">Because the lease term is shorter than the equipment&rsquo;s life, the equipment has an expected residual value at the end of the lease term. Both the present value of the lease payments and the present value of the residual value are included in the lease receivable, because the two amounts combine to allow the lessor to recover its net investment. By this arrangement, the lease is deemed to be a finance lease to the lessee.</p>' +
+    '<p><strong>Required:</strong> (1) What will be the effect of the lease on ' + LESSOR_2 + '&rsquo;s earnings for the first year (ignore taxes)? (2) What will be the balance in the balance sheet account related to the lease at the end of the first year (ignore taxes)?</p>';
+}
+
+function buildModel(s) {
+  const cols = ['Situation 1', 'Situation 2', 'Situation 3', 'Situation 4'];
+  function gridRow(label, key) { return { label: label, ans: s.calc.map(function(c) { return c[key]; }) }; }
+
+  const parts = [
+    { id: 'lessor', short: 'Problem 1 Lessor', title: 'Lessor Amounts at the Beginning of the Lease', kind: 'grid', corner: 'Lessor\u2019s amount', cols: cols,
+      instructions: 'Enter the lessor&rsquo;s amounts for each of the four situations, rounded to the nearest whole dollar.',
+      rows: [ gridRow('Lease payments', 'lessorPay'), gridRow('Gross investment in the lease', 'gross'), gridRow('Net investment in the lease', 'net') ] },
+    { id: 'lessee', short: 'Problem 1 Lessee', title: 'Lessee Amounts at the Beginning of the Lease', kind: 'grid', corner: 'Lessee\u2019s amount', cols: cols,
+      instructions: 'Enter the lessee&rsquo;s amounts for each of the four situations, rounded to the nearest whole dollar.',
+      rows: [ gridRow('Lease payments', 'lesseePay'), gridRow('Right-of-use asset', 'rou'), { label: 'Lease liability', ans: s.calc.map(function(c) { return c.rou; }) } ] },
+    { id: 'earn', short: 'Problem 2 Earnings', title: 'Effect on the Lessor\u2019s Earnings in the First Year', kind: 'grid', corner: 'Item', cols: ['Amount'],
+      instructions: 'Determine the effect of the lease on ' + LESSOR_2 + '&rsquo;s earnings for the year ended December 31, ' + YEAR + ', before taxes. Enter 0 for any item that does not apply.',
+      rows: [ { label: 'Selling profit on the lease', ans: [0] }, { label: 'Interest revenue', ans: [s.int1] }, { label: 'Total effect on earnings (before taxes)', ans: [s.int1] } ] },
+    { id: 'recv', short: 'Problem 2 Receivable', title: 'Lease Receivable at the End of the First Year', kind: 'grid', corner: 'Lease receivable', cols: ['Amount'],
+      instructions: 'Complete the lease receivable roll-forward for ' + LESSOR_2 + ' for the year ended December 31, ' + YEAR + '. Enter the two reductions as positive amounts.',
+      rows: [ { label: 'Initial balance, January 1, ' + YEAR + ' (net investment in the lease)', ans: [s.cost] },
+              { label: 'Reduction from the January 1, ' + YEAR + ' payment', ans: [s.P2] },
+              { label: 'Reduction from the December 31, ' + YEAR + ' payment', ans: [s.reduce2] },
+              { label: 'Balance, December 31, ' + YEAR, ans: [s.endBal] } ] }
+  ];
+
+  return {
+    problems: [
+      { code: 'rv', title: 'Problem 1: Lessor and Lessee Amounts with Residual Values', background: backgroundA(s), parts: [parts[0], parts[1]] },
+      { code: 'st', title: 'Problem 2: Sales-Type Lease with a Residual Value (Lessor)', background: backgroundB(s), parts: [parts[2], parts[3]] }
+    ],
+    parts: parts
+  };
+}
+
+/* ---------------------------------------------------------------------
+   ATTEMPT LIMIT (saved per Student ID in this browser)
+--------------------------------------------------------------------- */
+const memAttempts = {};
+function attemptKey(part, last6) { return 'ch15hw-' + EX_CODE + '-attempts-' + last6 + '-' + part; }
+function getAttempts(part, last6) {
+  const key = attemptKey(part, last6 || SCN.last6);
+  let stored = 0;
+  try { stored = parseInt(window.localStorage.getItem(key) || '0', 10) || 0; } catch (e) { /* storage blocked */ }
+  return Math.max(stored, memAttempts[key] || 0);
+}
+function setAttempts(part, n) {
+  const key = attemptKey(part, SCN.last6);
+  memAttempts[key] = n;
+  try { window.localStorage.setItem(key, String(n)); } catch (e) { /* storage blocked */ }
+}
+function lockPart(part, locked) {
+  document.getElementById('part-' + part).querySelectorAll('input').forEach(function(el) { el.disabled = locked; });
+}
+function updateAttemptsUI(part) {
+  const used = getAttempts(part);
+  const btn = document.getElementById('btn-' + part);
+  const lab = document.getElementById('attempts-' + part);
+  if (used >= MAX_ATTEMPTS) {
+    btn.disabled = true;
+    lab.className = 'attempts out';
+    lab.textContent = 'No attempts remaining (' + MAX_ATTEMPTS + ' of ' + MAX_ATTEMPTS + ' used). This part is locked.';
+    lockPart(part, true);
+  } else {
+    btn.disabled = false;
+    lab.className = 'attempts';
+    lab.textContent = 'Attempts used: ' + used + ' of ' + MAX_ATTEMPTS;
+    lockPart(part, false);
+  }
+}
+
+/* ---------------------------------------------------------------------
+   RENDERING
+--------------------------------------------------------------------- */
+let SCN = null;
+let MODEL = null;
+const DEFAULT_OVERALL = 'Check every part above to see your combined score.';
+
+function announce(msg) {
+  const el = document.getElementById('announce');
+  el.textContent = '';
+  window.setTimeout(function() { el.textContent = msg; }, 50);
+}
+
+function generateScenario(announceIt) {
+  const raw = document.getElementById('studentId').value.trim();
+  SCN = buildScenario(raw || '920123456');
+  MODEL = buildModel(SCN);
+  renderAll();
+  MODEL.parts.forEach(function(p) { updateAttemptsUI(p.id); });
+  const overall = document.getElementById('overallScore');
+  if (overall.textContent !== DEFAULT_OVERALL) overall.textContent = DEFAULT_OVERALL;
+  if (announceIt) announce('Scenario generated for the Student ID ending in ' + SCN.last6 + '. All answer fields are empty.');
+}
+
+function regenerate() {
+  const raw = document.getElementById('studentId').value.trim();
+  const l6 = last6Of(raw || '920123456');
+  const used = MODEL.parts.reduce(function(sum, p) { return sum + getAttempts(p.id, l6); }, 0);
+  if (used > 0 && !window.confirm('Regenerating the scenario will clear everything you have typed. Attempts you have already used will still count. Continue?')) return;
+  generateScenario(true);
+}
+
+function renderAll() {
+  let html = '';
+  let partNo = 0;
+  const total = MODEL.parts.length;
+  MODEL.problems.forEach(function(ex, exIdx) {
+    html += '<section aria-labelledby="ex-h-' + exIdx + '">';
+    html += '<h2 class="problem-title" id="ex-h-' + exIdx + '">' + ex.title + '</h2>';
+    html += '<h3>Background</h3><div class="background-box">' + ex.background + '</div>';
+    ex.parts.forEach(function(p) {
+      partNo++;
+      html += '<section aria-labelledby="part-h-' + p.id + '">';
+      html += '<h3 id="part-h-' + p.id + '">Part ' + partNo + ' of ' + total + ' &mdash; ' + p.title + '</h3>';
+      html += '<p class="part-instructions">' + p.instructions + '</p>';
+      html += '<div id="part-' + p.id + '">' + renderGrid(p) + '</div>';
+      html += '<div class="check-row"><button type="button" id="btn-' + p.id + '" data-part="' + p.id + '" aria-describedby="attempts-' + p.id + '">Check My Work &mdash; Part ' + partNo + '</button>' +
+              '<div class="check-status"><span class="part-score" id="score-' + p.id + '" role="status"></span><span class="attempts" id="attempts-' + p.id + '"></span></div></div>';
+      html += '</section>';
+    });
+    html += '</section>';
+  });
+  document.getElementById('problems').innerHTML = html;
+  document.querySelectorAll('#problems button[data-part]').forEach(function(b) {
+    b.addEventListener('click', function() { checkPart(b.getAttribute('data-part')); });
+  });
+}
+
+/* ---- answer grids (rows of items by columns of situations, or a single Amount column) ---- */
+function attrText(s) { return String(s).replace(/<[^>]+>/g, '').replace(/&rsquo;/g, '\u2019').replace(/"/g, ''); }
+
+function cellId(p, i, j) { return 'g-' + p.id + '-' + i + '-' + j; }
+
+function renderGrid(p) {
+  const multi = p.cols.length > 1;
+  let head = '<tr><th scope="col">' + p.corner + '</th>' + p.cols.map(function(c) { return '<th scope="col">' + c + '</th>'; }).join('') + '</tr>';
+  let body = '';
+  p.rows.forEach(function(r, i) {
+    body += '<tr><th scope="row">' + r.label + '</th>';
+    r.ans.forEach(function(a, j) {
+      const label = attrText(r.label) + (multi ? ', ' + p.cols[j] : '');
+      body += '<td><input type="number" step="any" inputmode="decimal" autocomplete="off" id="' + cellId(p, i, j) + '" aria-label="' + label + '">' +
+              '<span class="cell-mark" id="m-' + cellId(p, i, j) + '"></span></td>';
+    });
+    body += '</tr>';
+  });
+  return '<div class="entry-block" id="block-' + p.id + '"><div class="table-scroll"><table class="grid-table cols-' + p.cols.length + '"><caption class="sr-only">' + attrText(p.title) + '</caption>' +
+         '<thead>' + head + '</thead><tbody>' + body + '</tbody></table></div><div class="entry-result" id="result-' + p.id + '"></div></div>';
+}
+
+function setMark(id, state) {          // state: '' | 'bad' | 'blank'
+  const m = document.getElementById('m-' + id), el = document.getElementById(id);
+  if (state) {
+    m.innerHTML = '<span aria-hidden="true">\u2717</span> ' + (state === 'blank' ? 'Not answered' : 'Incorrect');
+    el.setAttribute('aria-invalid', 'true');
+  } else {
+    m.innerHTML = '';
+    el.removeAttribute('aria-invalid');
+  }
+}
+
+function gradeGrid(p) {
+  let correct = 0, total = 0;
+  const bad = [];
+  p.rows.forEach(function(r, i) {
+    r.ans.forEach(function(a, j) {
+      total++;
+      const id = cellId(p, i, j);
+      const raw = document.getElementById(id).value;
+      const v = parseFloat(raw);
+      if (raw === '' || isNaN(v)) { setMark(id, 'blank'); bad.push(id); return; }
+      if (Math.abs(v - a) <= TOL) { correct++; setMark(id, ''); }
+      else { setMark(id, 'bad'); bad.push(id); }
+    });
+  });
+  const block = document.getElementById('block-' + p.id), res = document.getElementById('result-' + p.id);
+  if (correct === total) {
+    block.className = 'entry-block entry-correct'; res.className = 'entry-result ok';
+    res.innerHTML = '<span aria-hidden="true">\u2713</span> All ' + total + ' amounts correct.';
+  } else {
+    block.className = 'entry-block entry-incorrect'; res.className = 'entry-result no';
+    res.innerHTML = '<span aria-hidden="true">\u2717</span> ' + correct + ' of ' + total + ' amounts correct. Fix the amounts marked &ldquo;Incorrect&rdquo; or &ldquo;Not answered&rdquo;.';
+  }
+  return { correct: correct, total: total, unit: 'amounts' };
+}
+
+/* ---------------------------------------------------------------------
+   CHECKING
+--------------------------------------------------------------------- */
+function partHasInput(part) {
+  let any = false;
+  document.getElementById('part-' + part).querySelectorAll('input').forEach(function(el) { if (el.value !== '') any = true; });
+  return any;
+}
+
+function checkPart(partId) {
+  if (!MODEL) { return; }
+  const p = MODEL.parts.find(function(x) { return x.id === partId; });
+  if (getAttempts(partId) >= MAX_ATTEMPTS) { updateAttemptsUI(partId); return; }
+  const scoreEl = document.getElementById('score-' + partId);
+  if (!partHasInput(partId)) {
+    scoreEl.textContent = 'Enter your answers first. This did not use an attempt.';
+    return;
+  }
+  const attempt = getAttempts(partId) + 1;
+  setAttempts(partId, attempt);
+  const r = gradeGrid(p);
+  scoreEl.textContent = r.correct + ' of ' + r.total + ' ' + r.unit + ' correct (attempt ' + attempt + ' of ' + MAX_ATTEMPTS + ')';
+  updateAttemptsUI(partId);
+  updateOverall();
+}
+
+function updateOverall() {
+  const texts = MODEL.parts.map(function(p) { return document.getElementById('score-' + p.id).textContent; });
+  const done = texts.filter(function(t) { return /attempt \d of/.test(t); }).length;
+  const el = document.getElementById('overallScore');
+  if (done === MODEL.parts.length) {
+    el.innerHTML = MODEL.parts.map(function(p, i) {
+      return '<strong>Part ' + (i + 1) + ' (' + p.short + '):</strong> ' + texts[i];
+    }).join(' &nbsp;&nbsp; ');
+  } else if (done > 0) {
+    el.textContent = 'Check the remaining parts to see your combined score.';
+  }
+}
+
+/* Editing an amount clears its Incorrect mark until the next check */
+function clearMark(e) {
+  const t = e.target;
+  if (!t || !t.id || t.tagName !== 'INPUT' || t.id.indexOf('g-') !== 0) return;
+  const m = document.getElementById('m-' + t.id);
+  if (m && m.innerHTML !== '') setMark(t.id, '');
+}
+document.addEventListener('input', clearMark);
+
+/* ---------------------------------------------------------------------
+   INIT
+--------------------------------------------------------------------- */
+document.getElementById('yearNote').textContent = 'Dates are in ' + YEAR + ' and roll forward automatically next year.';
+document.getElementById('noteCalc').innerHTML = NOTE_CALC;
+document.getElementById('btnGenerate').addEventListener('click', regenerate);
+document.getElementById('btnPrint').addEventListener('click', function() { window.print(); });
+document.getElementById('studentId').addEventListener('keydown', function(e) { if (e.key === 'Enter') { e.preventDefault(); regenerate(); } });
+generateScenario(false);
+</script>
+
+</body>
+</html>
