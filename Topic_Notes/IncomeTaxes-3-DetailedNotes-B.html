@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Permanent Differences, Tax Rates, and Multiple Differences: Detailed Notes B</title>
+<meta name="description" content="Detailed notes on permanent differences, the effective tax rate and rate reconciliation, enacted tax rates and rate changes, and accounting for several temporary differences at once, with references to FASB ASC Topic 740.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple: #4B2E83; --purple-dark: #341f5c; --gold: #C8A24A; --gold-light: #E8CF86;
+    --ink: #232023; --paper: #fdfcfb; --panel: #f7f3ec; --rule: #e2d9c8; --grid: #8a8076;
+    --muted: #5f5a56;
+    --key-bg: #f3eef9; --watch: #9C4221; --watch-title: #7a3418; --watch-bg: #FBEAE2;
+    --ex-bg: #fbf5e4; --good: #2E6B45; --good-bg: #E7F3EB; --link: #4B2E83; --visited: #5b3a9a;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-padding-top: 1rem; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif; font-size: 1.0625rem; line-height: 1.7; }
+  .sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+  .skip-link { position: absolute; left: 0.75rem; top: -4rem; z-index: 100; background: #fff; color: var(--purple-dark); font-family: 'Inter', system-ui, sans-serif; font-weight: 700; padding: 0.7rem 1.1rem; border: 3px solid var(--purple-dark); border-radius: 6px; text-decoration: none; }
+  .skip-link:focus { top: 0.75rem; }
+  :focus-visible { outline: 3px solid var(--purple-dark); outline-offset: 2px; box-shadow: 0 0 0 2px #fff; }
+  main:focus { outline: none; }
+  a { color: var(--link); text-decoration: underline; text-underline-offset: 0.18em; text-decoration-thickness: 0.08em; }
+  a:visited { color: var(--visited); }
+  a:hover { text-decoration-thickness: 0.16em; }
+
+  .site-header { background: linear-gradient(135deg, var(--purple) 0%, var(--purple-dark) 100%); color: #fff; border-bottom: 6px solid var(--gold); }
+  .header-inner { max-width: 70rem; margin: 0 auto; padding: 2.3rem 1.5rem 2rem; }
+  .eyebrow { font-family: 'Inter', system-ui, sans-serif; font-size: 0.95rem; font-weight: 600; letter-spacing: 0.02em; color: var(--gold-light); margin: 0 0 0.5rem; }
+  .site-header h1 { font-family: 'Source Serif 4', Georgia, serif; font-weight: 700; font-size: clamp(1.75rem, 4vw, 2.5rem); line-height: 1.2; margin: 0 0 0.6rem; max-width: 52rem; }
+  .header-sub { margin: 0; color: #ece6f6; font-family: 'Inter', system-ui, sans-serif; font-size: 1.05rem; line-height: 1.5; max-width: 42rem; }
+
+  .layout { display: grid; grid-template-columns: 15rem minmax(0, 46rem); gap: 3rem; max-width: 70rem; margin: 0 auto; padding: 2rem 1.5rem 3rem; }
+  .toc { align-self: start; position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow-y: auto; font-family: 'Inter', system-ui, sans-serif; font-size: 0.92rem; line-height: 1.4; background: var(--panel); border: 1px solid var(--rule); border-top: 5px solid var(--gold); border-radius: 8px; padding: 0.9rem 1rem 1rem; }
+  .toc-title { margin: 0 0 0.5rem; font-weight: 700; color: var(--purple-dark); }
+  .toc ol { margin: 0; padding-left: 1.2rem; }
+  .toc li { margin: 0.35rem 0; }
+  main { min-width: 0; }
+
+  h2, h3, h4 { font-family: 'Source Serif 4', Georgia, serif; color: var(--purple-dark); line-height: 1.3; }
+  h2 { font-size: 1.65rem; margin: 3rem 0 0.9rem; padding-bottom: 0.4rem; border-bottom: 3px solid var(--gold); }
+  main > section:first-child > h2:first-child { margin-top: 0; }
+  h3 { font-size: 1.3rem; margin: 2.2rem 0 0.6rem; }
+  h4 { font-size: 1.1rem; margin: 1.6rem 0 0.4rem; }
+  p { margin: 0.8rem 0; }
+  ul, ol { margin: 0.8rem 0; padding-left: 1.5rem; }
+  li { margin: 0.35rem 0; }
+  strong { color: var(--purple-dark); }
+  code, .mono { font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-size: 0.92em; }
+
+  .lede { font-size: 1.2rem; line-height: 1.6; }
+  .note-small { font-family: 'Inter', system-ui, sans-serif; font-size: 0.9rem; color: var(--muted); }
+
+  .callout { font-family: 'Inter', system-ui, sans-serif; font-size: 0.98rem; line-height: 1.6; border-radius: 8px; border: 1px solid var(--rule); border-left-width: 7px; padding: 0.8rem 1.1rem 0.9rem; margin: 1.5rem 0; }
+  .callout p { margin: 0.5rem 0; }
+  .callout ul, .callout ol { margin: 0.5rem 0; }
+  .callout-title { margin: 0 0 0.25rem !important; font-weight: 700; font-size: 1rem; }
+  .callout.key { background: var(--key-bg); border-color: #d6c9ec; border-left-color: var(--purple); }
+  .callout.key .callout-title { color: var(--purple-dark); }
+  .callout.watch { background: var(--watch-bg); border-color: #efc7b6; border-left-color: var(--watch); }
+  .callout.watch .callout-title { color: var(--watch-title); }
+  .callout.example { background: var(--ex-bg); border-color: #ecdca8; border-left-color: var(--gold); }
+  .callout.example .callout-title { color: #4a3a0c; }
+  .callout.codif { background: #fff; border-color: var(--purple); border-left-color: var(--purple-dark); }
+  .callout.codif .callout-title { color: var(--purple-dark); }
+  .callout.codif ul { padding-left: 1.2rem; }
+  .asc { font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-size: 0.86em; font-weight: 600; color: var(--purple-dark); background: var(--panel); border: 1px solid var(--rule); border-radius: 4px; padding: 0.05em 0.35em; white-space: nowrap; }
+  .callout.global { background: #fff; border-color: var(--grid); border-left-color: var(--grid); }
+  .callout.global .callout-title { color: var(--purple-dark); }
+
+  .example-box { border: 1px solid var(--rule); border-top: 5px solid var(--purple); border-radius: 8px; background: #fff; padding: 0.4rem 1.2rem 1rem; margin: 1.8rem 0; }
+  .example-box > h3, .example-box > h4 { margin-top: 1rem; }
+  .example-box > h3:first-child { margin-top: 0.9rem; border: 0; }
+  .facts { font-family: 'Inter', system-ui, sans-serif; font-size: 0.97rem; background: var(--panel); border-radius: 6px; padding: 0.7rem 1rem; margin: 0.8rem 0; }
+  .facts p { margin: 0.35rem 0; }
+
+  .table-scroll { overflow-x: auto; margin: 1rem 0; }
+  table { border-collapse: separate; border-spacing: 0; width: 100%; min-width: 26rem; border-top: 1px solid var(--grid); border-left: 1px solid var(--grid); font-family: 'Inter', system-ui, sans-serif; font-size: 0.92rem; line-height: 1.45; font-variant-numeric: tabular-nums; }
+  caption { text-align: left; font-weight: 700; color: var(--purple-dark); padding: 0 0 0.5rem; font-size: 0.98rem; }
+  th, td { border: 0; border-right: 1px solid var(--grid); border-bottom: 1px solid var(--grid); padding: 0.45rem 0.65rem; vertical-align: top; text-align: left; }
+  thead th { background: var(--panel); color: var(--purple-dark); }
+  tbody th[scope="row"] { background: #fff; font-weight: 600; color: var(--ink); position: sticky; left: 0; z-index: 1; min-width: 9.5rem; }
+  thead th:first-child { position: sticky; left: 0; z-index: 2; min-width: 9.5rem; }
+  td.num, th.num { text-align: right; }
+  td.num { white-space: nowrap; }
+  tr.sub th, tr.sub td { background: var(--panel); font-weight: 700; }
+  tr.plug th, tr.plug td { background: var(--ex-bg); font-weight: 700; box-shadow: inset 0 3px 0 var(--gold); }
+  tr.step th { border-left: 6px solid var(--purple); }
+  tr.plug th { border-left: 6px solid var(--gold); }
+  table.compact { font-size: 0.88rem; min-width: 24rem; }
+  table.je { min-width: 22rem; }
+  table.je td.num { font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; }
+  table.je td.cr-acct { padding-left: 2.2rem; }
+  table.je th.acct-col { width: 62%; }
+  .je-wrap { margin: 1.1rem 0; }
+  .je-date { font-family: 'Inter', system-ui, sans-serif; font-weight: 700; margin: 0 0 0.3rem; color: var(--purple-dark); }
+
+  ol.steps { list-style: none; counter-reset: step; padding: 0; margin: 1.2rem 0; display: grid; gap: 0.7rem; }
+  ol.steps > li { counter-increment: step; font-family: 'Inter', system-ui, sans-serif; font-size: 0.98rem; line-height: 1.55; margin: 0; padding: 0.7rem 1rem 0.8rem 3.5rem; background: #fff; border: 1px solid var(--rule); border-left: 6px solid var(--purple); border-radius: 8px; position: relative; }
+  ol.steps > li::before { content: counter(step); position: absolute; left: 0.9rem; top: 0.6rem; width: 1.9rem; height: 1.9rem; border-radius: 50%; background: var(--purple); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  ol.steps > li:last-child { border-left-color: var(--gold); }
+  ol.steps > li:last-child::before { background: var(--gold); color: var(--ink); }
+  ol.steps strong { display: block; font-size: 1.02rem; }
+
+  dl.glossary { font-family: 'Inter', system-ui, sans-serif; font-size: 0.96rem; line-height: 1.55; }
+  dl.glossary dt { font-weight: 700; color: var(--purple-dark); margin-top: 0.9rem; }
+  dl.glossary dd { margin: 0.1rem 0 0 0; }
+
+  details { font-family: 'Inter', system-ui, sans-serif; font-size: 0.97rem; line-height: 1.6; border: 1px solid var(--grid); border-radius: 8px; background: #fff; margin: 0.9rem 0; }
+  details > summary { cursor: pointer; font-weight: 700; color: var(--purple-dark); padding: 0.7rem 1rem; min-height: 2.75rem; }
+  details[open] > summary { border-bottom: 1px solid var(--rule); }
+  details > .answer { padding: 0.2rem 1rem 0.9rem; }
+  .practice { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 0.2rem 1.2rem 0.9rem; margin: 1.2rem 0; }
+  .practice h3, .practice h4 { margin-top: 1rem; }
+
+  figure { margin: 1.5rem 0; }
+  figcaption { font-family: 'Inter', system-ui, sans-serif; font-size: 0.9rem; color: var(--muted); margin-top: 0.4rem; }
+  svg text { font-family: 'Inter', system-ui, sans-serif; }
+
+  .pill-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.8rem 0; padding: 0; list-style: none; }
+  .pill-row li { margin: 0; font-family: 'Inter', system-ui, sans-serif; font-size: 0.9rem; font-weight: 600; background: var(--panel); border: 1px solid var(--grid); border-radius: 999px; padding: 0.2rem 0.8rem; }
+
+  .next-box { font-family: 'Inter', system-ui, sans-serif; background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 0.9rem 1.2rem; margin-top: 2.5rem; }
+  footer { font-family: 'Inter', system-ui, sans-serif; text-align: center; font-size: 0.88rem; color: var(--muted); padding: 1.5rem 1rem 2.5rem; border-top: 1px solid var(--rule); }
+
+  @media (max-width: 62rem) {
+    .layout { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; padding-top: 1.5rem; }
+    .toc { position: static; max-height: none; }
+  }
+  @media (max-width: 30rem) {
+    body { font-size: 1rem; }
+    .header-inner { padding: 1.6rem 1rem 1.4rem; }
+    .layout { padding-left: 1rem; padding-right: 1rem; }
+    ol.steps > li { padding-left: 3.1rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+  @media print {
+    body { font-size: 11pt; }
+    .skip-link, .toc { display: none; }
+    .layout { display: block; padding: 0; }
+    .site-header { background: #fff; color: #000; border-bottom: 3px solid #000; }
+    .site-header h1, .header-sub, .eyebrow { color: #000; }
+    .table-scroll { overflow: visible; }
+    a { color: #000; }
+    details > summary { list-style: none; }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header">
+  <div class="header-inner">
+    <p class="eyebrow">ACCT 352 · Intermediate Accounting II · Detailed Notes B</p>
+    <h1>Permanent Differences, Tax Rates, and Multiple Differences</h1>
+    <p class="header-sub">What never reverses, how the effective tax rate differs from the statutory rate, what happens to deferred taxes when tax rates change, and how to handle several temporary differences at once.</p>
+  </div>
+</header>
+<div class="layout">
+  <nav class="toc" aria-label="On this page">
+    <p class="toc-title">On this page</p>
+    <ol><li><a href="#s-codif">Reading the Codification references</a></li><li><a href="#s-perm">Permanent differences</a></li><li><a href="#s-handle">How to account for them</a></li><li><a href="#s-combo">Permanent and temporary together</a></li><li><a href="#s-etr">The effective tax rate</a></li><li><a href="#s-rates">Which tax rate to use</a></li><li><a href="#s-change">When tax rates change</a></li><li><a href="#s-multi">Several temporary differences at once</a></li><li><a href="#s-mistakes">Common mistakes</a></li><li><a href="#s-practice">Practice with answers</a></li><li><a href="#s-map">Codification map</a></li><li><a href="#s-terms">Key terms</a></li></ol>
+  </nav>
+  <main id="main" tabindex="-1">
+
+<section>
+  <h2 id="s-codif">Reading the Codification references</h2>
+  <p>These notes point to the guidance in <strong>ASC Topic 740, Income Taxes</strong>, in the FASB Accounting Standards Codification, the authoritative source of U.S. GAAP. Boxes labeled &ldquo;In the FASB Codification&rdquo; paraphrase the guidance. For exact wording, read the cited paragraph.</p>
+  <p>A citation runs from topic to subtopic to section to paragraph. For example, <span class="asc">ASC 740-10-35-4</span> is Topic 740 (Income Taxes), Subtopic 10 (Overall), Section 35 (Subsequent measurement), Paragraph 4. Common sections are 20 (glossary), 25 (recognition), 30 (initial measurement), 35 (subsequent measurement), 45 (other presentation matters), 50 (disclosure), and 55 (implementation guidance and illustrations). Detailed Notes A has a longer guide.</p>
+</section>
+
+<section>
+  <h2 id="s-perm">Permanent differences</h2>
+  <p>Not every gap between book income and taxable income closes by itself. A <strong>permanent difference</strong> comes from an item that, under current tax law, will <em>never</em> be reported on the tax return the way it is on the income statement, or never at all. The tax-free interest on a municipal bond is the classic case. It appears as revenue on the income statement, but it never appears in taxable income, now or later.</p>
+  <p>The contrast with a temporary difference is the heart of this topic:</p>
+  <div class="table-scroll"><table class="compact"><caption>Temporary differences compared with permanent differences</caption><thead><tr><th scope="col"><span class="sr-only">Item</span></th><th scope="col">Temporary difference</th><th scope="col">Permanent difference</th></tr></thead><tbody><tr><th scope="row">Does it reverse?</th><td>Yes. The same total ends up on both reports over time.</td><td>No. The item is on one report only.</td></tr><tr><th scope="row">Effect on future taxes</th><td>Creates future taxable or deductible amounts.</td><td>None.</td></tr><tr><th scope="row">Deferred tax asset or liability?</th><td>Yes.</td><td>No.</td></tr><tr><th scope="row">Effect on the effective tax rate</th><td>None over the life of the item.</td><td>Moves the effective rate away from the statutory rate.</td></tr></tbody></table></div>
+  <h3>Common examples</h3>
+  <div class="table-scroll"><table class="compact"><caption>Typical permanent differences</caption><thead><tr><th scope="col">Item</th><th scope="col">Why it is permanent</th></tr></thead><tbody><tr><th scope="row">Interest on state and municipal bonds</th><td>Reported as revenue, but exempt from federal income tax.</td></tr><tr><th scope="row">Fines and penalties for breaking the law</th><td>Reported as an expense, but not deductible.</td></tr><tr><th scope="row">Premiums on a life insurance policy on an executive when the company is the beneficiary</th><td>Reported as an expense, but not deductible.</td></tr><tr><th scope="row">Proceeds from that life insurance policy when the insured executive dies</th><td>Reported as income, but not taxable.</td></tr><tr><th scope="row">Costs of earning tax-exempt income</th><td>Reported as an expense, but not deductible.</td></tr><tr><th scope="row">A portion of dividends received from other domestic corporations</th><td>Reported as revenue, but partly excluded through the dividends-received deduction.</td></tr><tr><th scope="row">Some stock-based compensation</th><td>Reported as an expense under accounting rules, but never deductible in some plans.</td></tr><tr><th scope="row">Foreign income that is taxed abroad at a lower rate and permanently reinvested there</th><td>The lower tax is a lasting difference in what the company pays.</td></tr></tbody></table></div>
+  <div class="callout watch"><p class="callout-title">Check the rules in your problem</p><p>Which items are permanent depends on the tax law in force. Provisions come and go, so rely on what a problem tells you about whether an item is taxable or deductible.</p></div>
+  <div class="callout codif"><p class="callout-title">In the FASB Codification</p><ul>
+<li>The Codification builds its recognition model around temporary differences (<span class="asc">ASC 740-10-20</span>, <span class="asc">ASC 740-10-25-23</span>). A company records deferred taxes for all temporary differences and carryforwards, subject to a few specific exceptions (<span class="asc">ASC 740-10-25-29</span>, <span class="asc">ASC 740-10-25-3</span>). Items that will never produce taxable or deductible amounts in a later year fall outside that model. Practice calls them permanent differences.</li>
+<li>They show up in the rate reconciliation that companies disclose (<span class="asc">ASC 740-10-50-12</span>), where items such as tax-exempt income and nondeductible expenses explain why the effective rate differs from the statutory rate.</li>
+<li>A related special rule: <span class="asc">ASC 740-30-25-18</span> contains an exception that can let a company skip deferred taxes on some undistributed earnings of foreign subsidiaries that it plans to reinvest abroad indefinitely.</li></ul></div>
+</section>
+
+<section>
+  <h2 id="s-handle">How to account for them</h2>
+  <p>Permanent differences are easier than temporary ones. Because the item never reverses, there is nothing to defer, so no deferred tax asset or liability is recorded. The procedure is:</p>
+  <ol>
+    <li>Start from pretax accounting income.</li>
+    <li><strong>Remove</strong> permanent differences when you compute taxable income. Subtract revenue that will never be taxed. Add back expenses that will never be deductible.</li>
+    <li>Multiply taxable income by the tax rate. That is tax payable, and (with no temporary differences) it is also income tax expense.</li>
+  </ol>
+  <p>The name can confuse. A permanent difference is a difference between <em>taxable income</em> and <em>pretax accounting income</em>. It is not a difference between tax expense and tax payable. Those two are equal as far as permanent differences are concerned.</p>
+  <div class="example-box">
+    <h3>Sylva Street Supply: tax-free interest and a fine</h3>
+    <div class="facts"><p>Pretax accounting income is $300,000. It includes $20,000 of interest from municipal bonds (never taxed) and it was reduced by an $8,000 fine for a regulatory violation (never deductible). There are no temporary differences. The tax rate is 25%.</p></div>
+    <div class="table-scroll"><table class="compact"><caption>Sylva Street Supply: taxable income and tax</caption><thead><tr><th scope="col"><span class="sr-only">Item</span></th><th scope="col" class="num">Amount</th></tr></thead><tbody><tr><th scope="row">Pretax accounting income</th><td class="num">300,000</td></tr><tr><th scope="row">Subtract: municipal bond interest (never taxed)</th><td class="num">−20,000</td></tr><tr><th scope="row">Add: fine (never deductible)</th><td class="num">+8,000</td></tr><tr class="sub"><th scope="row">Taxable income</th><td class="num">288,000</td></tr><tr class="step"><th scope="row">Tax payable (25%)</th><td class="num">72,000</td></tr><tr class="plug"><th scope="row">Income tax expense (no deferred tax)</th><td class="num">72,000</td></tr></tbody></table></div>
+    <div class="je-wrap"><p class="je-date">Income tax entry</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: Income tax entry</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Income tax expense</td><td class="num">72,000</td><td class="num"></td></tr><tr><td class="cr-acct">Income tax payable</td><td class="num"></td><td class="num">72,000</td></tr></tbody></table></div></div>
+    <p>Tax expense is $72,000, which is not 25% of the $300,000 pretax income. It is 25% of $288,000, the income after permanent differences are removed.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="s-combo">Permanent and temporary differences together</h2>
+  <p>Real companies have both kinds in the same year. Handle them in one pass: take pretax income, add back or subtract the permanent differences (they are gone for good), and then adjust for temporary differences (they get a deferred tax entry). Only the temporary differences feed the deferred tax balances.</p>
+  <div class="example-box">
+    <h3>Balsam Mountain Metalworks</h3>
+    <div class="facts"><p>In Year 1 the company buys equipment for $200,000 with a four-year life. Book depreciation is $50,000 a year, while the tax depreciation is $70,000, $90,000, $26,000, and $14,000 over the four years. Pretax accounting income is $240,000 in Year 1 and $260,000 in Year 2. Each year includes a penalty expense that is never deductible: $8,000 in Year 1 and $12,000 in Year 2. The tax rate is 25%.</p></div>
+    <div class="table-scroll"><table class="compact"><caption>Balsam Mountain Metalworks: four steps for each year</caption><thead><tr><th scope="col">Line</th><th scope="col" class="num">Year 1</th><th scope="col" class="num">Year 2</th></tr></thead><tbody><tr><th scope="row">Pretax accounting income</th><td class="num">240,000</td><td class="num">260,000</td></tr><tr><th scope="row">Add: nondeductible penalty (permanent)</th><td class="num">+8,000</td><td class="num">+12,000</td></tr><tr><th scope="row">Temporary difference: book depreciation minus tax depreciation</th><td class="num">−20,000</td><td class="num">−40,000</td></tr><tr class="sub"><th scope="row">Taxable income</th><td class="num">228,000</td><td class="num">232,000</td></tr><tr class="step"><th scope="row">Step 1: Income tax payable (25%)</th><td class="num">57,000</td><td class="num">58,000</td></tr><tr><th scope="row">Future taxable amounts remaining at year-end</th><td class="num">20,000</td><td class="num">60,000</td></tr><tr class="step"><th scope="row">Step 2: Ending deferred tax liability (× 25%)</th><td class="num">5,000</td><td class="num">15,000</td></tr><tr class="step"><th scope="row">Step 3: Change in the deferred tax liability</th><td class="num">+5,000</td><td class="num">+10,000</td></tr><tr class="plug"><th scope="row">Step 4: Income tax expense (the plug)</th><td class="num">62,000</td><td class="num">68,000</td></tr></tbody></table></div>
+    <div class="je-wrap"><p class="je-date">End of Year 1</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: End of Year 1</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Income tax expense</td><td class="num">62,000</td><td class="num"></td></tr><tr><td class="cr-acct">Income tax payable</td><td class="num"></td><td class="num">57,000</td></tr><tr><td class="cr-acct">Deferred tax liability</td><td class="num"></td><td class="num">5,000</td></tr></tbody></table></div></div>
+    <div class="je-wrap"><p class="je-date">End of Year 2</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: End of Year 2</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Income tax expense</td><td class="num">68,000</td><td class="num"></td></tr><tr><td class="cr-acct">Income tax payable</td><td class="num"></td><td class="num">58,000</td></tr><tr><td class="cr-acct">Deferred tax liability</td><td class="num"></td><td class="num">10,000</td></tr></tbody></table></div></div>
+    <p>In Year 1, expense is $62,000, which is 25% of $248,000 (pretax income plus the penalty). The penalty raises expense because it can never be deducted, while the depreciation difference only shifts when tax is paid. Year 2 works the same way: expense is 25% of $272,000 = $68,000. As a check, at the end of Year 2 the equipment has a book value of $100,000 and a tax basis of $40,000, a gap of $60,000, and $60,000 × 25% = $15,000, which matches the ending liability.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="s-etr">The effective tax rate</h2>
+  <p>The <strong>statutory rate</strong> is the rate written into law. The <strong>effective tax rate</strong> is what the company actually bears:</p>
+  <p class="mono">Effective tax rate = income tax expense ÷ pretax accounting income</p>
+  <p>Pretax accounting income is the denominator, so permanent differences move the effective rate. A permanent difference that lowers taxable income, such as tax-free interest, pulls the effective rate below the statutory rate. A permanent difference that raises taxable income, such as a nondeductible fine, pushes it above. Temporary differences do not change the effective rate over time, because deferred taxes make expense line up with book income.</p>
+  <div class="table-scroll"><table class="compact"><caption>Sylva Street Supply: why the effective rate is below 25%</caption><thead><tr><th scope="col"><span class="sr-only">Item</span></th><th scope="col" class="num">Amount</th><th scope="col" class="num">Percent of pretax income</th></tr></thead><tbody><tr><th scope="row">Tax at the statutory rate (25% × $300,000)</th><td class="num">75,000</td><td class="num">25.00%</td></tr><tr><th scope="row">Effect of tax-free municipal bond interest</th><td class="num">(5,000)</td><td class="num">(1.67)%</td></tr><tr><th scope="row">Effect of nondeductible fine</th><td class="num">2,000</td><td class="num">0.67%</td></tr><tr class="plug"><th scope="row">Income tax expense and effective tax rate</th><td class="num">72,000</td><td class="num">24.00%</td></tr></tbody></table></div>
+  <div class="table-scroll"><table class="compact"><caption>Balsam Mountain Metalworks, Year 1: why the effective rate is above 25%</caption><thead><tr><th scope="col"><span class="sr-only">Item</span></th><th scope="col" class="num">Amount</th><th scope="col" class="num">Percent of pretax income</th></tr></thead><tbody><tr><th scope="row">Tax at the statutory rate (25% × $240,000)</th><td class="num">60,000</td><td class="num">25.00%</td></tr><tr><th scope="row">Effect of nondeductible penalty ($8,000 × 25%)</th><td class="num">2,000</td><td class="num">0.83%</td></tr><tr class="plug"><th scope="row">Income tax expense and effective tax rate</th><td class="num">62,000</td><td class="num">25.83%</td></tr></tbody></table></div>
+  <p>Public companies must publish a table like these, called the <strong>rate reconciliation</strong>, which starts at the statutory rate and walks to the effective rate item by item. It shows readers which permanent differences, tax credits, and other items matter most. A company that earns income abroad in low-tax places, for example, will usually show a lower effective rate. If it later decides to bring those earnings home and pay the extra tax, the effective rate rises that year, even though pretax income does not change.</p>
+  <div class="callout codif"><p class="callout-title">In the FASB Codification: rate reconciliation</p><ul>
+<li><span class="asc">ASC 740-10-50-12</span> through <span class="asc">ASC 740-10-50-14</span> require a reconciliation between reported income tax expense and the expense that would result from applying the statutory federal rate to pretax income from continuing operations. Public business entities report it in detail. Other entities describe the nature of significant reconciling items.</li>
+<li><strong>Recent change.</strong> FASB Accounting Standards Update (ASU) 2023-09, issued in December 2023, amended the requirement for public business entities. They now present the reconciliation as a table in both dollars and percentages, using prescribed categories (for example, state and local taxes, tax credits, changes in valuation allowances, and nontaxable or nondeductible items), and they disclose income taxes paid by jurisdiction. The update applies to public business entities for annual periods beginning after December 15, 2024, and to other entities for annual periods beginning after December 15, 2025.</li>
+<li>The permanent differences in these notes, such as tax-exempt interest and nondeductible fines, belong in the &ldquo;nontaxable or nondeductible items&rdquo; part of such a reconciliation.</li></ul>
+<p>The two small reconciliations in this section use the simple format. A real public-company table now follows the prescribed categories.</p></div>
+</section>
+
+<section>
+  <h2 id="s-rates">Which tax rate to use</h2>
+  <p>To measure a deferred tax liability or asset, multiply the temporary difference by the <strong>enacted</strong> tax rate that will apply in the year or years it reverses. Accountants could try to forecast future rates, but standard setters chose to wait until a rate change is actually law. That choice favors <em>reliability</em> over <em>relevance</em>: a law that has passed is a fact, while a proposed one is a guess.</p>
+  <div class="callout codif"><p class="callout-title">In the FASB Codification: which rate to use</p><ul>
+<li><span class="asc">ASC 740-10-30-2</span>: current and deferred taxes are measured under the tax law as <em>enacted</em>. Possible future changes in tax laws or rates are not factored in.</li>
+<li><span class="asc">ASC 740-10-30-5(b)</span> and <span class="asc">ASC 740-10-30-5(c)</span>: the deferred tax liability and the deferred tax asset are found by applying the applicable tax rate to the totals. That rate is the enacted rate expected to apply when the temporary differences reverse.</li></ul></div><div class="callout global"><p class="callout-title">U.S. GAAP and IFRS</p><p>IFRS (IAS 12, paragraphs 47 through 49) measures deferred taxes using rates that are enacted <em>or substantively enacted</em> by the end of the reporting period. In some jurisdictions an announcement by the government has the effect of enactment, and IFRS then uses the announced rate. U.S. GAAP uses only enacted rates. IFRS also uses an average rate when different rates apply to different levels of taxable income.</p></div>
+  <h3>When enacted rates differ from year to year</h3>
+  <p>Sometimes a law already on the books schedules different rates for different future years. Then multiply each year’s reversing amount by that year’s rate, and add the results.</p>
+  <div class="example-box">
+    <h3>Cullowhee Creek Land &amp; Cabins, with a scheduled rate increase</h3>
+    <div class="facts"><p>Revisit the installment sales example from the first set of notes. Income of $120,000 is reported in Year 1 on the income statement but is taxed as collected: $30,000 in Year 2 and $90,000 in Year 3. Now suppose the enacted rate is 25% for Years 1 and 2 but 30% for Year 3. Year 1 taxable income is $80,000.</p></div>
+    <div class="table-scroll"><table class="compact"><caption>Deferred tax liability with different enacted rates</caption><thead><tr><th scope="col">Year taxed</th><th scope="col" class="num">Future taxable amount</th><th scope="col" class="num">Enacted rate</th><th scope="col" class="num">Tax</th></tr></thead><tbody><tr><th scope="row">Year 2</th><td class="num">30,000</td><td class="num">25%</td><td class="num">7,500</td></tr><tr><th scope="row">Year 3</th><td class="num">90,000</td><td class="num">30%</td><td class="num">27,000</td></tr><tr class="sub"><th scope="row">Deferred tax liability at end of Year 1</th><td class="num">120,000</td><td class="num"></td><td class="num">34,500</td></tr></tbody></table></div>
+    <div class="je-wrap"><p class="je-date">End of Year 1</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: End of Year 1</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Income tax expense</td><td class="num">54,500</td><td class="num"></td></tr><tr><td class="cr-acct">Income tax payable</td><td class="num"></td><td class="num">20,000</td></tr><tr><td class="cr-acct">Deferred tax liability</td><td class="num"></td><td class="num">34,500</td></tr></tbody></table></div></div>
+    <p>With a flat 25% rate the liability would have been $30,000. The 30% rate in Year 3 adds $4,500 ($90,000 × 5%), so Year 1 expense is $54,500 instead of $50,000.</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="s-change">When tax rates change</h2>
+  <p>The case above involves rates that were already scheduled. A different situation arises when lawmakers <em>change</em> the rate that will apply in the future. Deferred tax accounts exist to show what will be paid or saved later. When the law changes how much that is, the accounts must be restated. The rule:</p>
+  <div class="callout key"><p class="callout-title">Key idea</p><p>When a new rate is enacted, remeasure the existing deferred tax assets and liabilities at the new rate. The whole adjustment goes through income tax expense in the period of enactment. It does not wait for the differences to reverse.</p></div>
+  <p>Tax payable for the year of enactment is unaffected, because the current year’s return is figured at the rate in force for that year. Only the deferred balances change, so the plug in the journal entry is the entire effect.</p>
+  <div class="callout codif"><p class="callout-title">In the FASB Codification: changes in tax laws or rates</p><ul>
+<li><span class="asc">ASC 740-10-25-47</span>: a change in tax laws or rates enters the financial statements on the date it is enacted.</li>
+<li><span class="asc">ASC 740-10-35-4</span>: existing deferred tax balances are remeasured for the new law or rate, and management should also reconsider whether the valuation allowance is still right.</li>
+<li><span class="asc">ASC 740-10-45-15</span>: the effect is reported in income from continuing operations for the period that contains the enactment date, even when the deferred tax was first recorded elsewhere, such as in other comprehensive income.</li>
+<li><span class="asc">ASC 740-10-50-9</span>: the adjustment is disclosed as its own component of income tax expense.</li></ul>
+<p><strong>The enactment date matters.</strong> For U.S. federal legislation, the enactment date is the date the President signs the bill. A company records the effect in the reporting period that contains that date, even if the new rate does not take effect until later. Two companies with different year-ends can therefore record the same law change in different fiscal years.</p></div>
+  <div class="example-box">
+    <h3>A rate cut and a deferred tax liability</h3>
+    <div class="facts"><p>Western Highlands Brewing Company has future taxable amounts of $800,000. Under a combined rate of 35% its deferred tax liability is $280,000. New legislation lowers the future combined rate to 25%, so the liability should now be $200,000.</p></div>
+    <div class="je-wrap"><p class="je-date">Date of enactment</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: Date of enactment</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Deferred tax liability</td><td class="num">80,000</td><td class="num"></td></tr><tr><td class="cr-acct">Income tax expense</td><td class="num"></td><td class="num">80,000</td></tr></tbody></table></div></div>
+    <p>The company will owe less tax than it had expected, so the liability falls by $80,000. The credit to income tax expense is a gain for the year: net income rises.</p>
+  </div>
+  <div class="example-box">
+    <h3>A rate cut and a deferred tax asset</h3>
+    <div class="facts"><p>Mountain Echo Magazine has future deductible amounts of $500,000. At 35% its deferred tax asset is $175,000. The same rate cut to 25% means the asset is now only worth $125,000.</p></div>
+    <div class="je-wrap"><p class="je-date">Date of enactment</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: Date of enactment</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Income tax expense</td><td class="num">50,000</td><td class="num"></td></tr><tr><td class="cr-acct">Deferred tax asset</td><td class="num"></td><td class="num">50,000</td></tr></tbody></table></div></div>
+    <p>The deductions will save less tax than expected, so the asset shrinks by $50,000, and net income falls by the same amount.</p>
+  </div>
+  <div class="table-scroll"><table class="compact"><caption>Effect of a change in the future tax rate on income</caption><thead><tr><th scope="col"><span class="sr-only">Item</span></th><th scope="col">Rate decreases</th><th scope="col">Rate increases</th></tr></thead><tbody><tr><th scope="row">Company with a net deferred tax liability</th><td>Liability falls; net income rises.</td><td>Liability grows; net income falls.</td></tr><tr><th scope="row">Company with a net deferred tax asset</th><td>Asset falls; net income falls.</td><td>Asset grows; net income rises.</td></tr></tbody></table></div>
+  <p>This is why a lower tax rate, which sounds like good news, can hurt reported earnings in the year it is enacted. When the U.S. federal corporate rate dropped from 35% to 21% beginning in 2018, companies with large net deferred tax assets, such as banks with big loss carryforwards, recorded big charges, while companies with large net deferred tax liabilities, such as capital-intensive firms, recorded big gains. Neither group had earned or lost anything operationally. They simply revalued tax balances.</p>
+</section>
+
+<section>
+  <h2 id="s-multi">Several temporary differences at once</h2>
+  <p>Having many temporary differences adds bookkeeping but no new principles. Sort every temporary difference into one of two groups, then total each group:</p>
+  <ul>
+    <li>Differences that leave <strong>future taxable amounts</strong>: total them and multiply by the enacted rate to get the deferred tax <em>liability</em>.</li>
+    <li>Differences that leave <strong>future deductible amounts</strong>: total them and multiply by the enacted rate to get the deferred tax <em>asset</em>.</li>
+  </ul>
+  <p>Keep the two totals separate. They produce two different accounts, and the four-step process then runs as before. If different rates are scheduled for different years, total each group year by year, apply that year’s rate, and add up the taxes.</p>
+  <div class="callout codif"><p class="callout-title">In the FASB Codification</p><p><span class="asc">ASC 740-10-30-5</span> gives the Codification&rsquo;s own sequence, which handles any number of temporary differences:</p><div class="table-scroll"><table class="compact"><caption>The Codification measurement sequence in ASC 740-10-30-5</caption><thead><tr><th scope="col">Paragraph</th><th scope="col">What it requires (paraphrased)</th><th scope="col">In these notes</th></tr></thead><tbody><tr><th scope="row"><span class="asc">ASC 740-10-30-5(a)</span></th><td>Catalog the kinds and amounts of existing temporary differences and carryforwards.</td><td>List every difference and sort it into taxable or deductible.</td></tr><tr><th scope="row"><span class="asc">ASC 740-10-30-5(b)</span></th><td>Apply the applicable rate to the total taxable temporary differences to get the deferred tax liability.</td><td>Total the future taxable amounts and multiply by the enacted rate.</td></tr><tr><th scope="row"><span class="asc">ASC 740-10-30-5(c)</span></th><td>Apply the applicable rate to the total deductible temporary differences and operating loss carryforwards to get the deferred tax asset.</td><td>Total the future deductible amounts and multiply by the enacted rate.</td></tr><tr><th scope="row"><span class="asc">ASC 740-10-30-5(d)</span></th><td>Determine deferred tax assets for each kind of tax credit carryforward.</td><td>Beyond the scope of these notes.</td></tr><tr><th scope="row"><span class="asc">ASC 740-10-30-5(e)</span></th><td>Cut deferred tax assets back by a valuation allowance when it is more likely than not that some or all will go unrealized.</td><td>Covered in Detailed Notes A.</td></tr></tbody></table></div>
+<p>The Codification measures the total liability and the total asset separately. Whether a deferred tax liability and asset may be netted on the balance sheet is a separate presentation question (<span class="asc">ASC 740-10-45-6</span>) that these notes do not cover.</p></div>
+  <div class="example-box">
+    <h3>Whitewater Wholesale Distributors</h3>
+    <div class="facts">
+      <p>In Year 1, the company’s first year, pretax accounting income is $400,000. It includes three items with temporary effects:</p>
+      <ul>
+        <li><strong>Installment sales:</strong> $12,000 of income, taxed when collected ($8,000 in Year 2, $4,000 in Year 3).</li>
+        <li><strong>Equipment:</strong> a $240,000 asset with a four-year life and book depreciation of $60,000 a year. Tax depreciation is $84,000, $100,000, $36,000, and $20,000 over the four years.</li>
+        <li><strong>Warranty:</strong> $20,000 of estimated expense, deductible when paid ($8,000 in Year 2 and $12,000 in Year 3).</li>
+      </ul>
+      <p>In Year 2, pretax income is again $400,000, and it includes a new $6,000 accrued lawsuit loss that will be deductible when paid in Year 4. The tax rate is 25% each year.</p>
+    </div>
+    <div class="table-scroll"><table class="compact"><caption>Whitewater Wholesale: four steps for Years 1 and 2</caption><thead><tr><th scope="col">Line</th><th scope="col" class="num">Year 1</th><th scope="col" class="num">Year 2</th></tr></thead><tbody><tr><th scope="row">Pretax accounting income</th><td class="num">400,000</td><td class="num">400,000</td></tr><tr><th scope="row">Installment income: in income statement now / taxed when collected</th><td class="num">−12,000</td><td class="num">+8,000</td></tr><tr><th scope="row">Depreciation: book minus tax</th><td class="num">−24,000</td><td class="num">−40,000</td></tr><tr><th scope="row">Warranty: expense now / deducted when paid</th><td class="num">+20,000</td><td class="num">−8,000</td></tr><tr><th scope="row">Lawsuit loss: expense now / deducted when paid</th><td class="num">0</td><td class="num">+6,000</td></tr><tr class="sub"><th scope="row">Taxable income</th><td class="num">384,000</td><td class="num">366,000</td></tr><tr class="step"><th scope="row">Step 1: Income tax payable (25%)</th><td class="num">96,000</td><td class="num">91,500</td></tr><tr><th scope="row">Future taxable amounts remaining at year-end</th><td class="num">36,000</td><td class="num">68,000</td></tr><tr><th scope="row">Future deductible amounts remaining at year-end</th><td class="num">20,000</td><td class="num">18,000</td></tr><tr class="step"><th scope="row">Step 2: Ending deferred tax liability (× 25%)</th><td class="num">9,000</td><td class="num">17,000</td></tr><tr class="step"><th scope="row">Step 2: Ending deferred tax asset (× 25%)</th><td class="num">5,000</td><td class="num">4,500</td></tr><tr class="step"><th scope="row">Step 3: Change in the deferred tax liability</th><td class="num">+9,000</td><td class="num">+8,000</td></tr><tr class="step"><th scope="row">Step 3: Change in the deferred tax asset</th><td class="num">+5,000</td><td class="num">−500</td></tr><tr class="plug"><th scope="row">Step 4: Income tax expense (the plug)</th><td class="num">100,000</td><td class="num">100,000</td></tr></tbody></table></div>
+    <p>At the end of Year 1 the remaining future taxable amounts are $36,000 (installment income of $12,000 plus depreciation of $24,000), which gives a $9,000 liability. The remaining future deductible amount is the $20,000 warranty, which gives a $5,000 asset. At the end of Year 2 the remaining future taxable amounts are $68,000 (installment $4,000 plus depreciation $24,000 in Year 3 and $40,000 in Year 4), and the future deductible amounts are $18,000 (warranty $12,000 plus the new $6,000 lawsuit loss).</p>
+    <div class="je-wrap"><p class="je-date">End of Year 1</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: End of Year 1</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Income tax expense</td><td class="num">100,000</td><td class="num"></td></tr><tr><td>Deferred tax asset</td><td class="num">5,000</td><td class="num"></td></tr><tr><td class="cr-acct">Income tax payable</td><td class="num"></td><td class="num">96,000</td></tr><tr><td class="cr-acct">Deferred tax liability</td><td class="num"></td><td class="num">9,000</td></tr></tbody></table></div></div>
+    <div class="je-wrap"><p class="je-date">End of Year 2</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: End of Year 2</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Income tax expense</td><td class="num">100,000</td><td class="num"></td></tr><tr><td class="cr-acct">Income tax payable</td><td class="num"></td><td class="num">91,500</td></tr><tr><td class="cr-acct">Deferred tax liability</td><td class="num"></td><td class="num">8,000</td></tr><tr><td class="cr-acct">Deferred tax asset</td><td class="num"></td><td class="num">500</td></tr></tbody></table></div></div>
+    <p>In both years expense is $100,000, which is 25% of the $400,000 pretax income. There are no permanent differences, so deferred taxes keep expense in line with book income.</p>
+  </div>
+  <div class="callout global"><p class="callout-title">U.S. GAAP and IFRS</p><p>Both frameworks account for deferred taxes in a similar way, but reported deferred taxes still differ often, because many <em>non-tax</em> accounting differences flow through to deferred taxes. For example, IFRS records a loss contingency at a lower probability threshold than U.S. GAAP. A loss accrued under IFRS but not under U.S. GAAP creates a deferred tax asset under IFRS only.</p></div>
+</section>
+
+<section>
+  <h2 id="s-mistakes">Common mistakes</h2>
+  <ul>
+    <li><strong>Recording deferred tax on a permanent difference.</strong> If the item will never be taxed or deducted, there is nothing to defer.</li>
+    <li><strong>Adjusting in the wrong direction.</strong> Subtract revenue that will never be taxed. Add back expenses that will never be deductible.</li>
+    <li><strong>Saying expense is 25% of pretax income when permanent differences exist.</strong> It is 25% of pretax income <em>after</em> permanent differences are removed.</li>
+    <li><strong>Using a rate that has not been enacted.</strong> Use the enacted rates only, even if everyone expects a change.</li>
+    <li><strong>Spreading a rate change over future years.</strong> The effect is recognized in full, in the year of enactment.</li>
+    <li><strong>Mixing up the effect of a rate cut on a liability and an asset.</strong> A cut helps a net liability position (income rises) and hurts a net asset position (income falls).</li>
+    <li><strong>Netting differences before multiplying.</strong> Keep future taxable and future deductible amounts in separate totals so the liability and the asset are separately measured.</li>
+  </ul>
+</section>
+
+<section>
+  <h2 id="s-practice">Practice with answers</h2>
+  <div class="practice">
+    <h3>Problem 1: Permanent or temporary?</h3>
+    <p>Classify each item as a permanent difference or a temporary difference, and for temporary ones say whether it creates a deferred tax asset or liability: (a) interest on municipal bonds; (b) a fine for violating a regulation; (c) estimated warranty expense deductible when paid; (d) tax depreciation faster than book depreciation; (e) life insurance proceeds received when a key executive dies; (f) installment sales income taxed as collected.</p>
+    <details><summary>Show the answer</summary><div class="answer"><ul><li>(a) Permanent. Revenue that is never taxed.</li><li>(b) Permanent. An expense that is never deductible.</li><li>(c) Temporary; creates a deferred tax asset.</li><li>(d) Temporary; creates a deferred tax liability.</li><li>(e) Permanent. Income that is never taxed.</li><li>(f) Temporary; creates a deferred tax liability.</li></ul></div></details>
+    <h3>Problem 2: Everything together</h3>
+    <p>Blue Ridge Bookbinding earns pretax accounting income of $180,000 in its first year. The amount includes $10,000 of municipal bond interest and is after a $6,000 nondeductible fine. It is also after $30,000 of estimated warranty expense that is deductible only when paid, in the next year. The tax rate is 25%. Prepare the income tax entry and compute the effective tax rate.</p>
+    <details><summary>Show the answer</summary><div class="answer"><div class="table-scroll"><table class="compact"><caption>Blue Ridge Bookbinding: answer</caption><thead><tr><th scope="col">Line</th><th scope="col" class="num">Amount</th></tr></thead><tbody><tr><th scope="row">Pretax accounting income</th><td class="num">180,000</td></tr><tr><th scope="row">Subtract: municipal bond interest (permanent)</th><td class="num">−10,000</td></tr><tr><th scope="row">Add: nondeductible fine (permanent)</th><td class="num">+6,000</td></tr><tr><th scope="row">Add: warranty expense not yet deductible (temporary)</th><td class="num">+30,000</td></tr><tr class="sub"><th scope="row">Taxable income</th><td class="num">206,000</td></tr><tr class="step"><th scope="row">Step 1: Income tax payable (25%)</th><td class="num">51,500</td></tr><tr class="step"><th scope="row">Step 2: Ending deferred tax asset ($30,000 × 25%)</th><td class="num">7,500</td></tr><tr class="step"><th scope="row">Step 3: Change in the deferred tax asset</th><td class="num">+7,500</td></tr><tr class="plug"><th scope="row">Step 4: Income tax expense (the plug)</th><td class="num">44,000</td></tr></tbody></table></div><div class="je-wrap"><p class="je-date">Income tax entry</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: Income tax entry</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Income tax expense</td><td class="num">44,000</td><td class="num"></td></tr><tr><td>Deferred tax asset</td><td class="num">7,500</td><td class="num"></td></tr><tr><td class="cr-acct">Income tax payable</td><td class="num"></td><td class="num">51,500</td></tr></tbody></table></div></div><p>Expense of $44,000 equals 25% of $176,000, which is the pretax income after the two permanent differences. The effective tax rate is $44,000 ÷ $180,000 = 24.4%. It is below 25% because the tax-free interest ($10,000) outweighs the nondeductible fine ($6,000).</p></div></details>
+    <h3>Problem 3: Rates change</h3>
+    <p>A company has future taxable amounts of $400,000 and future deductible amounts of $300,000, both previously measured at 30%. New legislation lowers the future rate to 24%. Prepare the entries for the deferred tax liability and the deferred tax asset, and say what happens to net income.</p>
+    <details><summary>Show the answer</summary><div class="answer"><p>The liability falls from $120,000 to $96,000 (a decrease of $24,000). The asset falls from $90,000 to $72,000 (a decrease of $18,000).</p><div class="je-wrap"><p class="je-date">Remeasure the deferred tax liability</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: Remeasure the deferred tax liability</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Deferred tax liability</td><td class="num">24,000</td><td class="num"></td></tr><tr><td class="cr-acct">Income tax expense</td><td class="num"></td><td class="num">24,000</td></tr></tbody></table></div></div><div class="je-wrap"><p class="je-date">Remeasure the deferred tax asset</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: Remeasure the deferred tax asset</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Income tax expense</td><td class="num">18,000</td><td class="num"></td></tr><tr><td class="cr-acct">Deferred tax asset</td><td class="num"></td><td class="num">18,000</td></tr></tbody></table></div></div><p>Net income rises by $24,000 − $18,000 = $6,000 in the year of enactment, because the company has more in deferred tax liability than in deferred tax asset.</p></div></details>
+  </div>
+</section>
+
+<section>
+  <h2 id="s-map">Codification map</h2>
+  <p>Use this table to find the guidance behind each idea in these notes.</p>
+  <div class="table-scroll"><table class="compact"><caption>Where each idea appears in the Codification</caption><thead><tr><th scope="col">Idea in these notes</th><th scope="col">Where to read it</th><th scope="col">In plain words</th></tr></thead><tbody><tr><th scope="row">Temporary differences as the basis for deferred taxes</th><td><span class="asc">ASC 740-10-20</span>, <span class="asc">ASC 740-10-25-23</span>, <span class="asc">ASC 740-10-25-29</span></td><td>Deferred taxes are recorded for temporary differences and carryforwards.</td></tr><tr><th scope="row">Exceptions to recording deferred taxes</th><td><span class="asc">ASC 740-10-25-3</span>, <span class="asc">ASC 740-30-25-18</span></td><td>Limited exceptions, including some foreign subsidiary earnings.</td></tr><tr><th scope="row">Permanent differences and the rate reconciliation</th><td><span class="asc">ASC 740-10-50-12</span> through <span class="asc">ASC 740-10-50-14</span></td><td>Disclosure that explains the gap between statutory and effective rates.</td></tr><tr><th scope="row">New income tax disclosure requirements</th><td>ASU 2023-09 (amends ASC 740-10-50)</td><td>Prescribed rate reconciliation categories and income taxes paid by jurisdiction.</td></tr><tr><th scope="row">Which rate to use</th><td><span class="asc">ASC 740-10-30-2</span>, <span class="asc">ASC 740-10-30-5</span></td><td>Enacted rates for the years the differences reverse.</td></tr><tr><th scope="row">Effect of a change in tax laws or rates</th><td><span class="asc">ASC 740-10-25-47</span>, <span class="asc">ASC 740-10-35-4</span>, <span class="asc">ASC 740-10-45-15</span></td><td>Recognized at enactment, through income from continuing operations.</td></tr><tr><th scope="row">Several temporary differences at once</th><td><span class="asc">ASC 740-10-30-5</span></td><td>Measure the total liability and the total asset separately.</td></tr><tr><th scope="row">Disclosure of rate-change adjustments</th><td><span class="asc">ASC 740-10-50-9</span></td><td>A separate component of income tax expense.</td></tr><tr><th scope="row">International comparison</th><td>IAS 12, paragraphs 47 through 49</td><td>IFRS uses enacted or substantively enacted rates.</td></tr></tbody></table></div>
+</section>
+
+<section>
+  <h2 id="s-terms">Key terms</h2>
+  <dl class="glossary"><dt>Permanent difference</dt><dd>A difference between pretax accounting income and taxable income caused by an item that will never be taxed or never be deductible. It has no deferred tax effect.</dd><dt>Statutory tax rate</dt><dd>The tax rate written into law.</dd><dt>Effective tax rate</dt><dd>Income tax expense divided by pretax accounting income.</dd><dt>Rate reconciliation</dt><dd>A disclosure that starts from the statutory rate and shows each item that moves the company to its effective rate.</dd><dt>Enacted tax rate</dt><dd>A rate that has been signed into law and is scheduled to apply. Deferred taxes are measured using enacted rates.</dd><dt>Remeasurement</dt><dd>Restating deferred tax assets and liabilities at a new enacted rate; the effect goes through income tax expense in the year of enactment.</dd><dt>Net deferred tax liability (asset) position</dt><dd>The total of a company’s deferred tax liabilities less its deferred tax assets (or the reverse); the direction determines whether a rate cut helps or hurts income.</dd><dt>Future taxable amounts</dt><dd>Amounts that will increase taxable income when temporary differences reverse; multiplied by the rate they give the deferred tax liability.</dd><dt>Future deductible amounts</dt><dd>Amounts that will reduce taxable income when temporary differences reverse; multiplied by the rate they give the deferred tax asset.</dd></dl>
+  <div class="next-box"><p><strong>Where to go next.</strong> Remaining topics in this unit cover net operating losses, how deferred taxes appear on the balance sheet and in the notes, uncertain tax positions, and allocating tax within the income statement. The overview page summarizes all of them.</p></div>
+</section>
+
+  </main>
+</div>
+<footer>Detailed Notes B: Permanent Differences, Tax Rates, and Multiple Differences &middot; ACCT 352 &middot; Western Carolina University<br>All companies in these notes are fictional.</footer>
+<script>
+/* Progressive enhancements (the page works without them):
+   1. Expand the answer boxes when printing, then restore them.
+   2. Make a table wrapper keyboard-focusable only when the table is wider than the screen. */
+(function () {
+  var opened = [];
+  window.addEventListener('beforeprint', function () {
+    opened = [];
+    document.querySelectorAll('details:not([open])').forEach(function (d) { d.setAttribute('open', ''); opened.push(d); });
+  });
+  window.addEventListener('afterprint', function () {
+    opened.forEach(function (d) { d.removeAttribute('open'); });
+    opened = [];
+  });
+  var n = 0;
+  function sizeScrollers() {
+    document.querySelectorAll('.table-scroll').forEach(function (w) {
+      var cap = w.querySelector('caption');
+      if (w.scrollWidth > w.clientWidth + 1) {
+        if (cap && !cap.id) { cap.id = 'tcap-' + (++n); }
+        w.setAttribute('tabindex', '0');
+        w.setAttribute('role', 'group');
+        if (cap) { w.setAttribute('aria-labelledby', cap.id); }
+      } else {
+        w.removeAttribute('tabindex'); w.removeAttribute('role'); w.removeAttribute('aria-labelledby');
+      }
+    });
+  }
+  var t;
+  window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(sizeScrollers, 150); });
+  window.addEventListener('load', sizeScrollers);
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(sizeScrollers); }
+})();
+</script>
+</body>
+</html>

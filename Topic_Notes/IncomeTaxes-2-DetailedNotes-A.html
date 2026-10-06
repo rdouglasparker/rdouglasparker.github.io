@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Temporary Differences and Deferred Taxes: Detailed Notes A</title>
+<meta name="description" content="Detailed notes on temporary differences, deferred tax liabilities, deferred tax assets, valuation allowances, and the four-step process for income tax expense, with references to FASB ASC Topic 740.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple: #4B2E83; --purple-dark: #341f5c; --gold: #C8A24A; --gold-light: #E8CF86;
+    --ink: #232023; --paper: #fdfcfb; --panel: #f7f3ec; --rule: #e2d9c8; --grid: #8a8076;
+    --muted: #5f5a56;
+    --key-bg: #f3eef9; --watch: #9C4221; --watch-title: #7a3418; --watch-bg: #FBEAE2;
+    --ex-bg: #fbf5e4; --good: #2E6B45; --good-bg: #E7F3EB; --link: #4B2E83; --visited: #5b3a9a;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-padding-top: 1rem; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif; font-size: 1.0625rem; line-height: 1.7; }
+  .sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+  .skip-link { position: absolute; left: 0.75rem; top: -4rem; z-index: 100; background: #fff; color: var(--purple-dark); font-family: 'Inter', system-ui, sans-serif; font-weight: 700; padding: 0.7rem 1.1rem; border: 3px solid var(--purple-dark); border-radius: 6px; text-decoration: none; }
+  .skip-link:focus { top: 0.75rem; }
+  :focus-visible { outline: 3px solid var(--purple-dark); outline-offset: 2px; box-shadow: 0 0 0 2px #fff; }
+  main:focus { outline: none; }
+  a { color: var(--link); text-decoration: underline; text-underline-offset: 0.18em; text-decoration-thickness: 0.08em; }
+  a:visited { color: var(--visited); }
+  a:hover { text-decoration-thickness: 0.16em; }
+
+  .site-header { background: linear-gradient(135deg, var(--purple) 0%, var(--purple-dark) 100%); color: #fff; border-bottom: 6px solid var(--gold); }
+  .header-inner { max-width: 70rem; margin: 0 auto; padding: 2.3rem 1.5rem 2rem; }
+  .eyebrow { font-family: 'Inter', system-ui, sans-serif; font-size: 0.95rem; font-weight: 600; letter-spacing: 0.02em; color: var(--gold-light); margin: 0 0 0.5rem; }
+  .site-header h1 { font-family: 'Source Serif 4', Georgia, serif; font-weight: 700; font-size: clamp(1.75rem, 4vw, 2.5rem); line-height: 1.2; margin: 0 0 0.6rem; max-width: 52rem; }
+  .header-sub { margin: 0; color: #ece6f6; font-family: 'Inter', system-ui, sans-serif; font-size: 1.05rem; line-height: 1.5; max-width: 42rem; }
+
+  .layout { display: grid; grid-template-columns: 15rem minmax(0, 46rem); gap: 3rem; max-width: 70rem; margin: 0 auto; padding: 2rem 1.5rem 3rem; }
+  .toc { align-self: start; position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow-y: auto; font-family: 'Inter', system-ui, sans-serif; font-size: 0.92rem; line-height: 1.4; background: var(--panel); border: 1px solid var(--rule); border-top: 5px solid var(--gold); border-radius: 8px; padding: 0.9rem 1rem 1rem; }
+  .toc-title { margin: 0 0 0.5rem; font-weight: 700; color: var(--purple-dark); }
+  .toc ol { margin: 0; padding-left: 1.2rem; }
+  .toc li { margin: 0.35rem 0; }
+  main { min-width: 0; }
+
+  h2, h3, h4 { font-family: 'Source Serif 4', Georgia, serif; color: var(--purple-dark); line-height: 1.3; }
+  h2 { font-size: 1.65rem; margin: 3rem 0 0.9rem; padding-bottom: 0.4rem; border-bottom: 3px solid var(--gold); }
+  main > section:first-child > h2:first-child { margin-top: 0; }
+  h3 { font-size: 1.3rem; margin: 2.2rem 0 0.6rem; }
+  h4 { font-size: 1.1rem; margin: 1.6rem 0 0.4rem; }
+  p { margin: 0.8rem 0; }
+  ul, ol { margin: 0.8rem 0; padding-left: 1.5rem; }
+  li { margin: 0.35rem 0; }
+  strong { color: var(--purple-dark); }
+  code, .mono { font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-size: 0.92em; }
+
+  .lede { font-size: 1.2rem; line-height: 1.6; }
+  .note-small { font-family: 'Inter', system-ui, sans-serif; font-size: 0.9rem; color: var(--muted); }
+
+  .callout { font-family: 'Inter', system-ui, sans-serif; font-size: 0.98rem; line-height: 1.6; border-radius: 8px; border: 1px solid var(--rule); border-left-width: 7px; padding: 0.8rem 1.1rem 0.9rem; margin: 1.5rem 0; }
+  .callout p { margin: 0.5rem 0; }
+  .callout ul, .callout ol { margin: 0.5rem 0; }
+  .callout-title { margin: 0 0 0.25rem !important; font-weight: 700; font-size: 1rem; }
+  .callout.key { background: var(--key-bg); border-color: #d6c9ec; border-left-color: var(--purple); }
+  .callout.key .callout-title { color: var(--purple-dark); }
+  .callout.watch { background: var(--watch-bg); border-color: #efc7b6; border-left-color: var(--watch); }
+  .callout.watch .callout-title { color: var(--watch-title); }
+  .callout.example { background: var(--ex-bg); border-color: #ecdca8; border-left-color: var(--gold); }
+  .callout.example .callout-title { color: #4a3a0c; }
+  .callout.codif { background: #fff; border-color: var(--purple); border-left-color: var(--purple-dark); }
+  .callout.codif .callout-title { color: var(--purple-dark); }
+  .callout.codif ul { padding-left: 1.2rem; }
+  .asc { font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-size: 0.86em; font-weight: 600; color: var(--purple-dark); background: var(--panel); border: 1px solid var(--rule); border-radius: 4px; padding: 0.05em 0.35em; white-space: nowrap; }
+  .callout.global { background: #fff; border-color: var(--grid); border-left-color: var(--grid); }
+  .callout.global .callout-title { color: var(--purple-dark); }
+
+  .example-box { border: 1px solid var(--rule); border-top: 5px solid var(--purple); border-radius: 8px; background: #fff; padding: 0.4rem 1.2rem 1rem; margin: 1.8rem 0; }
+  .example-box > h3, .example-box > h4 { margin-top: 1rem; }
+  .example-box > h3:first-child { margin-top: 0.9rem; border: 0; }
+  .facts { font-family: 'Inter', system-ui, sans-serif; font-size: 0.97rem; background: var(--panel); border-radius: 6px; padding: 0.7rem 1rem; margin: 0.8rem 0; }
+  .facts p { margin: 0.35rem 0; }
+
+  .table-scroll { overflow-x: auto; margin: 1rem 0; }
+  table { border-collapse: separate; border-spacing: 0; width: 100%; min-width: 26rem; border-top: 1px solid var(--grid); border-left: 1px solid var(--grid); font-family: 'Inter', system-ui, sans-serif; font-size: 0.92rem; line-height: 1.45; font-variant-numeric: tabular-nums; }
+  caption { text-align: left; font-weight: 700; color: var(--purple-dark); padding: 0 0 0.5rem; font-size: 0.98rem; }
+  th, td { border: 0; border-right: 1px solid var(--grid); border-bottom: 1px solid var(--grid); padding: 0.45rem 0.65rem; vertical-align: top; text-align: left; }
+  thead th { background: var(--panel); color: var(--purple-dark); }
+  tbody th[scope="row"] { background: #fff; font-weight: 600; color: var(--ink); position: sticky; left: 0; z-index: 1; min-width: 9.5rem; }
+  thead th:first-child { position: sticky; left: 0; z-index: 2; min-width: 9.5rem; }
+  td.num, th.num { text-align: right; }
+  td.num { white-space: nowrap; }
+  tr.sub th, tr.sub td { background: var(--panel); font-weight: 700; }
+  tr.plug th, tr.plug td { background: var(--ex-bg); font-weight: 700; box-shadow: inset 0 3px 0 var(--gold); }
+  tr.step th { border-left: 6px solid var(--purple); }
+  tr.plug th { border-left: 6px solid var(--gold); }
+  table.compact { font-size: 0.88rem; min-width: 24rem; }
+  table.je { min-width: 22rem; }
+  table.je td.num { font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; }
+  table.je td.cr-acct { padding-left: 2.2rem; }
+  table.je th.acct-col { width: 62%; }
+  .je-wrap { margin: 1.1rem 0; }
+  .je-date { font-family: 'Inter', system-ui, sans-serif; font-weight: 700; margin: 0 0 0.3rem; color: var(--purple-dark); }
+
+  ol.steps { list-style: none; counter-reset: step; padding: 0; margin: 1.2rem 0; display: grid; gap: 0.7rem; }
+  ol.steps > li { counter-increment: step; font-family: 'Inter', system-ui, sans-serif; font-size: 0.98rem; line-height: 1.55; margin: 0; padding: 0.7rem 1rem 0.8rem 3.5rem; background: #fff; border: 1px solid var(--rule); border-left: 6px solid var(--purple); border-radius: 8px; position: relative; }
+  ol.steps > li::before { content: counter(step); position: absolute; left: 0.9rem; top: 0.6rem; width: 1.9rem; height: 1.9rem; border-radius: 50%; background: var(--purple); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  ol.steps > li:last-child { border-left-color: var(--gold); }
+  ol.steps > li:last-child::before { background: var(--gold); color: var(--ink); }
+  ol.steps strong { display: block; font-size: 1.02rem; }
+
+  dl.glossary { font-family: 'Inter', system-ui, sans-serif; font-size: 0.96rem; line-height: 1.55; }
+  dl.glossary dt { font-weight: 700; color: var(--purple-dark); margin-top: 0.9rem; }
+  dl.glossary dd { margin: 0.1rem 0 0 0; }
+
+  details { font-family: 'Inter', system-ui, sans-serif; font-size: 0.97rem; line-height: 1.6; border: 1px solid var(--grid); border-radius: 8px; background: #fff; margin: 0.9rem 0; }
+  details > summary { cursor: pointer; font-weight: 700; color: var(--purple-dark); padding: 0.7rem 1rem; min-height: 2.75rem; }
+  details[open] > summary { border-bottom: 1px solid var(--rule); }
+  details > .answer { padding: 0.2rem 1rem 0.9rem; }
+  .practice { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 0.2rem 1.2rem 0.9rem; margin: 1.2rem 0; }
+  .practice h3, .practice h4 { margin-top: 1rem; }
+
+  figure { margin: 1.5rem 0; }
+  figcaption { font-family: 'Inter', system-ui, sans-serif; font-size: 0.9rem; color: var(--muted); margin-top: 0.4rem; }
+  svg text { font-family: 'Inter', system-ui, sans-serif; }
+
+  .pill-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.8rem 0; padding: 0; list-style: none; }
+  .pill-row li { margin: 0; font-family: 'Inter', system-ui, sans-serif; font-size: 0.9rem; font-weight: 600; background: var(--panel); border: 1px solid var(--grid); border-radius: 999px; padding: 0.2rem 0.8rem; }
+
+  .next-box { font-family: 'Inter', system-ui, sans-serif; background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 0.9rem 1.2rem; margin-top: 2.5rem; }
+  footer { font-family: 'Inter', system-ui, sans-serif; text-align: center; font-size: 0.88rem; color: var(--muted); padding: 1.5rem 1rem 2.5rem; border-top: 1px solid var(--rule); }
+
+  @media (max-width: 62rem) {
+    .layout { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; padding-top: 1.5rem; }
+    .toc { position: static; max-height: none; }
+  }
+  @media (max-width: 30rem) {
+    body { font-size: 1rem; }
+    .header-inner { padding: 1.6rem 1rem 1.4rem; }
+    .layout { padding-left: 1rem; padding-right: 1rem; }
+    ol.steps > li { padding-left: 3.1rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+  @media print {
+    body { font-size: 11pt; }
+    .skip-link, .toc { display: none; }
+    .layout { display: block; padding: 0; }
+    .site-header { background: #fff; color: #000; border-bottom: 3px solid #000; }
+    .site-header h1, .header-sub, .eyebrow { color: #000; }
+    .table-scroll { overflow: visible; }
+    a { color: #000; }
+    details > summary { list-style: none; }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header">
+  <div class="header-inner">
+    <p class="eyebrow">ACCT 352 · Intermediate Accounting II · Detailed Notes A</p>
+    <h1>Temporary Differences and Deferred Taxes</h1>
+    <p class="header-sub">Why income tax expense is not the same as the tax a company pays, and how deferred tax liabilities, deferred tax assets, and valuation allowances close the gap.</p>
+  </div>
+</header>
+<div class="layout">
+  <nav class="toc" aria-label="On this page">
+    <p class="toc-title">On this page</p>
+    <ol><li><a href="#s-puzzle">A puzzle to start</a></li><li><a href="#s-codif">Where these rules live</a></li><li><a href="#s-why">Why two sets of numbers exist</a></li><li><a href="#s-temp">Temporary differences</a></li><li><a href="#s-parts">Tax expense has two parts</a></li><li><a href="#s-steps">The four-step process</a></li><li><a href="#s-types">Four kinds of temporary differences</a></li><li><a href="#s-dtl">Deferred tax liabilities</a></li><li><a href="#s-dta">Deferred tax assets</a></li><li><a href="#s-basis">Book value versus tax basis</a></li><li><a href="#s-va">Valuation allowance</a></li><li><a href="#s-note">Reading a company’s tax note</a></li><li><a href="#s-mistakes">Common mistakes</a></li><li><a href="#s-practice">Practice with answers</a></li><li><a href="#s-map">Codification map</a></li><li><a href="#s-terms">Key terms</a></li></ol>
+  </nav>
+  <main id="main" tabindex="-1">
+
+<section>
+  <h2 id="s-puzzle">A puzzle to start</h2>
+  <p class="lede">Catamount Coffee Roasters reports the same profit before tax in each of three years, yet the tax it <em>pays</em> is $22,500 in the first year and $45,000 in each of the next two. Why would a company that earns the same amount each year pay such different amounts, and what should the income statement show?</p>
+  <div class="table-scroll"><table class=""><caption>Tax paid versus tax expense reported (Catamount Coffee Roasters)</caption><thead><tr><th scope="col"><span class="sr-only">Item</span></th><th scope="col" class="num">Year 1</th><th scope="col" class="num">Year 2</th><th scope="col" class="num">Year 3</th><th scope="col" class="num">Three-year total</th></tr></thead><tbody><tr><th scope="row">Income tax paid (payable for the year)</th><td class="num">22,500</td><td class="num">45,000</td><td class="num">45,000</td><td class="num">112,500</td></tr><tr class="plug"><th scope="row">Income tax expense in the income statement</th><td class="num">37,500</td><td class="num">37,500</td><td class="num">37,500</td><td class="num">112,500</td></tr></tbody></table></div>
+  <p>The totals match, so the company is not escaping tax. It is only paying some of it later. Everything in these notes is about how to report that timing gap honestly. The short answer is that the income statement reports the tax that belongs to each year’s activity, and a deferred tax account on the balance sheet carries the difference until the cash catches up.</p>
+  <div class="callout example"><p class="callout-title">About the examples</p><p>Every company in these notes is fictional. To keep arithmetic readable, the examples use one combined income tax rate of 25% (federal plus state). Tax laws and rates change, so when you solve a problem, always use the rates and rules stated in that problem.</p></div>
+</section>
+
+<section>
+  <h2 id="s-codif">Where these rules live: the FASB Codification</h2>
+  <p>The rules in these notes come from one place in U.S. GAAP: <strong>Topic 740, Income Taxes</strong>, in the FASB Accounting Standards Codification (ASC). The Codification is the single authoritative source of nongovernmental U.S. GAAP, and it is organized by topic instead of by the date a standard was issued. Boxes labeled &ldquo;In the FASB Codification&rdquo; appear throughout these notes so you can find the original text. They <em>paraphrase</em> the guidance. When you need the exact wording, for an exam, a research case, or professional work, read the paragraph itself.</p>
+  <h3>How to read a citation</h3>
+  <p>A citation runs from broad to narrow: topic, subtopic, section, and paragraph. Take <span class="asc">ASC 740-10-30-5(e)</span> as an example.</p>
+  <div class="table-scroll"><table class="compact"><caption>Parts of a Codification citation</caption><thead><tr><th scope="col">Part</th><th scope="col">In ASC 740-10-30-5(e)</th><th scope="col">What it tells you</th></tr></thead><tbody><tr><th scope="row">Topic</th><td>740</td><td>The subject area: Income Taxes.</td></tr><tr><th scope="row">Subtopic</th><td>10</td><td>Overall, the main body of the topic. Other subtopics cover specific areas, such as 740-20 for intraperiod tax allocation and 740-30 for special areas like the undistributed earnings of foreign subsidiaries.</td></tr><tr><th scope="row">Section</th><td>30</td><td>Initial measurement: how to measure what must be recorded.</td></tr><tr><th scope="row">Paragraph</th><td>5(e)</td><td>Paragraph 5, subparagraph (e): the requirement to reduce deferred tax assets by a valuation allowance when needed.</td></tr></tbody></table></div>
+  <div class="table-scroll"><table class="compact"><caption>What the section numbers mean</caption><thead><tr><th scope="col">Section number</th><th scope="col">Contents</th></tr></thead><tbody><tr><th scope="row">05</th><td>Overview and background</td></tr><tr><th scope="row">10</th><td>Objectives</td></tr><tr><th scope="row">15</th><td>Scope</td></tr><tr><th scope="row">20</th><td>Glossary</td></tr><tr><th scope="row">25</th><td>Recognition</td></tr><tr><th scope="row">30</th><td>Initial measurement</td></tr><tr><th scope="row">35</th><td>Subsequent measurement</td></tr><tr><th scope="row">45</th><td>Other presentation matters</td></tr><tr><th scope="row">50</th><td>Disclosure</td></tr><tr><th scope="row">55</th><td>Implementation guidance and illustrations</td></tr><tr><th scope="row">65</th><td>Transition and open effective date information</td></tr></tbody></table></div>
+  <p>The four-step process in these notes is a teaching framework. The Codification states its own measurement sequence in <span class="asc">ASC 740-10-30-5</span>, and a later section shows how the four steps line up with it.</p>
+  <p class="note-small">FASB offers free access to a read-only version of the Codification after you register at <a href="https://asc.fasb.org" rel="noopener">the FASB Accounting Standards Codification website</a>, and your library may provide the full professional edition.</p>
+</section>
+
+<section>
+  <h2 id="s-why">Why two sets of numbers exist</h2>
+  <p>A company really does keep two sets of books about income. One follows financial reporting standards. Its job is to give investors and lenders a useful picture of performance. The other follows the tax code, written by lawmakers who want to raise revenue and who also use taxes to steer behavior, for example by rewarding investment in equipment or by refusing a deduction for illegal conduct.</p>
+  <p>Because the goals differ, the two rulebooks sometimes count a revenue or an expense in different years, and sometimes treat an item differently altogether. The result is two measures of income:</p>
+  <ul>
+    <li><strong>Pretax accounting income</strong>: income before income taxes on the income statement.</li>
+    <li><strong>Taxable income</strong>: the amount on the tax return that the tax rate is applied to.</li>
+  </ul>
+  <p>Most of the time the two agree. These notes deal with the cases where they do not.</p>
+</section>
+
+<section>
+  <h2 id="s-temp">Temporary differences</h2>
+  <p>A <strong>temporary difference</strong> exists when the tax return and the income statement both include an item, but in different years. The question is never <em>whether</em> the amount is taxed or deducted. The question is <em>when</em>. Over the whole life of the item the two measures add up to the same total. That is why the difference is called temporary: it appears (originates) in one year and disappears (reverses) in later years.</p>
+  <h3>Following one asset through three years</h3>
+  <div class="example-box">
+    <h3>Catamount Coffee Roasters buys a roaster</h3>
+    <div class="facts">
+      <p>Catamount buys a commercial roaster for $90,000 at the start of Year 1. It expects to use it for three years, so the income statement records straight-line depreciation of $30,000 a year. The tax rules let Catamount deduct the entire $90,000 on the Year 1 tax return. Income before depreciation is $180,000 each year, so pretax accounting income is $150,000 each year. The tax rate is 25%.</p>
+    </div>
+    <div class="table-scroll"><table class="compact"><caption>Pretax accounting income compared with taxable income</caption><thead><tr><th scope="col"><span class="sr-only">Item</span></th><th scope="col" class="num">Year 1</th><th scope="col" class="num">Year 2</th><th scope="col" class="num">Year 3</th><th scope="col" class="num">Total</th></tr></thead><tbody><tr><th scope="row">Income before depreciation</th><td class="num">180,000</td><td class="num">180,000</td><td class="num">180,000</td><td class="num">540,000</td></tr><tr><th scope="row">Depreciation in the income statement</th><td class="num">30,000</td><td class="num">30,000</td><td class="num">30,000</td><td class="num">90,000</td></tr><tr class="sub"><th scope="row">Pretax accounting income</th><td class="num">150,000</td><td class="num">150,000</td><td class="num">150,000</td><td class="num">450,000</td></tr><tr><th scope="row">Depreciation on the tax return</th><td class="num">90,000</td><td class="num">0</td><td class="num">0</td><td class="num">90,000</td></tr><tr class="sub"><th scope="row">Taxable income</th><td class="num">90,000</td><td class="num">180,000</td><td class="num">180,000</td><td class="num">450,000</td></tr><tr><th scope="row">Temporary difference (taxable income minus pretax income)</th><td class="num">−60,000</td><td class="num">+30,000</td><td class="num">+30,000</td><td class="num">0</td></tr></tbody></table></div>
+    <p>In Year 1 taxable income is $60,000 lower than book income because the tax return took the whole deduction up front. In Years 2 and 3 the roaster still produces $30,000 of book depreciation, but the tax return has nothing left to deduct, so taxable income runs $30,000 higher than book income each year. The totals over three years are equal at $450,000. Only the timing differs.</p>
+  </div>
+  <p>Two phrases describe what a temporary difference leaves behind for the future:</p>
+  <ul>
+    <li><strong>Future taxable amounts</strong> will push taxable income <em>above</em> book income when the difference reverses (the roaster in Years 2 and 3).</li>
+    <li><strong>Future deductible amounts</strong> will pull taxable income <em>below</em> book income when the difference reverses.</li>
+  </ul>
+  <div class="callout codif"><p class="callout-title">In the FASB Codification</p><ul>
+<li><span class="asc">ASC 740-10-20</span> (the glossary) defines a <strong>temporary difference</strong> as a difference between the tax basis of an asset or liability and its reported amount in the financial statements that will produce taxable or deductible amounts in future years, when the asset is recovered or the liability is settled.</li>
+<li><span class="asc">ASC 740-10-25-23</span> separates the two kinds. Differences that will produce taxable amounts are <strong>taxable temporary differences</strong>, and differences that will produce deductible amounts are <strong>deductible temporary differences</strong>. Those are the Codification&rsquo;s names for the future taxable and future deductible amounts in these notes.</li>
+<li><span class="asc">ASC 740-10-25-20</span> lists examples of events that create temporary differences.</li></ul></div>
+</section>
+
+<section>
+  <h2 id="s-parts">Tax expense has two parts</h2>
+  <p>It would be simple to report as tax expense whatever tax is payable that year. Catamount would show $22,500 of expense in Year 1 and $45,000 in Years 2 and 3. That would mislead readers. Year 1 profit would look unusually strong, and no one would be warned that taxes will be twice as high in the following years.</p>
+  <p>Accounting follows the <strong>accrual concept</strong> for taxes just as it does for wages or interest: record the expense in the period whose activity caused it, whenever the cash is due. A year’s income tax expense therefore has two parts:</p>
+  <ul>
+    <li>The <strong>current portion</strong>: tax payable on this year’s tax return.</li>
+    <li>The <strong>deferred portion</strong>: the change in deferred tax assets and deferred tax liabilities during the year.</li>
+  </ul>
+  <p>A <strong>deferred tax liability (DTL)</strong> records tax the company has been allowed to postpone. A <strong>deferred tax asset (DTA)</strong> records tax the company has already paid in advance, which will save it money in future years.</p>
+  <div class="callout key"><p class="callout-title">Key idea</p><p>Tax expense is not calculated on its own. It is the balancing figure that falls out of two things: the tax payable this year and the change in the deferred tax accounts.</p></div>
+  <div class="callout codif"><p class="callout-title">In the FASB Codification</p><ul>
+<li><span class="asc">ASC 740-10-10-1</span> states the goals of income tax accounting: to record what the company owes or will get back for the year, and to record deferred tax balances that capture the future tax consequences of events already reflected in the financial statements or on tax returns.</li>
+<li><span class="asc">ASC 740-10-25-2</span> sets two basic requirements. First, record the tax the company owes or is due back on its returns for the current and earlier years. Second, record deferred tax balances for the expected future tax effects of temporary differences and carryforwards.</li>
+<li><span class="asc">ASC 740-10-30-3</span> and <span class="asc">ASC 740-10-30-4</span> explain the two pieces of expense. A year’s total tax expense combines the tax payable or refundable for the year with deferred tax expense, and deferred tax expense is simply how much the deferred tax liabilities and assets changed over the year.</li></ul>
+<p><strong>Vocabulary.</strong> The Codification calls the tax payable on this year&rsquo;s return <em>current tax expense (or benefit)</em>.</p></div>
+</section>
+
+<section>
+  <h2 id="s-steps">The four-step process</h2>
+  <p>Use the same four steps for every deferred tax problem, however many differences it contains.</p>
+  <ol class="steps" role="list">
+    <li><strong>Compute income tax payable.</strong> Start with pretax accounting income, adjust it to taxable income, and multiply by the tax rate.</li>
+    <li><strong>Find the ending deferred tax balances.</strong> Multiply the future taxable amounts that remain by the enacted rate to get the DTL. Multiply the future deductible amounts that remain by the enacted rate to get the DTA.</li>
+    <li><strong>Find the change in each deferred tax account.</strong> Subtract the beginning balance from the ending balance. The result tells you whether to debit or credit the account.</li>
+    <li><strong>Solve for income tax expense.</strong> Combine tax payable with the changes from step 3. Expense is the figure that makes the journal entry balance.</li>
+  </ol>
+  <p>The entry always has the same shape. Expense is usually a debit, but it can be a credit (a tax benefit) when a large debit to a deferred tax asset outweighs the tax payable.</p>
+  <div class="table-scroll"><table class="je compact"><caption class="sr-only">Shape of the income tax journal entry</caption>
+    <thead><tr><th scope="col" class="acct-col">Account</th><th scope="col">When it appears</th></tr></thead>
+    <tbody>
+      <tr><td>Income tax expense (the plug)</td><td>Debit, or credit if the entry produces a tax benefit</td></tr>
+      <tr><td>Deferred tax asset</td><td>Debit if it increases, credit if it decreases</td></tr>
+      <tr><td class="cr-acct">Deferred tax liability</td><td>Credit if it increases, debit if it decreases</td></tr>
+      <tr><td class="cr-acct">Income tax payable</td><td>Credit for the tax owed on this year’s return</td></tr>
+    </tbody></table></div>
+  <div class="callout key"><p class="callout-title">A memory aid</p><p><strong>Pay less now, owe more later: liability.</strong> <strong>Pay more now, save later: asset.</strong> If the tax return lets you postpone tax, you get a deferred tax liability. If the tax return makes you pay ahead of the income statement, you get a deferred tax asset.</p></div>
+  <h3>How the four steps connect to the Codification</h3>
+<div class="table-scroll"><table class="compact"><caption>The four steps and their Codification sources</caption><thead><tr><th scope="col">Step</th><th scope="col">What the Codification requires (paraphrased)</th><th scope="col">Where</th></tr></thead><tbody><tr><th scope="row">1. Compute tax payable</th><td>Record the tax owed (or refundable) for the year, figured under the tax law as enacted.</td><td><span class="asc">ASC 740-10-25-2</span>, <span class="asc">ASC 740-10-30-2</span></td></tr><tr><th scope="row">2. Find the ending deferred balances</th><td>Apply the applicable tax rate to the total taxable temporary differences to get the deferred tax liability, and to the total deductible temporary differences and operating loss carryforwards to get the deferred tax asset. Then cut the deferred tax assets back by any valuation allowance that is needed.</td><td><span class="asc">ASC 740-10-30-5(b), (c), (e)</span></td></tr><tr><th scope="row">3. Find the changes</th><td>Deferred tax expense (or benefit) is the year’s change in the deferred tax liabilities and assets.</td><td><span class="asc">ASC 740-10-30-4</span></td></tr><tr><th scope="row">4. Solve for expense</th><td>Total income tax expense (or benefit) combines the deferred tax expense with the tax payable or refundable for the year.</td><td><span class="asc">ASC 740-10-30-3</span></td></tr></tbody></table></div>
+<p><span class="asc">ASC 740-10-30-5</span> lays out the full measurement sequence: identify the differences and carryforwards, measure the liability, measure the assets, and reduce the assets by a valuation allowance. The four steps are a convenient way to carry that sequence out for a journal entry.</p>
+</section>
+
+<section>
+  <h2 id="s-types">Four kinds of temporary differences</h2>
+  <p>Every temporary difference involves either a revenue (or gain) or an expense (or loss), and the item shows up first on either the income statement or the tax return. That gives four combinations.</p>
+  <div class="table-scroll"><table class="compact"><caption>The four kinds of temporary differences and what each creates</caption><thead><tr><th scope="col"><span class="sr-only">Item</span></th><th scope="col">Income statement first, tax return later</th><th scope="col">Tax return first, income statement later</th></tr></thead><tbody><tr><th scope="row">Revenue or gain</th><td><strong>Deferred tax liability.</strong> Installment sales taxed as cash is collected. Investment gains recorded at fair value but taxed only when the investment is sold.</td><td><strong>Deferred tax asset.</strong> Cash received in advance (subscriptions, rent, gift cards) that is taxed when received but earned later.</td></tr><tr><th scope="row">Expense or loss</th><td><strong>Deferred tax asset.</strong> Estimated warranty cost, accrued lawsuit losses, and bad debt estimates that are deductible only when actually paid or written off.</td><td><strong>Deferred tax liability.</strong> Faster depreciation on the tax return than in the income statement. Prepaid expenses deducted when paid.</td></tr></tbody></table></div>
+  <p>The next two sections work one full example of each kind. Notice that each example has the same rhythm: the difference originates in Year 1 and then reverses, and the deferred tax balance rises and falls with it.</p>
+  <div class="callout codif"><p class="callout-title">In the FASB Codification</p><p><span class="asc">ASC 740-10-25-20</span> gives examples of events that create temporary differences. They cover all four combinations in the table above: revenues or gains that are taxable before or after they appear in the income statement, and expenses or losses that are deductible before or after they appear. The paragraph also lists further, less common examples.</p></div>
+</section>
+
+<section>
+  <h2 id="s-dtl">Deferred tax liabilities</h2>
+  <p>A deferred tax liability appears when a temporary difference will increase taxable income in the future, in other words when it creates future taxable amounts. Two common causes are an expense that the tax return deducts early and a revenue that the tax return taxes late.</p>
+  <div class="callout codif"><p class="callout-title">In the FASB Codification: recognition and measurement</p><ul>
+<li><span class="asc">ASC 740-10-25-29</span>: deferred tax balances are recorded for <em>every</em> temporary difference and carryforward, apart from the limited exceptions in <span class="asc">ASC 740-10-25-3</span>. Those exceptions (for example, certain goodwill and some differences tied to foreign subsidiaries) are beyond the scope of these notes.</li>
+<li><span class="asc">ASC 740-10-30-5(b)</span>: multiply the total taxable temporary differences by the applicable tax rate to get the deferred tax liability.</li>
+<li><span class="asc">ASC 740-10-30-2</span>: measurements rely on the tax law as enacted today. Possible future law changes are not factored in (see Detailed Notes B).</li></ul></div>
+
+  <h3>Expense reported on the tax return first: depreciation</h3>
+  <p>Return to the Catamount roaster. Work through the four steps for each year.</p>
+  <div class="table-scroll"><table class="compact"><caption>Catamount Coffee Roasters: four steps for each year</caption><thead><tr><th scope="col">Line</th><th scope="col" class="num">Year 1</th><th scope="col" class="num">Year 2</th><th scope="col" class="num">Year 3</th></tr></thead><tbody><tr><th scope="row">Pretax accounting income (income statement)</th><td class="num">150,000</td><td class="num">150,000</td><td class="num">150,000</td></tr><tr><th scope="row">Add: depreciation in the income statement</th><td class="num">+30,000</td><td class="num">+30,000</td><td class="num">+30,000</td></tr><tr><th scope="row">Subtract: depreciation on the tax return</th><td class="num">−90,000</td><td class="num">0</td><td class="num">0</td></tr><tr class="sub"><th scope="row">Taxable income (tax return)</th><td class="num">90,000</td><td class="num">180,000</td><td class="num">180,000</td></tr><tr><th scope="row">Enacted tax rate</th><td class="num">25%</td><td class="num">25%</td><td class="num">25%</td></tr><tr class="step"><th scope="row">Step 1: Income tax payable</th><td class="num">22,500</td><td class="num">45,000</td><td class="num">45,000</td></tr><tr><th scope="row">Future taxable amounts remaining at year-end</th><td class="num">60,000</td><td class="num">30,000</td><td class="num">0</td></tr><tr class="step"><th scope="row">Step 2: Ending deferred tax liability (remaining amounts × 25%)</th><td class="num">15,000</td><td class="num">7,500</td><td class="num">0</td></tr><tr class="step"><th scope="row">Step 3: Change in the deferred tax liability (+ increase, − decrease)</th><td class="num">+15,000</td><td class="num">−7,500</td><td class="num">−7,500</td></tr><tr class="plug"><th scope="row">Step 4: Income tax expense (the plug)</th><td class="num">37,500</td><td class="num">37,500</td><td class="num">37,500</td></tr></tbody></table></div>
+  <p>In Year 1 the company owes $22,500 now, and it has been allowed to postpone tax on $60,000 of income: $60,000 × 25% = $15,000. That postponed tax is recorded as a deferred tax liability, so Year 1 expense is $22,500 + $15,000 = $37,500. In Years 2 and 3 half of the difference reverses each year. Taxable income is higher, so tax payable rises to $45,000, but the DTL shrinks by $7,500 each year, which brings expense back to $37,500. Because there are no other differences, expense equals 25% of the $150,000 book income every year.</p>
+  <div class="je-wrap"><p class="je-date">End of Year 1</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: End of Year 1</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Income tax expense</td><td class="num">37,500</td><td class="num"></td></tr><tr><td class="cr-acct">Deferred tax liability</td><td class="num"></td><td class="num">15,000</td></tr><tr><td class="cr-acct">Income tax payable</td><td class="num"></td><td class="num">22,500</td></tr></tbody></table></div></div>
+  <div class="je-wrap"><p class="je-date">End of Year 2</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: End of Year 2</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Income tax expense</td><td class="num">37,500</td><td class="num"></td></tr><tr><td>Deferred tax liability</td><td class="num">7,500</td><td class="num"></td></tr><tr><td class="cr-acct">Income tax payable</td><td class="num"></td><td class="num">45,000</td></tr></tbody></table></div></div>
+  <div class="je-wrap"><p class="je-date">End of Year 3</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: End of Year 3</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Income tax expense</td><td class="num">37,500</td><td class="num"></td></tr><tr><td>Deferred tax liability</td><td class="num">7,500</td><td class="num"></td></tr><tr><td class="cr-acct">Income tax payable</td><td class="num"></td><td class="num">45,000</td></tr></tbody></table></div></div>
+  <figure>
+    <svg viewBox="0 0 640 300" width="100%" role="img" aria-labelledby="chart-t chart-d" xmlns="http://www.w3.org/2000/svg"><title id="chart-t">Catamount deferred tax liability at the end of each year</title><desc id="chart-d">A bar chart. The deferred tax liability is 0 at the start of Year 1, rises to 15,000 at the end of Year 1, falls to 7,500 at the end of Year 2, and returns to 0 at the end of Year 3.</desc><rect x="0" y="0" width="640" height="300" fill="#fdfcfb"/><line x1="64" y1="238.0" x2="628" y2="238.0" stroke="#8a8076" stroke-width="1"/><text x="56" y="242.0" text-anchor="end" font-size="12" fill="#232023">0</text><line x1="64" y1="137.0" x2="628" y2="137.0" stroke="#8a8076" stroke-width="1"/><text x="56" y="141.0" text-anchor="end" font-size="12" fill="#232023">7,500</text><line x1="64" y1="36.0" x2="628" y2="36.0" stroke="#8a8076" stroke-width="1"/><text x="56" y="40.0" text-anchor="end" font-size="12" fill="#232023">15,000</text><rect x="108.0" y="238.0" width="84" height="0.0" fill="#4B2E83" stroke="#341f5c" stroke-width="1.5"/><text x="150.0" y="230.0" text-anchor="middle" font-size="14" font-weight="700" fill="#232023">0</text><text x="150.0" y="260" text-anchor="middle" font-size="13" fill="#232023">Start of Year 1</text><rect x="236.0" y="36.0" width="84" height="202.0" fill="#4B2E83" stroke="#341f5c" stroke-width="1.5"/><text x="278.0" y="28.0" text-anchor="middle" font-size="14" font-weight="700" fill="#232023">15,000</text><text x="278.0" y="260" text-anchor="middle" font-size="13" fill="#232023">End of Year 1</text><rect x="364.0" y="137.0" width="84" height="101.0" fill="#4B2E83" stroke="#341f5c" stroke-width="1.5"/><text x="406.0" y="129.0" text-anchor="middle" font-size="14" font-weight="700" fill="#232023">7,500</text><text x="406.0" y="260" text-anchor="middle" font-size="13" fill="#232023">End of Year 2</text><rect x="492.0" y="238.0" width="84" height="0.0" fill="#4B2E83" stroke="#341f5c" stroke-width="1.5"/><text x="534.0" y="230.0" text-anchor="middle" font-size="14" font-weight="700" fill="#232023">0</text><text x="534.0" y="260" text-anchor="middle" font-size="13" fill="#232023">End of Year 3</text></svg>
+    <figcaption>The deferred tax liability grows while the difference originates, then shrinks to zero as it reverses. The table above gives the same balances: 0, 15,000, 7,500, and 0.</figcaption>
+  </figure>
+
+  <h3>Revenue reported on the tax return later: installment sales</h3>
+  <div class="example-box">
+    <h3>Cullowhee Creek Land &amp; Cabins sells lots on installment</h3>
+    <div class="facts"><p>Pretax accounting income is $200,000 in Year 1 and $100,000 in each of Years 2 and 3. Year 1 includes $120,000 of income from selling lots on installment. The company reports that income in full in Year 1 on the income statement, but the tax return reports it as cash arrives: $30,000 in Year 2 and $90,000 in Year 3. The tax rate is 25%.</p></div>
+    <div class="table-scroll"><table class="compact"><caption>Cullowhee Creek Land & Cabins: four steps for each year</caption><thead><tr><th scope="col">Line</th><th scope="col" class="num">Year 1</th><th scope="col" class="num">Year 2</th><th scope="col" class="num">Year 3</th></tr></thead><tbody><tr><th scope="row">Pretax accounting income (income statement)</th><td class="num">200,000</td><td class="num">100,000</td><td class="num">100,000</td></tr><tr><th scope="row">Subtract: installment income in the income statement</th><td class="num">−120,000</td><td class="num">0</td><td class="num">0</td></tr><tr><th scope="row">Add: installment income collected (taxed on the return)</th><td class="num">0</td><td class="num">+30,000</td><td class="num">+90,000</td></tr><tr class="sub"><th scope="row">Taxable income (tax return)</th><td class="num">80,000</td><td class="num">130,000</td><td class="num">190,000</td></tr><tr><th scope="row">Enacted tax rate</th><td class="num">25%</td><td class="num">25%</td><td class="num">25%</td></tr><tr class="step"><th scope="row">Step 1: Income tax payable</th><td class="num">20,000</td><td class="num">32,500</td><td class="num">47,500</td></tr><tr><th scope="row">Future taxable amounts remaining at year-end</th><td class="num">120,000</td><td class="num">90,000</td><td class="num">0</td></tr><tr class="step"><th scope="row">Step 2: Ending deferred tax liability (remaining amounts × 25%)</th><td class="num">30,000</td><td class="num">22,500</td><td class="num">0</td></tr><tr class="step"><th scope="row">Step 3: Change in the deferred tax liability (+ increase, − decrease)</th><td class="num">+30,000</td><td class="num">−7,500</td><td class="num">−22,500</td></tr><tr class="plug"><th scope="row">Step 4: Income tax expense (the plug)</th><td class="num">50,000</td><td class="num">25,000</td><td class="num">25,000</td></tr></tbody></table></div>
+    <div class="table-scroll"><table class="compact"><caption>Each year's entry at a glance (deferred tax liability example)</caption><thead><tr><th scope="col">Year</th><th scope="col" class="num">Debit: income tax expense</th><th scope="col" class="num">Deferred tax liability</th><th scope="col" class="num">Credit: income tax payable</th></tr></thead><tbody><tr><th scope="row">Year 1</th><td class="num">50,000</td><td class="num">Credit 30,000</td><td class="num">20,000</td></tr><tr><th scope="row">Year 2</th><td class="num">25,000</td><td class="num">Debit 7,500</td><td class="num">32,500</td></tr><tr><th scope="row">Year 3</th><td class="num">25,000</td><td class="num">Debit 22,500</td><td class="num">47,500</td></tr></tbody></table></div>
+    <p>The Year 1 liability is $120,000 × 25% = $30,000, added to $20,000 of tax payable for $50,000 of expense. Each later year the DTL is reduced by the tax on the cash collected: $30,000 × 25% = $7,500 in Year 2 and $90,000 × 25% = $22,500 in Year 3. Expense is 25% of book income every year ($50,000, $25,000, $25,000).</p>
+  </div>
+</section>
+
+<section>
+  <h2 id="s-dta">Deferred tax assets</h2>
+  <p>A deferred tax asset appears when a temporary difference will reduce taxable income in the future, in other words when it creates future deductible amounts. The company has effectively paid some tax early, and the asset shows the savings it will collect later.</p>
+  <div class="callout codif"><p class="callout-title">In the FASB Codification: deferred tax assets</p><ul>
+<li><span class="asc">ASC 740-10-25-29</span> calls for a deferred tax asset for every deductible temporary difference and carryforward, with the same limited exceptions found in <span class="asc">ASC 740-10-25-3</span>.</li>
+<li><span class="asc">ASC 740-10-30-5(c)</span>: multiply the total deductible temporary differences and operating loss carryforwards by the applicable tax rate to get the deferred tax asset.</li>
+<li><span class="asc">ASC 740-10-30-2</span>: a deferred tax asset is cut back, when necessary, by the benefits that the evidence says will not be realized. That reduction is the valuation allowance, covered below.</li></ul></div>
+
+  <h3>Expense reported on the income statement first: warranty cost</h3>
+  <div class="example-box">
+    <h3>Tuckasegee Trail Bikes sells bikes with a warranty</h3>
+    <div class="facts"><p>Pretax accounting income is $100,000 each year. In Year 1 the income statement includes $60,000 of estimated warranty expense. The tax rules allow a deduction only when warranty claims are actually paid: $24,000 in Year 2 and $36,000 in Year 3. The tax rate is 25%.</p></div>
+    <div class="table-scroll"><table class="compact"><caption>Tuckasegee Trail Bikes: four steps for each year</caption><thead><tr><th scope="col">Line</th><th scope="col" class="num">Year 1</th><th scope="col" class="num">Year 2</th><th scope="col" class="num">Year 3</th></tr></thead><tbody><tr><th scope="row">Pretax accounting income (income statement)</th><td class="num">100,000</td><td class="num">100,000</td><td class="num">100,000</td></tr><tr><th scope="row">Add: warranty expense in the income statement</th><td class="num">+60,000</td><td class="num">0</td><td class="num">0</td></tr><tr><th scope="row">Subtract: warranty paid (deducted on the return)</th><td class="num">0</td><td class="num">−24,000</td><td class="num">−36,000</td></tr><tr class="sub"><th scope="row">Taxable income (tax return)</th><td class="num">160,000</td><td class="num">76,000</td><td class="num">64,000</td></tr><tr><th scope="row">Enacted tax rate</th><td class="num">25%</td><td class="num">25%</td><td class="num">25%</td></tr><tr class="step"><th scope="row">Step 1: Income tax payable</th><td class="num">40,000</td><td class="num">19,000</td><td class="num">16,000</td></tr><tr><th scope="row">Future deductible amounts remaining at year-end</th><td class="num">60,000</td><td class="num">36,000</td><td class="num">0</td></tr><tr class="step"><th scope="row">Step 2: Ending deferred tax asset (remaining amounts × 25%)</th><td class="num">15,000</td><td class="num">9,000</td><td class="num">0</td></tr><tr class="step"><th scope="row">Step 3: Change in the deferred tax asset (+ increase, − decrease)</th><td class="num">+15,000</td><td class="num">−6,000</td><td class="num">−9,000</td></tr><tr class="plug"><th scope="row">Step 4: Income tax expense (the plug)</th><td class="num">25,000</td><td class="num">25,000</td><td class="num">25,000</td></tr></tbody></table></div>
+    <div class="table-scroll"><table class="compact"><caption>Each year's entry at a glance (deferred tax asset example)</caption><thead><tr><th scope="col">Year</th><th scope="col" class="num">Debit: income tax expense</th><th scope="col" class="num">Deferred tax asset</th><th scope="col" class="num">Credit: income tax payable</th></tr></thead><tbody><tr><th scope="row">Year 1</th><td class="num">25,000</td><td class="num">Debit 15,000</td><td class="num">40,000</td></tr><tr><th scope="row">Year 2</th><td class="num">25,000</td><td class="num">Credit 6,000</td><td class="num">19,000</td></tr><tr><th scope="row">Year 3</th><td class="num">25,000</td><td class="num">Credit 9,000</td><td class="num">16,000</td></tr></tbody></table></div>
+    <p>In Year 1 taxable income is $60,000 higher than book income, so the company pays $40,000 of tax. But it now holds $60,000 of deductions to use later, worth $15,000, which it records as a deferred tax asset. Expense is $40,000 − $15,000 = $25,000. In Years 2 and 3 the company deducts the warranty payments, pays less tax, and uses up the asset.</p>
+  </div>
+
+  <h3>Revenue reported on the tax return first: cash received in advance</h3>
+  <div class="example-box">
+    <h3>Mountain Echo Magazine sells multi-year subscriptions</h3>
+    <div class="facts"><p>Pretax accounting income is $100,000 each year. In Year 1 the company collects $72,000 of subscriptions. The tax return includes the full $72,000 in Year 1. The income statement reports the revenue only as magazines are delivered: $48,000 in Year 2 and $24,000 in Year 3. The tax rate is 25%.</p></div>
+    <div class="table-scroll"><table class="compact"><caption>Mountain Echo Magazine: four steps for each year</caption><thead><tr><th scope="col">Line</th><th scope="col" class="num">Year 1</th><th scope="col" class="num">Year 2</th><th scope="col" class="num">Year 3</th></tr></thead><tbody><tr><th scope="row">Pretax accounting income (income statement)</th><td class="num">100,000</td><td class="num">100,000</td><td class="num">100,000</td></tr><tr><th scope="row">Add: subscriptions received (taxed on the return)</th><td class="num">+72,000</td><td class="num">0</td><td class="num">0</td></tr><tr><th scope="row">Subtract: subscription revenue earned in the income statement</th><td class="num">0</td><td class="num">−48,000</td><td class="num">−24,000</td></tr><tr class="sub"><th scope="row">Taxable income (tax return)</th><td class="num">172,000</td><td class="num">52,000</td><td class="num">76,000</td></tr><tr><th scope="row">Enacted tax rate</th><td class="num">25%</td><td class="num">25%</td><td class="num">25%</td></tr><tr class="step"><th scope="row">Step 1: Income tax payable</th><td class="num">43,000</td><td class="num">13,000</td><td class="num">19,000</td></tr><tr><th scope="row">Future deductible amounts remaining at year-end</th><td class="num">72,000</td><td class="num">24,000</td><td class="num">0</td></tr><tr class="step"><th scope="row">Step 2: Ending deferred tax asset (remaining amounts × 25%)</th><td class="num">18,000</td><td class="num">6,000</td><td class="num">0</td></tr><tr class="step"><th scope="row">Step 3: Change in the deferred tax asset (+ increase, − decrease)</th><td class="num">+18,000</td><td class="num">−12,000</td><td class="num">−6,000</td></tr><tr class="plug"><th scope="row">Step 4: Income tax expense (the plug)</th><td class="num">25,000</td><td class="num">25,000</td><td class="num">25,000</td></tr></tbody></table></div>
+    <div class="table-scroll"><table class="compact"><caption>Each year's entry at a glance (deferred tax asset example)</caption><thead><tr><th scope="col">Year</th><th scope="col" class="num">Debit: income tax expense</th><th scope="col" class="num">Deferred tax asset</th><th scope="col" class="num">Credit: income tax payable</th></tr></thead><tbody><tr><th scope="row">Year 1</th><td class="num">25,000</td><td class="num">Debit 18,000</td><td class="num">43,000</td></tr><tr><th scope="row">Year 2</th><td class="num">25,000</td><td class="num">Credit 12,000</td><td class="num">13,000</td></tr><tr><th scope="row">Year 3</th><td class="num">25,000</td><td class="num">Credit 6,000</td><td class="num">19,000</td></tr></tbody></table></div>
+    <p>The law makes Mountain Echo pay tax on the cash before the income statement has recognized the revenue. In Year 1, that prepayment is recorded as a $18,000 deferred tax asset (72,000 × 25%). Each later year some of the revenue is earned but is no longer taxed, so the asset is used up.</p>
+  </div>
+  <div class="callout global"><p class="callout-title">A manager’s point of view</p><p>Managers usually prefer deferred tax liabilities to deferred tax assets. A liability means taxes are being delayed, which is helpful because the company keeps its cash longer. An asset means the company is paying taxes sooner than the income statement suggests, and cash paid out earlier costs the company the use of that money in the meantime.</p></div>
+</section>
+
+<section>
+  <h2 id="s-basis">Book value versus tax basis</h2>
+  <p>There is a second route to the same answer, and it works from the balance sheet. The <strong>tax basis</strong> of an asset or liability is its original amount for tax purposes, reduced by whatever has already been counted on tax returns. A gap between the amount on the balance sheet (book value) and the tax basis is a <strong>book-tax difference</strong>. Multiply the gap by the enacted rate and you have the ending deferred tax balance, which is step 2 of the four-step process.</p>
+  <div class="table-scroll"><table class="compact"><caption>Catamount roaster: ending deferred tax liability from book-tax differences</caption><thead><tr><th scope="col"><span class="sr-only">Item</span></th><th scope="col" class="num">End of Year 1</th><th scope="col" class="num">End of Year 2</th><th scope="col" class="num">End of Year 3</th></tr></thead><tbody><tr><th scope="row">Book value of the roaster</th><td class="num">60,000</td><td class="num">30,000</td><td class="num">0</td></tr><tr><th scope="row">Tax basis of the roaster</th><td class="num">0</td><td class="num">0</td><td class="num">0</td></tr><tr class="sub"><th scope="row">Book-tax difference</th><td class="num">60,000</td><td class="num">30,000</td><td class="num">0</td></tr><tr><th scope="row">Tax rate</th><td class="num">25%</td><td class="num">25%</td><td class="num">25%</td></tr><tr class="plug"><th scope="row">Deferred tax liability</th><td class="num">15,000</td><td class="num">7,500</td><td class="num">0</td></tr></tbody></table></div>
+  <p>These balances equal the step 2 balances in the four-step table above. The two methods are complementary ways to reach the same numbers. Use whichever your problem makes easier.</p>
+  <div class="table-scroll"><table class="compact"><caption>What a gap between book value and tax basis creates</caption><thead><tr><th scope="col"><span class="sr-only">Item</span></th><th scope="col">Book value is greater than tax basis</th><th scope="col">Book value is less than tax basis</th></tr></thead><tbody><tr><th scope="row">Asset</th><td>Deferred tax liability (the asset will produce more taxable income later)</td><td>Deferred tax asset</td></tr><tr><th scope="row">Liability</th><td>Deferred tax asset (the liability will produce deductions later)</td><td>Deferred tax liability</td></tr></tbody></table></div>
+  <p>Check the table against the examples. The roaster is an asset whose book value ($60,000) exceeds its tax basis ($0), which creates a liability. The warranty obligation is a liability whose book value exceeds its tax basis of $0, which creates an asset.</p>
+  <div class="callout codif"><p class="callout-title">In the FASB Codification</p><p>The Codification takes this balance sheet approach, often called the <em>asset and liability method</em>. The glossary definition of a temporary difference (<span class="asc">ASC 740-10-20</span>) is written in terms of tax basis and reported amount, and <span class="asc">ASC 740-10-25-23</span> ties taxable and deductible temporary differences to the recovery of assets and the settlement of liabilities.</p></div>
+</section>
+
+<section>
+  <h2 id="s-va">Valuation allowance</h2>
+  <p>A deferred tax asset only saves money if the company has taxable income later to apply the deductions against. So the accounting is in two stages. First, record a deferred tax asset for every deductible temporary difference. Then reduce it with a <strong>valuation allowance</strong> if it is <strong>more likely than not</strong> (more than a 50% chance) that some or all of the asset will never be realized.</p>
+  <p>The idea is not new. You already reduce accounts receivable with an allowance for amounts you do not expect to collect. A valuation allowance does the same thing for a deferred tax asset.</p>
+  <div class="example-box">
+    <h3>Western Highlands Brewing Company</h3>
+    <div class="facts"><p>The brewery carries a $60,000 deferred tax asset. After a run of weak results in some of its markets, management concludes it is more likely than not that $24,000 of the asset will not be realized.</p></div>
+    <div class="je-wrap"><p class="je-date">Establish the allowance</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: Establish the allowance</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Income tax expense</td><td class="num">24,000</td><td class="num"></td></tr><tr><td class="cr-acct">Valuation allowance</td><td class="num"></td><td class="num">24,000</td></tr></tbody></table></div></div>
+    <div class="table-scroll"><table class="compact"><caption>Balance sheet presentation</caption><thead><tr><th scope="col">Item</th><th scope="col" class="num">Amount</th></tr></thead><tbody><tr><th scope="row">Deferred tax asset</th><td class="num">60,000</td></tr><tr><th scope="row">Less: valuation allowance</th><td class="num">(24,000)</td></tr><tr class="sub"><th scope="row">Deferred tax asset, net</th><td class="num">36,000</td></tr></tbody></table></div>
+    <p>Next year the outlook improves, and management now expects only $6,000 of the asset to go unused. The allowance is adjusted down to $6,000, a reduction of $18,000. The expense account is the plug again, so this time it is a credit.</p>
+    <div class="je-wrap"><p class="je-date">Reduce the allowance</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: Reduce the allowance</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Valuation allowance</td><td class="num">18,000</td><td class="num"></td></tr><tr><td class="cr-acct">Income tax expense</td><td class="num"></td><td class="num">18,000</td></tr></tbody></table></div></div>
+  </div>
+  <h3>How management decides</h3>
+  <p>The test is whether enough taxable income will exist in the years the deductions become available. Evidence from every angle counts:</p>
+  <ul>
+    <li><strong>Negative evidence:</strong> losses in recent years, expected changes that will hurt future profits, deductions that will expire unused.</li>
+    <li><strong>Positive evidence:</strong> a record of consistent profits, signed contracts that will generate future income, and prudent <strong>tax-planning strategies</strong> that management could use to create taxable income in time, such as selling an appreciated asset.</li>
+  </ul>
+  <p>The allowance is re-evaluated every reporting period, and it is adjusted up or down to the balance that is now required. Because it depends on judgment about the future, analysts watch it closely: a rising allowance is often a sign that management has become pessimistic.</p>
+  <div class="callout codif"><p class="callout-title">In the FASB Codification: valuation allowance</p><ul>
+<li><span class="asc">ASC 740-10-30-5(e)</span>: a valuation allowance is required when, weighing all the evidence, there is more than a 50 percent chance (&ldquo;more likely than not&rdquo;) that part or all of a deferred tax asset will go unrealized. The allowance is sized to leave the asset at the amount that is more likely than not to be realized.</li>
+<li><span class="asc">ASC 740-10-30-17</span>: weigh all available evidence, favorable and unfavorable.</li>
+<li><span class="asc">ASC 740-10-30-18</span>: realization depends on having enough taxable income of the right kind. The paragraph lists four possible sources: reversals of existing taxable temporary differences, future taxable income apart from those reversals, taxable income in carryback years, and tax-planning strategies (<span class="asc">ASC 740-10-30-19</span>).</li>
+<li><span class="asc">ASC 740-10-30-21</span> and <span class="asc">ASC 740-10-30-22</span> give examples of negative evidence and positive evidence. Cumulative losses in recent years are a leading example of negative evidence, and they make it hard to conclude that no allowance is needed.</li>
+<li><span class="asc">ASC 740-10-30-23</span>: the weight given to a piece of evidence should match how objectively it can be verified.</li>
+<li><span class="asc">ASC 740-10-55</span> (implementation guidance) includes worked illustrations on valuation allowances and tax-planning strategies.</li></ul></div>
+  <div class="callout global"><p class="callout-title">U.S. GAAP and IFRS</p><p>Under U.S. GAAP a company records the full deferred tax asset and then reduces it with an allowance. Under IFRS (IAS 12, paragraphs 24 and 34) a company records a deferred tax asset only to the extent that realizing it is probable (more likely than not), so no separate allowance appears. As a result, U.S. GAAP financial statements can show larger deferred tax assets together with an offsetting allowance.</p></div>
+</section>
+
+<section>
+  <h2 id="s-note">Reading a company’s tax note</h2>
+  <p>You can rebuild the income tax journal entry from the tax note in a company’s annual report. Two numbers are the key: the <em>current</em> tax expense (which is tax payable) and the <em>deferred</em> tax expense (which equals the net change in deferred tax assets, valuation allowances, and deferred tax liabilities).</p>
+  <div class="example-box">
+    <h3>Forsyth Furniture Gallery (amounts in thousands)</h3>
+    <div class="table-scroll"><table class="compact"><caption>Components of income tax expense for the year</caption><thead><tr><th scope="col"><span class="sr-only">Item</span></th><th scope="col" class="num">Amount</th></tr></thead><tbody><tr><th scope="row">Current: federal</th><td class="num">640</td></tr><tr><th scope="row">Current: state</th><td class="num">160</td></tr><tr class="sub"><th scope="row">Total current</th><td class="num">800</td></tr><tr><th scope="row">Deferred: federal</th><td class="num">(72)</td></tr><tr><th scope="row">Deferred: state</th><td class="num">(23)</td></tr><tr class="sub"><th scope="row">Total deferred</th><td class="num">(95)</td></tr><tr class="plug"><th scope="row">Total income tax expense</th><td class="num">705</td></tr></tbody></table></div>
+    <div class="table-scroll"><table class="compact"><caption>Deferred tax assets and liabilities at the beginning and end of the year</caption><thead><tr><th scope="col"><span class="sr-only">Item</span></th><th scope="col" class="num">Beginning</th><th scope="col" class="num">End</th></tr></thead><tbody><tr><th scope="row">Warranty reserve</th><td class="num">410</td><td class="num">455</td></tr><tr><th scope="row">Deferred revenue</th><td class="num">220</td><td class="num">260</td></tr><tr><th scope="row">Accrued compensation</th><td class="num">330</td><td class="num">345</td></tr><tr class="sub"><th scope="row">Total deferred tax assets before allowance</th><td class="num">960</td><td class="num">1,060</td></tr><tr><th scope="row">Less: valuation allowance</th><td class="num">(40)</td><td class="num">(65)</td></tr><tr class="sub"><th scope="row">Deferred tax assets, net of allowance</th><td class="num">920</td><td class="num">995</td></tr><tr><th scope="row">Depreciation differences (liability)</th><td class="num">(610)</td><td class="num">(580)</td></tr><tr><th scope="row">Prepaid expenses (liability)</th><td class="num">(140)</td><td class="num">(150)</td></tr><tr class="sub"><th scope="row">Total deferred tax liabilities</th><td class="num">(750)</td><td class="num">(730)</td></tr><tr class="plug"><th scope="row">Net deferred tax asset</th><td class="num">170</td><td class="num">265</td></tr></tbody></table></div>
+    <p>The net deferred tax asset grew from 170 to 265, an increase of 95. That is the debit side of the deferred portion of the entry, and it matches the “total deferred” line, a benefit of 95. Now the whole entry can be rebuilt:</p>
+    <div class="je-wrap"><p class="je-date">Income tax entry for the year (in thousands)</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: Income tax entry for the year (in thousands)</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Income tax expense</td><td class="num">705</td><td class="num"></td></tr><tr><td>Deferred tax assets and liabilities, net</td><td class="num">95</td><td class="num"></td></tr><tr><td class="cr-acct">Income tax payable</td><td class="num"></td><td class="num">800</td></tr></tbody></table></div></div>
+  </div>
+  <p>Sometimes the plug flips. If the deferred tax assets rise by more than the tax payable, income tax expense becomes a credit, reported as an <strong>income tax benefit</strong>. For instance, a company with 300 of tax payable and a 450 increase in its net deferred tax asset would debit the deferred tax asset for 450, credit income tax payable for 300, and credit the benefit for 150.</p>
+  <p>In real reports the pieces may not tie out perfectly. The expense table covers continuing operations only, while the balance table covers every part of the company, and acquisitions or other items can move deferred taxes in between.</p>
+  <div class="callout codif"><p class="callout-title">In the FASB Codification</p><ul>
+<li><span class="asc">ASC 740-10-50-2</span>: disclose the components of the net deferred tax liability or asset, including the total of all deferred tax liabilities, the total of all deferred tax assets, and the total valuation allowance.</li>
+<li><span class="asc">ASC 740-10-50-6</span>: public companies also disclose the approximate tax effect of each type of temporary difference and carryforward that gives rise to a significant part of the deferred tax liabilities and assets. That is the line-by-line table in the example above.</li>
+<li><span class="asc">ASC 740-10-50-9</span>: disclose the significant components of income tax expense for continuing operations. The list includes current expense or benefit, deferred expense or benefit, the benefit of operating loss carryforwards, adjustments for enacted changes in tax laws or rates, and adjustments to the beginning-of-year valuation allowance when management&rsquo;s judgment about realizability changes.</li></ul>
+<p>Because a deferred tax asset is measured net of any allowance (<span class="asc">ASC 740-10-30-2</span>), changes in the allowance flow through deferred tax expense, which is why the allowance appears in the reconciliation of the deferred taxes in a tax note.</p></div>
+</section>
+
+<section>
+  <h2 id="s-mistakes">Common mistakes</h2>
+  <ul>
+    <li><strong>Computing expense first.</strong> Expense is always the last number. Start with tax payable and the deferred balances.</li>
+    <li><strong>Using the wrong direction.</strong> Pay less now means a liability; pay more now means an asset. If you are unsure, use the book value versus tax basis table.</li>
+    <li><strong>Forgetting that the balance is a running total.</strong> The journal entry records the <em>change</em> in the account, not the ending balance.</li>
+    <li><strong>Applying the tax rate to the whole difference.</strong> Multiply only the amounts that remain to reverse, using the enacted rate for the years they will reverse.</li>
+    <li><strong>Treating the valuation allowance as a deferred tax liability.</strong> It reduces the deferred tax asset, and changes in it run through income tax expense.</li>
+    <li><strong>Mixing up the DTA with a receivable from the government.</strong> A deferred tax asset is the value of future deductions, not a refund that is owed right now.</li>
+  </ul>
+</section>
+
+<section>
+  <h2 id="s-practice">Practice with answers</h2>
+  <p>Try each problem on paper, then open the answer to check your work.</p>
+  <div class="practice">
+    <h3>Problem 1: Prepaid insurance</h3>
+    <p>Laurel Ridge Rentals pays $36,000 at the start of Year 1 for a three-year insurance policy. The income statement spreads the cost at $12,000 a year, but the tax return deducts all $36,000 in Year 1. Pretax accounting income is $80,000 in each year and the tax rate is 25%. Find tax payable, the ending deferred tax balance, the change, and income tax expense for each year.</p>
+    <details><summary>Show the answer</summary><div class="answer"><div class="table-scroll"><table class="compact"><caption>Laurel Ridge Rentals: answer</caption><thead><tr><th scope="col">Line</th><th scope="col" class="num">Year 1</th><th scope="col" class="num">Year 2</th><th scope="col" class="num">Year 3</th></tr></thead><tbody><tr><th scope="row">Pretax accounting income (income statement)</th><td class="num">80,000</td><td class="num">80,000</td><td class="num">80,000</td></tr><tr><th scope="row">Add: insurance expense in the income statement</th><td class="num">+12,000</td><td class="num">+12,000</td><td class="num">+12,000</td></tr><tr><th scope="row">Subtract: insurance deducted on the return</th><td class="num">−36,000</td><td class="num">0</td><td class="num">0</td></tr><tr class="sub"><th scope="row">Taxable income (tax return)</th><td class="num">56,000</td><td class="num">92,000</td><td class="num">92,000</td></tr><tr><th scope="row">Enacted tax rate</th><td class="num">25%</td><td class="num">25%</td><td class="num">25%</td></tr><tr class="step"><th scope="row">Step 1: Income tax payable</th><td class="num">14,000</td><td class="num">23,000</td><td class="num">23,000</td></tr><tr><th scope="row">Future taxable amounts remaining at year-end</th><td class="num">24,000</td><td class="num">12,000</td><td class="num">0</td></tr><tr class="step"><th scope="row">Step 2: Ending deferred tax liability (remaining amounts × 25%)</th><td class="num">6,000</td><td class="num">3,000</td><td class="num">0</td></tr><tr class="step"><th scope="row">Step 3: Change in the deferred tax liability (+ increase, − decrease)</th><td class="num">+6,000</td><td class="num">−3,000</td><td class="num">−3,000</td></tr><tr class="plug"><th scope="row">Step 4: Income tax expense (the plug)</th><td class="num">20,000</td><td class="num">20,000</td><td class="num">20,000</td></tr></tbody></table></div><p>This is an expense deducted on the tax return first, so it creates a deferred tax liability. Expense is $20,000 each year, which is 25% of the $80,000 book income.</p></div></details>
+    <h3>Problem 2: Estimated bad debts and a valuation allowance</h3>
+    <p>Sylva Street Supply records $30,000 of estimated bad debt expense in Year 1. The tax return deducts it in Year 2, when the receivables are actually written off. Pretax accounting income is $100,000 in each of the two years and the tax rate is 25%. (a) Prepare the Year 1 and Year 2 income tax entries. (b) At the end of Year 1, management decides that it is more likely than not that $2,000 of the deferred tax asset will not be realized. Prepare the entry for that, and give the net deferred tax asset.</p>
+    <details><summary>Show the answer</summary><div class="answer"><div class="table-scroll"><table class="compact"><caption>Sylva Street Supply: answer to part (a)</caption><thead><tr><th scope="col">Line</th><th scope="col" class="num">Year 1</th><th scope="col" class="num">Year 2</th></tr></thead><tbody><tr><th scope="row">Pretax accounting income</th><td class="num">100,000</td><td class="num">100,000</td></tr><tr><th scope="row">Add: bad debt expense in the income statement</th><td class="num">+30,000</td><td class="num">0</td></tr><tr><th scope="row">Subtract: bad debts written off (deducted on the return)</th><td class="num">0</td><td class="num">−30,000</td></tr><tr class="sub"><th scope="row">Taxable income</th><td class="num">130,000</td><td class="num">70,000</td></tr><tr class="step"><th scope="row">Step 1: Income tax payable (25%)</th><td class="num">32,500</td><td class="num">17,500</td></tr><tr class="step"><th scope="row">Step 2: Ending deferred tax asset</th><td class="num">7,500</td><td class="num">0</td></tr><tr class="step"><th scope="row">Step 3: Change in the deferred tax asset</th><td class="num">+7,500</td><td class="num">−7,500</td></tr><tr class="plug"><th scope="row">Step 4: Income tax expense (the plug)</th><td class="num">25,000</td><td class="num">25,000</td></tr></tbody></table></div><div class="je-wrap"><p class="je-date">Year 1 entry</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: Year 1 entry</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Income tax expense</td><td class="num">25,000</td><td class="num"></td></tr><tr><td>Deferred tax asset</td><td class="num">7,500</td><td class="num"></td></tr><tr><td class="cr-acct">Income tax payable</td><td class="num"></td><td class="num">32,500</td></tr></tbody></table></div></div><div class="je-wrap"><p class="je-date">Year 2 entry</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: Year 2 entry</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Income tax expense</td><td class="num">25,000</td><td class="num"></td></tr><tr><td class="cr-acct">Income tax payable</td><td class="num"></td><td class="num">17,500</td></tr><tr><td class="cr-acct">Deferred tax asset</td><td class="num"></td><td class="num">7,500</td></tr></tbody></table></div></div><p><strong>Part (b).</strong> Debit income tax expense and credit the valuation allowance for $2,000. On the balance sheet the deferred tax asset is $7,500 less the $2,000 allowance, a net of $5,500.</p><div class="je-wrap"><p class="je-date">Valuation allowance entry (part b)</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: Valuation allowance entry (part b)</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Income tax expense</td><td class="num">2,000</td><td class="num"></td></tr><tr><td class="cr-acct">Valuation allowance</td><td class="num"></td><td class="num">2,000</td></tr></tbody></table></div></div></div></details>
+    <h3>Problem 3: Which kind is it?</h3>
+    <p>For each item, say whether it creates a deferred tax liability or a deferred tax asset: (a) rent collected in advance and taxed when received but earned in later years; (b) a gain on an investment recorded at fair value, taxed only when the investment is sold; (c) an estimated lawsuit loss, deductible only when paid; (d) tax depreciation that is faster than book depreciation; (e) revenue from a sale that is recognized now but collected and taxed over the next three years.</p>
+    <details><summary>Show the answer</summary><div class="answer"><ul><li>(a) Deferred tax asset. The tax return reports the revenue first, so tax is paid in advance.</li><li>(b) Deferred tax liability. The income statement reports the gain first, and tax comes later.</li><li>(c) Deferred tax asset. The expense is in the income statement first; the deduction comes later.</li><li>(d) Deferred tax liability. The tax return takes the deduction first.</li><li>(e) Deferred tax liability. The income statement reports the revenue first, and the tax return reports it later.</li></ul></div></details>
+  </div>
+</section>
+
+<section>
+  <h2 id="s-map">Codification map</h2>
+  <p>Use this table to find the guidance behind each idea in these notes.</p>
+  <div class="table-scroll"><table class="compact"><caption>Where each idea appears in the Codification</caption><thead><tr><th scope="col">Idea in these notes</th><th scope="col">Where to read it</th><th scope="col">In plain words</th></tr></thead><tbody><tr><th scope="row">Objectives of accounting for income taxes</th><td><span class="asc">ASC 740-10-10-1</span></td><td>Recognize taxes payable now and deferred taxes for future tax consequences.</td></tr><tr><th scope="row">Basic requirements: current and deferred</th><td><span class="asc">ASC 740-10-25-2</span></td><td>Record a current tax liability or asset and a deferred tax liability or asset.</td></tr><tr><th scope="row">Temporary differences, taxable and deductible</th><td><span class="asc">ASC 740-10-20</span>, <span class="asc">ASC 740-10-25-23</span></td><td>Differences between reported amount and tax basis that reverse as assets are recovered and liabilities are settled.</td></tr><tr><th scope="row">Examples of temporary differences</th><td><span class="asc">ASC 740-10-25-20</span></td><td>Revenues and expenses taxed or deducted before or after they are reported.</td></tr><tr><th scope="row">Which differences get deferred tax</th><td><span class="asc">ASC 740-10-25-29</span>, <span class="asc">ASC 740-10-25-3</span></td><td>All temporary differences and carryforwards, with limited exceptions.</td></tr><tr><th scope="row">Measuring deferred tax liabilities and assets</th><td><span class="asc">ASC 740-10-30-5</span>, <span class="asc">ASC 740-10-30-2</span></td><td>Use the applicable enacted rate, and reduce assets by any valuation allowance.</td></tr><tr><th scope="row">Deferred and total tax expense</th><td><span class="asc">ASC 740-10-30-3</span>, <span class="asc">ASC 740-10-30-4</span></td><td>Deferred expense is the change in the deferred accounts; total expense adds current tax.</td></tr><tr><th scope="row">Valuation allowance</th><td><span class="asc">ASC 740-10-30-5(e)</span>, <span class="asc">ASC 740-10-30-17</span> through <span class="asc">ASC 740-10-30-23</span></td><td>More-likely-than-not test, sources of taxable income, and weighing evidence.</td></tr><tr><th scope="row">Tax disclosures</th><td><span class="asc">ASC 740-10-50-2</span>, <span class="asc">ASC 740-10-50-6</span>, <span class="asc">ASC 740-10-50-9</span></td><td>Deferred tax components, effect of each type of temporary difference, and components of expense.</td></tr><tr><th scope="row">Worked illustrations</th><td><span class="asc">ASC 740-10-55</span></td><td>Implementation guidance, including valuation allowance examples.</td></tr><tr><th scope="row">International comparison</th><td>IAS 12, Income Taxes</td><td>IFRS standard on income taxes.</td></tr></tbody></table></div>
+  <h3>Vocabulary bridge</h3>
+  <p>These notes use some plain-language labels. This table connects them to the terms you will see in the Codification and in company reports.</p>
+  <div class="table-scroll"><table class="compact"><caption>Terms in these notes and Codification terms</caption><thead><tr><th scope="col">In these notes</th><th scope="col">In the Codification and company reports</th></tr></thead><tbody><tr><th scope="row">Income tax payable</th><td>Current tax expense (or benefit)</td></tr><tr><th scope="row">Future taxable amounts</th><td>Taxable temporary differences</td></tr><tr><th scope="row">Future deductible amounts</th><td>Deductible temporary differences (and carryforwards)</td></tr><tr><th scope="row">Book-tax difference</th><td>Temporary difference (reported amount versus tax basis)</td></tr><tr><th scope="row">Deferred portion of tax expense</th><td>Deferred tax expense (benefit): the change in deferred tax liabilities and assets</td></tr><tr><th scope="row">Enacted tax rate</th><td>Enacted tax rate (the rate in the enacted tax law)</td></tr><tr><th scope="row">Valuation allowance</th><td>Valuation allowance</td></tr></tbody></table></div>
+</section>
+
+<section>
+  <h2 id="s-terms">Key terms</h2>
+  <dl class="glossary"><dt>Pretax accounting income</dt><dd>Income before income taxes, as reported in the income statement.</dd><dt>Taxable income</dt><dd>Income as determined by the tax rules; the base to which the tax rate is applied.</dd><dt>Temporary difference</dt><dd>A difference between book and tax treatment that reverses over time because the item is recognized in different years.</dd><dt>Origination and reversal</dt><dd>A temporary difference originates when it first arises and reverses when it unwinds in later years.</dd><dt>Future taxable amounts</dt><dd>Amounts that will increase taxable income relative to book income when a temporary difference reverses. They create a deferred tax liability.</dd><dt>Future deductible amounts</dt><dd>Amounts that will decrease taxable income relative to book income when a temporary difference reverses. They create a deferred tax asset.</dd><dt>Deferred tax liability (DTL)</dt><dd>The tax a company expects to pay in the future because of income already reported in the income statement.</dd><dt>Deferred tax asset (DTA)</dt><dd>The tax savings a company expects in the future because of deductions or prepaid taxes it has already recorded.</dd><dt>Tax basis</dt><dd>The amount an asset or liability is worth for tax purposes: its original value reduced by what tax returns have already counted.</dd><dt>Book-tax difference</dt><dd>The gap between the book value and the tax basis of an asset or liability.</dd><dt>Valuation allowance</dt><dd>A contra account that reduces a deferred tax asset when it is more likely than not that some of it will not be realized.</dd><dt>More likely than not</dt><dd>A probability of more than 50%.</dd><dt>Income tax payable</dt><dd>Tax owed on the current year’s tax return.</dd><dt>Current and deferred portions of tax expense</dt><dd>Current is tax payable for the year; deferred is the change in the deferred tax accounts.</dd></dl>
+  <div class="next-box"><p><strong>Where to go next.</strong> The second set of detailed notes covers permanent differences, the effective tax rate, how tax rate changes affect deferred taxes, and what to do when a company has several temporary differences at once.</p></div>
+</section>
+
+  </main>
+</div>
+<footer>Detailed Notes A: Temporary Differences and Deferred Taxes &middot; ACCT 352 &middot; Western Carolina University<br>All companies in these notes are fictional.</footer>
+<script>
+/* Progressive enhancements (the page works without them):
+   1. Expand the answer boxes when printing, then restore them.
+   2. Make a table wrapper keyboard-focusable only when the table is wider than the screen. */
+(function () {
+  var opened = [];
+  window.addEventListener('beforeprint', function () {
+    opened = [];
+    document.querySelectorAll('details:not([open])').forEach(function (d) { d.setAttribute('open', ''); opened.push(d); });
+  });
+  window.addEventListener('afterprint', function () {
+    opened.forEach(function (d) { d.removeAttribute('open'); });
+    opened = [];
+  });
+  var n = 0;
+  function sizeScrollers() {
+    document.querySelectorAll('.table-scroll').forEach(function (w) {
+      var cap = w.querySelector('caption');
+      if (w.scrollWidth > w.clientWidth + 1) {
+        if (cap && !cap.id) { cap.id = 'tcap-' + (++n); }
+        w.setAttribute('tabindex', '0');
+        w.setAttribute('role', 'group');
+        if (cap) { w.setAttribute('aria-labelledby', cap.id); }
+      } else {
+        w.removeAttribute('tabindex'); w.removeAttribute('role'); w.removeAttribute('aria-labelledby');
+      }
+    });
+  }
+  var t;
+  window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(sizeScrollers, 150); });
+  window.addEventListener('load', sizeScrollers);
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(sizeScrollers); }
+})();
+</script>
+</body>
+</html>
