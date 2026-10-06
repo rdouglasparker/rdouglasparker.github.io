@@ -33,13 +33,16 @@
   .rounding-note strong{ color:var(--purple); font-weight:600; }
   main{ max-width:900px; margin:0 auto; padding:22px 6vw 90px; }
   .part{ background:var(--paper); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); padding:24px 26px 26px; margin-top:26px; }
-  .part-label{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--gold); background:var(--purple); display:inline-block; padding:3px 9px; border-radius:4px; letter-spacing:.04em; margin-bottom:12px; }
+  .part-label{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--gold-soft); background:var(--purple); display:inline-block; padding:3px 9px; border-radius:4px; letter-spacing:.04em; margin-bottom:12px; }
   .part h2{ font-family:'Source Serif 4', serif; font-size:21px; font-weight:600; color:var(--purple); margin:0 0 12px; }
   .scenario{ background:var(--parchment); border-left:3px solid var(--gold); padding:14px 18px; border-radius:0 6px 6px 0; font-size:14.5px; color:var(--ink); margin-bottom:20px; }
   .scenario p{ margin:0 0 10px; } .scenario p:last-child{ margin-bottom:0; }
   .scenario span.val{ font-weight:700; color:var(--purple-deep); }
   .req{ font-weight:600; font-size:14.5px; color:var(--ink); margin:20px 0 10px; }
   .req .letter{ font-family:'IBM Plex Mono', monospace; color:var(--purple); margin-right:6px; }
+  .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+  .table-wrap{ overflow-x:auto; position:relative; }
+  table.worksheet.wide{ min-width:640px; }
   table.worksheet{ width:100%; border-collapse:collapse; font-size:13px; margin-bottom:8px; }
   table.worksheet th{ text-align:left; font-size:10.5px; text-transform:uppercase; letter-spacing:.03em; color:var(--slate); border-bottom:2px solid var(--purple); padding:7px 5px; }
   table.worksheet td{ border-bottom:1px solid var(--line); padding:7px 5px; vertical-align:middle; }
@@ -90,6 +93,7 @@
   .submit-status.error{ color:var(--danger); }
   .submit-hint{ font-size:12px; color:var(--slate); margin:6px 0 0; }
   @media print{
+    .table-wrap{ overflow:visible; }
     .print-hide, .id-bar, .check-bar, .rounding-note{ display:none !important; }
     header{ background:none !important; color:var(--ink) !important; padding:0 0 14px !important; }
     header::after{ display:none !important; }
@@ -116,6 +120,7 @@
 <p class="print-name-line" id="printNameLine"></p>
 <p class="print-name-line" id="printScoreLine" style="font-weight:600;"></p>
 
+<section aria-label="Scenario setup">
 <div class="id-bar">
   <label for="studentId">Student ID</label>
   <input type="text" id="studentId" placeholder="e.g. 92841016">
@@ -125,6 +130,7 @@
 <div class="rounding-note">
   <strong>Rounding convention:</strong> round every extended (quantity &times; unit) dollar amount to the nearest dollar.
 </div>
+</section>
 
 <main>
 
@@ -135,18 +141,19 @@
       <p>Wesser Creek Supply uses LIFO and reports inventory at the lower of cost or market. Wesser Creek has five products on hand at year-end. For each product, selling costs are <span class="val" id="sSellingCostPct">15%</span> of selling price and the normal profit margin is <span class="val" id="sNormalProfitPct">40%</span> of selling price. Quantity, unit cost, unit replacement cost, and unit selling price are given below.</p>
     </div>
     <div class="req"><span class="letter">a.</span>For each product, determine the ceiling (NRV), the floor (NRV &minus; normal profit), and market (replacement cost, bounded by the ceiling and floor). Then enter the lower of cost or market, extended for quantity.</div>
-    <table class="worksheet">
+    <div class="table-wrap"><table class="worksheet wide">
+      <caption class="sr-only">Products on hand with given quantities, costs, and selling prices, and the ceiling, floor, market, and lower-of-cost-or-market amounts to enter</caption>
       <thead>
         <tr>
-          <th style="width:8%;">Prod.</th><th style="width:8%;">Qty</th><th style="width:10%;">Unit Cost</th><th style="width:10%;">Repl. Cost</th>
-          <th style="width:11%;">Ceiling</th><th style="width:11%;">Floor</th><th style="width:11%;">Market</th><th style="width:15%;">LCM (extended)</th>
+          <th scope="col" style="width:7%;">Prod.</th><th scope="col" style="width:8%;">Qty</th><th scope="col" style="width:10%;">Unit Cost</th><th scope="col" style="width:10%;">Repl. Cost</th><th scope="col" style="width:11%;">Unit Selling Price</th>
+          <th scope="col" style="width:12%;">Ceiling</th><th scope="col" style="width:12%;">Floor</th><th scope="col" style="width:12%;">Market</th><th scope="col" style="width:18%;">LCM (extended)</th>
         </tr>
       </thead>
       <tbody id="p1-tbody"></tbody>
       <tfoot>
-        <tr class="total-row"><td colspan="7">Total (individual items)</td><td><input type="text" placeholder="$" id="p1-endinv" data-label="Ending inventory — individual items"></td></tr>
+        <tr class="total-row"><td colspan="8">Total (individual items)</td><td><input type="text" placeholder="$" id="p1-endinv" data-label="Ending inventory — individual items" aria-label="Ending inventory — individual items"></td></tr>
       </tfoot>
-    </table>
+    </table></div>
     <div class="check-bar">
       <button class="btn-check" id="checkPart1" type="button">Check my work</button>
       <span class="check-summary" id="part1Summary"></span>
@@ -160,24 +167,25 @@
     <span class="part-label">Part 2</span>
     <h2>LCM Applied to Total Inventory, and the Adjusting Entry</h2>
     <div class="req"><span class="letter">b.</span>Using total cost and total market across all five products, what amount should be reported for ending inventory applying LCM to <em>total</em> inventory?</div>
-    <table class="worksheet">
+    <div class="table-wrap"><table class="worksheet">
       <tbody>
-        <tr><td style="width:70%;">Ending inventory, LCM applied to total inventory</td><td><input type="text" placeholder="$" id="p2-endinvtotal" data-label="Ending inventory — total inventory"></td></tr>
+        <tr><td style="width:70%;">Ending inventory, LCM applied to total inventory</td><td><input type="text" placeholder="$" id="p2-endinvtotal" data-label="Ending inventory — total inventory" aria-label="Ending inventory — total inventory"></td></tr>
       </tbody>
-    </table>
+    </table></div>
     <div class="req"><span class="letter">c.</span>Record any necessary year-end adjusting entry based on the total-inventory approach. (If no entry is needed, enter $0 for both the debit and the credit.)</div>
-    <table class="worksheet" style="margin-bottom:16px;">
+    <div class="table-wrap"><table class="worksheet" style="margin-bottom:16px;">
       <tbody>
-        <tr><td style="width:70%;">Amount of the write-down (enter $0 if none is needed)</td><td><input type="text" placeholder="$" id="p2-writedown" data-label="Write-down amount"></td></tr>
+        <tr><td style="width:70%;">Amount of the write-down (enter $0 if none is needed)</td><td><input type="text" placeholder="$" id="p2-writedown" data-label="Write-down amount" aria-label="Write-down amount"></td></tr>
       </tbody>
-    </table>
-    <table class="je">
-      <thead><tr><th style="width:55%;">Account</th><th style="width:22%;">Debit</th><th style="width:23%;">Credit</th></tr></thead>
+    </table></div>
+    <div class="table-wrap"><table class="je">
+      <caption class="sr-only">Year-end adjusting entry: account, debit, and credit</caption>
+      <thead><tr><th scope="col" style="width:55%;">Account</th><th scope="col" style="width:22%;">Debit</th><th scope="col" style="width:23%;">Credit</th></tr></thead>
       <tbody>
-        <tr><td><select class="coa-select" id="p2-je1-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="p2-je1-debit"></td><td><input type="text" placeholder="$" id="p2-je1-credit"></td></tr>
-        <tr><td class="indent"><select class="coa-select" id="p2-je2-account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="p2-je2-debit"></td><td><input type="text" placeholder="$" id="p2-je2-credit"></td></tr>
+        <tr><td><select class="coa-select" id="p2-je1-account" data-label="Journal entry line 1 — Account" aria-label="Journal entry line 1 — Account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="p2-je1-debit" data-label="Journal entry line 1 — Debit" aria-label="Journal entry line 1 — Debit"></td><td><input type="text" placeholder="$" id="p2-je1-credit" data-label="Journal entry line 1 — Credit" aria-label="Journal entry line 1 — Credit"></td></tr>
+        <tr><td class="indent"><select class="coa-select" id="p2-je2-account" data-label="Journal entry line 2 — Account" aria-label="Journal entry line 2 — Account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="p2-je2-debit" data-label="Journal entry line 2 — Debit" aria-label="Journal entry line 2 — Debit"></td><td><input type="text" placeholder="$" id="p2-je2-credit" data-label="Journal entry line 2 — Credit" aria-label="Journal entry line 2 — Credit"></td></tr>
       </tbody>
-    </table>
+    </table></div>
     <p class="je-hint">Indent the credited account below the debited account, as usual.</p>
     <div class="check-bar">
       <button class="btn-check" id="checkPart2" type="button">Check my work</button>
@@ -263,7 +271,7 @@
       var q = qty[i];
       var cost = Math.round(q*unitCost*100)/100;
       var marketExt = Math.round(q*market*100)/100;
-      return { letter:letter, qty:q, unitCost:unitCost, replCost:replCost, ceiling:ceiling, floor:floor, market:market,
+      return { letter:letter, qty:q, unitCost:unitCost, replCost:replCost, sellingPrice:sellingPrice, ceiling:ceiling, floor:floor, market:market,
                cost:cost, marketExt:marketExt, lcm: Math.min(cost, marketExt) };
     });
 
@@ -286,10 +294,11 @@
         '<td class="given">'+it.qty.toLocaleString('en-US')+'</td>'+
         '<td class="given">'+money2(it.unitCost)+'</td>'+
         '<td class="given">'+money2(it.replCost)+'</td>'+
-        '<td><input type="text" placeholder="$" id="p1-'+it.letter+'-ceil" data-label="Product '+it.letter+' — Ceiling"></td>'+
-        '<td><input type="text" placeholder="$" id="p1-'+it.letter+'-floor" data-label="Product '+it.letter+' — Floor"></td>'+
-        '<td><input type="text" placeholder="$" id="p1-'+it.letter+'-mkt" data-label="Product '+it.letter+' — Market"></td>'+
-        '<td><input type="text" placeholder="$" id="p1-'+it.letter+'-lcm" data-label="Product '+it.letter+' — LCM (extended)"></td>';
+        '<td class="given">'+money2(it.sellingPrice)+'</td>'+
+        '<td><input type="text" placeholder="$" id="p1-'+it.letter+'-ceil" data-label="Product '+it.letter+' — Ceiling" aria-label="Product '+it.letter+' — Ceiling"></td>'+
+        '<td><input type="text" placeholder="$" id="p1-'+it.letter+'-floor" data-label="Product '+it.letter+' — Floor" aria-label="Product '+it.letter+' — Floor"></td>'+
+        '<td><input type="text" placeholder="$" id="p1-'+it.letter+'-mkt" data-label="Product '+it.letter+' — Market" aria-label="Product '+it.letter+' — Market"></td>'+
+        '<td><input type="text" placeholder="$" id="p1-'+it.letter+'-lcm" data-label="Product '+it.letter+' — LCM (extended)" aria-label="Product '+it.letter+' — LCM (extended)"></td>';
       tbody.appendChild(tr);
     });
   }
@@ -352,6 +361,7 @@
     var d = currentScenario;
     var p1Rows = [];
     d.items.forEach(function(it){
+      p1Rows.push(['Product '+it.letter+' — Unit selling price', money2(it.sellingPrice)]);
       p1Rows.push(['Product '+it.letter+' — Ceiling / Floor / Market', money2(it.ceiling)+' / '+money2(it.floor)+' / '+money2(it.market)]);
       p1Rows.push(['Product '+it.letter+' — LCM (extended)', money0(it.lcm)]);
     });
@@ -513,6 +523,14 @@
       var labelEl=partEl.querySelector('.part-label'); var h2El=partEl.querySelector('h2');
       var heading=(labelEl?labelEl.textContent+' \u2014 ':'')+(h2El?h2El.textContent:'');
       children.push(h(heading));
+      if(currentScenario && partEl.querySelector('#p1-tbody')){
+        var SW=[1400,1500,2000,2200,2260];
+        var sRows=[row(['Product','Quantity','Unit cost','Replacement cost','Unit selling price'].map(function(t,i){ return cell(t,SW[i],{bold:true,shading:PURPLE,color:'FFFFFF'}); }))];
+        currentScenario.items.forEach(function(it){ sRows.push(row([it.letter, it.qty.toLocaleString('en-US'), money2(it.unitCost), money2(it.replCost), money2(it.sellingPrice)].map(function(t,i){ return cell(String(t),SW[i]); }))); });
+        children.push(p('Scenario data (given)',{bold:true}));
+        children.push(table(SW, sRows));
+        children.push(p('Your answers',{bold:true}));
+      }
       var rows=[row([cell('Item',COLS[0],{bold:true,shading:PURPLE,color:'FFFFFF'}), cell('Your answer',COLS[1],{bold:true,shading:PURPLE,color:'FFFFFF'})])];
       partEl.querySelectorAll('input[type="text"], select').forEach(function(field){
         var lbl = field.getAttribute('data-label') || field.id;
