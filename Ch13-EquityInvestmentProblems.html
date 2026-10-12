@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Equity Method and Fair Value Investments — Mica Ridge Bakery and Black Balsam Pharmaceuticals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --purple:#592C88; --purple-deep:#38195A; --purple-mid:#6E3FA3;
+    --gold:#7A5A12; --gold-soft:#D6C398; --gold-pale:#F1E9D6;
+    --parchment:#F7F4EC; --paper:#FFFEFA; --ink:#221B2E; --slate:#5F5A6B;
+    --line:#DBD3E0; --field-border:#7F7790; --answer:#1E5C34; --answer-bg:#E7F1E9;
+    --danger:#9C3B34; --danger-bg:#F3E1DE; --missing:#7A5A12;
+    --shadow: 0 1px 2px rgba(56,25,90,0.07), 0 6px 18px rgba(56,25,90,0.08);
+  }
+  *{box-sizing:border-box;} html,body{margin:0;padding:0;}
+  body{ background:var(--parchment); color:var(--ink); font-family:'Inter',sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased; }
+  .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+  .skip-link{ position:absolute; left:8px; top:-60px; z-index:100; background:var(--paper); color:var(--purple-deep); font-weight:600; padding:10px 16px; border:2px solid var(--purple-deep); border-radius:5px; text-decoration:none; }
+  .skip-link:focus{ top:8px; }
+  :focus-visible{ outline:3px solid var(--purple-deep); outline-offset:2px; }
+  header :focus-visible{ outline-color:#fff; }
+  header{ background: linear-gradient(180deg, var(--purple) 0%, var(--purple-deep) 100%); color:#F1E9D6; padding: 30px 6vw 24px; position:relative; }
+  header::after{ content:""; position:absolute; left:0; right:0; bottom:0; height:4px; background: linear-gradient(90deg, #D6C398, #B0925C 40%, #D6C398 70%, #B0925C); }
+  .eyebrow{ font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold-soft); margin:0 0 10px; }
+  h1.title{ font-family:'Source Serif 4', serif; font-weight:600; font-size:clamp(24px,3.4vw,34px); margin:0 0 8px; letter-spacing:-0.01em; }
+  .subtitle{ font-size:14.5px; color:#D9CDE5; max-width:680px; margin:0; }
+  .id-bar{ max-width:900px; margin:0 auto; padding:18px 6vw 0; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .id-bar label{ font-size:13px; font-weight:600; color:var(--slate); }
+  .id-bar input[type="text"]{ font-family:'IBM Plex Mono', monospace; font-size:13.5px; padding:8px 11px; border:1px solid var(--field-border); border-radius:5px; background:var(--paper); color:var(--ink); width:180px; min-height:36px; }
+  .id-bar button{ font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600; border-radius:5px; padding:8px 15px; border:1px solid var(--purple); background:var(--purple); color:#fff; cursor:pointer; min-height:36px; }
+  .id-bar button:hover{ background:var(--purple-mid); }
+  .id-status{ font-size:13px; font-weight:600; color:var(--answer); }
+  .rounding-note{ max-width:900px; margin:14px auto 0; padding:12px 6vw; font-size:13px; color:var(--slate); line-height:1.5; }
+  .rounding-note strong{ color:var(--purple); font-weight:600; }
+  ::placeholder{ color:var(--slate); opacity:1; }
+  main{ max-width:900px; margin:0 auto; padding:22px 6vw 90px; }
+  .part{ background:var(--paper); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); padding:24px 26px 26px; margin-top:26px; }
+  .part-label{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--gold-soft); background:var(--purple); display:inline-block; padding:3px 9px; border-radius:4px; letter-spacing:.04em; margin-bottom:12px; }
+  .part h2{ font-family:'Source Serif 4', serif; font-size:21px; font-weight:600; color:var(--purple); margin:0 0 12px; }
+  .scenario{ background:var(--parchment); border-left:3px solid var(--gold); padding:14px 18px; border-radius:0 6px 6px 0; font-size:14.5px; color:var(--ink); margin-bottom:20px; }
+  .scenario p{ margin:0 0 10px; } .scenario p:last-child{ margin-bottom:0; }
+  .scenario ul{ margin:6px 0 0; padding-left:22px; } .scenario li{ margin:3px 0; }
+  .scenario span.val{ font-weight:700; color:var(--purple-deep); }
+  .req{ font-weight:600; font-size:14.5px; color:var(--ink); margin:22px 0 10px; }
+  .req .letter{ font-family:'IBM Plex Mono', monospace; color:var(--purple); margin-right:6px; }
+  .table-wrap{ overflow-x:auto; }
+  table.je{ width:100%; border-collapse:collapse; font-size:13.5px; margin-top:6px; min-width:480px; }
+  table.je th{ text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.03em; color:var(--slate); border-bottom:2px solid var(--purple); padding:8px 8px; }
+  table.je td{ border-bottom:1px solid var(--line); padding:8px 8px; vertical-align:top; }
+  table.je input[type="text"]{ width:100%; font-family:'IBM Plex Mono', monospace; font-size:13.5px; padding:6px 8px; border:1px solid var(--field-border); border-radius:5px; background:var(--parchment); color:var(--ink); min-height:34px; }
+  table.je select.coa-select, .field-row select{ width:100%; font-family:'Inter',sans-serif; font-size:13.5px; padding:6px 8px; border:1px solid var(--field-border); border-radius:5px; background:var(--parchment); color:var(--ink); min-height:34px; }
+  .field-row{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,260px); gap:8px 16px; align-items:start; margin:10px 0; }
+  .field-row label{ font-size:14px; font-weight:500; padding-top:6px; }
+  .field-row input[type="text"]{ width:100%; font-family:'IBM Plex Mono', monospace; font-size:13.5px; padding:6px 8px; border:1px solid var(--field-border); border-radius:5px; background:var(--parchment); color:var(--ink); min-height:34px; }
+  .field-row input:focus, .field-row select:focus, table.je input:focus, table.je select:focus, .id-bar input:focus, .submit-row input:focus{ background:var(--paper); }
+  .je-hint{ font-size:12.5px; color:var(--slate); margin-top:6px; }
+  .flag{ display:block; font-size:12px; font-weight:700; margin-top:3px; }
+  .flag.good{ color:var(--answer); } .flag.bad{ color:var(--danger); } .flag.miss{ color:var(--missing); }
+  .key{ margin-top:14px; background:var(--answer-bg); border:1px solid #6FA27E; border-radius:8px; padding:14px 16px; color:var(--answer); font-size:13.5px; }
+  .key h3{ margin:0 0 6px; font-family:'Source Serif 4', serif; font-size:14.5px; }
+  .key table{ width:100%; border-collapse:collapse; font-size:13px; margin-top:4px; }
+  .key td, .key th{ padding:4px 6px; border-bottom:1px dashed #6FA27E; text-align:left; font-weight:inherit; vertical-align:top; }
+  .key tr:last-child td, .key tr:last-child th{ border-bottom:none; }
+  .key .entry-head th{ font-weight:700; padding-top:10px; }
+  .check-bar{ margin-top:20px; padding-top:16px; border-top:1px solid var(--line); display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  .btn-check{ font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600; border-radius:5px; padding:9px 18px; border:1px solid var(--purple); background:var(--purple); color:#fff; cursor:pointer; min-height:38px; }
+  .btn-check:hover{ background:var(--purple-mid); }
+  .btn-check:disabled{ background:#6B6577; border-color:#6B6577; cursor:not-allowed; }
+  .check-summary{ font-size:13.5px; font-weight:600; }
+  .check-summary.good{ color:var(--answer); } .check-summary.bad{ color:var(--danger); }
+  .check-disclaimer{ font-size:12px; color:var(--slate); width:100%; margin-top:2px; font-style:italic; }
+  .attempts-note{ font-size:12.5px; font-weight:600; color:var(--slate); }
+  .attempts-note.low{ color:var(--gold); } .attempts-note.locked{ color:var(--danger); }
+  input:disabled, select:disabled{ cursor:not-allowed; color:var(--ink); -webkit-text-fill-color:var(--ink); opacity:1; background:#ECE8E0 !important; }
+  .score-bar{ margin-top:26px; background:var(--paper); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); padding:16px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+  .score-bar h2{ font-family:'Source Serif 4', serif; font-size:16px; font-weight:600; color:var(--purple); margin:0; }
+  .score-bar .score-value{ font-family:'IBM Plex Mono', monospace; font-size:18px; font-weight:600; color:var(--ink); }
+  .score-bar .score-breakdown{ font-size:13px; color:var(--slate); width:100%; }
+  input.field-correct, select.field-correct{ border:2px solid var(--answer) !important; background:var(--answer-bg) !important; }
+  input.field-incorrect, select.field-incorrect{ border:2px dashed var(--danger) !important; background:var(--danger-bg) !important; }
+  input.field-missing, select.field-missing{ border:2px dotted var(--missing) !important; background:var(--gold-pale) !important; }
+  .key-reveal-note{ margin-top:14px; background:var(--gold-pale); border:1px solid var(--missing); border-radius:8px; padding:12px 16px; color:var(--purple-deep); font-size:13.5px; font-weight:600; display:none; }
+  .submit-bar{ background:var(--paper); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); padding:22px 26px 24px; margin-top:26px; }
+  .submit-bar h2{ font-family:'Source Serif 4', serif; font-size:19px; font-weight:600; color:var(--purple); margin:0 0 14px; }
+  .submit-row{ display:flex; align-items:center; gap:10px; margin-bottom:12px; flex-wrap:wrap; }
+  .submit-row label{ font-size:13px; font-weight:600; color:var(--slate); }
+  .submit-row input[type="text"]{ font-family:'Inter',sans-serif; font-size:13.5px; padding:8px 11px; border:1px solid var(--field-border); border-radius:5px; background:var(--parchment); color:var(--ink); width:240px; max-width:100%; min-height:36px; }
+  .btn-submit{ font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600; border-radius:5px; padding:10px 18px; border:1px solid var(--purple); background:var(--purple); color:#fff; cursor:pointer; min-height:38px; }
+  .btn-submit:hover{ background:var(--purple-mid); }
+  .btn-submit-outline{ background:var(--paper); color:var(--purple); } .btn-submit-outline:hover{ background:var(--parchment); }
+  .submit-status{ font-size:13px; font-weight:600; min-height:18px; margin:10px 0 0; color:var(--answer); }
+  .submit-status.error{ color:var(--danger); }
+  .submit-hint{ font-size:12.5px; color:var(--slate); margin:6px 0 0; }
+  .print-name-line{ display:none; font-size:13px; color:var(--ink); padding:0 6vw; margin:0 0 10px; }
+  footer{ text-align:center; padding:26px 6vw 40px; font-size:12.5px; color:var(--slate); }
+  @media print{
+    .print-hide, .id-bar, .check-bar, .rounding-note, .skip-link, .flag{ display:none !important; }
+    header{ background:none !important; color:var(--ink) !important; padding:0 0 14px !important; }
+    header::after{ display:none !important; }
+    .eyebrow{ color:var(--purple) !important; } .subtitle{ color:var(--slate) !important; }
+    body{ background:#fff !important; }
+    .part{ box-shadow:none !important; border:1px solid #999 !important; break-inside:auto; }
+    .part .req{ break-after:avoid; } table.je tr{ break-inside:avoid; }
+    .score-bar{ box-shadow:none !important; border:1.5px solid var(--purple) !important; break-inside:avoid; break-before:avoid; }
+    input[type="text"], select{ border:none !important; border-bottom:1px solid #000 !important; background:transparent !important; border-radius:0 !important; color:#000 !important; -webkit-appearance:none; appearance:none; padding:2px 4px !important; }
+    .print-name-line{ display:block !important; }
+    .table-wrap{ overflow:visible; }
+  }
+  @media (max-width:600px){ header, main, .id-bar{ padding-left:5vw; padding-right:5vw; } table.je{ font-size:12.5px; } .field-row{ grid-template-columns:1fr; } .part{ padding:20px 16px 22px; } }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to the assignment</a>
+
+<header>
+  <p class="eyebrow">ACCT 352 &middot; Investments in Equity Securities</p>
+  <h1 class="title">Equity Investment Problems</h1>
+  <p class="subtitle">Mica Ridge Bakery and Black Balsam Pharmaceuticals — comparing the equity method (significant influence) with the fair value method, including dividends, the investor’s share of net income, the depreciation adjustment for the excess of cost over book value, and the year-end fair value adjustment.</p>
+</header>
+
+<p class="print-name-line" id="printNameLine"></p>
+<p class="print-name-line" id="printScoreLine" style="font-weight:600;"></p>
+
+<section aria-label="Student ID and rounding instructions">
+<div class="id-bar">
+  <label for="studentId">Student ID</label>
+  <input type="text" id="studentId" placeholder="e.g. 92841016" autocomplete="off" aria-describedby="idStatus">
+  <button id="genBtn" type="button">Generate scenario</button>
+  <span class="id-status" id="idStatus" role="status" aria-live="polite"></span>
+</div>
+
+<div class="rounding-note">
+  <strong>Rounding convention:</strong> round every dollar amount to the nearest dollar. Assume the investor owns the percentage stated in each part, and treat any excess of cost over book value that is not attributed to depreciable assets as goodwill. List debits before credits. Use the account dropdowns; choose &ldquo;No Entry Required&rdquo; when no entry is needed.
+</div>
+</section>
+
+<main id="main">
+
+    <section class="part" id="part1" aria-labelledby="h-part1">
+    <span class="part-label">Part 1</span>
+    <h2 id="h-part1">Mica Ridge Bakery &mdash; 30% Interest (Equity Method)</h2>
+    <div class="scenario" id="p1-scenario"></div>
+    <div id="p1-entries"></div>
+    <div class="req"><span class="letter" id="p1-letter-rep"></span><span id="p1-rep-text"></span></div>
+    <div class="field-row"><label for="p1-bs" id="p1-bs-lbl"></label><div><input type="text" inputmode="decimal" autocomplete="off" placeholder="$" id="p1-bs"></div></div>
+    <div class="field-row"><label for="p1-inc" id="p1-inc-lbl"></label><div><input type="text" inputmode="decimal" autocomplete="off" placeholder="$" id="p1-inc"></div></div>
+    <div class="check-bar">
+      <button class="btn-check" id="checkPart1" type="button">Check my work</button>
+      <span class="check-summary" id="part1Summary" role="status" aria-live="polite"></span>
+      <span class="attempts-note" id="part1Attempts" aria-live="polite">3 attempts remaining</span>
+      <span class="check-disclaimer">This checks the accounts you selected and the dollar amounts you entered against the key, within a small rounding tolerance. Entries may be listed in any order. Enter a loss as a negative number, such as -1,250 or (1,250).</span>
+    </div>
+    <div class="key" id="part1Key" style="display:none;"></div>
+  </section>
+
+  <section class="part" id="part2" aria-labelledby="h-part2">
+    <span class="part-label">Part 2</span>
+    <h2 id="h-part2">Mica Ridge Bakery &mdash; 10% Interest (Fair Value Method)</h2>
+    <div class="scenario" id="p2-scenario"></div>
+    <div id="p2-entries"></div>
+    <div class="req"><span class="letter" id="p2-letter-rep"></span><span id="p2-rep-text"></span></div>
+    <div class="field-row"><label for="p2-bs" id="p2-bs-lbl"></label><div><input type="text" inputmode="decimal" autocomplete="off" placeholder="$" id="p2-bs"></div></div>
+    <div class="field-row"><label for="p2-inc" id="p2-inc-lbl"></label><div><input type="text" inputmode="decimal" autocomplete="off" placeholder="$" id="p2-inc"></div></div>
+    <div class="check-bar">
+      <button class="btn-check" id="checkPart2" type="button">Check my work</button>
+      <span class="check-summary" id="part2Summary" role="status" aria-live="polite"></span>
+      <span class="attempts-note" id="part2Attempts" aria-live="polite">3 attempts remaining</span>
+      <span class="check-disclaimer">This checks the accounts you selected and the dollar amounts you entered against the key, within a small rounding tolerance. Entries may be listed in any order. Enter a loss as a negative number, such as -1,250 or (1,250).</span>
+    </div>
+    <div class="key" id="part2Key" style="display:none;"></div>
+  </section>
+
+  <section class="part" id="part3" aria-labelledby="h-part3">
+    <span class="part-label">Part 3</span>
+    <h2 id="h-part3">Black Balsam Pharmaceuticals &mdash; Equity Method</h2>
+    <div class="scenario" id="p3-scenario"></div>
+    <div id="p3-entries"></div>
+    <div class="req"><span class="letter" id="p3-letter-rep"></span><span id="p3-rep-text"></span></div>
+    <div class="field-row"><label for="p3-bs" id="p3-bs-lbl"></label><div><input type="text" inputmode="decimal" autocomplete="off" placeholder="$" id="p3-bs"></div></div>
+    <div class="field-row"><label for="p3-inc" id="p3-inc-lbl"></label><div><input type="text" inputmode="decimal" autocomplete="off" placeholder="$" id="p3-inc"></div></div>
+    <div class="check-bar">
+      <button class="btn-check" id="checkPart3" type="button">Check my work</button>
+      <span class="check-summary" id="part3Summary" role="status" aria-live="polite"></span>
+      <span class="attempts-note" id="part3Attempts" aria-live="polite">3 attempts remaining</span>
+      <span class="check-disclaimer">This checks the accounts you selected and the dollar amounts you entered against the key, within a small rounding tolerance. Entries may be listed in any order. Enter a loss as a negative number, such as -1,250 or (1,250).</span>
+    </div>
+    <div class="key" id="part3Key" style="display:none;"></div>
+  </section>
+
+<section class="score-bar" aria-labelledby="h-score">
+    <h2 id="h-score">Assignment score</h2>
+    <span class="score-value" id="overallScore" role="status" aria-live="polite">Check all three parts to see your score</span>
+    <span class="score-breakdown" id="scoreBreakdown"></span>
+  </section>
+
+  <div class="key-reveal-note" id="keyRevealNote" role="status">You've used all 3 attempts on all three parts — the answer key is now shown below each part, and a submission PDF has opened for you to save.</div>
+
+  <section class="submit-bar print-hide" aria-labelledby="h-submit">
+    <h2 id="h-submit">Ready to submit?</h2>
+    <div class="submit-row">
+      <label for="studentName">Your name</label>
+      <input type="text" id="studentName" placeholder="First and last name" autocomplete="name">
+    </div>
+    <div class="submit-row submit-actions">
+      <button class="btn-submit" id="printBtn" type="button">Print / Save as PDF</button>
+      <button class="btn-submit btn-submit-outline" id="downloadDocxBtn" type="button">Download as Word (.docx)</button>
+    </div>
+    <p class="submit-status" id="submitStatus" role="status" aria-live="polite"></p>
+    <p class="submit-hint">Both options capture exactly what's currently filled in above, including your generated scenario numbers. &ldquo;Print / Save as PDF&rdquo; works offline; &ldquo;Download as Word&rdquo; needs an internet connection to load the export tool.</p>
+  </section>
+
+</main>
+
+<footer>Equity Investment Problems &middot; ACCT 352 &middot; Western Carolina University</footer>
+
+<script>
+(function(){
+  function hashSeed(str){ var h=2166136261; for(var i=0;i<str.length;i++){ h ^= str.charCodeAt(i); h = Math.imul(h,16777619); } return h>>>0; }
+  function mulberry32(seed){ return function(){ seed |= 0; seed = seed + 0x6D2B79F5 | 0; var t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  function pick(rand, arr){ return arr[Math.floor(rand()*arr.length)]; }
+  function money0(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
+  var YEAR = new Date().getFullYear();
+    var NOENTRY = 'No Entry Required';
+
+  var CHART_OF_ACCOUNTS = {
+    'Assets': ['Cash','Dividends Receivable','Goodwill','Investment in Equity Affiliate','Investment in Equity Securities','Investment in Hiwassee Cosmetics','Investment in Linville Gorge Labeling'],
+    'Revenues and gains': ['Dividend Revenue','Equity in Investee Income','Investment Revenue','Gain on Sale of Investments','Unrealized Holding Gain \u2014 Net Income'],
+    'Expenses and losses': ['Depreciation Expense','Equity in Investee Loss','Unrealized Holding Loss \u2014 Net Income'],
+    'Other comprehensive income': ['Unrealized Holding Gain \u2014 OCI','Unrealized Holding Loss \u2014 OCI'],
+    'Other': [NOENTRY]
+  };
+  function populateSelects(){
+    var acct='<option value="">Select account\u2026</option>';
+    Object.keys(CHART_OF_ACCOUNTS).forEach(function(g){
+      acct+='<optgroup label="'+g+'">';
+      CHART_OF_ACCOUNTS[g].forEach(function(a){ acct+='<option value="'+a+'">'+a+'</option>'; });
+      acct+='</optgroup>';
+    });
+    document.querySelectorAll('select.coa-select').forEach(function(s){ if(!s.dataset.populated){ s.innerHTML=acct; s.dataset.populated='1'; } });
+  }
+
+  // ---------- Scenario generation ----------
+  function L(side, acct, amt, alts){ return {side:side, acct:acct, amt:amt, alts:alts||[acct]}; }
+  function money2(n){ return '$'+(Math.round(n*100)/100).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+
+  var INV1 = 'Investment in Linville Gorge Labeling', INV3 = 'Investment in Hiwassee Cosmetics', INVFV = 'Investment in Equity Securities';
+  var INC = 'Equity in Investee Income';
+
+  // One investment's raw numbers, shared by Parts 1 and 2 (same shares, different interest)
+  function mkInvestment(rand, o){
+    var S = pick(rand,o.shares), BV = pick(rand,o.bv), D = pick(rand,o.dep), GW = pick(rand,o.gw), Life = pick(rand,o.life);
+    var NI = pick(rand,o.ni), div = pick(rand,o.div);
+    var own = 0.30;
+    var bvShare = Math.round(own*BV), deprShare = Math.round(own*D);
+    var price = bvShare + deprShare + GW;
+    var adj = Math.round(deprShare/Life);
+    var dividends = Math.round(div*S);
+    var niShare = Math.round(own*NI);
+    var pct = pick(rand,[0.04,0.06,0.08,0.10]), up = rand()<0.5;
+    var fvps = Math.round(price*(up?1+pct:1-pct)/S*100)/100;
+    var fvTotal = Math.round(fvps*S);
+    return {S:S, BV:BV, D:D, GW:GW, Life:Life, NI:NI, div:div, bvShare:bvShare, deprShare:deprShare, price:price, adj:adj,
+            dividends:dividends, niShare:niShare, fvps:fvps, fvTotal:fvTotal, excess:price-bvShare};
+  }
+  var v = function(t){ return '<span class="val">'+t+'</span>'; };
+
+  function equityEntries(x, inv, d1, d2, pur){
+    var IA = [inv,'Investment in Equity Affiliate'], CA = [INC,'Investment Revenue'];
+    return [
+      {title:'Record the purchase of the investment on '+pur+', '+YEAR+'.', short:'Purchase on '+pur, rows:4,
+        lines:[L('Dr',inv,x.price,IA), L('Cr','Cash',x.price)]},
+      {title:'Record the receipt of dividends on '+d1+', '+YEAR+'.', short:'Dividends on '+d1, rows:4,
+        lines:[L('Dr','Cash',x.dividends), L('Cr',inv,x.dividends,IA)]},
+      {title:'Record the investor\u2019s share of the investee\u2019s net income for '+YEAR+'. If no entry is required, select \u201cNo Entry Required\u201d on the first line.', short:'Share of net income, December 31', rows:4,
+        lines:[L('Dr',inv,x.niShare,IA), L('Cr',INC,x.niShare,CA)]},
+      {title:'Record the adjustment, if any, for the excess of cost over book value attributable to depreciable assets for '+YEAR+'. If no entry is required, select \u201cNo Entry Required\u201d on the first line.', short:'Depreciation adjustment, December 31', rows:4,
+        lines:[L('Dr',INC,x.adj,CA), L('Cr',inv,x.adj,IA)]},
+      {title:'Record any adjustment to fair value at December 31, '+YEAR+'. If no entry is required, select \u201cNo Entry Required\u201d on the first line.', short:'Fair value adjustment, December 31', rows:3, none:true, lines:[],
+        noneNote:'Under the equity method the investment is not adjusted to fair value.'}
+    ];
+  }
+
+  function generateScenario(id){
+    var seedStr = (id || 'demo').trim().toLowerCase();
+    var rand = mulberry32(hashSeed(seedStr));
+    var x = mkInvestment(rand, {shares:[60000,80000,100000], bv:[2400000,2600000,2800000,3000000,3200000], dep:[120000,160000,200000,240000], gw:[60000,90000,120000,150000], life:[4,5,6,8], ni:[320000,360000,400000,440000,480000], div:[0.40,0.50,0.60,0.75,0.80,1.00]});
+    var z = mkInvestment(rand, {shares:[40000,50000,60000], bv:[1200000,1500000,1800000,2100000], dep:[90000,150000,210000], gw:[45000,75000,105000], life:[8,9,10,12], ni:[200000,240000,280000,320000], div:[0.50,0.60,0.80,1.00,1.20]});
+    var parts = [];
+
+    // ---- Part 1: Mica Ridge / Linville Gorge, equity method ----
+    var p1 = {kind:'equity', x:x, inv:INV1, entries:equityEntries(x, INV1, 'December 15', 'December 31', 'January 4'),
+      bsAnswer: x.price - x.dividends + x.niShare - x.adj, incAnswer: x.niShare - x.adj,
+      bsLabel:'Amount reported for the investment in Linville Gorge on the December 31, '+YEAR+' balance sheet',
+      incLabel:'Amount the investment adds to (or subtracts from) Mica Ridge\u2019s pretax net income for '+YEAR+' (enter a loss as a negative number)',
+      html:
+        '<p>On January 4, '+YEAR+', Mica Ridge Bakery, Inc. paid '+v(money0(x.price))+' for '+v(x.S.toLocaleString('en-US'))+' shares of Linville Gorge Labeling Company common stock. The investment represents a '+v('30%')+' interest in the net assets of Linville Gorge and gave Mica Ridge the ability to exercise significant influence over Linville Gorge\u2019s operations. Mica Ridge received dividends of '+v(money2(x.div))+' per share on December 15, '+YEAR+', and Linville Gorge reported net income of '+v(money0(x.NI))+' for the year. The market value of Linville Gorge\u2019s common stock at December 31 was '+v(money2(x.fvps))+' per share. On the purchase date, the book value of Linville Gorge\u2019s identifiable net assets was '+v(money0(x.BV))+' and:</p>'+
+        '<ul><li>The fair value of Linville Gorge\u2019s depreciable assets, with an average remaining useful life of '+v(x.Life+' years')+', exceeded their book value by '+v(money0(x.D))+'.</li>'+
+        '<li>The remainder of the excess of the cost of the investment over the book value of net assets purchased was attributable to goodwill.</li></ul>'};
+    parts.push(p1);
+
+    // ---- Part 2: same shares, 10% interest, fair value through net income ----
+    var up = x.fvTotal >= x.price, gl = Math.abs(x.fvTotal - x.price);
+    var e2 = [
+      {title:'Record the purchase of the investment on January 4, '+YEAR+'.', short:'Purchase on January 4', rows:4,
+        lines:[L('Dr',INVFV,x.price,[INVFV,INV1]), L('Cr','Cash',x.price)]},
+      {title:'Record the receipt of dividends on December 15, '+YEAR+'.', short:'Dividends on December 15', rows:4,
+        lines:[L('Dr','Cash',x.dividends), L('Cr','Dividend Revenue',x.dividends)]},
+      {title:'Record the investor\u2019s share of the investee\u2019s net income for '+YEAR+'. If no entry is required, select \u201cNo Entry Required\u201d on the first line.', short:'Share of net income, December 31', rows:4, none:true, lines:[],
+        noneNote:'Without significant influence, the investor does not record its share of the investee\u2019s income.'},
+      {title:'Record the adjustment, if any, for the excess of cost over book value attributable to depreciable assets for '+YEAR+'. If no entry is required, select \u201cNo Entry Required\u201d on the first line.', short:'Depreciation adjustment, December 31', rows:4, none:true, lines:[],
+        noneNote:'The excess of cost over book value is tracked only under the equity method.'},
+      {title:'Record any adjustment to fair value at December 31, '+YEAR+'. If no entry is required, select \u201cNo Entry Required\u201d on the first line.', short:'Fair value adjustment, December 31', rows:3,
+        lines: up ? [L('Dr',INVFV,gl,[INVFV,INV1]), L('Cr','Unrealized Holding Gain \u2014 Net Income',gl)]
+                  : [L('Dr','Unrealized Holding Loss \u2014 Net Income',gl), L('Cr',INVFV,gl,[INVFV,INV1])]}
+    ];
+    parts.push({kind:'fv', x:x, entries:e2, bsAnswer:x.fvTotal, incAnswer:x.dividends + (x.fvTotal - x.price),
+      bsLabel:'Amount reported for the investment on the December 31, '+YEAR+' balance sheet',
+      incLabel:'Amount the investment adds to (or subtracts from) Mica Ridge\u2019s pretax net income for '+YEAR+' (enter a loss as a negative number)',
+      html:
+        '<p>Assume instead that the same '+v(x.S.toLocaleString('en-US'))+' shares of Linville Gorge Labeling Company, purchased by Mica Ridge Bakery, Inc. for '+v(money0(x.price))+' on January 4, '+YEAR+', represent only a '+v('10%')+' interest in Linville Gorge, so Mica Ridge has <em>no</em> significant influence. The equity securities are accounted for at fair value, with changes in fair value reported in net income.</p>'+
+        '<p>The facts are otherwise unchanged: Mica Ridge received dividends of '+v(money2(x.div))+' per share on December 15, '+YEAR+'; Linville Gorge reported net income of '+v(money0(x.NI))+' for the year; and the market value of Linville Gorge\u2019s common stock at December 31 was '+v(money2(x.fvps))+' per share.</p>'});
+
+    // ---- Part 3: Black Balsam / Hiwassee, equity method ----
+    parts.push({kind:'equity', x:z, inv:INV3, entries:equityEntries(z, INV3, 'December 21', 'December 31', 'January 2'),
+      bsAnswer: z.price - z.dividends + z.niShare - z.adj, incAnswer: z.niShare - z.adj,
+      bsLabel:'Amount reported for the investment in Hiwassee on the December 31, '+YEAR+' balance sheet',
+      incLabel:'Amount the investment adds to (or subtracts from) Black Balsam\u2019s pretax net income for '+YEAR+' (enter a loss as a negative number)',
+      html:
+        '<p>Black Balsam Pharmaceuticals, Inc. paid '+v(money0(z.price))+' on January 2, '+YEAR+', for '+v(z.S.toLocaleString('en-US'))+' shares of Hiwassee Cosmetics Company common stock. The investment represents a '+v('30%')+' interest in the net assets of Hiwassee and gave Black Balsam the ability to exercise significant influence over Hiwassee\u2019s operations. Black Balsam received dividends of '+v(money2(z.div))+' per share on December 21, '+YEAR+', and Hiwassee reported net income of '+v(money0(z.NI))+' for the year. The fair value of Hiwassee\u2019s common stock at December 31 was '+v(money2(z.fvps))+' per share. Additional research revealed:</p>'+
+        '<ul><li>The book value of Hiwassee\u2019s net assets was '+v(money0(z.BV))+'.</li>'+
+        '<li>The fair value of Hiwassee\u2019s depreciable assets exceeded their book value by '+v(money0(z.D))+'. These assets had an average remaining useful life of '+v(z.Life+' years')+'.</li>'+
+        '<li>The remainder of the excess of the cost of the investment over the book value of net assets purchased was attributable to goodwill.</li></ul>'});
+    return { parts:parts };
+  }
+
+  // ---------- Build the entry tables ----------
+  var LETTERS = ['a','b','c','d','e'];
+  function entryHtml(pi, ei, e){
+    var pre = 'p'+(pi+1)+'-e'+(ei+1);
+    var rows = '';
+    for(var r=1;r<=e.rows;r++){
+      var base = 'Part '+(pi+1)+', entry '+LETTERS[ei]+', line '+r;
+      rows += '<tr>'+
+        '<td><select class="coa-select" id="'+pre+'-r'+r+'-acct" data-label="'+base+' \u2014 Account" aria-label="'+base+' account"></select></td>'+
+        '<td><input type="text" inputmode="decimal" autocomplete="off" placeholder="$" id="'+pre+'-r'+r+'-dr" data-label="'+base+' \u2014 Debit" aria-label="'+base+' debit"></td>'+
+        '<td><input type="text" inputmode="decimal" autocomplete="off" placeholder="$" id="'+pre+'-r'+r+'-cr" data-label="'+base+' \u2014 Credit" aria-label="'+base+' credit"></td></tr>';
+    }
+    return '<div class="req"><span class="letter">'+LETTERS[ei]+'.</span>'+e.title+'</div>'+
+      '<div class="table-wrap" role="region" tabindex="0" aria-label="Journal entry '+LETTERS[ei]+' worksheet, Part '+(pi+1)+'">'+
+      '<table class="je"><caption class="sr-only">Journal entry '+LETTERS[ei]+': '+e.short+'</caption>'+
+      '<thead><tr><th scope="col" style="width:55%;">Account</th><th scope="col" style="width:22%;">Debit</th><th scope="col" style="width:23%;">Credit</th></tr></thead>'+
+      '<tbody>'+rows+'</tbody></table></div>';
+  }
+
+  // ---------- State ----------
+  var currentScenario = null;
+  var MAX_ATTEMPTS = 3;
+  var TOTAL_POINTS = 100;
+  var scoreState = [null,null,null];
+  var attempts = [0,0,0];
+  var locked = [false,false,false];
+  var keyRevealed = false;
+  var possible = [0,0,0];
+
+  function itemCount(p){
+    var n = 2; // balance sheet amount + location
+    p.entries.forEach(function(e){ n += e.none ? 1 : e.lines.length*2; });
+    return n;
+  }
+
+  // ---------- Helpers ----------
+  function $(id){ return document.getElementById(id); }
+  function parseMoney(s){ if(s===null||s===undefined) return NaN; var t=String(s).trim(); var neg=/^\(.*\)$/.test(t)||/^[\u2212\u2013-]/.test(t.replace(/^\$/,'')); var c=t.replace(/[^0-9.]/g,''); if(c===''||c==='.') return NaN; var n=parseFloat(c); return neg?-n:n; }
+  function near(a,b,tol){ if(isNaN(a)||isNaN(b)) return false; return Math.abs(a-b) <= tol; }
+  function clearFlag(el){ var n = el.nextElementSibling; if(n && n.classList.contains('flag')) n.remove(); }
+  function clearFieldState(el){ if(!el) return; el.classList.remove('field-correct','field-incorrect','field-missing'); el.removeAttribute('aria-invalid'); clearFlag(el); }
+  function clearAllFieldStates(){ document.querySelectorAll('.field-correct,.field-incorrect,.field-missing').forEach(clearFieldState); document.querySelectorAll('.flag').forEach(function(f){ f.remove(); }); }
+  function bindClear(el){
+    if(el.dataset.clearBound) return;
+    el.addEventListener(el.tagName==='SELECT'?'change':'input', function(){ clearFieldState(el); });
+    el.dataset.clearBound='1';
+  }
+  function setState(el, state){ // 'good' | 'bad' | 'miss'
+    if(!el) return;
+    clearFieldState(el);
+    var cls = state==='good'?'field-correct':(state==='bad'?'field-incorrect':'field-missing');
+    el.classList.add(cls);
+    if(state==='bad') el.setAttribute('aria-invalid','true');
+    var f = document.createElement('span'); f.className='flag '+state;
+    f.innerHTML = state==='good' ? '<span aria-hidden="true">\u2713</span> Correct' : (state==='bad' ? '<span aria-hidden="true">\u2717</span> Not correct' : '<span aria-hidden="true">!</span> Required');
+    el.insertAdjacentElement('afterend', f);
+    bindClear(el);
+  }
+  function blank(el){ return !el.value || !el.value.trim(); }
+  function partFields(pi){ return Array.prototype.slice.call(document.querySelectorAll('#part'+(pi+1)+' input, #part'+(pi+1)+' select')); }
+
+  function updateSummary(elId, results, pointsPossible){
+    var el=$(elId);
+    var graded=results.length;
+    var correct=results.filter(function(r){return r===true;}).length;
+    var points=graded>0?(correct/graded)*pointsPossible:0;
+    el.textContent=correct+' of '+graded+' correct \u2014 '+points.toFixed(1)+' of '+pointsPossible.toFixed(1)+' pts';
+    el.classList.remove('good','bad'); el.classList.add(correct===graded && graded>0?'good':'bad');
+    return points;
+  }
+  function updateOverallScore(){
+    var el=$('overallScore'), br=$('scoreBreakdown');
+    if(scoreState.every(function(s){return s===null;})){ el.textContent='Check all three parts to see your score'; br.textContent=''; return; }
+    var total=0; scoreState.forEach(function(s){ if(s!==null) total+=s; });
+    el.textContent=total.toFixed(1)+' / '+TOTAL_POINTS.toFixed(1)+' pts';
+    br.textContent = scoreState.map(function(s,i){ return 'Part '+(i+1)+': '+(s===null?'not checked yet':s.toFixed(1)+' / '+possible[i].toFixed(1)+' pts'); }).join('  \u00b7  ');
+  }
+  function updateAttemptsNote(pi){
+    var el=$('part'+(pi+1)+'Attempts'); var remaining=MAX_ATTEMPTS-attempts[pi];
+    el.classList.remove('low','locked');
+    if(remaining<=0){ el.textContent='No attempts remaining \u2014 inputs locked'; el.classList.add('locked'); }
+    else { el.textContent=remaining+' attempt'+(remaining===1?'':'s')+' remaining'; if(remaining===1) el.classList.add('low'); }
+  }
+  function lockPart(pi){ partFields(pi).forEach(function(el){ el.disabled=true; }); var b=$('checkPart'+(pi+1)); b.disabled=true; b.textContent='No attempts remaining'; }
+  function unlockPart(pi){ partFields(pi).forEach(function(el){ el.disabled=false; }); var b=$('checkPart'+(pi+1)); b.disabled=false; b.textContent='Check my work'; }
+
+  // ---------- Grading ----------
+  function rowEls(pi, ei, r){ var pre='p'+(pi+1)+'-e'+(ei+1)+'-r'+r; return {sel:$(pre+'-acct'), dr:$(pre+'-dr'), cr:$(pre+'-cr')}; }
+
+  function gradeEntry(pi, ei, e){
+    var results = [], rows = [], used = {};
+    for(var r=1;r<=e.rows;r++) rows.push(rowEls(pi,ei,r));
+    function rowBlank(row){ return !row.sel.value && blank(row.dr) && blank(row.cr); }
+    rows.forEach(function(row){ [row.sel,row.dr,row.cr].forEach(clearFieldState); });
+    if(e.none){
+      var first = rows[0];
+      var ok = first.sel.value === NOENTRY && blank(first.dr) && blank(first.cr);
+      setState(first.sel, ok?'good':'bad'); results.push(ok);
+      if(!ok){ if(!blank(first.dr)) setState(first.dr,'bad'); if(!blank(first.cr)) setState(first.cr,'bad'); }
+      for(var i=1;i<rows.length;i++){ if(!rowBlank(rows[i])){ setState(rows[i].sel,'bad'); if(!blank(rows[i].dr)) setState(rows[i].dr,'bad'); if(!blank(rows[i].cr)) setState(rows[i].cr,'bad'); results.push(false); } }
+      return results;
+    }
+    e.lines.forEach(function(line){
+      var side = line.side==='Dr'?'dr':'cr', other = line.side==='Dr'?'cr':'dr';
+      var full=-1, acctOnly=-1;
+      rows.forEach(function(row,i){
+        if(used[i] || line.alts.indexOf(row.sel.value)<0) return;
+        if(near(parseMoney(row[side].value), line.amt, 1) && blank(row[other])){ if(full<0) full=i; }
+        else if(acctOnly<0) acctOnly=i;
+      });
+      if(full>=0){ used[full]=true; setState(rows[full].sel,'good'); setState(rows[full][side],'good'); results.push(true,true); }
+      else if(acctOnly>=0){
+        used[acctOnly]=true; var row=rows[acctOnly];
+        setState(row.sel,'good'); setState(row[side],'bad');
+        if(!blank(row[other])) setState(row[other],'bad');
+        results.push(true,false);
+      } else { results.push(false,false); }
+    });
+    rows.forEach(function(row,i){
+      if(used[i] || rowBlank(row)) return;
+      setState(row.sel,'bad'); if(!blank(row.dr)) setState(row.dr,'bad'); if(!blank(row.cr)) setState(row.cr,'bad');
+      results.push(false);
+    });
+    return results;
+  }
+
+  function findMissingPart(pi){
+    var p = currentScenario.parts[pi], miss = [];
+    p.entries.forEach(function(e,ei){
+      var any=false;
+      for(var r=1;r<=e.rows;r++){ var row=rowEls(pi,ei,r); if(row.sel.value || !blank(row.dr) || !blank(row.cr)) any=true; }
+      if(!any) miss.push(rowEls(pi,ei,1).sel);
+    });
+    var bs=$('p'+(pi+1)+'-bs'), inc=$('p'+(pi+1)+'-inc');
+    if(blank(bs)) miss.push(bs); if(blank(inc)) miss.push(inc);
+    return miss;
+  }
+
+  function checkPart(pi){
+    if(!currentScenario || locked[pi]) return;
+    var fields = partFields(pi); fields.forEach(clearFieldState);
+    var miss = findMissingPart(pi), sumEl = $('part'+(pi+1)+'Summary');
+    if(miss.length){
+      miss.forEach(function(el){ setState(el,'miss'); });
+      sumEl.textContent='Please complete every entry (use \u201cNo Entry Required\u201d if no entry is needed) and answer both reporting questions \u2014 '+miss.length+' item'+(miss.length===1?'':'s')+' incomplete.';
+      sumEl.classList.remove('good'); sumEl.classList.add('bad'); miss[0].focus(); return;
+    }
+    var p = currentScenario.parts[pi], results = [];
+    p.entries.forEach(function(e,ei){ results = results.concat(gradeEntry(pi,ei,e)); });
+    var bs=$('p'+(pi+1)+'-bs'), inc=$('p'+(pi+1)+'-inc');
+    var okBs = near(parseMoney(bs.value), p.bsAnswer, 2); setState(bs, okBs?'good':'bad'); results.push(okBs);
+    var okInc = near(parseMoney(inc.value), p.incAnswer, 2); setState(inc, okInc?'good':'bad'); results.push(okInc);
+    scoreState[pi] = updateSummary('part'+(pi+1)+'Summary', results, possible[pi]);
+    updateOverallScore();
+    attempts[pi]++; updateAttemptsNote(pi);
+    if(attempts[pi]>=MAX_ATTEMPTS){ locked[pi]=true; lockPart(pi); }
+    if(locked[0] && locked[1] && locked[2] && !keyRevealed){ keyRevealed=true; revealAnswerKeys(); setTimeout(triggerPrint, 350); }
+  }
+
+  // ---------- Answer key ----------
+  function revealAnswerKeys(){
+    currentScenario.parts.forEach(function(p,pi){
+      var html = '<h3>Answer Key \u2014 Part '+(pi+1)+'</h3><table><tbody>';
+      p.entries.forEach(function(e,ei){
+        html += '<tr class="entry-head"><th scope="row" colspan="2">'+LETTERS[ei]+'. '+e.short+'</th></tr>';
+        if(e.none) html += '<tr><td>No entry required</td><td>'+e.noneNote+'</td></tr>';
+        else e.lines.forEach(function(l){ var also = l.alts.filter(function(a){return a!==l.acct;}); html += '<tr><td>'+(l.side==='Dr'?'Debit':'Credit')+' '+l.acct+(also.length?' <em>(also accepted: '+also.join('; ')+')</em>':'')+'</td><td>'+money0(l.amt)+'</td></tr>'; });
+      });
+      html += '<tr class="entry-head"><th scope="row" colspan="2">e. Reporting</th></tr>';
+      html += '<tr><td>Investment, December 31 balance sheet</td><td>'+money0(p.bsAnswer)+'</td></tr>';
+      html += '<tr><td>Effect of the investment on pretax net income</td><td>'+(p.incAnswer<0?'\u2212':'')+money0(Math.abs(p.incAnswer))+'</td></tr></tbody></table>';
+      var k=$('part'+(pi+1)+'Key'); k.innerHTML=html; k.style.display='block';
+    });
+    $('keyRevealNote').style.display='block';
+  }
+
+  // ---------- Apply a scenario ----------
+  function applyAndStore(id){
+    currentScenario = generateScenario(id);
+    var counts = currentScenario.parts.map(itemCount);
+    var totalItems = counts.reduce(function(a,b){return a+b;},0);
+    possible = counts.map(function(c){ return c*TOTAL_POINTS/totalItems; });
+    currentScenario.parts.forEach(function(p,pi){
+      var n = pi+1;
+      $('p'+n+'-scenario').innerHTML = p.html;
+      $('p'+n+'-entries').innerHTML = p.entries.map(function(e,ei){ return entryHtml(pi,ei,e); }).join('');
+      var repLetter = LETTERS[p.entries.length];
+      $('p'+n+'-letter-rep').textContent = repLetter+'.';
+      $('p'+n+'-rep-text').textContent = 'Report the investment at December 31, '+YEAR+' and its effect on income for the year.';
+      $('p'+n+'-bs-lbl').textContent = p.bsLabel;
+      $('p'+n+'-inc-lbl').textContent = p.incLabel;
+      $('p'+n+'-bs').setAttribute('data-label','Part '+n+' \u2014 Balance sheet amount, December 31, '+YEAR);
+      $('p'+n+'-inc').setAttribute('data-label','Part '+n+' \u2014 Effect on pretax net income, '+YEAR);
+    });
+    populateSelects();
+    clearAllFieldStates();
+    ['p1-bs','p2-bs','p3-bs'].forEach(function(i){ $(i).value=''; });
+    ['p1-inc','p2-inc','p3-inc'].forEach(function(i){ $(i).value=''; });
+    scoreState=[null,null,null]; attempts=[0,0,0]; locked=[false,false,false]; keyRevealed=false;
+    for(var i=0;i<3;i++){ unlockPart(i); updateAttemptsNote(i); var k=$('part'+(i+1)+'Key'); k.style.display='none'; k.innerHTML=''; var s=$('part'+(i+1)+'Summary'); s.textContent=''; s.classList.remove('good','bad'); }
+    $('keyRevealNote').style.display='none';
+    updateOverallScore();
+  }
+
+  $('genBtn').addEventListener('click', function(){
+    applyAndStore($('studentId').value);
+    $('idStatus').textContent = $('studentId').value.trim() ? 'Scenario generated for ID '+$('studentId').value.trim()+'.' : 'Sample scenario shown. Enter your Student ID to generate yours.';
+  });
+  $('studentId').addEventListener('keydown', function(e){ if(e.key==='Enter') $('genBtn').click(); });
+  [1,2,3].forEach(function(n,i){ $('checkPart'+n).addEventListener('click', function(){ checkPart(i); }); });
+
+  // ---------- Print ----------
+  function val(id){ var el=$(id); return el?el.value.trim():''; }
+  $('printBtn').addEventListener('click', triggerPrint);
+  function triggerPrint(){
+    var name=val('studentName'); var id=val('studentId');
+    $('printNameLine').textContent='Name: '+(name||'_______________________')+'     Student ID: '+(id||'_______________________');
+    var scoreText=$('overallScore').textContent, breakdownText=$('scoreBreakdown').textContent;
+    $('printScoreLine').textContent='Score: '+scoreText+(breakdownText?'  ('+breakdownText+')':'');
+    var oldTitle=document.title; document.title='EquityInvestments-'+(id||'submission'); window.print(); document.title=oldTitle;
+  }
+
+  // ---------- Download as Word (.docx) ----------
+  var docxLoadPromise = null;
+  function loadDocxLib(){
+    if(window.docx) return Promise.resolve();
+    if(docxLoadPromise) return docxLoadPromise;
+    docxLoadPromise = new Promise(function(resolve, reject){
+      var s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js';
+      s.onload = function(){ window.docx ? resolve() : reject(new Error('docx library did not load correctly')); };
+      s.onerror = function(){ reject(new Error('network error loading docx library')); };
+      document.head.appendChild(s);
+    });
+    return docxLoadPromise;
+  }
+  function blankIfEmpty(s){ return s && s.length ? s : '\u2014'; }
+  function buildAnswersDoc(){
+    var D = window.docx; var PURPLE='592C88', INK='221B2E', SLATE='5F5A6B';
+    var name = blankIfEmpty(val('studentName')); var sid = blankIfEmpty(val('studentId'));
+    function h(text){ return new D.Paragraph({heading:D.HeadingLevel.HEADING_2, spacing:{before:200,after:100}, children:[new D.TextRun({text:text,bold:true,color:PURPLE,size:26})]}); }
+    function p(text,opts){ opts=opts||{}; return new D.Paragraph({spacing:{before:60,after:60}, children:[new D.TextRun({text:text,size:20,color:opts.color||INK,bold:!!opts.bold})]}); }
+    function cell(text,width,opts){ opts=opts||{}; return new D.TableCell({width:{size:width,type:D.WidthType.DXA}, shading:opts.shading?{type:D.ShadingType.CLEAR,fill:opts.shading}:undefined, margins:{top:60,bottom:60,left:90,right:90}, children:[new D.Paragraph({children:[new D.TextRun({text:text,size:19,bold:!!opts.bold,color:opts.color||INK})]})]}); }
+    function row(cells,header){ return new D.TableRow({tableHeader:!!header, children:cells}); }
+    function table(widths, rows){ return new D.Table({width:{size:widths.reduce(function(a,b){return a+b;},0),type:D.WidthType.DXA}, columnWidths:widths, rows:rows}); }
+    var COLS = [5148,4102];
+    var children = [];
+    children.push(new D.Paragraph({heading:D.HeadingLevel.TITLE, spacing:{after:60}, children:[new D.TextRun({text:'Equity Investment Problems \u2014 Mica Ridge Bakery and Black Balsam Pharmaceuticals', color:PURPLE, size:32, bold:true})]}));
+    children.push(p('Name: '+name+'     Student ID: '+sid, {bold:true}));
+    children.push(p('ACCT 352  \u00b7  Investments in Equity Securities', {color:SLATE}));
+    var scoreText=$('overallScore').textContent||'', breakdownText=$('scoreBreakdown').textContent||'';
+    children.push(new D.Paragraph({spacing:{before:200,after:60}, border:{top:{style:D.BorderStyle.SINGLE,size:6,color:PURPLE},bottom:{style:D.BorderStyle.SINGLE,size:6,color:PURPLE}}, children:[new D.TextRun({text:'Assignment score', bold:true, color:PURPLE, size:24})]}));
+    children.push(new D.Paragraph({spacing:{before:40,after:20}, children:[new D.TextRun({text:scoreText, bold:true, color:INK, size:24})]}));
+    if(breakdownText) children.push(new D.Paragraph({spacing:{after:100}, children:[new D.TextRun({text:breakdownText, color:SLATE, size:18})]}));
+    document.querySelectorAll('.part').forEach(function(partEl){
+      var labelEl=partEl.querySelector('.part-label'); var h2El=partEl.querySelector('h2');
+      children.push(h((labelEl?labelEl.textContent+' \u2014 ':'')+(h2El?h2El.textContent:'')));
+      var rows=[row([cell('Item',COLS[0],{bold:true,shading:PURPLE,color:'FFFFFF'}), cell('Your answer',COLS[1],{bold:true,shading:PURPLE,color:'FFFFFF'})], true)];
+      partEl.querySelectorAll('input[type="text"], select').forEach(function(field){
+        var lbl = field.getAttribute('data-label') || field.id;
+        var v = field.tagName==='SELECT' ? (field.options[field.selectedIndex]?field.options[field.selectedIndex].textContent:'') : field.value;
+        if(v==='Select account\u2026') v='';
+        rows.push(row([cell(lbl,COLS[0]), cell(blankIfEmpty(v),COLS[1])]));
+      });
+      children.push(table(COLS, rows));
+    });
+    children.push(new D.Paragraph({spacing:{before:300}, alignment:D.AlignmentType.CENTER, children:[new D.TextRun({text:'Equity Investment Problems \u00b7 ACCT 352 \u00b7 Western Carolina University', size:16, italics:true, color:SLATE})]}));
+    return new D.Document({title:'Equity Investment Problems \u2014 Mica Ridge Bakery and Black Balsam Pharmaceuticals', sections:[{properties:{page:{size:{width:12240,height:15840}, margin:{top:1440,bottom:1440,left:1440,right:1440}}}, children:children}]});
+  }
+  $('downloadDocxBtn').addEventListener('click', function(){
+    var statusEl=$('submitStatus'); statusEl.classList.remove('error'); statusEl.textContent='Preparing your Word document\u2026';
+    loadDocxLib().then(function(){ return window.docx.Packer.toBlob(buildAnswersDoc()); }).then(function(blob){
+      var idPart=val('studentId')||'submission'; var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='EquityInvestments-'+idPart+'.docx';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      statusEl.textContent='Downloaded.'; setTimeout(function(){ statusEl.textContent=''; }, 4000);
+    }).catch(function(){ statusEl.classList.add('error'); statusEl.textContent='Could not load the Word export tool (needs internet access) \u2014 use Print / Save as PDF instead.'; });
+  });
+
+  applyAndStore('');
+})();
+</script>
+
+</body>
+</html>
