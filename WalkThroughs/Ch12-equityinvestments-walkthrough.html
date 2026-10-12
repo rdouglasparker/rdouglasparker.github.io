@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Equity Investments — Guided Walkthrough</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --wcu-purple: #4B2E83;
+    --wcu-purple-dark: #341f5c;
+    --wcu-gold: #C8A24A;
+    --gold-light: #f4ecd8;
+    --ink: #232023;
+    --muted: #5b5559;          /* secondary text: 6.9:1 on the page background */
+    --paper: #fdfcfb;
+    --panel: #f7f3ec;
+    --rule: #e2d9c8;
+    --ctl: #7d7388;            /* borders on form controls: 3:1 or better */
+    --warn: #6b4f00;
+    --warn-bg: #FBF3DC;
+    --ifrs: #2f4c8a;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-padding-top: 1rem; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.55;
+  }
+
+  /* ---------- Accessibility helpers ---------- */
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+  .skip-link {
+    position: absolute; left: 0.75rem; top: -4rem; z-index: 100;
+    background: #fff; color: var(--wcu-purple-dark); font-weight: 700;
+    padding: 0.6rem 1rem; border: 3px solid var(--wcu-purple-dark); border-radius: 6px;
+  }
+  .skip-link:focus { top: 0.75rem; }
+  :focus-visible { outline: 3px solid var(--wcu-purple-dark); outline-offset: 3px; }
+  header :focus-visible, footer :focus-visible { outline-color: #fff; }
+  main:focus { outline: none; }
+  .table-wrap { overflow-x: auto; max-width: 100%; }
+  .table-wrap:focus-visible { outline-offset: 0; }
+
+  header {
+    background: linear-gradient(135deg, var(--wcu-purple) 0%, var(--wcu-purple-dark) 100%);
+    color: #fff;
+    padding: 2.2rem 1.5rem 1.8rem;
+    border-bottom: 6px solid var(--wcu-gold);
+  }
+  header .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #E3C673;
+    margin-bottom: 0.4rem;
+  }
+  header h1 {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 700;
+    font-size: 1.9rem;
+    margin: 0 0 0.3rem;
+  }
+  header p.sub { margin: 0; color: #ece6f6; font-size: 0.98rem; }
+
+  main { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+  .lo-block { margin-bottom: 2.8rem; }
+
+  h2 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.5rem;
+    margin: 0 0 0.8rem;
+    color: var(--wcu-purple-dark);
+    border-bottom: 2px solid var(--rule);
+    padding-bottom: 0.4rem;
+  }
+  h3 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.1rem;
+    margin: 1.4rem 0 0.5rem;
+    color: var(--wcu-purple-dark);
+  }
+  p { margin: 0.6rem 0; }
+
+  .key-idea {
+    background: var(--panel);
+    border-left: 4px solid var(--wcu-gold);
+    padding: 0.9rem 1.1rem;
+    border-radius: 0 6px 6px 0;
+    margin: 0.9rem 0;
+  }
+  .key-idea strong { color: var(--wcu-purple-dark); }
+
+  .formula {
+    font-family: 'IBM Plex Mono', monospace;
+    background: var(--wcu-purple-dark);
+    color: var(--gold-light);
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin: 0.8rem 0;
+    font-size: 0.92rem;
+    overflow-x: auto;
+  }
+
+  .example {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin: 0.9rem 0;
+  }
+  .example .ex-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--wcu-purple);
+    margin-bottom: 0.4rem;
+  }
+
+  ul, ol { padding-left: 1.4rem; }
+  li { margin-bottom: 0.35rem; }
+
+  .patterns {
+    background: var(--gold-light);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin: 0.8rem 0;
+  }
+  .patterns p { margin: 0.3rem 0; }
+
+  .ifrs {
+    background: #eef2fb;
+    border-left: 4px solid var(--ifrs);
+    border-radius: 0 6px 6px 0;
+    padding: 0.9rem 1.1rem;
+    margin: 0.9rem 0;
+  }
+  .ifrs .ifrs-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ifrs);
+    margin-bottom: 0.4rem;
+  }
+
+  table.mini-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.4rem 0 0.9rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+  }
+  table.mini-table caption {
+    font-family: 'Inter', sans-serif; font-size: 0.9rem; color: var(--muted);
+    text-align: left; margin-bottom: 0.4rem;
+  }
+  table.mini-table th, table.mini-table td {
+    border: 1px solid var(--rule);
+    padding: 0.4rem 0.55rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.mini-table th {
+    background: var(--panel);
+    color: var(--wcu-purple-dark);
+    font-weight: 600;
+  }
+  table.mini-table td.num, table.mini-table th.num { text-align: right; white-space: nowrap; }
+  table.mini-table tr.total-row th, table.mini-table tr.total-row td { background: var(--panel); font-weight: 700; }
+
+  table.je-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.5rem 0 0.3rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.88rem;
+  }
+  table.je-table thead th { padding: 0; border: 0; height: 0; line-height: 0; }
+  table.je-table td { padding: 0.28rem 0.3rem; vertical-align: top; }
+  table.je-table td.je-debit-amt, table.je-table td.je-credit-amt {
+    text-align: right;
+    width: 100px;
+    white-space: nowrap;
+  }
+  table.je-table td.indent { padding-left: 1.8rem; }
+  .je-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-style: italic;
+    margin: 0 0 1rem;
+  }
+  .date-tag {
+    display: inline-block; font-family: 'IBM Plex Mono', monospace; font-weight: 700; font-size: 0.82rem;
+    color: #fff; background: var(--wcu-purple-dark); padding: 0.12rem 0.5rem; border-radius: 4px; margin-top: 0.4rem;
+  }
+
+  footer {
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--muted);
+    padding: 1.5rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+  @media (forced-colors: active) {
+    .key-idea, .ifrs, .example { border: 1px solid CanvasText; }
+    header { border-bottom: 6px solid CanvasText; }
+  }
+
+  .progress-bar { max-width: 780px; margin: 0 auto; padding: 0.8rem 1.5rem 0; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .progress-track { flex: 1; height: 8px; background: var(--rule); border-radius: 4px; overflow: hidden; }
+  .progress-fill { height: 100%; width: 0%; background: var(--wcu-purple); transition: width 0.3s ease; }
+  .progress-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; color: var(--muted); white-space: nowrap; }
+  main { max-width: 780px; padding-top: 1.2rem; }
+  li { margin-bottom: 0.4rem; }
+  .facts { background: #fff; border: 1px solid var(--rule); border-radius: 8px; padding: 1rem 1.2rem; margin: 1rem 0 1.6rem; }
+  .facts .ex-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--wcu-purple); margin-bottom: 0.4rem; }
+  .facts ul { margin: 0.4rem 0 0; }
+  .example { padding: 1rem 1.2rem 1.2rem; margin: 1.1rem 0; }
+  table.data { border-collapse: collapse; width: 100%; margin: 0.7rem 0; font-size: 0.9rem; }
+  table.data caption { text-align: left; font-size: 0.9rem; color: var(--muted); padding-bottom: 0.3rem; }
+  table.data th, table.data td { border: 1px solid var(--rule); padding: 0.4rem 0.55rem; text-align: left; vertical-align: top; }
+  table.data th { background: var(--panel); color: var(--wcu-purple-dark); font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; text-transform: uppercase; }
+  table.data tbody th[scope="row"] { text-transform: none; font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; }
+  table.data td.num, table.data th.num { text-align: right; font-family: 'IBM Plex Mono', monospace; }
+  table.data tr.total-row td, table.data tr.total-row th { background: var(--panel); font-weight: 700; }
+
+  .input-block { display: flex; flex-direction: column; gap: 0.6rem; margin: 0.9rem 0 0.6rem; padding: 0.9rem; background: var(--panel); border-radius: 6px; }
+  .input-item { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+  .input-item label { flex: 1 1 280px; font-size: 0.95rem; font-weight: 600; color: var(--wcu-purple-dark); }
+  .input-item .unit { font-family: 'IBM Plex Mono', monospace; color: var(--muted); }
+  .input-item input[type="number"], .input-item select { font-family: 'IBM Plex Mono', monospace; font-size: 1rem; padding: 0.45rem 0.6rem; border: 1px solid var(--ctl); border-radius: 5px; background: #fff; color: var(--ink); }
+  .input-item input[type="number"] { width: 150px; }
+  .input-item select { min-width: 190px; font-family: 'Inter', sans-serif; }
+  .input-item input:focus, .input-item select:focus { border-color: var(--wcu-purple); }
+  .reveal-btn { align-self: flex-start; font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 600; color: #fff; background: var(--wcu-purple); border: 2px solid var(--wcu-purple); padding: 0.55rem 1.1rem; border-radius: 5px; cursor: pointer; margin-top: 0.2rem; }
+  .reveal-btn:hover { background: var(--wcu-purple-dark); border-color: var(--wcu-purple-dark); }
+
+  .feedback { font-weight: 600; margin: 0.4rem 0 0.2rem; font-size: 0.95rem; }
+  .feedback.warn { color: var(--warn); background: var(--warn-bg); padding: 0.6rem 0.9rem; border-radius: 6px; border: 1px solid var(--warn); }
+
+  .solution { margin-top: 0.9rem; padding-top: 0.9rem; border-top: 1px dashed var(--ctl); }
+  .solution[hidden] { display: none; }
+  .solution:focus { outline: none; }
+  .solution-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--wcu-purple); margin: 0.9rem 0 0.4rem; }
+  .solution-label:first-child { margin-top: 0; }
+  .final-answer { font-size: 1rem; margin-top: 0.6rem; }
+  .final-answer strong { color: var(--wcu-purple-dark); }
+  table.je-table td.who { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--wcu-purple-dark); padding-top: 0.6rem; }
+  code { font-family: 'IBM Plex Mono', monospace; font-size: 0.9em; background: var(--panel); padding: 0.05rem 0.3rem; border-radius: 3px; }
+
+  .example h3.ex-label, .facts p.ex-label { margin: 0 0 0.4rem; }
+  .example h3.ex-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--wcu-purple); }
+  .hint { font-size: 0.9rem; color: var(--muted); margin: 0.3rem 0 0; }
+  table.je-entry { border-collapse: collapse; width: 100%; margin: 0.2rem 0 0.4rem; }
+  table.je-entry caption { text-align: left; font-size: 0.9rem; color: var(--muted); padding-bottom: 0.4rem; }
+  table.je-entry th { text-align: left; font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; text-transform: uppercase; color: var(--wcu-purple-dark); padding: 0.2rem 0.3rem; }
+  table.je-entry td { padding: 0.25rem 0.3rem; vertical-align: middle; }
+  table.je-entry select, table.je-entry input { width: 100%; font-size: 0.95rem; padding: 0.45rem 0.5rem; border: 1px solid var(--ctl); border-radius: 5px; background: #fff; color: var(--ink); }
+  table.je-entry select { font-family: 'Inter', sans-serif; min-width: 230px; }
+  table.je-entry input { font-family: 'IBM Plex Mono', monospace; min-width: 110px; }
+  table.je-entry select:focus, table.je-entry input:focus { border-color: var(--wcu-purple); }
+  .je-summary { font-weight: 600; margin: 0.2rem 0 0.5rem; }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header>
+  <div class="eyebrow">Guided Walkthrough · Not Graded</div>
+  <h1>Investments in Equity Securities</h1>
+  <p class="sub">Choose the method, then account for fair value investments and the equity method from purchase to sale.</p>
+</header>
+
+<div class="progress-bar">
+  <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-label" id="progressLabel" role="status">0 of 20 revealed</div>
+</div>
+
+<main id="main" tabindex="-1">
+
+  <div class="key-idea">
+    <strong>How this works:</strong> Work each problem on your own first and enter your answer in every box. Then select <strong>Reveal Answer</strong> to see the correct answer next to yours, along with a detailed explanation and the journal entries. This page isn't graded and doesn't get submitted anywhere; it's just for practice. Where a problem asks for a decrease or a loss as a negative amount, enter it with a minus sign. On the journal entry problems, choose an account on each line and enter the amount in either the Debit or the Credit column.
+  </div>
+
+  <div class="facts">
+    <p class="ex-label">The investments used in this walkthrough</p>
+    <p><strong>Jackson Ridge Holdings</strong> invests in the stock of other companies. Its fiscal year ends December 31. Problems 2&ndash;4 involve a small stake in <strong>Tuckasegee Technologies</strong>, and Problems 5&ndash;10 involve a larger stake in <strong>Balsam Valley Brewing Co.</strong> Problems 1 and 11&ndash;13 each have their own facts.</p>
+  </div>
+
+<div class="lo-block">
+    <h2>Choosing the Method</h2>
+
+    <div class="example" id="q1">
+      <h3 class="ex-label">Problem 1 &mdash; Which Method?</h3>
+      <p>For each investment held by Jackson Ridge, choose the accounting method that normally applies.</p>
+      <div class="input-block">
+        <div class="input-item"><label for="q1-a">a. Jackson Ridge owns 12% of an investee's voting shares, has no board seat, and has no say in company policy.</label><select id="q1-a" class="ans" data-label="a. 12% stake, no influence" data-answer="Fair value through net income"><option value="">Select&hellip;</option><option>Fair value through net income</option><option>Equity method</option><option>Consolidation</option></select></div><div class="input-item"><label for="q1-b">b. Jackson Ridge owns 28% of an investee's voting shares and has no evidence that it lacks significant influence.</label><select id="q1-b" class="ans" data-label="b. 28% stake" data-answer="Equity method"><option value="">Select&hellip;</option><option>Fair value through net income</option><option>Equity method</option><option>Consolidation</option></select></div><div class="input-item"><label for="q1-c">c. Jackson Ridge owns 55% of an investee's voting shares.</label><select id="q1-c" class="ans" data-label="c. 55% stake" data-answer="Consolidation"><option value="">Select&hellip;</option><option>Fair value through net income</option><option>Equity method</option><option>Consolidation</option></select></div><div class="input-item"><label for="q1-d">d. Jackson Ridge owns 16% of an investee's voting shares, but an officer of Jackson Ridge sits on the investee's board and no other shareholder owns more than 10%.</label><select id="q1-d" class="ans" data-label="d. 16% stake with an officer on the board" data-answer="Equity method"><option value="">Select&hellip;</option><option>Fair value through net income</option><option>Equity method</option><option>Consolidation</option></select></div>
+        <button type="button" class="reveal-btn" id="q1-btn" aria-expanded="false" aria-controls="q1-sol" onclick="reveal('q1')">Reveal Answer</button>
+      </div>
+      <div class="feedback" role="status"></div>
+      <div class="solution" id="q1-sol" tabindex="-1" role="region" aria-label="Solution to Problem 1" hidden>
+        <div class="solution-label">Your answers vs. the answers</div>
+        <table class="data"><caption class="sr-only">Your answers compared with the correct answers for Problem 1</caption><thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th></tr></thead><tbody class="compare-body"></tbody></table>
+        <div class="solution-label">Explanation</div>
+        <ol type="a">
+          <li><strong>Fair value through net income.</strong> Below 20% with no other sign of influence, the investor is presumed to lack significant influence.</li>
+          <li><strong>Equity method.</strong> Ownership of 20% to 50% gives rise to a presumption of significant influence.</li>
+          <li><strong>Consolidation.</strong> More than 50% of the voting shares means control. The parent and subsidiary report combined (consolidated) financial statements.</li>
+          <li><strong>Equity method.</strong> The percentages are only presumptions. A board seat and a dispersed shareholder base are evidence of significant influence even though the stake is below 20%.</li>
+        </ol>
+        <p>Conversely, owning more than 20% doesn't create significant influence if, for example, another investor holds a majority or the investee successfully blocks the investor's influence.</p>
+      </div>
+    </div>
+
+  </div>
+<div class="lo-block">
+    <h2>No Significant Influence: Fair Value through Net Income</h2>
+    <div class="facts">
+      <p class="ex-label">Facts for Problems 2&ndash;4</p>
+      <ul>
+        <li>On April 1, <span class="yr0">2026</span>, Jackson Ridge buys 8% of the common stock of Tuckasegee Technologies for $900,000.</li>
+        <li>On December 31, <span class="yr0">2026</span>, Jackson Ridge receives a $36,000 cash dividend, and the fair value of the shares is $965,000.</li>
+        <li>On March 10, <span class="yr1">2027</span>, Jackson Ridge sells the shares for $950,000.</li>
+      </ul>
+    </div>
+
+    <div class="example" id="q2">
+      <h3 class="ex-label">Problem 2 &mdash; Purchase and Dividend</h3>
+      <p>Record the purchase and the receipt of the dividend. What amounts are recorded?</p>
+      <div class="input-block">
+        <div class="input-item"><label for="q2-a">Investment in equity securities recorded at purchase:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" autocomplete="off" id="q2-a" class="ans" data-label="Investment in equity securities recorded at purchase" data-answer="900000" data-unit="$" placeholder="0"></div><div class="input-item"><label for="q2-b">Dividend revenue recognized in net income:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" autocomplete="off" id="q2-b" class="ans" data-label="Dividend revenue recognized in net income" data-answer="36000" data-unit="$" placeholder="0"></div>
+        <button type="button" class="reveal-btn" id="q2-btn" aria-expanded="false" aria-controls="q2-sol" onclick="reveal('q2')">Reveal Answer</button>
+      </div>
+      <div class="feedback" role="status"></div>
+      <div class="solution" id="q2-sol" tabindex="-1" role="region" aria-label="Solution to Problem 2" hidden>
+        <div class="solution-label">Your answers vs. the answers</div>
+        <table class="data"><caption class="sr-only">Your answers compared with the correct answers for Problem 2</caption><thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th></tr></thead><tbody class="compare-body"></tbody></table>
+        <div class="solution-label">Explanation</div>
+        <p>All equity investments are initially recorded at <strong>cost</strong>.</p>
+        <div class="date-tag">April 1, <span class="yr0">2026</span></div>
+        <div class="table-wrap"><table class="je-table"><caption class="sr-only">Purchase of the shares</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Investment in equity securities</td><td class="je-debit-amt">900,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Cash</td><td class="je-debit-amt"></td><td class="je-credit-amt">900,000</td></tr></tbody></table></div>
+        <p>For an investment without significant influence, <strong>dividends are revenue</strong> when received:</p>
+        <div class="date-tag">December 31, <span class="yr0">2026</span></div>
+        <div class="table-wrap"><table class="je-table"><caption class="sr-only">Dividend received</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Cash</td><td class="je-debit-amt">36,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Dividend revenue</td><td class="je-debit-amt"></td><td class="je-credit-amt">36,000</td></tr></tbody></table></div>
+      </div>
+    </div>
+
+
+    <div class="example" id="q3">
+      <h3 class="ex-label">Problem 3 &mdash; Adjusting to Fair Value</h3>
+      <p>Record the adjustment of the Tuckasegee shares to fair value on December 31, <span class="yr0">2026</span>.</p>
+      <div class="input-block">
+        <div class="input-item"><label for="q3-a">Debit to Fair value adjustment:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" autocomplete="off" id="q3-a" class="ans" data-label="Debit to Fair value adjustment" data-answer="65000" data-unit="$" placeholder="0"></div><div class="input-item"><label for="q3-b">Unrealized gain included in net income:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" autocomplete="off" id="q3-b" class="ans" data-label="Unrealized gain in net income" data-answer="65000" data-unit="$" placeholder="0"></div><div class="input-item"><label for="q3-c">Carrying amount of the investment on the balance sheet:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" autocomplete="off" id="q3-c" class="ans" data-label="Balance sheet carrying amount" data-answer="965000" data-unit="$" placeholder="0"></div>
+        <button type="button" class="reveal-btn" id="q3-btn" aria-expanded="false" aria-controls="q3-sol" onclick="reveal('q3')">Reveal Answer</button>
+      </div>
+      <div class="feedback" role="status"></div>
+      <div class="solution" id="q3-sol" tabindex="-1" role="region" aria-label="Solution to Problem 3" hidden>
+        <div class="solution-label">Your answers vs. the answers</div>
+        <table class="data"><caption class="sr-only">Your answers compared with the correct answers for Problem 3</caption><thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th></tr></thead><tbody class="compare-body"></tbody></table>
+        <div class="solution-label">Explanation</div>
+        <p>Equity investments without significant influence are carried at <strong>fair value</strong>, with unrealized holding gains and losses reported in <strong>net income</strong> as they occur. (Equity securities can't be classified as available-for-sale, so there's no OCI treatment.)</p>
+        <p>Fair value adjustment needed = $965,000 fair value &minus; $900,000 cost = <strong>$65,000</strong>.</p>
+        <div class="date-tag">December 31, <span class="yr0">2026</span></div>
+        <div class="table-wrap"><table class="je-table"><caption class="sr-only">Adjust to fair value</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Fair value adjustment</td><td class="je-debit-amt">65,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Gain on investments (unrealized, net income)</td><td class="je-debit-amt"></td><td class="je-credit-amt">65,000</td></tr></tbody></table></div>
+        <p class="je-desc">Carrying amount: $900,000 + $65,000 = $965,000.</p>
+      </div>
+    </div>
+
+
+    <div class="example" id="q4">
+      <h3 class="ex-label">Problem 4 &mdash; Selling the Investment</h3>
+      <p>Record the sale on March 10, <span class="yr1">2027</span>. First the shares are adjusted to fair value as of the sale date (the sale price). Then the sale is recorded.</p>
+      <div class="input-block">
+        <div class="input-item"><label for="q4-a">Additional unrealized gain or loss recorded before the sale (enter a loss as a negative amount):<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" autocomplete="off" id="q4-a" class="ans" data-label="Additional unrealized gain (loss) before the sale" data-answer="-15000" data-unit="$" placeholder="0"></div><div class="input-item"><label for="q4-b">Fair value adjustment balance removed in the sale entry (as a credit, enter a positive amount):<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" autocomplete="off" id="q4-b" class="ans" data-label="Fair value adjustment removed in the sale" data-answer="50000" data-unit="$" placeholder="0"></div><div class="input-item"><label for="q4-c">Additional gain or loss recognized on the sale itself:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" autocomplete="off" id="q4-c" class="ans" data-label="Additional gain or loss on the sale itself" data-answer="0" data-unit="$" placeholder="0"></div><div class="input-item"><label for="q4-d">Total effect on net income over both years (dividend revenue + gains and losses):<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" autocomplete="off" id="q4-d" class="ans" data-label="Total effect on net income" data-answer="86000" data-unit="$" placeholder="0"></div>
+        <button type="button" class="reveal-btn" id="q4-btn" aria-expanded="false" aria-controls="q4-sol" onclick="reveal('q4')">Reveal Answer</button>
+      </div>
+      <div class="feedback" role="status"></div>
+      <div class="solution" id="q4-sol" tabindex="-1" role="region" aria-label="Solution to Problem 4" hidden>
+        <div class="solution-label">Your answers vs. the answers</div>
+        <table class="data"><caption class="sr-only">Your answers compared with the correct answers for Problem 4</caption><thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th></tr></thead><tbody class="compare-body"></tbody></table>
+        <div class="solution-label">Explanation</div>
+        <p><strong>Step 1: update to fair value.</strong> The adjustment account has a $65,000 debit balance. The shares are now worth $950,000, which is $50,000 <em>above</em> cost, so the adjustment needs to be a $50,000 debit. That means reducing it by $15,000, an unrealized loss in <span class="yr1">2027</span>:</p>
+        <div class="date-tag">March 10, <span class="yr1">2027</span></div>
+        <div class="table-wrap"><table class="je-table"><caption class="sr-only">Adjust to fair value before the sale</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Loss on investments (unrealized, net income)</td><td class="je-debit-amt">15,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Fair value adjustment</td><td class="je-debit-amt"></td><td class="je-credit-amt">15,000</td></tr></tbody></table></div>
+        <p><strong>Step 2: record the sale.</strong> The shares are now carried at the sale price, so there's nothing left to recognize. Remove the accounts:</p>
+        <div class="table-wrap"><table class="je-table"><caption class="sr-only">Record the sale</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Cash</td><td class="je-debit-amt">950,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Investment in equity securities (account balance)</td><td class="je-debit-amt"></td><td class="je-credit-amt">900,000</td></tr><tr><td class="indent">Fair value adjustment (account balance)</td><td class="je-debit-amt"></td><td class="je-credit-amt">50,000</td></tr></tbody></table></div>
+        <p class="final-answer"><strong>Total effect on net income = $36,000 dividend + $65,000 gain &minus; $15,000 loss = $86,000</strong></p>
+        <p>This matches the cash result: dividends received ($36,000) plus the sale price less cost ($950,000 &minus; $900,000 = $50,000) = $86,000. As always, the method affects <em>when</em> income is recognized, not the total.</p>
+      </div>
+    </div>
+
+  </div>
+<div class="lo-block">
+    <h2>Significant Influence: The Equity Method</h2>
+    <div class="facts">
+      <p class="ex-label">Facts for Problems 5&ndash;10</p>
+      <p>On January 2, <span class="yr0">2026</span>, Jackson Ridge pays <strong>$2,400,000</strong> in cash for 30% of the common stock of <strong>Balsam Valley Brewing Co.</strong> and gains significant influence. At that date:</p>
+      <ul>
+        <li>The book value of Balsam Valley's identifiable net assets is $3,000,000.</li>
+        <li>Fair values exceed book values for buildings by $900,000, for land by $300,000, and for inventory by $200,000. Book value equals fair value for all other items.</li>
+        <li>The buildings have a 15-year remaining life (straight-line, no salvage value). All of the inventory is sold during <span class="yr0">2026</span>.</li>
+        <li>During <span class="yr0">2026</span>, Balsam Valley reports net income of $700,000 and declares and pays dividends of $300,000.</li>
+        <li>On January 2, <span class="yr1">2027</span>, Jackson Ridge sells its entire investment for $2,500,000.</li>
+      </ul>
+    </div>
+
+    <div class="example" id="q5">
+      <h3 class="ex-label">Problem 5 &mdash; The Differential</h3>
+      <p>Jackson Ridge paid more than the book value of the net assets it acquired. Determine how the extra price is explained. Calculate Jackson Ridge's 30% share of each excess, and the part of the price that is attributed to goodwill.</p>
+      <div class="input-block">
+        <div class="input-item"><label for="q5-a">Share of the buildings' excess of fair value over book value:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" autocomplete="off" id="q5-a" class="ans" data-label="Buildings excess (30% share)" data-answer="270000" data-unit="$" placeholder="0"></div><div class="input-item"><label for="q5-b">Share of the land's excess:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" autocomplete="off" id="q5-b" class="ans" data-label="Land excess (30% share)" data-answer="90000" data-unit="$" placeholder="0"></div><div class="input-item"><label for="q5-c">Share of the inventory's excess:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" autocomplete="off" id="q5-c" class="ans" data-label="Inventory excess (30% share)" data-answer="60000" data-unit="$" placeholder="0"></div><div class="input-item"><label for="q5-d">Goodwill implied by the purchase price:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" autocomplete="off" id="q5-d" class="ans" data-label="Goodwill" data-answer="1080000" data-unit="$" placeholder="0"></div>
+        <button type="button" class="reveal-btn" id="q5-btn" aria-expanded="false" aria-controls="q5-sol" onclick="reveal('q5')">Reveal Answer</button>
+      </div>
+      <div class="feedback" role="status"></div>
+      <div class="solution" id="q5-sol" tabindex="-1" role="region" aria-label="Solution to Problem 5" hidden>
+        <div class="solution-label">Your answers vs. the answers</div>
+        <table class="data"><caption class="sr-only">Your answers compared with the correct answers for Problem 5</caption><thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th></tr></thead><tbody class="compare-body"></tbody></table>
+        <div class="solution-label">Explanation</div>
+        <p>Jackson Ridge's 30% share of each fair value excess:</p>
+        <div class="table-wrap"><table class="mini-table"><caption>Allocating the purchase price</caption><thead><tr><th scope="col">Piece</th><th scope="col">Calculation</th><th scope="col" class="num">Amount</th></tr></thead><tbody><tr><th scope="row">Book value of net assets acquired</th><td>$3,000,000 &times; 30%</td><td class="num">$900,000</td></tr><tr><th scope="row">Buildings</th><td>$900,000 &times; 30%</td><td class="num">$270,000</td></tr><tr><th scope="row">Land</th><td>$300,000 &times; 30%</td><td class="num">$90,000</td></tr><tr><th scope="row">Inventory</th><td>$200,000 &times; 30%</td><td class="num">$60,000</td></tr><tr><th scope="row">Fair value of identifiable net assets acquired</th><td>$4,400,000 &times; 30%</td><td class="num">$1,320,000</td></tr><tr><th scope="row">Goodwill (price less fair value of identifiable net assets)</th><td>$2,400,000 &minus; $1,320,000</td><td class="num">$1,080,000</td></tr><tr class="total-row"><th scope="row">Price paid</th><td></td><td class="num">$2,400,000</td></tr></tbody></table></div>
+        <p>The purchase price implies a total fair value for Balsam Valley of $2,400,000 &divide; 30% = $8,000,000. Goodwill is whatever isn't explained by identifiable assets.</p>
+        <p>Why it matters: the investor wants its income to look as if the assets it bought had been recorded at fair value. Extra <strong>depreciation</strong> (buildings) and extra <strong>cost of goods sold</strong> (inventory) will reduce income. <strong>Land</strong> and <strong>goodwill</strong> aren't depreciated or amortized, so no adjustment is needed for them.</p>
+      </div>
+    </div>
+
+
+    <div class="example" id="q6">
+      <h3 class="ex-label">Problem 6 &mdash; Purchase, Income, and Dividends</h3>
+      <p>Record the purchase and Jackson Ridge's share of Balsam Valley's <span class="yr0">2026</span> net income and dividends.</p>
+      <div class="input-block">
+        <div class="input-item"><label for="q6-a">Investment in equity affiliate recorded at purchase:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" autocomplete="off" id="q6-a" class="ans" data-label="Investment recorded at purchase" data-answer="2400000" data-unit="$" placeholder="0"></div><div class="input-item"><label for="q6-b">Share of net income (increase in the investment):<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" autocomplete="off" id="q6-b" class="ans" data-label="Share of net income" data-answer="210000" data-unit="$" placeholder="0"></div><div class="input-item"><label for="q6-c">Share of dividends received (decrease in the investment):<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" autocomplete="off" id="q6-c" class="ans" data-label="Share of dividends received" data-answer="90000" data-unit="$" placeholder="0"></div>
+        <button type="button" class="reveal-btn" id="q6-btn" aria-expanded="false" aria-controls="q6-sol" onclick="reveal('q6')">Reveal Answer</button>
+      </div>
+      <div class="feedback" role="status"></div>
+      <div class="solution" id="q6-sol" tabindex="-1" role="region" aria-label="Solution to Problem 6" hidden>
+        <div class="solution-label">Your answers vs. the answers</div>
+        <table class="data"><caption class="sr-only">Your answers compared with the correct answers for Problem 6</caption><thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th></tr></thead><tbody class="compare-body"></tbody></table>
+        <div class="solution-label">Explanation</div>
+        <div class="date-tag">January 2, <span class="yr0">2026</span></div>
+        <div class="table-wrap"><table class="je-table"><caption class="sr-only">Purchase of the 30% interest</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Investment in equity affiliate</td><td class="je-debit-amt">2,400,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Cash</td><td class="je-debit-amt"></td><td class="je-credit-amt">2,400,000</td></tr></tbody></table></div>
+        <p>Under the equity method, the investor recognizes its share of the investee's income as the investee <em>earns</em> it: 30% &times; $700,000 = <strong>$210,000</strong>.</p>
+        <div class="date-tag">December 31, <span class="yr0">2026</span></div>
+        <div class="table-wrap"><table class="je-table"><caption class="sr-only">Share of net income</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Investment in equity affiliate</td><td class="je-debit-amt">210,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Investment revenue</td><td class="je-debit-amt"></td><td class="je-credit-amt">210,000</td></tr></tbody></table></div>
+        <p>Dividends are <strong>not</strong> revenue. That income has already been recognized, so recording it again would double count. The dividend is a return of some of the investee's net assets, so it reduces the investment: 30% &times; $300,000 = <strong>$90,000</strong>.</p>
+        <div class="table-wrap"><table class="je-table"><caption class="sr-only">Dividends received</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Cash</td><td class="je-debit-amt">90,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Investment in equity affiliate</td><td class="je-debit-amt"></td><td class="je-credit-amt">90,000</td></tr></tbody></table></div>
+      </div>
+    </div>
+
+
+    <div class="example" id="q7">
+      <h3 class="ex-label">Problem 7 &mdash; Adjustments for the Differential</h3>
+      <p>Calculate the adjustments Jackson Ridge makes in <span class="yr0">2026</span> for the fair value excess of the buildings and the inventory, and the net investment revenue for the year.</p>
+      <div class="input-block">
+        <div class="input-item"><label for="q7-a">Extra depreciation for the buildings:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" autocomplete="off" id="q7-a" class="ans" data-label="Extra depreciation, buildings" data-answer="18000" data-unit="$" placeholder="0"></div><div class="input-item"><label for="q7-b">Adjustment for the inventory sold:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" autocomplete="off" id="q7-b" class="ans" data-label="Adjustment for inventory sold" data-answer="60000" data-unit="$" placeholder="0"></div><div class="input-item"><label for="q7-c">Net investment revenue for the year:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" autocomplete="off" id="q7-c" class="ans" data-label="Net investment revenue" data-answer="132000" data-unit="$" placeholder="0"></div>
+        <button type="button" class="reveal-btn" id="q7-btn" aria-expanded="false" aria-controls="q7-sol" onclick="reveal('q7')">Reveal Answer</button>
+      </div>
+      <div class="feedback" role="status"></div>
+      <div class="solution" id="q7-sol" tabindex="-1" role="region" aria-label="Solution to Problem 7" hidden>
+        <div class="solution-label">Your answers vs. the answers</div>
+        <table class="data"><caption class="sr-only">Your answers compared with the correct answers for Problem 7</caption><thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th></tr></thead><tbody class="compare-body"></tbody></table>
+        <div class="solution-label">Explanation</div>
+        <p><strong>Buildings:</strong> $270,000 &divide; 15 years = <strong>$18,000</strong> of extra depreciation each year.</p>
+        <p><strong>Inventory:</strong> all of the inventory was sold in <span class="yr0">2026</span>, so the entire $60,000 excess becomes extra cost of goods sold in <span class="yr0">2026</span>.</p>
+        <div class="date-tag">December 31, <span class="yr0">2026</span></div>
+        <div class="table-wrap"><table class="je-table"><caption class="sr-only">Adjustments to investment revenue</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Investment revenue</td><td class="je-debit-amt">18,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Investment in equity affiliate</td><td class="je-debit-amt"></td><td class="je-credit-amt">18,000</td></tr><tr><td>Investment revenue</td><td class="je-debit-amt">60,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Investment in equity affiliate</td><td class="je-debit-amt"></td><td class="je-credit-amt">60,000</td></tr></tbody></table></div>
+        <p class="final-answer"><strong>Net investment revenue = $210,000 &minus; $18,000 &minus; $60,000 = $132,000</strong></p>
+        <p>No adjustments are needed for land or goodwill. (If the inventory had not been sold until the following year, that year would carry the adjustment.)</p>
+      </div>
+    </div>
+
+
+    <div class="example" id="q8">
+      <h3 class="ex-label">Problem 8 &mdash; Ending Balance and Cash Flows</h3>
+      <p>Determine the balance in the investment account at December 31, <span class="yr0">2026</span>, and how the investment affects the statement of cash flows.</p>
+      <div class="input-block">
+        <div class="input-item"><label for="q8-a">Investment in equity affiliate, December 31:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" autocomplete="off" id="q8-a" class="ans" data-label="Investment balance at year-end" data-answer="2442000" data-unit="$" placeholder="0"></div><div class="input-item"><label for="q8-b">Cash paid to purchase the investment is reported in:</label><select id="q8-b" class="ans" data-label="Purchase: cash flow classification" data-answer="Investing activities"><option value="">Select&hellip;</option><option>Operating activities</option><option>Investing activities</option><option>Financing activities</option></select></div><div class="input-item"><label for="q8-c">Cash dividends received are reported in:</label><select id="q8-c" class="ans" data-label="Dividends: cash flow classification" data-answer="Operating activities"><option value="">Select&hellip;</option><option>Operating activities</option><option>Investing activities</option><option>Financing activities</option></select></div><div class="input-item"><label for="q8-d">Under the indirect method, the operating section subtracts this amount (investment revenue not received in cash):<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" autocomplete="off" id="q8-d" class="ans" data-label="Undistributed earnings subtracted (indirect method)" data-answer="42000" data-unit="$" placeholder="0"></div>
+        <button type="button" class="reveal-btn" id="q8-btn" aria-expanded="false" aria-controls="q8-sol" onclick="reveal('q8')">Reveal Answer</button>
+      </div>
+      <div class="feedback" role="status"></div>
+      <div class="solution" id="q8-sol" tabindex="-1" role="region" aria-label="Solution to Problem 8" hidden>
+        <div class="solution-label">Your answers vs. the answers</div>
+        <table class="data"><caption class="sr-only">Your answers compared with the correct answers for Problem 8</caption><thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th></tr></thead><tbody class="compare-body"></tbody></table>
+        <div class="solution-label">Explanation</div>
+        <div class="table-wrap"><table class="mini-table"><caption>Investment in equity affiliate</caption><thead><tr><th scope="col">Item</th><th scope="col" class="num">Amount</th></tr></thead><tbody><tr><th scope="row">Purchase price</th><td class="num">$2,400,000</td></tr><tr><th scope="row">+ Share of net income</th><td class="num">$210,000</td></tr><tr><th scope="row">&minus; Dividends received</th><td class="num">($90,000)</td></tr><tr><th scope="row">&minus; Extra depreciation, buildings</th><td class="num">($18,000)</td></tr><tr><th scope="row">&minus; Inventory adjustment</th><td class="num">($60,000)</td></tr><tr class="total-row"><th scope="row">Balance, December 31</th><td class="num">$2,442,000</td></tr></tbody></table></div>
+        <p>The balance is not fair value; it's cost adjusted for the investor's share of earnings less dividends and differential adjustments.</p>
+        <p><strong>Cash flows:</strong> purchase (and later sale) of the investment are <strong>investing</strong> activities, while dividends received are <strong>operating</strong> inflows. Under the indirect method, net income includes $132,000 of investment revenue but only $90,000 was received in cash, so the operating section subtracts the <strong>$42,000</strong> difference (usually labeled &ldquo;undistributed earnings of investee&rdquo;).</p>
+      </div>
+    </div>
+
+
+    <div class="example" id="q9">
+      <h3 class="ex-label">Problem 9 &mdash; Selling the Investment</h3>
+      <p>On January 2, <span class="yr1">2027</span>, Jackson Ridge sells its entire investment in Balsam Valley for $2,500,000. Record the sale.</p>
+      <div class="input-block">
+        <div class="input-item"><label for="q9-a">Carrying amount of the investment sold:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" autocomplete="off" id="q9-a" class="ans" data-label="Carrying amount sold" data-answer="2442000" data-unit="$" placeholder="0"></div><div class="input-item"><label for="q9-b">Gain on sale recognized in net income:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" autocomplete="off" id="q9-b" class="ans" data-label="Gain on sale" data-answer="58000" data-unit="$" placeholder="0"></div>
+        <button type="button" class="reveal-btn" id="q9-btn" aria-expanded="false" aria-controls="q9-sol" onclick="reveal('q9')">Reveal Answer</button>
+      </div>
+      <div class="feedback" role="status"></div>
+      <div class="solution" id="q9-sol" tabindex="-1" role="region" aria-label="Solution to Problem 9" hidden>
+        <div class="solution-label">Your answers vs. the answers</div>
+        <table class="data"><caption class="sr-only">Your answers compared with the correct answers for Problem 9</caption><thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th></tr></thead><tbody class="compare-body"></tbody></table>
+        <div class="solution-label">Explanation</div>
+        <p>The gain or loss is the difference between the selling price and the <strong>carrying amount</strong> (the adjusted investment balance), not the original cost:</p>
+        <p><strong>Gain</strong> = $2,500,000 &minus; $2,442,000 = <strong>$58,000</strong></p>
+        <div class="date-tag">January 2, <span class="yr1">2027</span></div>
+        <div class="table-wrap"><table class="je-table"><caption class="sr-only">Sale of the equity-method investment</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Cash</td><td class="je-debit-amt">2,500,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Investment in equity affiliate (account balance)</td><td class="je-debit-amt"></td><td class="je-credit-amt">2,442,000</td></tr><tr><td class="indent">Gain on investments (net income)</td><td class="je-debit-amt"></td><td class="je-credit-amt">58,000</td></tr></tbody></table></div>
+      </div>
+    </div>
+
+
+    <div class="example" id="q10">
+      <h3 class="ex-label">Problem 10 &mdash; Equity Method vs. Fair Value</h3>
+      <p>Suppose Jackson Ridge had instead accounted for the Balsam Valley shares at <strong>fair value through net income</strong> (for example, by electing the fair value option), with a fair value of $2,520,000 at December 31, <span class="yr0">2026</span>, and the same $2,500,000 sale price. Compare the results.</p>
+      <div class="input-block">
+        <div class="input-item"><label for="q10-a">Effect on <span class="yr0">2026</span> net income (dividend revenue + unrealized gain):<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" autocomplete="off" id="q10-a" class="ans" data-label="Fair value method: first-year net income" data-answer="210000" data-unit="$" placeholder="0"></div><div class="input-item"><label for="q10-b">Effect on <span class="yr1">2027</span> net income (enter a loss as a negative amount):<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" autocomplete="off" id="q10-b" class="ans" data-label="Fair value method: second-year net income" data-answer="-20000" data-unit="$" placeholder="0"></div><div class="input-item"><label for="q10-c">Total net income effect over both years, fair value method:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" autocomplete="off" id="q10-c" class="ans" data-label="Fair value method: total" data-answer="190000" data-unit="$" placeholder="0"></div><div class="input-item"><label for="q10-d">Total net income effect over both years, equity method:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" autocomplete="off" id="q10-d" class="ans" data-label="Equity method: total" data-answer="190000" data-unit="$" placeholder="0"></div>
+        <button type="button" class="reveal-btn" id="q10-btn" aria-expanded="false" aria-controls="q10-sol" onclick="reveal('q10')">Reveal Answer</button>
+      </div>
+      <div class="feedback" role="status"></div>
+      <div class="solution" id="q10-sol" tabindex="-1" role="region" aria-label="Solution to Problem 10" hidden>
+        <div class="solution-label">Your answers vs. the answers</div>
+        <table class="data"><caption class="sr-only">Your answers compared with the correct answers for Problem 10</caption><thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th></tr></thead><tbody class="compare-body"></tbody></table>
+        <div class="solution-label">Explanation</div>
+        <p><strong>Fair value through net income:</strong></p>
+        <ul>
+          <li><span class="yr0">2026</span>: dividend revenue $90,000 + unrealized gain ($2,520,000 &minus; $2,400,000 = $120,000) = <strong>$210,000</strong></li>
+          <li><span class="yr1">2027</span>: the shares fall from $2,520,000 to the $2,500,000 sale price, an unrealized loss of <strong>($20,000)</strong>; no further gain or loss on the sale itself</li>
+          <li>Total: $210,000 &minus; $20,000 = <strong>$190,000</strong></li>
+        </ul>
+        <p><strong>Equity method:</strong> <span class="yr0">2026</span> investment revenue of $132,000 + <span class="yr1">2027</span> gain on sale of $58,000 = <strong>$190,000</strong>.</p>
+        <p>The totals agree: both equal dividends received ($90,000) plus the sale price less the original cost ($2,500,000 &minus; $2,400,000 = $100,000). The methods differ in <em>timing</em> ($210,000 vs. $132,000 in <span class="yr0">2026</span>), in the carrying amount at year-end ($2,520,000 vs. $2,442,000), and in the gain or loss on sale.</p>
+      </div>
+    </div>
+
+  </div>
+<div class="lo-block">
+    <h2>Special Situations</h2>
+
+    <div class="example" id="q11">
+      <h3 class="ex-label">Problem 11 &mdash; Acquiring a Stake Mid-Year</h3>
+      <p>On October 1, <span class="yr0">2026</span>, Jackson Ridge pays $600,000 for 25% of <strong>Cataloochee Press</strong>, an investee accounted for by the equity method. Cataloochee reports <span class="yr0">2026</span> net income of $480,000, earned evenly through the year, and pays a $120,000 dividend on December 15, <span class="yr0">2026</span>. Ignore any differential adjustments.</p>
+      <div class="input-block">
+        <div class="input-item"><label for="q11-a">Jackson Ridge's share of net income for the period it owned the stake:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" autocomplete="off" id="q11-a" class="ans" data-label="Share of net income (3 months)" data-answer="30000" data-unit="$" placeholder="0"></div><div class="input-item"><label for="q11-b">Dividends received (reduce the investment):<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" autocomplete="off" id="q11-b" class="ans" data-label="Dividends received" data-answer="30000" data-unit="$" placeholder="0"></div><div class="input-item"><label for="q11-c">Investment balance at December 31, <span class="yr0">2026</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" autocomplete="off" id="q11-c" class="ans" data-label="Investment balance at year-end" data-answer="600000" data-unit="$" placeholder="0"></div>
+        <button type="button" class="reveal-btn" id="q11-btn" aria-expanded="false" aria-controls="q11-sol" onclick="reveal('q11')">Reveal Answer</button>
+      </div>
+      <div class="feedback" role="status"></div>
+      <div class="solution" id="q11-sol" tabindex="-1" role="region" aria-label="Solution to Problem 11" hidden>
+        <div class="solution-label">Your answers vs. the answers</div>
+        <table class="data"><caption class="sr-only">Your answers compared with the correct answers for Problem 11</caption><thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th></tr></thead><tbody class="compare-body"></tbody></table>
+        <div class="solution-label">Explanation</div>
+        <p>Only income earned <em>after</em> the acquisition belongs to the investor: October 1 to December 31 is 3 of 12 months.</p>
+        <p><strong>Share of net income</strong> = 25% &times; $480,000 &times; 3/12 = <strong>$30,000</strong></p>
+        <p><strong>Dividends</strong>: the dividend was paid after the acquisition, so Jackson Ridge receives its full 25% share: 25% &times; $120,000 = <strong>$30,000</strong>.</p>
+        <p class="final-answer"><strong>Balance = $600,000 + $30,000 &minus; $30,000 = $600,000</strong></p>
+        <div class="table-wrap"><table class="je-table"><caption class="sr-only">Entries for the partial year</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Investment in equity affiliate</td><td class="je-debit-amt">30,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Investment revenue</td><td class="je-debit-amt"></td><td class="je-credit-amt">30,000</td></tr><tr><td>Cash</td><td class="je-debit-amt">30,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Investment in equity affiliate</td><td class="je-debit-amt"></td><td class="je-credit-amt">30,000</td></tr></tbody></table></div>
+      </div>
+    </div>
+
+
+    <div class="example" id="q12">
+      <h3 class="ex-label">Problem 12 &mdash; When the Investee Has a Loss</h3>
+      <p>Jackson Ridge owns 25% of <strong>Pine Mountain Pottery</strong>, accounted for by the equity method. At the beginning of <span class="yr1">2027</span>, the investment account has a balance of $60,000. During <span class="yr1">2027</span>, Pine Mountain reports a net loss of $400,000. Ignore any differential adjustments.</p>
+      <div class="input-block">
+        <div class="input-item"><label for="q12-a">Jackson Ridge's share of the <span class="yr1">2027</span> loss:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" autocomplete="off" id="q12-a" class="ans" data-label="Share of the loss" data-answer="100000" data-unit="$" placeholder="0"></div><div class="input-item"><label for="q12-b">Loss recognized in <span class="yr1">2027</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" autocomplete="off" id="q12-b" class="ans" data-label="Loss recognized" data-answer="60000" data-unit="$" placeholder="0"></div><div class="input-item"><label for="q12-c">Investment balance at the end of <span class="yr1">2027</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" autocomplete="off" id="q12-c" class="ans" data-label="Ending investment balance" data-answer="0" data-unit="$" placeholder="0"></div><div class="input-item"><label for="q12-d">Share of the loss not recognized:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" autocomplete="off" id="q12-d" class="ans" data-label="Loss not recognized" data-answer="40000" data-unit="$" placeholder="0"></div>
+        <button type="button" class="reveal-btn" id="q12-btn" aria-expanded="false" aria-controls="q12-sol" onclick="reveal('q12')">Reveal Answer</button>
+      </div>
+      <div class="feedback" role="status"></div>
+      <div class="solution" id="q12-sol" tabindex="-1" role="region" aria-label="Solution to Problem 12" hidden>
+        <div class="solution-label">Your answers vs. the answers</div>
+        <table class="data"><caption class="sr-only">Your answers compared with the correct answers for Problem 12</caption><thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th></tr></thead><tbody class="compare-body"></tbody></table>
+        <div class="solution-label">Explanation</div>
+        <p>Jackson Ridge's share of the loss is 25% &times; $400,000 = <strong>$100,000</strong>. But the investment balance is only $60,000, and the equity method can't reduce the investment <em>below zero</em>.</p>
+        <div class="table-wrap"><table class="je-table"><caption class="sr-only">Loss recognized, limited to the investment balance</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Loss on investment (share of investee loss)</td><td class="je-debit-amt">60,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Investment in equity affiliate</td><td class="je-debit-amt"></td><td class="je-credit-amt">60,000</td></tr></tbody></table></div>
+        <p class="final-answer"><strong>Recognized loss = $60,000; ending balance = $0; unrecognized loss = $40,000</strong></p>
+        <p>The investor stops applying the equity method (the investment stays at zero) until its share of later earnings equals the losses it didn't recognize.</p>
+      </div>
+    </div>
+
+
+    <div class="example" id="q13">
+      <h3 class="ex-label">Problem 13 &mdash; Changing Methods</h3>
+      <p>The level of Jackson Ridge's influence over an investee changes. How should it account for the change?</p>
+      <div class="input-block">
+        <div class="input-item"><label for="q13-a">a. Jackson Ridge sells part of its stake and loses significant influence. What happens to the carrying amount of the remaining shares?</label><select id="q13-a" class="ans" data-label="a. Equity method to another method" data-answer="No adjustment; the carrying amount becomes the new cost basis"><option value="">Select&hellip;</option><option>No adjustment; the carrying amount becomes the new cost basis</option><option>The shares are adjusted to fair value through net income immediately</option></select></div><div class="input-item"><label for="q13-b">b. Jackson Ridge increases its stake from 15% to 25% and gains significant influence. What happens to the shares it already held?</label><select id="q13-b" class="ans" data-label="b. Another method to the equity method" data-answer="They are marked to fair value first, with the gain or loss in net income"><option value="">Select&hellip;</option><option>They are marked to fair value first, with the gain or loss in net income</option><option>They are restated as if the equity method had always been used</option><option>No adjustment is made</option></select></div>
+        <button type="button" class="reveal-btn" id="q13-btn" aria-expanded="false" aria-controls="q13-sol" onclick="reveal('q13')">Reveal Answer</button>
+      </div>
+      <div class="feedback" role="status"></div>
+      <div class="solution" id="q13-sol" tabindex="-1" role="region" aria-label="Solution to Problem 13" hidden>
+        <div class="solution-label">Your answers vs. the answers</div>
+        <table class="data"><caption class="sr-only">Your answers compared with the correct answers for Problem 13</caption><thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th></tr></thead><tbody class="compare-body"></tbody></table>
+        <div class="solution-label">Explanation</div>
+        <p><strong>(a) Equity method to another method:</strong> no adjustment is made to the remaining carrying amount. The equity method is simply discontinued. The balance in the investment account becomes the new cost basis, and from then on the investment is written up or down to fair value.</p>
+        <p><strong>(b) Another method to the equity method:</strong> the existing shares are first marked to fair value on the date of the change, with any unrealized gain or loss recognized in net income. That fair value (plus the cost of any additional shares) becomes the starting balance in the equity-method investment account. There's no retroactive restatement. A disclosure note describes the change.</p>
+      </div>
+    </div>
+
+  </div>
+<div class="lo-block">
+    <h2>Preparing the Journal Entries</h2>
+    <div class="facts">
+      <p class="ex-label">Facts for Problems 14&ndash;20</p>
+      <p>These problems use the same Tuckasegee Technologies investment (Problems 14&ndash;16) and the same Balsam Valley Brewing Co. investment (Problems 17&ndash;20) described above. Record each entry on your own, choosing the accounts and entering the amounts.</p>
+    </div>
+
+    <div class="example" id="j1">
+      <h3 class="ex-label">Problem 14 &mdash; Dividend Received (Fair Value Method)</h3>
+      <p>Record the $36,000 cash dividend received from Tuckasegee Technologies on December 31, <span class="yr0">2026</span>.</p>
+      <div class="input-block">
+        <div class="table-wrap"><table class="je-entry" data-correct="[[&quot;Cash&quot;, &quot;Dr&quot;, 36000], [&quot;Dividend revenue&quot;, &quot;Cr&quot;, 36000]]">
+          <caption>Journal entry for Problem 14 (2 lines). On each line, choose an account and enter an amount in either the Debit column or the Credit column.</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col">Debit</th><th scope="col">Credit</th></tr></thead>
+          <tbody><tr><td><select class="je-acct" aria-label="Line 1 account"><option value="">Select account&hellip;</option><option>Cash</option><option>Dividend receivable</option><option>Dividend revenue</option><option>Fair value adjustment</option><option>Gain on investments (net income)</option><option>Gain on investments (unrealized, OCI)</option><option>Gain on investments (unrealized, net income)</option><option>Investment in equity affiliate</option><option>Investment in equity securities</option><option>Investment revenue</option><option>Loss on investments (net income)</option><option>Loss on investments (unrealized, net income)</option></select></td><td><input type="number" step="any" min="0" inputmode="decimal" autocomplete="off" class="je-dr" aria-label="Line 1 debit amount in dollars" placeholder="0"></td><td><input type="number" step="any" min="0" inputmode="decimal" autocomplete="off" class="je-cr" aria-label="Line 1 credit amount in dollars" placeholder="0"></td></tr><tr><td><select class="je-acct" aria-label="Line 2 account"><option value="">Select account&hellip;</option><option>Cash</option><option>Dividend receivable</option><option>Dividend revenue</option><option>Fair value adjustment</option><option>Gain on investments (net income)</option><option>Gain on investments (unrealized, OCI)</option><option>Gain on investments (unrealized, net income)</option><option>Investment in equity affiliate</option><option>Investment in equity securities</option><option>Investment revenue</option><option>Loss on investments (net income)</option><option>Loss on investments (unrealized, net income)</option></select></td><td><input type="number" step="any" min="0" inputmode="decimal" autocomplete="off" class="je-dr" aria-label="Line 2 debit amount in dollars" placeholder="0"></td><td><input type="number" step="any" min="0" inputmode="decimal" autocomplete="off" class="je-cr" aria-label="Line 2 credit amount in dollars" placeholder="0"></td></tr></tbody></table></div>
+        <button type="button" class="reveal-btn" id="j1-btn" aria-expanded="false" aria-controls="j1-sol" onclick="revealJE('j1')">Reveal Answer</button>
+      </div>
+      <div class="feedback" role="status"></div>
+      <div class="solution" id="j1-sol" tabindex="-1" role="region" aria-label="Solution to Problem 14" hidden>
+        <div class="solution-label">Your entry vs. the answer</div>
+        <p class="je-summary"></p>
+        <table class="data"><caption class="sr-only">Your journal entry lines and whether each matches the answer for Problem 14</caption><thead><tr><th scope="col">Account</th><th scope="col">Debit</th><th scope="col">Credit</th><th scope="col">Result</th></tr></thead><tbody class="je-compare-body"></tbody></table>
+        <div class="solution-label">The answer</div>
+        <div class="table-wrap"><table class="je-table"><caption class="sr-only">Correct journal entry for Problem 14</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Cash</td><td class="je-debit-amt">36,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Dividend revenue</td><td class="je-debit-amt"></td><td class="je-credit-amt">36,000</td></tr></tbody></table></div>
+        <div class="solution-label">Explanation</div>
+        <p>With no significant influence, dividends are <strong>revenue</strong> when received.</p>
+      </div>
+    </div>
+
+
+    <div class="example" id="j2">
+      <h3 class="ex-label">Problem 15 &mdash; Adjusting the Tuckasegee Shares to Fair Value</h3>
+      <p>Record the adjustment to fair value on December 31, <span class="yr0">2026</span> (cost $900,000; fair value $965,000).</p>
+      <div class="input-block">
+        <div class="table-wrap"><table class="je-entry" data-correct="[[&quot;Fair value adjustment&quot;, &quot;Dr&quot;, 65000], [&quot;Gain on investments (unrealized, net income)&quot;, &quot;Cr&quot;, 65000]]">
+          <caption>Journal entry for Problem 15 (2 lines). On each line, choose an account and enter an amount in either the Debit column or the Credit column.</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col">Debit</th><th scope="col">Credit</th></tr></thead>
+          <tbody><tr><td><select class="je-acct" aria-label="Line 1 account"><option value="">Select account&hellip;</option><option>Cash</option><option>Dividend receivable</option><option>Dividend revenue</option><option>Fair value adjustment</option><option>Gain on investments (net income)</option><option>Gain on investments (unrealized, OCI)</option><option>Gain on investments (unrealized, net income)</option><option>Investment in equity affiliate</option><option>Investment in equity securities</option><option>Investment revenue</option><option>Loss on investments (net income)</option><option>Loss on investments (unrealized, net income)</option></select></td><td><input type="number" step="any" min="0" inputmode="decimal" autocomplete="off" class="je-dr" aria-label="Line 1 debit amount in dollars" placeholder="0"></td><td><input type="number" step="any" min="0" inputmode="decimal" autocomplete="off" class="je-cr" aria-label="Line 1 credit amount in dollars" placeholder="0"></td></tr><tr><td><select class="je-acct" aria-label="Line 2 account"><option value="">Select account&hellip;</option><option>Cash</option><option>Dividend receivable</option><option>Dividend revenue</option><option>Fair value adjustment</option><option>Gain on investments (net income)</option><option>Gain on investments (unrealized, OCI)</option><option>Gain on investments (unrealized, net income)</option><option>Investment in equity affiliate</option><option>Investment in equity securities</option><option>Investment revenue</option><option>Loss on investments (net income)</option><option>Loss on investments (unrealized, net income)</option></select></td><td><input type="number" step="any" min="0" inputmode="decimal" autocomplete="off" class="je-dr" aria-label="Line 2 debit amount in dollars" placeholder="0"></td><td><input type="number" step="any" min="0" inputmode="decimal" autocomplete="off" class="je-cr" aria-label="Line 2 credit amount in dollars" placeholder="0"></td></tr></tbody></table></div>
+        <button type="button" class="reveal-btn" id="j2-btn" aria-expanded="false" aria-controls="j2-sol" onclick="revealJE('j2')">Reveal Answer</button>
+      </div>
+      <div class="feedback" role="status"></div>
+      <div class="solution" id="j2-sol" tabindex="-1" role="region" aria-label="Solution to Problem 15" hidden>
+        <div class="solution-label">Your entry vs. the answer</div>
+        <p class="je-summary"></p>
+        <table class="data"><caption class="sr-only">Your journal entry lines and whether each matches the answer for Problem 15</caption><thead><tr><th scope="col">Account</th><th scope="col">Debit</th><th scope="col">Credit</th><th scope="col">Result</th></tr></thead><tbody class="je-compare-body"></tbody></table>
+        <div class="solution-label">The answer</div>
+        <div class="table-wrap"><table class="je-table"><caption class="sr-only">Correct journal entry for Problem 15</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Fair value adjustment</td><td class="je-debit-amt">65,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Gain on investments (unrealized, net income)</td><td class="je-debit-amt"></td><td class="je-credit-amt">65,000</td></tr></tbody></table></div>
+        <div class="solution-label">Explanation</div>
+        <p>The adjustment is $965,000 &minus; $900,000 = $65,000. Equity securities carried at fair value report the unrealized gain in <strong>net income</strong>.</p>
+      </div>
+    </div>
+
+
+    <div class="example" id="j3">
+      <h3 class="ex-label">Problem 16 &mdash; Sale of the Tuckasegee Shares</h3>
+      <p>On March 10, <span class="yr1">2027</span>, the shares are sold for $950,000. Assume the shares have already been adjusted to the sale price, so the fair value adjustment account has a $50,000 debit balance. Record the sale.</p>
+      <div class="input-block">
+        <div class="table-wrap"><table class="je-entry" data-correct="[[&quot;Cash&quot;, &quot;Dr&quot;, 950000], [&quot;Investment in equity securities&quot;, &quot;Cr&quot;, 900000], [&quot;Fair value adjustment&quot;, &quot;Cr&quot;, 50000]]">
+          <caption>Journal entry for Problem 16 (3 lines). On each line, choose an account and enter an amount in either the Debit column or the Credit column.</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col">Debit</th><th scope="col">Credit</th></tr></thead>
+          <tbody><tr><td><select class="je-acct" aria-label="Line 1 account"><option value="">Select account&hellip;</option><option>Cash</option><option>Dividend receivable</option><option>Dividend revenue</option><option>Fair value adjustment</option><option>Gain on investments (net income)</option><option>Gain on investments (unrealized, OCI)</option><option>Gain on investments (unrealized, net income)</option><option>Investment in equity affiliate</option><option>Investment in equity securities</option><option>Investment revenue</option><option>Loss on investments (net income)</option><option>Loss on investments (unrealized, net income)</option></select></td><td><input type="number" step="any" min="0" inputmode="decimal" autocomplete="off" class="je-dr" aria-label="Line 1 debit amount in dollars" placeholder="0"></td><td><input type="number" step="any" min="0" inputmode="decimal" autocomplete="off" class="je-cr" aria-label="Line 1 credit amount in dollars" placeholder="0"></td></tr><tr><td><select class="je-acct" aria-label="Line 2 account"><option value="">Select account&hellip;</option><option>Cash</option><option>Dividend receivable</option><option>Dividend revenue</option><option>Fair value adjustment</option><option>Gain on investments (net income)</option><option>Gain on investments (unrealized, OCI)</option><option>Gain on investments (unrealized, net income)</option><option>Investment in equity affiliate</option><option>Investment in equity securities</option><option>Investment revenue</option><option>Loss on investments (net income)</option><option>Loss on investments (unrealized, net income)</option></select></td><td><input type="number" step="any" min="0" inputmode="decimal" autocomplete="off" class="je-dr" aria-label="Line 2 debit amount in dollars" placeholder="0"></td><td><input type="number" step="any" min="0" inputmode="decimal" autocomplete="off" class="je-cr" aria-label="Line 2 credit amount in dollars" placeholder="0"></td></tr><tr><td><select class="je-acct" aria-label="Line 3 account"><option value="">Select account&hellip;</option><option>Cash</option><option>Dividend receivable</option><option>Dividend revenue</option><option>Fair value adjustment</option><option>Gain on investments (net income)</option><option>Gain on investments (unrealized, OCI)</option><option>Gain on investments (unrealized, net income)</option><option>Investment in equity affiliate</option><option>Investment in equity securities</option><option>Investment revenue</option><option>Loss on investments (net income)</option><option>Loss on investments (unrealized, net income)</option></select></td><td><input type="number" step="any" min="0" inputmode="decimal" autocomplete="off" class="je-dr" aria-label="Line 3 debit amount in dollars" placeholder="0"></td><td><input type="number" step="any" min="0" inputmode="decimal" autocomplete="off" class="je-cr" aria-label="Line 3 credit amount in dollars" placeholder="0"></td></tr></tbody></table></div>
+        <button type="button" class="reveal-btn" id="j3-btn" aria-expanded="false" aria-controls="j3-sol" onclick="revealJE('j3')">Reveal Answer</button>
+      </div>
+      <div class="feedback" role="status"></div>
+      <div class="solution" id="j3-sol" tabindex="-1" role="region" aria-label="Solution to Problem 16" hidden>
+        <div class="solution-label">Your entry vs. the answer</div>
+        <p class="je-summary"></p>
+        <table class="data"><caption class="sr-only">Your journal entry lines and whether each matches the answer for Problem 16</caption><thead><tr><th scope="col">Account</th><th scope="col">Debit</th><th scope="col">Credit</th><th scope="col">Result</th></tr></thead><tbody class="je-compare-body"></tbody></table>
+        <div class="solution-label">The answer</div>
+        <div class="table-wrap"><table class="je-table"><caption class="sr-only">Correct journal entry for Problem 16</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Cash</td><td class="je-debit-amt">950,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Investment in equity securities</td><td class="je-debit-amt"></td><td class="je-credit-amt">900,000</td></tr><tr><td class="indent">Fair value adjustment</td><td class="je-debit-amt"></td><td class="je-credit-amt">50,000</td></tr></tbody></table></div>
+        <div class="solution-label">Explanation</div>
+        <p>The investment account ($900,000) and the fair value adjustment ($50,000) are both removed. The shares were already carried at the sale price, so <strong>no additional gain or loss</strong> is recognized.</p>
+      </div>
+    </div>
+
+
+    <div class="example" id="j4">
+      <h3 class="ex-label">Problem 17 &mdash; Equity Method: Share of Net Income</h3>
+      <p>Record Jackson Ridge's share of Balsam Valley's <span class="yr0">2026</span> net income ($700,000) on December 31, <span class="yr0">2026</span>.</p>
+      <div class="input-block">
+        <div class="table-wrap"><table class="je-entry" data-correct="[[&quot;Investment in equity affiliate&quot;, &quot;Dr&quot;, 210000], [&quot;Investment revenue&quot;, &quot;Cr&quot;, 210000]]">
+          <caption>Journal entry for Problem 17 (2 lines). On each line, choose an account and enter an amount in either the Debit column or the Credit column.</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col">Debit</th><th scope="col">Credit</th></tr></thead>
+          <tbody><tr><td><select class="je-acct" aria-label="Line 1 account"><option value="">Select account&hellip;</option><option>Cash</option><option>Dividend receivable</option><option>Dividend revenue</option><option>Fair value adjustment</option><option>Gain on investments (net income)</option><option>Gain on investments (unrealized, OCI)</option><option>Gain on investments (unrealized, net income)</option><option>Investment in equity affiliate</option><option>Investment in equity securities</option><option>Investment revenue</option><option>Loss on investments (net income)</option><option>Loss on investments (unrealized, net income)</option></select></td><td><input type="number" step="any" min="0" inputmode="decimal" autocomplete="off" class="je-dr" aria-label="Line 1 debit amount in dollars" placeholder="0"></td><td><input type="number" step="any" min="0" inputmode="decimal" autocomplete="off" class="je-cr" aria-label="Line 1 credit amount in dollars" placeholder="0"></td></tr><tr><td><select class="je-acct" aria-label="Line 2 account"><option value="">Select account&hellip;</option><option>Cash</option><option>Dividend receivable</option><option>Dividend revenue</option><option>Fair value adjustment</option><option>Gain on investments (net income)</option><option>Gain on investments (unrealized, OCI)</option><option>Gain on investments (unrealized, net income)</option><option>Investment in equity affiliate</option><option>Investment in equity securities</option><option>Investment revenue</option><option>Loss on investments (net income)</option><option>Loss on investments (unrealized, net income)</option></select></td><td><input type="number" step="any" min="0" inputmode="decimal" autocomplete="off" class="je-dr" aria-label="Line 2 debit amount in dollars" placeholder="0"></td><td><input type="number" step="any" min="0" inputmode="decimal" autocomplete="off" class="je-cr" aria-label="Line 2 credit amount in dollars" placeholder="0"></td></tr></tbody></table></div>
+        <button type="button" class="reveal-btn" id="j4-btn" aria-expanded="false" aria-controls="j4-sol" onclick="revealJE('j4')">Reveal Answer</button>
+      </div>
+      <div class="feedback" role="status"></div>
+      <div class="solution" id="j4-sol" tabindex="-1" role="region" aria-label="Solution to Problem 17" hidden>
+        <div class="solution-label">Your entry vs. the answer</div>
+        <p class="je-summary"></p>
+        <table class="data"><caption class="sr-only">Your journal entry lines and whether each matches the answer for Problem 17</caption><thead><tr><th scope="col">Account</th><th scope="col">Debit</th><th scope="col">Credit</th><th scope="col">Result</th></tr></thead><tbody class="je-compare-body"></tbody></table>
+        <div class="solution-label">The answer</div>
+        <div class="table-wrap"><table class="je-table"><caption class="sr-only">Correct journal entry for Problem 17</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Investment in equity affiliate</td><td class="je-debit-amt">210,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Investment revenue</td><td class="je-debit-amt"></td><td class="je-credit-amt">210,000</td></tr></tbody></table></div>
+        <div class="solution-label">Explanation</div>
+        <p>30% &times; $700,000 = $210,000. The investor recognizes its share of income as the investee earns it, and the investment increases.</p>
+      </div>
+    </div>
+
+
+    <div class="example" id="j5">
+      <h3 class="ex-label">Problem 18 &mdash; Equity Method: Dividends Received</h3>
+      <p>Record the dividends received from Balsam Valley ($300,000 total declared and paid) on December 31, <span class="yr0">2026</span>.</p>
+      <div class="input-block">
+        <div class="table-wrap"><table class="je-entry" data-correct="[[&quot;Cash&quot;, &quot;Dr&quot;, 90000], [&quot;Investment in equity affiliate&quot;, &quot;Cr&quot;, 90000]]">
+          <caption>Journal entry for Problem 18 (2 lines). On each line, choose an account and enter an amount in either the Debit column or the Credit column.</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col">Debit</th><th scope="col">Credit</th></tr></thead>
+          <tbody><tr><td><select class="je-acct" aria-label="Line 1 account"><option value="">Select account&hellip;</option><option>Cash</option><option>Dividend receivable</option><option>Dividend revenue</option><option>Fair value adjustment</option><option>Gain on investments (net income)</option><option>Gain on investments (unrealized, OCI)</option><option>Gain on investments (unrealized, net income)</option><option>Investment in equity affiliate</option><option>Investment in equity securities</option><option>Investment revenue</option><option>Loss on investments (net income)</option><option>Loss on investments (unrealized, net income)</option></select></td><td><input type="number" step="any" min="0" inputmode="decimal" autocomplete="off" class="je-dr" aria-label="Line 1 debit amount in dollars" placeholder="0"></td><td><input type="number" step="any" min="0" inputmode="decimal" autocomplete="off" class="je-cr" aria-label="Line 1 credit amount in dollars" placeholder="0"></td></tr><tr><td><select class="je-acct" aria-label="Line 2 account"><option value="">Select account&hellip;</option><option>Cash</option><option>Dividend receivable</option><option>Dividend revenue</option><option>Fair value adjustment</option><option>Gain on investments (net income)</option><option>Gain on investments (unrealized, OCI)</option><option>Gain on investments (unrealized, net income)</option><option>Investment in equity affiliate</option><option>Investment in equity securities</option><option>Investment revenue</option><option>Loss on investments (net income)</option><option>Loss on investments (unrealized, net income)</option></select></td><td><input type="number" step="any" min="0" inputmode="decimal" autocomplete="off" class="je-dr" aria-label="Line 2 debit amount in dollars" placeholder="0"></td><td><input type="number" step="any" min="0" inputmode="decimal" autocomplete="off" class="je-cr" aria-label="Line 2 credit amount in dollars" placeholder="0"></td></tr></tbody></table></div>
+        <button type="button" class="reveal-btn" id="j5-btn" aria-expanded="false" aria-controls="j5-sol" onclick="revealJE('j5')">Reveal Answer</button>
+      </div>
+      <div class="feedback" role="status"></div>
+      <div class="solution" id="j5-sol" tabindex="-1" role="region" aria-label="Solution to Problem 18" hidden>
+        <div class="solution-label">Your entry vs. the answer</div>
+        <p class="je-summary"></p>
+        <table class="data"><caption class="sr-only">Your journal entry lines and whether each matches the answer for Problem 18</caption><thead><tr><th scope="col">Account</th><th scope="col">Debit</th><th scope="col">Credit</th><th scope="col">Result</th></tr></thead><tbody class="je-compare-body"></tbody></table>
+        <div class="solution-label">The answer</div>
+        <div class="table-wrap"><table class="je-table"><caption class="sr-only">Correct journal entry for Problem 18</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Cash</td><td class="je-debit-amt">90,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Investment in equity affiliate</td><td class="je-debit-amt"></td><td class="je-credit-amt">90,000</td></tr></tbody></table></div>
+        <div class="solution-label">Explanation</div>
+        <p>30% &times; $300,000 = $90,000. Under the equity method, dividends are <strong>not</strong> revenue. They reduce the investment.</p>
+      </div>
+    </div>
+
+
+    <div class="example" id="j6">
+      <h3 class="ex-label">Problem 19 &mdash; Equity Method: Differential Adjustments</h3>
+      <p>Record, in a single entry, the adjustments for the extra depreciation on the buildings ($18,000) and for the inventory sold ($60,000) on December 31, <span class="yr0">2026</span>.</p>
+      <div class="input-block">
+        <div class="table-wrap"><table class="je-entry" data-correct="[[&quot;Investment revenue&quot;, &quot;Dr&quot;, 78000], [&quot;Investment in equity affiliate&quot;, &quot;Cr&quot;, 78000]]">
+          <caption>Journal entry for Problem 19 (2 lines). On each line, choose an account and enter an amount in either the Debit column or the Credit column.</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col">Debit</th><th scope="col">Credit</th></tr></thead>
+          <tbody><tr><td><select class="je-acct" aria-label="Line 1 account"><option value="">Select account&hellip;</option><option>Cash</option><option>Dividend receivable</option><option>Dividend revenue</option><option>Fair value adjustment</option><option>Gain on investments (net income)</option><option>Gain on investments (unrealized, OCI)</option><option>Gain on investments (unrealized, net income)</option><option>Investment in equity affiliate</option><option>Investment in equity securities</option><option>Investment revenue</option><option>Loss on investments (net income)</option><option>Loss on investments (unrealized, net income)</option></select></td><td><input type="number" step="any" min="0" inputmode="decimal" autocomplete="off" class="je-dr" aria-label="Line 1 debit amount in dollars" placeholder="0"></td><td><input type="number" step="any" min="0" inputmode="decimal" autocomplete="off" class="je-cr" aria-label="Line 1 credit amount in dollars" placeholder="0"></td></tr><tr><td><select class="je-acct" aria-label="Line 2 account"><option value="">Select account&hellip;</option><option>Cash</option><option>Dividend receivable</option><option>Dividend revenue</option><option>Fair value adjustment</option><option>Gain on investments (net income)</option><option>Gain on investments (unrealized, OCI)</option><option>Gain on investments (unrealized, net income)</option><option>Investment in equity affiliate</option><option>Investment in equity securities</option><option>Investment revenue</option><option>Loss on investments (net income)</option><option>Loss on investments (unrealized, net income)</option></select></td><td><input type="number" step="any" min="0" inputmode="decimal" autocomplete="off" class="je-dr" aria-label="Line 2 debit amount in dollars" placeholder="0"></td><td><input type="number" step="any" min="0" inputmode="decimal" autocomplete="off" class="je-cr" aria-label="Line 2 credit amount in dollars" placeholder="0"></td></tr></tbody></table></div>
+        <button type="button" class="reveal-btn" id="j6-btn" aria-expanded="false" aria-controls="j6-sol" onclick="revealJE('j6')">Reveal Answer</button>
+      </div>
+      <div class="feedback" role="status"></div>
+      <div class="solution" id="j6-sol" tabindex="-1" role="region" aria-label="Solution to Problem 19" hidden>
+        <div class="solution-label">Your entry vs. the answer</div>
+        <p class="je-summary"></p>
+        <table class="data"><caption class="sr-only">Your journal entry lines and whether each matches the answer for Problem 19</caption><thead><tr><th scope="col">Account</th><th scope="col">Debit</th><th scope="col">Credit</th><th scope="col">Result</th></tr></thead><tbody class="je-compare-body"></tbody></table>
+        <div class="solution-label">The answer</div>
+        <div class="table-wrap"><table class="je-table"><caption class="sr-only">Correct journal entry for Problem 19</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Investment revenue</td><td class="je-debit-amt">78,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Investment in equity affiliate</td><td class="je-debit-amt"></td><td class="je-credit-amt">78,000</td></tr></tbody></table></div>
+        <div class="solution-label">Explanation</div>
+        <p>$18,000 + $60,000 = $78,000. Both adjustments reduce investment revenue and the investment, as if the extra depreciation and cost of goods sold had been recorded by the investee.</p>
+      </div>
+    </div>
+
+
+    <div class="example" id="j7">
+      <h3 class="ex-label">Problem 20 &mdash; Equity Method: Sale of the Investment</h3>
+      <p>On January 2, <span class="yr1">2027</span>, Jackson Ridge sells its entire investment in Balsam Valley for $2,500,000. The investment account has a balance of $2,442,000. Record the sale.</p>
+      <div class="input-block">
+        <div class="table-wrap"><table class="je-entry" data-correct="[[&quot;Cash&quot;, &quot;Dr&quot;, 2500000], [&quot;Investment in equity affiliate&quot;, &quot;Cr&quot;, 2442000], [&quot;Gain on investments (net income)&quot;, &quot;Cr&quot;, 58000]]">
+          <caption>Journal entry for Problem 20 (3 lines). On each line, choose an account and enter an amount in either the Debit column or the Credit column.</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col">Debit</th><th scope="col">Credit</th></tr></thead>
+          <tbody><tr><td><select class="je-acct" aria-label="Line 1 account"><option value="">Select account&hellip;</option><option>Cash</option><option>Dividend receivable</option><option>Dividend revenue</option><option>Fair value adjustment</option><option>Gain on investments (net income)</option><option>Gain on investments (unrealized, OCI)</option><option>Gain on investments (unrealized, net income)</option><option>Investment in equity affiliate</option><option>Investment in equity securities</option><option>Investment revenue</option><option>Loss on investments (net income)</option><option>Loss on investments (unrealized, net income)</option></select></td><td><input type="number" step="any" min="0" inputmode="decimal" autocomplete="off" class="je-dr" aria-label="Line 1 debit amount in dollars" placeholder="0"></td><td><input type="number" step="any" min="0" inputmode="decimal" autocomplete="off" class="je-cr" aria-label="Line 1 credit amount in dollars" placeholder="0"></td></tr><tr><td><select class="je-acct" aria-label="Line 2 account"><option value="">Select account&hellip;</option><option>Cash</option><option>Dividend receivable</option><option>Dividend revenue</option><option>Fair value adjustment</option><option>Gain on investments (net income)</option><option>Gain on investments (unrealized, OCI)</option><option>Gain on investments (unrealized, net income)</option><option>Investment in equity affiliate</option><option>Investment in equity securities</option><option>Investment revenue</option><option>Loss on investments (net income)</option><option>Loss on investments (unrealized, net income)</option></select></td><td><input type="number" step="any" min="0" inputmode="decimal" autocomplete="off" class="je-dr" aria-label="Line 2 debit amount in dollars" placeholder="0"></td><td><input type="number" step="any" min="0" inputmode="decimal" autocomplete="off" class="je-cr" aria-label="Line 2 credit amount in dollars" placeholder="0"></td></tr><tr><td><select class="je-acct" aria-label="Line 3 account"><option value="">Select account&hellip;</option><option>Cash</option><option>Dividend receivable</option><option>Dividend revenue</option><option>Fair value adjustment</option><option>Gain on investments (net income)</option><option>Gain on investments (unrealized, OCI)</option><option>Gain on investments (unrealized, net income)</option><option>Investment in equity affiliate</option><option>Investment in equity securities</option><option>Investment revenue</option><option>Loss on investments (net income)</option><option>Loss on investments (unrealized, net income)</option></select></td><td><input type="number" step="any" min="0" inputmode="decimal" autocomplete="off" class="je-dr" aria-label="Line 3 debit amount in dollars" placeholder="0"></td><td><input type="number" step="any" min="0" inputmode="decimal" autocomplete="off" class="je-cr" aria-label="Line 3 credit amount in dollars" placeholder="0"></td></tr></tbody></table></div>
+        <button type="button" class="reveal-btn" id="j7-btn" aria-expanded="false" aria-controls="j7-sol" onclick="revealJE('j7')">Reveal Answer</button>
+      </div>
+      <div class="feedback" role="status"></div>
+      <div class="solution" id="j7-sol" tabindex="-1" role="region" aria-label="Solution to Problem 20" hidden>
+        <div class="solution-label">Your entry vs. the answer</div>
+        <p class="je-summary"></p>
+        <table class="data"><caption class="sr-only">Your journal entry lines and whether each matches the answer for Problem 20</caption><thead><tr><th scope="col">Account</th><th scope="col">Debit</th><th scope="col">Credit</th><th scope="col">Result</th></tr></thead><tbody class="je-compare-body"></tbody></table>
+        <div class="solution-label">The answer</div>
+        <div class="table-wrap"><table class="je-table"><caption class="sr-only">Correct journal entry for Problem 20</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Cash</td><td class="je-debit-amt">2,500,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Investment in equity affiliate</td><td class="je-debit-amt"></td><td class="je-credit-amt">2,442,000</td></tr><tr><td class="indent">Gain on investments (net income)</td><td class="je-debit-amt"></td><td class="je-credit-amt">58,000</td></tr></tbody></table></div>
+        <div class="solution-label">Explanation</div>
+        <p>The gain is the $2,500,000 selling price less the $2,442,000 carrying amount = $58,000, recognized in net income.</p>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>Investments in Equity Securities · Guided Walkthrough (Ungraded)</footer>
+
+<script>
+  var REVEALED = {};
+  var TOTAL = 20;
+
+  function updateProgress() {
+    var count = Object.keys(REVEALED).length;
+    document.getElementById('progressLabel').textContent = count + ' of ' + TOTAL + ' revealed';
+    document.getElementById('progressFill').style.width = (count / TOTAL * 100) + '%';
+  }
+
+  function fmt(val, unit) {
+    var n = Number(val);
+    if (unit === '$') {
+      var s = Math.abs(n).toLocaleString('en-US', { maximumFractionDigits: 2 });
+      return n < 0 ? '($' + s + ')' : '$' + s;
+    }
+    if (unit === '%') {
+      return n.toLocaleString('en-US', { maximumFractionDigits: 2 }) + '%';
+    }
+    return String(val);
+  }
+
+  function cell(tag, text, bold, scope) {
+    var c = document.createElement(tag);
+    if (scope) { c.setAttribute('scope', scope); }
+    if (bold) { var b = document.createElement('strong'); b.textContent = text; c.appendChild(b); }
+    else { c.textContent = text; }
+    return c;
+  }
+
+  function reveal(id) {
+    var box = document.getElementById(id);
+    var inputs = box.querySelectorAll('.ans');
+    var fb = box.querySelector('.feedback');
+    var firstMissing = null;
+    inputs.forEach(function (el) {
+      if ((el.value === '' || el.value === null) && !firstMissing) { firstMissing = el; }
+    });
+    if (firstMissing) {
+      fb.className = 'feedback warn';
+      fb.textContent = 'Please enter an answer in every box first, then select Reveal Answer.';
+      firstMissing.focus();
+      return;
+    }
+    fb.className = 'feedback';
+    fb.textContent = '';
+
+    var body = box.querySelector('.compare-body');
+    body.textContent = '';
+    inputs.forEach(function (el) {
+      var label = el.getAttribute('data-label');
+      var unit = el.getAttribute('data-unit') || '';
+      var yours, answer;
+      if (el.tagName === 'SELECT') {
+        yours = el.value;
+        answer = el.getAttribute('data-answer');
+      } else {
+        yours = fmt(el.value, unit);
+        answer = fmt(el.getAttribute('data-answer'), unit);
+      }
+      var tr = document.createElement('tr');
+      tr.appendChild(cell('th', label, false, 'row'));
+      tr.appendChild(cell('td', yours, false));
+      tr.appendChild(cell('td', answer, true));
+      body.appendChild(tr);
+    });
+    var sol = box.querySelector('.solution');
+    sol.hidden = false;
+    box.querySelector('.reveal-btn').setAttribute('aria-expanded', 'true');
+    REVEALED[id] = true;
+    updateProgress();
+    sol.focus();
+  }
+
+  function revealJE(id) {
+    var box = document.getElementById(id);
+    var fb = box.querySelector('.feedback');
+    var table = box.querySelector('table.je-entry');
+    var correct = JSON.parse(table.getAttribute('data-correct'));
+    var rows = table.querySelectorAll('tbody tr');
+    var student = [], bad = null;
+    for (var i = 0; i < rows.length; i++) {
+      var acct = rows[i].querySelector('.je-acct');
+      var dr = rows[i].querySelector('.je-dr');
+      var cr = rows[i].querySelector('.je-cr');
+      var hasDr = dr.value !== '' && Number(dr.value) !== 0;
+      var hasCr = cr.value !== '' && Number(cr.value) !== 0;
+      if (acct.value === '' || hasDr === hasCr) { if (!bad) { bad = (acct.value === '') ? acct : (hasDr ? cr : dr); } }
+      student.push({ acct: acct.value, side: hasDr ? 'Dr' : 'Cr', amt: Number(hasDr ? dr.value : cr.value) });
+    }
+    if (bad) {
+      fb.className = 'feedback warn';
+      fb.textContent = 'Please choose an account on every line and enter an amount in either the Debit column or the Credit column (not both), then select Reveal Answer.';
+      bad.focus();
+      return;
+    }
+    fb.className = 'feedback';
+    fb.textContent = '';
+
+    var used = [], matches = 0, totDr = 0, totCr = 0;
+    var body = box.querySelector('.je-compare-body');
+    body.textContent = '';
+    student.forEach(function (s) {
+      var ok = false;
+      for (var j = 0; j < correct.length; j++) {
+        if (!used[j] && correct[j][0] === s.acct && correct[j][1] === s.side && Math.abs(correct[j][2] - s.amt) < 0.5) { used[j] = true; ok = true; break; }
+      }
+      if (ok) { matches++; }
+      if (s.side === 'Dr') { totDr += s.amt; } else { totCr += s.amt; }
+      var tr = document.createElement('tr');
+      tr.appendChild(cell('th', s.acct, false, 'row'));
+      tr.appendChild(cell('td', s.side === 'Dr' ? fmt(s.amt, '$') : '', false));
+      tr.appendChild(cell('td', s.side === 'Cr' ? fmt(s.amt, '$') : '', false));
+      tr.appendChild(cell('td', ok ? 'Matches the answer' : 'Does not match the answer', !ok));
+      body.appendChild(tr);
+    });
+    var msg = matches + ' of ' + correct.length + ' lines match the answer. ';
+    msg += (Math.abs(totDr - totCr) < 0.5) ? 'Your debits equal your credits.' : 'Your debits (' + fmt(totDr, '$') + ') do not equal your credits (' + fmt(totCr, '$') + ').';
+    box.querySelector('.je-summary').textContent = msg;
+    var sol = box.querySelector('.solution');
+    sol.hidden = false;
+    box.querySelector('.reveal-btn').setAttribute('aria-expanded', 'true');
+    REVEALED[id] = true;
+    updateProgress();
+    sol.focus();
+  }
+
+  // Keeps the dates current automatically, with no recoding needed each year.
+  // yr0 is always the current calendar year; yr1, yr2, ... follow.
+  (function () {
+    var y = new Date().getFullYear();
+    for (var k = 0; k <= 5; k++) {
+      var els = document.querySelectorAll('.yr' + k);
+      for (var i = 0; i < els.length; i++) { els[i].textContent = y + k; }
+    }
+  })();
+
+
+  // Wide tables and formulas scroll sideways on small screens. Make those regions
+  // reachable by keyboard (and named for screen readers) only when they actually scroll.
+  (function () {
+    function mark() {
+      var regions = document.querySelectorAll('.table-wrap, .formula');
+      for (var i = 0; i < regions.length; i++) {
+        var w = regions[i];
+        if (w.scrollWidth > w.clientWidth + 1) {
+          var cap = w.querySelector('caption');
+          w.setAttribute('tabindex', '0');
+          w.setAttribute('role', 'region');
+          w.setAttribute('aria-label', (cap ? cap.textContent : 'Formula') + ' (scrolls sideways)');
+        } else {
+          w.removeAttribute('tabindex'); w.removeAttribute('role'); w.removeAttribute('aria-label');
+        }
+      }
+    }
+    window.addEventListener('load', mark);
+    window.addEventListener('resize', mark);
+  })();
+
+</script>
+
+</body>
+</html>
