@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investments in Debt Securities — Pisgah Ridge Technologies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --purple:#592C88; --purple-deep:#38195A; --purple-mid:#6E3FA3;
+    --gold:#7A5A12; --gold-soft:#D6C398; --gold-pale:#F1E9D6;
+    --parchment:#F7F4EC; --paper:#FFFEFA; --ink:#221B2E; --slate:#5F5A6B;
+    --line:#DBD3E0; --field-border:#7F7790; --answer:#1E5C34; --answer-bg:#E7F1E9;
+    --danger:#9C3B34; --danger-bg:#F3E1DE; --missing:#7A5A12;
+    --shadow: 0 1px 2px rgba(56,25,90,0.07), 0 6px 18px rgba(56,25,90,0.08);
+  }
+  *{box-sizing:border-box;} html,body{margin:0;padding:0;}
+  body{ background:var(--parchment); color:var(--ink); font-family:'Inter',sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased; }
+  .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+  .skip-link{ position:absolute; left:8px; top:-60px; z-index:100; background:var(--paper); color:var(--purple-deep); font-weight:600; padding:10px 16px; border:2px solid var(--purple-deep); border-radius:5px; text-decoration:none; }
+  .skip-link:focus{ top:8px; }
+  :focus-visible{ outline:3px solid var(--purple-deep); outline-offset:2px; }
+  header :focus-visible{ outline-color:#fff; }
+  header{ background: linear-gradient(180deg, var(--purple) 0%, var(--purple-deep) 100%); color:#F1E9D6; padding: 30px 6vw 24px; position:relative; }
+  header::after{ content:""; position:absolute; left:0; right:0; bottom:0; height:4px; background: linear-gradient(90deg, #D6C398, #B0925C 40%, #D6C398 70%, #B0925C); }
+  .eyebrow{ font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold-soft); margin:0 0 10px; }
+  h1.title{ font-family:'Source Serif 4', serif; font-weight:600; font-size:clamp(24px,3.4vw,34px); margin:0 0 8px; letter-spacing:-0.01em; }
+  .subtitle{ font-size:14.5px; color:#D9CDE5; max-width:680px; margin:0; }
+  .id-bar{ max-width:900px; margin:0 auto; padding:18px 6vw 0; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .id-bar label{ font-size:13px; font-weight:600; color:var(--slate); }
+  .id-bar input[type="text"]{ font-family:'IBM Plex Mono', monospace; font-size:13.5px; padding:8px 11px; border:1px solid var(--field-border); border-radius:5px; background:var(--paper); color:var(--ink); width:180px; min-height:36px; }
+  .id-bar button{ font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600; border-radius:5px; padding:8px 15px; border:1px solid var(--purple); background:var(--purple); color:#fff; cursor:pointer; min-height:36px; }
+  .id-bar button:hover{ background:var(--purple-mid); }
+  .id-status{ font-size:13px; font-weight:600; color:var(--answer); }
+  .rounding-note{ max-width:900px; margin:14px auto 0; padding:12px 6vw; font-size:13px; color:var(--slate); line-height:1.5; }
+  .rounding-note strong{ color:var(--purple); font-weight:600; }
+  ::placeholder{ color:var(--slate); opacity:1; }
+  main{ max-width:900px; margin:0 auto; padding:22px 6vw 90px; }
+  .part{ background:var(--paper); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); padding:24px 26px 26px; margin-top:26px; }
+  .part-label{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--gold-soft); background:var(--purple); display:inline-block; padding:3px 9px; border-radius:4px; letter-spacing:.04em; margin-bottom:12px; }
+  .part h2{ font-family:'Source Serif 4', serif; font-size:21px; font-weight:600; color:var(--purple); margin:0 0 12px; }
+  .scenario{ background:var(--parchment); border-left:3px solid var(--gold); padding:14px 18px; border-radius:0 6px 6px 0; font-size:14.5px; color:var(--ink); margin-bottom:20px; }
+  .scenario p{ margin:0 0 10px; } .scenario p:last-child{ margin-bottom:0; }
+  .scenario span.val{ font-weight:700; color:var(--purple-deep); }
+  .req{ font-weight:600; font-size:14.5px; color:var(--ink); margin:22px 0 10px; }
+  .req .letter{ font-family:'IBM Plex Mono', monospace; color:var(--purple); margin-right:6px; }
+  .table-wrap{ overflow-x:auto; }
+  table.je{ width:100%; border-collapse:collapse; font-size:13.5px; margin-top:6px; min-width:480px; }
+  table.je th{ text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.03em; color:var(--slate); border-bottom:2px solid var(--purple); padding:8px 8px; }
+  table.je td{ border-bottom:1px solid var(--line); padding:8px 8px; vertical-align:top; }
+  table.je input[type="text"]{ width:100%; font-family:'IBM Plex Mono', monospace; font-size:13.5px; padding:6px 8px; border:1px solid var(--field-border); border-radius:5px; background:var(--parchment); color:var(--ink); min-height:34px; }
+  table.je select.coa-select, .field-row select{ width:100%; font-family:'Inter',sans-serif; font-size:13.5px; padding:6px 8px; border:1px solid var(--field-border); border-radius:5px; background:var(--parchment); color:var(--ink); min-height:34px; }
+  .field-row{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,260px); gap:8px 16px; align-items:start; margin:10px 0; }
+  .field-row label{ font-size:14px; font-weight:500; padding-top:6px; }
+  .field-row input[type="text"]{ width:100%; font-family:'IBM Plex Mono', monospace; font-size:13.5px; padding:6px 8px; border:1px solid var(--field-border); border-radius:5px; background:var(--parchment); color:var(--ink); min-height:34px; }
+  .field-row input:focus, .field-row select:focus, table.je input:focus, table.je select:focus, .id-bar input:focus, .submit-row input:focus{ background:var(--paper); }
+  .je-hint{ font-size:12.5px; color:var(--slate); margin-top:6px; }
+  .flag{ display:block; font-size:12px; font-weight:700; margin-top:3px; }
+  .flag.good{ color:var(--answer); } .flag.bad{ color:var(--danger); } .flag.miss{ color:var(--missing); }
+  .key{ margin-top:14px; background:var(--answer-bg); border:1px solid #6FA27E; border-radius:8px; padding:14px 16px; color:var(--answer); font-size:13.5px; }
+  .key h3{ margin:0 0 6px; font-family:'Source Serif 4', serif; font-size:14.5px; }
+  .key table{ width:100%; border-collapse:collapse; font-size:13px; margin-top:4px; }
+  .key td, .key th{ padding:4px 6px; border-bottom:1px dashed #6FA27E; text-align:left; font-weight:inherit; vertical-align:top; }
+  .key tr:last-child td, .key tr:last-child th{ border-bottom:none; }
+  .key .entry-head th{ font-weight:700; padding-top:10px; }
+  .check-bar{ margin-top:20px; padding-top:16px; border-top:1px solid var(--line); display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  .btn-check{ font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600; border-radius:5px; padding:9px 18px; border:1px solid var(--purple); background:var(--purple); color:#fff; cursor:pointer; min-height:38px; }
+  .btn-check:hover{ background:var(--purple-mid); }
+  .btn-check:disabled{ background:#6B6577; border-color:#6B6577; cursor:not-allowed; }
+  .check-summary{ font-size:13.5px; font-weight:600; }
+  .check-summary.good{ color:var(--answer); } .check-summary.bad{ color:var(--danger); }
+  .check-disclaimer{ font-size:12px; color:var(--slate); width:100%; margin-top:2px; font-style:italic; }
+  .attempts-note{ font-size:12.5px; font-weight:600; color:var(--slate); }
+  .attempts-note.low{ color:var(--gold); } .attempts-note.locked{ color:var(--danger); }
+  input:disabled, select:disabled{ cursor:not-allowed; color:var(--ink); -webkit-text-fill-color:var(--ink); opacity:1; background:#ECE8E0 !important; }
+  .score-bar{ margin-top:26px; background:var(--paper); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); padding:16px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+  .score-bar h2{ font-family:'Source Serif 4', serif; font-size:16px; font-weight:600; color:var(--purple); margin:0; }
+  .score-bar .score-value{ font-family:'IBM Plex Mono', monospace; font-size:18px; font-weight:600; color:var(--ink); }
+  .score-bar .score-breakdown{ font-size:13px; color:var(--slate); width:100%; }
+  input.field-correct, select.field-correct{ border:2px solid var(--answer) !important; background:var(--answer-bg) !important; }
+  input.field-incorrect, select.field-incorrect{ border:2px dashed var(--danger) !important; background:var(--danger-bg) !important; }
+  input.field-missing, select.field-missing{ border:2px dotted var(--missing) !important; background:var(--gold-pale) !important; }
+  .key-reveal-note{ margin-top:14px; background:var(--gold-pale); border:1px solid var(--missing); border-radius:8px; padding:12px 16px; color:var(--purple-deep); font-size:13.5px; font-weight:600; display:none; }
+  .submit-bar{ background:var(--paper); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); padding:22px 26px 24px; margin-top:26px; }
+  .submit-bar h2{ font-family:'Source Serif 4', serif; font-size:19px; font-weight:600; color:var(--purple); margin:0 0 14px; }
+  .submit-row{ display:flex; align-items:center; gap:10px; margin-bottom:12px; flex-wrap:wrap; }
+  .submit-row label{ font-size:13px; font-weight:600; color:var(--slate); }
+  .submit-row input[type="text"]{ font-family:'Inter',sans-serif; font-size:13.5px; padding:8px 11px; border:1px solid var(--field-border); border-radius:5px; background:var(--parchment); color:var(--ink); width:240px; max-width:100%; min-height:36px; }
+  .btn-submit{ font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600; border-radius:5px; padding:10px 18px; border:1px solid var(--purple); background:var(--purple); color:#fff; cursor:pointer; min-height:38px; }
+  .btn-submit:hover{ background:var(--purple-mid); }
+  .btn-submit-outline{ background:var(--paper); color:var(--purple); } .btn-submit-outline:hover{ background:var(--parchment); }
+  .submit-status{ font-size:13px; font-weight:600; min-height:18px; margin:10px 0 0; color:var(--answer); }
+  .submit-status.error{ color:var(--danger); }
+  .submit-hint{ font-size:12.5px; color:var(--slate); margin:6px 0 0; }
+  .print-name-line{ display:none; font-size:13px; color:var(--ink); padding:0 6vw; margin:0 0 10px; }
+  footer{ text-align:center; padding:26px 6vw 40px; font-size:12.5px; color:var(--slate); }
+  @media print{
+    .print-hide, .id-bar, .check-bar, .rounding-note, .skip-link, .flag{ display:none !important; }
+    header{ background:none !important; color:var(--ink) !important; padding:0 0 14px !important; }
+    header::after{ display:none !important; }
+    .eyebrow{ color:var(--purple) !important; } .subtitle{ color:var(--slate) !important; }
+    body{ background:#fff !important; }
+    .part{ box-shadow:none !important; border:1px solid #999 !important; break-inside:auto; }
+    .part .req{ break-after:avoid; } table.je tr{ break-inside:avoid; }
+    .score-bar{ box-shadow:none !important; border:1.5px solid var(--purple) !important; break-inside:avoid; break-before:avoid; }
+    input[type="text"], select{ border:none !important; border-bottom:1px solid #000 !important; background:transparent !important; border-radius:0 !important; color:#000 !important; -webkit-appearance:none; appearance:none; padding:2px 4px !important; }
+    .print-name-line{ display:block !important; }
+    .table-wrap{ overflow:visible; }
+  }
+  @media (max-width:600px){ header, main, .id-bar{ padding-left:5vw; padding-right:5vw; } table.je{ font-size:12.5px; } .field-row{ grid-template-columns:1fr; } .part{ padding:20px 16px 22px; } }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to the assignment</a>
+
+<header>
+  <p class="eyebrow">ACCT 352 &middot; Investments in Debt Securities</p>
+  <h1 class="title">Pisgah Ridge Technologies</h1>
+  <p class="subtitle">Investments in bonds — recording the purchase, interest revenue under the effective interest method, and the year-end fair value adjustment for held-to-maturity, trading, and available-for-sale securities.</p>
+</header>
+
+<p class="print-name-line" id="printNameLine"></p>
+<p class="print-name-line" id="printScoreLine" style="font-weight:600;"></p>
+
+<section aria-label="Student ID and rounding instructions">
+<div class="id-bar">
+  <label for="studentId">Student ID</label>
+  <input type="text" id="studentId" placeholder="e.g. 92841016" autocomplete="off" aria-describedby="idStatus">
+  <button id="genBtn" type="button">Generate scenario</button>
+  <span class="id-status" id="idStatus" role="status" aria-live="polite"></span>
+</div>
+
+<div class="rounding-note">
+  <strong>Rounding convention:</strong> round every dollar amount to the nearest dollar. Compute interest revenue as the beginning carrying amount &times; the effective (market) rate &divide; 2, and round before computing amortization. List debits before credits. Use the account dropdowns; choose &ldquo;No Entry Required&rdquo; when no entry is needed.
+</div>
+</section>
+
+<main id="main">
+
+  <section class="part" id="part1" aria-labelledby="h-part1">
+    <span class="part-label">Part 1</span>
+    <h2 id="h-part1">Bonds Held to Maturity</h2>
+    <div class="scenario" id="p1-scenario"></div>
+    <div id="p1-entries"></div>
+    <div class="req"><span class="letter" id="p1-letter-rep"></span><span id="p1-rep-text"></span></div>
+    <div class="field-row"><label for="p1-bs" id="p1-bs-lbl"></label><div><input type="text" inputmode="decimal" autocomplete="off" placeholder="$" id="p1-bs"></div></div>
+    <div class="field-row"><label for="p1-loc">Where is any change in the bonds' fair value recognized?</label><div><select class="loc-select" id="p1-loc"></select></div></div>
+    <div class="check-bar">
+      <button class="btn-check" id="checkPart1" type="button">Check my work</button>
+      <span class="check-summary" id="part1Summary" role="status" aria-live="polite"></span>
+      <span class="attempts-note" id="part1Attempts" aria-live="polite">3 attempts remaining</span>
+      <span class="check-disclaimer">This checks the accounts you selected and the dollar amounts you entered against the key, within a small rounding tolerance. Entries may be listed in any order.</span>
+    </div>
+    <div class="key" id="part1Key" style="display:none;"></div>
+  </section>
+
+  <section class="part" id="part2" aria-labelledby="h-part2">
+    <span class="part-label">Part 2</span>
+    <h2 id="h-part2">Bonds Classified as Trading</h2>
+    <div class="scenario" id="p2-scenario"></div>
+    <div id="p2-entries"></div>
+    <div class="req"><span class="letter" id="p2-letter-rep"></span><span id="p2-rep-text"></span></div>
+    <div class="field-row"><label for="p2-bs" id="p2-bs-lbl"></label><div><input type="text" inputmode="decimal" autocomplete="off" placeholder="$" id="p2-bs"></div></div>
+    <div class="field-row"><label for="p2-loc">Where is any change in the bonds' fair value recognized?</label><div><select class="loc-select" id="p2-loc"></select></div></div>
+    <div class="check-bar">
+      <button class="btn-check" id="checkPart2" type="button">Check my work</button>
+      <span class="check-summary" id="part2Summary" role="status" aria-live="polite"></span>
+      <span class="attempts-note" id="part2Attempts" aria-live="polite">3 attempts remaining</span>
+      <span class="check-disclaimer">This checks the accounts you selected and the dollar amounts you entered against the key, within a small rounding tolerance. Entries may be listed in any order.</span>
+    </div>
+    <div class="key" id="part2Key" style="display:none;"></div>
+  </section>
+
+  <section class="part" id="part3" aria-labelledby="h-part3">
+    <span class="part-label">Part 3</span>
+    <h2 id="h-part3">Bonds Classified as Available-for-Sale</h2>
+    <div class="scenario" id="p3-scenario"></div>
+    <div id="p3-entries"></div>
+    <div class="req"><span class="letter" id="p3-letter-rep"></span><span id="p3-rep-text"></span></div>
+    <div class="field-row"><label for="p3-bs" id="p3-bs-lbl"></label><div><input type="text" inputmode="decimal" autocomplete="off" placeholder="$" id="p3-bs"></div></div>
+    <div class="field-row"><label for="p3-loc">Where is any change in the bonds' fair value recognized?</label><div><select class="loc-select" id="p3-loc"></select></div></div>
+    <div class="check-bar">
+      <button class="btn-check" id="checkPart3" type="button">Check my work</button>
+      <span class="check-summary" id="part3Summary" role="status" aria-live="polite"></span>
+      <span class="attempts-note" id="part3Attempts" aria-live="polite">3 attempts remaining</span>
+      <span class="check-disclaimer">This checks the accounts you selected and the dollar amounts you entered against the key, within a small rounding tolerance. Entries may be listed in any order.</span>
+    </div>
+    <div class="key" id="part3Key" style="display:none;"></div>
+  </section>
+
+  <section class="score-bar" aria-labelledby="h-score">
+    <h2 id="h-score">Assignment score</h2>
+    <span class="score-value" id="overallScore" role="status" aria-live="polite">Check all three parts to see your score</span>
+    <span class="score-breakdown" id="scoreBreakdown"></span>
+  </section>
+
+  <div class="key-reveal-note" id="keyRevealNote" role="status">You've used all 3 attempts on all three parts — the answer key is now shown below each part, and a submission PDF has opened for you to save.</div>
+
+  <section class="submit-bar print-hide" aria-labelledby="h-submit">
+    <h2 id="h-submit">Ready to submit?</h2>
+    <div class="submit-row">
+      <label for="studentName">Your name</label>
+      <input type="text" id="studentName" placeholder="First and last name" autocomplete="name">
+    </div>
+    <div class="submit-row submit-actions">
+      <button class="btn-submit" id="printBtn" type="button">Print / Save as PDF</button>
+      <button class="btn-submit btn-submit-outline" id="downloadDocxBtn" type="button">Download as Word (.docx)</button>
+    </div>
+    <p class="submit-status" id="submitStatus" role="status" aria-live="polite"></p>
+    <p class="submit-hint">Both options capture exactly what's currently filled in above, including your generated scenario numbers. &ldquo;Print / Save as PDF&rdquo; works offline; &ldquo;Download as Word&rdquo; needs an internet connection to load the export tool.</p>
+  </section>
+
+</main>
+
+<footer>Pisgah Ridge Technologies &middot; Investments in Debt Securities &middot; ACCT 352 &middot; Western Carolina University</footer>
+
+<script>
+(function(){
+  function hashSeed(str){ var h=2166136261; for(var i=0;i<str.length;i++){ h ^= str.charCodeAt(i); h = Math.imul(h,16777619); } return h>>>0; }
+  function mulberry32(seed){ return function(){ seed |= 0; seed = seed + 0x6D2B79F5 | 0; var t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  function pick(rand, arr){ return arr[Math.floor(rand()*arr.length)]; }
+  function money0(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
+  var YEAR = new Date().getFullYear();
+  var COMPANY = 'Pisgah Ridge Technologies, Inc.';
+  var NOENTRY = 'No Entry Required';
+
+  var CHART_OF_ACCOUNTS = {
+    'Assets': ['Cash','Interest Receivable','Investment in Bonds','Discount on Bond Investment','Premium on Bond Investment'],
+    'Revenues and gains': ['Interest Revenue','Gain on Sale of Investments','Unrealized Holding Gain \u2014 Net Income'],
+    'Expenses and losses': ['Bond Interest Expense','Unrealized Holding Loss \u2014 Net Income'],
+    'Other comprehensive income': ['Unrealized Holding Gain \u2014 OCI','Unrealized Holding Loss \u2014 OCI'],
+    'Other': [NOENTRY]
+  };
+  var LOC_OPTIONS = ['Net income (income statement)','Other comprehensive income (OCI)','Not recognized in the financial statements'];
+  var LOC_NI = LOC_OPTIONS[0], LOC_OCI = LOC_OPTIONS[1], LOC_NONE = LOC_OPTIONS[2];
+
+  function populateSelects(){
+    var acct='<option value="">Select account\u2026</option>';
+    Object.keys(CHART_OF_ACCOUNTS).forEach(function(g){
+      acct+='<optgroup label="'+g+'">';
+      CHART_OF_ACCOUNTS[g].forEach(function(a){ acct+='<option value="'+a+'">'+a+'</option>'; });
+      acct+='</optgroup>';
+    });
+    document.querySelectorAll('select.coa-select').forEach(function(s){ if(!s.dataset.populated){ s.innerHTML=acct; s.dataset.populated='1'; } });
+    var loc='<option value="">Select\u2026</option>'+LOC_OPTIONS.map(function(o){ return '<option value="'+o+'">'+o+'</option>'; }).join('');
+    document.querySelectorAll('select.loc-select').forEach(function(s){ if(!s.dataset.populated){ s.innerHTML=loc; s.dataset.populated='1'; } });
+  }
+
+  // ---------- Scenario generation ----------
+  function bond(face, sr, er, years, premium){
+    var n = years*2, i = er/200, cash = Math.round(face*sr/200);
+    var df = Math.pow(1+i, -n);
+    var price = Math.round(face*df + cash*(1-df)/i);
+    var rev1 = Math.round(price*i);
+    var am1 = premium ? cash-rev1 : rev1-cash;
+    var cv1 = premium ? price-am1 : price+am1;
+    var rev2 = Math.round(cv1*i);
+    var am2 = premium ? cash-rev2 : rev2-cash;
+    var cv2 = premium ? cv1-am2 : cv1+am2;
+    return {face:face, sr:sr, er:er, years:years, premium:premium, cash:cash, price:price, rev1:rev1, am1:am1, cv1:cv1, rev2:rev2, am2:am2, cv2:cv2};
+  }
+  function L(side, acct, amt){ return {side:side, acct:acct, amt:amt}; }
+
+  function buildPart(rand, type){
+    var cfg = {
+      htm:     {sr:[4,5,6,7,8], gap:[2,3], faces:[200000,250000,300000,350000,400000,500000], years:5, premium:false},
+      trading: {sr:[5,6,7,8],   gap:[1,2,3], faces:[300000,350000,450000,500000,550000,600000], years:4, premium:false},
+      afs:     {sr:[6,7,8,9],   gap:[1,2,3], faces:[250000,300000,400000,450000,550000], years:5, premium:true}
+    }[type];
+    var sr = pick(rand, cfg.sr), gap = pick(rand, cfg.gap), face = pick(rand, cfg.faces);
+    var er = cfg.premium ? sr-gap : sr+gap;
+    var b = bond(face, sr, er, cfg.years, cfg.premium);
+    var adj = Math.round(face*pick(rand,[0.01,0.015,0.02,0.025,0.03])/100)*100;
+    var up = rand() < 0.5;
+    var fair = up ? b.cv2+adj : b.cv2-adj;
+    var DISC='Discount on Bond Investment', PREM='Premium on Bond Investment';
+    var entries = [];
+    // a. Purchase
+    entries.push({title:'Record the purchase of the bonds on January 1, '+YEAR+'.', short:'Purchase on January 1', rows:4,
+      lines: cfg.premium ? [L('Dr','Investment in Bonds',face), L('Dr',PREM,b.price-face), L('Cr','Cash',b.price)]
+                         : [L('Dr','Investment in Bonds',face), L('Cr',DISC,face-b.price), L('Cr','Cash',b.price)]});
+    // b, c. Interest
+    [['June 30',b.rev1,b.am1],['December 31',b.rev2,b.am2]].forEach(function(x){
+      entries.push({title:'Record the receipt of interest and the '+(cfg.premium?'premium':'discount')+' amortization on '+x[0]+', '+YEAR+', using the effective interest method.', short:'Interest on '+x[0], rows:4,
+        lines: cfg.premium ? [L('Dr','Cash',b.cash), L('Cr',PREM,x[2]), L('Cr','Interest Revenue',x[1])]
+                           : [L('Dr','Cash',b.cash), L('Dr',DISC,x[2]), L('Cr','Interest Revenue',x[1])]});
+    });
+    // d. Fair value adjustment
+    var fvText = 'Record any necessary adjustment at December 31, '+YEAR+' to reflect fair value. If no entry is required, select \u201cNo Entry Required\u201d on the first line.';
+    var bsAnswer, locAnswer;
+    if(type==='htm'){
+      entries.push({title:fvText, short:'Year-end fair value adjustment', rows:3, none:true, lines:[]});
+      bsAnswer = b.cv2; locAnswer = LOC_NONE;
+    } else {
+      var gl = type==='trading' ? 'Net Income' : 'OCI';
+      entries.push({title:fvText, short:'Year-end fair value adjustment', rows:3,
+        lines: up ? [L('Dr','Investment in Bonds',adj), L('Cr','Unrealized Holding Gain \u2014 '+gl,adj)]
+                  : [L('Dr','Unrealized Holding Loss \u2014 '+gl,adj), L('Cr','Investment in Bonds',adj)]});
+      bsAnswer = fair; locAnswer = type==='trading' ? LOC_NI : LOC_OCI;
+    }
+    return {type:type, b:b, fair:fair, entries:entries, bsAnswer:bsAnswer, locAnswer:locAnswer};
+  }
+
+  function scenarioHtml(p){
+    var b = p.b, v = function(t){ return '<span class="val">'+t+'</span>'; };
+    var intro;
+    if(p.type==='htm') intro = ' purchased, as a long-term investment, '+v(money0(b.face))+' of '+v(b.sr+'%')+' bonds, dated January 1, on January 1, '+YEAR+'. Management has the positive intent and ability to hold the bonds until they mature.';
+    else if(p.type==='trading') intro = ' purchased, as a short-term investment, '+v(money0(b.face))+' of '+v(b.sr+'%')+' bonds, dated January 1, on January 1, '+YEAR+'. Management intends to include the investment in an active trading portfolio.';
+    else intro = ' purchased '+v(money0(b.face))+' of '+v(b.sr+'%')+' bonds, dated January 1, on January 1, '+YEAR+'. Management classifies the investment as available-for-sale and may sell the bonds if market conditions warrant.';
+    return '<p>'+COMPANY.replace('Inc.','Inc.')+intro+'</p>'+
+      '<p>For bonds of similar risk and maturity, the market yield was '+v(b.er+'%')+'. The bonds mature in '+v(b.years+' years')+'. Interest is received semiannually on June 30 and December 31.</p>'+
+      '<p>The price paid for the bonds was '+v(money0(b.price))+'. Due to changing market conditions, the fair value of the bonds at December 31, '+YEAR+', was '+v(money0(p.fair))+'.</p>';
+  }
+
+  function generateScenario(id){
+    var seedStr = (id || 'demo').trim().toLowerCase();
+    var rand = mulberry32(hashSeed(seedStr));
+    return { parts:[ buildPart(rand,'htm'), buildPart(rand,'trading'), buildPart(rand,'afs') ] };
+  }
+
+  // ---------- Build the entry tables ----------
+  var LETTERS = ['a','b','c','d','e'];
+  function entryHtml(pi, ei, e){
+    var pre = 'p'+(pi+1)+'-e'+(ei+1);
+    var rows = '';
+    for(var r=1;r<=e.rows;r++){
+      var base = 'Part '+(pi+1)+', entry '+LETTERS[ei]+', line '+r;
+      rows += '<tr>'+
+        '<td><select class="coa-select" id="'+pre+'-r'+r+'-acct" data-label="'+base+' \u2014 Account" aria-label="'+base+' account"></select></td>'+
+        '<td><input type="text" inputmode="decimal" autocomplete="off" placeholder="$" id="'+pre+'-r'+r+'-dr" data-label="'+base+' \u2014 Debit" aria-label="'+base+' debit"></td>'+
+        '<td><input type="text" inputmode="decimal" autocomplete="off" placeholder="$" id="'+pre+'-r'+r+'-cr" data-label="'+base+' \u2014 Credit" aria-label="'+base+' credit"></td></tr>';
+    }
+    return '<div class="req"><span class="letter">'+LETTERS[ei]+'.</span>'+e.title+'</div>'+
+      '<div class="table-wrap" role="region" tabindex="0" aria-label="Journal entry '+LETTERS[ei]+' worksheet, Part '+(pi+1)+'">'+
+      '<table class="je"><caption class="sr-only">Journal entry '+LETTERS[ei]+': '+e.short+'</caption>'+
+      '<thead><tr><th scope="col" style="width:55%;">Account</th><th scope="col" style="width:22%;">Debit</th><th scope="col" style="width:23%;">Credit</th></tr></thead>'+
+      '<tbody>'+rows+'</tbody></table></div>';
+  }
+
+  // ---------- State ----------
+  var currentScenario = null;
+  var MAX_ATTEMPTS = 3;
+  var TOTAL_POINTS = 100;
+  var scoreState = [null,null,null];
+  var attempts = [0,0,0];
+  var locked = [false,false,false];
+  var keyRevealed = false;
+  var possible = [0,0,0];
+
+  function itemCount(p){
+    var n = 2; // balance sheet amount + location
+    p.entries.forEach(function(e){ n += e.none ? 1 : e.lines.length*2; });
+    return n;
+  }
+
+  // ---------- Helpers ----------
+  function $(id){ return document.getElementById(id); }
+  function parseMoney(s){ if(s===null||s===undefined) return NaN; var c=String(s).replace(/[^0-9.\-]/g,''); if(c===''||c==='-') return NaN; return parseFloat(c); }
+  function near(a,b,tol){ if(isNaN(a)||isNaN(b)) return false; return Math.abs(a-b) <= tol; }
+  function clearFlag(el){ var n = el.nextElementSibling; if(n && n.classList.contains('flag')) n.remove(); }
+  function clearFieldState(el){ if(!el) return; el.classList.remove('field-correct','field-incorrect','field-missing'); el.removeAttribute('aria-invalid'); clearFlag(el); }
+  function clearAllFieldStates(){ document.querySelectorAll('.field-correct,.field-incorrect,.field-missing').forEach(clearFieldState); document.querySelectorAll('.flag').forEach(function(f){ f.remove(); }); }
+  function bindClear(el){
+    if(el.dataset.clearBound) return;
+    el.addEventListener(el.tagName==='SELECT'?'change':'input', function(){ clearFieldState(el); });
+    el.dataset.clearBound='1';
+  }
+  function setState(el, state){ // 'good' | 'bad' | 'miss'
+    if(!el) return;
+    clearFieldState(el);
+    var cls = state==='good'?'field-correct':(state==='bad'?'field-incorrect':'field-missing');
+    el.classList.add(cls);
+    if(state==='bad') el.setAttribute('aria-invalid','true');
+    var f = document.createElement('span'); f.className='flag '+state;
+    f.innerHTML = state==='good' ? '<span aria-hidden="true">\u2713</span> Correct' : (state==='bad' ? '<span aria-hidden="true">\u2717</span> Not correct' : '<span aria-hidden="true">!</span> Required');
+    el.insertAdjacentElement('afterend', f);
+    bindClear(el);
+  }
+  function blank(el){ return !el.value || !el.value.trim(); }
+  function partFields(pi){ return Array.prototype.slice.call(document.querySelectorAll('#part'+(pi+1)+' input, #part'+(pi+1)+' select')); }
+
+  function updateSummary(elId, results, pointsPossible){
+    var el=$(elId);
+    var graded=results.length;
+    var correct=results.filter(function(r){return r===true;}).length;
+    var points=graded>0?(correct/graded)*pointsPossible:0;
+    el.textContent=correct+' of '+graded+' correct \u2014 '+points.toFixed(1)+' of '+pointsPossible.toFixed(1)+' pts';
+    el.classList.remove('good','bad'); el.classList.add(correct===graded && graded>0?'good':'bad');
+    return points;
+  }
+  function updateOverallScore(){
+    var el=$('overallScore'), br=$('scoreBreakdown');
+    if(scoreState.every(function(s){return s===null;})){ el.textContent='Check all three parts to see your score'; br.textContent=''; return; }
+    var total=0; scoreState.forEach(function(s){ if(s!==null) total+=s; });
+    el.textContent=total.toFixed(1)+' / '+TOTAL_POINTS.toFixed(1)+' pts';
+    br.textContent = scoreState.map(function(s,i){ return 'Part '+(i+1)+': '+(s===null?'not checked yet':s.toFixed(1)+' / '+possible[i].toFixed(1)+' pts'); }).join('  \u00b7  ');
+  }
+  function updateAttemptsNote(pi){
+    var el=$('part'+(pi+1)+'Attempts'); var remaining=MAX_ATTEMPTS-attempts[pi];
+    el.classList.remove('low','locked');
+    if(remaining<=0){ el.textContent='No attempts remaining \u2014 inputs locked'; el.classList.add('locked'); }
+    else { el.textContent=remaining+' attempt'+(remaining===1?'':'s')+' remaining'; if(remaining===1) el.classList.add('low'); }
+  }
+  function lockPart(pi){ partFields(pi).forEach(function(el){ el.disabled=true; }); var b=$('checkPart'+(pi+1)); b.disabled=true; b.textContent='No attempts remaining'; }
+  function unlockPart(pi){ partFields(pi).forEach(function(el){ el.disabled=false; }); var b=$('checkPart'+(pi+1)); b.disabled=false; b.textContent='Check my work'; }
+
+  // ---------- Grading ----------
+  function rowEls(pi, ei, r){ var pre='p'+(pi+1)+'-e'+(ei+1)+'-r'+r; return {sel:$(pre+'-acct'), dr:$(pre+'-dr'), cr:$(pre+'-cr')}; }
+
+  function gradeEntry(pi, ei, e){
+    var results = [], rows = [], used = {};
+    for(var r=1;r<=e.rows;r++) rows.push(rowEls(pi,ei,r));
+    function rowBlank(row){ return !row.sel.value && blank(row.dr) && blank(row.cr); }
+    rows.forEach(function(row){ [row.sel,row.dr,row.cr].forEach(clearFieldState); });
+    if(e.none){
+      var first = rows[0];
+      var ok = first.sel.value === NOENTRY && blank(first.dr) && blank(first.cr);
+      setState(first.sel, ok?'good':'bad'); results.push(ok);
+      if(!ok){ if(!blank(first.dr)) setState(first.dr,'bad'); if(!blank(first.cr)) setState(first.cr,'bad'); }
+      for(var i=1;i<rows.length;i++){ if(!rowBlank(rows[i])){ setState(rows[i].sel,'bad'); if(!blank(rows[i].dr)) setState(rows[i].dr,'bad'); if(!blank(rows[i].cr)) setState(rows[i].cr,'bad'); results.push(false); } }
+      return results;
+    }
+    e.lines.forEach(function(line){
+      var side = line.side==='Dr'?'dr':'cr', other = line.side==='Dr'?'cr':'dr';
+      var full=-1, acctOnly=-1;
+      rows.forEach(function(row,i){
+        if(used[i] || row.sel.value!==line.acct) return;
+        if(near(parseMoney(row[side].value), line.amt, 1) && blank(row[other])){ if(full<0) full=i; }
+        else if(acctOnly<0) acctOnly=i;
+      });
+      if(full>=0){ used[full]=true; setState(rows[full].sel,'good'); setState(rows[full][side],'good'); results.push(true,true); }
+      else if(acctOnly>=0){
+        used[acctOnly]=true; var row=rows[acctOnly];
+        setState(row.sel,'good'); setState(row[side],'bad');
+        if(!blank(row[other])) setState(row[other],'bad');
+        results.push(true,false);
+      } else { results.push(false,false); }
+    });
+    rows.forEach(function(row,i){
+      if(used[i] || rowBlank(row)) return;
+      setState(row.sel,'bad'); if(!blank(row.dr)) setState(row.dr,'bad'); if(!blank(row.cr)) setState(row.cr,'bad');
+      results.push(false);
+    });
+    return results;
+  }
+
+  function findMissingPart(pi){
+    var p = currentScenario.parts[pi], miss = [];
+    p.entries.forEach(function(e,ei){
+      var any=false;
+      for(var r=1;r<=e.rows;r++){ var row=rowEls(pi,ei,r); if(row.sel.value || !blank(row.dr) || !blank(row.cr)) any=true; }
+      if(!any) miss.push(rowEls(pi,ei,1).sel);
+    });
+    var bs=$('p'+(pi+1)+'-bs'), loc=$('p'+(pi+1)+'-loc');
+    if(blank(bs)) miss.push(bs); if(!loc.value) miss.push(loc);
+    return miss;
+  }
+
+  function checkPart(pi){
+    if(!currentScenario || locked[pi]) return;
+    var fields = partFields(pi); fields.forEach(clearFieldState);
+    var miss = findMissingPart(pi), sumEl = $('part'+(pi+1)+'Summary');
+    if(miss.length){
+      miss.forEach(function(el){ setState(el,'miss'); });
+      sumEl.textContent='Please complete every entry (use \u201cNo Entry Required\u201d if no entry is needed) and answer both reporting questions \u2014 '+miss.length+' item'+(miss.length===1?'':'s')+' incomplete.';
+      sumEl.classList.remove('good'); sumEl.classList.add('bad'); miss[0].focus(); return;
+    }
+    var p = currentScenario.parts[pi], results = [];
+    p.entries.forEach(function(e,ei){ results = results.concat(gradeEntry(pi,ei,e)); });
+    var bs=$('p'+(pi+1)+'-bs'), loc=$('p'+(pi+1)+'-loc');
+    var okBs = near(parseMoney(bs.value), p.bsAnswer, 2); setState(bs, okBs?'good':'bad'); results.push(okBs);
+    var okLoc = loc.value===p.locAnswer; setState(loc, okLoc?'good':'bad'); results.push(okLoc);
+    scoreState[pi] = updateSummary('part'+(pi+1)+'Summary', results, possible[pi]);
+    updateOverallScore();
+    attempts[pi]++; updateAttemptsNote(pi);
+    if(attempts[pi]>=MAX_ATTEMPTS){ locked[pi]=true; lockPart(pi); }
+    if(locked[0] && locked[1] && locked[2] && !keyRevealed){ keyRevealed=true; revealAnswerKeys(); setTimeout(triggerPrint, 350); }
+  }
+
+  // ---------- Answer key ----------
+  function revealAnswerKeys(){
+    currentScenario.parts.forEach(function(p,pi){
+      var html = '<h3>Answer Key \u2014 Part '+(pi+1)+'</h3><table><tbody>';
+      p.entries.forEach(function(e,ei){
+        html += '<tr class="entry-head"><th scope="row" colspan="2">'+LETTERS[ei]+'. '+e.short+'</th></tr>';
+        if(e.none) html += '<tr><td>No entry required</td><td>Held-to-maturity bonds are carried at amortized cost; fair value changes are not recognized.</td></tr>';
+        else e.lines.forEach(function(l){ html += '<tr><td>'+(l.side==='Dr'?'Debit':'Credit')+' '+l.acct+'</td><td>'+money0(l.amt)+'</td></tr>'; });
+      });
+      html += '<tr class="entry-head"><th scope="row" colspan="2">e. Reporting</th></tr>';
+      html += '<tr><td>Investment in bonds, December 31 balance sheet</td><td>'+money0(p.bsAnswer)+'</td></tr>';
+      html += '<tr><td>Change in fair value recognized</td><td>'+p.locAnswer+'</td></tr></tbody></table>';
+      var k=$('part'+(pi+1)+'Key'); k.innerHTML=html; k.style.display='block';
+    });
+    $('keyRevealNote').style.display='block';
+  }
+
+  // ---------- Apply a scenario ----------
+  function applyAndStore(id){
+    currentScenario = generateScenario(id);
+    var counts = currentScenario.parts.map(itemCount);
+    var totalItems = counts.reduce(function(a,b){return a+b;},0);
+    possible = counts.map(function(c){ return c*TOTAL_POINTS/totalItems; });
+    currentScenario.parts.forEach(function(p,pi){
+      var n = pi+1;
+      $('p'+n+'-scenario').innerHTML = scenarioHtml(p);
+      $('p'+n+'-entries').innerHTML = p.entries.map(function(e,ei){ return entryHtml(pi,ei,e); }).join('');
+      var repLetter = LETTERS[p.entries.length];
+      $('p'+n+'-letter-rep').textContent = repLetter+'.';
+      $('p'+n+'-rep-text').textContent = 'Report the investment in bonds at December 31, '+YEAR+'.';
+      $('p'+n+'-bs-lbl').textContent = 'Amount reported for the investment in bonds on the December 31, '+YEAR+' balance sheet';
+      $('p'+n+'-bs').setAttribute('data-label','Part '+n+' \u2014 Balance sheet amount, December 31, '+YEAR);
+      $('p'+n+'-loc').setAttribute('data-label','Part '+n+' \u2014 Where the change in fair value is recognized');
+    });
+    populateSelects();
+    clearAllFieldStates();
+    ['p1-bs','p2-bs','p3-bs'].forEach(function(i){ $(i).value=''; });
+    ['p1-loc','p2-loc','p3-loc'].forEach(function(i){ $(i).value=''; });
+    scoreState=[null,null,null]; attempts=[0,0,0]; locked=[false,false,false]; keyRevealed=false;
+    for(var i=0;i<3;i++){ unlockPart(i); updateAttemptsNote(i); var k=$('part'+(i+1)+'Key'); k.style.display='none'; k.innerHTML=''; var s=$('part'+(i+1)+'Summary'); s.textContent=''; s.classList.remove('good','bad'); }
+    $('keyRevealNote').style.display='none';
+    updateOverallScore();
+  }
+
+  $('genBtn').addEventListener('click', function(){
+    applyAndStore($('studentId').value);
+    $('idStatus').textContent = $('studentId').value.trim() ? 'Scenario generated for ID '+$('studentId').value.trim()+'.' : 'Sample scenario shown. Enter your Student ID to generate yours.';
+  });
+  $('studentId').addEventListener('keydown', function(e){ if(e.key==='Enter') $('genBtn').click(); });
+  [1,2,3].forEach(function(n,i){ $('checkPart'+n).addEventListener('click', function(){ checkPart(i); }); });
+
+  // ---------- Print ----------
+  function val(id){ var el=$(id); return el?el.value.trim():''; }
+  $('printBtn').addEventListener('click', triggerPrint);
+  function triggerPrint(){
+    var name=val('studentName'); var id=val('studentId');
+    $('printNameLine').textContent='Name: '+(name||'_______________________')+'     Student ID: '+(id||'_______________________');
+    var scoreText=$('overallScore').textContent, breakdownText=$('scoreBreakdown').textContent;
+    $('printScoreLine').textContent='Score: '+scoreText+(breakdownText?'  ('+breakdownText+')':'');
+    var oldTitle=document.title; document.title='PisgahRidge-DebtInvestments-'+(id||'submission'); window.print(); document.title=oldTitle;
+  }
+
+  // ---------- Download as Word (.docx) ----------
+  var docxLoadPromise = null;
+  function loadDocxLib(){
+    if(window.docx) return Promise.resolve();
+    if(docxLoadPromise) return docxLoadPromise;
+    docxLoadPromise = new Promise(function(resolve, reject){
+      var s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js';
+      s.onload = function(){ window.docx ? resolve() : reject(new Error('docx library did not load correctly')); };
+      s.onerror = function(){ reject(new Error('network error loading docx library')); };
+      document.head.appendChild(s);
+    });
+    return docxLoadPromise;
+  }
+  function blankIfEmpty(s){ return s && s.length ? s : '\u2014'; }
+  function buildAnswersDoc(){
+    var D = window.docx; var PURPLE='592C88', INK='221B2E', SLATE='5F5A6B';
+    var name = blankIfEmpty(val('studentName')); var sid = blankIfEmpty(val('studentId'));
+    function h(text){ return new D.Paragraph({heading:D.HeadingLevel.HEADING_2, spacing:{before:200,after:100}, children:[new D.TextRun({text:text,bold:true,color:PURPLE,size:26})]}); }
+    function p(text,opts){ opts=opts||{}; return new D.Paragraph({spacing:{before:60,after:60}, children:[new D.TextRun({text:text,size:20,color:opts.color||INK,bold:!!opts.bold})]}); }
+    function cell(text,width,opts){ opts=opts||{}; return new D.TableCell({width:{size:width,type:D.WidthType.DXA}, shading:opts.shading?{type:D.ShadingType.CLEAR,fill:opts.shading}:undefined, margins:{top:60,bottom:60,left:90,right:90}, children:[new D.Paragraph({children:[new D.TextRun({text:text,size:19,bold:!!opts.bold,color:opts.color||INK})]})]}); }
+    function row(cells,header){ return new D.TableRow({tableHeader:!!header, children:cells}); }
+    function table(widths, rows){ return new D.Table({width:{size:widths.reduce(function(a,b){return a+b;},0),type:D.WidthType.DXA}, columnWidths:widths, rows:rows}); }
+    var COLS = [5148,4102];
+    var children = [];
+    children.push(new D.Paragraph({heading:D.HeadingLevel.TITLE, spacing:{after:60}, children:[new D.TextRun({text:'Pisgah Ridge Technologies \u2014 Investments in Debt Securities', color:PURPLE, size:32, bold:true})]}));
+    children.push(p('Name: '+name+'     Student ID: '+sid, {bold:true}));
+    children.push(p('ACCT 352  \u00b7  Investments in Debt Securities', {color:SLATE}));
+    var scoreText=$('overallScore').textContent||'', breakdownText=$('scoreBreakdown').textContent||'';
+    children.push(new D.Paragraph({spacing:{before:200,after:60}, border:{top:{style:D.BorderStyle.SINGLE,size:6,color:PURPLE},bottom:{style:D.BorderStyle.SINGLE,size:6,color:PURPLE}}, children:[new D.TextRun({text:'Assignment score', bold:true, color:PURPLE, size:24})]}));
+    children.push(new D.Paragraph({spacing:{before:40,after:20}, children:[new D.TextRun({text:scoreText, bold:true, color:INK, size:24})]}));
+    if(breakdownText) children.push(new D.Paragraph({spacing:{after:100}, children:[new D.TextRun({text:breakdownText, color:SLATE, size:18})]}));
+    document.querySelectorAll('.part').forEach(function(partEl){
+      var labelEl=partEl.querySelector('.part-label'); var h2El=partEl.querySelector('h2');
+      children.push(h((labelEl?labelEl.textContent+' \u2014 ':'')+(h2El?h2El.textContent:'')));
+      var rows=[row([cell('Item',COLS[0],{bold:true,shading:PURPLE,color:'FFFFFF'}), cell('Your answer',COLS[1],{bold:true,shading:PURPLE,color:'FFFFFF'})], true)];
+      partEl.querySelectorAll('input[type="text"], select').forEach(function(field){
+        var lbl = field.getAttribute('data-label') || field.id;
+        var v = field.tagName==='SELECT' ? (field.options[field.selectedIndex]?field.options[field.selectedIndex].textContent:'') : field.value;
+        if(v==='Select account\u2026' || v==='Select\u2026') v='';
+        rows.push(row([cell(lbl,COLS[0]), cell(blankIfEmpty(v),COLS[1])]));
+      });
+      children.push(table(COLS, rows));
+    });
+    children.push(new D.Paragraph({spacing:{before:300}, alignment:D.AlignmentType.CENTER, children:[new D.TextRun({text:'Pisgah Ridge Technologies \u00b7 ACCT 352 \u00b7 Western Carolina University', size:16, italics:true, color:SLATE})]}));
+    return new D.Document({title:'Pisgah Ridge Technologies \u2014 Investments in Debt Securities', sections:[{properties:{page:{size:{width:12240,height:15840}, margin:{top:1440,bottom:1440,left:1440,right:1440}}}, children:children}]});
+  }
+  $('downloadDocxBtn').addEventListener('click', function(){
+    var statusEl=$('submitStatus'); statusEl.classList.remove('error'); statusEl.textContent='Preparing your Word document\u2026';
+    loadDocxLib().then(function(){ return window.docx.Packer.toBlob(buildAnswersDoc()); }).then(function(blob){
+      var idPart=val('studentId')||'submission'; var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='PisgahRidge-DebtInvestments-'+idPart+'.docx';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      statusEl.textContent='Downloaded.'; setTimeout(function(){ statusEl.textContent=''; }, 4000);
+    }).catch(function(){ statusEl.classList.add('error'); statusEl.textContent='Could not load the Word export tool (needs internet access) \u2014 use Print / Save as PDF instead.'; });
+  });
+
+  applyAndStore('');
+})();
+</script>
+
+</body>
+</html>
