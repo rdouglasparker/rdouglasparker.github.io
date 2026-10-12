@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Investments in Debt Securities — Reading Notes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --wcu-purple: #4B2E83;
+    --wcu-purple-dark: #341f5c;
+    --wcu-gold: #C8A24A;
+    --gold-light: #f4ecd8;
+    --ink: #232023;
+    --muted: #5b5559;          /* secondary text: 6.9:1 on the page background */
+    --paper: #fdfcfb;
+    --panel: #f7f3ec;
+    --rule: #e2d9c8;
+    --ctl: #7d7388;            /* borders on form controls: 3:1 or better */
+    --warn: #6b4f00;
+    --warn-bg: #FBF3DC;
+    --ifrs: #2f4c8a;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-padding-top: 1rem; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.55;
+  }
+
+  /* ---------- Accessibility helpers ---------- */
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+  .skip-link {
+    position: absolute; left: 0.75rem; top: -4rem; z-index: 100;
+    background: #fff; color: var(--wcu-purple-dark); font-weight: 700;
+    padding: 0.6rem 1rem; border: 3px solid var(--wcu-purple-dark); border-radius: 6px;
+  }
+  .skip-link:focus { top: 0.75rem; }
+  :focus-visible { outline: 3px solid var(--wcu-purple-dark); outline-offset: 3px; }
+  header :focus-visible, footer :focus-visible { outline-color: #fff; }
+  main:focus { outline: none; }
+  .table-wrap { overflow-x: auto; max-width: 100%; }
+  .table-wrap:focus-visible { outline-offset: 0; }
+
+  header {
+    background: linear-gradient(135deg, var(--wcu-purple) 0%, var(--wcu-purple-dark) 100%);
+    color: #fff;
+    padding: 2.2rem 1.5rem 1.8rem;
+    border-bottom: 6px solid var(--wcu-gold);
+  }
+  header .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #E3C673;
+    margin-bottom: 0.4rem;
+  }
+  header h1 {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 700;
+    font-size: 1.9rem;
+    margin: 0 0 0.3rem;
+  }
+  header p.sub { margin: 0; color: #ece6f6; font-size: 0.98rem; }
+
+  main { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+  .lo-block { margin-bottom: 2.8rem; }
+
+  h2 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.5rem;
+    margin: 0 0 0.8rem;
+    color: var(--wcu-purple-dark);
+    border-bottom: 2px solid var(--rule);
+    padding-bottom: 0.4rem;
+  }
+  h3 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.1rem;
+    margin: 1.4rem 0 0.5rem;
+    color: var(--wcu-purple-dark);
+  }
+  p { margin: 0.6rem 0; }
+
+  .key-idea {
+    background: var(--panel);
+    border-left: 4px solid var(--wcu-gold);
+    padding: 0.9rem 1.1rem;
+    border-radius: 0 6px 6px 0;
+    margin: 0.9rem 0;
+  }
+  .key-idea strong { color: var(--wcu-purple-dark); }
+
+  .formula {
+    font-family: 'IBM Plex Mono', monospace;
+    background: var(--wcu-purple-dark);
+    color: var(--gold-light);
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin: 0.8rem 0;
+    font-size: 0.92rem;
+    overflow-x: auto;
+  }
+
+  .example {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin: 0.9rem 0;
+  }
+  .example .ex-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--wcu-purple);
+    margin-bottom: 0.4rem;
+  }
+
+  ul, ol { padding-left: 1.4rem; }
+  li { margin-bottom: 0.35rem; }
+
+  .patterns {
+    background: var(--gold-light);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin: 0.8rem 0;
+  }
+  .patterns p { margin: 0.3rem 0; }
+
+  .ifrs {
+    background: #eef2fb;
+    border-left: 4px solid var(--ifrs);
+    border-radius: 0 6px 6px 0;
+    padding: 0.9rem 1.1rem;
+    margin: 0.9rem 0;
+  }
+  .ifrs .ifrs-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ifrs);
+    margin-bottom: 0.4rem;
+  }
+
+  table.mini-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.4rem 0 0.9rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+  }
+  table.mini-table caption {
+    font-family: 'Inter', sans-serif; font-size: 0.9rem; color: var(--muted);
+    text-align: left; margin-bottom: 0.4rem;
+  }
+  table.mini-table th, table.mini-table td {
+    border: 1px solid var(--rule);
+    padding: 0.4rem 0.55rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.mini-table th {
+    background: var(--panel);
+    color: var(--wcu-purple-dark);
+    font-weight: 600;
+  }
+  table.mini-table td.num, table.mini-table th.num { text-align: right; white-space: nowrap; }
+  table.mini-table tr.total-row th, table.mini-table tr.total-row td { background: var(--panel); font-weight: 700; }
+
+  table.je-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.5rem 0 0.3rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.88rem;
+  }
+  table.je-table thead th { padding: 0; border: 0; height: 0; line-height: 0; }
+  table.je-table td { padding: 0.28rem 0.3rem; vertical-align: top; }
+  table.je-table td.je-debit-amt, table.je-table td.je-credit-amt {
+    text-align: right;
+    width: 100px;
+    white-space: nowrap;
+  }
+  table.je-table td.indent { padding-left: 1.8rem; }
+  .je-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-style: italic;
+    margin: 0 0 1rem;
+  }
+  .date-tag {
+    display: inline-block; font-family: 'IBM Plex Mono', monospace; font-weight: 700; font-size: 0.82rem;
+    color: #fff; background: var(--wcu-purple-dark); padding: 0.12rem 0.5rem; border-radius: 4px; margin-top: 0.4rem;
+  }
+
+  footer {
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--muted);
+    padding: 1.5rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+  @media (forced-colors: active) {
+    .key-idea, .ifrs, .example { border: 1px solid CanvasText; }
+    header { border-bottom: 6px solid CanvasText; }
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header>
+  <div class="eyebrow">ACCT 352 · Investments — Debt Securities</div>
+  <h1>Investments in Debt Securities</h1>
+  <p class="sub">Reading Notes</p>
+</header>
+
+<main id="main" tabindex="-1">
+
+  <div class="lo-block">
+    <h2>What a Debt Investment Looks Like</h2>
+    <p>A bond (or note, or Treasury security) is a promise: the issuer will pay the holder a stated amount of <strong>interest</strong> on specified dates and return the <strong>principal</strong> (also called the face amount or maturity value) on the <strong>maturity date</strong>. A company that buys another entity's debt is lending money, so the question for the investor is how to account for a purchase, interest, changes in value while it holds the security, and a sale or maturity.</p>
+    <div class="key-idea">
+      Four events drive the accounting for every debt investment: <strong>(1)</strong> purchase, <strong>(2)</strong> receiving interest, <strong>(3)</strong> holding the investment while its fair value changes, and <strong>(4)</strong> selling it or collecting the principal at maturity. Events 1 and 2 are accounted for the same way no matter what. Events 3 and 4 depend on how the investment is <strong>classified</strong>.
+    </div>
+  </div>
+
+
+  <div class="lo-block">
+    <h2>Pricing the Investment and Recording the Purchase</h2>
+    <p>An investor pays what the future cash flows are worth <em>today</em>, using the <strong>market interest rate</strong> for debt of similar risk and maturity, not the rate printed on the bond.</p>
+    <div class="formula">Price = PV of the periodic interest payments + PV of the principal, both discounted at the market rate</div>
+    <p>When interest is paid semiannually, use <strong>half</strong> the annual rate and <strong>twice</strong> the number of years.</p>
+    <div class="patterns">
+      <p><strong>Stated rate &gt; market rate</strong> &rarr; investors pay more than face value (a <strong>premium</strong>).</p>
+      <p><strong>Stated rate &lt; market rate</strong> &rarr; investors pay less than face value (a <strong>discount</strong>).</p>
+    </div>
+
+    <div class="example">
+      <div class="ex-label">Running example for these notes</div>
+      <p>On July 1, <span class="yr0">2026</span>, <strong>Catamount Capital Holdings</strong> buys the entire issue of <strong>$500,000</strong>, 8% bonds issued by <strong>Mountain Heritage Foods</strong>. Interest is paid each June 30 and December 31, the bonds mature on June 30, <span class="yr3">2029</span>, and the market rate for similar bonds is 10%.</p>
+      <div class="table-wrap"><table class="mini-table"><caption>Price of the bonds (6 semiannual periods, 5% market rate per period)</caption><thead><tr><th scope="col">Cash flow</th><th scope="col">Calculation</th><th scope="col" class="num">Present value</th></tr></thead><tbody><tr><th scope="row">Interest</th><td>$20,000 &times; 5.07569 (PV of an ordinary annuity, n = 6, i = 5%)</td><td class="num">$101,514</td></tr><tr><th scope="row">Principal</th><td>$500,000 &times; 0.74622 (PV of $1, n = 6, i = 5%)</td><td class="num">$373,110</td></tr><tr class="total-row"><th scope="row">Price paid</th><td></td><td class="num">$474,624</td></tr></tbody></table></div>
+      <p>Cash interest each period is $500,000 &times; (8% &divide; 2) = $20,000. Catamount pays $474,624, which is $25,376 less than face value, because the bonds pay less than the 10% the market demands. (Table factors are rounded, so a calculator or Excel may differ by a few dollars.)</p>
+    </div>
+
+    <p>Investments are recorded at <strong>cost</strong>, including any brokerage fees. Using the <em>gross method</em>, the bond account is kept at face value and the difference goes to a contra account:</p>
+    <div class="date-tag">July 1, <span class="yr0">2026</span></div>
+    <div class="table-wrap"><table class="je-table"><caption class="sr-only">Purchase of the bonds at a discount</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Investment in bonds (face amount)</td><td class="je-debit-amt">500,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Discount on bond investment (difference)</td><td class="je-debit-amt"></td><td class="je-credit-amt">25,376</td></tr><tr><td class="indent">Cash (price paid)</td><td class="je-debit-amt"></td><td class="je-credit-amt">474,624</td></tr></tbody></table></div>
+    <p class="je-desc">A premium would instead be a <em>debit</em> to Premium on bond investment. An alternative, the net method, records the cost directly in the investment account.</p>
+  </div>
+
+
+  <div class="lo-block">
+    <h2>Recording Interest Revenue: The Effective Interest Method</h2>
+    <p>Each period, the investor receives a fixed amount of cash but <em>earns</em> a return on the amount it has invested. Interest revenue is based on the market rate at the date of purchase and the investment's current <strong>amortized cost</strong> (face amount less unamortized discount, or plus unamortized premium).</p>
+    <div class="formula">Interest revenue = Market rate (per period) &times; Beginning amortized cost<br>Cash received = Stated rate (per period) &times; Face amount<br>Amortization = Interest revenue &minus; Cash received</div>
+    <p>For Catamount's first period: 5% &times; $474,624 = <strong>$23,731</strong> of revenue, but only $20,000 of cash. The $3,731 difference is a piece of the discount that has now been earned.</p>
+    <div class="date-tag">December 31, <span class="yr0">2026</span></div>
+    <div class="table-wrap"><table class="je-table"><caption class="sr-only">First interest receipt</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Cash (stated rate &times; face amount)</td><td class="je-debit-amt">20,000</td><td class="je-credit-amt"></td></tr><tr><td>Discount on bond investment (difference)</td><td class="je-debit-amt">3,731</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Interest revenue (market rate &times; amortized cost)</td><td class="je-debit-amt"></td><td class="je-credit-amt">23,731</td></tr></tbody></table></div>
+    <p>Because the discount shrinks, amortized cost <em>grows</em> toward face value ($474,624 &rarr; $478,355 after one period) and reaches $500,000 at maturity.</p>
+    <div class="table-wrap"><table class="mini-table"><caption>Amortization schedule for the running example (discount)</caption><thead><tr><th scope="col">Period</th><th scope="col" class="num">Cash interest</th><th scope="col" class="num">Interest revenue</th><th scope="col" class="num">Discount amortized</th><th scope="col" class="num">Unamortized discount</th><th scope="col" class="num">Amortized cost</th></tr></thead><tbody><tr><th scope="row">Period 1</th><td class="num">20,000</td><td class="num">23,731</td><td class="num">3,731</td><td class="num">21,645</td><td class="num">478,355</td></tr><tr><th scope="row">Period 2</th><td class="num">20,000</td><td class="num">23,918</td><td class="num">3,918</td><td class="num">17,727</td><td class="num">482,273</td></tr><tr><th scope="row">Period 3</th><td class="num">20,000</td><td class="num">24,114</td><td class="num">4,114</td><td class="num">13,613</td><td class="num">486,387</td></tr><tr><th scope="row">Period 4</th><td class="num">20,000</td><td class="num">24,319</td><td class="num">4,319</td><td class="num">9,294</td><td class="num">490,706</td></tr><tr><th scope="row">Period 5</th><td class="num">20,000</td><td class="num">24,535</td><td class="num">4,535</td><td class="num">4,759</td><td class="num">495,241</td></tr><tr><th scope="row">Period 6</th><td class="num">20,000</td><td class="num">24,759</td><td class="num">4,759</td><td class="num">0</td><td class="num">500,000</td></tr></tbody></table></div>
+    <div class="key-idea">
+      <strong>Premium bonds work in reverse:</strong> cash received is <em>more</em> than interest revenue, so the premium is amortized down, and amortized cost declines toward face value. The last period's numbers are rounded so the balance lands exactly on face value.
+    </div>
+  </div>
+
+
+  <div class="lo-block">
+    <h2>Three Classifications of Debt Investments</h2>
+    <p>The company classifies each debt investment based on what it intends to do with it. The classification determines how <strong>unrealized holding gains and losses</strong> (changes in fair value of securities that haven't been sold) are reported.</p>
+    <div class="table-wrap"><table class="mini-table"><caption>Classification of debt investments at a glance</caption><thead><tr><th scope="col">Classification</th><th scope="col">Intent</th><th scope="col">Balance sheet</th><th scope="col">Unrealized gains and losses</th><th scope="col">Cash flows (typical)</th></tr></thead><tbody><tr><th scope="row">Held-to-maturity (HTM)</th><td>Positive intent <em>and</em> ability to hold until maturity</td><td>Amortized cost, less any allowance for credit losses</td><td>Not recognized (fair value is disclosed in the notes)</td><td>Investing</td></tr><tr><th scope="row">Trading (TS)</th><td>Actively bought and sold to profit from short-term price changes</td><td>Fair value, usually as a current asset</td><td>Reported in <strong>net income</strong></td><td>Operating</td></tr><tr><th scope="row">Available-for-sale (AFS)</th><td>Neither of the above</td><td>Fair value</td><td>Reported in <strong>other comprehensive income (OCI)</strong>, accumulating in AOCI</td><td>Investing</td></tr></tbody></table></div>
+    <div class="key-idea">
+      <strong>Why do fair values change?</strong> A bond's fair value is the present value of its remaining cash flows at the <em>current</em> market rate. When market rates <strong>rise</strong>, fair value <strong>falls</strong>; when market rates <strong>fall</strong>, fair value <strong>rises</strong>. The investor's amortization schedule does <em>not</em> change; it stays based on the rate at purchase.
+    </div>
+    <div class="example">
+      <div class="ex-label">Running example, continued</div>
+      <p>At December 31, <span class="yr0">2026</span>, market rates for similar bonds have fallen to 9%. Five semiannual periods remain, at 4.5% per period:</p>
+      <div class="table-wrap"><table class="mini-table"><caption>Fair value on December 31 (5 periods, 4.5% per period)</caption><thead><tr><th scope="col">Cash flow</th><th scope="col">Calculation</th><th scope="col" class="num">Present value</th></tr></thead><tbody><tr><th scope="row">Interest</th><td>$20,000 &times; 4.38998</td><td class="num">$87,800</td></tr><tr><th scope="row">Principal</th><td>$500,000 &times; 0.80245</td><td class="num">$401,225</td></tr><tr class="total-row"><th scope="row">Fair value</th><td></td><td class="num">$489,025</td></tr></tbody></table></div>
+      <p>Amortized cost at that date is $478,355, so there is an unrealized holding gain of $489,025 &minus; $478,355 = <strong>$10,670</strong>. The three classifications treat that gain three different ways.</p>
+    </div>
+  </div>
+
+
+  <div class="lo-block">
+    <h2>Held-to-Maturity (HTM)</h2>
+    <p>If the investor has the <strong>positive intent and ability</strong> to hold a debt security until it matures, sale before maturity isn't a real alternative, so day-to-day fair value changes are not very relevant. HTM investments stay at <strong>amortized cost</strong> and fair value changes are ignored (only disclosed in the notes).</p>
+    <p>A security can't be HTM if the investor might sell it in response to changes in market prices or interest rates, or to meet liquidity needs.</p>
+    <div class="key-idea">
+      <strong>The "tainting" rule:</strong> selling an HTM security for reasons other than a narrow list of unforeseen events calls the company's original intent into question. The company can be required to reclassify <em>all</em> its HTM securities as AFS and avoid the HTM category for two years.
+    </div>
+    <h3>If an HTM investment is sold early</h3>
+    <p>It's like selling any other asset: compare the cash received with the carrying amount (amortized cost). In the running example, suppose Catamount sells on January 5, <span class="yr1">2027</span>, for $498,000 (ignoring a few days of accrued interest). The investment account is $500,000 and the unamortized discount is $21,645:</p>
+    <div class="date-tag">January 5, <span class="yr1">2027</span></div>
+    <div class="table-wrap"><table class="je-table"><caption class="sr-only">Sale of HTM investment</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Cash</td><td class="je-debit-amt">498,000</td><td class="je-credit-amt"></td></tr><tr><td>Discount on bond investment (account balance)</td><td class="je-debit-amt">21,645</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Investment in bonds (account balance)</td><td class="je-debit-amt"></td><td class="je-credit-amt">500,000</td></tr><tr><td class="indent">Gain on investments (net income)</td><td class="je-debit-amt"></td><td class="je-credit-amt">19,645</td></tr></tbody></table></div>
+    <h3>Credit losses</h3>
+    <p>HTM is the one place where something resembling an unrealized loss <em>is</em> recognized. Under the Current Expected Credit Loss (CECL) model, the investor estimates the interest and principal it does not expect to collect, records a credit loss in net income, and reduces the carrying amount with an <strong>allowance for credit losses</strong>, just like bad debt expense and the allowance for uncollectible accounts.</p>
+  </div>
+
+
+  <div class="lo-block">
+    <h2>Trading Securities</h2>
+    <p>Trading securities are bought and sold for short-term profit (holding periods are measured in days or hours, not years), so they're reported at <strong>fair value</strong> and the changes flow through <strong>net income</strong> as they occur. That makes management's success at timing purchases and sales visible in the income statement.</p>
+    <p>The investment account keeps its amortized cost. A valuation account, <strong>Fair value adjustment</strong>, is adjusted each period so that cost plus (or minus) the adjustment equals fair value.</p>
+    <div class="formula">Required fair value adjustment = Fair value &minus; Amortized cost<br>Entry = Required balance &minus; Existing balance in the adjustment account</div>
+    <div class="date-tag">December 31, <span class="yr0">2026</span></div>
+    <div class="table-wrap"><table class="je-table"><caption class="sr-only">Adjust trading security to fair value</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Fair value adjustment</td><td class="je-debit-amt">10,670</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Gain on investments (unrealized, net income)</td><td class="je-debit-amt"></td><td class="je-credit-amt">10,670</td></tr></tbody></table></div>
+    <p>For a <strong>portfolio</strong>, calculate the required adjustment for the portfolio as a whole (total fair value &minus; total amortized cost). The adjustment can be a debit or a credit; the unrealized gain or loss is whatever moves the account from its old balance to its new one.</p>
+    <h3>When a trading security is sold</h3>
+    <p>First, bring the adjustment up to the date of sale (here, from $489,025 to the $498,000 sale price, an additional gain of $8,975). Then remove the accounts. Because every change in value has already hit net income, <strong>no additional gain or loss</strong> is recorded on the sale.</p>
+    <div class="date-tag">January 5, <span class="yr1">2027</span></div>
+    <div class="table-wrap"><table class="je-table"><caption class="sr-only">Trading security: adjust to fair value before sale</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Fair value adjustment</td><td class="je-debit-amt">8,975</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Gain on investments (unrealized, net income)</td><td class="je-debit-amt"></td><td class="je-credit-amt">8,975</td></tr></tbody></table></div>
+    <div class="table-wrap"><table class="je-table"><caption class="sr-only">Trading security: record the sale</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Cash</td><td class="je-debit-amt">498,000</td><td class="je-credit-amt"></td></tr><tr><td>Discount on bond investment (account balance)</td><td class="je-debit-amt">21,645</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Investment in bonds (account balance)</td><td class="je-debit-amt"></td><td class="je-credit-amt">500,000</td></tr><tr><td class="indent">Fair value adjustment (account balance)</td><td class="je-debit-amt"></td><td class="je-credit-amt">19,645</td></tr></tbody></table></div>
+    <p class="je-desc">The total gain recognized in net income over the life of the investment is $10,670 + $8,975 = $19,645. That's the same total as HTM; only the timing differs.</p>
+  </div>
+
+
+  <div class="lo-block">
+    <h2>Available-for-Sale (AFS)</h2>
+    <p>AFS is the middle ground: the investor isn't actively trading, but the security is available to sell if cash is needed or the market is favorable. It's reported at <strong>fair value</strong> like a trading security, but unrealized holding gains and losses go to <strong>other comprehensive income (OCI)</strong> rather than net income.</p>
+    <div class="key-idea">
+      <strong>Net income vs. OCI.</strong> Comprehensive income = net income + OCI. Net income is closed to <strong>retained earnings</strong>; OCI is closed to <strong>accumulated other comprehensive income (AOCI)</strong>. Think of AOCI as a "holding tank" in shareholders' equity: unrealized gains and losses accumulate there while the investment is held, and are emptied out when it's sold.
+    </div>
+    <p>The rationale is that AFS investments are held for multiple periods, so gains and losses may offset over time; running them through net income each period would make earnings look more volatile than they really are.</p>
+    <div class="date-tag">December 31, <span class="yr0">2026</span></div>
+    <div class="table-wrap"><table class="je-table"><caption class="sr-only">Adjust AFS security to fair value</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Fair value adjustment</td><td class="je-debit-amt">10,670</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Gain on investments (unrealized, OCI)</td><td class="je-debit-amt"></td><td class="je-credit-amt">10,670</td></tr></tbody></table></div>
+    <p>The amounts are identical to trading securities; only the <em>destination</em> of the gain differs.</p>
+    <h3>When an AFS security is sold: three entries</h3>
+    <ol>
+      <li><strong>Adjust to fair value</strong> at the date of sale (an additional $8,975 unrealized gain in OCI).</li>
+      <li><strong>Reclassify.</strong> Back the accumulated unrealized gain ($19,645) out of OCI (and therefore AOCI) with a <em>reclassification adjustment</em> and eliminate the fair value adjustment. Without this step the gain would be counted twice.</li>
+      <li><strong>Record the sale</strong> and recognize the realized gain in net income.</li>
+    </ol>
+    <div class="date-tag">January 5, <span class="yr1">2027</span></div>
+    <div class="table-wrap"><table class="je-table"><caption class="sr-only">AFS: adjust to fair value before sale</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Fair value adjustment</td><td class="je-debit-amt">8,975</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Gain on investments (unrealized, OCI)</td><td class="je-debit-amt"></td><td class="je-credit-amt">8,975</td></tr></tbody></table></div>
+    <div class="table-wrap"><table class="je-table"><caption class="sr-only">AFS: reclassification adjustment</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Reclassification adjustment (OCI)</td><td class="je-debit-amt">19,645</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Fair value adjustment (account balance)</td><td class="je-debit-amt"></td><td class="je-credit-amt">19,645</td></tr></tbody></table></div>
+    <div class="table-wrap"><table class="je-table"><caption class="sr-only">AFS: record the sale</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Cash</td><td class="je-debit-amt">498,000</td><td class="je-credit-amt"></td></tr><tr><td>Discount on bond investment (account balance)</td><td class="je-debit-amt">21,645</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Investment in bonds (account balance)</td><td class="je-debit-amt"></td><td class="je-credit-amt">500,000</td></tr><tr><td class="indent">Gain on investments (net income)</td><td class="je-debit-amt"></td><td class="je-credit-amt">19,645</td></tr></tbody></table></div>
+    <p class="je-desc">Net effect: the $19,645 gain moves from OCI/AOCI into net income/retained earnings in the period of sale.</p>
+    <h3>Impairment</h3>
+    <p>If an AFS security's fair value is below amortized cost, ask what management expects to do. If management intends to sell, or more likely than not will have to sell before fair value recovers, write the security down to fair value and recognize the loss in <strong>net income</strong>. Otherwise, estimate <strong>credit losses</strong> and record them through an allowance (as with HTM); any remaining decline stays in OCI as an unrealized loss.</p>
+    <h3>Income taxes</h3>
+    <p>Retained earnings contains after-tax amounts, so for AOCI to be comparable, unrealized gains and losses in OCI are reported net of tax, which typically creates deferred tax assets and liabilities.</p>
+  </div>
+
+
+  <div class="lo-block">
+    <h2>Side by Side: Same Cash, Same Total Gain, Different Timing</h2>
+    <div class="table-wrap"><table class="mini-table"><caption>Effects of the $19,645 gain in the running example (interest revenue excluded)</caption><thead><tr><th scope="col">Item</th><th scope="col" class="num">HTM</th><th scope="col" class="num">Trading</th><th scope="col" class="num">AFS</th></tr></thead><tbody><tr><th scope="row">Fair value adjustment recorded?</th><td class="num">No</td><td class="num">Yes</td><td class="num">Yes</td></tr><tr><th scope="row">Net income, <span class="yr0">2026</span></th><td class="num">0</td><td class="num">10,670</td><td class="num">0</td></tr><tr><th scope="row">Net income, <span class="yr1">2027</span> (sale year)</th><td class="num">19,645</td><td class="num">8,975</td><td class="num">19,645</td></tr><tr><th scope="row">OCI, <span class="yr0">2026</span></th><td class="num">0</td><td class="num">0</td><td class="num">10,670</td></tr><tr><th scope="row">OCI, <span class="yr1">2027</span> (adjustment 8,975 less reclassification 19,645)</th><td class="num">0</td><td class="num">0</td><td class="num">(10,670)</td></tr><tr><th scope="row">AOCI at end of <span class="yr0">2026</span></th><td class="num">0</td><td class="num">0</td><td class="num">10,670</td></tr><tr><th scope="row">Carrying amount on the balance sheet at end of <span class="yr0">2026</span></th><td class="num">478,355</td><td class="num">489,025</td><td class="num">489,025</td></tr><tr class="total-row"><th scope="row">Total gain recognized in net income over the life</th><td class="num">19,645</td><td class="num">19,645</td><td class="num">19,645</td></tr></tbody></table></div>
+    <div class="key-idea">
+      Purchases and interest are recorded identically under all three. Trading and AFS have identical effects on the investment account and on total shareholders' equity; they differ only in whether the unrealized gain passes through net income (and retained earnings) or OCI (and AOCI). The question is never <em>how much</em> income is recognized, but <em>when</em>.
+    </div>
+  </div>
+
+
+  <div class="lo-block">
+    <h2>Transfers Between Classifications</h2>
+    <p>The classification is reassessed at each reporting date. A security that is reclassified is transferred at its <strong>fair value</strong> on the transfer date, and any unrealized gain or loss is handled consistently with the <em>new</em> classification.</p>
+    <div class="table-wrap"><table class="mini-table"><caption>Effect of reclassifying a debt investment</caption><thead><tr><th scope="col">Transfer from &rarr; to</th><th scope="col">Treatment of the unrealized gain or loss at transfer</th></tr></thead><tbody><tr><th scope="row">HTM or AFS &rarr; Trading</th><td>Include the total unrealized gain or loss in current net income, as if it all occurred now.</td></tr><tr><th scope="row">Trading &rarr; HTM or AFS</th><td>Include in net income only the unrealized gain or loss that arose in the current period before the transfer (earlier amounts already went through net income).</td></tr><tr><th scope="row">HTM &rarr; AFS</th><td>No effect on net income. Report the total unrealized gain or loss in AOCI.</td></tr><tr><th scope="row">AFS &rarr; HTM</th><td>No effect on net income. Leave the existing AOCI balance in place and amortize it to net income over the security's remaining life; the fair value becomes the new amortized cost.</td></tr></tbody></table></div>
+    <p>Reclassifications are unusual, and the notes must describe the circumstances.</p>
+  </div>
+
+
+  <div class="lo-block">
+    <h2>The Fair Value Option</h2>
+    <p>GAAP lets a company <strong>elect</strong> to account for most financial assets (including HTM- and AFS-type debt investments) at fair value, with unrealized gains and losses in net income, which is exactly how trading securities are treated. Key features:</p>
+    <ul>
+      <li>The election is made when the investment is purchased and is <strong>irrevocable</strong>.</li>
+      <li>It can be applied to some securities and not to others, but the company must explain a partial election in the notes.</li>
+      <li>Unlike true trading securities, cash flows from FVO investments usually are <strong>investing</strong> activities, because they aren't held for near-term sale.</li>
+      <li>One reason for the option: it simplifies hedging. If a company hedges an asset with a liability, electing fair value for both lets the offsetting changes show up in earnings together without complex hedge-accounting rules.</li>
+    </ul>
+  </div>
+
+
+  <div class="lo-block">
+    <h2>Financial Statement Presentation and Disclosure</h2>
+    <div class="table-wrap"><table class="mini-table"><caption>Where each classification shows up</caption><thead><tr><th scope="col">Statement</th><th scope="col">HTM</th><th scope="col">Trading</th><th scope="col">AFS</th></tr></thead><tbody><tr><th scope="row">Income statement</th><td>Interest revenue; realized gain or loss on sale</td><td>Interest revenue; all gains and losses, realized and unrealized</td><td>Interest revenue; realized gain or loss on sale</td></tr><tr><th scope="row">Other comprehensive income</th><td>None</td><td>None</td><td>Unrealized gains and losses; reclassification adjustments when sold</td></tr><tr><th scope="row">Balance sheet</th><td>Amortized cost, less allowance</td><td>Fair value</td><td>Fair value; AOCI in equity</td></tr><tr><th scope="row">Cash flows</th><td>Investing</td><td>Operating</td><td>Investing</td></tr></tbody></table></div>
+    <p>Individual securities are classified as current or noncurrent based on when they will mature or be sold. A company doesn't have to show the three categories separately on the face of the balance sheet if the notes provide the information.</p>
+    <p>The notes also disclose, for each period: aggregate fair value, gross realized and unrealized gains and losses, the change in net unrealized gains and losses, and amortized cost by major security type. They also identify the <strong>level of the fair value hierarchy</strong> (Levels 1, 2, or 3) for each measurement; Level 3 estimates, the most subjective, require the most disclosure.</p>
+  </div>
+
+
+  <div class="lo-block">
+    <h2>GAAP vs. IFRS</h2>
+    <div class="ifrs">
+      <div class="ifrs-label">Different Classification Categories</div>
+      <p>IFRS has no HTM or AFS categories. Debt investments are classified as <strong>amortized cost</strong> (like HTM), <strong>fair value through other comprehensive income (FVOCI)</strong> (like AFS, but with different impairment rules), or <strong>fair value through profit or loss (FVPL)</strong> (like trading). Classification depends on (1) whether the contractual cash flows are solely payments of principal and interest, and (2) the <em>business model</em>: collect cash flows only, collect and sell, or sell for profit.</p>
+    </div>
+    <div class="ifrs">
+      <div class="ifrs-label">Transfers Are Much Rarer</div>
+      <p>Under IFRS, an investment moves between categories only when the company changes its business model for it.</p>
+    </div>
+    <div class="ifrs">
+      <div class="ifrs-label">Tighter Fair Value Option</div>
+      <p>IFRS allows the fair value option only in specific circumstances, such as avoiding an "accounting mismatch" in a hedge. U.S. GAAP's option isn't limited to those situations. U.S. GAAP also permits specialized accounting for industries like broker-dealers and insurers; IFRS does not.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer>ACCT 352 · Investments in Debt Securities — Reading Notes</footer>
+<script>
+  // Keeps the dates current automatically, with no recoding needed each year.
+  // yr0 is always the current calendar year; yr1, yr2, ... follow.
+  (function () {
+    var y = new Date().getFullYear();
+    for (var k = 0; k <= 5; k++) {
+      var els = document.querySelectorAll('.yr' + k);
+      for (var i = 0; i < els.length; i++) { els[i].textContent = y + k; }
+    }
+  })();
+
+  // Wide tables and formulas scroll sideways on small screens. Make those regions
+  // reachable by keyboard (and named for screen readers) only when they actually scroll.
+  (function () {
+    function mark() {
+      var regions = document.querySelectorAll('.table-wrap, .formula');
+      for (var i = 0; i < regions.length; i++) {
+        var w = regions[i];
+        if (w.scrollWidth > w.clientWidth + 1) {
+          var cap = w.querySelector('caption');
+          w.setAttribute('tabindex', '0');
+          w.setAttribute('role', 'region');
+          w.setAttribute('aria-label', (cap ? cap.textContent : 'Formula') + ' (scrolls sideways)');
+        } else {
+          w.removeAttribute('tabindex'); w.removeAttribute('role'); w.removeAttribute('aria-label');
+        }
+      }
+    }
+    window.addEventListener('load', mark);
+    window.addEventListener('resize', mark);
+  })();
+</script>
+</body>
+</html>
