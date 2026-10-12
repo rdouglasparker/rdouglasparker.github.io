@@ -3,20 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Debt Investment Accounting Practice Quiz (P12-1, P12-2, P12-3)</title>
+  <title>Debt Investment Accounting Practice Quiz</title>
   <style>
     :root {
       --primary: #1e3a8a;
-      --primary-light: #3b82f6;
+      --primary-focus: #1d4ed8;
       --bg: #f8fafc;
       --card-bg: #ffffff;
       --text: #0f172a;
-      --text-muted: #475569;
-      --border: #e2e8f0;
-      --success: #16a34a;
+      --text-muted: #334155;
+      --border: #cbd5e1;
+      --focus-ring: #2563eb;
+      --success-text: #14532d;
       --success-bg: #dcfce7;
-      --danger: #dc2626;
+      --success-border: #15803d;
+      --danger-text: #7f1d1d;
       --danger-bg: #fee2e2;
+      --danger-border: #b91c1c;
     }
 
     * {
@@ -38,15 +41,33 @@
       margin: 0 auto;
     }
 
+    /* Skip Link for Keyboard Navigation */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 10px;
+      background: var(--primary);
+      color: #ffffff;
+      padding: 8px 14px;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 4px;
+      z-index: 1000;
+      transition: top 0.2s;
+    }
+    .skip-link:focus {
+      top: 10px;
+    }
+
     header {
       text-align: center;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
 
     h1 {
       font-size: 1.9rem;
       color: var(--primary);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .subtitle {
@@ -54,31 +75,11 @@
       font-size: 1rem;
     }
 
-    .scenario-box {
-      background-color: #eff6ff;
-      border: 1px solid #bfdbfe;
-      border-radius: 8px;
-      padding: 18px 22px;
-      margin-bottom: 28px;
-    }
-
-    .scenario-box h2 {
-      font-size: 1.15rem;
-      color: var(--primary);
-      margin-bottom: 10px;
-    }
-
-    .scenario-box ul {
-      margin-left: 20px;
-      color: var(--text-muted);
-      font-size: 0.95rem;
-    }
-
     .score-banner {
       position: sticky;
       top: 12px;
       background-color: var(--card-bg);
-      border: 1px solid var(--border);
+      border: 2px solid var(--border);
       padding: 12px 20px;
       border-radius: 8px;
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
@@ -90,68 +91,61 @@
     }
 
     .score-text {
-      font-weight: 600;
-      font-size: 1.05rem;
+      font-weight: 700;
+      font-size: 1.1rem;
       color: var(--primary);
     }
 
     .reset-btn {
       background-color: #f1f5f9;
-      color: var(--text-muted);
+      color: var(--text);
       border: 1px solid var(--border);
-      padding: 6px 14px;
+      padding: 8px 16px;
       border-radius: 6px;
       cursor: pointer;
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: all 0.2s;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: background-color 0.2s;
     }
 
     .reset-btn:hover {
       background-color: #e2e8f0;
-      color: var(--text);
     }
 
-    .question-card {
+    fieldset.question-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: 20px;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     }
 
-    .question-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-
-    .question-num {
-      font-size: 0.85rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--primary-light);
-    }
-
-    .category-badge {
-      font-size: 0.75rem;
-      padding: 2px 8px;
-      border-radius: 9999px;
-      background: #e0e7ff;
-      color: #3730a3;
-      font-weight: 600;
-    }
-
-    .question-text {
+    legend.question-legend {
+      float: left;
+      width: 100%;
       font-size: 1.05rem;
       font-weight: 600;
-      margin-bottom: 16px;
+      color: var(--text);
+      margin-bottom: 14px;
+      padding: 0;
+    }
+
+    .category-tag {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #312e81;
+      background-color: #e0e7ff;
+      padding: 2px 10px;
+      border-radius: 9999px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .options-list {
+      clear: both;
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -162,7 +156,7 @@
       display: flex;
       align-items: flex-start;
       padding: 12px 14px;
-      border: 1px solid var(--border);
+      border: 2px solid var(--border);
       border-radius: 6px;
       cursor: pointer;
       font-size: 0.95rem;
@@ -171,33 +165,38 @@
 
     .option-label:hover {
       background-color: #f8fafc;
-      border-color: #cbd5e1;
+      border-color: #94a3b8;
     }
 
-    .option-label input {
+    .option-label input[type="radio"] {
+      width: 18px;
+      height: 18px;
       margin-right: 12px;
-      margin-top: 4px;
+      margin-top: 3px;
+      cursor: pointer;
+      accent-color: var(--primary);
     }
 
     .option-label.correct-choice {
       background-color: var(--success-bg);
-      border-color: var(--success);
-      color: #14532d;
-      font-weight: 500;
+      border-color: var(--success-border);
+      color: var(--success-text);
+      font-weight: 600;
     }
 
     .option-label.incorrect-choice {
       background-color: var(--danger-bg);
-      border-color: var(--danger);
-      color: #7f1d1d;
+      border-color: var(--danger-border);
+      color: var(--danger-text);
     }
 
     .feedback-box {
       display: none;
       padding: 14px 16px;
       border-radius: 6px;
-      font-size: 0.9rem;
-      margin-top: 12px;
+      font-size: 0.95rem;
+      margin-top: 14px;
+      line-height: 1.5;
     }
 
     .[suspicious link removed] {
@@ -206,203 +205,275 @@
 
     .feedback-correct {
       background-color: var(--success-bg);
-      border: 1px solid #86efac;
-      color: #166534;
+      border: 2px solid var(--success-border);
+      color: var(--success-text);
     }
 
     .feedback-incorrect {
       background-color: var(--danger-bg);
-      border: 1px solid #fca5a5;
-      color: #991b1b;
+      border: 2px solid var(--danger-border);
+      color: var(--danger-text);
     }
 
     .submit-btn {
       background-color: var(--primary);
       color: #ffffff;
       border: none;
-      padding: 8px 18px;
+      padding: 10px 20px;
       border-radius: 6px;
       cursor: pointer;
       font-size: 0.95rem;
-      font-weight: 500;
+      font-weight: 600;
       transition: background-color 0.2s;
     }
 
     .submit-btn:hover {
-      background-color: #1d4ed8;
+      background-color: var(--primary-focus);
     }
 
-    .submit-btn:disabled {
-      background-color: #94a3b8;
-      cursor: not-allowed;
+    /* Accessible focus rings across controls */
+    button:focus-visible,
+    input[type="radio"]:focus-visible,
+    .skip-link:focus-visible {
+      outline: 3px solid var(--focus-ring);
+      outline-offset: 3px;
     }
   </style>
 </head>
 <body>
 
+<a href="#main-quiz" class="skip-link">Skip to practice quiz content</a>
+
 <div class="container">
   <header>
     <h1>Debt Investment Accounting Practice Quiz</h1>
-    <p class="subtitle">Focus: Problems 12-1, 12-2, and 12-3 (Held-to-Maturity, Trading, and Available-for-Sale)</p>
+    <p class="subtitle">Core Concepts: Held-to-Maturity, Trading, and Available-for-Sale Securities</p>
   </header>
 
-  <section class="scenario-box">
-    <h2>Common Background (Fuzzy Monkey Technologies, Inc.)</h2>
-    <ul>
-      <li><strong>Date of Purchase:</strong> January 1, 2024</li>
-      <li><strong>Face Amount:</strong> $80.00 million (8% stated interest, paid semiannually on June 30 and December 31 = \$3.20 million per period)</li>
-      <li><strong>Purchase Price:</strong> \$66.00 million (Effective semiannual yield: 5%, or 10% annually)</li>
-      <li><strong>Initial Discount:</strong> \$14.00 million</li>
-      <li><strong>Fair Value at December 31, 2024:</strong> \$70.00 million</li>
-    </ul>
-  </section>
-
-  <div class="score-banner">
-    <span class="score-text" id="scoreDisplay">Score: 0 / 7</span>
-    <button class="reset-btn" onclick="resetQuiz()">Reset Quiz</button>
-  </div>
-
-  <form id="quizForm">
-    <!-- Question 1 -->
-    <div class="question-card" id="card-q1">
-      <div class="question-header">
-        <span class="question-num">Question 1</span>
-        <span class="category-badge">Initial Acquisition</span>
-      </div>
-      <p class="question-text">How does Fuzzy Monkey Technologies record the purchase of the bonds on January 1, 2024 (applies to P12-1, P12-2, and P12-3)?</p>
-      <div class="options-list">
-        <label class="option-label"><input type="radio" name="q1" value="A"> Debit Investment in bonds \$66.00M; Credit Cash \$66.00M</label>
-        <label class="option-label"><input type="radio" name="q1" value="B"> Debit Investment in bonds \$80.00M; Credit Discount on bond investment \$14.00M; Credit Cash \$66.00M</label>
-        <label class="option-label"><input type="radio" name="q1" value="C"> Debit Investment in bonds \$80.00M; Debit Discount on bond investment \$14.00M; Credit Cash \$94.00M</label>
-        <label class="option-label"><input type="radio" name="q1" value="D"> Debit Investment in bonds \$80.00M; Credit Gain on bond purchase \$14.00M; Credit Cash \$66.00M</label>
-      </div>
-      <button type="button" class="submit-btn" onclick="checkQuestion('q1')">Check Answer</button>
-      <div class="feedback-box" id="feedback-q1"></div>
+  <main id="main-quiz">
+    <!-- Screen reader live score update -->
+    <div class="score-banner" role="region" aria-label="Quiz Progress">
+      <div class="score-text" id="scoreDisplay" aria-live="polite" aria-atomic="true">Score: 0 / 8</div>
+      <button type="button" class="reset-btn" onclick="resetQuiz()">Reset Quiz</button>
     </div>
 
-    <!-- Question 2 -->
-    <div class="question-card" id="card-q2">
-      <div class="question-header">
-        <span class="question-num">Question 2</span>
-        <span class="category-badge">Effective Interest Method</span>
-      </div>
-      <p class="question-text">On June 30, 2024, Fuzzy Monkey receives its first semiannual interest payment. What are the recorded interest revenue and discount amortization?</p>
-      <div class="options-list">
-        <label class="option-label"><input type="radio" name="q2" value="A"> Interest revenue: \$3.20M; Discount amortization: \$0.00M</label>
-        <label class="option-label"><input type="radio" name="q2" value="B"> Interest revenue: \$4.00M; Discount amortization: \$0.80M</label>
-        <label class="option-label"><input type="radio" name="q2" value="C"> Interest revenue: \$3.30M; Discount amortization: \$0.10M</label>
-        <label class="option-label"><input type="radio" name="q2" value="D"> Interest revenue: \$3.31M; Discount amortization: \$0.11M</label>
-      </div>
-      <button type="button" class="submit-btn" onclick="checkQuestion('q2')">Check Answer</button>
-      <div class="feedback-box" id="feedback-q2"></div>
-    </div>
+    <form id="quizForm" onsubmit="event.preventDefault();">
+      <!-- Question 1 -->
+      <fieldset class="question-card" id="card-q1">
+        <legend class="question-legend">
+          <span class="category-tag">Question 1: Classification</span><br>
+          When an investor purchases debt securities and has both the positive intent and the financial ability to hold them until their maturity date, how must the securities be classified?
+        </legend>
+        <div class="options-list">
+          <label class="option-label" for="q1-optA">
+            <input type="radio" id="q1-optA" name="q1" value="A"> Trading Securities (TS)
+          </label>
+          <label class="option-label" for="q1-optB">
+            <input type="radio" id="q1-optB" name="q1" value="B"> Available-for-Sale Securities (AFS)
+          </label>
+          <label class="option-label" for="q1-optC">
+            <input type="radio" id="q1-optC" name="q1" value="C"> Held-to-Maturity Securities (HTM)
+          </label>
+          <label class="option-label" for="q1-optD">
+            <input type="radio" id="q1-optD" name="q1" value="D"> Significant Influence Investments
+          </label>
+        </div>
+        <button type="button" class="submit-btn" aria-controls="feedback-q1" onclick="checkQuestion('q1')">Check Answer for Question 1</button>
+        <div class="feedback-box" id="feedback-q1" aria-live="polite"></div>
+      </fieldset>
 
-    <!-- Question 3 -->
-    <div class="question-card" id="card-q3">
-      <div class="question-header">
-        <span class="question-num">Question 3</span>
-        <span class="category-badge">P12-1 (HTM)</span>
-      </div>
-      <p class="question-text">Under Problem 12-1 (Held-to-Maturity), at what amount is the investment reported on the December 31, 2024 balance sheet, and what year-end fair value adjustment is made?</p>
-      <div class="options-list">
-        <label class="option-label"><input type="radio" name="q3" value="A"> Reported at \$70.00M; debit Fair value adjustment \$3.79M</label>
-        <label class="option-label"><input type="radio" name="q3" value="B"> Reported at \$80.00M face value; no fair value adjustment</label>
-        <label class="option-label"><input type="radio" name="q3" value="C"> Reported at \$66.21M amortized cost; no fair value adjustment is recorded</label>
-        <label class="option-label"><input type="radio" name="q3" value="D"> Reported at \$66.21M; debit Unrealized loss in OCI \$3.79M</label>
-      </div>
-      <button type="button" class="submit-btn" onclick="checkQuestion('q3')">Check Answer</button>
-      <div class="feedback-box" id="feedback-q3"></div>
-    </div>
+      <!-- Question 2 -->
+      <fieldset class="question-card" id="card-q2">
+        <legend class="question-legend">
+          <span class="category-tag">Question 2: Effective Interest Method</span><br>
+          Under the effective interest method of amortization, how is interest revenue determined for each accounting period?
+        </legend>
+        <div class="options-list">
+          <label class="option-label" for="q2-optA">
+            <input type="radio" id="q2-optA" name="q2" value="A"> Face amount of the bond multiplied by the stated (coupon) interest rate
+          </label>
+          <label class="option-label" for="q2-optB">
+            <input type="radio" id="q2-optB" name="q2" value="B"> Outstanding carrying value (amortized cost) multiplied by the effective (market) yield at acquisition
+          </label>
+          <label class="option-label" for="q2-optC">
+            <input type="radio" id="q2-optC" name="q2" value="C"> Actual cash received plus or minus changes in the fair value of the bond
+          </label>
+          <label class="option-label" for="q2-optD">
+            <input type="radio" id="q2-optD" name="q2" value="D"> Outstanding carrying value multiplied by the current prevailing market rate at each reporting date
+          </label>
+        </div>
+        <button type="button" class="submit-btn" aria-controls="feedback-q2" onclick="checkQuestion('q2')">Check Answer for Question 2</button>
+        <div class="feedback-box" id="feedback-q2" aria-live="polite"></div>
+      </fieldset>
 
-    <!-- Question 4 -->
-    <div class="question-card" id="card-q4">
-      <div class="question-header">
-        <span class="question-num">Question 4</span>
-        <span class="category-badge">P12-2 (Trading)</span>
-      </div>
-      <p class="question-text">Under Problem 12-2 (Trading Securities), how is the \$3.79 million unrealized holding gain recorded at December 31, 2024, and what is total 2024 net income from this investment?</p>
-      <div class="options-list">
-        <label class="option-label"><input type="radio" name="q4" value="A"> Credited to Gain on investments (unrealized, NI); Total 2024 Net Income is \$10.40M (\$6.61M interest revenue + \$3.79M gain)</label>
-        <label class="option-label"><input type="radio" name="q4" value="B"> Credited to Gain on investments (unrealized, OCI); Total 2024 Net Income is \$6.61M</label>
-        <label class="option-label"><input type="radio" name="q4" value="C"> Credited to Retained Earnings directly; Total 2024 Net Income is \$6.61M</label>
-        <label class="option-label"><input type="radio" name="q4" value="D"> Credited to Discount on bond investment; Total 2024 Net Income is \$3.79M</label>
-      </div>
-      <button type="button" class="submit-btn" onclick="checkQuestion('q4')">Check Answer</button>
-      <div class="feedback-box" id="feedback-q4"></div>
-    </div>
+      <!-- Question 3 -->
+      <fieldset class="question-card" id="card-q3">
+        <legend class="question-legend">
+          <span class="category-tag">Question 3: Balance Sheet Valuation (HTM)</span><br>
+          How are Held-to-Maturity (HTM) debt investments reported on the balance sheet at each reporting date?
+        </legend>
+        <div class="options-list">
+          <label class="option-label" for="q3-optA">
+            <input type="radio" id="q3-optA" name="q3" value="A"> At fair value, using a fair value adjustment valuation account
+          </label>
+          <label class="option-label" for="q3-optB">
+            <input type="radio" id="q3-optB" name="q3" value="B"> At amortized cost, with ordinary fair value fluctuations ignored on the balance sheet
+          </label>
+          <label class="option-label" for="q3-optC">
+            <input type="radio" id="q3-optC" name="q3" value="C"> At the lower of amortized cost or current market value
+          </label>
+          <label class="option-label" for="q3-optD">
+            <input type="radio" id="q3-optD" name="q3" value="D"> At original face value with discounts or premiums recognized immediately in equity
+          </label>
+        </div>
+        <button type="button" class="submit-btn" aria-controls="feedback-q3" onclick="checkQuestion('q3')">Check Answer for Question 3</button>
+        <div class="feedback-box" id="feedback-q3" aria-live="polite"></div>
+      </fieldset>
 
-    <!-- Question 5 -->
-    <div class="question-card" id="card-q5">
-      <div class="question-header">
-        <span class="question-num">Question 5</span>
-        <span class="category-badge">P12-3 (AFS)</span>
-      </div>
-      <p class="question-text">Under Problem 12-3 (Available-for-Sale), what are the effects of the investment on 2024 Net Income, Other Comprehensive Income (OCI), and Comprehensive Income?</p>
-      <div class="options-list">
-        <label class="option-label"><input type="radio" name="q5" value="A"> Net Income: \$10.40M; OCI: \$0; Comprehensive Income: \$10.40M</label>
-        <label class="option-label"><input type="radio" name="q5" value="B"> Net Income: \$6.61M; OCI: \$3.79M; Comprehensive Income: \$10.40M</label>
-        <label class="option-label"><input type="radio" name="q5" value="C"> Net Income: \$6.61M; OCI: \$0; Comprehensive Income: \$6.61M</label>
-        <label class="option-label"><input type="radio" name="q5" value="D"> Net Income: \$0; OCI: \$10.40M; Comprehensive Income: \$10.40M</label>
-      </div>
-      <button type="button" class="submit-btn" onclick="checkQuestion('q5')">Check Answer</button>
-      <div class="feedback-box" id="feedback-q5"></div>
-    </div>
+      <!-- Question 4 -->
+      <fieldset class="question-card" id="card-q4">
+        <legend class="question-legend">
+          <span class="category-tag">Question 4: Trading Securities (TS)</span><br>
+          Where are unrealized holding gains and losses arising from fair value changes of Trading debt securities recognized?
+        </legend>
+        <div class="options-list">
+          <label class="option-label" for="q4-optA">
+            <input type="radio" id="q4-optA" name="q4" value="A"> In Net Income on the Income Statement
+          </label>
+          <label class="option-label" for="q4-optB">
+            <input type="radio" id="q4-optB" name="q4" value="B"> In Other Comprehensive Income (OCI), bypassing Net Income
+          </label>
+          <label class="option-label" for="q4-optC">
+            <input type="radio" id="q4-optC" name="q4" value="C"> Directly in Retained Earnings without entering the Income Statement
+          </label>
+          <label class="option-label" for="q4-optD">
+            <input type="radio" id="q4-optD" name="q4" value="D"> They are not recognized until the security is sold
+          </label>
+        </div>
+        <button type="button" class="submit-btn" aria-controls="feedback-q4" onclick="checkQuestion('q4')">Check Answer for Question 4</button>
+        <div class="feedback-box" id="feedback-q4" aria-live="polite"></div>
+      </fieldset>
 
-    <!-- Question 6 -->
-    <div class="question-card" id="card-q6">
-      <div class="question-header">
-        <span class="question-num">Question 6</span>
-        <span class="category-badge">Statement of Cash Flows</span>
-      </div>
-      <p class="question-text">Where is the initial \$66.00 million cash outflow to purchase the bonds classified on the 2024 Statement of Cash Flows?</p>
-      <div class="options-list">
-        <label class="option-label"><input type="radio" name="q6" value="A"> Investing activity for HTM and AFS; Operating activity for Trading securities</label>
-        <label class="option-label"><input type="radio" name="q6" value="B"> Operating activity for HTM, TS, and AFS alike</label>
-        <label class="option-label"><input type="radio" name="q6" value="C"> Investing activity for all three classifications</label>
-        <label class="option-label"><input type="radio" name="q6" value="D"> Financing activity for HTM and AFS; Investing activity for Trading securities</label>
-      </div>
-      <button type="button" class="submit-btn" onclick="checkQuestion('q6')">Check Answer</button>
-      <div class="feedback-box" id="feedback-q6"></div>
-    </div>
+      <!-- Question 5 -->
+      <fieldset class="question-card" id="card-q5">
+        <legend class="question-legend">
+          <span class="category-tag">Question 5: Available-for-Sale (AFS)</span><br>
+          How does an investor account for period-end fair value adjustments on Available-for-Sale (AFS) debt securities?
+        </legend>
+        <div class="options-list">
+          <label class="option-label" for="q5-optA">
+            <input type="radio" id="q5-optA" name="q5" value="A"> Debit/credit Fair Value Adjustment and recognize the unrealized gain/loss in Net Income
+          </label>
+          <label class="option-label" for="q5-optB">
+            <input type="radio" id="q5-optB" name="q5" value="B"> Debit/credit Fair Value Adjustment and recognize the unrealized gain/loss in Other Comprehensive Income (OCI)
+          </label>
+          <label class="option-label" for="q5-optC">
+            <input type="radio" id="q5-optC" name="q5" value="C"> Adjust the Investment in Bonds account directly and recognize the gain/loss in Net Income
+          </label>
+          <label class="option-label" for="q5-optD">
+            <input type="radio" id="q5-optD" name="q5" value="D"> Fair value adjustments are prohibited for AFS debt securities
+          </label>
+        </div>
+        <button type="button" class="submit-btn" aria-controls="feedback-q5" onclick="checkQuestion('q5')">Check Answer for Question 5</button>
+        <div class="feedback-box" id="feedback-q5" aria-live="polite"></div>
+      </fieldset>
 
-    <!-- Question 7 -->
-    <div class="question-card" id="card-q7">
-      <div class="question-header">
-        <span class="question-num">Question 7</span>
-        <span class="category-badge">Total Shareholders' Equity</span>
-      </div>
-      <p class="question-text">By December 31, 2024, what is the net increase in total shareholders' equity under Trading (P12-2) versus Available-for-Sale (P12-3)?</p>
-      <div class="options-list">
-        <label class="option-label"><input type="radio" name="q7" value="A"> Trading increases total equity by \$10.40M; AFS increases total equity by only \$6.61M</label>
-        <label class="option-label"><input type="radio" name="q7" value="B"> Both increase total equity by \$10.40M (Trading via Retained Earnings; AFS via \$6.61M Retained Earnings + \$3.79M AOCI)</label>
-        <label class="option-label"><input type="radio" name="q7" value="C"> Trading increases total equity by \$3.79M; AFS increases total equity by \$10.40M</label>
-        <label class="option-label"><input type="radio" name="q7" value="D"> Both increase total equity by \$6.61M</label>
-      </div>
-      <button type="button" class="submit-btn" onclick="checkQuestion('q7')">Check Answer</button>
-      <div class="feedback-box" id="feedback-q7"></div>
-    </div>
-  </form>
+      <!-- Question 6 -->
+      <fieldset class="question-card" id="card-q6">
+        <legend class="question-legend">
+          <span class="category-tag">Question 6: Valuation Allowance Base</span><br>
+          When calculating the required balance in the Fair Value Adjustment account for Trading or AFS debt securities, the fair value is compared against which figure?
+        </legend>
+        <div class="options-list">
+          <label class="option-label" for="q6-optA">
+            <input type="radio" id="q6-optA" name="q6" value="A"> The bond's face (maturity) value
+          </label>
+          <label class="option-label" for="q6-optB">
+            <input type="radio" id="q6-optB" name="q6" value="B"> The original cash purchase price (ignoring subsequent amortization)
+          </label>
+          <label class="option-label" for="q6-optC">
+            <input type="radio" id="q6-optC" name="q6" value="C"> The current amortized cost (carrying value after applying the effective interest method)
+          </label>
+          <label class="option-label" for="q6-optD">
+            <input type="radio" id="q6-optD" name="q6" value="D"> The prior year's market fair value
+          </label>
+        </div>
+        <button type="button" class="submit-btn" aria-controls="feedback-q6" onclick="checkQuestion('q6')">Check Answer for Question 6</button>
+        <div class="feedback-box" id="feedback-q6" aria-live="polite"></div>
+      </fieldset>
+
+      <!-- Question 7 -->
+      <fieldset class="question-card" id="card-q7">
+        <legend class="question-legend">
+          <span class="category-tag">Question 7: Statement of Cash Flows</span><br>
+          How are cash outflows to purchase debt investments categorized on the Statement of Cash Flows across classifications?
+        </legend>
+        <div class="options-list">
+          <label class="option-label" for="q7-optA">
+            <input type="radio" id="q7-optA" name="q7" value="A"> Operating activities for Trading; Investing activities for HTM and AFS
+          </label>
+          <label class="option-label" for="q7-optB">
+            <input type="radio" id="q7-optB" name="q7" value="B"> Investing activities for all three classifications
+          </label>
+          <label class="option-label" for="q7-optC">
+            <input type="radio" id="q7-optC" name="q7" value="C"> Operating activities for all three classifications
+          </label>
+          <label class="option-label" for="q7-optD">
+            <input type="radio" id="q7-optD" name="q7" value="D"> Financing activities for HTM; Investing activities for Trading and AFS
+          </label>
+        </div>
+        <button type="button" class="submit-btn" aria-controls="feedback-q7" onclick="checkQuestion('q7')">Check Answer for Question 7</button>
+        <div class="feedback-box" id="feedback-q7" aria-live="polite"></div>
+      </fieldset>
+
+      <!-- Question 8 -->
+      <fieldset class="question-card" id="card-q8">
+        <legend class="question-legend">
+          <span class="category-tag">Question 8: Total Shareholders' Equity</span><br>
+          If a bond classified as Trading and an identical bond classified as AFS experience the same unrealized holding gain, how does the impact on total shareholders' equity compare?
+        </legend>
+        <div class="options-list">
+          <label class="option-label" for="q8-optA">
+            <input type="radio" id="q8-optA" name="q8" value="A"> Trading increases total equity, but AFS has no impact on total equity
+          </label>
+          <label class="option-label" for="q8-optB">
+            <input type="radio" id="q8-optB" name="q8" value="B"> Both increase total shareholders' equity by the exact same amount (Trading via Retained Earnings; AFS via Accumulated Other Comprehensive Income)
+          </label>
+          <label class="option-label" for="q8-optC">
+            <input type="radio" id="q8-optC" name="q8" value="C"> AFS increases total shareholders' equity more because it bypasses income taxes
+          </label>
+          <label class="option-label" for="q8-optD">
+            <input type="radio" id="q8-optD" name="q8" value="D"> Trading increases Retained Earnings, but AFS reduces Retained Earnings
+          </label>
+        </div>
+        <button type="button" class="submit-btn" aria-controls="feedback-q8" onclick="checkQuestion('q8')">Check Answer for Question 8</button>
+        <div class="feedback-box" id="feedback-q8" aria-live="polite"></div>
+      </fieldset>
+    </form>
+  </main>
 </div>
 
 <script>
   const correctAnswers = {
-    q1: "B",
-    q2: "C",
-    q3: "C",
+    q1: "C",
+    q2: "B",
+    q3: "B",
     q4: "A",
     q5: "B",
-    q6: "A",
-    q7: "B"
+    q6: "C",
+    q7: "A",
+    q8: "B"
   };
 
   const explanations = {
-    q1: "Correct! The gross method records the face amount of \$80.00M in Investment in bonds, credits Cash for the purchase price of \$66.00M, and credits Discount on bond investment for the \$14.00M difference.",
-    q2: "Correct! Cash received = \$80.00M × 4% = \$3.20M. Interest revenue = \$66.00M carrying value × 5% effective yield = \$3.30M. The \$0.10M difference is credited to discount amortization, increasing carrying value to \$66.10M.",
-    q3: "Correct! Held-to-maturity investments are carried at amortized cost (\$80.00M face less remaining discount of \$13.79M = \$66.21M). Market fair value fluctuations are ignored because management intends and is able to hold to maturity.",
-    q4: "Correct! For trading securities, fair value changes are treated as recognized performance measures. Fair value adjustment is debited for \$3.79M (\$70.00M fair value - \$66.21M amortized cost) and credited to Gain on investments (unrealized, NI). Total Net Income = \$6.61M interest revenue + \$3.79M unrealized gain = \$10.40M.",
-    q5: "Correct! For AFS securities, interest revenue of \$6.61M is included in Net Income. The \$3.79M unrealized holding gain is excluded from Net Income and reported in OCI, making Comprehensive Income \$10.40M.",
-    q6: "Correct! Cash paid to purchase HTM and AFS debt securities is classified under Investing Activities. In contrast, purchases of Trading securities are classified under Operating Activities because financial institutions manage them as part of daily operational trading.",
-    q7: "Correct! Under both classifications, total shareholders' equity increases by \$10.40M. The difference is location: Trading places the entire \$10.40M into Retained Earnings through Net Income, whereas AFS places \$6.61M in Retained Earnings and \$3.79M into Accumulated Other Comprehensive Income (AOCI)."
+    q1: "Held-to-Maturity (HTM) classification strictly requires that management possesses both the positive intent and the financial ability to hold the debt instruments until their maturity date.",
+    q2: "Under the effective interest method, interest revenue always equals the beginning carrying value (amortized cost) multiplied by the historical effective interest rate (market yield) at issuance.",
+    q3: "HTM securities are reported at amortized cost (face amount minus unamortized discount or plus unamortized premium). Because management plans to collect all cash flows until maturity, temporary fair value changes are not recognized.",
+    q4: "Trading debt securities are actively held to generate near-term profits; therefore, unrealized holding gains and losses are recognized directly in Net Income on the Income Statement.",
+    q5: "Available-for-Sale (AFS) debt securities are reported on the balance sheet at fair value, but unrealized gains and losses are recognized in Other Comprehensive Income (OCI) and accumulated in AOCI within shareholders' equity.",
+    q6: "The required fair value adjustment balance is always the difference between the fair value at the reporting date and the current amortized cost (carrying value). This ensures that amortization is applied consistently before marking to market.",
+    q7: "Purchases and sales of HTM and AFS debt securities are classified as Investing Activities, whereas purchases and sales of Trading securities are classified as Operating Activities because they are part of active, day-to-day trading operations.",
+    q8: "Total shareholders' equity increases by the exact same amount under both classifications. The difference is presentation: Trading flows through Net Income into Retained Earnings, whereas AFS flows through OCI into Accumulated Other Comprehensive Income (AOCI)."
   };
 
   let answeredCorrectly = {};
@@ -413,7 +484,8 @@
     const labels = document.querySelectorAll(`#card-${qId} .option-label`);
 
     if (!selected) {
-      alert("Please select an answer before checking.");
+      feedbackBox.className = "feedback-box show feedback-incorrect";
+      feedbackBox.innerHTML = "<strong>Notice:</strong> Please select an answer option above before checking.";
       return;
     }
 
@@ -426,12 +498,12 @@
     if (selected.value === correctAnswers[qId]) {
       selected.parentElement.classList.add("correct-choice");
       feedbackBox.classList.add("feedback-correct");
-      feedbackBox.innerHTML = `<strong>Correct!</strong> ${explanations[qId]}`;
+      feedbackBox.innerHTML = `<strong>Correct:</strong> ${explanations[qId]}`;
       answeredCorrectly[qId] = true;
     } else {
       selected.parentElement.classList.add("incorrect-choice");
       feedbackBox.classList.add("feedback-incorrect");
-      feedbackBox.innerHTML = `<strong>Incorrect.</strong> Try again! ${explanations[qId]}`;
+      feedbackBox.innerHTML = `<strong>Incorrect:</strong> ${explanations[qId]}`;
       answeredCorrectly[qId] = false;
     }
 
@@ -440,7 +512,7 @@
 
   function updateScore() {
     const totalCorrect = Object.values(answeredCorrectly).filter(Boolean).length;
-    document.getElementById("scoreDisplay").textContent = `Score: ${totalCorrect} / 7`;
+    document.getElementById("scoreDisplay").textContent = `Score: ${totalCorrect} / 8`;
   }
 
   function resetQuiz() {
