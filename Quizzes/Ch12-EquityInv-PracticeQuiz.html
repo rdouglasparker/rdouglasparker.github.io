@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equity Investments Accounting Practice Quiz</title>
+  <style>
+    :root {
+      --primary: #1e3a8a;
+      --primary-focus: #1d4ed8;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #334155;
+      --border: #cbd5e1;
+      --focus-ring: #2563eb;
+      --success-text: #14532d;
+      --success-bg: #dcfce7;
+      --success-border: #15803d;
+      --danger-text: #7f1d1d;
+      --danger-bg: #fee2e2;
+      --danger-border: #b91c1c;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 24px 16px;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* Accessible Skip Link */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 10px;
+      background: var(--primary);
+      color: #ffffff;
+      padding: 8px 14px;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 4px;
+      z-index: 1000;
+      transition: top 0.2s;
+    }
+    .skip-link:focus {
+      top: 10px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: 1.9rem;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .score-banner {
+      position: sticky;
+      top: 12px;
+      background-color: var(--card-bg);
+      border: 2px solid var(--border);
+      padding: 12px 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      z-index: 10;
+    }
+
+    .score-text {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--primary);
+    }
+
+    .reset-btn {
+      background-color: #f1f5f9;
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: background-color 0.2s;
+    }
+
+    .reset-btn:hover {
+      background-color: #e2e8f0;
+    }
+
+    fieldset.question-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    legend.question-legend {
+      float: left;
+      width: 100%;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 14px;
+      padding: 0;
+    }
+
+    .category-tag {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #312e81;
+      background-color: #e0e7ff;
+      padding: 2px 10px;
+      border-radius: 9999px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .options-list {
+      clear: both;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .option-label {
+      display: flex;
+      align-items: flex-start;
+      padding: 12px 14px;
+      border: 2px solid var(--border);
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: background-color 0.15s, border-color 0.15s;
+    }
+
+    .option-label:hover {
+      background-color: #f8fafc;
+      border-color: #94a3b8;
+    }
+
+    .option-label input[type="radio"] {
+      width: 18px;
+      height: 18px;
+      margin-right: 12px;
+      margin-top: 3px;
+      cursor: pointer;
+      accent-color: var(--primary);
+    }
+
+    .option-label.correct-choice {
+      background-color: var(--success-bg);
+      border-color: var(--success-border);
+      color: var(--success-text);
+      font-weight: 600;
+    }
+
+    .option-label.incorrect-choice {
+      background-color: var(--danger-bg);
+      border-color: var(--danger-border);
+      color: var(--danger-text);
+    }
+
+    .feedback-box {
+      display: none;
+      padding: 14px 16px;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      margin-top: 14px;
+      line-height: 1.5;
+    }
+
+    .[suspicious link removed] {
+      display: block;
+    }
+
+    .feedback-correct {
+      background-color: var(--success-bg);
+      border: 2px solid var(--success-border);
+      color: var(--success-text);
+    }
+
+    .feedback-incorrect {
+      background-color: var(--danger-bg);
+      border: 2px solid var(--danger-border);
+      color: var(--danger-text);
+    }
+
+    .submit-btn {
+      background-color: var(--primary);
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: background-color 0.2s;
+    }
+
+    .submit-btn:hover {
+      background-color: var(--primary-focus);
+    }
+
+    /* Accessible Focus Indicators */
+    button:focus-visible,
+    input[type="radio"]:focus-visible,
+    .skip-link:focus-visible {
+      outline: 3px solid var(--focus-ring);
+      outline-offset: 3px;
+    }
+  </style>
+</head>
+<body>
+
+<a href="#main-quiz" class="skip-link">Skip to practice quiz content</a>
+
+<div class="container">
+  <header>
+    <h1>Equity Investments Accounting Practice Quiz</h1>
+    <p class="subtitle">Core Concepts: Fair Value through Net Income, the Equity Method, and the Fair Value Option</p>
+  </header>
+
+  <main id="main-quiz">
+    <!-- Live Progress Region for Assistive Tech -->
+    <div class="score-banner" role="region" aria-label="Quiz Progress">
+      <div class="score-text" id="scoreDisplay" aria-live="polite" aria-atomic="true">Score: 0 / 8</div>
+      <button type="button" class="reset-btn" onclick="resetQuiz()">Reset Quiz</button>
+    </div>
+
+    <form id="quizForm" onsubmit="event.preventDefault();">
+      <!-- Question 1 -->
+      <fieldset class="question-card" id="card-q1">
+        <legend class="question-legend">
+          <span class="category-tag">Question 1: Classification & Influence</span><br>
+          Under U.S. GAAP, when an investor holds voting common stock in an investee and lacks the ability to exercise significant influence (typically owning less than 20% of the voting shares), how must the investment be accounted for?
+        </legend>
+        <div class="options-list">
+          <label class="option-label" for="q1-optA">
+            <input type="radio" id="q1-optA" name="q1" value="A"> As an Available-for-Sale (AFS) equity security with unrealized gains/losses in OCI
+          </label>
+          <label class="option-label" for="q1-optB">
+            <input type="radio" id="q1-optB" name="q1" value="B"> At fair value through net income (FV-NI), with unrealized gains/losses recognized in net income
+          </label>
+          <label class="option-label" for="q1-optC">
+            <input type="radio" id="q1-optC" name="q1" value="C"> At amortized cost using the effective interest method
+          </label>
+          <label class="option-label" for="q1-optD">
+            <input type="radio" id="q1-optD" name="q1" value="D"> Under the equity method, recognizing proportionate earnings
+          </label>
+        </div>
+        <button type="button" class="submit-btn" aria-controls="feedback-q1" onclick="checkQuestion('q1')">Check Answer for Question 1</button>
+        <div class="feedback-box" id="feedback-q1" aria-live="polite"></div>
+      </fieldset>
+
+      <!-- Question 2 -->
+      <fieldset class="question-card" id="card-q2">
+        <legend class="question-legend">
+          <span class="category-tag">Question 2: Accounting for Dividends Received</span><br>
+          How does the accounting treatment for cash dividends received differ between an investment accounted for at Fair Value through Net Income (FV-NI) versus the Equity Method?
+        </legend>
+        <div class="options-list">
+          <label class="option-label" for="q2-optA">
+            <input type="radio" id="q2-optA" name="q2" value="A"> FV-NI records dividends as dividend revenue; the Equity Method records dividends as a reduction of the investment account
+          </label>
+          <label class="option-label" for="q2-optB">
+            <input type="radio" id="q2-optB" name="q2" value="B"> FV-NI records dividends as a reduction of the investment account; the Equity Method records them as dividend revenue
+          </label>
+          <label class="option-label" for="q2-optC">
+            <input type="radio" id="q2-optC" name="q2" value="C"> Both methods recognize cash dividends received as dividend revenue in the income statement
+          </label>
+          <label class="option-label" for="q2-optD">
+            <input type="radio" id="q2-optD" name="q2" value="D"> Both methods treat dividends as an addition to Other Comprehensive Income (OCI)
+          </label>
+        </div>
+        <button type="button" class="submit-btn" aria-controls="feedback-q2" onclick="checkQuestion('q2')">Check Answer for Question 2</button>
+        <div class="feedback-box" id="feedback-q2" aria-live="polite"></div>
+      </fieldset>
+
+      <!-- Question 3 -->
+      <fieldset class="question-card" id="card-q3">
+        <legend class="question-legend">
+          <span class="category-tag">Question 3: Investee Net Income Recognition</span><br>
+          When an investee reports positive net income at the end of the fiscal year, what entry does the investor make if the investment is accounted for under the Equity Method?
+        </legend>
+        <div class="options-list">
+          <label class="option-label" for="q3-optA">
+            <input type="radio" id="q3-optA" name="q3" value="A"> No entry is made until the investee declares and pays a cash dividend
+          </label>
+          <label class="option-label" for="q3-optB">
+            <input type="radio" id="q3-optB" name="q3" value="B"> Debit Investment in Equity Affiliate and Credit Investment Revenue for its proportionate share of the investee's earnings
+          </label>
+          <label class="option-label" for="q3-optC">
+            <input type="radio" id="q3-optC" name="q3" value="C"> Debit Cash and Credit Dividend Revenue for its proportionate share of the earnings
+          </label>
+          <label class="option-label" for="q3-optD">
+            <input type="radio" id="q3-optD" name="q3" value="D"> Debit Fair Value Adjustment and Credit Unrealized Gain (OCI)
+          </label>
+        </div>
+        <button type="button" class="submit-btn" aria-controls="feedback-q3" onclick="checkQuestion('q3')">Check Answer for Question 3</button>
+        <div class="feedback-box" id="feedback-q3" aria-live="polite"></div>
+      </fieldset>
+
+      <!-- Question 4 -->
+      <fieldset class="question-card" id="card-q4">
+        <legend class="question-legend">
+          <span class="category-tag">Question 4: Year-End Fair Value Changes</span><br>
+          At the reporting date, how are changes in the quoted market price of the investee's shares accounted for under the standard Equity Method (assuming the Fair Value Option was not elected)?
+        </legend>
+        <div class="options-list">
+          <label class="option-label" for="q4-optA">
+            <input type="radio" id="q4-optA" name="q4" value="A"> Market price fluctuations are ignored on the balance sheet; the investment remains carried at cost plus share of earnings less share of dividends and differential amortization
+          </label>
+          <label class="option-label" for="q4-optB">
+            <input type="radio" id="q4-optB" name="q4" value="B"> The investment is marked to market via a Fair Value Adjustment account with gains/losses in net income
+          </label>
+          <label class="option-label" for="q4-optC">
+            <input type="radio" id="q4-optC" name="q4" value="C"> Unrealized holding gains and losses are recognized in Other Comprehensive Income (OCI)
+          </label>
+          <label class="option-label" for="q4-optD">
+            <input type="radio" id="q4-optD" name="q4" value="D"> The investment is adjusted to market value with the offset directly credited to Retained Earnings
+          </label>
+        </div>
+        <button type="button" class="submit-btn" aria-controls="feedback-q4" onclick="checkQuestion('q4')">Check Answer for Question 4</button>
+        <div class="feedback-box" id="feedback-q4" aria-live="polite"></div>
+      </fieldset>
+
+      <!-- Question 5 -->
+      <fieldset class="question-card" id="card-q5">
+        <legend class="question-legend">
+          <span class="category-tag">Question 5: Equity Method — Amortizing the Differential</span><br>
+          Under the equity method, why and how does an investor record an adjustment when the fair value of the investee's depreciable buildings exceeds their book value at the acquisition date?
+        </legend>
+        <div class="options-list">
+          <label class="option-label" for="q5-optA">
+            <input type="radio" id="q5-optA" name="q5" value="A"> The investor debits Depreciation Expense and credits Accumulated Depreciation on its own books
+          </label>
+          <label class="option-label" for="q5-optB">
+            <input type="radio" id="q5-optB" name="q5" value="B"> The investor reduces Investment Revenue and reduces the Investment account for its share of the extra annual depreciation, approximating consolidation accounting
+          </label>
+          <label class="option-label" for="q5-optC">
+            <input type="radio" id="q5-optC" name="q5" value="C"> The difference is recorded as a separate intangible asset and tested annually for impairment
+          </label>
+          <label class="option-label" for="q5-optD">
+            <input type="radio" id="q5-optD" name="q5" value="D"> No adjustment is permitted because the investee records depreciation on its own financial statements
+          </label>
+        </div>
+        <button type="button" class="submit-btn" aria-controls="feedback-q5" onclick="checkQuestion('q5')">Check Answer for Question 5</button>
+        <div class="feedback-box" id="feedback-q5" aria-live="polite"></div>
+      </fieldset>
+
+      <!-- Question 6 -->
+      <fieldset class="question-card" id="card-q6">
+        <legend class="question-legend">
+          <span class="category-tag">Question 6: Purchase Differential on Land and Goodwill</span><br>
+          When an investor acquires an equity-method investment and pays an amount in excess of the book value of net assets that is attributable to undervalued land and goodwill, how are these specific differentials amortized in subsequent periods?
+        </legend>
+        <div class="options-list">
+          <label class="option-label" for="q6-optA">
+            <input type="radio" id="q6-optA" name="q6" value="A"> Both are amortized straight-line over a mandatory maximum period of 40 years
+          </label>
+          <label class="option-label" for="q6-optB">
+            <input type="radio" id="q6-optB" name="q6" value="B"> Land is amortized over its remaining useful life, but goodwill is not amortized
+          </label>
+          <label class="option-label" for="q6-optC">
+            <input type="radio" id="q6-optC" name="q6" value="C"> Neither land nor goodwill is amortized; land has an indefinite life and goodwill is tested for impairment rather than amortized
+          </label>
+          <label class="option-label" for="q6-optD">
+            <input type="radio" id="q6-optD" name="q6" value="D"> Goodwill is amortized straight-line over 10 years, while land is expensed immediately
+          </label>
+        </div>
+        <button type="button" class="submit-btn" aria-controls="feedback-q6" onclick="checkQuestion('q6')">Check Answer for Question 6</button>
+        <div class="feedback-box" id="feedback-q6" aria-live="polite"></div>
+      </fieldset>
+
+      <!-- Question 7 -->
+      <fieldset class="question-card" id="card-q7">
+        <legend class="question-legend">
+          <span class="category-tag">Question 7: Fair Value Option (FVO) for Significant Influence</span><br>
+          If an investor has significant influence (20% to 50% ownership) but irrevocably elects the Fair Value Option (FVO) at acquisition, how is the investment reported?
+        </legend>
+        <div class="options-list">
+          <label class="option-label" for="q7-optA">
+            <input type="radio" id="q7-optA" name="q7" value="A"> At fair value on the balance sheet, with unrealized holding gains and losses included in net income
+          </label>
+          <label class="option-label" for="q7-optB">
+            <input type="radio" id="q7-optB" name="q7" value="B"> At amortized cost on the balance sheet, with fair value gains reported in OCI
+          </label>
+          <label class="option-label" for="q7-optC">
+            <input type="radio" id="q7-optC" name="q7" value="C"> At fair value on the balance sheet, but unrealized gains and losses bypass the income statement into AOCI
+          </label>
+          <label class="option-label" for="q7-optD">
+            <input type="radio" id="q7-optD" name="q7" value="D"> The Fair Value Option is prohibited under U.S. GAAP for significant-influence equity investments
+          </label>
+        </div>
+        <button type="button" class="submit-btn" aria-controls="feedback-q7" onclick="checkQuestion('q7')">Check Answer for Question 7</button>
+        <div class="feedback-box" id="feedback-q7" aria-live="polite"></div>
+      </fieldset>
+
+      <!-- Question 8 -->
+      <fieldset class="question-card" id="card-q8">
+        <legend class="question-legend">
+          <span class="category-tag">Question 8: Statement of Cash Flows (Equity Method)</span><br>
+          Under the Equity Method, where are the cash outflow to purchase the investment and the cash inflows from dividends received reported on the Statement of Cash Flows?
+        </legend>
+        <div class="options-list">
+          <label class="option-label" for="q8-optA">
+            <input type="radio" id="q8-optA" name="q8" value="A"> Purchase: Operating activity; Dividends: Investing activity
+          </label>
+          <label class="option-label" for="q8-optB">
+            <input type="radio" id="q8-optB" name="q8" value="B"> Purchase: Investing activity; Dividends: Operating activity
+          </label>
+          <label class="option-label" for="q8-optC">
+            <input type="radio" id="q8-optC" name="q8" value="C"> Both purchase and dividends are reported as Financing activities
+          </label>
+          <label class="option-label" for="q8-optD">
+            <input type="radio" id="q8-optD" name="q8" value="D"> Both purchase and dividends are reported as Investing activities
+          </label>
+        </div>
+        <button type="button" class="submit-btn" aria-controls="feedback-q8" onclick="checkQuestion('q8')">Check Answer for Question 8</button>
+        <div class="feedback-box" id="feedback-q8" aria-live="polite"></div>
+      </fieldset>
+    </form>
+  </main>
+</div>
+
+<script>
+  const correctAnswers = {
+    q1: "B",
+    q2: "A",
+    q3: "B",
+    q4: "A",
+    q5: "B",
+    q6: "C",
+    q7: "A",
+    q8: "B"
+  };
+
+  const explanations = {
+    q1: "Correct! When an investor lacks significant influence (<20% voting shares), U.S. GAAP requires equity securities to be accounted for at Fair Value through Net Income (FV-NI). The Available-for-Sale (AFS) classification is not permitted for equity investments under U.S. GAAP.",
+    q2: "Correct! Under FV-NI, dividends are recognized as Dividend Revenue in net income. Under the Equity Method, dividends are viewed as a return/distribution of the investee's net assets, so the investor credits the Investment account to avoid double counting earnings.",
+    q3: "Correct! Under the Equity Method, the investor prospers as the investee prospers. Therefore, the investor increases its Investment account and recognizes Investment Revenue in net income for its proportionate share of the investee's earnings.",
+    q4: "Correct! Normal fair value fluctuations of equity-method shares are ignored on the balance sheet. The investment is carried at cost, adjusted upward for the investor's share of earnings and downward for dividends received and differential amortization.",
+    q5: "Correct! The equity method approximates consolidation ('one-line consolidation'). Because the investee depreciates buildings using historical cost, the investor must reduce Investment Revenue and the Investment account for its share of the additional depreciation based on acquisition fair values.",
+    q6: "Correct! Land is not a depreciable asset, so no amortization is recorded. Similarly, goodwill has an indefinite life and is not amortized under GAAP; instead, it is evaluated periodically for impairment.",
+    q7: "Correct! U.S. GAAP permits companies to make an irrevocable election at acquisition to carry significant-influence investments at fair value on the balance sheet, with unrealized holding gains and losses recognized in net income.",
+    q8: "Correct! The initial cash paid to purchase the equity-method investment is an Investing cash outflow. Cash dividends received are classified as Operating cash inflows."
+  };
+
+  let answeredCorrectly = {};
+
+  function checkQuestion(qId) {
+    const selected = document.querySelector(`input[name="${qId}"]:checked`);
+    const feedbackBox = document.getElementById(`feedback-${qId}`);
+    const labels = document.querySelectorAll(`#card-${qId} .option-label`);
+
+    if (!selected) {
+      feedbackBox.className = "feedback-box show feedback-incorrect";
+      feedbackBox.innerHTML = "<strong>Notice:</strong> Please select an answer option above before checking.";
+      return;
+    }
+
+    labels.forEach(l => {
+      l.classList.remove("correct-choice", "incorrect-choice");
+    });
+
+    feedbackBox.className = "feedback-box show";
+
+    if (selected.value === correctAnswers[qId]) {
+      selected.parentElement.classList.add("correct-choice");
+      feedbackBox.classList.add("feedback-correct");
+      feedbackBox.innerHTML = `<strong>Correct:</strong> ${explanations[qId]}`;
+      answeredCorrectly[qId] = true;
+    } else {
+      selected.parentElement.classList.add("incorrect-choice");
+      feedbackBox.classList.add("feedback-incorrect");
+      feedbackBox.innerHTML = `<strong>Incorrect:</strong> ${explanations[qId]}`;
+      answeredCorrectly[qId] = false;
+    }
+
+    updateScore();
+  }
+
+  function updateScore() {
+    const totalCorrect = Object.values(answeredCorrectly).filter(Boolean).length;
+    document.getElementById("scoreDisplay").textContent = `Score: ${totalCorrect} / 8`;
+  }
+
+  function resetQuiz() {
+    document.getElementById("quizForm").reset();
+    answeredCorrectly = {};
+    updateScore();
+    const feedbacks = document.querySelectorAll(".feedback-box");
+    feedbacks.forEach(f => {
+      f.className = "feedback-box";
+      f.innerHTML = "";
+    });
+    const labels = document.querySelectorAll(".option-label");
+    labels.forEach(l => {
+      l.classList.remove("correct-choice", "incorrect-choice");
+    });
+  }
+</script>
+
+</body>
+</html>
