@@ -36,7 +36,7 @@
     }
 
     .container {
-      max-width: 800px;
+      max-width: 820px;
       margin: 0 auto;
       background: var(--card-bg);
       padding: 2rem;
@@ -73,9 +73,10 @@
 
     legend {
       font-weight: 700;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       padding: 0 0.5rem;
       color: var(--text-color);
+      line-height: 1.4;
     }
 
     .option-group {
@@ -198,7 +199,7 @@
   <div class="container">
     <header>
       <h1>Current Liabilities Practice Quiz</h1>
-      <p class="instructions">Test your understanding of current liabilities accounting. Select an answer for each question and select <strong>Submit Quiz</strong> to evaluate your responses.</p>
+      <p class="instructions">This quiz contains 10 questions testing your knowledge of current liabilities, short-term debt, payroll obligations, advance collections, and liquidity ratios. Select an answer for each question and click <strong>Submit Quiz</strong> to review your score and detailed explanations.</p>
     </header>
 
     <main>
@@ -245,7 +246,7 @@
             </label>
             <label class="option-label" for="q2-opt4">
               <input type="radio" id="q2-opt4" name="q2" value="D">
-              <span>D) Because the bank requires a committed line of credit fee that doubles the nominal discount rate.</span>
+              <span>D) Because bank regulations mandate an automatic 2% surcharge on discounted notes.</span>
             </label>
           </div>
           <div id="q2-feedback" class="feedback" role="region" aria-live="polite"></div>
@@ -253,23 +254,23 @@
 
         <!-- Question 3 -->
         <fieldset id="fs-q3">
-          <legend>Question 3: Under U.S. GAAP, when can a short-term obligation maturing in the coming year be classified as a noncurrent liability?</legend>
+          <legend>Question 3: How does a bank requirement for a compensating balance affect the borrower on a line of credit?</legend>
           <div class="option-group">
             <label class="option-label" for="q3-opt1">
               <input type="radio" id="q3-opt1" name="q3" value="A" required>
-              <span>A) Only if actual refinancing is completed on or before the balance sheet date.</span>
+              <span>A) It reduces the effective interest rate by providing interest rebates on deposit accounts.</span>
             </label>
             <label class="option-label" for="q3-opt2">
               <input type="radio" id="q3-opt2" name="q3" value="B">
-              <span>B) Whenever management intends to refinance, even if no financing agreement is negotiated.</span>
+              <span>B) It increases the borrower's effective interest rate because part of the funds must remain deposited in a low-interest or noninterest-bearing account.</span>
             </label>
             <label class="option-label" for="q3-opt3">
               <input type="radio" id="q3-opt3" name="q3" value="C">
-              <span>C) If management intends to refinance on a long-term basis and demonstrates the ability to do so before financial statements are issued.</span>
+              <span>C) It requires an immediate journal entry debiting Notes Payable and crediting Cash.</span>
             </label>
             <label class="option-label" for="q3-opt4">
               <input type="radio" id="q3-opt4" name="q3" value="D">
-              <span>D) If the creditor agrees to an informal 30-day grace period after the audit report date.</span>
+              <span>D) It converts the short-term borrowing into long-term equity.</span>
             </label>
           </div>
           <div id="q3-feedback" class="feedback" role="region" aria-live="polite"></div>
@@ -277,23 +278,23 @@
 
         <!-- Question 4 -->
         <fieldset id="fs-q4">
-          <legend>Question 4: Which of the following is REQUIRED for an employer to accrue an expense and liability for compensated future absences (e.g., vacation pay)?</legend>
+          <legend>Question 4: What is commercial paper, and why does its maturity rarely exceed 270 days?</legend>
           <div class="option-group">
             <label class="option-label" for="q4-opt1">
               <input type="radio" id="q4-opt1" name="q4" value="A" required>
-              <span>A) The absence must specifically pertain to employee sick leave rather than vacation.</span>
+              <span>A) Unsecured notes issued by large, highly rated corporations; maturities are kept to 270 days or less to avoid filing a registration statement with the SEC.</span>
             </label>
             <label class="option-label" for="q4-opt2">
               <input type="radio" id="q4-opt2" name="q4" value="B">
-              <span>B) All four criteria must be met: services already performed, benefit vests or accumulates, payment is probable, and amount is reasonably estimable.</span>
+              <span>B) Secured notes backed by inventory; maturities beyond 270 days require liquidation of the pledged assets.</span>
             </label>
             <label class="option-label" for="q4-opt3">
               <input type="radio" id="q4-opt3" name="q4" value="C">
-              <span>C) The future absence benefit must not vest upon employee termination.</span>
+              <span>C) Informal trade credit instruments with no minimum denomination sold to retail consumers.</span>
             </label>
             <label class="option-label" for="q4-opt4">
               <input type="radio" id="q4-opt4" name="q4" value="D">
-              <span>D) The accrual must be calculated using estimated wage rates projected five years into the future.</span>
+              <span>D) Non-negotiable loans issued exclusively to federal government agencies.</span>
             </label>
           </div>
           <div id="q4-feedback" class="feedback" role="region" aria-live="polite"></div>
@@ -301,26 +302,146 @@
 
         <!-- Question 5 -->
         <fieldset id="fs-q5">
-          <legend>Question 5: How are gift card sales initially recorded, and how are expired unredeemed cards handled under a 100% escheatment law?</legend>
+          <legend>Question 5: How are customer advances (such as advance collections for magazine subscriptions or returnable container deposits) accounted for upon receipt?</legend>
           <div class="option-group">
             <label class="option-label" for="q5-opt1">
               <input type="radio" id="q5-opt1" name="q5" value="A" required>
-              <span>A) Recorded as Sales Revenue; upon expiration, Cash is debited and Revenue is credited.</span>
+              <span>A) Immediately recognized as Sales Revenue under the accrual accounting matching principle.</span>
             </label>
             <label class="option-label" for="q5-opt2">
               <input type="radio" id="q5-opt2" name="q5" value="B">
-              <span>B) Recorded as Accounts Payable; upon expiration, an adjusting entry debits Expense and credits Cash.</span>
+              <span>B) Recorded as a liability (deferred revenue or refundable deposit liability) until goods or services are delivered or deposits returned.</span>
             </label>
             <label class="option-label" for="q5-opt3">
               <input type="radio" id="q5-opt3" name="q5" value="C">
-              <span>C) Recorded as Deferred Revenue; upon expiration, Deferred Revenue is debited and Cash is credited to remit funds to the state.</span>
+              <span>C) Credited directly to Retained Earnings as contributed capital.</span>
             </label>
             <label class="option-label" for="q5-opt4">
               <input type="radio" id="q5-opt4" name="q5" value="D">
-              <span>D) Recorded as Contingent Gains; upon expiration, recognized as Gift Card Breakage Revenue.</span>
+              <span>D) Disclosed only in footnote notes until the cash is expended.</span>
             </label>
           </div>
           <div id="q5-feedback" class="feedback" role="region" aria-live="polite"></div>
+        </fieldset>
+
+        <!-- Question 6 -->
+        <fieldset id="fs-q6">
+          <legend>Question 6: How are gift card sales initially recorded, and how are expired unredeemed cards handled under a 100% escheatment law?</legend>
+          <div class="option-group">
+            <label class="option-label" for="q6-opt1">
+              <input type="radio" id="q6-opt1" name="q6" value="A" required>
+              <span>A) Recorded as Sales Revenue; upon expiration, Cash is debited and Revenue is credited.</span>
+            </label>
+            <label class="option-label" for="q6-opt2">
+              <input type="radio" id="q6-opt2" name="q6" value="B">
+              <span>B) Recorded as Accounts Payable; upon expiration, an adjusting entry debits Expense and credits Cash.</span>
+            </label>
+            <label class="option-label" for="q6-opt3">
+              <input type="radio" id="q6-opt3" name="q6" value="C">
+              <span>C) Recorded as Deferred Revenue; upon expiration, Deferred Revenue is debited and Cash is credited to remit funds to the state.</span>
+            </label>
+            <label class="option-label" for="q6-opt4">
+              <input type="radio" id="q6-opt4" name="q6" value="D">
+              <span>D) Recorded as Contingent Gains; upon expiration, recognized as Gift Card Breakage Revenue.</span>
+            </label>
+          </div>
+          <div id="q6-feedback" class="feedback" role="region" aria-live="polite"></div>
+        </fieldset>
+
+        <!-- Question 7 -->
+        <fieldset id="fs-q7">
+          <legend>Question 7: Which of the following is REQUIRED for an employer to accrue an expense and liability for compensated future absences (e.g., vacation pay)?</legend>
+          <div class="option-group">
+            <label class="option-label" for="q7-opt1">
+              <input type="radio" id="q7-opt1" name="q7" value="A" required>
+              <span>A) The absence must specifically pertain to employee sick leave rather than vacation.</span>
+            </label>
+            <label class="option-label" for="q7-opt2">
+              <input type="radio" id="q7-opt2" name="q7" value="B">
+              <span>B) All four criteria must be met: services already performed, benefit vests or accumulates, payment is probable, and amount is reasonably estimable.</span>
+            </label>
+            <label class="option-label" for="q7-opt3">
+              <input type="radio" id="q7-opt3" name="q7" value="C">
+              <span>C) The future absence benefit must not vest upon employee termination.</span>
+            </label>
+            <label class="option-label" for="q7-opt4">
+              <input type="radio" id="q7-opt4" name="q7" value="D">
+              <span>D) The accrual must be calculated using estimated wage rates projected five years into the future.</span>
+            </label>
+          </div>
+          <div id="q7-feedback" class="feedback" role="region" aria-live="polite"></div>
+        </fieldset>
+
+        <!-- Question 8 -->
+        <fieldset id="fs-q8">
+          <legend>Question 8: In payroll accounting, which taxes represent an expense of the employer rather than a withholding from the employee's paycheck?</legend>
+          <div class="option-group">
+            <label class="option-label" for="q8-opt1">
+              <input type="radio" id="q8-opt1" name="q8" value="A" required>
+              <span>A) Federal and state income tax withholdings.</span>
+            </label>
+            <label class="option-label" for="q8-opt2">
+              <input type="radio" id="q8-opt2" name="q8" value="B">
+              <span>B) Employee voluntary retirement contributions and union dues.</span>
+            </label>
+            <label class="option-label" for="q8-opt3">
+              <input type="radio" id="q8-opt3" name="q8" value="C">
+              <span>C) Employer matching FICA taxes, along with federal (FUTA) and state (SUTA) unemployment taxes.</span>
+            </label>
+            <label class="option-label" for="q8-opt4">
+              <input type="radio" id="q8-opt4" name="q8" value="D">
+              <span>D) Additional Medicare taxes assessed on high-earning employees.</span>
+            </label>
+          </div>
+          <div id="q8-feedback" class="feedback" role="region" aria-live="polite"></div>
+        </fieldset>
+
+        <!-- Question 9 -->
+        <fieldset id="fs-q9">
+          <legend>Question 9: Under U.S. GAAP, when can a short-term obligation maturing in the coming year be classified as a noncurrent liability?</legend>
+          <div class="option-group">
+            <label class="option-label" for="q9-opt1">
+              <input type="radio" id="q9-opt1" name="q9" value="A" required>
+              <span>A) Only if actual refinancing is completed on or before the balance sheet date.</span>
+            </label>
+            <label class="option-label" for="q9-opt2">
+              <input type="radio" id="q9-opt2" name="q9" value="B">
+              <span>B) Whenever management intends to refinance, even if no financing agreement is negotiated.</span>
+            </label>
+            <label class="option-label" for="q9-opt3">
+              <input type="radio" id="q9-opt3" name="q9" value="C">
+              <span>C) If management intends to refinance on a long-term basis and demonstrates the ability to do so before financial statements are issued.</span>
+            </label>
+            <label class="option-label" for="q9-opt4">
+              <input type="radio" id="q9-opt4" name="q9" value="D">
+              <span>D) If the creditor agrees to an informal 30-day grace period after the audit report date.</span>
+            </label>
+          </div>
+          <div id="q9-feedback" class="feedback" role="region" aria-live="polite"></div>
+        </fieldset>
+
+        <!-- Question 10 -->
+        <fieldset id="fs-q10">
+          <legend>Question 10: How does the acid-test (quick) ratio differ from the current ratio when assessing a company's short-term liquidity?</legend>
+          <div class="option-group">
+            <label class="option-label" for="q10-opt1">
+              <input type="radio" id="q10-opt1" name="q10" value="A" required>
+              <span>A) It excludes accounts receivable from the numerator because trade credit takes too long to collect.</span>
+            </label>
+            <label class="option-label" for="q10-opt2">
+              <input type="radio" id="q10-opt2" name="q10" value="B">
+              <span>B) It excludes inventory and prepaid expenses from the numerator, providing a more conservative measure of quick assets relative to current liabilities.</span>
+            </label>
+            <label class="option-label" for="q10-opt3">
+              <input type="radio" id="q10-opt3" name="q10" value="C">
+              <span>C) It includes noncurrent assets in the numerator to reflect total borrowing collateral.</span>
+            </label>
+            <label class="option-label" for="q10-opt4">
+              <input type="radio" id="q10-opt4" name="q10" value="D">
+              <span>D) It replaces current liabilities with long-term debt in the denominator.</span>
+            </label>
+          </div>
+          <div id="q10-feedback" class="feedback" role="region" aria-live="polite"></div>
         </fieldset>
 
         <div class="actions">
@@ -344,16 +465,36 @@
         explanation: "In a discounted noninterest-bearing note, interest is deducted from the face value at issuance to determine cash proceeds. Because the borrower receives less than the face amount while repaying the full face amount at maturity, the effective interest rate exceeds the discount rate."
       },
       q3: {
-        correct: "C",
-        explanation: "Under U.S. GAAP, short-term obligations expected to be refinanced long-term are reported as noncurrent only if the entity intends to refinance and demonstrates the ability to do so (via actual refinancing or an agreement) before financial statements are issued. Under IFRS, refinancing must occur before the balance sheet date."
+        correct: "B",
+        explanation: "A compensating balance requires the borrower to maintain a deposit in a low-interest or noninterest-bearing account. This restricts usable cash, thereby increasing the effective interest rate on the borrowing."
       },
       q4: {
+        correct: "A",
+        explanation: "Commercial paper consists of unsecured short-term notes sold by large, highly rated corporations in minimum denominations of $25,000. Maturities range up to 270 days; beyond 270 days, the issuer would have to file a formal registration statement with the SEC."
+      },
+      q5: {
+        correct: "B",
+        explanation: "Cash received before goods or services are delivered represents a customer advance (deferred revenue) or a refundable deposit liability. Revenue recognition is deferred until the performance obligation is fulfilled or deposits are forfeited."
+      },
+      q6: {
+        correct: "C",
+        explanation: "Gift card sales are initially recorded as deferred revenue. When unused cards expire under escheatment laws requiring remittance to the state, the deferred revenue is removed and Cash is credited rather than recognizing breakage revenue."
+      },
+      q7: {
         correct: "B",
         explanation: "Accrual of compensated future absences requires meeting all four conditions: services already performed, rights vest or accumulate, payment is probable, and the amount can be reasonably estimated. Sick pay accrual is not mandatory unless custom pays it even when employees are not ill."
       },
-      q5: {
+      q8: {
         correct: "C",
-        explanation: "Gift card sales are initially recorded as deferred revenue. When unused cards expire under escheatment laws requiring remittance to the state, the deferred revenue is removed and Cash is credited rather than recognizing breakage revenue."
+        explanation: "Income taxes withheld and employee FICA/Medicare deductions are paid by employees and withheld from paychecks. Employer payroll tax expense includes the employer's matching FICA and Medicare, as well as federal (FUTA) and state (SUTA) unemployment taxes."
+      },
+      q9: {
+        correct: "C",
+        explanation: "Under U.S. GAAP, short-term obligations expected to be refinanced long-term are reported as noncurrent only if the entity intends to refinance and demonstrates the ability to do so (via actual refinancing or an agreement) before financial statements are issued. Under IFRS, refinancing must occur before the balance sheet date."
+      },
+      q10: {
+        correct: "B",
+        explanation: "The acid-test (quick) ratio is more conservative than the current ratio because its numerator includes only 'quick' assets (cash, short-term investments, and accounts receivable), specifically excluding inventory and prepaid expenses, which are less readily convertible to cash."
       }
     };
 
