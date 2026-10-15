@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Current Liabilities — Reading Notes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --wcu-purple: #4B2E83;
+    --wcu-purple-dark: #341f5c;
+    --wcu-gold: #C8A24A;
+    --gold-light: #f4ecd8;
+    --ink: #232023;
+    --muted: #5b5559;          /* secondary text: 6.9:1 on the page background */
+    --paper: #fdfcfb;
+    --panel: #f7f3ec;
+    --rule: #e2d9c8;
+    --ctl: #7d7388;            /* borders on form controls: 3:1 or better */
+    --warn: #6b4f00;
+    --warn-bg: #FBF3DC;
+    --ifrs: #2f4c8a;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-padding-top: 1rem; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.55;
+  }
+
+  /* ---------- Accessibility helpers ---------- */
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+  .skip-link {
+    position: absolute; left: 0.75rem; top: -4rem; z-index: 100;
+    background: #fff; color: var(--wcu-purple-dark); font-weight: 700;
+    padding: 0.6rem 1rem; border: 3px solid var(--wcu-purple-dark); border-radius: 6px;
+  }
+  .skip-link:focus { top: 0.75rem; }
+  :focus-visible { outline: 3px solid var(--wcu-purple-dark); outline-offset: 3px; }
+  header :focus-visible, footer :focus-visible { outline-color: #fff; }
+  main:focus { outline: none; }
+  .table-wrap { overflow-x: auto; max-width: 100%; }
+  .table-wrap:focus-visible { outline-offset: 0; }
+
+  header {
+    background: linear-gradient(135deg, var(--wcu-purple) 0%, var(--wcu-purple-dark) 100%);
+    color: #fff;
+    padding: 2.2rem 1.5rem 1.8rem;
+    border-bottom: 6px solid var(--wcu-gold);
+  }
+  header .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #E3C673;
+    margin-bottom: 0.4rem;
+  }
+  header h1 {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 700;
+    font-size: 1.9rem;
+    margin: 0 0 0.3rem;
+  }
+  header p.sub { margin: 0; color: #ece6f6; font-size: 0.98rem; }
+
+  main { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+  .lo-block { margin-bottom: 2.8rem; }
+
+  h2 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.5rem;
+    margin: 0 0 0.8rem;
+    color: var(--wcu-purple-dark);
+    border-bottom: 2px solid var(--rule);
+    padding-bottom: 0.4rem;
+  }
+  h3 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.1rem;
+    margin: 1.4rem 0 0.5rem;
+    color: var(--wcu-purple-dark);
+  }
+  p { margin: 0.6rem 0; }
+
+  .key-idea {
+    background: var(--panel);
+    border-left: 4px solid var(--wcu-gold);
+    padding: 0.9rem 1.1rem;
+    border-radius: 0 6px 6px 0;
+    margin: 0.9rem 0;
+  }
+  .key-idea strong { color: var(--wcu-purple-dark); }
+
+  .formula {
+    font-family: 'IBM Plex Mono', monospace;
+    background: var(--wcu-purple-dark);
+    color: var(--gold-light);
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin: 0.8rem 0;
+    font-size: 0.92rem;
+    overflow-x: auto;
+  }
+
+  .example {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin: 0.9rem 0;
+  }
+  .example .ex-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--wcu-purple);
+    margin-bottom: 0.4rem;
+  }
+
+  ul, ol { padding-left: 1.4rem; }
+  li { margin-bottom: 0.35rem; }
+
+  .patterns {
+    background: var(--gold-light);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin: 0.8rem 0;
+  }
+  .patterns p { margin: 0.3rem 0; }
+
+  .ifrs {
+    background: #eef2fb;
+    border-left: 4px solid var(--ifrs);
+    border-radius: 0 6px 6px 0;
+    padding: 0.9rem 1.1rem;
+    margin: 0.9rem 0;
+  }
+  .ifrs .ifrs-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ifrs);
+    margin-bottom: 0.4rem;
+  }
+
+  table.mini-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.4rem 0 0.9rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+  }
+  table.mini-table caption {
+    font-family: 'Inter', sans-serif; font-size: 0.9rem; color: var(--muted);
+    text-align: left; margin-bottom: 0.4rem;
+  }
+  table.mini-table th, table.mini-table td {
+    border: 1px solid var(--rule);
+    padding: 0.4rem 0.55rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.mini-table th {
+    background: var(--panel);
+    color: var(--wcu-purple-dark);
+    font-weight: 600;
+  }
+  table.mini-table td.num, table.mini-table th.num { text-align: right; white-space: nowrap; }
+  table.mini-table tr.total-row th, table.mini-table tr.total-row td { background: var(--panel); font-weight: 700; }
+
+  table.je-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.5rem 0 0.3rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.88rem;
+  }
+  table.je-table thead th { padding: 0; border: 0; height: 0; line-height: 0; }
+  table.je-table td { padding: 0.28rem 0.3rem; vertical-align: top; }
+  table.je-table td.je-debit-amt, table.je-table td.je-credit-amt {
+    text-align: right;
+    width: 100px;
+    white-space: nowrap;
+  }
+  table.je-table td.indent { padding-left: 1.8rem; }
+  .je-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-style: italic;
+    margin: 0 0 1rem;
+  }
+  .date-tag {
+    display: inline-block; font-family: 'IBM Plex Mono', monospace; font-weight: 700; font-size: 0.82rem;
+    color: #fff; background: var(--wcu-purple-dark); padding: 0.12rem 0.5rem; border-radius: 4px; margin-top: 0.4rem;
+  }
+
+  footer {
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--muted);
+    padding: 1.5rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+  @media (forced-colors: active) {
+    .key-idea, .ifrs, .example { border: 1px solid CanvasText; }
+    header { border-bottom: 6px solid CanvasText; }
+  }
+
+  .table-wrap { contain: paint; }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header>
+  <div class="eyebrow">ACCT 352 · Current Liabilities</div>
+  <h1>Current Liabilities</h1>
+  <p class="sub">Reading Notes</p>
+</header>
+
+<main id="main" tabindex="-1">
+
+  <div class="lo-block">
+    <h2>What Makes Something a Liability</h2>
+    <p>Most liabilities obligate the debtor to pay cash, and the amount and timing are specified by a legally enforceable contract: notes, bonds, and the monthly payments on a car or a home are all examples. But to be <em>reported</em> as a liability, an obligation doesn't need to be payable in cash. It may require the company to transfer other assets or to provide services. It doesn't have to be represented by a written agreement or be legally enforceable, and even the amount and timing of repayment need not be precisely known.</p>
+    <div class="key-idea">From a financial reporting perspective, a liability has three essential characteristics:<ol><li>It is a <strong>probable, future sacrifice of economic benefits</strong>.</li><li>It arises from a <strong>present obligation</strong> (to transfer assets or provide services) to other entities.</li><li>It results from <strong>past transactions or events</strong>.</li></ol>Notice that the definition involves the past, the present, and the future: a liability is a <em>present</em> responsibility to sacrifice assets in the <em>future</em> because of a transaction or other event that happened in the <em>past</em>.</div>
+    <p>The FASB has proposed a simpler definition: a liability is a present obligation that requires an entity to transfer or otherwise provide economic benefits to others. The word "probable" would be dropped because it has sometimes been misunderstood as a probability threshold for recognition. That change isn't expected to affect how the liabilities in these notes are accounted for.</p>
+  </div>
+
+  <div class="lo-block">
+    <h2>What Is a Current Liability?</h2>
+    <p>On a classified balance sheet, liabilities are either <strong>current</strong> or <strong>long-term</strong>. The general definition says current liabilities are obligations payable within <strong>one year</strong> from the balance sheet date or within the firm's <strong>operating cycle</strong>, whichever is longer. A more discriminating definition says current liabilities are those <strong>expected to be satisfied with current assets or by the creation of other current liabilities</strong>.</p>
+    <p>Classification helps investors and creditors assess the risk that liabilities will require cash or other assets in the near term. If a debt is due years from now, resources can be used for other purposes without risking default. If it is due soon, payment will use current assets and reduce the liquid funds available for other uses. A major factor in the collapse of Bear Stearns in 2008 was its reliance on short-term liabilities that it couldn't refinance when lenders and trading partners grew concerned.</p>
+    <div class="patterns">
+      <p><strong>Conceptually,</strong> liabilities are recorded at the <strong>present value</strong> of all anticipated future cash payments (principal and interest).</p>
+      <p><strong>In practice,</strong> liabilities payable within one year are ordinarily recorded at their <strong>maturity amounts</strong>, because the short term makes the interest (time value) component immaterial. Trade payables due within a year are specifically exempted from present value reporting.</p>
+    </div>
+    <p>The most common current liabilities are accounts payable, notes payable, commercial paper, income tax liability, dividends payable, and accrued liabilities. Income taxes are covered in a later chapter; the others are covered here.</p>
+  </div>
+
+  <div class="lo-block">
+    <h2>Accounts Payable and Trade Notes Payable</h2>
+    <p><strong>Accounts payable</strong> are obligations to suppliers of merchandise or services purchased on account in the ordinary course of business. Most trade credit is offered on <strong>open account</strong>, which means the only formal credit instrument is the invoice. Because the time until payment is usually short (often 30, 45, or 60 days), these liabilities are typically noninterest-bearing and are reported at their <strong>face amounts</strong>.</p>
+    <p>The key accounting considerations are determining that the payables <em>exist</em> and ensuring they are recorded in the <em>appropriate accounting period</em>. Cash discounts on purchases are handled as part of inventory accounting.</p>
+    <p><strong>Trade notes payable</strong> differ from accounts payable in that they are formally recognized by a written promissory note. They are often of somewhat longer term and bear interest.</p>
+  </div>
+
+  <div class="lo-block">
+    <h2>Short-Term Notes Payable and Lines of Credit</h2>
+    <p>The most common way for a corporation to obtain temporary financing is a short-term bank loan. When a company borrows cash from a bank and signs a promissory note (essentially an IOU), the liability is reported as <strong>notes payable</strong> (sometimes called bank loans or short-term borrowings). Smaller firms often rely heavily on short-term financing, and even large companies use it as an important part of their capital structure because short-term funds usually carry lower interest rates and give managers flexibility.</p>
+    <h3>Lines of credit</h3>
+    <p>Short-term loans are usually arranged under an existing <strong>line of credit</strong>: an agreement to provide short-term financing, with amounts withdrawn by the borrower only when needed. Even though each loan is short-term, the line of credit itself typically lasts several years.</p>
+    <div class="patterns">
+      <p><strong>Noncommitted line of credit:</strong> an informal agreement that lets the company borrow up to a prearranged limit without formal loan procedures and paperwork. The bank may require a <strong>compensating balance</strong> on deposit (say, 5% of the line).</p>
+      <p><strong>Committed line of credit:</strong> a more formal agreement that usually requires the company to pay a <strong>commitment fee</strong> to keep the amount available (a typical annual fee is a fraction of a percent of the total committed funds), and may also require a compensating balance.</p>
+    </div>
+    <p>No journal entry is made when a line of credit is arranged; an entry is made only when a loan is actually taken. The existence and terms of the line are described in a disclosure note. A compensating balance (a deposit kept in a low-interest or noninterest-bearing account) increases the borrower's effective interest rate.</p>
+    <h3>Interest on notes</h3>
+    <p>Interest is stated as a percentage rate applied to the face amount, making this an <strong>interest-bearing note</strong>. Because the stated rate is an annual rate, the calculation must be adjusted for the fraction of the year the loan spans:</p>
+    <div class="formula">Interest = Face amount &times; Annual rate &times; Time to maturity</div>
+    <div class="example">
+      <div class="ex-label">Running example for these notes</div>
+      <p>On September 1, <span class="yr0">2026</span>, <strong>Cullowhee Creek Outfitters</strong> borrows <strong>$900,000</strong> from Tuckasegee Valley Bank under a noncommitted short-term line of credit and issues a nine-month, 10% promissory note. Interest is payable at maturity (June 1, <span class="yr1">2027</span>). The company's fiscal year ends December 31.</p>
+      <div class="date-tag">September 1, <span class="yr0">2026</span></div>
+      <div class="table-wrap"><table class="je-table"><caption class="sr-only">Issuance of the note</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Cash</td><td class="je-debit-amt">900,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Notes payable</td><td class="je-debit-amt"></td><td class="je-credit-amt">900,000</td></tr></tbody></table></div>
+      <p class="je-desc">Interest for the full term is $900,000 &times; 10% &times; 9/12 = $67,500, but no interest is recorded on the day of the loan. It accrues as time passes (see Accrued Liabilities below).</p>
+    </div>
+  </div>
+
+  <div class="lo-block">
+    <h2>Noninterest-Bearing Notes</h2>
+    <p>Sometimes a note takes the form of a so-called <strong>noninterest-bearing note</strong>. Nobody lends money without interest, so these loans do bear interest, but the interest is <strong>deducted (discounted) from the face amount</strong> to determine the cash proceeds made available to the borrower at the outset. The difference is recorded in a contra-liability account, <strong>Discount on notes payable</strong>, which is recognized as interest expense over time.</p>
+    <p>Sometimes the interest is described with a <strong>discount rate</strong> applied to the face amount, as in a note "discounted at issuance at a 9% discount rate." The interest is then the face amount &times; discount rate &times; the fraction of the year.</p>
+    <div class="example">
+      <div class="ex-label">Running example, continued</div>
+      <p>On October 1, <span class="yr0">2026</span>, Cullowhee Creek Outfitters issues a six-month, <strong>$800,000</strong> noninterest-bearing note. Interest is discounted at issuance at a <strong>9% discount rate</strong>.</p>
+      <div class="table-wrap"><table class="mini-table"><caption>Proceeds and effective interest rate</caption><thead><tr><th scope="col">Item</th><th scope="col">Calculation</th><th scope="col" class="num">Amount</th></tr></thead><tbody><tr><th scope="row">Interest (discount)</th><td>$800,000 &times; 9% &times; 6/12</td><td class="num">$36,000</td></tr><tr><th scope="row">Cash proceeds</th><td>$800,000 &minus; $36,000</td><td class="num">$764,000</td></tr><tr><th scope="row">Effective rate for six months</th><td>$36,000 &divide; $764,000</td><td class="num">4.71%</td></tr><tr><th scope="row">Effective annual rate</th><td>4.71% &times; 12/6</td><td class="num">9.42%</td></tr></tbody></table></div>
+      <p>The company only gets to use $764,000 but pays back $800,000, so the effective interest rate (9.42%) is <strong>higher</strong> than the stated 9% discount rate. When interest is discounted from the face amount of a note, the effective rate is always higher than the discount rate.</p>
+      <p>Using the <em>gross method</em>, the note is recorded at its face amount and the interest is recorded separately in the discount account:</p>
+      <div class="date-tag">October 1, <span class="yr0">2026</span></div>
+      <div class="table-wrap"><table class="je-table"><caption class="sr-only">Issuance of the noninterest-bearing note</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Cash (proceeds)</td><td class="je-debit-amt">764,000</td><td class="je-credit-amt"></td></tr><tr><td>Discount on notes payable (to balance)</td><td class="je-debit-amt">36,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Notes payable (face amount)</td><td class="je-debit-amt"></td><td class="je-credit-amt">800,000</td></tr></tbody></table></div>
+      <p>At December 31, three of the six months have passed, so half of the discount has become interest expense:</p>
+      <div class="date-tag">December 31, <span class="yr0">2026</span></div>
+      <div class="table-wrap"><table class="je-table"><caption class="sr-only">Year-end adjusting entry</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Interest expense ($36,000 &times; 3/6)</td><td class="je-debit-amt">18,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Discount on notes payable</td><td class="je-debit-amt"></td><td class="je-credit-amt">18,000</td></tr></tbody></table></div>
+      <div class="date-tag">April 1, <span class="yr1">2027</span></div>
+      <div class="table-wrap"><table class="je-table"><caption class="sr-only">Payment of the note at maturity</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Interest expense (remaining discount)</td><td class="je-debit-amt">18,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Discount on notes payable</td><td class="je-debit-amt"></td><td class="je-credit-amt">18,000</td></tr><tr><td>Notes payable (face amount)</td><td class="je-debit-amt">800,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Cash</td><td class="je-debit-amt"></td><td class="je-credit-amt">800,000</td></tr></tbody></table></div>
+      <p class="je-desc">By the <em>net method</em>, the interest component is netted against the face amount: Cash and Notes payable are both recorded at $764,000, and interest expense is recorded by increasing Notes payable to $800,000 over the term.</p>
+    </div>
+    <p>The same idea applies when a company buys something with a noninterest-bearing note. If inventory worth $760,000 is purchased with an $800,000 noninterest-bearing note, the inventory is recorded at its $760,000 value, and the $40,000 difference is the discount on notes payable.</p>
+  </div>
+
+  <div class="lo-block">
+    <h2>Secured Loans and Commercial Paper</h2>
+    <p>Short-term loans are sometimes <strong>secured</strong>, meaning a specified asset of the borrower is pledged as collateral. The assets most frequently pledged are <strong>inventory</strong> or <strong>accounts receivable</strong>. When receivables serve as collateral, the arrangement is called <em>pledging accounts receivable</em>. Sometimes the receivables are sold outright to a finance company as a means of short-term financing, which is called <em>factoring receivables</em>.</p>
+    <p><strong>Commercial paper</strong> refers to unsecured notes sold by large, highly rated corporations to obtain temporary financing, often purchased by other companies as a short-term investment.</p>
+    <div class="table-wrap"><table class="mini-table"><caption>Commercial paper at a glance</caption><thead><tr><th scope="col">Feature</th><th scope="col">Description</th></tr></thead><tbody><tr><th scope="row">Security</th><td>Unsecured notes, usually backed by a bank line of credit</td></tr><tr><th scope="row">Minimum denomination</th><td>$25,000</td></tr><tr><th scope="row">Maturity</th><td>1 to 270 days (beyond 270 days, the firm would have to file a registration statement with the SEC)</td></tr><tr><th scope="row">Interest</th><td>Often discounted at issuance, like a noninterest-bearing note</td></tr><tr><th scope="row">Who buys it</th><td>Issued directly to the buyer (lender)</td></tr><tr><th scope="row">Why companies use it</th><td>The interest rate is lower than on a bank loan</td></tr></tbody></table></div>
+    <p>Commercial paper is a form of notes payable, so recording its issuance and payment is exactly the same as for the discounted note above.</p>
+    <div class="key-idea"><strong>Statement of cash flows:</strong> cash received from short-term notes, and cash used to repay them, are <strong>financing activities</strong>. Most other current liabilities (accounts payable, interest payable, bonuses payable) are integrally related to a company's primary operations and are part of <strong>operating activities</strong>.</div>
+  </div>
+
+  <div class="lo-block">
+    <h2>Accrued Liabilities</h2>
+    <p><strong>Accrued liabilities</strong> represent expenses already incurred but not yet paid (accrued expenses). They are recorded by <strong>adjusting entries</strong> at the end of the reporting period, before the financial statements are prepared. Common examples are salaries payable, income taxes payable, and interest payable. Although recorded in separate liability accounts, accrued liabilities are usually combined and reported under a single caption (or perhaps two) on the balance sheet.</p>
+    <h3>Accrued interest payable</h3>
+    <p>Back to Cullowhee Creek Outfitters' nine-month, 10% note. The fiscal year ends December 31, four months after the note was issued, so four months of interest has accrued and must be recorded to avoid misstating expenses and liabilities.</p>
+    <div class="date-tag">December 31, <span class="yr0">2026</span></div>
+    <div class="table-wrap"><table class="je-table"><caption class="sr-only">Accrual of interest</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Interest expense ($900,000 &times; 10% &times; 4/12)</td><td class="je-debit-amt">30,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Interest payable</td><td class="je-debit-amt"></td><td class="je-credit-amt">30,000</td></tr></tbody></table></div>
+    <div class="date-tag">June 1, <span class="yr1">2027</span></div>
+    <div class="table-wrap"><table class="je-table"><caption class="sr-only">Payment of the note at maturity</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Interest expense ($900,000 &times; 10% &times; 5/12)</td><td class="je-debit-amt">37,500</td><td class="je-credit-amt"></td></tr><tr><td>Interest payable (from December 31 accrual)</td><td class="je-debit-amt">30,000</td><td class="je-credit-amt"></td></tr><tr><td>Notes payable</td><td class="je-debit-amt">900,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Cash ($900,000 + $67,500)</td><td class="je-debit-amt"></td><td class="je-credit-amt">967,500</td></tr></tbody></table></div>
+    <p class="je-desc">Total interest expense over the life of the note is $30,000 in <span class="yr0">2026</span> and $37,500 in <span class="yr1">2027</span>, which adds up to the $67,500 of total interest.</p>
+    <h3>Salaries, commissions, and bonuses</h3>
+    <p>Compensation can take the form of hourly wages, salary, commissions, bonuses, stock compensation, and pensions. Accrued liabilities arise when employees have provided services but will be paid after the financial statement date, and they are recorded by adjusting entries at the end of the period. <strong>Annual bonuses</strong> tied to performance objectives (earnings per share, net income, operating income, customer satisfaction, and so on) are compensation expense of the period in which they are earned, so unpaid bonuses are accrued as a liability at year-end.</p>
+  </div>
+
+  <div class="lo-block">
+    <h2>Paid Future Absences</h2>
+    <p>Suppose a firm grants two weeks of paid vacation each year. Some employees take the vacation in the same period it's earned. Others save it for a future period. Should the firm recognize compensation expense only for those who are paid during the period? Accrual accounting says no. An employer should accrue an expense and the related liability for employees' compensation for future absences (such as vacation pay) if the obligation meets <strong>all four</strong> of these conditions:</p>
+    <ol>
+      <li>The obligation is attributable to <strong>employees' services already performed</strong>.</li>
+      <li>The paid absence can be taken in a later year: the benefit <strong>vests</strong> (will be compensated even if employment is terminated) or can be <strong>accumulated</strong> over time.</li>
+      <li>Payment is <strong>probable</strong>.</li>
+      <li>The amount can be <strong>reasonably estimated</strong>.</li>
+    </ol>
+    <p>These are just the characteristics of a liability, adapted to employees' future absences. The liability is usually accrued at the <em>existing</em> wage rate rather than a rate estimated to be in effect when the absences occur, so if wage rates have risen, the difference between the accrual and the amount paid increases compensation expense in the year the vacation is taken.</p>
+    <div class="example">
+      <div class="ex-label">Running example, continued</div>
+      <p><strong>Whitewater Chemical Corp.</strong> has 2,000 employees. Each employee earns two weeks of paid vacation per year, and vacation not taken in the year earned can be carried over. During <span class="yr0">2026</span>, compensation averaged $700 a week per employee. By year-end, 800 employees had taken both weeks, 700 had taken one week, and 500 had taken none.</p>
+      <div class="table-wrap"><table class="mini-table"><caption>Vacation carryover at the end of the year</caption><thead><tr><th scope="col">Employees</th><th scope="col" class="num">Vacation weeks earned but not taken (each)</th><th scope="col" class="num">Total carryover weeks</th></tr></thead><tbody><tr><th scope="row">800</th><td class="num">0</td><td class="num">0</td></tr><tr><th scope="row">700</th><td class="num">1</td><td class="num">700</td></tr><tr><th scope="row">500</th><td class="num">2</td><td class="num">1,000</td></tr><tr class="total-row"><th scope="row">2,000</th><td class="num"></td><td class="num">1,700</td></tr></tbody></table></div>
+      <div class="date-tag">When vacations were taken in <span class="yr0">2026</span></div>
+      <div class="table-wrap"><table class="je-table"><caption class="sr-only">Vacations taken during the year</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Salaries expense [(800 &times; 2 weeks &times; $700) + (700 &times; 1 week &times; $700)]</td><td class="je-debit-amt">1,610,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Cash (or salaries payable)</td><td class="je-debit-amt"></td><td class="je-credit-amt">1,610,000</td></tr></tbody></table></div>
+      <div class="date-tag">December 31, <span class="yr0">2026</span> (adjusting entry)</div>
+      <div class="table-wrap"><table class="je-table"><caption class="sr-only">Accrual of compensated future absences</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Salaries expense (1,700 carryover weeks &times; $700)</td><td class="je-debit-amt">1,190,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Liability&mdash;compensated future absences</td><td class="je-debit-amt"></td><td class="je-credit-amt">1,190,000</td></tr></tbody></table></div>
+      <div class="date-tag">When <span class="yr0">2026</span> vacations are taken in <span class="yr1">2027</span></div>
+      <p>Suppose wage rates have risen, and the actual amount paid to employees for the carryover vacation is $1,250,000:</p>
+      <div class="table-wrap"><table class="je-table"><caption class="sr-only">Carryover vacations taken the following year</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Liability&mdash;compensated future absences (account balance)</td><td class="je-debit-amt">1,190,000</td><td class="je-credit-amt"></td></tr><tr><td>Salaries expense (difference)</td><td class="je-debit-amt">60,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Cash (or salaries payable) (given)</td><td class="je-debit-amt"></td><td class="je-credit-amt">1,250,000</td></tr></tbody></table></div>
+    </div>
+    <h3>Custom and practice matter</h3>
+    <ul>
+      <li><strong>Company policy and actual practice</strong> should be considered when deciding whether rights to payment have been earned by services already rendered. Sabbatical leave granted only to perform research that benefits the employer isn't accrued. If past practice shows it is intended as unrestricted compensated absence for past service, it is.</li>
+      <li><strong>Rights that expire</strong> aren't accrued. Holiday time, military leave, maternity leave, and jury time typically don't accumulate if unused, so no liability is usually accrued. But if it's customary that a particular paid absence can be carried forward and payment is probable, a liability is accrued.</li>
+      <li><strong>Sick pay</strong> quite often meets the conditions, but accrual isn't mandatory because future absence depends on future illness. If company policy or custom pays employees sick pay even when they aren't ill (for example, accumulated unused sick pay is paid at retirement), it is appropriate to record a liability.</li>
+      <li>If every condition is met except that the amount can't reasonably be estimated, a <strong>disclosure note</strong> should describe the situation.</li>
+    </ul>
+  </div>
+
+  <div class="lo-block">
+    <h2>Liabilities from Advance Collections</h2>
+    <p>Deposits and advances from customers, and collections for third parties, create liabilities to make payments or to provide goods or services in the future.</p>
+    <h3>Refundable deposits</h3>
+    <p>In some businesses it's typical to require a cash deposit that will be refunded when a specified event occurs: security deposits on apartments, deposits for utility service, deposits on returnable containers. Collecting the cash creates a liability to return the deposit.</p>
+    <div class="example">
+      <div class="ex-label">Example</div>
+      <p><strong>Balsam Chemical Company</strong> sells combustible chemicals in expensive, reusable containers. Customers are charged a deposit for each container and receive a refund when the container is returned. Deposits collected on containers delivered during the year were $500,000. Deposits are forfeited if containers are not returned within one year. Eighty percent of the containers were returned within the allotted time. Deposits charged are twice the actual cost of the containers, and the inventory of containers stays on the books until deposits are forfeited.</p>
+      <div class="date-tag">When deposits are collected</div>
+      <div class="table-wrap"><table class="je-table"><caption class="sr-only">Deposits collected</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Cash</td><td class="je-debit-amt">500,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Liability&mdash;refundable deposits</td><td class="je-debit-amt"></td><td class="je-credit-amt">500,000</td></tr></tbody></table></div>
+      <div class="date-tag">When containers are returned</div>
+      <div class="table-wrap"><table class="je-table"><caption class="sr-only">Containers returned</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Liability&mdash;refundable deposits</td><td class="je-debit-amt">400,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Cash</td><td class="je-debit-amt"></td><td class="je-credit-amt">400,000</td></tr></tbody></table></div>
+      <div class="date-tag">When deposits are forfeited</div>
+      <div class="table-wrap"><table class="je-table"><caption class="sr-only">Deposits forfeited</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Liability&mdash;refundable deposits</td><td class="je-debit-amt">100,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Revenue&mdash;sale of containers</td><td class="je-debit-amt"></td><td class="je-credit-amt">100,000</td></tr><tr><td>Cost of goods sold</td><td class="je-debit-amt">50,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Inventory of containers</td><td class="je-debit-amt"></td><td class="je-credit-amt">50,000</td></tr></tbody></table></div>
+      <p class="je-desc">Not all containers are returned at the same time, so these entries summarize many individual returns and forfeitures.</p>
+    </div>
+    <h3>Advances from customers</h3>
+    <p>Businesses sometimes require advance payments that will be applied to the purchase price when goods are delivered or services are provided: gift certificates, magazine subscriptions, layaway deposits, special order deposits, and airline tickets. These <strong>customer advances</strong> (also called <strong>deferred revenue</strong> or unearned revenue) are liabilities until the related product or service is provided. Revenue recognition must be delayed until the seller has fulfilled its performance obligation.</p>
+    <div class="example">
+      <div class="ex-label">Example</div>
+      <p><strong>Purple Ledger Publications</strong> collects magazine subscriptions at the time subscriptions are sold and recognizes subscription revenue over the term. In its first year of operations it collected $18,000,000 in subscription sales. At December 31, the average subscription was one-third expired.</p>
+      <div class="date-tag">When advance is collected</div>
+      <div class="table-wrap"><table class="je-table"><caption class="sr-only">Subscriptions collected</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Cash</td><td class="je-debit-amt">18,000,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Deferred subscription revenue</td><td class="je-debit-amt"></td><td class="je-credit-amt">18,000,000</td></tr></tbody></table></div>
+      <div class="date-tag">When product is delivered</div>
+      <div class="table-wrap"><table class="je-table"><caption class="sr-only">Revenue recognized</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Deferred subscription revenue</td><td class="je-debit-amt">6,000,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Subscription revenue</td><td class="je-debit-amt"></td><td class="je-credit-amt">6,000,000</td></tr></tbody></table></div>
+    </div>
+    <p>Deferred revenue is reduced when revenue is recognized, either because the seller delivered as promised or because the buyer forfeited the advance (for example, by not redeeming a gift certificate before it expires). Less often, it is reduced when the seller returns the advance because it didn't deliver.</p>
+    <div class="key-idea"><strong>Interest on advances.</strong> If a customer pays far in advance of delivery, the customer is effectively loaning money to the seller, and the seller should recognize interest expense on the deferred revenue liability. Companies can ignore the interest component if it isn't significant, which is assumed to be the case if the period between payment and delivery is less than one year.</div>
+    <h3>Gift cards</h3>
+    <p>When a company sells a gift card, it records the cash received as <strong>deferred revenue</strong>. It recognizes revenue either when the card is <strong>redeemed</strong> or when the probability of redemption is viewed as remote, called <strong>gift card breakage</strong> (based on expiration or the company's experience).</p>
+    <div class="example">
+      <div class="ex-label">Example</div>
+      <p>During May, <strong>Tuckasegee Tackle &amp; Gear</strong> sold $3,000,000 of gift cards. Also during May, $2,200,000 of gift cards sold in May and in prior periods were redeemed, and $500,000 of gift cards sold in prior periods expired and went unused.</p>
+      <div class="date-tag">To record sale of gift cards</div>
+      <div class="table-wrap"><table class="je-table"><caption class="sr-only">Sale of gift cards</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Cash</td><td class="je-debit-amt">3,000,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Deferred gift card revenue</td><td class="je-debit-amt"></td><td class="je-credit-amt">3,000,000</td></tr></tbody></table></div>
+      <div class="date-tag">To record redemption of gift cards (ignoring entries to inventory and cost of sales)</div>
+      <div class="table-wrap"><table class="je-table"><caption class="sr-only">Redemption of gift cards</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Deferred gift card revenue</td><td class="je-debit-amt">2,200,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Revenue&mdash;gift cards</td><td class="je-debit-amt"></td><td class="je-credit-amt">2,200,000</td></tr></tbody></table></div>
+      <div class="date-tag">To record expiration of gift cards</div>
+      <div class="table-wrap"><table class="je-table"><caption class="sr-only">Expiration of gift cards</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Deferred gift card revenue</td><td class="je-debit-amt">500,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Revenue&mdash;gift cards</td><td class="je-debit-amt"></td><td class="je-credit-amt">500,000</td></tr></tbody></table></div>
+    </div>
+    <p><strong>Escheatment.</strong> Escheatment laws specify a state's right to claim abandoned property. Where unused gift cards are subject to them, retailers must turn over all or part of the unredeemed value to the state after a period of three to five years. If a law requires payment of 100% of unredeemed gift cards to the state, the expiration entry changes: instead of crediting revenue, the company credits <strong>Cash</strong> (to balance).</p>
+    <div class="table-wrap"><table class="je-table"><caption class="sr-only">Expiration of gift cards under an escheatment law</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Deferred gift card revenue (amount of expired gift cards)</td><td class="je-debit-amt">500,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Cash (to balance)</td><td class="je-debit-amt"></td><td class="je-credit-amt">500,000</td></tr></tbody></table></div>
+    <p>Liabilities for deferred revenue are classified as current or long-term depending on when the obligation is expected to be satisfied.</p>
+    <h3>Collections for third parties</h3>
+    <p>Companies often collect amounts from customers or employees on behalf of third parties and periodically remit them to a governmental (or other) unit. These amounts are liabilities until remitted. <strong>Sales taxes</strong> are an example. Suppose a sale of $250,000 is made in a location with a 5% state sales tax rate and a 2% local sales tax rate. The tax creates a liability until it is paid, and it is <em>not</em> revenue.</p>
+    <div class="table-wrap"><table class="je-table"><caption class="sr-only">Sale with sales taxes collected</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Cash (or accounts receivable)</td><td class="je-debit-amt">267,500</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Sales revenue</td><td class="je-debit-amt"></td><td class="je-credit-amt">250,000</td></tr><tr><td class="indent">Sales taxes payable [(5% + 2%) &times; $250,000]</td><td class="je-debit-amt"></td><td class="je-credit-amt">17,500</td></tr></tbody></table></div>
+    <p>Payroll-related deductions, such as withholding taxes, Social Security taxes, employee insurance, retirement plan contributions, and union dues, also create current liabilities until the amounts collected are paid to the appropriate parties (see the payroll section below).</p>
+  </div>
+
+  <div class="lo-block">
+    <h2>Current vs. Noncurrent Classification</h2>
+    <p>Given a choice, management would rather report an obligation as <strong>noncurrent</strong>. Outsiders (banks, bondholders, shareholders) usually consider debt that is payable currently to be riskier because the company must be able to access cash relatively soon. A long-term classification also allows the company to report higher <strong>working capital</strong> (current assets minus current liabilities) and a higher <strong>current ratio</strong> (current assets &divide; current liabilities), and both are often explicitly restricted in loan contracts. So the manager's real question is "What amount can I <em>exclude</em> from current liabilities?"</p>
+    <h3>Current maturities of long-term debt</h3>
+    <p>Long-term obligations (bonds, notes, lease liabilities, deferred tax liabilities) are reclassified and reported as <strong>current liabilities</strong> when they become payable within the upcoming year (or operating cycle, if longer). A 20-year bond issue is long-term for 19 years and normally current on the balance sheet prepared during the 20th year.</p>
+    <h3>Obligations callable by the creditor</h3>
+    <p>The requirement to classify currently maturing debt as current includes debt that is <strong>callable</strong> (due on demand) by the creditor in the upcoming year (or operating cycle), <em>even if the debt isn't expected to be called</em>. It also includes situations in which:</p>
+    <ul>
+      <li>the creditor has the right to demand payment because of an <strong>existing violation</strong> of a provision of the debt agreement (say, working capital has fallen below a minimum covenant), and</li>
+      <li>debt isn't yet callable but will be within the year if an existing violation isn't corrected within a specified <strong>grace period</strong>, unless it's probable the violation will be corrected within the grace period or waived by the creditor.</li>
+    </ul>
+    <h3>Short-term obligations expected to be refinanced</h3>
+    <p>Suppose a second 20-year bond issue is sold specifically to refund the first issue when it matures. Substance over form says that's a single, continuing noncurrent obligation. So short-term obligations (including callable obligations) that are expected to be refinanced on a long-term basis can be reported as <strong>noncurrent</strong> only if <em>both</em> conditions are met:</p>
+    <div class="key-idea"><strong>(1)</strong> the company <strong>intends</strong> to refinance on a long-term basis, <em>and</em> <strong>(2)</strong> the company has <strong>demonstrated the ability</strong> to do so, either by an existing <strong>refinancing agreement</strong> or by <strong>actual financing</strong> before the financial statements are issued.</div>
+    <p>Several weeks usually pass between the end of the fiscal year and the date the statements are issued, and events during that period can be used to clarify the nature of balance sheet items at the reporting date. The specific form of the long-term refinancing (bonds, bank loans, even shares of stock) is irrelevant.</p>
+    <div class="example">
+      <div class="ex-label">Example</div>
+      <p><strong>Sylva Dairy Cooperative</strong> had $18 million of notes that mature in May <span class="yr1">2027</span> and $6 million of bonds issued years earlier that mature in February <span class="yr1">2027</span>. On December 31, <span class="yr0">2026</span>, its fiscal year-end, management intended to refinance both on a long-term basis. On February 7, <span class="yr1">2027</span>, the company issued $6 million of 20-year bonds and used the proceeds to repay the bonds that matured that month. In early March, before the <span class="yr0">2026</span> financial statements were issued, it negotiated a line of credit with a commercial bank for up to $10 million any time during <span class="yr1">2027</span>. Any borrowings mature two years from the date of borrowing.</p>
+      <div class="table-wrap"><table class="mini-table"><caption>Balance sheet classification at December 31 ($ in thousands)</caption><thead><tr><th scope="col">Classification</th><th scope="col">Item</th><th scope="col" class="num">Amount</th></tr></thead><tbody><tr><th scope="row">Current liabilities</th><td>Notes payable</td><td class="num">8,000</td></tr><tr><th scope="row">Long-term liabilities</th><td>Notes payable</td><td class="num">10,000</td></tr><tr><th scope="row">Long-term liabilities</th><td>Bonds payable</td><td class="num">6,000</td></tr></tbody></table></div>
+      <p>The ability to refinance the $6 million of bonds was demonstrated by <strong>actual financing</strong> before the statements were issued. The ability to refinance $10 million of the $18 million of notes was demonstrated by a <strong>refinancing agreement</strong>. The remaining $8 million has neither, so it must be reported as a current liability.</p>
+    </div>
+    <div class="ifrs">
+      <div class="ifrs-label">GAAP vs. IFRS: Liabilities to Be Refinanced</div>
+      <p>Under U.S. GAAP, liabilities payable within the coming year are classified as long-term if refinancing is completed <strong>before the date the financial statements are issued</strong>. Under IFRS, refinancing must be completed <strong>before the balance sheet date</strong>.</p>
+    </div>
+  </div>
+
+  <div class="lo-block">
+    <h2>Payroll-Related Liabilities</h2>
+    <p>All firms incur liabilities in connection with their payrolls. They arise from legal requirements to withhold taxes from employees' paychecks, from payroll taxes on the firm itself, and from voluntary deductions payable to third parties.</p>
+    <div class="table-wrap"><table class="mini-table"><caption>Payroll-related liabilities</caption><thead><tr><th scope="col">Type</th><th scope="col">What it is</th><th scope="col">Who pays</th></tr></thead><tbody><tr><th scope="row">Employees' withholding taxes</th><td>Federal (and sometimes state) income taxes, plus Social Security (6.2%) and Medicare (1.45%) taxes under FICA. Percentages and maximum wage bases change from time to time. High earners also pay an additional Medicare tax with no employer match.</td><td>Withheld from employees' pay and remitted by the employer</td></tr><tr><th scope="row">Voluntary deductions</th><td>Union dues, contributions to savings or retirement plans, insurance premiums</td><td>Withheld from employees' pay and remitted by the employer</td></tr><tr><th scope="row">Employer's payroll taxes</th><td>Matching FICA taxes, plus federal unemployment tax (FUTA, 6.0% of the first $7,000 per employee, reduced by up to a 5.4% credit for state contributions, so often net 0.6%) and state unemployment tax (most commonly 5.4%)</td><td>Employer</td></tr><tr><th scope="row">Fringe benefits</th><td>Employer-paid insurance premiums and retirement plan contributions</td><td>Employer</td></tr></tbody></table></div>
+    <div class="key-idea">Amounts withheld from paychecks, whether voluntarily or involuntarily, are <strong>liabilities until turned over to the appropriate third parties</strong>. Payroll taxes and fringe benefits are incurred because of services employees performed, and are also liabilities until paid.</div>
+    <div class="example">
+      <div class="ex-label">Example</div>
+      <p><strong>Cullowhee Lighting and Fixtures'</strong> payroll for the second week in January was $150,000. Federal income taxes to be withheld are $30,000 and state income taxes are $4,500. Medical insurance premiums total $2,000 (the employer pays 60%). Employees contribute $6,000 to a voluntary retirement plan, matched by the employer. Union dues of $150 are paid by employees, and life insurance premiums of $300 are 100% paid by the employer. The tax rates are Social Security 6.2%, Medicare 1.45%, federal unemployment 0.60% (after the state credit), and state unemployment 5.40%. (Assume every employee is still under the annual wage bases, as is typical early in the year.)</p>
+      <p>First, the payroll itself. Note that the amounts withheld are credited to liability accounts, and the employees receive only the net pay:</p>
+      <div class="table-wrap"><table class="je-table"><caption class="sr-only">Record the payroll</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Salaries expense (total amount earned)</td><td class="je-debit-amt">150,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Withholding taxes payable (federal income tax)</td><td class="je-debit-amt"></td><td class="je-credit-amt">30,000</td></tr><tr><td class="indent">Withholding taxes payable (state income tax)</td><td class="je-debit-amt"></td><td class="je-credit-amt">4,500</td></tr><tr><td class="indent">Social Security taxes payable (employees' portion, 6.2%)</td><td class="je-debit-amt"></td><td class="je-credit-amt">9,300</td></tr><tr><td class="indent">Medicare taxes payable (employees' portion, 1.45%)</td><td class="je-debit-amt"></td><td class="je-credit-amt">2,175</td></tr><tr><td class="indent">Payable to Mountain Health Plan (employees' portion of insurance premiums&mdash;40%)</td><td class="je-debit-amt"></td><td class="je-credit-amt">800</td></tr><tr><td class="indent">Payable to Summit Retirement Services (employees' investment)</td><td class="je-debit-amt"></td><td class="je-credit-amt">6,000</td></tr><tr><td class="indent">Payable to Local No. 714 (union dues)</td><td class="je-debit-amt"></td><td class="je-credit-amt">150</td></tr><tr><td class="indent">Salaries payable (net pay)</td><td class="je-debit-amt"></td><td class="je-credit-amt">97,075</td></tr></tbody></table></div>
+      <p>Second, the employer's own payroll taxes. The matching FICA and the unemployment taxes are the <strong>employer's payroll tax expense</strong>:</p>
+      <div class="table-wrap"><table class="je-table"><caption class="sr-only">Record the employer's payroll taxes</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Payroll tax expense (total)</td><td class="je-debit-amt">20,475</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Social Security taxes payable (employer's matching amount)</td><td class="je-debit-amt"></td><td class="je-credit-amt">9,300</td></tr><tr><td class="indent">Medicare taxes payable (employer's matching amount)</td><td class="je-debit-amt"></td><td class="je-credit-amt">2,175</td></tr><tr><td class="indent">FUTA payable (federal unemployment tax: 0.6%)</td><td class="je-debit-amt"></td><td class="je-credit-amt">900</td></tr><tr><td class="indent">State unemployment tax payable (5.4%)</td><td class="je-debit-amt"></td><td class="je-credit-amt">8,100</td></tr></tbody></table></div>
+      <p>Third, fringe benefits, which are part of salaries and wages expense:</p>
+      <div class="table-wrap"><table class="je-table"><caption class="sr-only">Record fringe benefits</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Salaries expense (fringe benefits)</td><td class="je-debit-amt">7,500</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Payable to Mountain Health Plan (insurance premiums&mdash;60%)</td><td class="je-debit-amt"></td><td class="je-credit-amt">1,200</td></tr><tr><td class="indent">Payable to Summit Retirement Services (employer's matching amount)</td><td class="je-debit-amt"></td><td class="je-credit-amt">6,000</td></tr><tr><td class="indent">Payable to Evergreen Life Insurance (insurance premiums)</td><td class="je-debit-amt"></td><td class="je-credit-amt">300</td></tr></tbody></table></div>
+    </div>
+  </div>
+
+  <div class="lo-block">
+    <h2>Evaluating Liquidity</h2>
+    <p>Current liabilities affect a company's <strong>liquidity</strong>: its cash position and overall ability to obtain cash in the normal course of business. A company is liquid if it has enough cash (or assets quickly convertible to cash) to pay currently maturing debts. Lack of liquidity can end an otherwise healthy company, so managers, investors, and creditors watch it closely.</p>
+    <div class="formula">Current ratio = Current assets &divide; Current liabilities<br>Acid-test (quick) ratio = (Cash and cash equivalents + Short-term investments + Accounts receivable) &divide; Current liabilities</div>
+    <p>A current ratio of 1 to 1 or higher is often a rule of thumb, but it should be judged in the context of the company's industry and circumstances. The acid-test ratio is more conservative because it leaves out inventories and prepaid expenses, which are less readily convertible to cash. A ratio below the industry's is a red flag, not proof of a problem; profitability is probably the best long-run indication of liquidity.</p>
+    <div class="patterns">
+      <p><strong>Some companies deliberately run high current liabilities.</strong> They treat accounts payable as a free loan from suppliers and pressure customers to pay quickly. That lowers the current ratio but can be an intelligent way to manage cash.</p>
+      <p><strong>Analysts should watch for manipulation.</strong> Because accounts payable is in the denominator, the timing of when a payable is recognized can mean the difference between violating a debt covenant and complying with it.</p>
+    </div>
+    <div class="example">
+      <div class="ex-label">Example</div>
+      <p>A company has current assets of $6.0 million and current liabilities of $4.5 million, a current ratio of 1.33. A debt covenant requires a minimum current ratio of 1.4, so the company is in violation. If it persuades a supplier to delay delivery of $1.0 million of inventory, current assets fall to $5.0 million and current liabilities fall to $3.5 million, so the ratio becomes 5.0 &divide; 3.5 = 1.43. The company now complies, though nothing about its real liquidity has improved.</p>
+    </div>
+    <p>Finally, remember the link between deferred revenue and later revenue. Increases in deferred revenue can signal future revenue recognition. But research suggests some firms with deferred revenue manage the timing of revenue recognition to manage their earnings.</p>
+  </div>
+
+
+</main>
+
+<footer>ACCT 352 · Current Liabilities — Reading Notes</footer>
+<script>
+  // Keeps the dates current automatically, with no recoding needed each year.
+  // yr0 is always the current calendar year; yr1, yr2, ... follow.
+  (function () {
+    var y = new Date().getFullYear();
+    for (var k = 0; k <= 5; k++) {
+      var els = document.querySelectorAll('.yr' + k);
+      for (var i = 0; i < els.length; i++) { els[i].textContent = y + k; }
+    }
+  })();
+
+  // Wide tables and formulas scroll sideways on small screens. Make those regions
+  // reachable by keyboard (and named for screen readers) only when they actually scroll.
+  (function () {
+    function mark() {
+      var regions = document.querySelectorAll('.table-wrap, .formula');
+      for (var i = 0; i < regions.length; i++) {
+        var w = regions[i];
+        if (w.scrollWidth > w.clientWidth + 1) {
+          var cap = w.querySelector('caption');
+          w.setAttribute('tabindex', '0');
+          w.setAttribute('role', 'region');
+          w.setAttribute('aria-label', (cap ? cap.textContent : 'Formula') + ' (scrolls sideways)');
+        } else {
+          w.removeAttribute('tabindex'); w.removeAttribute('role'); w.removeAttribute('aria-label');
+        }
+      }
+    }
+    window.addEventListener('load', mark);
+    window.addEventListener('resize', mark);
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Loss Contingencies — Reading Notes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --wcu-purple: #4B2E83;
+    --wcu-purple-dark: #341f5c;
+    --wcu-gold: #C8A24A;
+    --gold-light: #f4ecd8;
+    --ink: #232023;
+    --muted: #5b5559;          /* secondary text: 6.9:1 on the page background */
+    --paper: #fdfcfb;
+    --panel: #f7f3ec;
+    --rule: #e2d9c8;
+    --ctl: #7d7388;            /* borders on form controls: 3:1 or better */
+    --warn: #6b4f00;
+    --warn-bg: #FBF3DC;
+    --ifrs: #2f4c8a;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-padding-top: 1rem; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.55;
+  }
+
+  /* ---------- Accessibility helpers ---------- */
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+  .skip-link {
+    position: absolute; left: 0.75rem; top: -4rem; z-index: 100;
+    background: #fff; color: var(--wcu-purple-dark); font-weight: 700;
+    padding: 0.6rem 1rem; border: 3px solid var(--wcu-purple-dark); border-radius: 6px;
+  }
+  .skip-link:focus { top: 0.75rem; }
+  :focus-visible { outline: 3px solid var(--wcu-purple-dark); outline-offset: 3px; }
+  header :focus-visible, footer :focus-visible { outline-color: #fff; }
+  main:focus { outline: none; }
+  .table-wrap { overflow-x: auto; max-width: 100%; }
+  .table-wrap:focus-visible { outline-offset: 0; }
+
+  header {
+    background: linear-gradient(135deg, var(--wcu-purple) 0%, var(--wcu-purple-dark) 100%);
+    color: #fff;
+    padding: 2.2rem 1.5rem 1.8rem;
+    border-bottom: 6px solid var(--wcu-gold);
+  }
+  header .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #E3C673;
+    margin-bottom: 0.4rem;
+  }
+  header h1 {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 700;
+    font-size: 1.9rem;
+    margin: 0 0 0.3rem;
+  }
+  header p.sub { margin: 0; color: #ece6f6; font-size: 0.98rem; }
+
+  main { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+  .lo-block { margin-bottom: 2.8rem; }
+
+  h2 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.5rem;
+    margin: 0 0 0.8rem;
+    color: var(--wcu-purple-dark);
+    border-bottom: 2px solid var(--rule);
+    padding-bottom: 0.4rem;
+  }
+  h3 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.1rem;
+    margin: 1.4rem 0 0.5rem;
+    color: var(--wcu-purple-dark);
+  }
+  p { margin: 0.6rem 0; }
+
+  .key-idea {
+    background: var(--panel);
+    border-left: 4px solid var(--wcu-gold);
+    padding: 0.9rem 1.1rem;
+    border-radius: 0 6px 6px 0;
+    margin: 0.9rem 0;
+  }
+  .key-idea strong { color: var(--wcu-purple-dark); }
+
+  .formula {
+    font-family: 'IBM Plex Mono', monospace;
+    background: var(--wcu-purple-dark);
+    color: var(--gold-light);
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin: 0.8rem 0;
+    font-size: 0.92rem;
+    overflow-x: auto;
+  }
+
+  .example {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin: 0.9rem 0;
+  }
+  .example .ex-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--wcu-purple);
+    margin-bottom: 0.4rem;
+  }
+
+  ul, ol { padding-left: 1.4rem; }
+  li { margin-bottom: 0.35rem; }
+
+  .patterns {
+    background: var(--gold-light);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin: 0.8rem 0;
+  }
+  .patterns p { margin: 0.3rem 0; }
+
+  .ifrs {
+    background: #eef2fb;
+    border-left: 4px solid var(--ifrs);
+    border-radius: 0 6px 6px 0;
+    padding: 0.9rem 1.1rem;
+    margin: 0.9rem 0;
+  }
+  .ifrs .ifrs-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ifrs);
+    margin-bottom: 0.4rem;
+  }
+
+  table.mini-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.4rem 0 0.9rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+  }
+  table.mini-table caption {
+    font-family: 'Inter', sans-serif; font-size: 0.9rem; color: var(--muted);
+    text-align: left; margin-bottom: 0.4rem;
+  }
+  table.mini-table th, table.mini-table td {
+    border: 1px solid var(--rule);
+    padding: 0.4rem 0.55rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.mini-table th {
+    background: var(--panel);
+    color: var(--wcu-purple-dark);
+    font-weight: 600;
+  }
+  table.mini-table td.num, table.mini-table th.num { text-align: right; white-space: nowrap; }
+  table.mini-table tr.total-row th, table.mini-table tr.total-row td { background: var(--panel); font-weight: 700; }
+
+  table.je-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.5rem 0 0.3rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.88rem;
+  }
+  table.je-table thead th { padding: 0; border: 0; height: 0; line-height: 0; }
+  table.je-table td { padding: 0.28rem 0.3rem; vertical-align: top; }
+  table.je-table td.je-debit-amt, table.je-table td.je-credit-amt {
+    text-align: right;
+    width: 100px;
+    white-space: nowrap;
+  }
+  table.je-table td.indent { padding-left: 1.8rem; }
+  .je-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-style: italic;
+    margin: 0 0 1rem;
+  }
+  .date-tag {
+    display: inline-block; font-family: 'IBM Plex Mono', monospace; font-weight: 700; font-size: 0.82rem;
+    color: #fff; background: var(--wcu-purple-dark); padding: 0.12rem 0.5rem; border-radius: 4px; margin-top: 0.4rem;
+  }
+
+  footer {
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--muted);
+    padding: 1.5rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+  @media (forced-colors: active) {
+    .key-idea, .ifrs, .example { border: 1px solid CanvasText; }
+    header { border-bottom: 6px solid CanvasText; }
+  }
+
+  .table-wrap { contain: paint; }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header>
+  <div class="eyebrow">ACCT 352 · Contingencies</div>
+  <h1>Loss Contingencies</h1>
+  <p class="sub">Reading Notes</p>
+</header>
+
+<main id="main" tabindex="-1">
+
+  <div class="lo-block">
+    <h2>What a Loss Contingency Is</h2>
+    <p>The feature that distinguishes loss contingencies from the liabilities in Part A is <strong>uncertainty as to whether an obligation really exists</strong>. The circumstance giving rise to the contingency has already occurred, but whether a liability exists will be resolved only when some future event occurs (or doesn't occur).</p>
+    <div class="key-idea">A <strong>loss contingency</strong> is an existing, uncertain situation involving potential loss depending on whether some future event occurs. Whether it is accrued and reported as a liability depends on <strong>(a) the likelihood that the confirming event will occur</strong> and <strong>(b) what can be determined about the amount of loss</strong>.</div>
+    <p>Consider a car manufacturer facing lawsuits from customers who say they were injured by a faulty part in cars that were recalled. The company sold those cars in the past, so the event giving rise to the potential losses has already happened. What's uncertain is whether, and how much, it will eventually have to pay. Notice what that means for the three liability characteristics: the contingency is accounted for <em>only</em> when the event that gave rise to it occurred <strong>before the financial statement date</strong>. If it occurred afterward, no liability existed at the balance sheet date, however likely the outcome.</p>
+    <h3>Likelihood of the confirming event</h3>
+    <div class="table-wrap"><table class="mini-table"><caption>Three categories of likelihood</caption><thead><tr><th scope="col">Category</th><th scope="col">Meaning</th></tr></thead><tbody><tr><th scope="row">Probable</th><td>The confirming event is likely to occur.</td></tr><tr><th scope="row">Reasonably possible</th><td>The chance the confirming event will occur is more than remote but less than likely.</td></tr><tr><th scope="row">Remote</th><td>The chance the confirming event will occur is slight.</td></tr></tbody></table></div>
+    <h3>Dollar amount of the loss</h3>
+    <p>The potential loss is classified as <strong>known</strong>, <strong>reasonably estimable</strong>, or <strong>not reasonably estimable</strong>.</p>
+    <div class="key-idea">A loss contingency is <strong>accrued</strong> if it is both <strong>probable</strong> that the confirming event will occur <em>and</em> the amount can be at least <strong>reasonably estimated</strong>.</div>
+    <div class="table-wrap"><table class="je-table"><caption class="sr-only">General form of accruing a loss contingency</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Loss (or expense)</td><td class="je-debit-amt">XXXX</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Liability</td><td class="je-debit-amt"></td><td class="je-credit-amt">XXXX</td></tr></tbody></table></div>
+    <p>Some contingent losses don't involve liabilities at all. When resolved, they cause a noncash asset to be <em>impaired</em>, so accruing the contingency means reducing the asset instead (the most common example is an uncollectible receivable: debit bad debt expense, credit allowance for uncollectible accounts).</p>
+    <p>Income taxes are an exception: uncertainty in income taxes follows its own guidance, covered in a later chapter.</p>
+  </div>
+
+  <div class="lo-block">
+    <h2>Accrue, Disclose, or Ignore?</h2>
+    <p>Putting the two dimensions together gives the accounting treatment for every combination:</p>
+    <div class="table-wrap"><table class="mini-table"><caption>Accounting treatment of loss contingencies</caption><thead><tr><th scope="col">Likelihood</th><th scope="col">Amount known</th><th scope="col">Amount reasonably estimable</th><th scope="col">Amount not reasonably estimable</th></tr></thead><tbody><tr><th scope="row">Probable</th><td>Liability accrued and disclosure note</td><td>Liability accrued and disclosure note</td><td>Disclosure note only</td></tr><tr><th scope="row">Reasonably possible</th><td>Disclosure note only</td><td>Disclosure note only</td><td>Disclosure note only</td></tr><tr><th scope="row">Remote</th><td>No disclosure required*</td><td>No disclosure required*</td><td>No disclosure required*</td></tr></tbody></table></div>
+    <p class="je-desc">*Except for certain guarantees and other specified off-balance-sheet risk situations covered in a later chapter.</p>
+    <h3>Choosing an amount within a range</h3>
+    <p>If one amount within a range of possible loss appears better than the others, that amount is accrued. When <strong>no amount within the range appears more likely</strong> than the others, the <strong>minimum amount</strong> is recorded under U.S. GAAP, and the possible additional loss is disclosed.</p>
+    <div class="example">
+      <div class="ex-label">Example</div>
+      <p>A large software company reports in its notes that it has accrued aggregate legal liabilities of $306 million, and that adverse outcomes it estimates could reach approximately $500 million beyond the recorded amounts are reasonably possible. That's exactly the rule at work: the <em>probable and reasonably estimable</em> $306 million is accrued and disclosed, and the additional <em>reasonably possible</em> range is only disclosed.</p>
+    </div>
+    <h3>What disclosure involves</h3>
+    <p>If one or both criteria for accrual aren't met but there is at least a reasonable possibility that a loss will occur, a disclosure note describes the contingency and gives an estimate of the potential loss or range of loss, if possible. If an estimate can't be made, the note says so.</p>
+  </div>
+
+  <div class="lo-block">
+    <h2>Product Warranties and Guarantees</h2>
+    <h3>Quality-assurance warranties</h3>
+    <p>Most consumer products come with a guarantee. When it is included in the contract between the seller and customer, a <strong>quality-assurance warranty</strong> isn't a separate performance obligation. It is a guarantee that the customer will be satisfied with what the seller provided. Sellers offer these to boost sales, so the costs of making good on them should be estimated and recorded as expenses <strong>in the same period the products are sold</strong> (matching expenses with revenues). That is also when the company becomes obligated.</p>
+    <p>Much of the cost occurs later, sometimes years later, so this is a loss contingency: a possible future sacrifice of economic benefits (cost of satisfying the guarantee) due to an existing circumstance (the products have been sold) that depends on an uncertain future event (a customer claim). Even though the liability for any single sale is unpredictable, prior experience usually allows a reasonably accurate estimate of the total for a period. So the criteria for accrual are <strong>almost always met</strong> for product warranties.</p>
+    <div class="example">
+      <div class="ex-label">Example</div>
+      <p><strong>Tuckasegee Home Health</strong> introduced a new in-home air purifier carrying a two-year warranty against defects. Industry experience indicates warranty costs of 2% of sales in the first 12 months after the sale and 4% in the next 12 months. During December <span class="yr0">2026</span>, its first month of availability, the company sold $3,000,000 of purifiers.</p>
+      <div class="date-tag">During December <span class="yr0">2026</span></div>
+      <div class="table-wrap"><table class="je-table"><caption class="sr-only">Sales</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Cash (and accounts receivable)</td><td class="je-debit-amt">3,000,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Sales revenue</td><td class="je-debit-amt"></td><td class="je-credit-amt">3,000,000</td></tr></tbody></table></div>
+      <div class="date-tag">December 31, <span class="yr0">2026</span> (adjusting entry)</div>
+      <div class="table-wrap"><table class="je-table"><caption class="sr-only">Accrue the warranty cost</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Warranty expense [(2% + 4%) &times; $3,000,000]</td><td class="je-debit-amt">180,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Warranty liability</td><td class="je-debit-amt"></td><td class="je-credit-amt">180,000</td></tr></tbody></table></div>
+      <p>When customer claims are made and costs are incurred to satisfy them, the liability is reduced (say, $75,000 in <span class="yr1">2027</span>):</p>
+      <div class="table-wrap"><table class="je-table"><caption class="sr-only">Warranty claims satisfied</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Warranty liability</td><td class="je-debit-amt">75,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Cash (or salaries payable, parts and supplies, etc.)</td><td class="je-debit-amt"></td><td class="je-credit-amt">75,000</td></tr></tbody></table></div>
+      <p class="je-desc">Estimates can't be precise. If the estimating method is monitored and revised when needed, overestimates and underestimates cancel out over time. The liability may be classified as current or as part current and part long-term, depending on when claims are expected to be satisfied.</p>
+    </div>
+    <h3>Expected cash flow approach</h3>
+    <p>The traditional measure of a warranty obligation is the "best estimate" of future cash flows, ignoring the time value of money as immaterial. When the warranty spans more than one year and probabilities can be attached to possible cash outcomes, the <strong>expected cash flow approach</strong> gives a more plausible estimate: weight each possible outcome by its probability to get the <em>expected</em> cash flow for each year, then discount at the risk-free rate.</p>
+    <div class="example">
+      <div class="ex-label">Example</div>
+      <p>Suppose Tuckasegee Home Health's industry experience for the same $3,000,000 of sales instead gives this probability distribution of warranty costs, with costs settled with a service firm at the end of <span class="yr1">2027</span> and <span class="yr2">2028</span>. The risk-free rate is 5%.</p>
+      <div class="table-wrap"><table class="mini-table"><caption>Expected cash flows</caption><thead><tr><th scope="col">Year</th><th scope="col" class="num">Possible cost</th><th scope="col" class="num">Probability</th><th scope="col" class="num">Weighted</th></tr></thead><tbody><tr><th scope="row"><span class="yr1">2027</span></th><td class="num">$30,000</td><td class="num">20%</td><td class="num">$6,000</td></tr><tr><th scope="row"><span class="yr1">2027</span></th><td class="num">$40,000</td><td class="num">50%</td><td class="num">$20,000</td></tr><tr><th scope="row"><span class="yr1">2027</span></th><td class="num">$50,000</td><td class="num">30%</td><td class="num">$15,000</td></tr><tr><th scope="row"><span class="yr1">2027</span> expected cash flow</th><td class="num"></td><td class="num"></td><td class="num"><strong>$41,000</strong></td></tr><tr><th scope="row"><span class="yr2">2028</span></th><td class="num">$50,000</td><td class="num">20%</td><td class="num">$10,000</td></tr><tr><th scope="row"><span class="yr2">2028</span></th><td class="num">$70,000</td><td class="num">50%</td><td class="num">$35,000</td></tr><tr><th scope="row"><span class="yr2">2028</span></th><td class="num">$80,000</td><td class="num">30%</td><td class="num">$24,000</td></tr><tr><th scope="row"><span class="yr2">2028</span> expected cash flow</th><td class="num"></td><td class="num"></td><td class="num"><strong>$69,000</strong></td></tr></tbody></table></div>
+      <div class="table-wrap"><table class="mini-table"><caption>Present value of the expected cash flows (5%)</caption><thead><tr><th scope="col">Year</th><th scope="col">Calculation</th><th scope="col" class="num">Present value</th></tr></thead><tbody><tr><th scope="row"><span class="yr1">2027</span></th><td>$41,000 &times; 0.95238 (PV of $1, n = 1, i = 5%)</td><td class="num">$39,048</td></tr><tr><th scope="row"><span class="yr2">2028</span></th><td>$69,000 &times; 0.90703 (PV of $1, n = 2, i = 5%)</td><td class="num">$62,585</td></tr><tr class="total-row"><th scope="row">Estimated liability</th><td></td><td class="num">$101,633</td></tr></tbody></table></div>
+      <div class="date-tag">December 31, <span class="yr0">2026</span> (adjusting entry)</div>
+      <div class="table-wrap"><table class="je-table"><caption class="sr-only">Accrue the warranty cost at present value</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Warranty expense</td><td class="je-debit-amt">101,633</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Warranty liability (calculated above)</td><td class="je-debit-amt"></td><td class="je-credit-amt">101,633</td></tr></tbody></table></div>
+    </div>
+    <h3>Extended warranty contracts</h3>
+    <p>An <strong>extended warranty</strong> provides protection beyond the manufacturer's original warranty. Because it is priced and sold separately from the product, it is a <strong>separate performance obligation</strong>. The accounting question isn't just how to recognize a contingent liability but <em>when to recognize the revenue</em>. Cash is received up front, but coverage extends over time, so the revenue is recorded as <strong>deferred revenue</strong> at the time of sale and recognized over the contract period, typically on a straight-line basis. The costs of satisfying claims are recorded in those same years.</p>
+    <div class="example">
+      <div class="ex-label">Example</div>
+      <p><strong>Mountain Home Appliances</strong> sells appliances with a one-year manufacturer's warranty. At the time of purchase, customers can also buy a three-year extended warranty. On January 3, <span class="yr0">2026</span>, the company sold a $120 extended warranty covering <span class="yr1">2027</span>, <span class="yr2">2028</span>, and <span class="yr3">2029</span>.</p>
+      <div class="date-tag">January 3, <span class="yr0">2026</span></div>
+      <div class="table-wrap"><table class="je-table"><caption class="sr-only">Sale of the extended warranty</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Cash (or accounts receivable)</td><td class="je-debit-amt">120</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Deferred revenue&mdash;extended warranties</td><td class="je-debit-amt"></td><td class="je-credit-amt">120</td></tr></tbody></table></div>
+      <div class="date-tag">December 31, <span class="yr1">2027</span>, <span class="yr2">2028</span>, <span class="yr3">2029</span> (adjusting entries)</div>
+      <div class="table-wrap"><table class="je-table"><caption class="sr-only">Recognize one year of coverage</caption><thead><tr><th scope="col"><span class="sr-only">Account</span></th><th scope="col"><span class="sr-only">Debit</span></th><th scope="col"><span class="sr-only">Credit</span></th></tr></thead><tbody><tr><td>Deferred revenue&mdash;extended warranties</td><td class="je-debit-amt">40</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Revenue&mdash;extended warranties ($120 &divide; 3)</td><td class="je-debit-amt"></td><td class="je-credit-amt">40</td></tr></tbody></table></div>
+    </div>
+    <h3>Rebates, premiums, and coupons</h3>
+    <p>Promotions that obligate a company to do something in the future used to be viewed as contingent liabilities. With the revenue recognition standards, most are now part of the agreement between the seller and customer and are accounted for through revenue recognition:</p>
+    <div class="table-wrap"><table class="mini-table"><caption>Accounting for promotions</caption><thead><tr><th scope="col">Promotion</th><th scope="col">How it's accounted for</th></tr></thead><tbody><tr><th scope="row">Cash rebates</th><td>An obligation to return cash is a reduction in the net amount paid by the customer. Estimate the rebates customers will take and <strong>reduce revenue</strong> by that estimate in the period revenue is recognized. Also recognize a <strong>liability</strong> for the estimated rebates, similar to a refundable deposit.</td></tr><tr><th scope="row">Premiums (noncash items such as toys or small appliances)</th><td>A <strong>separate performance obligation</strong>. Allocate a portion of the original sales price to the premium (based on relative stand-alone selling prices), record it as deferred revenue, and recognize it as revenue when the premiums are delivered. No contingent liability is recognized.</td></tr><tr><th scope="row">Coupons that aren't part of a sales contract</th><td>No revenue recognition is involved. Issuing coupons creates a <strong>contingent liability</strong> recognized in the period the coupons are issued. In practice firms either recognize the whole estimated redemption expense when the coupons are issued, or record the expense only when coupons are redeemed. The difference usually isn't material.</td></tr></tbody></table></div>
+  </div>
+
+  <div class="lo-block">
+    <h2>Litigation Claims</h2>
+    <p>Pending litigation is common; most medium and large corporations report multiple loss contingencies from litigation every year. But <strong>accrual of a loss from pending litigation is rare in practice</strong>. If a company's own financial statements say it is probable it will lose, and for how much, those statements become welcome ammunition for the other side's lawyers. And in today's legal environment, the outcome of litigation is highly uncertain, so likelihood predictions are difficult.</p>
+    <p>So while companies may accrue estimated lawyer fees and other legal costs, they usually don't record a loss until the ultimate settlement has been reached or negotiations for settlement are substantially completed. They <em>should</em> provide extensive disclosure, including a description of the range of reasonably possible losses, but practice has been uneven, and the SEC has pushed firms for more complete disclosure.</p>
+    <ul>
+      <li>Even after a <strong>judgment</strong> has been issued against it, a firm may not accrue if it is appealing and doesn't consider a significant loss probable. The matter is disclosed instead.</li>
+      <li>For a loss to be accrued, the <strong>cause</strong> of the lawsuit must have occurred before the accounting period ended. It isn't necessary that the lawsuit actually was filed during that reporting period.</li>
+    </ul>
+  </div>
+
+  <div class="lo-block">
+    <h2>Subsequent Events</h2>
+    <p>Several weeks usually pass between the end of a company's fiscal year and the date the financial statements are issued (or, for entities that don't widely distribute their statements, <em>available to be issued</em>). Events during that period can help clarify the nature of financial statement elements at the report date.</p>
+    <div class="table-wrap"><table class="mini-table"><caption>When the cause of the contingency occurs</caption><thead><tr><th scope="col">Cause of the contingency</th><th scope="col">Timing of the new information</th><th scope="col">Treatment</th></tr></thead><tbody><tr><th scope="row"><strong>Before</strong> the fiscal year-end</th><td>Between year-end and the issuance of the financial statements</td><td>The clarifying information <strong>is used</strong> to decide whether to accrue and how much. For example, a lawsuit settled after year-end can lead to an accrual of the settlement amount at year-end.</td></tr><tr><th scope="row"><strong>After</strong> the fiscal year-end</th><td>Before the financial statements are issued</td><td>A liability <strong>cannot be accrued</strong>, because it didn't exist at year-end. But if failing to disclose it would make the statements misleading, a <strong>disclosure note</strong> describes it and its effect on key numbers.</td></tr></tbody></table></div>
+    <p>Any event occurring after year-end but before issuance that has a <strong>material effect on the company's financial position</strong> must be disclosed in a <strong>subsequent events note</strong>. Examples are an issuance of debt or equity securities, a business combination, and discontinued operations. Companies must also disclose the date through which subsequent events were evaluated.</p>
+    <p>Contingent liabilities a company assumes when it <em>acquires</em> another company may be treated differently. If the acquirer can determine the acquisition-date fair value of the contingent liability (a warranty obligation, for example), it is measured at fair value. If not, the usual criteria apply (probable and reasonably estimable).</p>
+  </div>
+
+  <div class="lo-block">
+    <h2>Unasserted Claims and Assessments</h2>
+    <p>Sometimes a company is aware of a potential claim that <em>hasn't been made yet</em>. Whether to accrue or disclose it follows a <strong>two-step process</strong>:</p>
+    <ol>
+      <li><strong>Is it probable that a claim will be asserted?</strong> If not, stop: no accrual or disclosure is necessary. If so, go to step 2.</li>
+      <li><strong>Treat the claim as if it has been asserted.</strong> Evaluate (a) the likelihood of an unfavorable outcome and (b) whether the dollar amount can be estimated, just as for any other loss contingency.</li>
+    </ol>
+    <div class="example">
+      <div class="ex-label">Example</div>
+      <p>A trucking company that frequently transports hazardous waste is subject to environmental regulations. Management has identified several sites where it is or may be liable for remediation. For sites where no penalty has been asserted, management must assess the likelihood a claim will be made and then the likelihood the company would be held liable.</p>
+      <div class="table-wrap"><table class="mini-table"><caption>Treatment of an unasserted assessment (step 1 is already "probable")</caption><thead><tr><th scope="col">Unfavorable outcome</th><th scope="col">Amount</th><th scope="col">Treatment</th></tr></thead><tbody><tr><th scope="row">Probable</th><td>Reasonably estimable</td><td>Accrue the loss and liability</td></tr><tr><th scope="row">Probable</th><td>Cannot be reasonably estimated</td><td>Disclosure note only</td></tr><tr><th scope="row">Reasonably possible</th><td>Any</td><td>Disclosure note only</td></tr><tr><th scope="row">Remote</th><td>Any</td><td>No action needed</td></tr></tbody></table></div>
+      <p>And if step 1's answer is "no" (it isn't probable that a claim will be asserted), no disclosure is required even if an unfavorable outcome would be probable <em>if</em> an assessment were made.</p>
+    </div>
+  </div>
+
+  <div class="lo-block">
+    <h2>Gain Contingencies</h2>
+    <p>A <strong>gain contingency</strong> is an uncertain situation that might result in a gain. In a pending lawsuit, the defendant faces a loss contingency, but the plaintiff has a gain contingency. Loss contingencies are accrued when probable and reasonably estimable, but <strong>gain contingencies are not accrued</strong>. That nonparallel treatment is conservatism: it's desirable to anticipate losses, but recognizing gains should await their realization.</p>
+    <p>Material gain contingencies are <em>disclosed</em> in the notes, with care that the note doesn't give "misleading implications as to the likelihood of realization."</p>
+  </div>
+
+  <div class="lo-block">
+    <h2>GAAP vs. IFRS</h2>
+    <p>Accounting for contingencies under IFRS is part of a broader standard on provisions, contingent liabilities, and contingent assets. It is quite similar to U.S. GAAP: a contingent loss is accrued if it's both probable and can be reasonably estimated. But there are important differences.</p>
+    <div class="ifrs"><div class="ifrs-label">Terminology</div><p>IFRS calls accrued liabilities <strong>provisions</strong>, and calls possible obligations that are <em>not</em> accrued <strong>contingent liabilities</strong>. U.S. GAAP uses &ldquo;contingent liabilities&rdquo; for all of these obligations.</p></div>
+    <div class="ifrs"><div class="ifrs-label">Definition of &ldquo;Probable&rdquo;</div><p>IFRS defines probable as &ldquo;<strong>more likely than not</strong>&rdquo; (greater than 50%), a lower threshold than the one typically associated with &ldquo;probable&rdquo; in U.S. GAAP. So a loss with, say, a 55% chance may be accrued under IFRS but not under U.S. GAAP.</p></div>
+    <div class="ifrs"><div class="ifrs-label">Measuring a Range of Equally Likely Outcomes</div><p>If a liability is accrued, IFRS measures it at the best estimate of the expenditure required to settle the obligation. With a range of equally likely outcomes, IFRS uses the <strong>midpoint</strong>; U.S. GAAP uses the <strong>low end</strong> of the range.</p></div>
+    <div class="ifrs"><div class="ifrs-label">Present Values</div><p>If the time value of money is material, IFRS requires the liability to be stated at <strong>present value</strong>. U.S. GAAP permits present values in some circumstances, but liabilities for loss contingencies such as litigation are typically not discounted.</p></div>
+    <div class="ifrs"><div class="ifrs-label">Onerous Contracts</div><p>IFRS recognizes provisions for &ldquo;onerous&rdquo; contracts, in which the unavoidable costs of meeting the obligations exceed the expected benefits. U.S. GAAP generally doesn't recognize or disclose losses on money-losing contracts, with some exceptions (for example, losses on long-term construction contracts and on terminated contracts).</p></div>
+    <div class="ifrs"><div class="ifrs-label">Disclosure</div><p>IFRS requires disclosure (but not accrual) of two types of contingent liabilities: possible obligations whose existence depends on uncertain future events the company doesn't control, and present obligations for which an outflow isn't probable or the amount can't be measured reliably. U.S. GAAP doesn't make this distinction but typically requires disclosure of the same contingencies.</p></div>
+    <div class="ifrs"><div class="ifrs-label">Gain Contingencies</div><p>Under U.S. GAAP, gain contingencies are never accrued. Under IFRS, they are accrued if their future realization is <strong>virtually certain</strong>. Both disclose contingent gains when realization is probable, but &ldquo;probable&rdquo; has the lower IFRS threshold.</p></div>
+  </div>
+
+  <div class="lo-block">
+    <h2>Side by Side: What to Do with Each Situation</h2>
+    <div class="table-wrap"><table class="mini-table"><caption>Quick reference</caption><thead><tr><th scope="col">Situation</th><th scope="col">Accrue a liability?</th><th scope="col">Disclose in notes?</th></tr></thead><tbody><tr><th scope="row">Probable loss, amount known or reasonably estimable</th><td>Yes</td><td>Yes</td></tr><tr><th scope="row">Probable loss, amount not reasonably estimable</th><td>No</td><td>Yes</td></tr><tr><th scope="row">Reasonably possible loss</th><td>No</td><td>Yes</td></tr><tr><th scope="row">Remote loss</th><td>No</td><td>Generally no</td></tr><tr><th scope="row">Product warranty (quality-assurance)</th><td>Yes, in the period of sale (almost always meets the criteria)</td><td>Yes</td></tr><tr><th scope="row">Extended warranty sold separately</th><td>No contingent liability; record deferred revenue and recognize over the coverage period</td><td>As appropriate</td></tr><tr><th scope="row">Lawsuit settled after year-end for a cause that existed at year-end</th><td>Yes (clarifying event)</td><td>Yes</td></tr><tr><th scope="row">Event creating the contingency occurs after year-end</th><td>No</td><td>Yes, if the statements would otherwise be misleading</td></tr><tr><th scope="row">Unasserted claim: assertion not probable</th><td>No</td><td>No</td></tr><tr><th scope="row">Unasserted claim: assertion probable, then treat as asserted</th><td>Per the usual criteria</td><td>Per the usual criteria</td></tr><tr><th scope="row">Gain contingency</th><td>Never (U.S. GAAP)</td><td>Yes, carefully worded</td></tr></tbody></table></div>
+    <div class="key-idea">Two questions drive every contingency: <strong>how likely</strong> is the confirming event, and <strong>how well can the amount be measured</strong>? And one timing check comes first: did the event that gave rise to the contingency happen <strong>on or before</strong> the balance sheet date?</div>
+  </div>
+
+
+</main>
+
+<footer>ACCT 352 · Loss Contingencies — Reading Notes</footer>
+<script>
+  // Keeps the dates current automatically, with no recoding needed each year.
+  // yr0 is always the current calendar year; yr1, yr2, ... follow.
+  (function () {
+    var y = new Date().getFullYear();
+    for (var k = 0; k <= 5; k++) {
+      var els = document.querySelectorAll('.yr' + k);
+      for (var i = 0; i < els.length; i++) { els[i].textContent = y + k; }
+    }
+  })();
+
+  // Wide tables and formulas scroll sideways on small screens. Make those regions
+  // reachable by keyboard (and named for screen readers) only when they actually scroll.
+  (function () {
+    function mark() {
+      var regions = document.querySelectorAll('.table-wrap, .formula');
+      for (var i = 0; i < regions.length; i++) {
+        var w = regions[i];
+        if (w.scrollWidth > w.clientWidth + 1) {
+          var cap = w.querySelector('caption');
+          w.setAttribute('tabindex', '0');
+          w.setAttribute('role', 'region');
+          w.setAttribute('aria-label', (cap ? cap.textContent : 'Formula') + ' (scrolls sideways)');
+        } else {
+          w.removeAttribute('tabindex'); w.removeAttribute('role'); w.removeAttribute('aria-label');
+        }
+      }
+    }
+    window.addEventListener('load', mark);
+    window.addEventListener('resize', mark);
+  })();
+</script>
+</body>
+</html>
