@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Current Liabilities Practice Quiz</title>
+  <style>
+    :root {
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --text-color: #0f172a;
+      --text-muted: #334155;
+      --border-color: #cbd5e1;
+      --primary: #1d4ed8;
+      --primary-hover: #1e40af;
+      --correct-bg: #f0fdf4;
+      --correct-border: #16a34a;
+      --correct-text: #14532d;
+      --incorrect-bg: #fef2f2;
+      --incorrect-border: #dc2626;
+      --incorrect-text: #7f1d1d;
+      --focus-ring: #2563eb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 1.5rem;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    header {
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 1.875rem;
+      color: var(--text-color);
+    }
+
+    .instructions {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    fieldset {
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 1.25rem;
+      margin-bottom: 1.75rem;
+      background: #ffffff;
+    }
+
+    legend {
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 0 0.5rem;
+      color: var(--text-color);
+    }
+
+    .option-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+    }
+
+    .option-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      background-color: #ffffff;
+    }
+
+    .option-label:hover {
+      background-color: #f1f5f9;
+    }
+
+    input[type="radio"] {
+      margin-top: 0.25rem;
+      width: 1.15rem;
+      height: 1.15rem;
+      accent-color: var(--primary);
+    }
+
+    input[type="radio"]:focus-visible,
+    button:focus-visible {
+      outline: 3px solid var(--focus-ring);
+      outline-offset: 3px;
+    }
+
+    .feedback {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      display: none;
+    }
+
+    .feedback.correct {
+      display: block;
+      background-color: var(--correct-bg);
+      border-left: 5px solid var(--correct-border);
+      color: var(--correct-text);
+    }
+
+    .feedback.incorrect {
+      display: block;
+      background-color: var(--incorrect-bg);
+      border-left: 5px solid var(--incorrect-border);
+      color: var(--incorrect-text);
+    }
+
+    .feedback-badge {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 0.25rem;
+      font-size: 1.05rem;
+    }
+
+    .actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    button {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      border: none;
+      transition: background-color 0.15s ease-in-out;
+    }
+
+    .btn-submit {
+      background-color: var(--primary);
+      color: #ffffff;
+    }
+
+    .btn-submit:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn-reset {
+      background-color: #e2e8f0;
+      color: var(--text-color);
+    }
+
+    .btn-reset:hover {
+      background-color: #cbd5e1;
+    }
+
+    #results-summary {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      display: none;
+    }
+
+    #results-summary.visible {
+      display: block;
+      background-color: #e0f2fe;
+      border: 1px solid #7dd3fc;
+      color: #0369a1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Current Liabilities Practice Quiz</h1>
+      <p class="instructions">Test your understanding of current liabilities accounting. Select an answer for each question and select <strong>Submit Quiz</strong> to evaluate your responses.</p>
+    </header>
+
+    <main>
+      <form id="quiz-form" novalidate>
+        <!-- Question 1 -->
+        <fieldset id="fs-q1">
+          <legend>Question 1: What are the three essential characteristics of a liability from a financial reporting perspective?</legend>
+          <div class="option-group">
+            <label class="option-label" for="q1-opt1">
+              <input type="radio" id="q1-opt1" name="q1" value="A" required>
+              <span>A) It must obligate the debtor to pay cash under a legally enforceable written contract.</span>
+            </label>
+            <label class="option-label" for="q1-opt2">
+              <input type="radio" id="q1-opt2" name="q1" value="B">
+              <span>B) It is a probable future sacrifice of economic benefits, arises from a present obligation, and results from past transactions or events.</span>
+            </label>
+            <label class="option-label" for="q1-opt3">
+              <input type="radio" id="q1-opt3" name="q1" value="C">
+              <span>C) The exact payment amount and due date must be known with complete certainty at year-end.</span>
+            </label>
+            <label class="option-label" for="q1-opt4">
+              <input type="radio" id="q1-opt4" name="q1" value="D">
+              <span>D) It must be backed by a specific pledged asset and satisfied strictly within 30 days.</span>
+            </label>
+          </div>
+          <div id="q1-feedback" class="feedback" role="region" aria-live="polite"></div>
+        </fieldset>
+
+        <!-- Question 2 -->
+        <fieldset id="fs-q2">
+          <legend>Question 2: Why is the effective annual interest rate on a noninterest-bearing note discounted at issuance always higher than the stated discount rate?</legend>
+          <div class="option-group">
+            <label class="option-label" for="q2-opt1">
+              <input type="radio" id="q2-opt1" name="q2" value="A" required>
+              <span>A) Because interest is deducted upfront from the face amount, leaving the borrower with lower cash proceeds while still repaying the full face amount at maturity.</span>
+            </label>
+            <label class="option-label" for="q2-opt2">
+              <input type="radio" id="q2-opt2" name="q2" value="B">
+              <span>B) Because noninterest-bearing notes are legally required to carry compound penalty interest.</span>
+            </label>
+            <label class="option-label" for="q2-opt3">
+              <input type="radio" id="q2-opt3" name="q2" value="C">
+              <span>C) Because the net method requires adding an arbitrary premium over time.</span>
+            </label>
+            <label class="option-label" for="q2-opt4">
+              <input type="radio" id="q2-opt4" name="q2" value="D">
+              <span>D) Because the bank requires a committed line of credit fee that doubles the nominal discount rate.</span>
+            </label>
+          </div>
+          <div id="q2-feedback" class="feedback" role="region" aria-live="polite"></div>
+        </fieldset>
+
+        <!-- Question 3 -->
+        <fieldset id="fs-q3">
+          <legend>Question 3: Under U.S. GAAP, when can a short-term obligation maturing in the coming year be classified as a noncurrent liability?</legend>
+          <div class="option-group">
+            <label class="option-label" for="q3-opt1">
+              <input type="radio" id="q3-opt1" name="q3" value="A" required>
+              <span>A) Only if actual refinancing is completed on or before the balance sheet date.</span>
+            </label>
+            <label class="option-label" for="q3-opt2">
+              <input type="radio" id="q3-opt2" name="q3" value="B">
+              <span>B) Whenever management intends to refinance, even if no financing agreement is negotiated.</span>
+            </label>
+            <label class="option-label" for="q3-opt3">
+              <input type="radio" id="q3-opt3" name="q3" value="C">
+              <span>C) If management intends to refinance on a long-term basis and demonstrates the ability to do so before financial statements are issued.</span>
+            </label>
+            <label class="option-label" for="q3-opt4">
+              <input type="radio" id="q3-opt4" name="q3" value="D">
+              <span>D) If the creditor agrees to an informal 30-day grace period after the audit report date.</span>
+            </label>
+          </div>
+          <div id="q3-feedback" class="feedback" role="region" aria-live="polite"></div>
+        </fieldset>
+
+        <!-- Question 4 -->
+        <fieldset id="fs-q4">
+          <legend>Question 4: Which of the following is REQUIRED for an employer to accrue an expense and liability for compensated future absences (e.g., vacation pay)?</legend>
+          <div class="option-group">
+            <label class="option-label" for="q4-opt1">
+              <input type="radio" id="q4-opt1" name="q4" value="A" required>
+              <span>A) The absence must specifically pertain to employee sick leave rather than vacation.</span>
+            </label>
+            <label class="option-label" for="q4-opt2">
+              <input type="radio" id="q4-opt2" name="q4" value="B">
+              <span>B) All four criteria must be met: services already performed, benefit vests or accumulates, payment is probable, and amount is reasonably estimable.</span>
+            </label>
+            <label class="option-label" for="q4-opt3">
+              <input type="radio" id="q4-opt3" name="q4" value="C">
+              <span>C) The future absence benefit must not vest upon employee termination.</span>
+            </label>
+            <label class="option-label" for="q4-opt4">
+              <input type="radio" id="q4-opt4" name="q4" value="D">
+              <span>D) The accrual must be calculated using estimated wage rates projected five years into the future.</span>
+            </label>
+          </div>
+          <div id="q4-feedback" class="feedback" role="region" aria-live="polite"></div>
+        </fieldset>
+
+        <!-- Question 5 -->
+        <fieldset id="fs-q5">
+          <legend>Question 5: How are gift card sales initially recorded, and how are expired unredeemed cards handled under a 100% escheatment law?</legend>
+          <div class="option-group">
+            <label class="option-label" for="q5-opt1">
+              <input type="radio" id="q5-opt1" name="q5" value="A" required>
+              <span>A) Recorded as Sales Revenue; upon expiration, Cash is debited and Revenue is credited.</span>
+            </label>
+            <label class="option-label" for="q5-opt2">
+              <input type="radio" id="q5-opt2" name="q5" value="B">
+              <span>B) Recorded as Accounts Payable; upon expiration, an adjusting entry debits Expense and credits Cash.</span>
+            </label>
+            <label class="option-label" for="q5-opt3">
+              <input type="radio" id="q5-opt3" name="q5" value="C">
+              <span>C) Recorded as Deferred Revenue; upon expiration, Deferred Revenue is debited and Cash is credited to remit funds to the state.</span>
+            </label>
+            <label class="option-label" for="q5-opt4">
+              <input type="radio" id="q5-opt4" name="q5" value="D">
+              <span>D) Recorded as Contingent Gains; upon expiration, recognized as Gift Card Breakage Revenue.</span>
+            </label>
+          </div>
+          <div id="q5-feedback" class="feedback" role="region" aria-live="polite"></div>
+        </fieldset>
+
+        <div class="actions">
+          <button type="submit" class="btn-submit">Submit Quiz</button>
+          <button type="button" id="btn-reset" class="btn-reset">Reset Quiz</button>
+        </div>
+      </form>
+
+      <div id="results-summary" role="status" aria-live="polite"></div>
+    </main>
+  </div>
+
+  <script>
+    const answerKey = {
+      q1: {
+        correct: "B",
+        explanation: "A liability represents a present obligation to sacrifice economic benefits in the future resulting from past transactions or events. It does not require a written agreement, precise cash amount, or certainty of timing."
+      },
+      q2: {
+        correct: "A",
+        explanation: "In a discounted noninterest-bearing note, interest is deducted from the face value at issuance to determine cash proceeds. Because the borrower receives less than the face amount while repaying the full face amount at maturity, the effective interest rate exceeds the discount rate."
+      },
+      q3: {
+        correct: "C",
+        explanation: "Under U.S. GAAP, short-term obligations expected to be refinanced long-term are reported as noncurrent only if the entity intends to refinance and demonstrates the ability to do so (via actual refinancing or an agreement) before financial statements are issued. Under IFRS, refinancing must occur before the balance sheet date."
+      },
+      q4: {
+        correct: "B",
+        explanation: "Accrual of compensated future absences requires meeting all four conditions: services already performed, rights vest or accumulate, payment is probable, and the amount can be reasonably estimated. Sick pay accrual is not mandatory unless custom pays it even when employees are not ill."
+      },
+      q5: {
+        correct: "C",
+        explanation: "Gift card sales are initially recorded as deferred revenue. When unused cards expire under escheatment laws requiring remittance to the state, the deferred revenue is removed and Cash is credited rather than recognizing breakage revenue."
+      }
+    };
+
+    const form = document.getElementById('quiz-form');
+    const summary = document.getElementById('results-summary');
+    const resetBtn = document.getElementById('btn-reset');
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      let score = 0;
+      const total = Object.keys(answerKey).length;
+      let allAnswered = true;
+
+      for (const [qId, data] of Object.entries(answerKey)) {
+        const selected = form.elements[qId].value;
+        const feedbackEl = document.getElementById(qId + '-feedback');
+
+        if (!selected) {
+          allAnswered = false;
+        }
+
+        if (selected === data.correct) {
+          score++;
+          feedbackEl.className = 'feedback correct';
+          feedbackEl.innerHTML = '<span class="feedback-badge">✓ Correct</span>' + data.explanation;
+        } else if (selected) {
+          feedbackEl.className = 'feedback incorrect';
+          feedbackEl.innerHTML = '<span class="feedback-badge">✗ Incorrect</span><strong>Correct Answer: Option ' + data.correct + '.</strong> ' + data.explanation;
+        } else {
+          feedbackEl.className = 'feedback incorrect';
+          feedbackEl.innerHTML = '<span class="feedback-badge">✗ Unanswered</span><strong>Correct Answer: Option ' + data.correct + '.</strong> ' + data.explanation;
+        }
+      }
+
+      summary.className = 'visible';
+      summary.textContent = 'Quiz Results: You scored ' + score + ' out of ' + total + ' (' + Math.round((score / total) * 100) + '%). Feedback is displayed below each question.';
+      summary.focus();
+    });
+
+    resetBtn.addEventListener('click', function () {
+      form.reset();
+      summary.className = '';
+      summary.textContent = '';
+      for (const qId of Object.keys(answerKey)) {
+        const feedbackEl = document.getElementById(qId + '-feedback');
+        feedbackEl.className = 'feedback';
+        feedbackEl.innerHTML = '';
+      }
+    });
+  </script>
+</body>
+</html>
