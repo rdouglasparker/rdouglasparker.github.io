@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loss Contingencies & Liabilities Practice Quiz</title>
+  <style>
+    :root {
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --text-color: #0f172a;
+      --text-muted: #334155;
+      --border-color: #cbd5e1;
+      --primary: #1d4ed8;
+      --primary-hover: #1e40af;
+      --correct-bg: #f0fdf4;
+      --correct-border: #16a34a;
+      --correct-text: #14532d;
+      --incorrect-bg: #fef2f2;
+      --incorrect-border: #dc2626;
+      --incorrect-text: #7f1d1d;
+      --focus-ring: #2563eb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 1.5rem;
+    }
+
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    header {
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 1.875rem;
+      color: var(--text-color);
+    }
+
+    .instructions {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    fieldset {
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 1.25rem;
+      margin-bottom: 1.75rem;
+      background: #ffffff;
+    }
+
+    legend {
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 0 0.5rem;
+      color: var(--text-color);
+      line-height: 1.4;
+    }
+
+    .option-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+    }
+
+    .option-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      background-color: #ffffff;
+    }
+
+    .option-label:hover {
+      background-color: #f1f5f9;
+    }
+
+    input[type="radio"] {
+      margin-top: 0.25rem;
+      width: 1.15rem;
+      height: 1.15rem;
+      accent-color: var(--primary);
+    }
+
+    input[type="radio"]:focus-visible,
+    button:focus-visible {
+      outline: 3px solid var(--focus-ring);
+      outline-offset: 3px;
+    }
+
+    .feedback {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      display: none;
+    }
+
+    .feedback.correct {
+      display: block;
+      background-color: var(--correct-bg);
+      border-left: 5px solid var(--correct-border);
+      color: var(--correct-text);
+    }
+
+    .feedback.incorrect {
+      display: block;
+      background-color: var(--incorrect-bg);
+      border-left: 5px solid var(--incorrect-border);
+      color: var(--incorrect-text);
+    }
+
+    .feedback-badge {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 0.25rem;
+      font-size: 1.05rem;
+    }
+
+    .actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    button {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      border: none;
+      transition: background-color 0.15s ease-in-out;
+    }
+
+    .btn-submit {
+      background-color: var(--primary);
+      color: #ffffff;
+    }
+
+    .btn-submit:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn-reset {
+      background-color: #e2e8f0;
+      color: var(--text-color);
+    }
+
+    .btn-reset:hover {
+      background-color: #cbd5e1;
+    }
+
+    #results-summary {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      display: none;
+    }
+
+    #results-summary.visible {
+      display: block;
+      background-color: #e0f2fe;
+      border: 1px solid #7dd3fc;
+      color: #0369a1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Loss Contingencies &amp; Liabilities Practice Quiz</h1>
+      <p class="instructions">This quiz contains 10 questions testing your knowledge of loss contingencies, warranties, subsequent events, and related standards. Select an answer for each question and select <strong>Submit Quiz</strong> to review your score and detailed explanations.</p>
+    </header>
+
+    <main>
+      <form id="quiz-form" novalidate>
+        <!-- Question 1 -->
+        <fieldset id="fs-q1">
+          <legend>Question 1: Under U.S. GAAP, when must a loss contingency be accrued as a liability on the balance sheet?</legend>
+          <div class="option-group">
+            <label class="option-label" for="q1-opt1">
+              <input type="radio" id="q1-opt1" name="q1" value="A" required>
+              <span>A) Whenever an unfavorable outcome is remote but the dollar amount is known with absolute certainty.</span>
+            </label>
+            <label class="option-label" for="q1-opt2">
+              <input type="radio" id="q1-opt2" name="q1" value="B">
+              <span>B) When it is both probable that the confirming event will occur and the amount of loss can be at least reasonably estimated.</span>
+            </label>
+            <label class="option-label" for="q1-opt3">
+              <input type="radio" id="q1-opt3" name="q1" value="C">
+              <span>C) Only after a formal legal verdict or court judgment has been rendered against the entity.</span>
+            </label>
+            <label class="option-label" for="q1-opt4">
+              <input type="radio" id="q1-opt4" name="q1" value="D">
+              <span>D) Whenever the potential loss is reasonably possible, regardless of whether the dollar amount can be estimated.</span>
+            </label>
+          </div>
+          <div id="q1-feedback" class="feedback" role="region" aria-live="polite"></div>
+        </fieldset>
+
+        <!-- Question 2 -->
+        <fieldset id="fs-q2">
+          <legend>Question 2: If a probable loss falls within a range of estimated amounts and no single amount within the range appears more likely than any other, what amount does U.S. GAAP require to be accrued?</legend>
+          <div class="option-group">
+            <label class="option-label" for="q2-opt1">
+              <input type="radio" id="q2-opt1" name="q2" value="A" required>
+              <span>A) The midpoint of the range.</span>
+            </label>
+            <label class="option-label" for="q2-opt2">
+              <input type="radio" id="q2-opt2" name="q2" value="B">
+              <span>B) The maximum possible loss in the range.</span>
+            </label>
+            <label class="option-label" for="q2-opt3">
+              <input type="radio" id="q2-opt3" name="q2" value="C">
+              <span>C) The minimum amount (low end) of the range, with disclosure of the possible additional loss.</span>
+            </label>
+            <label class="option-label" for="q2-opt4">
+              <input type="radio" id="q2-opt4" name="q2" value="D">
+              <span>D) No amount is accrued; the full range is only disclosed in the footnotes.</span>
+            </label>
+          </div>
+          <div id="q2-feedback" class="feedback" role="region" aria-live="polite"></div>
+        </fieldset>
+
+        <!-- Question 3 -->
+        <fieldset id="fs-q3">
+          <legend>Question 3: How must a quality-assurance warranty included in the contract between seller and customer be accounted for?</legend>
+          <div class="option-group">
+            <label class="option-label" for="q3-opt1">
+              <input type="radio" id="q3-opt1" name="q3" value="A" required>
+              <span>A) Estimated and recorded as an expense and liability in the same period the products are sold.</span>
+            </label>
+            <label class="option-label" for="q3-opt2">
+              <input type="radio" id="q3-opt2" name="q3" value="B">
+              <span>B) Recognized as an expense only when individual customers file warranty claims and repairs occur.</span>
+            </label>
+            <label class="option-label" for="q3-opt3">
+              <input type="radio" id="q3-opt3" name="q3" value="C">
+              <span>C) Recorded as deferred revenue and recognized evenly over the warranty period as a separate performance obligation.</span>
+            </label>
+            <label class="option-label" for="q3-opt4">
+              <input type="radio" id="q3-opt4" name="q3" value="D">
+              <span>D) Disclosed only in footnote notes until warranty expenditures exceed 10% of revenue.</span>
+            </label>
+          </div>
+          <div id="q3-feedback" class="feedback" role="region" aria-live="polite"></div>
+        </fieldset>
+
+        <!-- Question 4 -->
+        <fieldset id="fs-q4">
+          <legend>Question 4: Why is an extended warranty contract accounted for differently from a quality-assurance warranty?</legend>
+          <div class="option-group">
+            <label class="option-label" for="q4-opt1">
+              <input type="radio" id="q4-opt1" name="q4" value="A" required>
+              <span>A) It is priced and sold separately from the product, creating a separate performance obligation where upfront cash is recorded as deferred revenue and recognized over time.</span>
+            </label>
+            <label class="option-label" for="q4-opt2">
+              <input type="radio" id="q4-opt2" name="q4" value="B">
+              <span>B) It can only be issued by third-party insurance underwriters, never the product manufacturer.</span>
+            </label>
+            <label class="option-label" for="q4-opt3">
+              <input type="radio" id="q4-opt3" name="q4" value="C">
+              <span>C) Extended warranties are classified as gain contingencies until the contract duration expires.</span>
+            </label>
+            <label class="option-label" for="q4-opt4">
+              <input type="radio" id="q4-opt4" name="q4" value="D">
+              <span>D) Extended warranties do not allow revenue to be recognized until all possible customer claims have lapsed.</span>
+            </label>
+          </div>
+          <div id="q4-feedback" class="feedback" role="region" aria-live="polite"></div>
+        </fieldset>
+
+        <!-- Question 5 -->
+        <fieldset id="fs-q5">
+          <legend>Question 5: What is the fundamental timing requirement for a loss contingency to be reported as an accrued liability at the balance sheet date?</legend>
+          <div class="option-group">
+            <label class="option-label" for="q5-opt1">
+              <input type="radio" id="q5-opt1" name="q5" value="A" required>
+              <span>A) A formal legal complaint or regulatory notice must have been filed before the year-end date.</span>
+            </label>
+            <label class="option-label" for="q5-opt2">
+              <input type="radio" id="q5-opt2" name="q5" value="B">
+              <span>B) The event giving rise to the potential loss must have occurred on or before the balance sheet date.</span>
+            </label>
+            <label class="option-label" for="q5-opt3">
+              <input type="radio" id="q5-opt3" name="q5" value="C">
+              <span>C) Settlement negotiations must be finalized prior to the end of the reporting period.</span>
+            </label>
+            <label class="option-label" for="q5-opt4">
+              <input type="radio" id="q5-opt4" name="q5" value="D">
+              <span>D) The potential liability must mature within 90 days after the close of the fiscal year.</span>
+            </label>
+          </div>
+          <div id="q5-feedback" class="feedback" role="region" aria-live="polite"></div>
+        </fieldset>
+
+        <!-- Question 6 -->
+        <fieldset id="fs-q6">
+          <legend>Question 6: Why is accrual of a loss from pending litigation relatively rare in corporate practice prior to settlement?</legend>
+          <div class="option-group">
+            <label class="option-label" for="q6-opt1">
+              <input type="radio" id="q6-opt1" name="q6" value="A" required>
+              <span>A) U.S. GAAP prohibits recording litigation liabilities until the U.S. Supreme Court issues a final ruling.</span>
+            </label>
+            <label class="option-label" for="q6-opt2">
+              <input type="radio" id="q6-opt2" name="q6" value="B">
+              <span>B) Legal outcomes are highly uncertain, and public accrual of specific loss estimates provides damaging ammunition to the opposing party's lawyers.</span>
+            </label>
+            <label class="option-label" for="q6-opt3">
+              <input type="radio" id="q6-opt3" name="q6" value="C">
+              <span>C) Litigation expenses cannot be deducted for tax purposes until payment is made.</span>
+            </label>
+            <label class="option-label" for="q6-opt4">
+              <input type="radio" id="q6-opt4" name="q6" value="D">
+              <span>D) Companies are legally mandated to write off legal damages directly against additional paid-in capital.</span>
+            </label>
+          </div>
+          <div id="q6-feedback" class="feedback" role="region" aria-live="polite"></div>
+        </fieldset>
+
+        <!-- Question 7 -->
+        <fieldset id="fs-q7">
+          <legend>Question 7: A lawsuit whose cause occurred before the fiscal year-end is settled for $2 million after year-end but before financial statements are issued. What is the appropriate accounting treatment?</legend>
+          <div class="option-group">
+            <label class="option-label" for="q7-opt1">
+              <input type="radio" id="q7-opt1" name="q7" value="A" required>
+              <span>A) The settlement is used as clarifying information to accrue the $2 million liability on the year-end balance sheet.</span>
+            </label>
+            <label class="option-label" for="q7-opt2">
+              <input type="radio" id="q7-opt2" name="q7" value="B">
+              <span>B) The settlement cannot be accrued at year-end because the settlement agreement occurred after the balance sheet date.</span>
+            </label>
+            <label class="option-label" for="q7-opt3">
+              <input type="radio" id="q7-opt3" name="q7" value="C">
+              <span>C) The payment is recorded as an extraordinary loss in the year following the settlement.</span>
+            </label>
+            <label class="option-label" for="q7-opt4">
+              <input type="radio" id="q7-opt4" name="q7" value="D">
+              <span>D) Only a footnote disclosure is allowed; no balance sheet entry can ever reflect events after year-end.</span>
+            </label>
+          </div>
+          <div id="q7-feedback" class="feedback" role="region" aria-live="polite"></div>
+        </fieldset>
+
+        <!-- Question 8 -->
+        <fieldset id="fs-q8">
+          <legend>Question 8: Under the two-step process for unasserted claims and assessments, what action is required if management concludes it is NOT probable that a claim will be asserted?</legend>
+          <div class="option-group">
+            <label class="option-label" for="q8-opt1">
+              <input type="radio" id="q8-opt1" name="q8" value="A" required>
+              <span>A) Accrue the minimum amount of potential loss as a precautionary liability.</span>
+            </label>
+            <label class="option-label" for="q8-opt2">
+              <input type="radio" id="q8-opt2" name="q8" value="B">
+              <span>B) No accrual and no footnote disclosure is required, even if an unfavorable outcome would be probable if asserted.</span>
+            </label>
+            <label class="option-label" for="q8-opt3">
+              <input type="radio" id="q8-opt3" name="q8" value="C">
+              <span>C) Disclose the full potential remediation cost in a contingency note without dollar amounts.</span>
+            </label>
+            <label class="option-label" for="q8-opt4">
+              <input type="radio" id="q8-opt4" name="q8" value="D">
+              <span>D) Obtain a binding waiver letter from state or federal regulatory agencies before filing.</span>
+            </label>
+          </div>
+          <div id="q8-feedback" class="feedback" role="region" aria-live="polite"></div>
+        </fieldset>
+
+        <!-- Question 9 -->
+        <fieldset id="fs-q9">
+          <legend>Question 9: How does U.S. GAAP treat material gain contingencies compared to loss contingencies?</legend>
+          <div class="option-group">
+            <label class="option-label" for="q9-opt1">
+              <input type="radio" id="q9-opt1" name="q9" value="A" required>
+              <span>A) Gain contingencies are accrued whenever realization is probable and reasonably estimable, matching loss contingency rules.</span>
+            </label>
+            <label class="option-label" for="q9-opt2">
+              <input type="radio" id="q9-opt2" name="q9" value="B">
+              <span>B) Gain contingencies are never accrued under U.S. GAAP due to conservatism, but material gains are disclosed in carefully worded notes.</span>
+            </label>
+            <label class="option-label" for="q9-opt3">
+              <input type="radio" id="q9-opt3" name="q9" value="C">
+              <span>C) Gain contingencies are recorded as deferred credits and recognized straight-line over five years.</span>
+            </label>
+            <label class="option-label" for="q9-opt4">
+              <input type="radio" id="q9-opt4" name="q9" value="D">
+              <span>D) Footnote disclosure of potential gains is prohibited under U.S. GAAP to prevent misleading investors.</span>
+            </label>
+          </div>
+          <div id="q9-feedback" class="feedback" role="region" aria-live="polite"></div>
+        </fieldset>
+
+        <!-- Question 10 -->
+        <fieldset id="fs-q10">
+          <legend>Question 10: Which of the following highlights a major difference between U.S. GAAP and IFRS regarding contingencies?</legend>
+          <div class="option-group">
+            <label class="option-label" for="q10-opt1">
+              <input type="radio" id="q10-opt1" name="q10" value="A" required>
+              <span>A) IFRS defines "probable" as "more likely than not" (&gt;50%) and measures an equally likely range at the midpoint, whereas U.S. GAAP has a higher probability threshold and uses the low end of the range.</span>
+            </label>
+            <label class="option-label" for="q10-opt2">
+              <input type="radio" id="q10-opt2" name="q10" value="B">
+              <span>B) U.S. GAAP uses the midpoint of an equally likely range, whereas IFRS requires recording the maximum possible exposure.</span>
+            </label>
+            <label class="option-label" for="q10-opt3">
+              <input type="radio" id="q10-opt3" name="q10" value="C">
+              <span>C) IFRS never accrues contingent liabilities under any circumstances, recognizing only cash disbursements.</span>
+            </label>
+            <label class="option-label" for="q10-opt4">
+              <input type="radio" id="q10-opt4" name="q10" value="D">
+              <span>D) Gain contingencies can never be accrued under IFRS, even if future realization is virtually certain.</span>
+            </label>
+          </div>
+          <div id="q10-feedback" class="feedback" role="region" aria-live="polite"></div>
+        </fieldset>
+
+        <div class="actions">
+          <button type="submit" class="btn-submit">Submit Quiz</button>
+          <button type="button" id="btn-reset" class="btn-reset">Reset Quiz</button>
+        </div>
+      </form>
+
+      <div id="results-summary" role="status" aria-live="polite"></div>
+    </main>
+  </div>
+
+  <script>
+    const answerKey = {
+      q1: {
+        correct: "B",
+        explanation: "A loss contingency is accrued as a liability only if it is both probable that the confirming event will occur and the amount of loss can be at least reasonably estimated. If only one or neither criterion is met, disclosure in notes is required (unless remote)."
+      },
+      q2: {
+        correct: "C",
+        explanation: "When no amount within a range of estimated probable losses is more likely than any other, U.S. GAAP requires accrual of the minimum amount (low end) of the range, along with disclosure of the possible additional loss."
+      },
+      q3: {
+        correct: "A",
+        explanation: "A quality-assurance warranty is not a separate performance obligation. It is offered to promote sales, so its estimated costs must be accrued as an expense and liability in the same period products are sold to match expenses with revenues."
+      },
+      q4: {
+        correct: "A",
+        explanation: "Extended warranties are sold separately from the product and represent a separate performance obligation. Cash received upfront is recorded as deferred revenue and recognized over the coverage period, usually on a straight-line basis."
+      },
+      q5: {
+        correct: "B",
+        explanation: "For a contingency to exist as a liability on the balance sheet, the underlying event that caused the potential loss must have occurred on or before the balance sheet date. If the cause occurred afterward, no liability existed at year-end."
+      },
+      q6: {
+        correct: "B",
+        explanation: "Predicting litigation outcomes is difficult, and corporate financial statements that publicly accrue an estimated loss amount provide opposing counsel with damaging leverage and ammunition during settlement or trial."
+      },
+      q7: {
+        correct: "A",
+        explanation: "Because the underlying cause of the lawsuit occurred before year-end, the post-year-end settlement before financial statement issuance provides clarifying evidence of conditions existing at the balance sheet date, requiring an accrual at year-end."
+      },
+      q8: {
+        correct: "B",
+        explanation: "Under the two-step evaluation for unasserted claims, Step 1 asks whether it is probable that a claim will be asserted. If the answer is no, stop: no accrual and no footnote disclosure is required, regardless of the potential outcome if asserted."
+      },
+      q9: {
+        correct: "B",
+        explanation: "Under U.S. GAAP conservatism, gain contingencies are never accrued prior to realization. Material gain contingencies are disclosed in the notes, with careful wording to avoid misleading impressions of likelihood."
+      },
+      q10: {
+        correct: "A",
+        explanation: "IFRS defines probable as 'more likely than not' (>50%)—a lower threshold than U.S. GAAP—and measures equally likely ranges at the midpoint. In contrast, U.S. GAAP uses the low end of the range. IFRS also accrues contingent gains if virtually certain."
+      }
+    };
+
+    const form = document.getElementById('quiz-form');
+    const summary = document.getElementById('results-summary');
+    const resetBtn = document.getElementById('btn-reset');
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      let score = 0;
+      const total = Object.keys(answerKey).length;
+      let allAnswered = true;
+
+      for (const [qId, data] of Object.entries(answerKey)) {
+        const selected = form.elements[qId].value;
+        const feedbackEl = document.getElementById(qId + '-feedback');
+
+        if (!selected) {
+          allAnswered = false;
+        }
+
+        if (selected === data.correct) {
+          score++;
+          feedbackEl.className = 'feedback correct';
+          feedbackEl.innerHTML = '<span class="feedback-badge">✓ Correct</span>' + data.explanation;
+        } else if (selected) {
+          feedbackEl.className = 'feedback incorrect';
+          feedbackEl.innerHTML = '<span class="feedback-badge">✗ Incorrect</span><strong>Correct Answer: Option ' + data.correct + '.</strong> ' + data.explanation;
+        } else {
+          feedbackEl.className = 'feedback incorrect';
+          feedbackEl.innerHTML = '<span class="feedback-badge">✗ Unanswered</span><strong>Correct Answer: Option ' + data.correct + '.</strong> ' + data.explanation;
+        }
+      }
+
+      summary.className = 'visible';
+      summary.textContent = 'Quiz Results: You scored ' + score + ' out of ' + total + ' (' + Math.round((score / total) * 100) + '%). See question feedback above.';
+      summary.focus();
+    });
+
+    resetBtn.addEventListener('click', function () {
+      form.reset();
+      summary.className = '';
+      summary.textContent = '';
+      for (const qId of Object.keys(answerKey)) {
+        const feedbackEl = document.getElementById(qId + '-feedback');
+        feedbackEl.className = 'feedback';
+        feedbackEl.innerHTML = '';
+      }
+    });
+  </script>
+</body>
+</html>
