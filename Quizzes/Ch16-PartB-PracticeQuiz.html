@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASC 740 Practice Quiz: Permanent Differences, Tax Rates & Multiple Differences</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #475569; /* Complies with WCAG AA 4.5:1+ contrast */
+      --primary: #1d4ed8;    /* Darker blue: 6.5:1 contrast */
+      --primary-hover: #1e40af;
+      --primary-light: #eff6ff;
+      --border: #cbd5e1;
+      --focus-ring: #0284c7;
+      --success: #15803d;
+      --success-bg: #f0fdf4;
+      --success-border: #86efac;
+      --danger: #b91c1c;
+      --danger-bg: #fef2f2;
+      --danger-border: #fca5a5;
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    /* Skip link for keyboard users */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--primary);
+      color: #ffffff;
+      padding: 8px 16px;
+      z-index: 100;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 0 0 4px 0;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .scoreboard-sticky {
+      position: sticky;
+      top: 1rem;
+      z-index: 10;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.5rem;
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    .score-stats {
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .progress-bar-container {
+      flex: 1;
+      max-width: 260px;
+      margin: 0 1.5rem;
+      height: 14px;
+      background-color: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid #cbd5e1;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background-color: var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    .reset-btn {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .reset-btn:hover {
+      background-color: #f1f5f9;
+    }
+
+    .reset-btn:focus-visible,
+    .submit-btn:focus-visible,
+    input[type="radio"]:focus-visible {
+      outline: 3px solid var(--focus-ring);
+      outline-offset: 2px;
+    }
+
+    .quiz-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    fieldset {
+      border: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    legend {
+      width: 100%;
+      margin-bottom: 1.25rem;
+    }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .q-badge {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+    }
+
+    .topic-tag {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+    }
+
+    .question-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #0f172a;
+      display: block;
+      margin-top: 0.5rem;
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .option-label {
+      display: flex;
+      align-items: flex-start;
+      padding: 0.85rem 1rem;
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      background: #fafafa;
+    }
+
+    .option-label:hover {
+      background: #f1f5f9;
+      border-color: #94a3b8;
+    }
+
+    .option-label:has(input:focus-visible) {
+      outline: 3px solid var(--focus-ring);
+      outline-offset: 2px;
+    }
+
+    .option-label input[type="radio"] {
+      margin-top: 0.25rem;
+      margin-right: 0.75rem;
+      width: 1.1rem;
+      height: 1.1rem;
+    }
+
+    .option-label.correct {
+      background-color: var(--success-bg) !important;
+      border-color: var(--success) !important;
+      color: #14532d;
+      font-weight: 600;
+    }
+
+    .option-label.incorrect {
+      background-color: var(--danger-bg) !important;
+      border-color: var(--danger) !important;
+      color: #7f1d1d;
+    }
+
+    .submit-btn {
+      background-color: var(--primary);
+      color: #ffffff;
+      border: none;
+      padding: 0.65rem 1.4rem;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover:not(:disabled) {
+      background-color: var(--primary-hover);
+    }
+
+    .submit-btn:disabled {
+      background-color: #e2e8f0;
+      color: #64748b;
+      cursor: not-allowed;
+    }
+
+    .feedback-box {
+      margin-top: 1.25rem;
+      padding: 1rem 1.25rem;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      display: none;
+    }
+
+    .feedback-box.show {
+      display: block;
+    }
+
+    .feedback-box.correct {
+      background: var(--success-bg);
+      border: 1.5px solid var(--success-border);
+      color: #14532d;
+    }
+
+    .feedback-box.incorrect {
+      background: var(--danger-bg);
+      border: 1.5px solid var(--danger-border);
+      color: #7f1d1d;
+    }
+
+    .feedback-explanation {
+      margin-top: 0.5rem;
+      color: #1e293b;
+      line-height: 1.55;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <div class="container">
+    <header>
+      <h1>ASC 740 Practice Quiz: Part B</h1>
+      <p class="subtitle">Permanent Differences, Tax Rates, and Multiple Differences</p>
+    </header>
+
+    <main id="main-content">
+      <div class="scoreboard-sticky" aria-label="Quiz status summary">
+        <div class="score-stats" id="scoreDisplay" aria-live="polite">Score: 0 / 10 (0%)</div>
+        <div 
+          class="progress-bar-container" 
+          role="progressbar" 
+          id="progressBarWrapper"
+          aria-label="Quiz completion progress" 
+          aria-valuemin="0" 
+          aria-valuemax="100" 
+          aria-valuenow="0">
+          <div class="progress-bar-fill" id="progressBar"></div>
+        </div>
+        <button type="button" class="reset-btn" onclick="resetQuiz()">Reset Quiz</button>
+      </div>
+
+      <div id="quizContainer"></div>
+    </main>
+
+    <footer>
+      <p>Grounded in FASB ASC 740 (Part B Detailed Notes) &middot; Accessible Educational Resource</p>
+    </footer>
+  </div>
+
+  <script>
+    const quizData = [
+      {
+        id: 1,
+        topic: "Permanent Differences Defined",
+        question: "How does FASB ASC 740 treat a 'permanent difference,' and how does it fundamentally differ from a temporary difference?",
+        options: [
+          "It originates in one period and reverses in subsequent periods, creating future taxable or deductible amounts.",
+          "It arises from an item that under existing tax law will never affect taxable income or taxes payable, resulting in no deferred tax asset or liability.",
+          "It represents a timing discrepancy that is recognized as a deferred tax asset subject to annual valuation allowance testing.",
+          "It is a deferred balance that must be discounted to present value over the life of the related operational asset."
+        ],
+        answer: 1,
+        explanation: "Under ASC 740 and Detailed Notes B, a permanent difference comes from an item that will never be reported on the tax return the way it is on the income statement, or never at all. Because it never reverses, it has no deferred tax consequences (no DTA or DTL)."
+      },
+      {
+        id: 2,
+        topic: "Classifying Tax Differences",
+        question: "Which of the following items represents a permanent difference rather than a temporary difference?",
+        options: [
+          "MACRS tax depreciation exceeding straight-line financial accounting depreciation.",
+          "Estimated warranty expense recognized on the income statement when goods are sold but deducted on the tax return when paid.",
+          "Tax-free interest received from investments in state and municipal government bonds.",
+          "Advance customer rental collections included in taxable income when received but deferred for book reporting."
+        ],
+        answer: 2,
+        explanation: "Interest on municipal bonds is exempt from federal income taxation. It is reported as revenue on the income statement but never appears on the tax return, making it a permanent difference. The other three items are temporary timing differences that reverse over time."
+      },
+      {
+        id: 3,
+        topic: "Accounting Mechanics for Permanent Differences",
+        question: "When a company has permanent differences but no temporary differences, what is the proper procedure to calculate taxes payable and income tax expense?",
+        options: [
+          "Record a deferred tax liability for nondeductible expenses and amortize it over five operating cycles.",
+          "Adjust pretax accounting income to eliminate the permanent differences to determine taxable income; tax expense equals tax payable.",
+          "Multiply pretax accounting income directly by the statutory rate to find tax expense, recording the gap as an equity adjustment.",
+          "Establish a valuation allowance contra-account equal to the statutory tax rate multiplied by tax-free revenues."
+        ],
+        answer: 1,
+        explanation: "Permanent differences are removed when computing taxable income (subtract tax-free revenue, add back nondeductible expense). Because there is nothing to defer, no deferred tax accounts are created, and income tax expense equals income tax payable."
+      },
+      {
+        id: 4,
+        topic: "Effective Tax Rate Impact",
+        question: "How does a nondeductible expense (such as a regulatory violation fine or a nondeductible key-executive life insurance premium) affect a company's effective tax rate?",
+        options: [
+          "It pulls the effective tax rate below the statutory tax rate.",
+          "It pushes the effective tax rate above the statutory tax rate.",
+          "It has zero impact because effective and statutory rates must always match under U.S. GAAP.",
+          "It creates an offsetting deferred tax asset that brings the effective rate back to the statutory rate over time."
+        ],
+        answer: 1,
+        explanation: "The effective tax rate equals income tax expense divided by pretax accounting income. A nondeductible expense increases taxable income and tax expense without increasing pretax accounting income (the denominator), thereby pushing the effective tax rate above the statutory rate."
+      },
+      {
+        id: 5,
+        topic: "Applicable Tax Rate Selection",
+        question: "When measuring deferred tax assets and liabilities under ASC 740-10-30-2, which tax rate must be applied to temporary differences?",
+        options: [
+          "The currently enacted tax rate that is scheduled to apply in the year(s) the temporary difference reverses.",
+          "The anticipated future rate proposed in pending Congressional tax legislation if enactment is probable.",
+          "The historical average tax rate paid by the entity over the past three fiscal years.",
+          "The enacted rate for the current period, ignoring any phased-in future rate changes already signed into law."
+        ],
+        answer: 0,
+        explanation: "ASC 740 requires deferred tax balances to be measured using the currently enacted tax rate scheduled to apply when the difference reverses. Standard setters rejected anticipating proposed tax legislation to favor reliability over relevance."
+      },
+      {
+        id: 6,
+        topic: "U.S. GAAP vs. IFRS (IAS 12)",
+        question: "How does IFRS (IAS 12) differ from U.S. GAAP regarding the tax rates used to measure deferred taxes?",
+        options: [
+          "IFRS allows deferred taxes to be measured using tax rates that are enacted or 'substantively enacted' by the end of the reporting period.",
+          "U.S. GAAP permits substantively enacted rates, whereas IFRS strictly forbids them.",
+          "IFRS requires discounting all deferred taxes using the corporate risk-free borrowing rate.",
+          "U.S. GAAP requires using an average global statutory rate across all multinational subsidiaries."
+        ],
+        answer: 0,
+        explanation: "Under IAS 12 (paragraphs 47–49), IFRS measures deferred taxes using rates that are enacted or substantively enacted by the balance sheet date (such as when an official government announcement has the practical effect of law). U.S. GAAP strictly requires enacted rates."
+      },
+      {
+        id: 7,
+        topic: "Remeasurement on Tax Rate Change",
+        question: "When lawmakers enact a new corporate tax rate that will take effect in a future year, how and when must the company adjust its existing deferred tax balances?",
+        options: [
+          "Spread the adjustment ratably over the remaining reversal years as an adjustment to revenues.",
+          "Delay any adjustments until the year the new tax rate officially goes into effect on the tax return.",
+          "Remeasure all existing deferred tax assets and liabilities immediately, recognizing the entire effect in income tax expense from continuing operations in the period of enactment.",
+          "Record the entire adjustment directly into Accumulated Other Comprehensive Income (AOCI)."
+        ],
+        answer: 2,
+        explanation: "Under ASC 740-10-25-47 and ASC 740-10-35-4, when a tax rate change is enacted (e.g., when the President signs the bill), existing deferred tax assets and liabilities are immediately remeasured at the new rate. The entire effect is recognized in income tax expense from continuing operations in that period."
+      },
+      {
+        id: 8,
+        topic: "Asymmetrical Impact of Tax Rate Cuts",
+        question: "Why does an enacted reduction in future corporate tax rates cause a decrease in reported net income for a corporation in a net Deferred Tax Asset (DTA) position?",
+        options: [
+          "Taxes payable for the current period increase immediately upon enactment of the rate cut.",
+          "Future deductions will shield less tax at the lower rate, so the DTA must be written down with an offsetting debit to income tax expense.",
+          "The company is forced to classify its DTA as a current liability on the balance sheet.",
+          "A rate cut requires creating an immediate 100% valuation allowance against all carryforwards."
+        ],
+        answer: 1,
+        explanation: "Future deductible amounts save less tax under a lower rate, making the DTA less valuable. The company must reduce the carrying value of its DTA (credit DTA), which produces an offsetting debit to Income Tax Expense, reducing current net income."
+      },
+      {
+        id: 9,
+        topic: "Multiple Differences Measurement Sequence",
+        question: "Under ASC 740-10-30-5, how must a corporation measure deferred taxes when multiple temporary differences exist in the same reporting period?",
+        options: [
+          "All future taxable and deductible amounts must be netted together before applying the enacted tax rate.",
+          "Future taxable amounts are totaled to determine the DTL, and future deductible amounts are totaled to determine the DTA; the two groups are not netted prior to measurement.",
+          "Only the single largest temporary difference is recognized; all smaller differences are treated as permanent.",
+          "Deferred tax assets are measured using the enacted rate, while deferred tax liabilities must use the historical rate."
+        ],
+        answer: 1,
+        explanation: "ASC 740-10-30-5 requires companies to catalog differences into two separate groups: total future taxable amounts (multiplied by the enacted rate to determine the DTL) and total future deductible amounts (multiplied by the enacted rate to determine the DTA). They must not be netted before calculating the accounts."
+      },
+      {
+        id: 10,
+        topic: "Comprehensive Calculation: Permanent & Multiple Differences",
+        question: "In Year 1, Orion Corp. reports pretax accounting income of \$500,000, which includes \$20,000 of tax-exempt municipal interest (permanent) and \$10,000 of nondeductible penalties (permanent). In addition, tax depreciation exceeds book depreciation by \$40,000 (temporary taxable), and accrued warranty costs of \$30,000 are not deductible until Year 2 (temporary deductible). If the enacted rate is 25% and beginning deferred balances are zero, what are Year 1 Tax Payable, ending DTL, ending DTA, and Income Tax Expense?",
+        options: [
+          "Tax Payable: \$120,000 | Ending DTL: \$10,000 | Ending DTA: \$7,500 | Income Tax Expense: \$122,500",
+          "Tax Payable: \$125,000 | Ending DTL: \$7,500 | Ending DTA: \$10,000 | Income Tax Expense: \$122,500",
+          "Tax Payable: \$117,500 | Ending DTL: \$10,000 | Ending DTA: \$7,500 | Income Tax Expense: \$120,000",
+          "Tax Payable: \$120,000 | Ending DTL: \$2,500 | Ending DTA: \$0 | Income Tax Expense: \$122,500"
+        ],
+        answer: 0,
+        explanation: "Taxable income = \$500,000 - \$20,000 (muni) + \$10,000 (penalty) - \$40,000 (depreciation) + \$30,000 (warranty) = \$480,000. Step 1: Tax payable = \$480,000 × 25% = \$120,000. Step 2: DTL = \$40,000 × 25% = \$10,000; DTA = \$30,000 × 25% = \$7,500. Step 3: Change in DTL = +\$10,000; Change in DTA = +\$7,500. Step 4: Tax expense = \$120,000 (payable) + \$10,000 (DTL credit) - \$7,500 (DTA debit) = \$122,500 (which equals 25% of [\$500,000 - \$20,000 + \$10,000])."
+      }
+    ];
+
+    let userAnswers = {};
+
+    function renderQuiz() {
+      const container = document.getElementById("quizContainer");
+      container.innerHTML = "";
+
+      quizData.forEach((q, index) => {
+        const card = document.createElement("section");
+        card.className = "quiz-card";
+        card.setAttribute("aria-labelledby", `q-title-${q.id}`);
+
+        const isAnswered = userAnswers[q.id] !== undefined;
+
+        let optionsHtml = "";
+        q.options.forEach((opt, optIndex) => {
+          let labelClass = "option-label";
+          if (isAnswered) {
+            if (optIndex === q.answer) labelClass += " correct";
+            else if (optIndex === userAnswers[q.id]) labelClass += " incorrect";
+          }
+
+          const optId = `opt-${q.id}-${optIndex}`;
+          optionsHtml += `
+            <label class="${labelClass}" id="label-${q.id}-${optIndex}" for="${optId}">
+              <input type="radio" 
+                id="${optId}"
+                name="question-${q.id}" 
+                value="${optIndex}" 
+                ${isAnswered ? "disabled" : ""} 
+                ${userAnswers[q.id] === optIndex ? "checked" : ""}
+                onchange="handleOptionSelect(${q.id})"
+              >
+              <span>${String.fromCharCode(65 + optIndex)}. ${opt}</span>
+            </label>
+          `;
+        });
+
+        card.innerHTML = `
+          <fieldset>
+            <legend>
+              <div class="card-meta">
+                <span class="q-badge">Question ${index + 1} of 10</span>
+                <span class="topic-tag">${q.topic}</span>
+              </div>
+              <span class="question-text" id="q-title-${q.id}">${q.question}</span>
+            </legend>
+            <div class="options-list" role="radiogroup" aria-labelledby="q-title-${q.id}">
+              ${optionsHtml}
+            </div>
+            <button 
+              type="button" 
+              class="submit-btn" 
+              id="btn-${q.id}" 
+              onclick="submitAnswer(${q.id})" 
+              ${isAnswered ? "disabled" : ""}>
+              ${isAnswered ? "Submitted" : "Submit Answer"}
+            </button>
+            <div 
+              class="feedback-box ${isAnswered ? 'show ' + (userAnswers[q.id] === q.answer ? 'correct' : 'incorrect') : ''}" 
+              id="feedback-${q.id}"
+              role="status"
+              aria-live="polite">
+              <strong>${isAnswered ? (userAnswers[q.id] === q.answer ? "Correct!" : "Incorrect.") : ""}</strong>
+              <div class="feedback-explanation">${isAnswered ? q.explanation : ""}</div>
+            </div>
+          </fieldset>
+        `;
+
+        container.appendChild(card);
+      });
+
+      updateScoreboard();
+    }
+
+    function handleOptionSelect(qId) {
+      const btn = document.getElementById(`btn-${qId}`);
+      if (btn) btn.disabled = false;
+    }
+
+    function submitAnswer(qId) {
+      const selectedInput = document.querySelector(`input[name="question-${qId}"]:checked`);
+      if (!selectedInput) return;
+
+      const selectedOpt = parseInt(selectedInput.value, 10);
+      userAnswers[qId] = selectedOpt;
+
+      const q = quizData.find(item => item.id === qId);
+      const isCorrect = selectedOpt === q.answer;
+
+      q.options.forEach((_, optIndex) => {
+        const label = document.getElementById(`label-${qId}-${optIndex}`);
+        const input = document.getElementById(`opt-${qId}-${optIndex}`);
+        input.disabled = true;
+
+        if (optIndex === q.answer) {
+          label.classList.add("correct");
+        } else if (optIndex === selectedOpt) {
+          label.classList.add("incorrect");
+        }
+      });
+
+      const btn = document.getElementById(`btn-${qId}`);
+      btn.disabled = true;
+      btn.textContent = "Submitted";
+
+      const feedback = document.getElementById(`feedback-${qId}`);
+      feedback.className = `feedback-box show ${isCorrect ? 'correct' : 'incorrect'}`;
+      feedback.innerHTML = `
+        <strong>${isCorrect ? "Correct!" : "Incorrect."}</strong>
+        <div class="feedback-explanation">${q.explanation}</div>
+      `;
+
+      updateScoreboard();
+    }
+
+    function updateScoreboard() {
+      const answeredKeys = Object.keys(userAnswers);
+      const totalAnswered = answeredKeys.length;
+      let correctCount = 0;
+
+      answeredKeys.forEach(k => {
+        const q = quizData.find(item => item.id === parseInt(k, 10));
+        if (userAnswers[k] === q.answer) correctCount++;
+      });
+
+      const pct = totalAnswered > 0 ? Math.round((correctCount / totalAnswered) * 100) : 0;
+      document.getElementById("scoreDisplay").textContent = `Score: ${correctCount} / 10 (${pct}%)`;
+
+      const progressPct = Math.round((totalAnswered / quizData.length) * 100);
+      const progressBar = document.getElementById("progressBar");
+      const progressWrapper = document.getElementById("progressBarWrapper");
+      
+      progressBar.style.width = `${progressPct}%`;
+      progressWrapper.setAttribute("aria-valuenow", progressPct);
+    }
+
+    function resetQuiz() {
+      userAnswers = {};
+      renderQuiz();
+    }
+
+    renderQuiz();
+  </script>
+</body>
+</html>
