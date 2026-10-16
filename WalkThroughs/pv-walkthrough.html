@@ -288,6 +288,14 @@
     padding: 1.5rem;
   }
 </style>
+<style id="a11y-fixes">
+  /* Accessibility fixes added Oct 2026: visible keyboard focus, scrollable wide tables, and text colors adjusted to meet WCAG AA contrast. */
+  :focus-visible { outline: 3px solid #341f5c !important; outline-offset: 2px !important; box-shadow: 0 0 0 5px #ffffff !important; }
+  .a11y-scroll { overflow-x: auto; max-width: 100%; }
+  .table-scroll, .a11y-scroll { position: relative; }
+  .a11y-sr { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+  footer { color: #77716e !important; }
+</style>
 </head>
 <body>
 
@@ -593,5 +601,103 @@
   }
 </script>
 
+<script id="a11y-fixes-js">
+/* Accessibility support added Oct 2026: names for unlabeled form fields, scrollable wide tables, and screen-reader announcements of results. */
+(function () {
+  var LIVE = !document.querySelector('[aria-live],[role="status"],[role="alert"]');
+  function txt(el) { return el ? (el.textContent || '').replace(/\s+/g, ' ').trim() : ''; }
+  function hasName(el) {
+    if (el.getAttribute('aria-label') || el.getAttribute('aria-labelledby') || el.getAttribute('title')) return true;
+    if (el.id) { try { if (document.querySelector('label[for="' + CSS.escape(el.id) + '"]')) return true; } catch (e) {} }
+    return !!el.closest('label');
+  }
+  function heading(el) {
+    var box = el.closest('fieldset,[class*="block"],[class*="part"],[class*="card"],section,article,.example,.problem');
+    while (box) {
+      var h = box.querySelector('legend,caption,h2,h3,h4,h5,[class*="title"],[class*="label"],[class*="recap"]');
+      if (h && txt(h)) return txt(h).slice(0, 80);
+      box = box.parentElement ? box.parentElement.closest('fieldset,section,article,[class*="block"],[class*="part"]') : null;
+    }
+    return '';
+  }
+  function nameFor(el) {
+    var bits = [], tr = el.closest('tr'), table = el.closest('table');
+    var cap = table && table.querySelector('caption');
+    var h = heading(el); if (h) bits.push(h); else if (cap && txt(cap)) bits.push(txt(cap).slice(0, 80));
+    if (tr && table) {
+      var cell = el.closest('td,th'), rows = Array.prototype.slice.call(table.rows), ri = rows.indexOf(tr);
+      var rowHead = tr.querySelector('th[scope="row"]') || (tr.cells[0] && tr.cells[0] !== cell && !tr.cells[0].querySelector('input,select,textarea') ? tr.cells[0] : null);
+      var head = table.tHead && table.tHead.rows.length ? table.tHead.rows[table.tHead.rows.length - 1] : (rows[0] && rows[0] !== tr && !rows[0].querySelector('input,select') ? rows[0] : null);
+      var colHead = head && cell ? head.cells[cell.cellIndex] : null;
+      var bodyIdx = table.tHead ? ri - table.tHead.rows.length + 1 : ri + (head ? 0 : 1);
+      if (rowHead && txt(rowHead)) bits.push(txt(rowHead).slice(0, 80)); else bits.push('line ' + bodyIdx);
+      if (colHead && txt(colHead)) bits.push(txt(colHead).slice(0, 40));
+      else if (el.tagName === 'SELECT') bits.push('account');
+    } else {
+      var prev = el.previousElementSibling; if (prev && txt(prev)) bits.push(txt(prev).slice(0, 80));
+      if (el.placeholder) bits.push(el.placeholder);
+    }
+    if (!bits.length) bits.push(el.tagName === 'SELECT' ? 'Choose an option' : 'Answer');
+    return bits.join(', ');
+  }
+  function labelAll(root) {
+    (root || document).querySelectorAll('input:not([type="hidden"]):not([type="button"]):not([type="submit"]),select,textarea').forEach(function (el) {
+      if (!hasName(el)) el.setAttribute('aria-label', nameFor(el));
+    });
+  }
+  function wrapTables() {
+    document.querySelectorAll('table').forEach(function (t) {
+      if (t.closest('.a11y-scroll')) return;
+      var p = t.parentElement, s = p ? getComputedStyle(p) : null;
+      if (s && /auto|scroll/.test(s.overflowX)) return;
+      var avail = p ? p.clientWidth : 0;
+      if (!avail || t.scrollWidth <= avail + 1) return;
+      var w = document.createElement('div'); w.className = 'a11y-scroll';
+      if (!t.querySelector('input,select,textarea,button,a[href]')) {
+        w.setAttribute('role', 'region'); w.tabIndex = 0;
+        var c = t.querySelector('caption'); w.setAttribute('aria-label', (c && txt(c)) || 'Table (scrolls sideways)');
+      }
+      p.insertBefore(w, t); w.appendChild(t);
+    });
+  }
+  var live = null;
+  if (LIVE) {
+    live = document.createElement('div'); live.className = 'a11y-sr'; live.setAttribute('aria-live', 'polite'); live.setAttribute('role', 'status');
+    document.body.appendChild(live);
+  }
+  var RESULT = /(score|result|feedback|status|summary|message|msg|grade|total|verdict|outcome)/i;
+  var collecting = false, found = [];
+  function say(msg) { if (!live || !msg) return; live.textContent = ''; setTimeout(function () { live.textContent = msg; }, 60); }
+  var pending;
+  var mo = new MutationObserver(function (muts) {
+    clearTimeout(pending);
+    pending = setTimeout(function () { labelAll(); wrapTables(); }, 50);
+    if (!collecting) return;
+    muts.forEach(function (m) {
+      var n = m.target.nodeType === 1 ? m.target : m.target.parentElement;
+      while (n && n !== document.body) {
+        if (n === live) return;
+        if (RESULT.test((n.id || '') + ' ' + (typeof n.className === 'string' ? n.className : ''))) { if (found.indexOf(n) < 0) found.push(n); return; }
+        n = n.parentElement;
+      }
+    });
+  });
+  function start() {
+    labelAll(); wrapTables();
+    mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+    document.addEventListener('click', function (e) {
+      if (!live || !e.target.closest('button')) return;
+      collecting = true; found = [];
+      setTimeout(function () {
+        collecting = false;
+        var msg = found.map(txt).filter(Boolean).join(' ').slice(0, 300);
+        say(msg);
+      }, 400);
+    }, true);
+    var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(wrapTables, 150); });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
+})();
+</script>
 </body>
 </html>
