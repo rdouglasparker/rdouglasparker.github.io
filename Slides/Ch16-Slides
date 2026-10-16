@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tax Accounting Dashboard: Accounting for Income Taxes (ASC 740)</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #334155; /* Meets 7:1+ contrast against white */
+      --primary: #1d4ed8;    /* Meets 6.5:1 contrast against white */
+      --primary-hover: #1e40af;
+      --primary-light: #eff6ff;
+      --border: #cbd5e1;
+      --focus-ring: #0284c7;
+      --accent: #0f766e;
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 1.5rem 1rem;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Skip Navigation Link */
+    .skip-link {
+      position: absolute;
+      top: -50px;
+      left: 10px;
+      background: var(--primary);
+      color: #ffffff;
+      padding: 0.6rem 1.2rem;
+      z-index: 1000;
+      text-decoration: none;
+      font-weight: 700;
+      border-radius: 0 0 6px 6px;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+    header {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    header h1 {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    /* Accessible Navigation Bar */
+    .slide-controls {
+      position: sticky;
+      top: 0.75rem;
+      z-index: 100;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.85rem 1.25rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.06);
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .btn {
+      background-color: var(--primary);
+      color: #ffffff;
+      border: 1px solid var(--primary);
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn:hover:not(:disabled) {
+      background-color: var(--primary-hover);
+    }
+
+    .btn:disabled {
+      background-color: #e2e8f0;
+      border-color: #cbd5e1;
+      color: #64748b;
+      cursor: not-allowed;
+    }
+
+    .btn-secondary {
+      background-color: #ffffff;
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      background-color: #f1f5f9;
+    }
+
+    .btn:focus-visible,
+    select:focus-visible,
+    a:focus-visible {
+      outline: 3px solid var(--focus-ring);
+      outline-offset: 2px;
+    }
+
+    .jump-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .jump-group label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    select {
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background-color: #ffffff;
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+
+    /* Slide Deck Layout */
+    .slide-article {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      display: none;
+    }
+
+    .slide-article.active {
+      display: block;
+    }
+
+    .slide-header {
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 1rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .slide-badge {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    h2 {
+      font-size: 1.45rem;
+      color: #0f172a;
+      font-weight: 700;
+      margin-top: 0.4rem;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      color: var(--accent);
+      margin: 1.25rem 0 0.5rem;
+      font-weight: 700;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      color: #1e293b;
+    }
+
+    ul, ol {
+      margin: 0.75rem 0 1.25rem 1.75rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Accessible Tables */
+    .table-container {
+      overflow-x: auto;
+      margin: 1.25rem 0 1.75rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+
+    caption {
+      font-weight: 700;
+      text-align: left;
+      padding-bottom: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 0.75rem 1rem;
+    }
+
+    th {
+      background-color: #f1f5f9;
+      color: #0f172a;
+      font-weight: 700;
+    }
+
+    /* Key Concept Card */
+    .callout {
+      background-color: var(--primary-light);
+      border-left: 4px solid var(--primary);
+      padding: 1rem 1.25rem;
+      border-radius: 0 6px 6px 0;
+      margin: 1.25rem 0;
+    }
+
+    .callout strong {
+      color: var(--primary);
+    }
+
+    /* Screen Reader Announcements */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <div class="container">
+    <header>
+      <h1>Tax Accounting Dashboard</h1>
+      <p>Accessible Slide Deck Transcript &amp; Study Guide &middot; FASB ASC Topic 740</p>
+    </header>
+
+    <nav class="slide-controls" aria-label="Slide Deck Controls">
+      <div class="nav-buttons">
+        <button type="button" class="btn btn-secondary" id="prevBtn" onclick="navigateSlide(-1)">
+          &larr; Previous Slide
+        </button>
+        <button type="button" class="btn" id="nextBtn" onclick="navigateSlide(1)">
+          Next Slide &rarr;
+        </button>
+      </div>
+
+      <div class="jump-group">
+        <label for="slideSelect">Jump to Slide:</label>
+        <select id="slideSelect" onchange="jumpToSlide(parseInt(this.value, 10))">
+          <option value="1">Slide 1: Executive Overview</option>
+          <option value="2">Slide 2: Conceptual Underpinnings</option>
+          <option value="3">Slide 3: The 4-Step Process</option>
+          <option value="4">Slide 4: Temporary Differences Taxonomy</option>
+          <option value="5">Slide 5: Deferred Tax Liabilities (DTL)</option>
+          <option value="6">Slide 6: Deferred Tax Assets (DTA)</option>
+          <option value="7">Slide 7: Valuation Allowance Assessment</option>
+          <option value="8">Slide 8: Permanent Differences &amp; ETR</option>
+          <option value="9">Slide 9: Enacted Tax Rates &amp; Remeasurement</option>
+          <option value="10">Slide 10: Financial Statement Presentation</option>
+        </select>
+      </div>
+
+      <button type="button" class="btn btn-secondary" id="toggleViewBtn" onclick="toggleAllSlides()">
+        View All Slides as Transcript
+      </button>
+
+      <!-- Dynamic live status for screen reader users -->
+      <div class="sr-only" role="status" aria-live="polite" id="srAnnounce">
+        Viewing Slide 1 of 10: Executive Overview
+      </div>
+    </nav>
+
+    <main id="main-content">
+
+      <!-- SLIDE 1 -->
+      <article class="slide-article active" id="slide-1" aria-labelledby="slide1-heading">
+        <div class="slide-header">
+          <div>
+            <span class="slide-badge">Slide 1 of 10</span>
+            <h2 id="slide1-heading">Executive Overview: ASC 740 &amp; Tax Accounting</h2>
+          </div>
+        </div>
+        <p>Accounting for income taxes bridges two distinct regulatory regimes: <strong>Financial Reporting (U.S. GAAP)</strong> and the <strong>Internal Revenue Code (IRC)</strong>.</p>
+        <div class="callout">
+          <strong>Core Objective:</strong> Ensure that current and deferred tax consequences of all events recognized in financial statements are properly measured using the accrual method, reflecting future tax liabilities and future tax benefits.
+        </div>
+        <h3>Key Takeaways for This Dashboard</h3>
+        <ul>
+          <li><strong>Accrual Alignment:</strong> Income tax expense reported on the income statement reflects current period activities, regardless of when tax cash payments are due.</li>
+          <li><strong>Balance Sheet Approach:</strong> Deferred taxes are determined by measuring temporary differences between the book values and tax bases of assets and liabilities.</li>
+          <li><strong>Four-Step Method:</strong> Income tax expense serves as the balancing &ldquo;plug&rdquo; combining taxes payable and net changes in deferred tax accounts.</li>
+        </ul>
+      </article>
+
+      <!-- SLIDE 2 -->
+      <article class="slide-article" id="slide-2" aria-labelledby="slide2-heading">
+        <div class="slide-header">
+          <div>
+            <span class="slide-badge">Slide 2 of 10</span>
+            <h2 id="slide2-heading">Conceptual Underpinnings: GAAP vs. Tax Objectives</h2>
+          </div>
+        </div>
+        <p>The revenues, expenses, gains, and losses on a tax return frequently differ from those on the income statement because their foundational objectives diverge:</p>
+        <div class="table-container">
+          <table>
+            <caption>Comparison of Financial Accounting and Tax Regulatory Objectives</caption>
+            <thead>
+              <tr>
+                <th scope="col">Dimension</th>
+                <th scope="col">Financial Reporting (GAAP / ASC 740)</th>
+                <th scope="col">Tax Authorities (IRS / IRC)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Governing Body</th>
+                <td>Financial Accounting Standards Board (FASB)</td>
+                <td>U.S. Congress &amp; Department of the Treasury</td>
+              </tr>
+              <tr>
+                <th scope="row">Primary Objective</th>
+                <td>Provide decision-useful financial information to investors, creditors, and capital markets</td>
+                <td>Raise government revenue in an orderly manner and influence economic behavior</td>
+              </tr>
+              <tr>
+                <th scope="row">Incentive Mechanisms</th>
+                <td>Matches expenses against revenues systematically across operating periods</td>
+                <td>Encourages capital investment (e.g., accelerated bonus depreciation) and discourages illegal acts (fines)</td>
+              </tr>
+              <tr>
+                <th scope="row">Measurement Basis</th>
+                <td>Accrual basis accounting</td>
+                <td>Modified cash basis and statutory cost-recovery rules</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <!-- SLIDE 3 -->
+      <article class="slide-article" id="slide-3" aria-labelledby="slide3-heading">
+        <div class="slide-header">
+          <div>
+            <span class="slide-badge">Slide 3 of 10</span>
+            <h2 id="slide3-heading">The Four-Step Measurement Sequence</h2>
+          </div>
+        </div>
+        <p>Under ASC 740, income tax expense is never calculated directly by multiplying pretax accounting income by the tax rate. Instead, it is derived using a standardized four-step sequence:</p>
+        <ol>
+          <li>
+            <strong>Step 1: Calculate Tax Currently Payable</strong><br>
+            Multiply taxable income from the current tax return by the current enacted tax rate:
+            <br><em>Tax Payable = Taxable Income &times; Current Enacted Tax Rate</em>
+          </li>
+          <li>
+            <strong>Step 2: Calculate Ending Balances for DTAs and DTLs</strong><br>
+            Determine cumulative future taxable and deductible amounts based on year-end book-tax basis differences, multiplied by the scheduled enacted tax rates for future reversal years.
+          </li>
+          <li>
+            <strong>Step 3: Calculate Period Changes in Deferred Accounts</strong><br>
+            Compute the net debit or credit needed to adjust each deferred tax asset and liability from its beginning balance to the required ending balance from Step 2.
+          </li>
+          <li>
+            <strong>Step 4: Solve for Income Tax Expense as the Plug</strong><br>
+            Record the tax journal entry combining tax payable (Step 1) and deferred account adjustments (Step 3). The balancing amount is total <strong>Income Tax Expense</strong>.
+          </li>
+        </ol>
+      </article>
+
+      <!-- SLIDE 4 -->
+      <article class="slide-article" id="slide-4" aria-labelledby="slide4-heading">
+        <div class="slide-header">
+          <div>
+            <span class="slide-badge">Slide 4 of 10</span>
+            <h2 id="slide4-heading">Taxonomy of Temporary Differences (2&times;2 Matrix)</h2>
+          </div>
+        </div>
+        <p>Temporary differences arise when revenues or expenses are recognized in different years for book versus tax purposes. They originate in one period and completely reverse over time:</p>
+        <div class="table-container">
+          <table>
+            <caption>Classification of Temporary Differences (Illustration 16-1 Structure)</caption>
+            <thead>
+              <tr>
+                <th scope="col">Timing Pattern</th>
+                <th scope="col">Revenues / Gains</th>
+                <th scope="col">Expenses / Losses</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Reported on Income Statement First, Tax Return Later</th>
+                <td>
+                  <strong>Creates Future Taxable Amounts (DTL)</strong><br>
+                  <em>Examples:</em> Installment sales of property, unrealized holding gains on fair-value investments.
+                </td>
+                <td>
+                  <strong>Creates Future Deductible Amounts (DTA)</strong><br>
+                  <em>Examples:</em> Estimated product warranty expense, accrued loss contingencies, postretirement benefit costs.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Reported on Tax Return First, Income Statement Later</th>
+                <td>
+                  <strong>Creates Future Deductible Amounts (DTA)</strong><br>
+                  <em>Examples:</em> Subscriptions collected in advance, unearned rental receipts, customer deposits.
+                </td>
+                <td>
+                  <strong>Creates Future Taxable Amounts (DTL)</strong><br>
+                  <em>Examples:</em> Accelerated tax depreciation (MACRS) in excess of straight-line book depreciation, prepaid insurance deductible upon payment.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <!-- SLIDE 5 -->
+      <article class="slide-article" id="slide-5" aria-labelledby="slide5-heading">
+        <div class="slide-header">
+          <div>
+            <span class="slide-badge">Slide 5 of 10</span>
+            <h2 id="slide5-heading">Deferred Tax Liabilities (DTL) &amp; Future Taxable Amounts</h2>
+          </div>
+        </div>
+        <p>A <strong>Deferred Tax Liability (DTL)</strong> represents taxes that have been deferred to future periods because current tax deductions or delayed tax revenues cause taxable income to be lower than book income today.</p>
+        <h3>Primary Examples</h3>
+        <ul>
+          <li><strong>Accelerated Depreciation (MACRS):</strong> Tax laws allow full or accelerated cost recovery in early years. In later years, tax depreciation falls below straight-line book depreciation, creating future taxable amounts.</li>
+          <li><strong>Installment Sales:</strong> Revenue is recognized immediately upon sale under GAAP, but taxed only as cash is collected in subsequent years.</li>
+        </ul>
+        <div class="callout">
+          <strong>Balance Sheet Criterion:</strong> A DTL is present whenever an <em>Asset&rsquo;s Book Value exceeds its Tax Basis</em>, or a <em>Liability&rsquo;s Book Value is less than its Tax Basis</em>.
+        </div>
+      </article>
+
+      <!-- SLIDE 6 -->
+      <article class="slide-article" id="slide-6" aria-labelledby="slide6-heading">
+        <div class="slide-header">
+          <div>
+            <span class="slide-badge">Slide 6 of 10</span>
+            <h2 id="slide6-heading">Deferred Tax Assets (DTA) &amp; Future Deductible Amounts</h2>
+          </div>
+        </div>
+        <p>A <strong>Deferred Tax Asset (DTA)</strong> represents future tax savings resulting from having paid taxes in advance or having recognized expenses for financial accounting that cannot yet be deducted on the tax return.</p>
+        <h3>Primary Examples</h3>
+        <ul>
+          <li><strong>Estimated Product Warranties:</strong> Accrued as expense under GAAP when goods are sold; deductible for tax purposes only when cash is paid to satisfy claims in future years.</li>
+          <li><strong>Unearned Subscription/Rent Revenue:</strong> Taxed immediately upon receipt under cash-basis tax rules; recognized as revenue in later years as obligations are fulfilled.</li>
+        </ul>
+        <div class="callout">
+          <strong>Balance Sheet Criterion:</strong> A DTA is present whenever a <em>Liability&rsquo;s Book Value exceeds its Tax Basis</em>, or an <em>Asset&rsquo;s Book Value is less than its Tax Basis</em>.
+        </div>
+      </article>
+
+      <!-- SLIDE 7 -->
+      <article class="slide-article" id="slide-7" aria-labelledby="slide7-heading">
+        <div class="slide-header">
+          <div>
+            <span class="slide-badge">Slide 7 of 10</span>
+            <h2 id="slide7-heading">Valuation Allowance Assessment for DTAs</h2>
+          </div>
+        </div>
+        <p>Deferred tax assets are recognized in full for all future deductible differences, but they are subsequently reduced by a <strong>contra-asset valuation allowance</strong> if realization is uncertain.</p>
+        <div class="callout">
+          <strong>The Standard (ASC 740-10-30-5):</strong> A valuation allowance is established if, based on the weight of available evidence, it is <strong>&ldquo;more likely than not&rdquo;</strong> (a likelihood greater than 50%) that some or all of the deferred tax asset will not be realized.
+        </div>
+        <h3>Evaluating Evidentiary Factors</h3>
+        <ul>
+          <li><strong>Negative Evidence:</strong> Cumulative historical operating losses, anticipated future industry downturns, or expiring carryforward windows.</li>
+          <li><strong>Positive Evidence:</strong> Existing contracts, backlog of orders, profitable historical track record, and prudent tax-planning strategies.</li>
+          <li><strong>Journal Entry:</strong> Debit <em>Income Tax Expense</em>, Credit <em>Valuation Allowance</em> (reduces reported net income).</li>
+        </ul>
+      </article>
+
+      <!-- SLIDE 8 -->
+      <article class="slide-article" id="slide-8" aria-labelledby="slide8-heading">
+        <div class="slide-header">
+          <div>
+            <span class="slide-badge">Slide 8 of 10</span>
+            <h2 id="slide8-heading">Permanent Differences &amp; Effective Tax Rate (ETR)</h2>
+          </div>
+        </div>
+        <p><strong>Permanent differences</strong> arise from statutory tax rules where transactions never affect taxable income or taxes payable. Because they never reverse, they produce <strong>no deferred tax consequences</strong>.</p>
+        <h3>Common Examples</h3>
+        <ul>
+          <li>Interest earned on state and municipal government bonds (tax-free).</li>
+          <li>Fines and statutory penalties resulting from law violations (nondeductible).</li>
+          <li>Life insurance proceeds received upon executive death (nondeductible premiums / tax-free proceeds).</li>
+        </ul>
+        <div class="callout">
+          <strong>Effective Tax Rate Impact:</strong> 
+          <br><em>Effective Tax Rate = Total Income Tax Expense &divide; Pretax Accounting Income</em>
+          <br>Tax-exempt income pulls the effective rate <em>below</em> the statutory rate; nondeductible expenses push the effective rate <em>above</em> the statutory rate.
+        </div>
+      </article>
+
+      <!-- SLIDE 9 -->
+      <article class="slide-article" id="slide-9" aria-labelledby="slide9-heading">
+        <div class="slide-header">
+          <div>
+            <span class="slide-badge">Slide 9 of 10</span>
+            <h2 id="slide9-heading">Enacted Tax Rates &amp; Remeasurement Rules</h2>
+          </div>
+        </div>
+        <p>Deferred tax assets and liabilities must be measured using the <strong>currently enacted tax rate</strong> scheduled to apply in the future years when temporary differences are expected to reverse.</p>
+        <h3>Key Regulatory Principles</h3>
+        <ul>
+          <li><strong>Reliability over Relevance:</strong> Anticipated tax legislation is never recognized until signed into law by the executive branch.</li>
+          <li><strong>Immediate Period-of-Enactment Adjustment:</strong> When a new tax rate is enacted, all existing DTAs and DTLs are remeasured immediately. The entire adjustment is recognized in <em>Income Tax Expense from Continuing Operations</em>.</li>
+          <li><strong>Asymmetrical Impact of Rate Cuts:</strong>
+            <ul>
+              <li><strong>Net DTL Firms (e.g., GladCo):</strong> Lower rates reduce future liabilities, generating a credit to tax expense (tax benefit) that boosts current net income.</li>
+              <li><strong>Net DTA Firms (e.g., SadCo):</strong> Lower rates reduce the value of future tax deductions, forcing a debit write-down to tax expense that reduces current net income.</li>
+            </ul>
+          </li>
+        </ul>
+      </article>
+
+      <!-- SLIDE 10 -->
+      <article class="slide-article" id="slide-10" aria-labelledby="slide10-heading">
+        <div class="slide-header">
+          <div>
+            <span class="slide-badge">Slide 10 of 10</span>
+            <h2 id="slide10-heading">Financial Statement Presentation &amp; Disclosures</h2>
+          </div>
+        </div>
+        <p>Presentation standards under U.S. GAAP (ASU 2015-17) require streamlined, noncurrent balance sheet classification with comprehensive footnote reconciliations:</p>
+        <h3>Balance Sheet Presentation Guidelines</h3>
+        <ul>
+          <li><strong>All Noncurrent:</strong> All deferred tax liabilities, deferred tax assets, and valuation allowances are classified as <strong>noncurrent</strong> on the balance sheet.</li>
+          <li><strong>Jurisdictional Netting:</strong> DTAs and DTLs within the same tax-paying component and tax jurisdiction must be netted into a single noncurrent amount. Accounts across separate tax jurisdictions cannot be netted.</li>
+        </ul>
+        <h3>Mandatory Disclosure Notes</h3>
+        <ul>
+          <li>Breakdown of total tax expense into current provision and deferred provision.</li>
+          <li>Comprehensive inventory of components comprising deferred tax assets and liabilities.</li>
+          <li>Reconciliation of beginning and ending valuation allowance balances.</li>
+          <li>Numerical reconciliation between the statutory federal tax rate and the reported effective tax rate.</li>
+        </ul>
+      </article>
+
+    </main>
+
+    <footer>
+      <p>Accessible Educational Companion &middot; Grounded in FASB ASC Topic 740 &middot; WCAG 2.1 Level AA Compliant</p>
+    </footer>
+  </div>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 10;
+    let isFullTranscriptView = false;
+
+    const slideTitles = [
+      "Executive Overview",
+      "Conceptual Underpinnings",
+      "The 4-Step Process",
+      "Temporary Differences Taxonomy",
+      "Deferred Tax Liabilities (DTL)",
+      "Deferred Tax Assets (DTA)",
+      "Valuation Allowance Assessment",
+      "Permanent Differences & ETR",
+      "Enacted Tax Rates & Remeasurement",
+      "Financial Statement Presentation"
+    ];
+
+    function updateSlideDisplay() {
+      if (isFullTranscriptView) return;
+
+      for (let i = 1; i <= totalSlides; i++) {
+        const slide = document.getElementById(`slide-${i}`);
+        if (i === currentSlide) {
+          slide.classList.add("active");
+        } else {
+          slide.classList.remove("active");
+        }
+      }
+
+      document.getElementById("prevBtn").disabled = currentSlide === 1;
+      document.getElementById("nextBtn").disabled = currentSlide === totalSlides;
+      document.getElementById("slideSelect").value = currentSlide;
+
+      // Announce slide change to screen readers
+      const announcer = document.getElementById("srAnnounce");
+      announcer.textContent = `Viewing Slide ${currentSlide} of ${totalSlides}: ${slideTitles[currentSlide - 1]}`;
+    }
+
+    function navigateSlide(direction) {
+      if (isFullTranscriptView) {
+        toggleAllSlides();
+      }
+      currentSlide = Math.min(Math.max(currentSlide + direction, 1), totalSlides);
+      updateSlideDisplay();
+      document.getElementById(`slide-${currentSlide}`).focus();
+    }
+
+    function jumpToSlide(slideNum) {
+      if (isFullTranscriptView) {
+        toggleAllSlides();
+      }
+      currentSlide = slideNum;
+      updateSlideDisplay();
+    }
+
+    function toggleAllSlides() {
+      const toggleBtn = document.getElementById("toggleViewBtn");
+      isFullTranscriptView = !isFullTranscriptView;
+
+      for (let i = 1; i <= totalSlides; i++) {
+        const slide = document.getElementById(`slide-${i}`);
+        if (isFullTranscriptView) {
+          slide.classList.add("active");
+        } else {
+          if (i === currentSlide) {
+            slide.classList.add("active");
+          } else {
+            slide.classList.remove("active");
+          }
+        }
+      }
+
+      if (isFullTranscriptView) {
+        toggleBtn.textContent = "Switch to Single-Slide View";
+        document.getElementById("prevBtn").disabled = true;
+        document.getElementById("nextBtn").disabled = true;
+        document.getElementById("srAnnounce").textContent = "Viewing full transcript of all 10 slides.";
+      } else {
+        toggleBtn.textContent = "View All Slides as Transcript";
+        updateSlideDisplay();
+      }
+    }
+
+    // Initialize display state
+    updateSlideDisplay();
+  </script>
+</body>
+</html>
