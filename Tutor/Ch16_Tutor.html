@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ACCT 352 Chapter 16 Tutor</title>
+<meta name="description" content="Step-by-step ACCT 352 practice on accounting for income taxes with randomized numbers and Western North Carolina companies.">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: purple masthead with a gold ridge line, problem-type picker, then a step-by-step worksheet beside a four-step reference card. */
+:root{
+  --purple:#592C88; --purple-deep:#3F1D63; --gold:#FFC72C;
+  --bg:#F8F6FB; --surface:#FFFFFF; --surface-2:#F1ECF7;
+  --fg:#1E1729; --muted:#554B63; --line:#D9D1E4;
+  --accent:#592C88; --accent-fg:#FFFFFF; --link:#4B2275;
+  --ok:#1D6B39; --ok-bg:#E7F4EC; --bad:#9E2229; --bad-bg:#FBEAEA; --hint-bg:#FFF6DB; --hint-line:#B07F00;
+  --focus:#592C88;
+  --f-display:"Zilla Slab", Rockwell, "Roboto Slab", Georgia, serif;
+  --f-body:"Source Sans 3", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#15111C; --surface:#201A2A; --surface-2:#2A2236;
+    --fg:#EFEAF6; --muted:#BDB3CB; --line:#3D3350;
+    --accent:#C9AEF0; --accent-fg:#1A1023; --link:#D7C2F5;
+    --ok:#86D9A2; --ok-bg:#16301F; --bad:#FFA3A3; --bad-bg:#3A1A1D; --hint-bg:#352B12; --hint-line:#FFC72C;
+    --focus:#FFC72C; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#15111C; --surface:#201A2A; --surface-2:#2A2236;
+  --fg:#EFEAF6; --muted:#BDB3CB; --line:#3D3350;
+  --accent:#C9AEF0; --accent-fg:#1A1023; --link:#D7C2F5;
+  --ok:#86D9A2; --ok-bg:#16301F; --bad:#FFA3A3; --bad-bg:#3A1A1D; --hint-bg:#352B12; --hint-line:#FFC72C;
+  --focus:#FFC72C; color-scheme:dark;
+}
+[hidden]{display:none!important}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:1.0625rem;line-height:1.6}
+a{color:var(--link)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.wrap{max-width:72rem;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+.skip{position:absolute;left:-999px;top:0;background:var(--gold);color:#1E1729;padding:.6rem 1rem;font-weight:700;z-index:20}
+.skip:focus{left:max(16px, env(safe-area-inset-left, 0px));top:calc(8px + env(safe-area-inset-top, 0px))}
+
+/* Masthead */
+.mast{background:var(--purple);color:#fff;border-bottom:6px solid var(--gold)}
+.mast .wrap{padding-block:1.6rem 1.4rem}
+.course{font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:#F3E9FF;margin:0}
+.mast h1{font-family:var(--f-display);font-weight:700;font-size:clamp(1.7rem,4.2vw,2.6rem);line-height:1.15;margin:.3rem 0 .2rem;text-wrap:balance}
+.mast h1 span{color:var(--gold)}
+.mast p.sub{margin:0;color:#F3E9FF;max-width:44rem}
+.ridge{display:block;width:100%;height:28px;color:var(--purple-deep)}
+
+main{padding-block:1.5rem 3rem}
+h2{font-family:var(--f-display);font-weight:700;font-size:1.6rem;line-height:1.2;margin:0 0 .5rem;text-wrap:balance}
+h3{font-family:var(--f-display);font-weight:700;font-size:1.2rem;margin:0 0 .4rem}
+.lede{max-width:46rem;margin:0 0 1rem}
+.tips{max-width:46rem;background:var(--surface-2);border:1px solid var(--line);border-radius:6px;padding:.8rem 1rem;margin:0 0 1.6rem;font-size:.98rem}
+.tips ul{margin:.3rem 0 0;padding-left:1.2rem}
+
+/* Picker */
+.groups{display:grid;gap:1.6rem}
+.group h3{font-family:var(--f-body);font-size:.85rem;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:700;border-bottom:2px solid var(--gold);padding-bottom:.3rem;margin-bottom:.8rem}
+.types{list-style:none;margin:0;padding:0;display:grid;gap:.8rem;grid-template-columns:repeat(auto-fill,minmax(15.5rem,1fr))}
+.type-btn{display:flex;flex-direction:column;gap:.25rem;width:100%;height:100%;text-align:left;font:inherit;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--purple);border-radius:6px;padding:.8rem 1rem;cursor:pointer}
+.type-btn strong{font-family:var(--f-display);font-size:1.12rem;color:var(--accent)}
+.type-btn span{font-size:.95rem;color:var(--muted)}
+.type-btn:hover{background:var(--surface-2)}
+.type-btn[aria-pressed="true"]{border-left-color:var(--gold);background:var(--surface-2)}
+
+/* Workspace */
+.work{display:grid;gap:1.6rem;grid-template-columns:minmax(0,1fr);margin-top:2rem}
+@media (min-width:60rem){.work{grid-template-columns:minmax(0,1fr) 19rem;align-items:start}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:1.2rem 1.3rem;min-width:0}
+.prob-head{display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:.7rem;margin-bottom:1rem}
+.prob-head h2{margin:0}
+.eyebrow{font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700;margin:0 0 .2rem}
+.row-btns{display:flex;flex-wrap:wrap;gap:.5rem}
+.btn{font:inherit;font-weight:700;font-size:.98rem;padding:.55rem 1rem;border-radius:5px;cursor:pointer;border:2px solid var(--accent);background:var(--accent);color:var(--accent-fg)}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.scenario{max-width:48rem}
+.given{overflow-x:auto;margin:.8rem 0 1rem}
+table{border-collapse:collapse;font-variant-numeric:tabular-nums}
+.given table{min-width:20rem}
+caption{text-align:left;font-weight:700;padding:.2rem 0 .4rem;color:var(--fg)}
+th,td{padding:.4rem .7rem;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+td.num,th.num{text-align:right;font-family:var(--f-mono);white-space:nowrap}
+thead th{background:var(--surface-2);font-size:.92rem;font-family:var(--f-body)}
+details.key{background:var(--hint-bg);border-left:4px solid var(--hint-line);border-radius:4px;padding:.6rem .9rem;margin:0 0 1.2rem;max-width:48rem}
+details.key summary{font-weight:700;cursor:pointer}
+details.key p{margin:.5rem 0 0}
+.progress{font-weight:600;color:var(--muted);margin:0 0 .6rem}
+
+ol.steps{list-style:none;margin:0;padding:0;display:grid;gap:.9rem}
+.step{border:1px solid var(--line);border-radius:6px;padding:.9rem 1rem;background:var(--surface)}
+.step.done{background:var(--surface-2)}
+.step-num{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:var(--muted)}
+.step label{display:block;font-weight:600;margin:.15rem 0 .5rem}
+.answer-row{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+.answer-row input,.answer-row select{font:inherit;font-family:var(--f-mono);font-size:1rem;padding:.5rem .6rem;border:2px solid var(--muted);border-radius:5px;background:var(--surface);color:var(--fg);min-width:0;width:14rem;max-width:100%}
+.answer-row select{font-family:var(--f-body);width:auto;max-width:100%}
+.answer-row input[aria-invalid="true"]{border-color:var(--bad)}
+.unit{font-family:var(--f-mono);color:var(--muted)}
+.fb{margin-top:.6rem;border-radius:4px}
+.fb:empty{display:none}
+.fb p{margin:0}
+.fb .tag{font-weight:700}
+.fb.ok{background:var(--ok-bg);color:var(--fg);border-left:4px solid var(--ok);padding:.5rem .8rem}
+.fb.ok .tag{color:var(--ok)}
+.fb.hint{background:var(--hint-bg);border-left:4px solid var(--hint-line);padding:.5rem .8rem}
+.fb.bad{background:var(--bad-bg);border-left:4px solid var(--bad);padding:.5rem .8rem}
+.fb.bad .tag{color:var(--bad)}
+.math{font-family:var(--f-mono);font-size:.95rem}
+
+.summary{margin-top:1.4rem;border-top:3px solid var(--gold);padding-top:1rem}
+.score{display:flex;flex-wrap:wrap;gap:.6rem;margin:.4rem 0 1rem;padding:0;list-style:none}
+.score li{background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:.25rem .8rem;font-weight:600;font-size:.95rem}
+.je{overflow-x:auto;margin:.6rem 0 1rem}
+.je table{min-width:26rem}
+.je td.cr{padding-left:2.2rem}
+.takeaway{max-width:48rem}
+
+aside.ref{position:static}
+@media (min-width:60rem){aside.ref{position:sticky;top:calc(1rem + env(safe-area-inset-top, 0px))}}
+aside.ref ol{margin:.4rem 0 0;padding-left:1.2rem;display:grid;gap:.5rem}
+aside.ref h2{font-size:1.25rem}
+aside.ref .rule{border-top:1px solid var(--line);margin:1rem 0 .6rem}
+aside.ref dl{margin:0;display:grid;gap:.45rem}
+aside.ref dt{font-weight:700}
+aside.ref dd{margin:0;color:var(--muted);font-size:.95rem}
+
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:.92rem}
+footer .wrap{padding-block:1.2rem 2rem}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header class="mast">
+  <div class="wrap">
+    <p class="course">ACCT 352 · Intermediate Accounting II · Western Carolina University</p>
+    <h1>Chapter 16 Tutor: <span>Accounting for Income Taxes</span></h1>
+    <p class="sub">Practice deferred taxes one step at a time with companies from across Western North Carolina.</p>
+  </div>
+  <svg class="ridge" viewBox="0 0 1200 28" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path fill="currentColor" d="M0 28 L0 18 L90 8 L160 16 L250 4 L330 14 L420 6 L520 17 L600 5 L700 15 L780 7 L870 18 L960 6 L1050 15 L1130 9 L1200 16 L1200 28 Z"/></svg>
+</header>
+
+<main id="main" tabindex="-1">
+  <div class="wrap">
+    <section aria-labelledby="pick-title">
+      <h2 id="pick-title">Choose a problem type</h2>
+      <p class="lede">Welcome, Catamounts. Pick a problem type below. For each step, type your answer and press <strong>Check my answer</strong>. If you miss, you get a hint and one more try. A second miss shows the solution for that step, and you move on. Every problem uses a new company and new numbers, so you can practice as many times as you like.</p>
+      <div class="tips">
+        <strong>Answer tips</strong>
+        <ul>
+          <li>Enter whole dollars. Dollar signs and commas are optional.</li>
+          <li>Enter a decrease as a negative number, such as <span class="math">-12,000</span> or <span class="math">(12,000)</span>.</li>
+          <li>Enter rates as percents, such as <span class="math">23.5</span> for 23.5%.</li>
+        </ul>
+      </div>
+      <div class="groups" id="groups"></div>
+    </section>
+
+    <div class="work" id="work" hidden>
+      <section class="panel" id="problem" aria-labelledby="prob-title">
+        <div class="prob-head">
+          <div>
+            <p class="eyebrow" id="prob-type"></p>
+            <h2 id="prob-title" tabindex="-1"></h2>
+          </div>
+          <div class="row-btns">
+            <button type="button" class="btn" id="new-btn">New numbers</button>
+            <button type="button" class="btn ghost" id="back-btn">Change problem type</button>
+          </div>
+        </div>
+        <div class="scenario" id="scenario"></div>
+        <div class="given" id="given"></div>
+        <details class="key" id="keyidea"><summary>Key idea for this problem</summary><div id="keytext"></div></details>
+        <p class="progress" id="progress" aria-live="polite"></p>
+        <ol class="steps" id="steps"></ol>
+        <div class="summary" id="summary" hidden tabindex="-1"></div>
+      </section>
+
+      <aside class="panel ref" aria-labelledby="ref-title">
+        <h2 id="ref-title">The four-step method</h2>
+        <ol>
+          <li><strong>Income tax payable:</strong> taxable income × current-year tax rate.</li>
+          <li><strong>Ending deferred tax balance:</strong> cumulative temporary difference × enacted rate for the reversal year(s).</li>
+          <li><strong>Change in deferred tax:</strong> ending balance − beginning balance.</li>
+          <li><strong>Income tax expense:</strong> the plug. Payable + increase in DTL (or − increase in DTA).</li>
+        </ol>
+        <div class="rule"></div>
+        <dl>
+          <dt>Deferred tax liability (DTL)</dt><dd>Future taxable amounts. Taxes owed later on income already reported in the books.</dd>
+          <dt>Deferred tax asset (DTA)</dt><dd>Future deductible amounts. Taxes saved later on expenses already reported in the books.</dd>
+          <dt>Permanent difference</dt><dd>Never reverses, so it creates no deferred tax. It changes the effective tax rate.</dd>
+          <dt>More likely than not</dt><dd>A likelihood of more than 50%.</dd>
+        </dl>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Practice problems are modeled on the topics in an intermediate accounting chapter on income taxes. All company names and numbers are fictional and are randomly generated each time. The current year updates automatically.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+document.documentElement.lang = document.documentElement.lang || "en";
+
+var Y = new Date().getFullYear();
+
+/* ---------- helpers ---------- */
+function rnd(min,max,step){step=step||1;var n=Math.floor((max-min)/step);return min+step*Math.floor(Math.random()*(n+1));}
+function pick(a){return a[Math.floor(Math.random()*a.length)];}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function R(n){return Math.round(n);}
+function fmt(n){return Math.abs(R(n)).toLocaleString("en-US");}
+function $(n){return (R(n)<0?"−$":"$")+fmt(n);}
+function $p(n){return R(n)<0?"($"+fmt(n)+")":"$"+fmt(n);}
+function pc(r){return (Math.round(r*1000)/10)+"%";}
+function K(n){return n*1000;}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];});}
+
+var NAMES = ["Blue Ridge Brewing Co.","Tuckasegee Timber Works","Cullowhee Creek Canoe Co.","Balsam Gap Bakery","Whiteside Mountain Outfitters","Pisgah Pine Furniture","Fontana Lake Marine","Cashiers Valley Cabinetry","Dillsboro Depot Mercantile","Mount Mitchell Mills","Looking Glass Falls Lodge","Hiwassee River Rafting","Black Balsam Bicycles","Waterrock Knob Woodworks","Sylva Summit Coffee Roasters","Nantahala Gorge Gear Co.","Cherohala Skyway Cycles","Highlands Plateau Provisions","Franklin Gem Mine Supply","Brevard Waterfall Works","Bryson City Rail & Trail","Maggie Valley Mountain Crafts","Linville Gorge Logistics","Lake Glenville Marina","Shining Rock Solar","Panthertown Valley Paper Co.","Jackson County Apple Orchards","Catamount Peak Construction","Smoky Mountain Sawmill","Little Tennessee Trout Farms","Wayah Bald Wind Energy","Scaly Mountain Ski Supply","Cowee Valley Ceramics","Chimney Rock Climbing Co."];
+var lastName = "";
+function company(){var n;do{n=pick(NAMES);}while(n===lastName);lastName=n;return n;}
+
+function numStep(label,answer,hint,solution,opt){opt=opt||{};return {kind:"num",label:label,answer:answer,hint:hint,solution:solution,unit:opt.unit||"$",tol:opt.tol==null?1:opt.tol};}
+function choiceStep(label,options,answer,hint,solution){return {kind:"choice",label:label,options:options,answer:answer,hint:hint,solution:solution};}
+function givenTable(cap,rows){var h='<table><caption>'+esc(cap)+'</caption><thead><tr><th scope="col">Item</th><th scope="col" class="num">Amount</th></tr></thead><tbody>';rows.forEach(function(r){h+='<tr><th scope="row">'+r[0]+'</th><td class="num">'+r[1]+'</td></tr>';});return h+'</tbody></table>';}
+/* journal entry lines: [account, debit, credit] ; zero lines dropped */
+function je(cap,lines){var h='<table><caption>'+esc(cap)+'</caption><thead><tr><th scope="col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody>';lines.forEach(function(l){var d=R(l[1]||0),c=R(l[2]||0);if(!d&&!c)return;h+='<tr><td'+(c&&!d?' class="cr"':'')+'>'+esc(l[0])+'</td><td class="num">'+(d?"$"+fmt(d):'<span class="sr-only">none</span>')+'</td><td class="num">'+(c?"$"+fmt(c):'<span class="sr-only">none</span>')+'</td></tr>';});return h+'</tbody></table>';}
+/* account that changes: positive change = debit if asset, credit if liability */
+function deferredLine(acct,change,isAsset){if(!R(change))return [acct,0,0];var debit=(isAsset&&change>0)||(!isAsset&&change<0);return debit?[acct,Math.abs(change),0]:[acct,0,Math.abs(change)];}
+function expenseLines(exp){return exp>=0?["Income tax expense",exp,0]:["Income tax expense (benefit)",0,-exp];}
+
+/* ---------- problem generators ---------- */
+var GEN = {};
+
+GEN.dtl = {group:"Foundations",name:"Deferred tax liability",blurb:"Depreciation differences and the four-step method.",make:function(){
+  var co=company(),r=pick([.21,.25,.30]),orig=Math.random()<.6;
+  var P=K(rnd(2400,6800,100)),B=orig?K(rnd(0,1200,100)):K(rnd(900,2400,100));
+  var D=orig?K(rnd(200,900,100)):K(rnd(200,Math.min(B/1000,900),100));
+  var E=orig?B+D:B-D,TI=orig?P-D:P+D,pay=R(TI*r),begL=R(B*r),endL=R(E*r),chg=endL-begL,exp=pay+chg;
+  return {co:co,title:co,
+  scenario:'<p>'+esc(co)+' uses accelerated depreciation on its tax return and straight-line depreciation in its financial statements. '+(orig?'In '+Y+', tax depreciation <strong>exceeds</strong> book depreciation (the difference is originating).':'In '+Y+', book depreciation <strong>exceeds</strong> tax depreciation (the difference is reversing).')+' There are no other differences, and the enacted tax rate is '+pc(r)+' for all years.</p>',
+  given:givenTable("Data for "+Y,[["Pretax accounting income",$(P)],[(orig?"Tax depreciation in excess of book depreciation":"Book depreciation in excess of tax depreciation"),$(D)],["Cumulative temporary difference, beginning of "+Y,$(B)],["Deferred tax liability, beginning of "+Y,$(begL)],["Enacted tax rate",pc(r)]]),
+  key:'<p>A depreciation difference creates <strong>future taxable amounts</strong>: the company deducts more now and less later, so it owes more tax later. That obligation is a deferred tax liability. When the difference reverses, taxable income is higher than book income and the liability shrinks.</p>',
+  steps:[
+    numStep("Taxable income for "+Y,TI,orig?"Start with pretax accounting income. Extra tax depreciation is an additional deduction on the tax return, so subtract it.":"Start with pretax accounting income. When the difference reverses, tax depreciation is smaller than book depreciation, so add the difference.",'<span class="math">'+$(P)+(orig?" − ":" + ")+$(D)+" = "+$(TI)+'</span>'),
+    numStep("Step 1: Income tax payable",pay,"Multiply taxable income by the current tax rate.",'<span class="math">'+$(TI)+" × "+pc(r)+" = "+$(pay)+'</span>'),
+    numStep("Step 2: Ending deferred tax liability",endL,"Find the cumulative temporary difference at year-end ("+(orig?"beginning plus":"beginning minus")+" this year's difference), then multiply by the enacted rate.",'<span class="math">('+$(B)+(orig?" + ":" − ")+$(D)+") × "+pc(r)+" = "+$(E)+" × "+pc(r)+" = "+$(endL)+'</span>'),
+    numStep("Step 3: Change in the deferred tax liability (enter a decrease as negative)",chg,"Ending balance minus beginning balance.",'<span class="math">'+$(endL)+" − "+$(begL)+" = "+$(chg)+'</span>'),
+    numStep("Step 4: Income tax expense",exp,"Income tax expense is the plug: tax payable plus the increase in the DTL (or minus a decrease).",'<span class="math">'+$(pay)+(chg<0?" − "+$(-chg):" + "+$(chg))+" = "+$(exp)+'</span>')
+  ],
+  je:je("Journal entry, December 31, "+Y,[expenseLines(exp),deferredLine("Deferred tax liability",chg,false),["Income tax payable",0,pay]]),
+  take:"<p>Income tax expense equals pretax accounting income × the tax rate ("+$(P)+" × "+pc(r)+" = "+$(R(P*r))+") when there are no permanent differences and the rate never changes. The deferred tax liability simply shifts when the tax is paid.</p>"};
+}};
+
+GEN.dta = {group:"Foundations",name:"Deferred tax asset",blurb:"Warranty accruals create future deductible amounts.",make:function(){
+  var co=company(),r=pick([.21,.25,.30]);
+  var P=K(rnd(2400,6800,100)),Lb=K(rnd(0,1000,100)),W=K(rnd(300,1200,100));
+  var C=K(rnd(100,Math.min((Lb+W)/1000,1200),100)),Le=Lb+W-C,TI=P+W-C,pay=R(TI*r),begA=R(Lb*r),endA=R(Le*r),chg=endA-begA,exp=pay-chg;
+  return {co:co,title:co,
+  scenario:'<p>'+esc(co)+' offers a warranty on its products. In its financial statements, it accrues warranty expense in the year of sale. For tax purposes, warranty costs are deductible only when actually paid. There are no other differences, and the enacted tax rate is '+pc(r)+' for all years.</p>',
+  given:givenTable("Data for "+Y,[["Pretax accounting income",$(P)],["Warranty expense accrued (books)",$(W)],["Warranty costs paid (deductible for tax)",$(C)],["Estimated warranty liability, beginning of "+Y,$(Lb)],["Deferred tax asset, beginning of "+Y,$(begA)],["Enacted tax rate",pc(r)]]),
+  key:'<p>Accrued warranty expense is recognized in the books before it is deductible on the tax return. The company will deduct those costs later, so it has <strong>future deductible amounts</strong>. Those future tax savings are a deferred tax asset.</p>',
+  steps:[
+    numStep("Taxable income for "+Y,TI,"Start with pretax income. Add back the warranty expense accrued in the books, then subtract the warranty costs actually paid.",'<span class="math">'+$(P)+" + "+$(W)+" − "+$(C)+" = "+$(TI)+'</span>'),
+    numStep("Step 1: Income tax payable",pay,"Multiply taxable income by the current tax rate.",'<span class="math">'+$(TI)+" × "+pc(r)+" = "+$(pay)+'</span>'),
+    numStep("Step 2: Ending deferred tax asset",endA,"The ending warranty liability is the cumulative temporary difference: beginning liability + expense accrued − costs paid. Multiply it by the enacted rate.",'<span class="math">('+$(Lb)+" + "+$(W)+" − "+$(C)+") × "+pc(r)+" = "+$(Le)+" × "+pc(r)+" = "+$(endA)+'</span>'),
+    numStep("Step 3: Change in the deferred tax asset (enter a decrease as negative)",chg,"Ending balance minus beginning balance.",'<span class="math">'+$(endA)+" − "+$(begA)+" = "+$(chg)+'</span>'),
+    numStep("Step 4: Income tax expense",exp,"An increase in a DTA reduces income tax expense; a decrease adds to it. Expense = payable − change in DTA.",'<span class="math">'+$(pay)+(chg>=0?" − "+$(chg):" + "+$(-chg))+" = "+$(exp)+'</span>')
+  ],
+  je:je("Journal entry, December 31, "+Y,[expenseLines(exp),deferredLine("Deferred tax asset",chg,true),["Income tax payable",0,pay]]),
+  take:"<p>Here the company pays more tax now than its book income implies. The deferred tax asset records the tax it will save when the warranty costs are paid and deducted.</p>"};
+}};
+
+GEN.perm = {group:"Foundations",name:"Permanent and temporary differences",blurb:"Tax-exempt interest, fines, and an installment sale.",make:function(){
+  var co=company(),r=pick([.21,.25,.30]);
+  var P=K(rnd(3000,8000,100)),M=K(rnd(100,600,100)),F=K(rnd(100,400,100)),G=K(rnd(300,1500,100));
+  var TI=P-M+F-G,pay=R(TI*r),dtl=R(G*r),exp=pay+dtl,etr=Math.round(exp/P*1000)/10;
+  var opts=["Permanent difference","Temporary difference"];
+  return {co:co,title:co,
+  scenario:'<p>'+esc(co)+' reports the items below for '+Y+'. The installment sale profit is recognized in the books in '+Y+' but is taxed when cash is collected in later years. The company had no deferred tax balances at the beginning of '+Y+'. The enacted tax rate is '+pc(r)+' for all years.</p>',
+  given:givenTable("Data for "+Y,[["Pretax accounting income",$(P)],["Interest on municipal (tax-exempt) bonds",$(M)],["Fines paid for environmental violations (not deductible)",$(F)],["Installment sale gross profit deferred for tax",$(G)],["Enacted tax rate",pc(r)]]),
+  key:'<p>A <strong>permanent difference</strong> affects book income or taxable income, but never both, so it never reverses and creates no deferred tax. Permanent differences are why the <strong>effective tax rate</strong> differs from the statutory rate. A <strong>temporary difference</strong> reverses later and creates deferred tax.</p>',
+  steps:[
+    choiceStep("Municipal bond interest is a:",opts,0,"Will the interest ever be taxed in a future year?","Permanent difference. It is income in the books but is never taxable, so it never reverses."),
+    choiceStep("Fines for violating the law are a:",opts,0,"Will the fines ever be deductible on a future tax return?","Permanent difference. The fines are an expense in the books but are never deductible."),
+    numStep("Taxable income for "+Y,TI,"Subtract tax-exempt income, add back nondeductible expenses, and subtract the installment profit that is not yet taxable.",'<span class="math">'+$(P)+" − "+$(M)+" + "+$(F)+" − "+$(G)+" = "+$(TI)+'</span>'),
+    numStep("Step 1: Income tax payable",pay,"Multiply taxable income by the current tax rate.",'<span class="math">'+$(TI)+" × "+pc(r)+" = "+$(pay)+'</span>'),
+    numStep("Step 2: Ending deferred tax liability",dtl,"Only the temporary difference creates deferred tax. Multiply the deferred installment profit by the enacted rate.",'<span class="math">'+$(G)+" × "+pc(r)+" = "+$(dtl)+'</span>'),
+    numStep("Step 4: Income tax expense",exp,"The beginning DTL was zero, so the change equals the ending balance. Expense = payable + increase in DTL.",'<span class="math">'+$(pay)+" + "+$(dtl)+" = "+$(exp)+'</span>'),
+    numStep("Effective tax rate (as a percent, one decimal)",etr,"Effective tax rate = income tax expense ÷ pretax accounting income.",'<span class="math">'+$(exp)+" ÷ "+$(P)+" = "+etr+'%</span>',{unit:"%",tol:.1})
+  ],
+  je:je("Journal entry, December 31, "+Y,[["Income tax expense",exp,0],["Deferred tax liability",0,dtl],["Income tax payable",0,pay]]),
+  take:"<p>Check: (pretax income adjusted for permanent differences) × rate = ("+$(P)+" − "+$(M)+" + "+$(F)+") × "+pc(r)+" = "+$(R((P-M+F)*r))+", which equals income tax expense. The effective rate is "+etr+"% rather than "+pc(r)+" because of the two permanent differences.</p>"};
+}};
+
+var CLASS_OPTS=["Temporary difference that creates a deferred tax liability","Temporary difference that creates a deferred tax asset","Permanent difference (no deferred tax)"];
+var CLASS_BANK=[
+ ["Accelerated depreciation on the tax return; straight-line depreciation in the books",0,"Larger deductions now mean larger taxable amounts later."],
+ ["Installment sales: revenue recognized at the point of sale in the books, taxed when cash is collected",0,"The income will be taxed in future years when collected."],
+ ["Prepaid expenses deducted on the tax return when paid, expensed in the books over time",0,"The deduction has already been taken, so future taxable income will be higher."],
+ ["Equity-method investment income recognized in the books, taxed when dividends are received",0,"The income is booked now and taxed later."],
+ ["Warranty expense accrued in the books, deducted on the tax return when paid",1,"The deduction comes later, so the company will save tax in the future."],
+ ["Bad debt expense estimated in the books, deducted on the tax return when accounts are written off",1,"The deduction comes later when accounts are written off."],
+ ["Rent collected in advance: taxable when received, recognized as revenue in the books when earned",1,"Tax is paid now on revenue the books will report later, so future taxable income will be lower."],
+ ["Estimated litigation loss accrued in the books, deductible when the settlement is paid",1,"The expense is booked now and deducted later."],
+ ["Postretirement benefit expense accrued in the books, deductible when benefits are paid",1,"The expense is booked now and deducted later."],
+ ["Interest received on municipal bonds",2,"This income is never taxed, so there is nothing to reverse."],
+ ["Fines and penalties for violating the law",2,"These are never deductible, so there is nothing to reverse."],
+ ["Premiums paid on life insurance policies on key officers (company is the beneficiary)",2,"These premiums are never deductible."],
+ ["Life insurance proceeds received on the death of a key officer",2,"These proceeds are never taxable."],
+ ["Dividends received deduction on dividends from domestic corporations",2,"The deducted portion of the dividends is never taxed."]
+];
+GEN.classify = {group:"Foundations",name:"Classify the difference",blurb:"Temporary (DTL or DTA) or permanent?",make:function(){
+  var co=company(),items=shuffle(CLASS_BANK).slice(0,6);
+  return {co:co,title:co,
+  scenario:'<p>The tax staff at '+esc(co)+' is reviewing differences between the '+Y+' income statement and the '+Y+' tax return. Classify each item.</p>',
+  given:"",
+  key:'<p>Ask two questions. First, <strong>will it reverse?</strong> If never, it is a permanent difference. Second, if it reverses, will it <strong>increase</strong> future taxable income (deferred tax liability) or <strong>decrease</strong> it (deferred tax asset)?</p>',
+  steps:items.map(function(it,i){return choiceStep("Item "+(i+1)+": "+it[0],CLASS_OPTS,it[1],"Will it reverse? If yes, does it raise or lower taxable income in future years?",CLASS_OPTS[it[1]]+". "+it[2]);}),
+  je:"",
+  take:"<p>Rule of thumb: revenue taxed <em>after</em> it is booked, or expenses deducted <em>before</em> they are booked, create a deferred tax liability. Revenue taxed <em>before</em> it is booked, or expenses deducted <em>after</em> they are booked, create a deferred tax asset.</p>"};
+}};
+
+GEN.va = {group:"Measurement",name:"Valuation allowance",blurb:"Reduce a deferred tax asset to the amount likely to be realized.",make:function(){
+  var co=company(),r=pick([.21,.25,.30]);
+  var X=K(rnd(1000,3600,100)),U=K(rnd(200,X/1000-300,100)),V0=pick([0,0,K(rnd(20,200,10))]);
+  var dta=R(X*r),vae=R(U*r),net=dta-vae,adj=vae-V0;
+  return {co:co,title:co,
+  scenario:'<p>At December 31, '+Y+', '+esc(co)+' has future deductible amounts from accrued expenses. After weighing all available evidence, including recent losses in one division, management concludes that it is more likely than not that <strong>'+$(U)+'</strong> of the future deductible amounts will <strong>not</strong> be realized. The enacted tax rate is '+pc(r)+'.</p>',
+  given:givenTable("Data at December 31, "+Y,[["Cumulative future deductible amounts",$(X)],["Deductible amounts not expected to be realized",$(U)],["Valuation allowance, beginning of "+Y,$(V0)],["Enacted tax rate",pc(r)]]),
+  key:'<p>A deferred tax asset is recognized for <strong>all</strong> deductible temporary differences. It is then reduced by a <strong>valuation allowance</strong> if it is more likely than not (more than 50%) that some of it will not be realized, for example because future taxable income will be too low. Increasing the allowance increases income tax expense.</p>',
+  steps:[
+    numStep("Deferred tax asset before any allowance",dta,"Multiply all future deductible amounts by the enacted rate.",'<span class="math">'+$(X)+" × "+pc(r)+" = "+$(dta)+'</span>'),
+    numStep("Required ending balance in the valuation allowance",vae,"Multiply only the deductible amounts that will not be realized by the enacted rate.",'<span class="math">'+$(U)+" × "+pc(r)+" = "+$(vae)+'</span>'),
+    numStep("Net deferred tax asset expected to be realized",net,"Deferred tax asset minus the valuation allowance.",'<span class="math">'+$(dta)+" − "+$(vae)+" = "+$(net)+'</span>'),
+    numStep("Adjustment to the valuation allowance this year (enter a decrease as negative)",adj,"Required ending balance minus the beginning balance.",'<span class="math">'+$(vae)+" − "+$(V0)+" = "+$(adj)+'</span>'),
+    choiceStep("This adjustment to the valuation allowance will:",["Increase income tax expense","Decrease income tax expense","Have no effect on income tax expense"],adj>0?0:(adj<0?1:2),"Increasing the allowance reduces the asset. Where does the offsetting debit go?",adj>0?"Increase income tax expense by "+$(adj)+".":(adj<0?"Decrease income tax expense by "+$(-adj)+".":"No effect, because the allowance does not change."))
+  ],
+  je:adj===0?"<p>No entry is needed because the allowance is already at its required balance.</p>":je("Journal entry to adjust the valuation allowance, December 31, "+Y,adj>0?[["Income tax expense",adj,0],["Valuation allowance—deferred tax asset",0,adj]]:[["Valuation allowance—deferred tax asset",-adj,0],["Income tax expense",0,-adj]]),
+  take:"<p>The balance sheet reports the deferred tax asset of "+$(dta)+" less the valuation allowance of "+$(vae)+", a net "+$(net)+". The allowance is reevaluated every period and adjusted up or down.</p>"};
+}};
+
+GEN.sched = {group:"Measurement",name:"Multiple enacted rates",blurb:"Schedule reversals and apply each year's enacted rate.",make:function(){
+  var co=company(),t=pick([[.30,.25,.21],[.25,.30,.21],[.21,.25,.30],[.25,.21,.20],[.30,.21,.25]]),r0=t[0],r1=t[1],r2=t[2];
+  var P=K(rnd(3000,7000,100)),a=K(rnd(300,1200,100)),b=K(rnd(300,1200,100)),G=a+b;
+  var TI=P-G,pay=R(TI*r0),d1=R(a*r1),d2=R(b*r2),dtl=d1+d2,exp=pay+dtl;
+  return {co:co,title:co,
+  scenario:'<p>In '+Y+', '+esc(co)+' sold land on an installment basis. The full gross profit of '+$(G)+' is recognized in the books in '+Y+'. For tax purposes, the profit is taxed as cash is collected: '+$(a)+' in '+(Y+1)+' and '+$(b)+' in '+(Y+2)+'. There were no other differences and no beginning deferred tax balances. Tax laws already enacted set different rates for each year.</p>',
+  given:givenTable("Data for "+Y,[["Pretax accounting income",$(P)],["Installment profit taxable in "+(Y+1),$(a)],["Installment profit taxable in "+(Y+2),$(b)],["Enacted tax rate, "+Y,pc(r0)],["Enacted tax rate, "+(Y+1),pc(r1)],["Enacted tax rate, "+(Y+2),pc(r2)]]),
+  key:'<p>Deferred tax is measured using the <strong>enacted</strong> tax rate for the year in which each temporary difference will reverse. Schedule the future taxable amounts by year, then apply each year\'s rate. Rates that are proposed but not yet enacted are ignored.</p>',
+  steps:[
+    numStep("Taxable income for "+Y,TI,"Subtract the installment profit that will be taxed in later years.",'<span class="math">'+$(P)+" − "+$(G)+" = "+$(TI)+'</span>'),
+    numStep("Step 1: Income tax payable for "+Y,pay,"Use the "+Y+" rate for the current year.",'<span class="math">'+$(TI)+" × "+pc(r0)+" = "+$(pay)+'</span>'),
+    numStep("Deferred tax on the amount taxable in "+(Y+1),d1,"Use the rate enacted for "+(Y+1)+".",'<span class="math">'+$(a)+" × "+pc(r1)+" = "+$(d1)+'</span>'),
+    numStep("Deferred tax on the amount taxable in "+(Y+2),d2,"Use the rate enacted for "+(Y+2)+".",'<span class="math">'+$(b)+" × "+pc(r2)+" = "+$(d2)+'</span>'),
+    numStep("Step 2: Ending deferred tax liability",dtl,"Add the deferred tax for each future year.",'<span class="math">'+$(d1)+" + "+$(d2)+" = "+$(dtl)+'</span>'),
+    numStep("Step 4: Income tax expense for "+Y,exp,"Payable plus the increase in the DTL (beginning balance was zero).",'<span class="math">'+$(pay)+" + "+$(dtl)+" = "+$(exp)+'</span>')
+  ],
+  je:je("Journal entry, December 31, "+Y,[["Income tax expense",exp,0],["Deferred tax liability",0,dtl],["Income tax payable",0,pay]]),
+  take:"<p>Using the "+Y+" rate of "+pc(r0)+" for the whole difference would give a liability of "+$(R(G*r0))+" instead of "+$(dtl)+". The balance sheet should show the taxes the company actually expects to pay under enacted law.</p>"};
+}};
+
+GEN.rate = {group:"Measurement",name:"Change in tax rates",blurb:"Remeasure deferred taxes when a new rate is enacted.",make:function(){
+  var co=company(),pr=pick([[.30,.25],[.25,.21],[.21,.25],[.25,.30],[.30,.21]]),r0=pr[0],r1=pr[1],asset=Math.random()<.5;
+  var T=K(rnd(1000,5000,100)),old=R(T*r0),nw=R(T*r1),adj=nw-old,eff=asset?-adj:adj;
+  var acct=asset?"Deferred tax asset":"Deferred tax liability";
+  return {co:co,title:co,
+  scenario:'<p>At the end of '+Y+', before any adjustment for a new law, '+esc(co)+' reports a '+acct.toLowerCase()+' of '+$(old)+'. It reflects '+$(T)+' of cumulative future '+(asset?"deductible":"taxable")+' amounts measured at the previously enacted rate of '+pc(r0)+'. Late in '+Y+', Congress enacts a law changing the tax rate to '+pc(r1)+' for '+(Y+1)+' and later years. The temporary differences will reverse after '+Y+'.</p>',
+  given:givenTable("Data at December 31, "+Y,[["Cumulative future "+(asset?"deductible":"taxable")+" amounts",$(T)],[acct+" before the change",$(old)],["Previously enacted rate",pc(r0)],["Newly enacted rate ("+(Y+1)+" and later)",pc(r1)]]),
+  key:'<p>When a new tax rate is <strong>enacted</strong>, existing deferred tax assets and liabilities are remeasured right away. The entire effect goes to income tax expense in the period the law is enacted, not spread over future years. Taxes payable for the current year are not affected.</p>',
+  steps:[
+    numStep("Remeasured "+acct.toLowerCase()+" at the new rate",nw,"Multiply the cumulative temporary difference by the newly enacted rate.",'<span class="math">'+$(T)+" × "+pc(r1)+" = "+$(nw)+'</span>'),
+    numStep("Change in the "+acct.toLowerCase()+" (enter a decrease as negative)",adj,"New balance minus the old balance.",'<span class="math">'+$(nw)+" − "+$(old)+" = "+$(adj)+'</span>'),
+    numStep("Effect on "+Y+" income tax expense (enter a decrease as negative)",eff,asset?"A larger DTA means more future savings, which lowers expense. A smaller DTA raises expense.":"A larger DTL means more future taxes, which raises expense. A smaller DTL lowers expense.",asset?(adj<0?"The DTA decreases by "+$(-adj)+", so income tax expense increases by "+$(-adj)+".":"The DTA increases by "+$(adj)+", so income tax expense decreases by "+$(adj)+"."):(adj<0?"The DTL decreases by "+$(-adj)+", so income tax expense decreases by "+$(-adj)+".":"The DTL increases by "+$(adj)+", so income tax expense increases by "+$(adj)+".")),
+    choiceStep("As a result of the new law, "+Y+" net income will:",["Increase","Decrease","Not change"],eff<0?0:1,"Think about the direction of the change in income tax expense.",eff<0?"Increase. Lower income tax expense means higher net income.":"Decrease. Higher income tax expense means lower net income.")
+  ],
+  je:je("Journal entry to record the rate change, "+Y,asset?(adj<0?[["Income tax expense",-adj,0],[acct,0,-adj]]:[[acct,adj,0],["Income tax expense",0,adj]]):(adj<0?[[acct,-adj,0],["Income tax expense",0,-adj]]:[["Income tax expense",adj,0],[acct,0,adj]])),
+  take:"<p>"+(asset&&r1<r0?"A rate cut sounds like good news, but it shrinks the future savings in a deferred tax asset, so it <strong>reduces</strong> earnings in the year the law is enacted.":asset?"A rate increase makes each future deduction worth more, so the deferred tax asset grows and earnings rise.":r1<r0?"A rate cut lowers the taxes the company will pay when the difference reverses, so the deferred tax liability shrinks and earnings rise.":"A rate increase raises the future taxes owed, so the deferred tax liability grows and earnings fall.")+"</p>"};
+}};
+
+GEN.nol = {group:"Special topics",name:"Net operating loss carryforward",blurb:"Record the tax benefit, then use it subject to the 80% limit.",make:function(){
+  var co=company(),r=pick([.21,.25]);
+  var L=K(rnd(1000,5000,100)),I=K(rnd(2,10,1)*500);
+  var dta=R(L*r),netLoss=L-dta,used=Math.min(L,R(.8*I)),TI2=I-used,pay2=R(TI2*r),red=R(used*r),exp2=pay2+red,rem=L-used;
+  return {co:co,title:co,
+  scenario:'<p>After a slow tourist season, '+esc(co)+' reports an operating loss of '+$(L)+' in '+Y+' for both financial reporting and tax purposes. In '+(Y+1)+', it earns pretax accounting income and taxable income (before the NOL deduction) of '+$(I)+'. Current tax law allows the NOL to be carried forward indefinitely, but it can offset at most <strong>80%</strong> of taxable income in any year. No carryback is allowed. The enacted tax rate is '+pc(r)+'. Assume no valuation allowance is needed.</p>',
+  given:givenTable("Data",[["Operating loss, "+Y,$(L)],["Income before NOL deduction, "+(Y+1),$(I)],["NOL limit","80% of taxable income"],["Enacted tax rate",pc(r)]]),
+  key:'<p>An NOL carryforward is like a deductible temporary difference: it will reduce future taxable income. Record a <strong>deferred tax asset</strong> and an income tax <strong>benefit</strong> in the year of the loss. In later years, using the NOL reduces the asset.</p>',
+  steps:[
+    numStep(Y+": Deferred tax asset for the NOL carryforward",dta,"Multiply the NOL by the enacted rate.",'<span class="math">'+$(L)+" × "+pc(r)+" = "+$(dta)+'</span>'),
+    numStep(Y+": Net loss after the tax benefit (enter as a positive amount)",netLoss,"The tax benefit reduces the pretax loss.",'<span class="math">'+$(L)+" − "+$(dta)+" = "+$(netLoss)+'</span>'),
+    numStep((Y+1)+": NOL deduction used",used,"The deduction is the smaller of the available NOL and 80% of taxable income.",'<span class="math">Smaller of '+$(L)+" and 80% × "+$(I)+" ("+$(R(.8*I))+") = "+$(used)+'</span>'),
+    numStep((Y+1)+": Taxable income after the NOL deduction",TI2,"Income before the NOL minus the NOL deduction used.",'<span class="math">'+$(I)+" − "+$(used)+" = "+$(TI2)+'</span>'),
+    numStep((Y+1)+": Income tax payable",pay2,"Multiply taxable income after the NOL by the rate.",'<span class="math">'+$(TI2)+" × "+pc(r)+" = "+$(pay2)+'</span>'),
+    numStep((Y+1)+": Decrease in the deferred tax asset",red,"The NOL used times the rate is the part of the asset that is realized.",'<span class="math">'+$(used)+" × "+pc(r)+" = "+$(red)+'</span>'),
+    numStep((Y+1)+": Income tax expense",exp2,"Payable plus the decrease in the DTA.",'<span class="math">'+$(pay2)+" + "+$(red)+" = "+$(exp2)+'</span>'),
+    numStep("NOL carryforward remaining after "+(Y+1),rem,"Original NOL minus the amount used.",'<span class="math">'+$(L)+" − "+$(used)+" = "+$(rem)+'</span>')
+  ],
+  je:je("Journal entry, December 31, "+Y,[["Deferred tax asset—NOL carryforward",dta,0],["Income tax benefit (income tax expense)",0,dta]])+je("Journal entry, December 31, "+(Y+1),[["Income tax expense",exp2,0],["Deferred tax asset—NOL carryforward",0,red],["Income tax payable",0,pay2]]),
+  take:"<p>The tax benefit is recognized in the year of the loss, so the income statement shows a net loss of "+$(netLoss)+" rather than "+$(L)+". In "+(Y+1)+", income tax expense is "+$(exp2)+" ("+$(I)+" × "+pc(r)+") even though the company pays only "+$(pay2)+". "+(rem>0?"The remaining "+$(rem)+" NOL leaves a deferred tax asset of "+$(R(rem*r))+".":"The NOL is fully used, so the deferred tax asset is now zero.")+"</p>"};
+}};
+
+var PROBS=[[15,20,25,25,15],[30,25,20,15,10],[10,15,20,30,25],[20,10,30,25,15],[5,10,15,40,30],[40,20,20,10,10],[25,15,30,20,10]];
+GEN.utp = {group:"Special topics",name:"Uncertain tax positions",blurb:"Recognize the largest benefit more than 50% likely.",make:function(){
+  var co=company(),r=pick([.20,.25]);
+  var B=K(rnd(2,10,1)*100),D=R(B/r),P=K(rnd(3000,8000,100))+D;
+  var amts=[1,.8,.6,.4,.2].map(function(f){return R(B*f);}),pr=pick(PROBS),cum=0,ix=0,cums=[];
+  for(var i=0;i<5;i++){cum+=pr[i];cums.push(cum);}
+  for(i=0;i<5;i++){if(cums[i]>50){ix=i;break;}}
+  var rec=amts[ix],liab=B-rec,pay=R((P-D)*r),exp=pay+liab;
+  var tbl='<table><caption>Possible outcomes if the tax authority examines the position</caption><thead><tr><th scope="col" class="num">Tax benefit sustained</th><th scope="col" class="num">Probability</th></tr></thead><tbody>';
+  for(i=0;i<5;i++)tbl+='<tr><td class="num">'+$(amts[i])+'</td><td class="num">'+pr[i]+'%</td></tr>';
+  tbl+='</tbody></table>';
+  return {co:co,title:co,
+  scenario:'<p>On its '+Y+' tax return, '+esc(co)+' takes a '+$(D)+' deduction for research costs on a new product line. The deduction saves '+$(B)+' in taxes at the '+pc(r)+' rate. Management believes the position is more likely than not to be sustained on its merits, but the amount allowed may be smaller. Pretax accounting income is '+$(P)+', and there are no other differences.</p>',
+  given:tbl,
+  key:'<p>Uncertain tax positions use a two-step process. <strong>Recognition:</strong> a benefit is recognized only if the position is more likely than not (more than 50%) to be sustained. <strong>Measurement:</strong> recognize the <strong>largest</strong> amount of benefit whose <strong>cumulative</strong> probability exceeds 50%. Benefits claimed on the return but not recognized become a liability for unrecognized tax benefits.</p>',
+  steps:[
+    numStep("Tax benefit claimed on the tax return",B,"The deduction times the tax rate.",'<span class="math">'+$(D)+" × "+pc(r)+" = "+$(B)+'</span>'),
+    numStep("Tax benefit recognized in the financial statements",rec,"Start with the largest amount and add the probabilities moving down the table. Stop at the first amount where the running total is more than 50%.",'Cumulative probabilities: '+amts.map(function(a,k){return $(a)+" → "+cums[k]+"%";}).join("; ")+'. The first amount above 50% is <strong>'+$(rec)+'</strong>.'),
+    numStep("Liability for unrecognized tax benefits",liab,"Benefit claimed minus benefit recognized.",'<span class="math">'+$(B)+" − "+$(rec)+" = "+$(liab)+'</span>'),
+    numStep("Income tax payable for "+Y,pay,"The return includes the full deduction. Multiply (pretax income − deduction) by the rate.",'<span class="math">('+$(P)+" − "+$(D)+") × "+pc(r)+" = "+$(pay)+'</span>'),
+    numStep("Income tax expense for "+Y,exp,"Income tax payable plus the liability for unrecognized tax benefits.",'<span class="math">'+$(pay)+" + "+$(liab)+" = "+$(exp)+'</span>')
+  ],
+  je:je("Journal entry, December 31, "+Y,[["Income tax expense",exp,0],["Income tax payable",0,pay],["Liability for unrecognized tax benefits",0,liab]]),
+  take:"<p>Check: pretax income × rate − benefit recognized = "+$(R(P*r))+" − "+$(rec)+" = "+$(exp)+". If the tax authority later allows the full deduction, the liability is reversed and expense falls.</p>"};
+}};
+
+GEN.intra = {group:"Special topics",name:"Intraperiod tax allocation",blurb:"Report each item net of its own tax effect.",make:function(){
+  var co=company(),r=pick([.21,.25,.30]),loss=Math.random()<.6;
+  var C=K(rnd(2000,6000,100)),Dd=K(rnd(200,1500,100))*(loss?-1:1),G=K(rnd(100,600,100));
+  var taxC=R(C*r),incC=C-taxC,taxD=R(Dd*r),netD=Dd-taxD,NI=incC+netD,oci=G-R(G*r);
+  return {co:co,title:co,
+  scenario:'<p>'+esc(co)+' sold one of its divisions in '+Y+'. The division qualifies as a discontinued operation. The company also has an unrealized holding gain on available-for-sale debt securities, which is reported in other comprehensive income. The tax rate is '+pc(r)+' on all items.</p>',
+  given:givenTable("Data for "+Y+" (before taxes)",[["Income from continuing operations before income taxes",$(C)],[(loss?"Loss":"Gain")+" from discontinued operations",$(Math.abs(Dd))],["Unrealized holding gain on available-for-sale debt securities",$(G)],["Tax rate",pc(r)]]),
+  key:'<p><strong>Intraperiod tax allocation</strong> assigns income tax expense (or benefit) to the items that cause it. Income tax expense on the face of the income statement relates only to continuing operations. Discontinued operations and other comprehensive income items are each reported <strong>net of their own tax effect</strong>.</p>',
+  steps:[
+    numStep("Income tax expense on continuing operations",taxC,"Multiply income from continuing operations before taxes by the rate.",'<span class="math">'+$(C)+" × "+pc(r)+" = "+$(taxC)+'</span>'),
+    numStep("Income from continuing operations",incC,"Pretax income from continuing operations minus its tax.",'<span class="math">'+$(C)+" − "+$(taxC)+" = "+$(incC)+'</span>'),
+    numStep((loss?"Loss":"Gain")+" from discontinued operations, net of tax (enter a loss as negative)",netD,loss?"A loss creates a tax benefit, so the net loss is smaller than the pretax loss.":"A gain is taxed, so the net gain is smaller than the pretax gain.",'<span class="math">'+$(Dd)+(loss?" + "+$(-taxD)+" tax benefit":" − "+$(taxD)+" tax")+" = "+$(netD)+'</span>'),
+    numStep("Net income",NI,"Income from continuing operations plus (or minus) discontinued operations, net of tax.",'<span class="math">'+$(incC)+(netD<0?" − "+$(-netD):" + "+$(netD))+" = "+$(NI)+'</span>'),
+    numStep("Other comprehensive income, net of tax",oci,"The unrealized gain also carries its own tax effect.",'<span class="math">'+$(G)+" − ("+$(G)+" × "+pc(r)+") = "+$(oci)+'</span>')
+  ],
+  je:'<div class="given"><table><caption>Income statement excerpt, '+Y+'</caption><tbody>'+
+     '<tr><th scope="row">Income from continuing operations before income taxes</th><td class="num">'+$p(C)+'</td></tr>'+
+     '<tr><th scope="row">Income tax expense</th><td class="num">'+$p(-taxC)+'</td></tr>'+
+     '<tr><th scope="row">Income from continuing operations</th><td class="num">'+$p(incC)+'</td></tr>'+
+     '<tr><th scope="row">'+(loss?"Loss":"Gain")+' from discontinued operations, net of '+$(Math.abs(taxD))+' tax '+(loss?"benefit":"expense")+'</th><td class="num">'+$p(netD)+'</td></tr>'+
+     '<tr><th scope="row">Net income</th><td class="num">'+$p(NI)+'</td></tr>'+
+     '<tr><th scope="row">Other comprehensive income, net of '+$(R(G*r))+' tax</th><td class="num">'+$p(oci)+'</td></tr>'+
+     '<tr><th scope="row">Comprehensive income</th><td class="num">'+$p(NI+oci)+'</td></tr></tbody></table></div>',
+  take:"<p>Total tax for the period is "+$(taxC+taxD+R(G*r))+", but only the "+$(taxC)+" related to continuing operations is labeled income tax expense. Each other item carries its own tax effect.</p>"};
+}};
+
+GEN.bs = {group:"Special topics",name:"Balance sheet presentation",blurb:"Net deferred tax assets and liabilities as noncurrent.",make:function(){
+  var co=company(),r=pick([.21,.25,.30]);
+  var T1=K(rnd(1000,4000,100)),T2=K(rnd(300,2000,100)),T3=K(rnd(200,1200,100)),U=K(rnd(0,Math.min(T2/1000,600),100));
+  var dtl=R(T1*r),dta=R((T2+T3)*r),va=R(U*r),dtaN=dta-va,net=dtaN-dtl;
+  var opts=["Noncurrent asset","Noncurrent liability","Current asset","Current liability"];
+  return {co:co,title:co,
+  scenario:'<p>At December 31, '+Y+', '+esc(co)+' has the temporary differences below. All relate to the same tax jurisdiction. The enacted tax rate is '+pc(r)+'.</p>',
+  given:givenTable("Temporary differences at December 31, "+Y,[["Depreciation (future taxable amounts)",$(T1)],["Warranty liability (future deductible amounts)",$(T2)],["Allowance for uncollectible accounts (future deductible amounts)",$(T3)],["Future deductible amounts not expected to be realized",$(U)],["Enacted tax rate",pc(r)]]),
+  key:'<p>Within a single tax jurisdiction, deferred tax assets (net of any valuation allowance) and deferred tax liabilities are <strong>offset</strong> and reported as one net amount. Under U.S. GAAP, that net amount is always classified as <strong>noncurrent</strong>.</p>',
+  steps:[
+    numStep("Total deferred tax liability",dtl,"Multiply the future taxable amounts by the rate.",'<span class="math">'+$(T1)+" × "+pc(r)+" = "+$(dtl)+'</span>'),
+    numStep("Total deferred tax asset before the valuation allowance",dta,"Add the future deductible amounts, then multiply by the rate.",'<span class="math">('+$(T2)+" + "+$(T3)+") × "+pc(r)+" = "+$(dta)+'</span>'),
+    numStep("Deferred tax asset net of the valuation allowance",dtaN,"Valuation allowance = deductible amounts not expected to be realized × rate.",'<span class="math">'+$(dta)+" − ("+$(U)+" × "+pc(r)+") = "+$(dta)+" − "+$(va)+" = "+$(dtaN)+'</span>'),
+    numStep("Net deferred tax amount (enter as a positive amount)",Math.abs(net),"Offset the net deferred tax asset against the deferred tax liability.",'<span class="math">|'+$(dtaN)+" − "+$(dtl)+"| = "+$(Math.abs(net))+'</span>'),
+    choiceStep("On the balance sheet, the net amount is reported as a:",opts,net>=0?0:1,"Which is larger, the net DTA or the DTL? Then recall how deferred taxes are classified under U.S. GAAP.",(net>=0?"Noncurrent asset":"Noncurrent liability")+". The "+(net>=0?"net deferred tax asset is larger":"deferred tax liability is larger")+", and deferred taxes are always noncurrent under U.S. GAAP.")
+  ],
+  je:"",
+  take:"<p>Report a single <strong>net noncurrent deferred tax "+(net>=0?"asset":"liability")+"</strong> of "+$(Math.abs(net))+". The disclosure notes still show the gross deferred tax assets, the valuation allowance, and the gross deferred tax liabilities.</p>"};
+}};
+
+var ORDER=["classify","dtl","dta","perm","va","sched","rate","nol","utp","intra","bs"];
+
+/* ---------- UI ---------- */
+var groupsEl=document.getElementById("groups"),work=document.getElementById("work");
+var els={type:document.getElementById("prob-type"),title:document.getElementById("prob-title"),scen:document.getElementById("scenario"),given:document.getElementById("given"),key:document.getElementById("keytext"),keyD:document.getElementById("keyidea"),prog:document.getElementById("progress"),steps:document.getElementById("steps"),sum:document.getElementById("summary")};
+var state=null,typeBtns={};
+
+(function buildPicker(){
+  var groups={};
+  ORDER.forEach(function(k){var g=GEN[k].group;(groups[g]=groups[g]||[]).push(k);});
+  Object.keys(groups).forEach(function(g,gi){
+    var div=document.createElement("div");div.className="group";
+    var hid="grp-"+gi;
+    div.innerHTML='<h3 id="'+hid+'">'+esc(g)+'</h3>';
+    var ul=document.createElement("ul");ul.className="types";ul.setAttribute("aria-labelledby",hid);
+    groups[g].forEach(function(k){
+      var li=document.createElement("li"),b=document.createElement("button");
+      b.type="button";b.className="type-btn";b.id="type-"+k;b.setAttribute("aria-pressed","false");
+      b.innerHTML='<strong>'+esc(GEN[k].name)+'</strong><span>'+esc(GEN[k].blurb)+'</span>';
+      b.addEventListener("click",function(){start(k);});
+      typeBtns[k]=b;li.appendChild(b);ul.appendChild(li);
+    });
+    div.appendChild(ul);groupsEl.appendChild(div);
+  });
+})();
+
+function parseNum(s){
+  s=String(s).trim().replace(/−/g,"-");
+  if(!s)return null;
+  var neg=false;
+  if(/^\(.*\)$/.test(s)){neg=true;s=s.slice(1,-1).trim();}
+  s=s.replace(/[$,%\s]/g,"");
+  if(s.charAt(0)==="-"){neg=!neg;s=s.slice(1);}
+  if(s.charAt(0)==="$")s=s.slice(1);
+  if(!/^(\d+\.?\d*|\.\d+)$/.test(s))return NaN;
+  var v=parseFloat(s);return neg?-v:v;
+}
+function isCorrect(step,raw){
+  if(step.kind==="choice")return Number(raw)===step.answer;
+  var v=parseNum(raw);
+  if(Math.abs(v-step.answer)<=step.tol+1e-9)return true;
+  if(step.unit==="%"&&Math.abs(v*100-step.answer)<=step.tol+1e-9)return true;
+  return false;
+}
+function display(step){
+  if(step.kind==="choice")return step.options[step.answer];
+  if(step.unit==="%")return step.answer+"%";
+  return (step.answer<0?"-":"")+fmt(step.answer);
+}
+
+function start(k,quiet){
+  ORDER.forEach(function(x){typeBtns[x].setAttribute("aria-pressed",x===k?"true":"false");});
+  var p=GEN[k].make();
+  state={k:k,p:p,i:0,tries:p.steps.map(function(){return 0;}),first:0,second:0,shown:0};
+  work.hidden=false;
+  els.type.textContent=GEN[k].name;
+  els.title.textContent=p.title;
+  els.scen.innerHTML=p.scenario;
+  els.given.innerHTML=p.given||"";els.given.hidden=!p.given;
+  els.key.innerHTML=p.key;els.keyD.open=false;
+  els.sum.hidden=true;els.sum.innerHTML="";
+  els.steps.innerHTML="";
+  p.steps.forEach(function(s,i){els.steps.appendChild(buildStep(s,i,p.steps.length));});
+  showStep(0,false);
+  if(quiet)return;
+  els.title.focus({preventScroll:true});
+  els.title.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});
+}
+
+function buildStep(s,i,n){
+  var li=document.createElement("li");li.className="step";li.id="step-"+i;li.hidden=true;
+  var inId="ans-"+i,fbId="fb-"+i;
+  var field;
+  if(s.kind==="choice"){
+    field='<select id="'+inId+'" aria-describedby="'+fbId+'"><option value="">Select an answer</option>'+s.options.map(function(o,j){return '<option value="'+j+'">'+esc(o)+'</option>';}).join("")+'</select>';
+  }else{
+    field=(s.unit==="$"?'<span class="unit" aria-hidden="true">$</span>':'')+'<input id="'+inId+'" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-describedby="'+fbId+'">'+(s.unit==="%"?'<span class="unit" aria-hidden="true">%</span>':'');
+  }
+  li.innerHTML='<div class="step-num">Step '+(i+1)+' of '+n+'</div><label for="'+inId+'">'+esc(s.label)+(s.unit==="%"&&s.kind==="num"?' <span class="sr-only">(percent)</span>':s.kind==="num"?' <span class="sr-only">(dollars)</span>':'')+'</label><div class="answer-row">'+field+'<button type="button" class="btn" id="chk-'+i+'">Check my answer</button></div><div class="fb" id="'+fbId+'" role="status" aria-live="polite"></div>';
+  var input=li.querySelector("#"+inId),btn=li.querySelector("#chk-"+i);
+  btn.addEventListener("click",function(){check(i);});
+  if(s.kind!=="choice")input.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();check(i);}});
+  return li;
+}
+
+function showStep(i,focus){
+  var li=document.getElementById("step-"+i);li.hidden=false;
+  els.prog.textContent="Step "+(i+1)+" of "+state.p.steps.length;
+  if(focus)document.getElementById("ans-"+i).focus();
+}
+
+function check(i){
+  if(!state||i!==state.i)return;
+  var s=state.p.steps[i],input=document.getElementById("ans-"+i),fb=document.getElementById("fb-"+i),btn=document.getElementById("chk-"+i);
+  var raw=input.value;
+  if(s.kind==="choice"&&raw===""){fb.className="fb bad";fb.innerHTML='<p><span class="tag">No answer selected.</span> Choose an option, then press Check my answer.</p>';input.focus();return;}
+  if(s.kind==="num"){var v=parseNum(raw);
+    if(v===null){fb.className="fb bad";fb.innerHTML='<p><span class="tag">No answer entered.</span> Type a number, then press Check my answer.</p>';input.focus();return;}
+    if(isNaN(v)){fb.className="fb bad";fb.innerHTML='<p><span class="tag">That is not a number.</span> Use digits only, such as 12,500 or -12,500.</p>';input.setAttribute("aria-invalid","true");input.focus();return;}
+  }
+  state.tries[i]++;
+  if(isCorrect(s,raw)){
+    if(state.tries[i]===1)state.first++;else state.second++;
+    input.removeAttribute("aria-invalid");
+    fb.className="fb ok";fb.innerHTML='<p><span class="tag">Correct.</span> '+s.solution+'</p>';
+    finish(i);
+  }else if(state.tries[i]===1){
+    input.setAttribute("aria-invalid","true");
+    fb.className="fb hint";fb.innerHTML='<p><span class="tag">Not quite. Hint:</span> '+s.hint+' Try once more.</p>';
+    input.focus();if(input.select)input.select();
+  }else{
+    state.shown++;
+    input.removeAttribute("aria-invalid");
+    input.value=s.kind==="choice"?String(s.answer):display(s);
+    fb.className="fb bad";fb.innerHTML='<p><span class="tag">Here is the solution.</span> The answer is <strong>'+esc(display(s))+(s.unit==="$"&&s.kind==="num"?' dollars':'')+'</strong>. '+s.solution+'</p>';
+    finish(i);
+  }
+}
+
+function finish(i){
+  var li=document.getElementById("step-"+i);li.classList.add("done");
+  document.getElementById("ans-"+i).disabled=true;document.getElementById("chk-"+i).disabled=true;
+  state.i++;
+  if(state.i<state.p.steps.length){showStep(state.i,true);}
+  else summary();
+}
+
+function summary(){
+  var p=state.p,n=p.steps.length;
+  els.prog.textContent="All "+n+" steps complete.";
+  els.sum.innerHTML='<h3>Nice work. Here is the full solution.</h3><ul class="score" aria-label="Your results"><li>First try: '+state.first+' of '+n+'</li><li>After a hint: '+state.second+'</li><li>Solution shown: '+state.shown+'</li></ul>'+(p.je?'<div class="je">'+p.je+'</div>':'')+'<div class="takeaway">'+p.take+'</div><div class="row-btns"><button type="button" class="btn" id="again-btn">Try another with new numbers</button><button type="button" class="btn ghost" id="pick-btn">Change problem type</button></div>';
+  els.sum.hidden=false;
+  document.getElementById("again-btn").addEventListener("click",function(){start(state.k);});
+  document.getElementById("pick-btn").addEventListener("click",backToPicker);
+  els.sum.focus();
+}
+
+function backToPicker(){
+  var b=state&&typeBtns[state.k];
+  document.getElementById("pick-title").scrollIntoView({block:"start"});
+  if(b)b.focus();
+}
+document.getElementById("new-btn").addEventListener("click",function(){if(state)start(state.k);});
+document.getElementById("back-btn").addEventListener("click",backToPicker);
+start("dtl",true);
+
+/* expose generators for self-checks */
+window.__tutor={GEN:GEN,ORDER:ORDER};
+})();
+</script>
+</body>
+</html>
