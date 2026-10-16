@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ASC 740 Practice Quiz: Temporary Differences & Deferred Taxes</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #475569; /* WCAG AA 4.5:1+ compliant against white */
+      --primary: #1d4ed8;    /* Darker blue: 6.5:1 contrast */
+      --primary-hover: #1e40af;
+      --primary-light: #eff6ff;
+      --border: #cbd5e1;
+      --focus-ring: #0284c7;
+      --success: #15803d;
+      --success-bg: #f0fdf4;
+      --success-border: #86efac;
+      --danger: #b91c1c;
+      --danger-bg: #fef2f2;
+      --danger-border: #fca5a5;
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    /* Skip link for keyboard accessibility */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--primary);
+      color: #ffffff;
+      padding: 8px 16px;
+      z-index: 100;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 0 0 4px 0;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .scoreboard-sticky {
+      position: sticky;
+      top: 1rem;
+      z-index: 10;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.5rem;
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    .score-stats {
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .progress-bar-container {
+      flex: 1;
+      max-width: 260px;
+      margin: 0 1.5rem;
+      height: 14px;
+      background-color: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid #cbd5e1;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background-color: var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    .reset-btn {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .reset-btn:hover {
+      background-color: #f1f5f9;
+    }
+
+    .reset-btn:focus-visible,
+    .submit-btn:focus-visible,
+    input[type="radio"]:focus-visible {
+      outline: 3px solid var(--focus-ring);
+      outline-offset: 2px;
+    }
+
+    /* Semantic quiz card uses fieldset */
+    .quiz-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    fieldset {
+      border: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    legend {
+      width: 100%;
+      margin-bottom: 1.25rem;
+    }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .q-badge {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+    }
+
+    .topic-tag {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+    }
+
+    .question-text {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #0f172a;
+      display: block;
+      margin-top: 0.5rem;
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .option-label {
+      display: flex;
+      align-items: flex-start;
+      padding: 0.85rem 1rem;
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      background: #fafafa;
+    }
+
+    .option-label:hover {
+      background: #f1f5f9;
+      border-color: #94a3b8;
+    }
+
+    .option-label:has(input:focus-visible) {
+      outline: 3px solid var(--focus-ring);
+      outline-offset: 2px;
+    }
+
+    .option-label input[type="radio"] {
+      margin-top: 0.25rem;
+      margin-right: 0.75rem;
+      width: 1.1rem;
+      height: 1.1rem;
+    }
+
+    .option-label.correct {
+      background-color: var(--success-bg) !important;
+      border-color: var(--success) !important;
+      color: #14532d;
+      font-weight: 600;
+    }
+
+    .option-label.incorrect {
+      background-color: var(--danger-bg) !important;
+      border-color: var(--danger) !important;
+      color: #7f1d1d;
+    }
+
+    .submit-btn {
+      background-color: var(--primary);
+      color: #ffffff;
+      border: none;
+      padding: 0.65rem 1.4rem;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover:not(:disabled) {
+      background-color: var(--primary-hover);
+    }
+
+    .submit-btn:disabled {
+      background-color: #e2e8f0;
+      color: #64748b; /* Accessible contrast on disabled */
+      cursor: not-allowed;
+    }
+
+    /* Live feedback region for screen readers */
+    .feedback-box {
+      margin-top: 1.25rem;
+      padding: 1rem 1.25rem;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      display: none;
+    }
+
+    .feedback-box.show {
+      display: block;
+    }
+
+    .feedback-box.correct {
+      background: var(--success-bg);
+      border: 1.5px solid var(--success-border);
+      color: #14532d;
+    }
+
+    .feedback-box.incorrect {
+      background: var(--danger-bg);
+      border: 1.5px solid var(--danger-border);
+      color: #7f1d1d;
+    }
+
+    .feedback-explanation {
+      margin-top: 0.5rem;
+      color: #1e293b;
+      line-height: 1.55;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <div class="container">
+    <header>
+      <h1>ASC 740 Practice Quiz</h1>
+      <p class="subtitle">Interactive self-test on Temporary Differences, Deferred Taxes, and Valuation Allowances</p>
+    </header>
+
+    <main id="main-content">
+      <div class="scoreboard-sticky" aria-label="Quiz status summary">
+        <div class="score-stats" id="scoreDisplay" aria-live="polite">Score: 0 / 10 (0%)</div>
+        <div 
+          class="progress-bar-container" 
+          role="progressbar" 
+          id="progressBarWrapper"
+          aria-label="Quiz completion progress" 
+          aria-valuemin="0" 
+          aria-valuemax="100" 
+          aria-valuenow="0">
+          <div class="progress-bar-fill" id="progressBar"></div>
+        </div>
+        <button type="button" class="reset-btn" onclick="resetQuiz()">Reset Quiz</button>
+      </div>
+
+      <div id="quizContainer"></div>
+    </main>
+
+    <footer>
+      <p>Grounded in FASB ASC 740 (Income Taxes) &middot; Accessible Educational Resource</p>
+    </footer>
+  </div>
+
+  <script>
+    const quizData = [
+      {
+        id: 1,
+        topic: "FASB ASC 740 Foundations",
+        question: "Under U.S. GAAP (ASC 740), which of the following best defines a 'temporary difference'?",
+        options: [
+          "An item recognized for tax purposes that is permanently barred from financial accounting income.",
+          "A timing difference between the reported book value and tax basis of an asset or liability that originates in one period and reverses in later periods, yielding equal cumulative totals.",
+          "A difference caused when tax authorities forgive an accrued corporate income tax obligation.",
+          "A discretionary management accrual adjusted annually without statutory tax consequences."
+        ],
+        answer: 1,
+        explanation: "A temporary difference occurs when the tax return and income statement include an item in different years. The cumulative totals over the asset or liability's life are equal; it originates in one period and reverses in future periods (ASC 740-10-20)."
+      },
+      {
+        id: 2,
+        topic: "Income Tax Expense Components",
+        question: "Under accrual accounting in ASC 740, total income tax expense on the income statement is composed of:",
+        options: [
+          "Cash tax payments made during the reporting year plus IRS penalties.",
+          "The current portion (tax payable for the period) plus the deferred portion (the net change in deferred tax accounts).",
+          "Taxable income multiplied by the statutory rate, ignoring changes in deferred balances.",
+          "Pretax accounting income multiplied by the historical effective tax rate over five years."
+        ],
+        answer: 1,
+        explanation: "Income tax expense combines two pieces: the current portion (tax payable on this year's tax return) and the deferred portion (the net change in deferred tax assets and liabilities during the year; ASC 740-10-30-3)."
+      },
+      {
+        id: 3,
+        topic: "Deferred Tax Assets (DTA)",
+        question: "Which of the following events creates a Deferred Tax Asset (DTA)?",
+        options: [
+          "Collecting subscriptions or rent in advance, which is taxed when received but recognized in book revenue in subsequent years.",
+          "Deducting accelerated MACRS depreciation on the tax return while using straight-line depreciation on the income statement.",
+          "Selling real estate on installment and recognizing accounting income immediately while reporting taxable income as cash is collected.",
+          "Prepaying a multi-year commercial insurance premium and deducting the entire cash payment on Year 1's tax return."
+        ],
+        answer: 0,
+        explanation: "When cash received in advance is taxed immediately but earned in future periods on the income statement, taxes are paid in advance. This creates future deductible amounts and establishes a Deferred Tax Asset (ASC 740-10-25-20)."
+      },
+      {
+        id: 4,
+        topic: "Deferred Tax Liabilities (DTL)",
+        question: "Why does deducting accelerated depreciation on the tax return faster than straight-line book depreciation create a Deferred Tax Liability (DTL)?",
+        options: [
+          "It permanently eliminates future tax obligations.",
+          "It produces an immediate refund receivable from the government.",
+          "It postpones tax payments today, creating future taxable amounts when book depreciation exceeds tax depreciation in reversal years.",
+          "It creates future deductible amounts that reduce taxable income below book income in subsequent periods."
+        ],
+        answer: 2,
+        explanation: "Faster tax depreciation reduces current taxable income relative to book income. When the difference reverses in later years, book depreciation will exceed tax depreciation, pushing taxable income higher. Postponing tax creates future taxable amounts and a DTL."
+      },
+      {
+        id: 5,
+        topic: "Asset & Liability Method",
+        question: "Under the balance sheet approach (ASC 740), which relationship indicates the presence of a Deferred Tax Liability?",
+        options: [
+          "An asset's book value is less than its tax basis.",
+          "An asset's book value is greater than its tax basis.",
+          "A liability's book value is greater than its tax basis.",
+          "The tax basis of an asset exactly equals its carrying book value."
+        ],
+        answer: 1,
+        explanation: "When an asset's book value exceeds its tax basis, the asset will generate more accounting income than tax deductions upon recovery, creating future taxable amounts and a Deferred Tax Liability."
+      },
+      {
+        id: 6,
+        topic: "The Four-Step Process (Calculations)",
+        question: "A company acquires equipment for \$90,000 (3-year life, \$30,000/yr straight-line depreciation). Tax rules permit a full \$90,000 deduction in Year 1. Year 1 pretax accounting income is \$150,000 and the tax rate is 25%. What are Year 1 tax payable, ending DTL, and total income tax expense?",
+        options: [
+          "Tax payable: \$22,500 | Ending DTL: \$15,000 | Income tax expense: \$37,500",
+          "Tax payable: \$37,500 | Ending DTL: \$0 | Income tax expense: \$37,500",
+          "Tax payable: \$22,500 | Ending DTL: \$22,500 | Income tax expense: \$45,000",
+          "Tax payable: \$37,500 | Ending DTL: \$15,000 | Income tax expense: \$22,500"
+        ],
+        answer: 0,
+        explanation: "Taxable income = \$150,000 + \$30,000 book dep - \$90,000 tax dep = \$90,000. Step 1: Tax payable = \$90,000 × 25% = \$22,500. Step 2: Remaining taxable amount = \$60,000; DTL = \$60,000 × 25% = \$15,000. Step 3: Change in DTL = +\$15,000. Step 4: Tax expense = \$22,500 + \$15,000 = \$37,500."
+      },
+      {
+        id: 7,
+        topic: "Valuation Allowance Standard",
+        question: "Under ASC 740-10-30-5(e), what evidentiary threshold requires establishing a valuation allowance against a Deferred Tax Asset?",
+        options: [
+          "A remote possibility (<10%) that tax rates will decline.",
+          "A reasonable possibility (at least 20%) of future net operating losses.",
+          "It is 'more likely than not' (a likelihood greater than 50%) that some or all of the deferred tax asset will not be realized.",
+          "Virtual certainty (>95%) that the firm will be liquidated."
+        ],
+        answer: 2,
+        explanation: "ASC 740 requires a valuation allowance if, based on the weight of available positive and negative evidence, it is 'more likely than not' (a likelihood of more than 50%) that all or part of the deferred tax asset will not be realized."
+      },
+      {
+        id: 8,
+        topic: "Journal Entry Mechanics",
+        question: "What is the proper journal entry to record an increase in a valuation allowance for an unrealizable Deferred Tax Asset?",
+        options: [
+          "Debit Valuation Allowance; Credit Deferred Tax Asset",
+          "Debit Income Tax Expense; Credit Valuation Allowance",
+          "Debit Retained Earnings; Credit Deferred Tax Liability",
+          "Debit Income Tax Payable; Credit Valuation Allowance"
+        ],
+        answer: 1,
+        explanation: "Increasing a valuation allowance reduces the net deferred tax asset and increases deferred tax expense. The journal entry debits Income Tax Expense and credits Valuation Allowance (a contra-asset account)."
+      },
+      {
+        id: 9,
+        topic: "U.S. GAAP vs. IFRS",
+        question: "How does U.S. GAAP differ from IFRS (IAS 12) regarding the balance sheet presentation of deferred tax assets?",
+        options: [
+          "U.S. GAAP records the full DTA and uses a separate contra-asset valuation allowance; IFRS recognizes the DTA only to the extent realization is probable without a separate allowance.",
+          "IFRS requires a valuation allowance contra account, whereas U.S. GAAP prohibits valuation allowances.",
+          "U.S. GAAP forbids recognizing deferred tax assets altogether.",
+          "IFRS permits immediate expensing of all deferred tax balances directly into equity."
+        ],
+        answer: 0,
+        explanation: "Under U.S. GAAP, the full gross deferred tax asset is recorded and then reduced by a valuation allowance contra account. Under IFRS (IAS 12), the deferred tax asset is recognized only to the extent realization is probable, so no separate valuation allowance appears."
+      },
+      {
+        id: 10,
+        topic: "Income Tax Benefit",
+        question: "When does a corporation report an 'Income Tax Benefit' (a net credit to income tax expense) on its income statement?",
+        options: [
+          "Whenever taxable income exceeds pretax accounting income.",
+          "When the enacted tax rate decreases during the reporting year.",
+          "When an increase in net deferred tax assets (or reduction in net deferred tax liabilities) outweighs the current income tax payable.",
+          "Only when the IRS issues a direct cash refund for estimated quarterly overpayments."
+        ],
+        answer: 2,
+        explanation: "Income tax expense is the balancing figure in the tax journal entry. When debit adjustments to deferred tax assets (tax benefits) exceed credit entries to income tax payable, the balancing plug is a credit, reported as an Income Tax Benefit."
+      }
+    ];
+
+    let userAnswers = {};
+
+    function renderQuiz() {
+      const container = document.getElementById("quizContainer");
+      container.innerHTML = "";
+
+      quizData.forEach((q, index) => {
+        const card = document.createElement("section");
+        card.className = "quiz-card";
+        card.setAttribute("aria-labelledby", `q-title-${q.id}`);
+
+        const isAnswered = userAnswers[q.id] !== undefined;
+
+        let optionsHtml = "";
+        q.options.forEach((opt, optIndex) => {
+          let labelClass = "option-label";
+          if (isAnswered) {
+            if (optIndex === q.answer) labelClass += " correct";
+            else if (optIndex === userAnswers[q.id]) labelClass += " incorrect";
+          }
+
+          const optId = `opt-${q.id}-${optIndex}`;
+          optionsHtml += `
+            <label class="${labelClass}" id="label-${q.id}-${optIndex}" for="${optId}">
+              <input type="radio" 
+                id="${optId}"
+                name="question-${q.id}" 
+                value="${optIndex}" 
+                ${isAnswered ? "disabled" : ""} 
+                ${userAnswers[q.id] === optIndex ? "checked" : ""}
+                onchange="handleOptionSelect(${q.id})"
+              >
+              <span>${String.fromCharCode(65 + optIndex)}. ${opt}</span>
+            </label>
+          `;
+        });
+
+        card.innerHTML = `
+          <fieldset>
+            <legend>
+              <div class="card-meta">
+                <span class="q-badge">Question ${index + 1} of 10</span>
+                <span class="topic-tag">${q.topic}</span>
+              </div>
+              <span class="question-text" id="q-title-${q.id}">${q.question}</span>
+            </legend>
+            <div class="options-list" role="radiogroup" aria-labelledby="q-title-${q.id}">
+              ${optionsHtml}
+            </div>
+            <button 
+              type="button" 
+              class="submit-btn" 
+              id="btn-${q.id}" 
+              onclick="submitAnswer(${q.id})" 
+              ${isAnswered ? "disabled" : ""}>
+              ${isAnswered ? "Submitted" : "Submit Answer"}
+            </button>
+            <div 
+              class="feedback-box ${isAnswered ? 'show ' + (userAnswers[q.id] === q.answer ? 'correct' : 'incorrect') : ''}" 
+              id="feedback-${q.id}"
+              role="status"
+              aria-live="polite">
+              <strong>${isAnswered ? (userAnswers[q.id] === q.answer ? "Correct!" : "Incorrect.") : ""}</strong>
+              <div class="feedback-explanation">${isAnswered ? q.explanation : ""}</div>
+            </div>
+          </fieldset>
+        `;
+
+        container.appendChild(card);
+      });
+
+      updateScoreboard();
+    }
+
+    function handleOptionSelect(qId) {
+      const btn = document.getElementById(`btn-${qId}`);
+      if (btn) btn.disabled = false;
+    }
+
+    function submitAnswer(qId) {
+      const selectedInput = document.querySelector(`input[name="question-${qId}"]:checked`);
+      if (!selectedInput) return;
+
+      const selectedOpt = parseInt(selectedInput.value, 10);
+      userAnswers[qId] = selectedOpt;
+
+      const q = quizData.find(item => item.id === qId);
+      const isCorrect = selectedOpt === q.answer;
+
+      q.options.forEach((_, optIndex) => {
+        const label = document.getElementById(`label-${qId}-${optIndex}`);
+        const input = document.getElementById(`opt-${qId}-${optIndex}`);
+        input.disabled = true;
+
+        if (optIndex === q.answer) {
+          label.classList.add("correct");
+        } else if (optIndex === selectedOpt) {
+          label.classList.add("incorrect");
+        }
+      });
+
+      const btn = document.getElementById(`btn-${qId}`);
+      btn.disabled = true;
+      btn.textContent = "Submitted";
+
+      const feedback = document.getElementById(`feedback-${qId}`);
+      feedback.className = `feedback-box show ${isCorrect ? 'correct' : 'incorrect'}`;
+      feedback.innerHTML = `
+        <strong>${isCorrect ? "Correct!" : "Incorrect."}</strong>
+        <div class="feedback-explanation">${q.explanation}</div>
+      `;
+
+      updateScoreboard();
+    }
+
+    function updateScoreboard() {
+      const answeredKeys = Object.keys(userAnswers);
+      const totalAnswered = answeredKeys.length;
+      let correctCount = 0;
+
+      answeredKeys.forEach(k => {
+        const q = quizData.find(item => item.id === parseInt(k, 10));
+        if (userAnswers[k] === q.answer) correctCount++;
+      });
+
+      const pct = totalAnswered > 0 ? Math.round((correctCount / totalAnswered) * 100) : 0;
+      document.getElementById("scoreDisplay").textContent = `Score: ${correctCount} / 10 (${pct}%)`;
+
+      const progressPct = Math.round((totalAnswered / quizData.length) * 100);
+      const progressBar = document.getElementById("progressBar");
+      const progressWrapper = document.getElementById("progressBarWrapper");
+      
+      progressBar.style.width = `${progressPct}%`;
+      progressWrapper.setAttribute("aria-valuenow", progressPct);
+    }
+
+    function resetQuiz() {
+      userAnswers = {};
+      renderQuiz();
+    }
+
+    renderQuiz();
+  </script>
+</body>
+</html>
