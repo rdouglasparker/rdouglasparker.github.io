@@ -311,6 +311,21 @@ function L(chapter, title, description, link, image){ return { type:"link", chap
 
 const ASSIGNMENTS = [
   // ---- Topic Notes (N) ----
+    N("Ch. 12", "Debt Investments Notes",
+     "Reading notes for investments in debt securities.",
+     "Topic_Notes/Ch12-debtinvestments.html", "images/ch12-notes-debt-investments.svg"),
+
+    N("Ch. 12", "Equity Investments Notes",
+     "Reading notes for investments in equity securities and the equity method.",
+     "Topic_Notes/Ch12-equityinvestments.html", "images/ch12-notes-equity-investments.svg"),
+
+    N("Ch. 13", "Current Liabilities Notes",
+     "Reading notes for current liabilities.",
+     "Topic_Notes/Ch13A-currentliabilities.html", "images/ch13-notes-current-liabilities.svg"),
+
+    N("Ch. 13", "Loss Contingencies Notes",
+     "Reading notes for loss contingencies.",
+     "Topic_Notes/Ch13B-contingencies.html", "images/ch13-notes-contingencies.svg"),
   N("Ch. 15", "Lease Classification Notes",
      "Notes for Lease Classification and accounting for a financing and sales-type lease.",
      "Topic_Notes/Ch15-financeleases.html", "images/ch15-notes-lease-classification.svg"),
@@ -322,8 +337,36 @@ const ASSIGNMENTS = [
     N("Ch. 15", "Lease Topics",
      "Notes for various lease circumstances and how to account for them.",
      "Topic_Notes/Ch15-leasetopics.html", "images/ch15-notes-lease-topics.svg"),
+
+    N("Ch. 16", "Income Taxes Unit Overview",
+     "A summary overview of accounting for income taxes.",
+     "Topic_Notes/IncomeTaxes-1-Overview.html", "images/ch16-notes-overview.svg"),
+
+    N("Ch. 16", "Income Taxes Detailed Notes A",
+     "Temporary differences, deferred tax liabilities and assets, and valuation allowances.",
+     "Topic_Notes/IncomeTaxes-2-DetailedNotes-A.html", "images/ch16-notes-detailed-a.svg"),
+
+    N("Ch. 16", "Income Taxes Detailed Notes B",
+     "Permanent differences, the effective tax rate, tax rate changes, and multiple differences.",
+     "Topic_Notes/IncomeTaxes-3-DetailedNotes-B.html", "images/ch16-notes-detailed-b.svg"),
   
   // ---- Guided walkthroughs (W) ----
+  W("Ch. 12", "Debt Investments Walkthrough",
+     "Guided walk-through of accounting for investments in debt securities.",
+     "WalkThroughs/Ch12-debtinvestments-walkthrough.html", "images/ch12-walk-debt-investments.svg"),
+
+  W("Ch. 12", "Equity Investments Walkthrough",
+     "Guided walk-through of accounting for equity investments.",
+     "WalkThroughs/Ch12-equityinvestments-walkthrough.html", "images/ch12-walk-equity-investments.svg"),
+
+  W("Ch. 13", "Current Liabilities Walkthrough",
+     "Guided walk-through of current liabilities.",
+     "WalkThroughs/Ch13A-currentliabilities-walkthrough.html", "images/ch13-walk-current-liabilities.svg"),
+
+  W("Ch. 13", "Loss Contingencies Walkthrough",
+     "Guided walk-through of loss contingencies.",
+     "WalkThroughs/Ch13B-contingencies-walkthrough.html", "images/ch13-walk-contingencies.svg"),
+
   W("Ch. 14", "Bond Pricing Claude Agent Walkthrough",
      "A chat-based walkthrough of calculating bond price.",
      "https://claude.ai/public/artifacts/b6642e61-09e3-48d0-af32-02af514c952e", "images/ch14-walk-bond-pricing.svg"),
@@ -357,6 +400,14 @@ const ASSIGNMENTS = [
      "Investment classification and valuation practice, algorithmic and self-contained.",
      "https://rdouglasparker.github.io/EquitySecurityProblems/", "images/ch12-hw-equity-securities.svg"),
 
+  H("Ch. 12", "Debt Securities Problem - Pisgah Ridge Technologies",
+     "Self-grading, algorithmic: investments in debt securities.",
+     "Ch12-DebtInvestmentsProblem.html", "images/ch12-hw-pisgah-ridge-technologies.svg"),
+
+  H("Ch. 12", "Equity Securities Problem - Mica Ridge Bakery & Black Balsam",
+     "Self-grading, algorithmic: equity method and fair value investments.",
+     "Ch12-EquityInvestmentProblems.html", "images/ch12-hw-mica-ridge-black-balsam.svg"),
+
   H("Ch. 13", "Current Liabilities - Nantahala BioSciences",
      "Entries for Nantahala Biosciences liability transactions.",
      "https://rdouglasparker.github.io/CurrentLiabilitiesProblem1/", "images/ch13-hw-nantahala-biosciences.svg"),
@@ -377,6 +428,10 @@ const ASSIGNMENTS = [
      "Understanding amortization schedules.",
      "TennesseeHarvester.html", "images/ch14-hw-tennessee-harvester.svg"),
 
+  H("Ch. 14", "Long-Term Debt - Bond Problem 4",
+     "Pricing bonds at issuance.",
+     "NantahalaInstruments.html", "images/ch14-hw-nantahala-instruments.svg"),
+
   H("Ch. 15", "Leases Problem 1 - Wayah Valley Brewing",
      "Understanding classification and accounting for a finance lease.",
      "Ch15-FinanceLease-Lessee.html", "images/ch15-hw-wayah-valley-brewing.svg"),
@@ -392,6 +447,18 @@ const ASSIGNMENTS = [
   H("Ch. 15", "Leases Problem 4 - Highlands Lease Partners",
      "Calculate the Lease Payment for the Lessor and the PV of the minimum lease payments for the lessee.",
      "Ch15-LeasePayments-LessorAndLessee.html", "images/ch15-hw-highlands-lease-partners.svg"),
+
+  H("Ch. 15", "Leases Problem 5 - Glenville Computer Leasing",
+     "Operating lease entries for the lessee and lessor, and short-term lease entries.",
+     "Ch15-OperatingAndShortTermLease.html", "images/ch15-hw-glenville-computer-leasing.svg"),
+
+  H("Ch. 15", "Leases Problem 6 - Wayah Bald Leasing",
+     "Lessor payment and entries for a sales-type lease with a purchase option.",
+     "Ch15-PurchaseOptionSalesTypeLease.html", "images/ch15-hw-wayah-bald-leasing.svg"),
+
+  H("Ch. 15", "Leases Problem 7 - Cheoah Ridge Leasing",
+     "Lessor and lessee amounts for sales-type and finance leases with residual values.",
+     "Ch15-ResidualValueSalesTypeLease.html", "images/ch15-hw-cheoah-ridge-leasing.svg"),
 
   H("Ch. 16", "Income Taxes Problem 1 - Hickory Ridge Furniture",
      "Record income taxes for four years when a change in the tax rate is enacted.",
@@ -446,6 +513,13 @@ const ASSIGNMENTS = [
   
   // ---- Additional links (L) ----
   // Use these for anything else: a textbook site, a video, a calculator, a reference.
+  L("Ch. 16", "Income Taxes Slides",
+     "Chapter slides: accounting for income taxes (ASC 740).",
+     "Slides/Ch16-Slides.html", "images/ch16-slides.svg"),
+
+  L("Ch. 16", "Income Taxes Tutor",
+     "Step-by-step practice on accounting for income taxes with randomized numbers.",
+     "Tutor/Ch16_Tutor.html", "images/ch16-tutor.svg"),
   // L("", "FASB Accounting Standards Codification",
   //    "Free read-only access to the authoritative GAAP literature.",
   //    "https://asc.fasb.org/", null),
