@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Introducing Deferred Taxes — Guided Walkthrough</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+  :root {
+    --wcu-purple: #4B2E83; --wcu-purple-dark: #341f5c; --wcu-gold: #C8A24A;
+    --ink: #232023; --paper: #fdfcfb; --panel: #f7f3ec; --rule: #e2d9c8; --gold-light: #f4ecd8;
+    --muted: #5f5955; --warn: #6b4f0e; --warn-bg: #FBF3DC;
+    --ok: #1e5e32; --ok-bg: #e6f2e9; --no: #8c1d18; --no-bg: #fbe9e7;
+    --border-strong: #8a7f6c;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .progress-fill { transition: none !important; } }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; line-height: 1.55; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+  .skip-link { position: absolute; left: 1rem; top: -3rem; background: #fff; color: var(--wcu-purple-dark); font-weight: 700; padding: 0.5rem 0.9rem; border: 2px solid var(--wcu-purple); border-radius: 5px; z-index: 10; }
+  .skip-link:focus { top: 1rem; }
+  a { color: var(--wcu-purple); }
+  header { background: linear-gradient(135deg, var(--wcu-purple) 0%, var(--wcu-purple-dark) 100%); color: #fff; padding: 2.2rem 1.5rem 1.8rem; border-bottom: 6px solid var(--wcu-gold); }
+  header .inner { max-width: 780px; margin: 0 auto; }
+  header .eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: #e3c77f; margin: 0 0 0.4rem; }
+  header h1 { font-family: 'Source Serif 4', serif; font-weight: 700; font-size: 1.9rem; margin: 0 0 0.3rem; }
+  header p.sub { margin: 0; color: #ece6f5; font-size: 0.98rem; }
+  .progress-bar { margin: 0 0 0.4rem; padding: 0; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .progress-track { flex: 1; height: 8px; background: var(--rule); border-radius: 4px; overflow: hidden; border: 1px solid var(--border-strong); }
+  .progress-fill { height: 100%; width: 0%; background: var(--wcu-purple); transition: width 0.3s ease; }
+  .progress-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--muted); white-space: nowrap; }
+  main { max-width: 780px; margin: 0 auto; padding: 1.2rem 1.5rem 4rem; }
+  main:focus { outline: none; }
+  .lo-block { margin-bottom: 2.8rem; }
+  h2 { font-family: 'Source Serif 4', serif; font-size: 1.5rem; margin: 0 0 0.8rem; color: var(--wcu-purple-dark); border-bottom: 2px solid var(--rule); padding-bottom: 0.4rem; }
+  p { margin: 0.6rem 0; }
+  ul, ol { padding-left: 1.4rem; }
+  li { margin-bottom: 0.4rem; }
+  .key-idea { background: var(--panel); border-left: 4px solid var(--wcu-gold); padding: 0.9rem 1.1rem; border-radius: 0 6px 6px 0; margin: 0.9rem 0; }
+  .key-idea strong { color: var(--wcu-purple-dark); }
+  .facts { background: #fff; border: 1px solid var(--rule); border-radius: 8px; padding: 1rem 1.2rem; margin: 1rem 0 1.6rem; }
+  .ex-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--wcu-purple); margin: 0 0 0.4rem; line-height: 1.4; }
+  .facts ul { margin: 0.4rem 0 0; }
+  .example { background: #fff; border: 1px solid var(--rule); border-radius: 8px; padding: 1rem 1.2rem 1.2rem; margin: 1.1rem 0; }
+  .table-wrap { overflow-x: auto; }
+  .table-wrap:focus-visible { outline: 3px solid var(--wcu-purple); outline-offset: 2px; }
+  table.data { border-collapse: collapse; width: 100%; margin: 0.7rem 0; font-size: 0.88rem; }
+  table.data caption { text-align: left; font-weight: 600; font-size: 0.85rem; color: var(--wcu-purple-dark); padding: 0 0 0.3rem; }
+  table.data th, table.data td { border: 1px solid var(--rule); padding: 0.4rem 0.55rem; text-align: left; vertical-align: top; }
+  table.data thead th { background: var(--panel); color: var(--wcu-purple-dark); font-family: 'IBM Plex Mono', monospace; font-size: 0.74rem; text-transform: uppercase; }
+  table.data tbody th { font-weight: 500; min-width: 9rem; }
+  table.data thead th.num { white-space: normal; }
+  table.data td.num, table.data th.num { text-align: right; font-family: 'IBM Plex Mono', monospace; white-space: nowrap; }
+  table.data tr.total-row th, table.data tr.total-row td { background: var(--panel); font-weight: 700; }
+  table.data tr.sub-head th { font-style: italic; font-weight: 600; color: var(--wcu-purple-dark); }
+  table.data th.indent { padding-left: 1.5rem; }
+  .result-ok { color: var(--ok); background: var(--ok-bg); font-weight: 700; }
+  .result-no { color: var(--no); background: var(--no-bg); font-weight: 700; }
+
+  .input-block { display: flex; flex-direction: column; gap: 0.6rem; margin: 0.9rem 0 0.6rem; padding: 0.9rem; background: var(--panel); border-radius: 6px; }
+  .input-item { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+  .input-item label { flex: 1 1 280px; font-size: 0.9rem; font-weight: 600; color: var(--wcu-purple-dark); }
+  .input-item .unit { font-family: 'IBM Plex Mono', monospace; color: var(--muted); }
+  .input-item input[type="number"], .input-item select { font-family: 'IBM Plex Mono', monospace; font-size: 0.92rem; padding: 0.45rem 0.6rem; border: 1px solid var(--border-strong); border-radius: 5px; background: #fff; color: var(--ink); min-height: 2.4rem; }
+  .input-item input[type="number"] { width: 150px; }
+  .input-item select { min-width: 190px; font-family: 'Inter', sans-serif; }
+  .input-item input:focus-visible, .input-item select:focus-visible { outline: 3px solid var(--wcu-purple); outline-offset: 2px; border-color: var(--wcu-purple); }
+  .input-item [aria-invalid="true"] { border: 2px solid var(--no); }
+  .reveal-btn { align-self: flex-start; font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #fff; background: var(--wcu-purple); border: none; padding: 0.6rem 1.1rem; border-radius: 5px; cursor: pointer; margin-top: 0.2rem; min-height: 2.75rem; }
+  .reveal-btn:hover { background: var(--wcu-purple-dark); }
+  .reveal-btn:focus-visible { outline: 3px solid var(--wcu-purple-dark); outline-offset: 3px; box-shadow: 0 0 0 3px #fff inset; }
+
+  .feedback:empty { display: none; }
+  .feedback { font-weight: 600; padding: 0.6rem 0.9rem; border-radius: 6px; margin: 0.4rem 0 0.2rem; font-size: 0.92rem; color: var(--warn); background: var(--warn-bg); border: 1px solid #d9c58f; }
+
+  .solution { margin-top: 0.9rem; padding-top: 0.9rem; border-top: 1px dashed var(--border-strong); }
+  .solution[hidden] { display: none; }
+  .solution-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--wcu-purple); margin: 1rem 0 0.4rem; }
+  .solution-label:first-child { margin-top: 0; }
+  .solution-label:focus { outline: 3px solid var(--wcu-purple); outline-offset: 3px; }
+  .final-answer { font-size: 1rem; margin-top: 0.6rem; }
+  .final-answer strong { color: var(--wcu-purple-dark); }
+
+  table.je-table { border-collapse: collapse; width: 100%; margin: 0.4rem 0 0.2rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.83rem; }
+  table.je-table caption { text-align: left; }
+  table.je-table th { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; color: var(--muted); text-align: left; padding: 0.2rem 0.3rem; border-bottom: 1px solid var(--rule); }
+  table.je-table th.amt { text-align: right; }
+  table.je-table td { padding: 0.26rem 0.3rem; vertical-align: top; }
+  table.je-table td.je-debit-amt, table.je-table td.je-credit-amt { text-align: right; width: 105px; white-space: nowrap; }
+  table.je-table td.indent { padding-left: 1.8rem; }
+  .je-desc { font-size: 0.85rem; color: var(--muted); font-style: italic; margin: 0.2rem 0 0.9rem; }
+  .date-tag { display: inline-block; font-family: 'IBM Plex Mono', monospace; font-weight: 700; font-size: 0.75rem; color: #fff; background: var(--wcu-purple-dark); padding: 0.12rem 0.5rem; border-radius: 4px; margin-top: 0.4rem; }
+
+  .steps-grid { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 1rem; align-items: start; margin: 0.6rem 0; }
+  @media (max-width: 620px) { .steps-grid { grid-template-columns: 1fr; } }
+  ol.four-step { list-style: none; padding: 0.7rem 0.9rem; margin: 0; background: var(--gold-light); border-radius: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 0.84rem; }
+  ol.four-step li { margin: 0.2rem 0; }
+  ol.four-step li strong { color: var(--wcu-purple-dark); }
+  table.t-acct { border-collapse: collapse; width: 100%; font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem; }
+  table.t-acct caption { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--wcu-purple-dark); font-size: 0.86rem; padding-bottom: 0.2rem; border-bottom: 2px solid var(--ink); }
+  table.t-acct th, table.t-acct td { padding: 0.25rem 0.4rem; }
+  table.t-acct thead th { font-size: 0.7rem; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  table.t-acct tbody th { text-align: left; font-weight: 400; font-family: 'Inter', sans-serif; font-size: 0.8rem; color: var(--muted); }
+  table.t-acct td { text-align: right; width: 28%; }
+  table.t-acct td.dr { border-right: 2px solid var(--ink); }
+  table.t-acct tr.bal td, table.t-acct tr.bal th { border-top: 1px solid var(--ink); font-weight: 700; color: var(--ink); }
+
+  code { font-family: 'IBM Plex Mono', monospace; background: var(--panel); padding: 0 0.25rem; border-radius: 3px; }
+  footer { text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--muted); padding: 1.5rem; }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to the walkthrough</a>
+
+<header>
+  <div class="inner">
+    <p class="eyebrow">Guided Walkthrough · Not Graded</p>
+    <h1>Introducing Deferred Taxes</h1>
+    <p class="sub">Follow one temporary difference from origination through reversal using the four-step process.</p>
+  </div>
+</header>
+
+
+<main id="main" tabindex="-1">
+<div class="progress-bar">
+  <div class="progress-track" id="progressBar" role="progressbar" aria-label="Walkthrough progress" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-label" id="progressLabel" aria-hidden="true">0 revealed</div>
+</div>
+
+  <div class="key-idea">
+    <p style="margin:0"><strong>How this works:</strong> Work each problem on your own first and enter your answer in every box. Then select <strong>Reveal Answer</strong> to see the correct answer next to yours, along with a detailed explanation and the journal entries. Enter all amounts as positive numbers; the questions tell you whether an amount is an increase or a decrease. Answers within $1 of the solution count as a match (rounding). This page isn't graded and doesn't get submitted anywhere; it's just for practice.</p>
+  </div>
+
+  <div class="key-idea">
+    <p style="margin:0"><strong>The four-step process</strong> used throughout this walkthrough: <strong>Step 1</strong> determine income tax payable from taxable income on the tax return; <strong>Step 2</strong> determine the ending balance of the deferred tax liability (or asset) from future taxable (or deductible) amounts; <strong>Step 3</strong> find the change needed to adjust the account to that balance; <strong>Step 4</strong> income tax expense is the plug that balances the entry.</p>
+  </div>
+
+  <section class="facts" aria-labelledby="facts-h">
+    <h2 class="ex-label" id="facts-h" style="border:0;padding:0;font-size:0.78rem">The company used in Problems 1–8</h2>
+    
+    <p>On January 1, <span class="yr0">2026</span>, <strong>Catamount Climbing Gear, Inc.</strong> bought a computerized rope-braiding machine for <strong>$300,000</strong>. The machine has a three-year useful life and no residual value.</p>
+    <ul>
+      <li><strong>Income statement:</strong> straight-line depreciation of <strong>$100,000</strong> per year in <span class="yr0">2026</span>, <span class="yr1">2027</span>, and <span class="yr2">2028</span>.</li>
+      <li><strong>Tax return:</strong> accelerated depreciation of <strong>$180,000</strong> in <span class="yr0">2026</span>, <strong>$90,000</strong> in <span class="yr1">2027</span>, and <strong>$30,000</strong> in <span class="yr2">2028</span>.</li>
+      <li>Pretax accounting income is <strong>$500,000</strong> in each of the three years (after the $100,000 of straight-line depreciation).</li>
+      <li>Depreciation is the <em>only</em> difference between pretax accounting income and taxable income.</li>
+      <li>The enacted tax rate is <strong>25%</strong> for all years. Catamount had no deferred taxes before <span class="yr0">2026</span>.</li>
+    </ul>
+  </section>
+
+  <section class="lo-block" aria-labelledby="s-understandingthetemporarydiffe">
+    <h2 id="s-understandingthetemporarydiffe">Understanding the Temporary Difference</h2>
+    
+    <article class="example" id="p1" aria-labelledby="p1-h">
+      <h3 class="ex-label" id="p1-h">Problem 1 — What Kind of Difference Is This?</h3>
+      
+      <p>Before calculating anything, size up the depreciation difference. In <span class="yr0">2026</span>, Catamount deducts $180,000 on its tax return but reports only $100,000 of depreciation expense in its income statement.</p>
+      <div class="input-block" role="group" aria-labelledby="p1-h">
+        <div class="input-item"><label for="p1-a">1. Is the depreciation difference a temporary difference or a permanent difference?</label>
+          <select id="p1-a" class="ans" data-label="Type of difference" data-answer="Temporary difference"><option value="">Select…</option><option>Temporary difference</option><option>Permanent difference</option></select></div>
+        <div class="input-item"><label for="p1-b">2. In <span class="yr0">2026</span>, is taxable income higher or lower than pretax accounting income?</label>
+          <select id="p1-b" class="ans" data-label="Taxable income vs. accounting income" data-answer="Lower"><option value="">Select…</option><option>Higher</option><option>Lower</option></select></div>
+        <div class="input-item"><label for="p1-c">3. When the difference reverses, will it create future taxable amounts or future deductible amounts?</label>
+          <select id="p1-c" class="ans" data-label="Future amounts" data-answer="Future taxable amounts"><option value="">Select…</option><option>Future taxable amounts</option><option>Future deductible amounts</option></select></div>
+        <div class="input-item"><label for="p1-d">4. Which deferred tax account does Catamount need?</label>
+          <select id="p1-d" class="ans" data-label="Deferred tax account" data-answer="Deferred tax liability"><option value="">Select…</option><option>Deferred tax liability</option><option>Deferred tax asset</option></select></div>
+        <button type="button" class="reveal-btn" data-problem="p1" aria-expanded="false" aria-controls="p1-sol">Reveal Answer<span class="sr-only"> for Problem 1</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p1-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 1</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+        
+        <h4 class="solution-label">Explanation</h4>
+        <ol>
+          <li><strong>Temporary.</strong> Over the machine's life, total depreciation is $300,000 on <em>both</em> the income statement and the tax return. Only the <em>timing</em> differs, so the difference is temporary. It <strong>originates</strong> in <span class="yr0">2026</span> and <strong>reverses</strong> in <span class="yr1">2027</span> and <span class="yr2">2028</span>.</li>
+          <li><strong>Lower.</strong> The tax return deducts $80,000 more depreciation than the income statement, so taxable income ($420,000) is $80,000 lower than pretax accounting income ($500,000).</li>
+          <li><strong>Future taxable amounts.</strong> Catamount uses up most of its tax deductions early. In <span class="yr1">2027</span> and <span class="yr2">2028</span>, tax depreciation will be <em>less</em> than book depreciation, so taxable income will be <em>higher</em> than accounting income. Those later increases are future taxable amounts.</li>
+          <li><strong>Deferred tax liability.</strong> Future taxable amounts mean Catamount will pay more tax later. The tax it gets to put off today is a <strong>deferred tax liability (DTL)</strong>.</li>
+        </ol>
+        <p class="final-answer"><strong>Rule of thumb:</strong> taxable income lower than accounting income now → future taxable amounts → deferred tax liability.</p>
+      </div>
+    </article>
+  </section>
+  <section class="lo-block" aria-labelledby="s-origination">
+    <h2 id="s-origination">The Four-Step Process: Origination Year (<span class="yr0">2026</span>)</h2>
+    
+    <article class="example" id="p2" aria-labelledby="p2-h">
+      <h3 class="ex-label" id="p2-h">Problem 2 — Step 1: Tax Payable for <span class="yr0">2026</span></h3>
+      
+      <p>Begin the four-step process. Calculate Catamount's taxable income on its <span class="yr0">2026</span> tax return and the income tax payable for <span class="yr0">2026</span>.</p>
+      <div class="input-block" role="group" aria-labelledby="p2-h">
+        <div class="input-item"><label for="p2-a">Taxable income (tax return), <span class="yr0">2026</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p2-a" class="ans" data-label="Taxable income" data-answer="420000" data-unit="$"></div>
+        <div class="input-item"><label for="p2-b">Income tax payable, <span class="yr0">2026</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p2-b" class="ans" data-label="Income tax payable" data-answer="105000" data-unit="$"></div>
+        <button type="button" class="reveal-btn" data-problem="p2" aria-expanded="false" aria-controls="p2-sol">Reveal Answer<span class="sr-only"> for Problem 2</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p2-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 2</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+        
+        <h4 class="solution-label">Explanation</h4>
+        <p>Start with pretax accounting income and adjust for the temporary difference. The income statement subtracted $100,000 of depreciation, but the tax return subtracts $180,000, so taxable income is $80,000 lower:</p>
+        <p class="final-answer"><strong>$500,000 − $80,000 = $420,000 taxable income</strong></p>
+        <p class="final-answer"><strong>$420,000 × 25% = $105,000 tax payable</strong></p>
+        <p>Tax payable is always based on the <em>tax return</em>, never on pretax accounting income. This is the amount Catamount owes the government for <span class="yr0">2026</span>.</p>
+      </div>
+    </article>
+    <article class="example" id="p3" aria-labelledby="p3-h">
+      <h3 class="ex-label" id="p3-h">Problem 3 — Step 2: The Ending Deferred Tax Liability</h3>
+      
+      <p>Now look forward. Determine the future taxable amounts that remain at the end of <span class="yr0">2026</span> and the deferred tax liability Catamount should report on December 31, <span class="yr0">2026</span>.</p>
+      <div class="input-block" role="group" aria-labelledby="p3-h">
+        <div class="input-item"><label for="p3-a">Future taxable amount in <span class="yr1">2027</span> ($100,000 book − $90,000 tax):<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p3-a" class="ans" data-label="Future taxable amount, {yr1}" data-answer="10000" data-unit="$"></div>
+        <div class="input-item"><label for="p3-b">Future taxable amount in <span class="yr2">2028</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p3-b" class="ans" data-label="Future taxable amount, {yr2}" data-answer="70000" data-unit="$"></div>
+        <div class="input-item"><label for="p3-c">Deferred tax liability, ending balance, December 31, <span class="yr0">2026</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p3-c" class="ans" data-label="DTL ending balance" data-answer="20000" data-unit="$"></div>
+        <button type="button" class="reveal-btn" data-problem="p3" aria-expanded="false" aria-controls="p3-sol">Reveal Answer<span class="sr-only"> for Problem 3</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p3-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 3</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+        
+        <h4 class="solution-label">Explanation</h4>
+        <p>In each future year, book depreciation stays at $100,000, but tax depreciation drops. The excess is a future taxable amount:</p>
+        <ul>
+          <li><span class="yr1">2027</span>: $100,000 − $90,000 = <strong>$10,000</strong></li>
+          <li><span class="yr2">2028</span>: $100,000 − $30,000 = <strong>$70,000</strong></li>
+        </ul>
+        <p>Together, the future taxable amounts equal the $80,000 temporary difference that originated in <span class="yr0">2026</span>. Multiply by the enacted tax rate for the years they reverse:</p>
+        <p class="final-answer"><strong>$80,000 × 25% = $20,000 deferred tax liability</strong></p>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Catamount Climbing Gear — 2026 (in dollars; amounts in parentheses reduce income)"><table class="data">
+          <caption>Catamount Climbing Gear — <span class="yr0">2026</span> (in dollars; amounts in parentheses reduce income)</caption>
+          <thead><tr><th scope="col"><span class="sr-only">Item</span></th><th scope="col" class="num">Current year <span class="yr0">2026</span></th><th scope="col" class="num">Future taxable <span class="yr1">2027</span></th><th scope="col" class="num">Future taxable <span class="yr2">2028</span></th><th scope="col" class="num">Future taxable total</th></tr></thead>
+          <tbody><tr><th scope="row">Pretax accounting income</th><td class="num">$500,000</td><td class="num"></td><td class="num"></td><td class="num"></td></tr><tr class="sub-head"><th scope="row">Temporary difference:</th><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td></tr><tr><th scope="row" class="indent">Depreciation ($100,000 − $180,000)</th><td class="num">(80,000)</td><td class="num">$10,000</td><td class="num">$70,000</td><td class="num">$80,000</td></tr><tr class="total-row"><th scope="row">Taxable income (tax return)</th><td class="num">$420,000</td><td class="num"></td><td class="num"></td><td class="num"></td></tr><tr><th scope="row">Enacted tax rate</th><td class="num">25%</td><td class="num">25%</td><td class="num">25%</td><td class="num">25%</td></tr><tr><th scope="row">Tax payable</th><td class="num">$105,000</td><td class="num"></td><td class="num"></td><td class="num"></td></tr><tr><th scope="row">Deferred tax liability</th><td class="num"></td><td class="num"></td><td class="num"></td><td class="num">$20,000</td></tr></tbody></table></div>
+        <p>This is the book's schedule layout: the current year on the left, future taxable amounts on the right.</p>
+      </div>
+    </article>
+    <article class="example" id="p4" aria-labelledby="p4-h">
+      <h3 class="ex-label" id="p4-h">Problem 4 — Steps 3 and 4: Income Tax Expense and the Entry</h3>
+      
+      <p>Catamount's deferred tax liability had a $0 beginning balance. Find the change needed in the account (Step 3) and total income tax expense for <span class="yr0">2026</span> (Step 4).</p>
+      <div class="input-block" role="group" aria-labelledby="p4-h">
+        <div class="input-item"><label for="p4-a">Does the deferred tax liability need to increase or decrease?</label>
+          <select id="p4-a" class="ans" data-label="Direction of DTL change" data-answer="Increase"><option value="">Select…</option><option>Increase</option><option>Decrease</option></select></div>
+        <div class="input-item"><label for="p4-b">Amount of the change in the deferred tax liability:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p4-b" class="ans" data-label="DTL change" data-answer="20000" data-unit="$"></div>
+        <div class="input-item"><label for="p4-c">Income tax expense, <span class="yr0">2026</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p4-c" class="ans" data-label="Income tax expense" data-answer="125000" data-unit="$"></div>
+        <button type="button" class="reveal-btn" data-problem="p4" aria-expanded="false" aria-controls="p4-sol">Reveal Answer<span class="sr-only"> for Problem 4</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p4-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 4</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+        
+        <h4 class="solution-label">Explanation</h4>
+        <div class="steps-grid"><ol class="four-step" aria-label="The four-step process"><li><strong>Step 1:</strong> Tax payable: $105,000</li><li><strong>Step 2:</strong> DTL end bal: $20,000</li><li><strong>Step 3:</strong> DTL change: $20,000</li><li><strong>Step 4:</strong> Tax exp plug: $125,000</li></ol><div class="table-wrap"><table class="t-acct">
+          <caption>Deferred Tax Liability (T-account)</caption>
+          <thead><tr><th scope="col"><span class="sr-only">Entry</span></th><th scope="col" style="text-align:right">Debit</th><th scope="col" style="text-align:right">Credit</th></tr></thead>
+          <tbody><tr><th scope="row">Beginning balance</th><td class="dr"></td><td>0</td></tr><tr><th scope="row">Change, <span class="yr0">2026</span> (plug)</th><td class="dr"></td><td>20,000</td></tr><tr class="bal"><th scope="row">Ending balance</th><td class="dr"></td><td>20,000</td></tr></tbody></table></div></div>
+        <p>The T-account shows Step 3: to move from a $0 beginning balance to the required $20,000 ending balance, credit (increase) the deferred tax liability by $20,000.</p>
+        <p>Step 4: income tax expense is the amount needed to balance the entry: the current portion payable now ($105,000) plus the deferred portion ($20,000) = <strong>$125,000</strong>.</p>
+        
+        <div class="date-tag" aria-hidden="true">Dec. 31, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Dec. 31, 2026</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Income tax expense (to balance)</td><td class="je-debit-amt">125,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Income tax payable (determined above)</td><td class="je-debit-amt"></td><td class="je-credit-amt">105,000</td></tr><tr><td class="indent">Deferred tax liability (determined above)</td><td class="je-debit-amt"></td><td class="je-credit-amt">20,000</td></tr></tbody>
+        </table></div><p class="je-desc">Notice that $125,000 is exactly 25% of the $500,000 pretax accounting income. With only a temporary difference, tax expense matches the income actually reported in the income statement.</p>
+      </div>
+    </article>
+    <article class="example" id="p5" aria-labelledby="p5-h">
+      <h3 class="ex-label" id="p5-h">Problem 5 — The Balance Sheet Perspective</h3>
+      
+      <p>The book also shows a second way to do Step 2: compare the machine's <strong>accounting book value</strong> with its <strong>tax basis</strong> at the end of <span class="yr0">2026</span>. The difference between them is called a <strong>book-tax difference</strong>.</p>
+      <div class="input-block" role="group" aria-labelledby="p5-h">
+        <div class="input-item"><label for="p5-a">Accounting book value of the machine, Dec. 31, <span class="yr0">2026</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p5-a" class="ans" data-label="Accounting book value" data-answer="200000" data-unit="$"></div>
+        <div class="input-item"><label for="p5-b">Tax basis of the machine, Dec. 31, <span class="yr0">2026</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p5-b" class="ans" data-label="Tax basis" data-answer="120000" data-unit="$"></div>
+        <div class="input-item"><label for="p5-c">Deferred tax liability (book-tax difference × 25%):<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p5-c" class="ans" data-label="Deferred tax liability" data-answer="20000" data-unit="$"></div>
+        <button type="button" class="reveal-btn" data-problem="p5" aria-expanded="false" aria-controls="p5-sol">Reveal Answer<span class="sr-only"> for Problem 5</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p5-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 5</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+        
+        <h4 class="solution-label">Explanation</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Book-tax difference for Catamount&#x27;s machine (in dollars)"><table class="data">
+          <caption>Book-tax difference for Catamount's machine (in dollars)</caption>
+          <thead><tr><th scope="col"><span class="sr-only">Item</span></th><th scope="col" class="num">12/31/<span class="yr0">2026</span></th><th scope="col" class="num">12/31/<span class="yr1">2027</span></th><th scope="col" class="num">12/31/<span class="yr2">2028</span></th></tr></thead>
+          <tbody><tr><th scope="row">Accounting book value</th><td class="num">$200,000</td><td class="num">$100,000</td><td class="num">$0</td></tr><tr><th scope="row">Tax basis</th><td class="num">120,000</td><td class="num">30,000</td><td class="num">0</td></tr><tr><th scope="row">Temporary difference</th><td class="num">$80,000</td><td class="num">$70,000</td><td class="num">$0</td></tr><tr><th scope="row">Tax rate</th><td class="num">25%</td><td class="num">25%</td><td class="num">25%</td></tr><tr class="total-row"><th scope="row">Deferred tax liability (DTL)</th><td class="num">$20,000</td><td class="num">$17,500</td><td class="num">$0</td></tr></tbody></table></div>
+        <p>Book value is $300,000 − $100,000 = $200,000. Tax basis is $300,000 − $180,000 = $120,000. That $80,000 book-tax difference means Catamount has $80,000 less depreciation left to deduct on future tax returns than it has left to expense in its income statement, so future taxable income will be higher by $80,000.</p>
+        <p class="final-answer"><strong>$80,000 × 25% = $20,000</strong>, the same DTL found with the income statement approach in Problem 3.</p>
+        <p>The income statement and balance sheet perspectives are two complementary ways to reach the same Step 2 balance. Use whichever is easier for the facts you're given.</p>
+      </div>
+    </article>
+  </section>
+  <section class="lo-block" aria-labelledby="s-reversal">
+    <h2 id="s-reversal">Following the Reversal</h2>
+    
+    <article class="example" id="p6" aria-labelledby="p6-h">
+      <h3 class="ex-label" id="p6-h">Problem 6 — The Difference Starts to Reverse (<span class="yr1">2027</span>)</h3>
+      
+      <p>In <span class="yr1">2027</span>, Catamount reports $100,000 of depreciation expense but deducts only $90,000 on its tax return. Pretax accounting income is again $500,000. Work all four steps for <span class="yr1">2027</span>.</p>
+      <div class="input-block" role="group" aria-labelledby="p6-h">
+        <div class="input-item"><label for="p6-a">Step 1 — Income tax payable, <span class="yr1">2027</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p6-a" class="ans" data-label="Income tax payable" data-answer="127500" data-unit="$"></div>
+        <div class="input-item"><label for="p6-b">Step 2 — Deferred tax liability, ending balance, Dec. 31, <span class="yr1">2027</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p6-b" class="ans" data-label="DTL ending balance" data-answer="17500" data-unit="$"></div>
+        <div class="input-item"><label for="p6-c">Step 3 — Does the deferred tax liability increase or decrease?</label>
+          <select id="p6-c" class="ans" data-label="Direction of DTL change" data-answer="Decrease"><option value="">Select…</option><option>Increase</option><option>Decrease</option></select></div>
+        <div class="input-item"><label for="p6-d">Step 3 — Amount of the change:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p6-d" class="ans" data-label="DTL change" data-answer="2500" data-unit="$"></div>
+        <div class="input-item"><label for="p6-e">Step 4 — Income tax expense, <span class="yr1">2027</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p6-e" class="ans" data-label="Income tax expense" data-answer="125000" data-unit="$"></div>
+        <button type="button" class="reveal-btn" data-problem="p6" aria-expanded="false" aria-controls="p6-sol">Reveal Answer<span class="sr-only"> for Problem 6</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p6-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 6</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+        
+        <h4 class="solution-label">Explanation</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Catamount Climbing Gear — 2027 (in dollars)"><table class="data">
+          <caption>Catamount Climbing Gear — <span class="yr1">2027</span> (in dollars)</caption>
+          <thead><tr><th scope="col"><span class="sr-only">Item</span></th><th scope="col" class="num">Current year <span class="yr1">2027</span></th><th scope="col" class="num">Future taxable <span class="yr2">2028</span></th></tr></thead>
+          <tbody><tr><th scope="row">Pretax accounting income</th><td class="num">$500,000</td><td class="num"></td></tr><tr class="sub-head"><th scope="row">Temporary difference:</th><td class="num"></td><td class="num"></td></tr><tr><th scope="row" class="indent">Depreciation ($100,000 − $90,000)</th><td class="num">10,000</td><td class="num">$70,000</td></tr><tr class="total-row"><th scope="row">Taxable income (tax return)</th><td class="num">$510,000</td><td class="num"></td></tr><tr><th scope="row">Enacted tax rate</th><td class="num">25%</td><td class="num">25%</td></tr><tr><th scope="row">Tax payable</th><td class="num">$127,500</td><td class="num"></td></tr><tr><th scope="row">Deferred tax liability</th><td class="num"></td><td class="num">$17,500</td></tr></tbody></table></div>
+        <p>Now taxable income is <em>higher</em> than accounting income: $10,000 of the original $80,000 temporary difference reverses. Only $70,000 of future taxable amounts remain, so the DTL should be $70,000 × 25% = $17,500.</p>
+        <div class="steps-grid"><ol class="four-step" aria-label="The four-step process"><li><strong>Step 1:</strong> Tax payable: $127,500</li><li><strong>Step 2:</strong> DTL end bal: $17,500</li><li><strong>Step 3:</strong> DTL change: $(2,500)</li><li><strong>Step 4:</strong> Tax exp plug: $125,000</li></ol><div class="table-wrap"><table class="t-acct">
+          <caption>Deferred Tax Liability (T-account)</caption>
+          <thead><tr><th scope="col"><span class="sr-only">Entry</span></th><th scope="col" style="text-align:right">Debit</th><th scope="col" style="text-align:right">Credit</th></tr></thead>
+          <tbody><tr><th scope="row">Beginning balance</th><td class="dr"></td><td>20,000</td></tr><tr><th scope="row">Change, <span class="yr1">2027</span> (plug)</th><td class="dr">2,500</td><td></td></tr><tr class="bal"><th scope="row">Ending balance</th><td class="dr"></td><td>17,500</td></tr></tbody></table></div></div>
+        
+        <div class="date-tag" aria-hidden="true">Dec. 31, <span class="yr1">2027</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Dec. 31, 2027</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Income tax expense (to balance)</td><td class="je-debit-amt">125,000</td><td class="je-credit-amt"></td></tr><tr><td>Deferred tax liability (determined above)</td><td class="je-debit-amt">2,500</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Income tax payable (determined above)</td><td class="je-debit-amt"></td><td class="je-credit-amt">127,500</td></tr></tbody>
+        </table></div><p class="je-desc">The DTL decreases (debit) because part of the deferred tax is now being paid. Tax expense is the current portion ($127,500) minus the decrease in the DTL ($2,500).</p>
+      </div>
+    </article>
+    <article class="example" id="p7" aria-labelledby="p7-h">
+      <h3 class="ex-label" id="p7-h">Problem 7 — Full Reversal (<span class="yr2">2028</span>)</h3>
+      
+      <p>In <span class="yr2">2028</span>, Catamount reports $100,000 of depreciation expense and deducts only $30,000 on its tax return. Pretax accounting income is $500,000. Complete the four steps for <span class="yr2">2028</span>.</p>
+      <div class="input-block" role="group" aria-labelledby="p7-h">
+        <div class="input-item"><label for="p7-a">Step 1 — Income tax payable, <span class="yr2">2028</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p7-a" class="ans" data-label="Income tax payable" data-answer="142500" data-unit="$"></div>
+        <div class="input-item"><label for="p7-b">Step 2 — Deferred tax liability, ending balance, Dec. 31, <span class="yr2">2028</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p7-b" class="ans" data-label="DTL ending balance" data-answer="0" data-unit="$"></div>
+        <div class="input-item"><label for="p7-c">Step 3 — Amount of the decrease in the deferred tax liability:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p7-c" class="ans" data-label="DTL decrease" data-answer="17500" data-unit="$"></div>
+        <div class="input-item"><label for="p7-d">Step 4 — Income tax expense, <span class="yr2">2028</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p7-d" class="ans" data-label="Income tax expense" data-answer="125000" data-unit="$"></div>
+        <button type="button" class="reveal-btn" data-problem="p7" aria-expanded="false" aria-controls="p7-sol">Reveal Answer<span class="sr-only"> for Problem 7</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p7-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 7</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+        
+        <h4 class="solution-label">Explanation</h4>
+        <p>Taxable income is $500,000 + ($100,000 − $30,000) = $570,000, so tax payable is $570,000 × 25% = <strong>$142,500</strong>. The rest of the temporary difference reverses, leaving no future taxable amounts and a required DTL of <strong>$0</strong>.</p>
+        <div class="steps-grid"><ol class="four-step" aria-label="The four-step process"><li><strong>Step 1:</strong> Tax payable: $142,500</li><li><strong>Step 2:</strong> DTL end bal: $0</li><li><strong>Step 3:</strong> DTL change: $(17,500)</li><li><strong>Step 4:</strong> Tax exp plug: $125,000</li></ol><div class="table-wrap"><table class="t-acct">
+          <caption>Deferred Tax Liability (T-account)</caption>
+          <thead><tr><th scope="col"><span class="sr-only">Entry</span></th><th scope="col" style="text-align:right">Debit</th><th scope="col" style="text-align:right">Credit</th></tr></thead>
+          <tbody><tr><th scope="row"><span class="yr0">2026</span> ($80,000 × 25%)</th><td class="dr"></td><td>20,000</td></tr><tr><th scope="row"><span class="yr1">2027</span> ($10,000 × 25%)</th><td class="dr">2,500</td><td></td></tr><tr><th scope="row"><span class="yr2">2028</span> ($70,000 × 25%)</th><td class="dr">17,500</td><td></td></tr><tr class="bal"><th scope="row">Balance after 3 years</th><td class="dr"></td><td>0</td></tr></tbody></table></div></div>
+        
+        <div class="date-tag" aria-hidden="true">Dec. 31, <span class="yr2">2028</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Dec. 31, 2028</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Income tax expense (to balance)</td><td class="je-debit-amt">125,000</td><td class="je-credit-amt"></td></tr><tr><td>Deferred tax liability (determined above)</td><td class="je-debit-amt">17,500</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Income tax payable (determined above)</td><td class="je-debit-amt"></td><td class="je-credit-amt">142,500</td></tr></tbody>
+        </table></div>
+        <p>Look at the whole life of the machine: the DTL <strong>increased</strong> when the temporary difference originated and <strong>decreased</strong> as it reversed, ending at zero. Total tax payable over three years ($105,000 + $127,500 + $142,500 = $375,000) equals total tax expense ($125,000 × 3). The tax wasn't avoided, only deferred.</p>
+      </div>
+    </article>
+  </section>
+  <section class="lo-block" aria-labelledby="s-reporting">
+    <h2 id="s-reporting">Financial Statement Effects</h2>
+    
+    <article class="example" id="p8" aria-labelledby="p8-h">
+      <h3 class="ex-label" id="p8-h">Problem 8 — Reporting the Results</h3>
+      
+      <p>Return to <span class="yr0">2026</span>. Determine Catamount's <span class="yr0">2026</span> net income and how its tax accounts appear in the December 31, <span class="yr0">2026</span> classified balance sheet.</p>
+      <div class="input-block" role="group" aria-labelledby="p8-h">
+        <div class="input-item"><label for="p8-a">Net income, <span class="yr0">2026</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p8-a" class="ans" data-label="Net income" data-answer="375000" data-unit="$"></div>
+        <div class="input-item"><label for="p8-b">Effective tax rate, <span class="yr0">2026</span> (income tax expense ÷ pretax accounting income):<span class="sr-only"> (as a percent)</span></label>
+          <input type="number" step="any" inputmode="decimal" id="p8-b" class="ans" data-label="Effective tax rate" data-answer="25" data-unit="%"><span class="unit" aria-hidden="true">%</span></div>
+        <div class="input-item"><label for="p8-c">Where is the $105,000 income tax payable reported?</label>
+          <select id="p8-c" class="ans" data-label="Income tax payable classification" data-answer="Current liabilities"><option value="">Select…</option><option>Current liabilities</option><option>Noncurrent (long-term) liabilities</option></select></div>
+        <div class="input-item"><label for="p8-d">Where is the $20,000 deferred tax liability reported?</label>
+          <select id="p8-d" class="ans" data-label="Deferred tax liability classification" data-answer="Noncurrent (long-term) liabilities"><option value="">Select…</option><option>Current liabilities</option><option>Noncurrent (long-term) liabilities</option></select></div>
+        <button type="button" class="reveal-btn" data-problem="p8" aria-expanded="false" aria-controls="p8-sol">Reveal Answer<span class="sr-only"> for Problem 8</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p8-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 8</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+        
+        <h4 class="solution-label">Explanation</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Income statement (partial), 2026"><table class="data">
+          <caption>Income statement (partial), <span class="yr0">2026</span></caption>
+          <thead><tr><th scope="col"><span class="sr-only">Item</span></th><th scope="col" class="num">Amount</th></tr></thead>
+          <tbody><tr><th scope="row">Pretax accounting income</th><td class="num">$500,000</td></tr><tr><th scope="row">Less: Income tax expense</th><td class="num">(125,000)</td></tr><tr class="total-row"><th scope="row">Net income</th><td class="num">$375,000</td></tr></tbody></table></div>
+        <p>The effective tax rate is $125,000 ÷ $500,000 = <strong>25%</strong>. A temporary difference doesn't change the effective tax rate; it only changes <em>when</em> the tax is paid.</p>
+        <p>Income tax payable is due within the year, so it's a <strong>current liability</strong>. Deferred tax liabilities and deferred tax assets are <strong>always classified as noncurrent</strong> in a classified balance sheet, regardless of when the underlying temporary differences reverse.</p>
+      </div>
+    </article>
+    <article class="example" id="p9" aria-labelledby="p9-h">
+      <h3 class="ex-label" id="p9-h">Problem 9 — The Mirror Image: A Deferred Tax Asset</h3>
+      
+      <p><strong>Cullowhee Creek Outfitters</strong> began selling kayaks with a two-year warranty in <span class="yr0">2026</span>. It reports pretax accounting income of <strong>$300,000</strong>, which includes <strong>$40,000</strong> of estimated warranty expense. No warranty claims were paid in <span class="yr0">2026</span>. Warranty costs are tax deductible only when paid, which Cullowhee Creek expects in <span class="yr1">2027</span> and <span class="yr2">2028</span>. The enacted tax rate is 25%, and this is the only difference.</p>
+      <div class="input-block" role="group" aria-labelledby="p9-h">
+        <div class="input-item"><label for="p9-a">Taxable income (tax return), <span class="yr0">2026</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p9-a" class="ans" data-label="Taxable income" data-answer="340000" data-unit="$"></div>
+        <div class="input-item"><label for="p9-b">Income tax payable:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p9-b" class="ans" data-label="Income tax payable" data-answer="85000" data-unit="$"></div>
+        <div class="input-item"><label for="p9-c">Deferred tax asset, ending balance, Dec. 31, <span class="yr0">2026</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p9-c" class="ans" data-label="DTA ending balance" data-answer="10000" data-unit="$"></div>
+        <div class="input-item"><label for="p9-d">Income tax expense:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p9-d" class="ans" data-label="Income tax expense" data-answer="75000" data-unit="$"></div>
+        <button type="button" class="reveal-btn" data-problem="p9" aria-expanded="false" aria-controls="p9-sol">Reveal Answer<span class="sr-only"> for Problem 9</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p9-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 9</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+        
+        <h4 class="solution-label">Explanation</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Cullowhee Creek Outfitters — 2026 (in dollars)"><table class="data">
+          <caption>Cullowhee Creek Outfitters — <span class="yr0">2026</span> (in dollars)</caption>
+          <thead><tr><th scope="col"><span class="sr-only">Item</span></th><th scope="col" class="num">Current year <span class="yr0">2026</span></th><th scope="col" class="num">Future deductible amounts</th></tr></thead>
+          <tbody><tr><th scope="row">Pretax accounting income</th><td class="num">$300,000</td><td class="num"></td></tr><tr class="sub-head"><th scope="row">Temporary difference:</th><td class="num"></td><td class="num"></td></tr><tr><th scope="row" class="indent">Estimated warranty expense</th><td class="num">40,000</td><td class="num">$(40,000)</td></tr><tr class="total-row"><th scope="row">Taxable income (tax return)</th><td class="num">$340,000</td><td class="num"></td></tr><tr><th scope="row">Enacted tax rate</th><td class="num">25%</td><td class="num">25%</td></tr><tr><th scope="row">Tax payable</th><td class="num">$85,000</td><td class="num"></td></tr><tr><th scope="row">Deferred tax asset</th><td class="num"></td><td class="num">$10,000</td></tr></tbody></table></div>
+        <p>The warranty expense reduced accounting income but isn't deductible yet, so it's added back: taxable income is <em>higher</em> than accounting income. When the warranties are paid, Cullowhee Creek gets deductions: <strong>future deductible amounts</strong>, which create a <strong>deferred tax asset (DTA)</strong> of $40,000 × 25% = $10,000.</p>
+        <div class="steps-grid"><ol class="four-step" aria-label="The four-step process"><li><strong>Step 1:</strong> Tax payable: $85,000</li><li><strong>Step 2:</strong> DTA end bal: $10,000</li><li><strong>Step 3:</strong> DTA change: $10,000</li><li><strong>Step 4:</strong> Tax exp plug: $75,000</li></ol><div class="table-wrap"><table class="t-acct">
+          <caption>Deferred Tax Asset (T-account)</caption>
+          <thead><tr><th scope="col"><span class="sr-only">Entry</span></th><th scope="col" style="text-align:right">Debit</th><th scope="col" style="text-align:right">Credit</th></tr></thead>
+          <tbody><tr><th scope="row">Beginning balance</th><td class="dr">0</td><td></td></tr><tr><th scope="row">Change, <span class="yr0">2026</span> (plug)</th><td class="dr">10,000</td><td></td></tr><tr class="bal"><th scope="row">Ending balance</th><td class="dr">10,000</td><td></td></tr></tbody></table></div></div>
+        
+        <div class="date-tag" aria-hidden="true">Dec. 31, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Dec. 31, 2026</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Income tax expense (to balance)</td><td class="je-debit-amt">75,000</td><td class="je-credit-amt"></td></tr><tr><td>Deferred tax asset (determined above)</td><td class="je-debit-amt">10,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Income tax payable (determined above)</td><td class="je-debit-amt"></td><td class="je-credit-amt">85,000</td></tr></tbody>
+        </table></div><p class="je-desc">An increase in a DTA reduces tax expense: $85,000 currently payable − $10,000 deferred = $75,000, which is again 25% of the $300,000 pretax accounting income.</p>
+        <h4 class="solution-label">Putting it together</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Comparing the two single-difference examples"><table class="data">
+          <caption>Comparing the two single-difference examples</caption>
+          <thead><tr><th scope="col"><span class="sr-only">Item</span></th><th scope="col" class="num">Catamount (depreciation)</th><th scope="col" class="num">Cullowhee Creek (warranty)</th></tr></thead>
+          <tbody><tr><th scope="row">Taxable income vs. accounting income now</th><td>Lower</td><td>Higher</td></tr><tr><th scope="row">Creates future…</th><td>Taxable amounts</td><td>Deductible amounts</td></tr><tr><th scope="row">Deferred tax account</th><td>Deferred tax liability</td><td>Deferred tax asset</td></tr><tr><th scope="row">Tax expense vs. tax payable</th><td>Expense > payable</td><td>Expense < payable</td></tr></tbody></table></div>
+      </div>
+    </article>
+  </section>
+</main>
+
+<footer>Introducing Deferred Taxes · Guided Walkthrough (Ungraded)</footer>
+
+<script>
+  var REVEALED = {};
+  var TOTAL = document.querySelectorAll('.example').length;
+
+  function updateProgress() {
+    var count = Object.keys(REVEALED).length;
+    var bar = document.getElementById('progressBar');
+    bar.setAttribute('aria-valuenow', count);
+    bar.setAttribute('aria-valuetext', count + ' of ' + TOTAL + ' problems revealed');
+    document.getElementById('progressLabel').textContent = count + ' of ' + TOTAL + ' revealed';
+    document.getElementById('progressFill').style.width = (count / TOTAL * 100) + '%';
+  }
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function fmt(val, unit) {
+    var n = Number(val);
+    var abs = Math.abs(n).toLocaleString('en-US', { maximumFractionDigits: 2 });
+    if (unit === '$') { return (n < 0 ? '−$' : '$') + abs; }
+    if (unit === '%') { return (n < 0 ? '−' : '') + abs + '%'; }
+    return (n < 0 ? '−' : '') + abs;
+  }
+
+  function isMatch(el) {
+    var ans = el.getAttribute('data-answer');
+    if (el.tagName === 'SELECT') { return el.value === ans; }
+    var unit = el.getAttribute('data-unit') || '';
+    var tol = el.hasAttribute('data-tol') ? Number(el.getAttribute('data-tol')) : (unit === '%' ? 0.05 : 1);
+    return Math.abs(Number(el.value) - Number(ans)) <= tol;
+  }
+
+  function reveal(id) {
+    var box = document.getElementById(id);
+    var inputs = box.querySelectorAll('.ans');
+    var fb = box.querySelector('.feedback');
+    var firstMissing = null;
+    inputs.forEach(function (el) {
+      var empty = (el.value === '' || el.value === null);
+      if (empty) { el.setAttribute('aria-invalid', 'true'); if (!firstMissing) { firstMissing = el; } }
+      else { el.removeAttribute('aria-invalid'); }
+    });
+    if (firstMissing) {
+      fb.textContent = 'Enter an answer in every box first, then select Reveal Answer.';
+      firstMissing.focus();
+      return;
+    }
+    fb.textContent = '';
+
+    var rows = '';
+    inputs.forEach(function (el) {
+      var label = el.getAttribute('data-label').replace(/\{(yrm?\d)\}/g, function (m, k) { return YEARS[k]; });
+      var unit = el.getAttribute('data-unit') || '';
+      var yours, answer;
+      if (el.tagName === 'SELECT') {
+        yours = el.value;
+        answer = el.getAttribute('data-answer');
+      } else {
+        yours = fmt(el.value, unit);
+        answer = fmt(el.getAttribute('data-answer'), unit);
+      }
+      var ok = isMatch(el);
+      rows += '<tr><th scope="row">' + esc(label) + '</th><td>' + esc(yours) + '</td><td><strong>' + esc(answer) + '</strong></td>' +
+        '<td class="' + (ok ? 'result-ok' : 'result-no') + '">' + (ok ? '<span aria-hidden="true">✓ </span>Matches' : '<span aria-hidden="true">✗ </span>Review') + '</td></tr>';
+    });
+    box.querySelector('.compare-body').innerHTML = rows;
+    var sol = box.querySelector('.solution');
+    sol.hidden = false;
+    box.querySelector('.reveal-btn').setAttribute('aria-expanded', 'true');
+    var head = sol.querySelector('.solution-label');
+    if (head) { head.focus(); }
+    REVEALED[id] = true;
+    updateProgress();
+  }
+
+  document.querySelectorAll('.reveal-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () { reveal(btn.getAttribute('data-problem')); });
+  });
+
+  // Keeps the dates current automatically, with no recoding needed each year.
+  // yr0 is always the current calendar year; yr1..yr4 follow and yrm1, yrm2 precede.
+  var YEARS = (function () {
+    var yr0 = new Date().getFullYear();
+    var years = { yrm2: yr0 - 2, yrm1: yr0 - 1, yr0: yr0, yr1: yr0 + 1, yr2: yr0 + 2, yr3: yr0 + 3, yr4: yr0 + 4 };
+    Object.keys(years).forEach(function (cls) {
+      document.querySelectorAll('.' + cls).forEach(function (el) { el.textContent = years[cls]; });
+    });
+    return years;
+  })();
+
+  TOTAL = document.querySelectorAll('.example').length;
+  updateProgress();
+</script>
+
+<script>document.getElementById('progressBar').setAttribute('aria-valuemax', document.querySelectorAll('.example').length);</script>
+</body>
+</html>
