@@ -291,6 +291,7 @@
                     "homework"     -> Homework packets
                     "quiz"         -> Practice quizzes
                     "link"         -> Additional links
+                    "case"         -> Group case studies (shortcut C)
      chapter      Optional. e.g. "Ch. 4". Used for sorting and shown
                   as a small tag.
      description  Optional. One or two sentences (shows up to two lines).
@@ -308,8 +309,23 @@ function W(chapter, title, description, link, image){ return { type:"walkthrough
 function H(chapter, title, description, link, image){ return { type:"homework", chapter, title, description, link, image: image || null }; }
 function Q(chapter, title, description, link, image){ return { type:"quiz", chapter, title, description, link, image: image || null }; }
 function L(chapter, title, description, link, image){ return { type:"link", chapter, title, description, link, image: image || null }; }
+function C(chapter, title, description, link, image){ return { type:"case", chapter, title, description, link, image: image || null }; }
 
 const ASSIGNMENTS = [
+  // ---- Group Case Studies (C) ----
+  C("", "Case Series: Project Overview",
+     "Start here. Meet Catamount Ridge Gear, Inc., preview the four group cases, and review deliverables and grading.",
+     "cases/project-overview.html", "images/cases-overview.svg"),
+  C("", "Case Series: Version 1 Packet",
+     "All four group cases for groups assigned to Version 1.",
+     "cases/version-1.html", "images/cases-version-1.svg"),
+  C("", "Case Series: Version 2 Packet",
+     "All four group cases for groups assigned to Version 2.",
+     "cases/version-2.html", "images/cases-version-2.svg"),
+  C("", "Case Series: Version 3 Packet",
+     "All four group cases for groups assigned to Version 3.",
+     "cases/version-3.html", "images/cases-version-3.svg"),
+
   // ---- Topic Notes (N) ----
     N("Ch. 12", "Debt Investments Notes",
      "Reading notes for investments in debt securities.",
@@ -534,6 +550,7 @@ const ASSIGNMENTS = [
     { key:'notes',       name:'Chapter notes' },
     { key:'walkthrough', name:'Guided walkthroughs' },
     { key:'homework',    name:'Homework packets' },
+    { key:'case',        name:'Group case studies' },
     { key:'quiz',        name:'Practice quizzes' },
     { key:'link',        name:'Additional links' }
   ];

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CRG Cases: Version 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --purple:#592C88; --purple-dk:#3E1E61; --purple-lt:#F3EEF8;
+  --gold:#C1A875; --gold-lt:#FAF5E9; --gold-dk:#6B5A2E;
+  --ink:#1F1B24; --muted:#4A4453; --line:#D9D2E3; --paper:#FFFFFF;
+  --red:#9B1C1C; --red-lt:#FDECEC; --green:#1D5E3A; --green-lt:#E9F5EE;
+}
+*{box-sizing:border-box}
+html{font-size:16px}
+body{margin:0;background:#EEEAF2;color:var(--ink);font-family:"Source Serif 4",Georgia,serif;line-height:1.55}
+.skip{position:absolute;left:-9999px;top:0;background:var(--purple-dk);color:#fff;padding:.5rem 1rem;z-index:10}
+.skip:focus{left:1rem}
+main{max-width:8.5in;margin:1.5rem auto;background:var(--paper);padding:0 0 2rem;box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.banner{background:var(--purple);color:#fff;padding:1.4rem 2rem 1.2rem;border-bottom:6px solid var(--gold)}
+.banner .kicker{font-family:Inter,Arial,sans-serif;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;margin:0 0 .35rem;color:#fff}
+.banner h1{font-size:1.85rem;line-height:1.2;margin:0 0 .3rem;color:#fff}
+.banner .sub{margin:0;font-family:Inter,Arial,sans-serif;font-size:.95rem;color:#fff}
+.badges{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.8rem}
+.badge{font-family:Inter,Arial,sans-serif;font-size:.8rem;font-weight:600;background:#fff;color:var(--purple-dk);padding:.2rem .65rem;border-radius:999px}
+.badge.v{background:var(--gold-lt);color:var(--purple-dk);border:2px solid var(--gold)}
+.inst-banner{background:var(--red);color:#fff;font-family:Inter,Arial,sans-serif;font-weight:700;text-align:center;padding:.55rem 1rem;letter-spacing:.06em}
+.content{padding:.5rem 2rem 0}
+h2{font-family:Inter,Arial,sans-serif;color:var(--purple-dk);font-size:1.3rem;margin:1.8rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--gold)}
+h3{font-family:Inter,Arial,sans-serif;color:var(--purple);font-size:1.08rem;margin:1.3rem 0 .45rem}
+h4{font-family:Inter,Arial,sans-serif;color:var(--ink);font-size:.98rem;margin:1rem 0 .35rem}
+p{margin:.45rem 0 .7rem}
+ul,ol{margin:.3rem 0 .8rem;padding-left:1.4rem}
+li{margin:.25rem 0}
+.card{border:1px solid var(--line);border-left:6px solid var(--purple);background:var(--purple-lt);padding:.8rem 1.1rem;margin:1rem 0;border-radius:4px}
+.card h3,.card h4{margin-top:.2rem}
+.important{border:2px solid var(--gold-dk);background:var(--gold-lt);padding:.8rem 1.1rem;margin:1rem 0;border-radius:4px}
+.important h3,.important h4{color:var(--gold-dk);margin-top:.1rem}
+.quote{border-left:4px solid var(--gold);background:#FBFAFD;padding:.6rem 1rem;margin:.8rem 0;font-style:italic}
+.quote .who{display:block;font-style:normal;font-family:Inter,Arial,sans-serif;font-size:.85rem;color:var(--muted);margin-top:.3rem}
+.memo{border:1px solid var(--line);padding:.9rem 1.1rem;margin:1rem 0;background:#FFFEFB}
+.memo dl{display:grid;grid-template-columns:max-content 1fr;gap:.15rem .8rem;margin:0 0 .6rem;font-family:Inter,Arial,sans-serif;font-size:.9rem}
+.memo dt{font-weight:700}
+.memo dd{margin:0}
+table{border-collapse:collapse;width:100%;margin:.6rem 0 1rem;font-size:.92rem}
+caption{caption-side:top;text-align:left;font-family:Inter,Arial,sans-serif;font-weight:700;color:var(--purple-dk);padding:.2rem 0 .4rem}
+th,td{border:1px solid var(--line);padding:.35rem .55rem;vertical-align:top}
+thead th{background:var(--purple);color:#fff;font-family:Inter,Arial,sans-serif;font-size:.85rem;text-align:left}
+tbody th{background:#F7F5FA;text-align:left;font-weight:600}
+td.n,th.n{text-align:right;font-family:"IBM Plex Mono",Consolas,monospace;font-size:.86rem;white-space:nowrap}
+tr.total td,tr.total th{font-weight:700;border-top:2px solid var(--ink)}
+.je td.cr{padding-left:2rem}
+.alt{display:grid;grid-template-columns:1fr;gap:.6rem;margin:.6rem 0 1rem}
+.alt div{border:1px solid var(--line);border-top:4px solid var(--gold);padding:.6rem .9rem;background:#fff}
+.alt strong{font-family:Inter,Arial,sans-serif;color:var(--purple-dk)}
+.qs li{margin:.45rem 0}
+.key{border:2px solid var(--green);background:var(--green-lt);padding:.8rem 1.1rem;margin:1rem 0;border-radius:4px}
+.key h4,.key h3{color:var(--green);margin-top:.1rem}
+.flag{font-family:Inter,Arial,sans-serif;font-weight:700;color:var(--red)}
+.small{font-size:.86rem;color:var(--muted)}
+.mono{font-family:"IBM Plex Mono",Consolas,monospace}
+footer{padding:1rem 2rem 0;font-family:Inter,Arial,sans-serif;font-size:.8rem;color:var(--muted);border-top:1px solid var(--line);margin:2rem 2rem 0}
+a{color:var(--purple)}
+a:focus,button:focus{outline:3px solid var(--gold-dk);outline-offset:2px}
+.sitenav{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;padding:.6rem 2rem;background:var(--purple-dk);font-family:Inter,Arial,sans-serif;font-size:.88rem}
+.sitenav a{color:#fff}
+.page-break{break-before:page;page-break-before:always}
+@media (max-width:640px){
+  .banner,.content{padding-left:1rem;padding-right:1rem}
+  main{margin:0}
+  table{font-size:.82rem}
+  .memo dl{grid-template-columns:1fr}
+}
+@media print{
+  @page{size:letter;margin:.6in .6in .7in}
+  body{background:#fff;font-size:10.5pt}
+  main{box-shadow:none;margin:0;max-width:none;padding:0}
+  .banner{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  thead th,.inst-banner,.card,.important,.key,.badge{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  h2,h3,h4{break-after:avoid;page-break-after:avoid}
+  table,.card,.important,.key,.alt div,.quote,.memo{break-inside:avoid;page-break-inside:avoid}
+  .skip,.sitenav{display:none}
+  .content{padding:0 .1in}
+  .banner{padding:1rem 1.2rem}
+}
+</style>
+<style>
+.case-list{list-style:none;margin:1rem 0;padding:0;display:grid;gap:.9rem}
+.case-list a{display:flex;gap:1rem;align-items:center;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-left:6px solid var(--purple);background:#fff;padding:.9rem 1rem;border-radius:4px}
+.case-list a:hover{background:var(--purple-lt)}
+.case-list .num{flex:0 0 3.2rem;height:3.2rem;border-radius:50%;background:var(--purple);color:#fff;display:flex;align-items:center;justify-content:center;font-family:Inter,Arial,sans-serif;font-weight:700;font-size:1.3rem;border:3px solid var(--gold)}
+.case-list h3{margin:0 0 .2rem}
+.case-list p{margin:0;font-size:.95rem;color:var(--muted)}
+.case-list .go{margin-left:auto;font-family:Inter,Arial,sans-serif;font-weight:600;color:var(--purple);white-space:nowrap}
+@media (max-width:640px){.case-list .go{display:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main-content">Skip to main content</a>
+<main>
+<nav class="sitenav" aria-label="Case series navigation"><a href="../acct-352.html">&larr; ACCT 352 course page</a><a href="index.html">All versions</a><a href="project-overview.html">Project overview</a></nav>
+
+
+<header class="banner">
+<p class="kicker">ACCT 352 · CRG Case Series</p>
+<h1>Case Packet: Version 2</h1>
+<p class="sub">Catamount Ridge Gear, Inc. — four group cases</p>
+<div class="badges"><span class="badge v">Version 2</span><span class="badge">Group assignment</span></div>
+</header>
+<div class="content" id="main-content" tabindex="-1">
+
+<div class="card">
+<h2 style="border:none;margin-top:.2rem">Version 2 case packet</h2>
+<p>Use these four cases only if your group was assigned <strong>Version 2</strong>. Your version's facts carry forward from one case to the next, so keep your earlier work handy. Before you begin, read the <a href="project-overview.html">Project Overview</a> for the company profile, deliverables, and grading criteria.</p>
+</div>
+<h2>Cases</h2>
+<ul class="case-list"><li><a href="version-2/case-1.html"><span class="num" aria-hidden="true">1</span><span><h3>Case 1: Strategic Stakes and Short-Term Pressures</h3><p>Investments in debt and equity securities, the equity method, refinancing short-term debt, and loss and gain contingencies.</p></span><span class="go" aria-hidden="true">Open &rarr;</span></a></li><li><a href="version-2/case-2.html"><span class="num" aria-hidden="true">2</span><span><h3>Case 2: Financing the Dillsboro Line</h3><p>Bond pricing and the effective-interest method versus leasing: lease classification, measurement, and a debt covenant.</p></span><span class="go" aria-hidden="true">Open &rarr;</span></a></li><li><a href="version-2/case-3.html"><span class="num" aria-hidden="true">3</span><span><h3>Case 3: Taxes, Shareholders, and Stock-Based Pay</h3><p>Deferred tax valuation allowances, dividends and share repurchases, stock options versus RSUs, and basic and diluted EPS.</p></span><span class="go" aria-hidden="true">Open &rarr;</span></a></li><li><a href="version-2/case-4.html"><span class="num" aria-hidden="true">4</span><span><h3>Case 4: The Controller's Close</h3><p>Changes in principle and estimate, error corrections and restatements, and the statement of cash flows.</p></span><span class="go" aria-hidden="true">Open &rarr;</span></a></li></ul>
+<div class="important"><h3>Printing</h3><p>Each case is formatted to print cleanly on letter-size paper. Use your browser's Print command and choose "Background graphics" to keep the colored headings.</p></div>
+
+</div>
+<footer>
+<p>ACCT 352 · Intermediate Accounting II · Western Carolina University. Catamount Ridge Gear, Inc. and every person, company, and event in this case series are fictional; any resemblance to real entities is coincidental. Fiscal year ends December 31, <span class="yr" data-o="0">2026</span>.</p>
+</footer>
+</main>
+<script>
+(function(){var b=new Date().getFullYear();
+document.querySelectorAll('.yr').forEach(function(s){s.textContent=b+parseInt(s.getAttribute('data-o')||'0',10);});})();
+</script>
+</body>
+</html>

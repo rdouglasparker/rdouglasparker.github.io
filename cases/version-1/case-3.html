@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CRG Case 3, Version 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --purple:#592C88; --purple-dk:#3E1E61; --purple-lt:#F3EEF8;
+  --gold:#C1A875; --gold-lt:#FAF5E9; --gold-dk:#6B5A2E;
+  --ink:#1F1B24; --muted:#4A4453; --line:#D9D2E3; --paper:#FFFFFF;
+  --red:#9B1C1C; --red-lt:#FDECEC; --green:#1D5E3A; --green-lt:#E9F5EE;
+}
+*{box-sizing:border-box}
+html{font-size:16px}
+body{margin:0;background:#EEEAF2;color:var(--ink);font-family:"Source Serif 4",Georgia,serif;line-height:1.55}
+.skip{position:absolute;left:-9999px;top:0;background:var(--purple-dk);color:#fff;padding:.5rem 1rem;z-index:10}
+.skip:focus{left:1rem}
+main{max-width:8.5in;margin:1.5rem auto;background:var(--paper);padding:0 0 2rem;box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.banner{background:var(--purple);color:#fff;padding:1.4rem 2rem 1.2rem;border-bottom:6px solid var(--gold)}
+.banner .kicker{font-family:Inter,Arial,sans-serif;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;margin:0 0 .35rem;color:#fff}
+.banner h1{font-size:1.85rem;line-height:1.2;margin:0 0 .3rem;color:#fff}
+.banner .sub{margin:0;font-family:Inter,Arial,sans-serif;font-size:.95rem;color:#fff}
+.badges{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.8rem}
+.badge{font-family:Inter,Arial,sans-serif;font-size:.8rem;font-weight:600;background:#fff;color:var(--purple-dk);padding:.2rem .65rem;border-radius:999px}
+.badge.v{background:var(--gold-lt);color:var(--purple-dk);border:2px solid var(--gold)}
+.inst-banner{background:var(--red);color:#fff;font-family:Inter,Arial,sans-serif;font-weight:700;text-align:center;padding:.55rem 1rem;letter-spacing:.06em}
+.content{padding:.5rem 2rem 0}
+h2{font-family:Inter,Arial,sans-serif;color:var(--purple-dk);font-size:1.3rem;margin:1.8rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--gold)}
+h3{font-family:Inter,Arial,sans-serif;color:var(--purple);font-size:1.08rem;margin:1.3rem 0 .45rem}
+h4{font-family:Inter,Arial,sans-serif;color:var(--ink);font-size:.98rem;margin:1rem 0 .35rem}
+p{margin:.45rem 0 .7rem}
+ul,ol{margin:.3rem 0 .8rem;padding-left:1.4rem}
+li{margin:.25rem 0}
+.card{border:1px solid var(--line);border-left:6px solid var(--purple);background:var(--purple-lt);padding:.8rem 1.1rem;margin:1rem 0;border-radius:4px}
+.card h3,.card h4{margin-top:.2rem}
+.important{border:2px solid var(--gold-dk);background:var(--gold-lt);padding:.8rem 1.1rem;margin:1rem 0;border-radius:4px}
+.important h3,.important h4{color:var(--gold-dk);margin-top:.1rem}
+.quote{border-left:4px solid var(--gold);background:#FBFAFD;padding:.6rem 1rem;margin:.8rem 0;font-style:italic}
+.quote .who{display:block;font-style:normal;font-family:Inter,Arial,sans-serif;font-size:.85rem;color:var(--muted);margin-top:.3rem}
+.memo{border:1px solid var(--line);padding:.9rem 1.1rem;margin:1rem 0;background:#FFFEFB}
+.memo dl{display:grid;grid-template-columns:max-content 1fr;gap:.15rem .8rem;margin:0 0 .6rem;font-family:Inter,Arial,sans-serif;font-size:.9rem}
+.memo dt{font-weight:700}
+.memo dd{margin:0}
+table{border-collapse:collapse;width:100%;margin:.6rem 0 1rem;font-size:.92rem}
+caption{caption-side:top;text-align:left;font-family:Inter,Arial,sans-serif;font-weight:700;color:var(--purple-dk);padding:.2rem 0 .4rem}
+th,td{border:1px solid var(--line);padding:.35rem .55rem;vertical-align:top}
+thead th{background:var(--purple);color:#fff;font-family:Inter,Arial,sans-serif;font-size:.85rem;text-align:left}
+tbody th{background:#F7F5FA;text-align:left;font-weight:600}
+td.n,th.n{text-align:right;font-family:"IBM Plex Mono",Consolas,monospace;font-size:.86rem;white-space:nowrap}
+tr.total td,tr.total th{font-weight:700;border-top:2px solid var(--ink)}
+.je td.cr{padding-left:2rem}
+.alt{display:grid;grid-template-columns:1fr;gap:.6rem;margin:.6rem 0 1rem}
+.alt div{border:1px solid var(--line);border-top:4px solid var(--gold);padding:.6rem .9rem;background:#fff}
+.alt strong{font-family:Inter,Arial,sans-serif;color:var(--purple-dk)}
+.qs li{margin:.45rem 0}
+.key{border:2px solid var(--green);background:var(--green-lt);padding:.8rem 1.1rem;margin:1rem 0;border-radius:4px}
+.key h4,.key h3{color:var(--green);margin-top:.1rem}
+.flag{font-family:Inter,Arial,sans-serif;font-weight:700;color:var(--red)}
+.small{font-size:.86rem;color:var(--muted)}
+.mono{font-family:"IBM Plex Mono",Consolas,monospace}
+footer{padding:1rem 2rem 0;font-family:Inter,Arial,sans-serif;font-size:.8rem;color:var(--muted);border-top:1px solid var(--line);margin:2rem 2rem 0}
+a{color:var(--purple)}
+a:focus,button:focus{outline:3px solid var(--gold-dk);outline-offset:2px}
+.sitenav{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;padding:.6rem 2rem;background:var(--purple-dk);font-family:Inter,Arial,sans-serif;font-size:.88rem}
+.sitenav a{color:#fff}
+.page-break{break-before:page;page-break-before:always}
+@media (max-width:640px){
+  .banner,.content{padding-left:1rem;padding-right:1rem}
+  main{margin:0}
+  table{font-size:.82rem}
+  .memo dl{grid-template-columns:1fr}
+}
+@media print{
+  @page{size:letter;margin:.6in .6in .7in}
+  body{background:#fff;font-size:10.5pt}
+  main{box-shadow:none;margin:0;max-width:none;padding:0}
+  .banner{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  thead th,.inst-banner,.card,.important,.key,.badge{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  h2,h3,h4{break-after:avoid;page-break-after:avoid}
+  table,.card,.important,.key,.alt div,.quote,.memo{break-inside:avoid;page-break-inside:avoid}
+  .skip,.sitenav{display:none}
+  .content{padding:0 .1in}
+  .banner{padding:1rem 1.2rem}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main-content">Skip to main content</a>
+<main>
+<nav class="sitenav" aria-label="Case series navigation"><a href="../version-1.html">&larr; Version 1 case packet</a><a href="../project-overview.html">Project overview</a><a href="case-2.html">Previous: Case 2</a><a href="case-4.html">Next: Case 4</a></nav>
+
+
+<header class="banner">
+<p class="kicker">ACCT 352 · CRG Case Series · Case 3 of 4</p>
+<h1>Case 3: Taxes, Shareholders, and Stock-Based Pay</h1>
+<p class="sub">Deferred taxes, returning capital, executive compensation, and earnings per share</p>
+<div class="badges"><span class="badge v">Version 1</span><span class="badge">Group assignment</span><span class="badge">Handout</span></div>
+</header>
+<div class="content" id="main-content" tabindex="-1">
+
+<div class="memo">
+<dl>
+<dt>To:</dt><dd>Financial Reporting Advisory Team</dd>
+<dt>From:</dt><dd>Jonah Reeves, Controller</dd>
+<dt>Date:</dt><dd>February 21, <span class="yr" data-o="1">2027</span></dd>
+<dt>Re:</dt><dd>Deferred taxes, the <span class="yr" data-o="1">2027</span> capital plan, and the executive pay proposal</dd>
+</dl>
+<p>Three items need your team's analysis before the board's planning meeting. The first affects the <span class="yr" data-o="0">2026</span> statements we are about to finalize. The second and third are decisions the board will make for <span class="yr" data-o="1">2027</span>, and the board wants to understand how each option will affect reported earnings per share.</p>
+</div>
+
+<h2>Issue 1: Is CRG's deferred tax asset realizable?</h2>
+<p>At December 31, <span class="yr" data-o="0">2026</span>, CRG has <strong>$4,000,000</strong> of deductible temporary differences (accrued warranty, recall, and other costs that are deductible for tax only when paid). The balance was the same at the beginning of the year. Using the 25% tax rate, the related deferred tax asset is <strong>$1,000,000</strong>.</p>
+<p>During <span class="yr" data-o="0">2026</span>, taxable temporary differences from accelerated tax depreciation increased by $600,000, so the deferred tax liability increased by <strong>$150,000</strong>.</p>
+<table><caption>Table 1. Tax information for <span class="yr" data-o="0">2026</span></caption><thead><tr><th scope="col">Item</th><th scope="col" class=n>Amount</th></tr></thead><tbody><tr><th scope="row">Pretax accounting income</th><td class=n>$5,000,000</td></tr><tr><th scope="row">Income taxes payable per the tax return (current tax expense)</th><td class=n>$1,100,000</td></tr><tr><th scope="row">Valuation allowance balance, January 1, <span class="yr" data-o="0">2026</span></th><td class=n>$0</td></tr></tbody></table><table><caption>Table 2. Pretax income, last three years</caption><thead><tr><th scope="col">Year</th><th scope="col" class=n>Pretax income (loss)</th></tr></thead><tbody><tr><th scope="row"><span class="yr" data-o="-2">2024</span></th><td class=n>$4,600,000</td></tr><tr><th scope="row"><span class="yr" data-o="-1">2025</span></th><td class=n>$4,800,000</td></tr><tr><th scope="row"><span class="yr" data-o="0">2026</span></th><td class=n>$5,000,000</td></tr></tbody></table><h3>Other evidence</h3><ul><li>CRG has reported pretax income in each of the last eight years.</li><li>Orders on hand for <span class="yr" data-o="1">2027</span> are 12% higher than at this time last year.</li><li>The deductible temporary differences relate to warranty and other accrued costs that are expected to reverse (become deductible) over the next two years, when CRG expects to have ample taxable income.</li></ul><div class="quote">"Let's set up a $300,000 valuation allowance anyway. It's conservative, the auditors never complain about conservative, and it gives us something to release if next year is tight."<span class="who">— Marisa Holloway, CFO</span></div>
+<h2>Issue 2: Returning capital to shareholders</h2>
+<p>The board has set aside <strong>$3,000,000</strong> of cash to return to shareholders on <strong>July 1, <span class="yr" data-o="1">2027</span></strong>. Common stock has a $1 par value. <strong>2,000,000</strong> common shares ($1 par) are outstanding at January 1, <span class="yr" data-o="1">2027</span>.</p>
+
+<p>Three proposals are on the table:</p>
+<div class="alt">
+<div><strong>Proposal A — Cash dividend.</strong> Declare and pay cash dividends totaling $3,000,000.</div>
+<div><strong>Proposal B — Share repurchase.</strong> Use the cash to buy back common shares on the open market on July 1 at the expected market price. CRG would hold the shares as treasury stock (cost method).</div>
+<div><strong>Proposal C — Stock dividend.</strong> Keep the cash for operations and instead distribute a <strong>10% stock dividend</strong> on July 1.</div>
+</div>
+<table><caption>Table 3. Planning assumptions for <span class="yr" data-o="1">2027</span></caption><thead><tr><th scope="col">Item</th><th scope="col" class=n>Amount</th></tr></thead><tbody><tr><th scope="row">Projected <span class="yr" data-o="1">2027</span> net income, before the executive pay plan in Issue 3</th><td class=n>$4,000,000</td></tr><tr><th scope="row">Expected market price per common share (January 1 and July 1)</th><td class=n>$40.00</td></tr><tr><th scope="row">Analysts' consensus estimate of <span class="yr" data-o="1">2027</span> basic EPS</th><td class=n>$2.05</td></tr><tr><th scope="row">Projected retained earnings, July 1, before any distribution</th><td class=n>$18,000,000</td></tr><tr><th scope="row">Bond covenant: <em>cash</em> dividends and share repurchases are permitted only to the extent retained earnings remain at or above</th><td class=n>$12,000,000</td></tr></tbody></table><div class="quote">"I don't care which one we do, as long as we hit the consensus number. Missing by even a penny costs us 10% on the stock price."<span class="who">— Walt Cardinal, CEO</span></div>
+<h2>Issue 3: The executive pay proposal</h2>
+<p>The compensation committee will grant one of two awards to CRG's six senior executives on <strong>January 1, <span class="yr" data-o="1">2027</span></strong>. Either award <strong>cliff-vests after four years</strong> of continued service. CRG accounts for forfeitures when they occur, and no forfeitures are expected.</p>
+<div class="alt">
+<div><strong>Plan X — Stock options.</strong> 120,000 nonqualified options with an exercise price equal to the January 1 market price ($40.00). An option-pricing model estimates the fair value at <strong>$12.00</strong> per option on the grant date.</div>
+<div><strong>Plan Y — Restricted stock units (RSUs).</strong> 40,000 RSUs, each settled in one common share when it vests.</div>
+</div>
+<p>The expected <strong>average market price</strong> of CRG's common stock during <span class="yr" data-o="1">2027</span> is <strong>$46.00</strong>. Use the 25% tax rate for the after-tax effect of compensation expense. Assume the number of options or RSUs is not adjusted for any stock dividend in Issue 2.</p>
+<div class="quote">"Options are the better deal for shareholders. They barely touch diluted EPS and cost less to expense than RSUs."<span class="who">— Marisa Holloway, CFO</span></div>
+
+<h2>Questions for your group</h2>
+<h3>Issue 1</h3>
+<ol class="qs">
+<li>What standard must be met to report a deferred tax asset without a valuation allowance? List the positive and negative evidence in your version and weigh it. Which evidence is the most objective and verifiable?</li>
+<li>What valuation allowance, if any, should CRG report at December 31, <span class="yr" data-o="0">2026</span>? Prepare the <span class="yr" data-o="0">2026</span> income tax journal entry or entries.</li>
+<li>Compute <span class="yr" data-o="0">2026</span> income tax expense and net income under your recommendation and under management's proposal. Respond to management's position.</li>
+</ol>
+<h3>Issue 2</h3>
+<ol class="qs" start="4">
+<li>Prepare the July 1 journal entry for each proposal. For Proposal C, explain whether the stock dividend is "small" or "large" and why that matters.</li>
+<li>Compute projected <span class="yr" data-o="1">2027</span> basic EPS under each proposal. Show the numerator and weighted-average shares.</li>
+<li>Which proposals are legally and contractually permitted? Consider the bond covenant.</li>
+<li>Which proposal do you recommend? Address the CEO's focus on the consensus estimate. Is it appropriate to choose a capital-return method to hit an EPS target?</li>
+</ol>
+<h3>Issue 3</h3>
+<ol class="qs" start="8">
+<li>Compute total compensation cost and <span class="yr" data-o="1">2027</span> compensation expense under each plan. Prepare the <span class="yr" data-o="1">2027</span> entry for each.</li>
+<li>Using the treasury stock method, compute the incremental shares each plan would add to <span class="yr" data-o="1">2027</span> diluted EPS. Is either plan antidilutive? Explain why.</li>
+<li>Combine your Issue 2 recommendation with each plan: what are projected <span class="yr" data-o="1">2027</span> basic and diluted EPS?</li>
+<li>Which plan do you recommend? Respond to the executive's comment and discuss incentives, retention, and dilution in light of your version's stock price outlook.</li>
+</ol>
+
+</div>
+<footer>
+<p>ACCT 352 · Intermediate Accounting II · Western Carolina University. Catamount Ridge Gear, Inc. and every person, company, and event in this case series are fictional; any resemblance to real entities is coincidental. Fiscal year ends December 31, <span class="yr" data-o="0">2026</span>.</p>
+</footer>
+</main>
+<script>
+(function(){var b=new Date().getFullYear();
+document.querySelectorAll('.yr').forEach(function(s){s.textContent=b+parseInt(s.getAttribute('data-o')||'0',10);});})();
+</script>
+</body>
+</html>

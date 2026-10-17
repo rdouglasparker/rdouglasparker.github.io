@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CRG Case Series: Project Overview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --purple:#592C88; --purple-dk:#3E1E61; --purple-lt:#F3EEF8;
+  --gold:#C1A875; --gold-lt:#FAF5E9; --gold-dk:#6B5A2E;
+  --ink:#1F1B24; --muted:#4A4453; --line:#D9D2E3; --paper:#FFFFFF;
+  --red:#9B1C1C; --red-lt:#FDECEC; --green:#1D5E3A; --green-lt:#E9F5EE;
+}
+*{box-sizing:border-box}
+html{font-size:16px}
+body{margin:0;background:#EEEAF2;color:var(--ink);font-family:"Source Serif 4",Georgia,serif;line-height:1.55}
+.skip{position:absolute;left:-9999px;top:0;background:var(--purple-dk);color:#fff;padding:.5rem 1rem;z-index:10}
+.skip:focus{left:1rem}
+main{max-width:8.5in;margin:1.5rem auto;background:var(--paper);padding:0 0 2rem;box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.banner{background:var(--purple);color:#fff;padding:1.4rem 2rem 1.2rem;border-bottom:6px solid var(--gold)}
+.banner .kicker{font-family:Inter,Arial,sans-serif;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;margin:0 0 .35rem;color:#fff}
+.banner h1{font-size:1.85rem;line-height:1.2;margin:0 0 .3rem;color:#fff}
+.banner .sub{margin:0;font-family:Inter,Arial,sans-serif;font-size:.95rem;color:#fff}
+.badges{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.8rem}
+.badge{font-family:Inter,Arial,sans-serif;font-size:.8rem;font-weight:600;background:#fff;color:var(--purple-dk);padding:.2rem .65rem;border-radius:999px}
+.badge.v{background:var(--gold-lt);color:var(--purple-dk);border:2px solid var(--gold)}
+.inst-banner{background:var(--red);color:#fff;font-family:Inter,Arial,sans-serif;font-weight:700;text-align:center;padding:.55rem 1rem;letter-spacing:.06em}
+.content{padding:.5rem 2rem 0}
+h2{font-family:Inter,Arial,sans-serif;color:var(--purple-dk);font-size:1.3rem;margin:1.8rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--gold)}
+h3{font-family:Inter,Arial,sans-serif;color:var(--purple);font-size:1.08rem;margin:1.3rem 0 .45rem}
+h4{font-family:Inter,Arial,sans-serif;color:var(--ink);font-size:.98rem;margin:1rem 0 .35rem}
+p{margin:.45rem 0 .7rem}
+ul,ol{margin:.3rem 0 .8rem;padding-left:1.4rem}
+li{margin:.25rem 0}
+.card{border:1px solid var(--line);border-left:6px solid var(--purple);background:var(--purple-lt);padding:.8rem 1.1rem;margin:1rem 0;border-radius:4px}
+.card h3,.card h4{margin-top:.2rem}
+.important{border:2px solid var(--gold-dk);background:var(--gold-lt);padding:.8rem 1.1rem;margin:1rem 0;border-radius:4px}
+.important h3,.important h4{color:var(--gold-dk);margin-top:.1rem}
+.quote{border-left:4px solid var(--gold);background:#FBFAFD;padding:.6rem 1rem;margin:.8rem 0;font-style:italic}
+.quote .who{display:block;font-style:normal;font-family:Inter,Arial,sans-serif;font-size:.85rem;color:var(--muted);margin-top:.3rem}
+.memo{border:1px solid var(--line);padding:.9rem 1.1rem;margin:1rem 0;background:#FFFEFB}
+.memo dl{display:grid;grid-template-columns:max-content 1fr;gap:.15rem .8rem;margin:0 0 .6rem;font-family:Inter,Arial,sans-serif;font-size:.9rem}
+.memo dt{font-weight:700}
+.memo dd{margin:0}
+table{border-collapse:collapse;width:100%;margin:.6rem 0 1rem;font-size:.92rem}
+caption{caption-side:top;text-align:left;font-family:Inter,Arial,sans-serif;font-weight:700;color:var(--purple-dk);padding:.2rem 0 .4rem}
+th,td{border:1px solid var(--line);padding:.35rem .55rem;vertical-align:top}
+thead th{background:var(--purple);color:#fff;font-family:Inter,Arial,sans-serif;font-size:.85rem;text-align:left}
+tbody th{background:#F7F5FA;text-align:left;font-weight:600}
+td.n,th.n{text-align:right;font-family:"IBM Plex Mono",Consolas,monospace;font-size:.86rem;white-space:nowrap}
+tr.total td,tr.total th{font-weight:700;border-top:2px solid var(--ink)}
+.je td.cr{padding-left:2rem}
+.alt{display:grid;grid-template-columns:1fr;gap:.6rem;margin:.6rem 0 1rem}
+.alt div{border:1px solid var(--line);border-top:4px solid var(--gold);padding:.6rem .9rem;background:#fff}
+.alt strong{font-family:Inter,Arial,sans-serif;color:var(--purple-dk)}
+.qs li{margin:.45rem 0}
+.key{border:2px solid var(--green);background:var(--green-lt);padding:.8rem 1.1rem;margin:1rem 0;border-radius:4px}
+.key h4,.key h3{color:var(--green);margin-top:.1rem}
+.flag{font-family:Inter,Arial,sans-serif;font-weight:700;color:var(--red)}
+.small{font-size:.86rem;color:var(--muted)}
+.mono{font-family:"IBM Plex Mono",Consolas,monospace}
+footer{padding:1rem 2rem 0;font-family:Inter,Arial,sans-serif;font-size:.8rem;color:var(--muted);border-top:1px solid var(--line);margin:2rem 2rem 0}
+a{color:var(--purple)}
+a:focus,button:focus{outline:3px solid var(--gold-dk);outline-offset:2px}
+.sitenav{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;padding:.6rem 2rem;background:var(--purple-dk);font-family:Inter,Arial,sans-serif;font-size:.88rem}
+.sitenav a{color:#fff}
+.page-break{break-before:page;page-break-before:always}
+@media (max-width:640px){
+  .banner,.content{padding-left:1rem;padding-right:1rem}
+  main{margin:0}
+  table{font-size:.82rem}
+  .memo dl{grid-template-columns:1fr}
+}
+@media print{
+  @page{size:letter;margin:.6in .6in .7in}
+  body{background:#fff;font-size:10.5pt}
+  main{box-shadow:none;margin:0;max-width:none;padding:0}
+  .banner{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  thead th,.inst-banner,.card,.important,.key,.badge{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  h2,h3,h4{break-after:avoid;page-break-after:avoid}
+  table,.card,.important,.key,.alt div,.quote,.memo{break-inside:avoid;page-break-inside:avoid}
+  .skip,.sitenav{display:none}
+  .content{padding:0 .1in}
+  .banner{padding:1rem 1.2rem}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main-content">Skip to main content</a>
+<main>
+<nav class="sitenav" aria-label="Case series navigation"><a href="../acct-352.html">&larr; ACCT 352 course page</a><a href="index.html">Case series home</a></nav>
+
+
+<header class="banner">
+<p class="kicker">ACCT 352 · Group Case Series · Project Overview</p>
+<h1>Catamount Ridge Gear, Inc.: A Four-Case Series</h1>
+<p class="sub">Project overview: the company, the cases ahead, and what your group will deliver</p>
+<div class="badges"><span class="badge">Group assignment</span><span class="badge">Handout</span></div>
+</header>
+<div class="content" id="main-content" tabindex="-1">
+
+<div class="card">
+<h2 style="border:none;margin-top:.2rem">How this project works</h2>
+<p>Over the semester your group will serve as the <strong>Financial Reporting Advisory Team</strong> for Catamount Ridge Gear, Inc. ("CRG"), a Western North Carolina outdoor-gear manufacturer. CRG's leadership is closing the <span class="yr" data-o="0">2026</span> fiscal year and planning for <span class="yr" data-o="1">2027</span>. In each of four cases, management faces real choices about how to structure transactions and how to report them. Your job is to lay out the alternatives, run the numbers, take a position, and defend it.</p>
+<p>There is rarely a single "textbook" answer. The right answer depends on the facts, and <strong>the facts are different for each version</strong> of the case.</p>
+</div>
+
+<h2>Company profile</h2>
+<p>Catamount Ridge Gear, Inc. was founded in a Cullowhee garage by two Western Carolina graduates who were tired of backpack straps that failed halfway up Whiteside Mountain. What started as a repair business grew into a designer and manufacturer of technical outdoor equipment. CRG's headquarters is in Sylva, North Carolina, and its main manufacturing plant sits along the Tuckasegee River in Dillsboro.</p>
+
+<h3>Product lines</h3>
+<ul>
+<li><strong>Packs and bags</strong> — the original "Ridgeline" daypacks and multi-day packs (about 40% of revenue).</li>
+<li><strong>Shelter</strong> — "Balsam" tents and hammock systems (about 25%).</li>
+<li><strong>Water</strong> — "Fontana" inflatable and hard-shell paddleboards (about 20%).</li>
+<li><strong>Trail tools</strong> — "Summit Lock" trekking poles and accessories (about 15%).</li>
+</ul>
+
+<h3>Ownership and financing</h3>
+<p>CRG's common stock trades on a national stock exchange. About 2,000,000 common shares are outstanding, and founders and employees together own roughly 30% of them. CRG borrows from <strong>Blue Ridge Mountain Bank</strong> under a revolving line of credit and term notes, and it has publicly issued bonds outstanding. Its lending agreements contain financial <strong>covenants</strong>, and these matter in several cases.</p>
+<table><caption>Table 1. Financial snapshot, fiscal year <span class="yr" data-o="-1">2025</span> (rounded)</caption><thead><tr><th scope="col">Item</th><th scope="col" class=n>Amount</th></tr></thead><tbody><tr><th scope="row">Net sales</th><td class=n>$82.4 million</td></tr><tr><th scope="row">Total assets</th><td class=n>$38.0 million</td></tr><tr><th scope="row">Total liabilities</th><td class=n>$22.0 million</td></tr><tr><th scope="row">Total shareholders' equity</th><td class=n>$16.0 million</td></tr><tr><th scope="row">Common shares outstanding</th><td class=n>2,000,000</td></tr><tr><th scope="row">Employees</th><td class=n>about 420</td></tr></tbody></table><table><caption>Table 2. People you will hear from</caption><thead><tr><th scope="col">Name</th><th scope="col">Role</th><th scope="col">What they tend to care about</th></tr></thead><tbody><tr><th scope="row">Walt Cardinal</th><td>Chief Executive Officer</td><td>Growth, the stock price, and meeting analysts' expectations</td></tr><tr><th scope="row">Marisa Holloway</th><td>Chief Financial Officer</td><td>Reported earnings, covenant compliance, and keeping options open</td></tr><tr><th scope="row">Jonah Reeves</th><td>Corporate Controller</td><td>Getting the accounting right and documenting the support</td></tr><tr><th scope="row">Priya Natarajan</th><td>Assistant Controller, technical accounting (joined in January)</td><td>A clean close and a fresh look at old decisions</td></tr><tr><th scope="row">Lena Okafor</th><td>Audit partner, Balsam &amp; Lane LLP</td><td>Whether the conclusions are supportable under GAAP</td></tr><tr><th scope="row">Audit Committee</th><td>Independent directors</td><td>Transparency, risk, and a fair picture for investors</td></tr></tbody></table>
+<div class="important">
+<h3>Remember: management's preference is not the standard</h3>
+<p>Executives in these cases will tell you what they would <em>like</em> the answer to be. Sometimes they are right. Sometimes they are not. Your memo must rest on the facts and on U.S. GAAP (the FASB Accounting Standards Codification), not on what produces the most attractive numbers.</p>
+</div>
+
+<h2>The case series</h2>
+<table><caption>Table 3. Case roadmap</caption><thead><tr><th scope="col">Case</th><th scope="col">Title</th><th scope="col">Topics covered</th><th scope="col">Core decisions</th></tr></thead><tbody><tr><th scope="row">1</th><td>Strategic Stakes and Short-Term Pressures</td><td>Investments in debt and equity securities; the equity method; current liabilities; refinancing short-term debt; loss and gain contingencies</td><td>How to account for a stake in a key supplier; how to classify a maturing note; whether and how much to accrue for a lawsuit</td></tr><tr><th scope="row">2</th><td>Financing the Dillsboro Line</td><td>Bonds and long-term notes; bond pricing and the effective-interest method; lease classification and measurement (lessee)</td><td>Issue bonds or lease a $10 million production line, and how each choice affects the statements and a debt covenant</td></tr><tr><th scope="row">3</th><td>Taxes, Shareholders, and Stock-Based Pay</td><td>Deferred tax assets and liabilities; valuation allowances; dividends, stock dividends, and share repurchases; stock options and restricted stock units; basic and diluted earnings per share</td><td>Whether a valuation allowance is needed; how to return capital to shareholders; which executive pay plan to adopt</td></tr><tr><th scope="row">4</th><td>The Controller's Close</td><td>Changes in accounting principle and estimate; error corrections and restatements; the statement of cash flows</td><td>How to report three year-end discoveries; whether proposed moves to improve operating cash flow are appropriate</td></tr></tbody></table>
+<p class="small">Each case builds on earlier ones. For example, the supplier investment from Case 1 shows up again in the cash flow statement in Case 4.</p>
+
+<h2>Versions</h2>
+<p>Each case comes in <strong>three versions</strong>. The company and the questions are the same, but key facts (ownership percentages, interest rates, lease terms, legal opinions, stock prices, and so on) change. Because of this, <strong>a well-supported answer for one version may be the wrong answer for another.</strong></p>
+<ul>
+<li>Your group is assigned <strong>one version for the entire series</strong>. Facts carry forward from case to case within your version.</li>
+<li>Do not rely on another group's conclusions. Comparing versions after submission is encouraged, and we will debrief the differences in class.</li>
+</ul>
+
+<h2>What every case asks you to do</h2>
+<ol>
+<li><strong>Identify the issues.</strong> What decisions does CRG face, and what accounting questions follow from them?</li>
+<li><strong>Lay out the alternatives.</strong> For each issue, describe the realistic options, including the one management prefers.</li>
+<li><strong>Run the numbers.</strong> Prepare the journal entries, schedules, and financial statement effects under each alternative the case asks about.</li>
+<li><strong>Take a position.</strong> Recommend a treatment or course of action and explain why it is required or preferable.</li>
+<li><strong>Support it.</strong> Cite the relevant FASB Codification topic and connect the facts of your version to the criteria. Address the strongest counterargument.</li>
+</ol>
+
+<div class="card">
+<h3>Group deliverables for each case</h3>
+<ul>
+<li><strong>Memo to the CFO</strong> (no more than 4 pages, single-spaced, excluding exhibits) that states each issue, the alternatives, your recommendation, and your support.</li>
+<li><strong>Exhibits</strong>: journal entries, calculations, schedules, and any statement excerpts. Label each exhibit and refer to it in the memo.</li>
+<li><strong>Team record</strong>: a short list of who contributed what, and any point where your group disagreed and how you resolved it.</li>
+</ul>
+<p>Submit one set of deliverables per group. Follow the due dates posted in Canvas.</p>
+</div>
+<table><caption>Table 4. How each case is graded (100 points)</caption><thead><tr><th scope="col">Criterion</th><th scope="col" class=n>Points</th><th scope="col">What strong work looks like</th></tr></thead><tbody><tr><th scope="row">Issue identification and alternatives</th><td class=n>15</td><td>Every issue in the case is identified; realistic alternatives (including management's preference) are described fairly</td></tr><tr><th scope="row">Technical accuracy</th><td class=n>30</td><td>Journal entries, schedules, and statement effects are correct and complete for your version's facts</td></tr><tr><th scope="row">Use of authoritative support</th><td class=n>20</td><td>Recommendations are tied to specific Codification criteria, applied to your version's facts</td></tr><tr><th scope="row">Recommendation and reasoning</th><td class=n>20</td><td>Clear positions; the strongest counterargument is addressed; ethical and business consequences are considered</td></tr><tr><th scope="row">Professional communication</th><td class=n>10</td><td>Memo is organized, concise, and readable by an executive; exhibits are labeled and referenced</td></tr><tr><th scope="row">Team record</th><td class=n>5</td><td>Contributions and resolved disagreements are documented</td></tr></tbody></table>
+<div class="important">
+<h3>Ground rules</h3>
+<ul>
+<li>Assume a combined income tax rate of 25% unless a case says otherwise.</li>
+<li>Round to the nearest dollar unless a case says amounts are in thousands.</li>
+<li>Show your work. A correct number with no support earns partial credit at best.</li>
+<li>When the facts are incomplete, state a reasonable assumption and explain how a different assumption would change your answer.</li>
+</ul>
+</div>
+
+</div>
+<footer>
+<p>ACCT 352 · Intermediate Accounting II · Western Carolina University. Catamount Ridge Gear, Inc. and every person, company, and event in this case series are fictional; any resemblance to real entities is coincidental. Fiscal year ends December 31, <span class="yr" data-o="0">2026</span>.</p>
+</footer>
+</main>
+<script>
+(function(){var b=new Date().getFullYear();
+document.querySelectorAll('.yr').forEach(function(s){s.textContent=b+parseInt(s.getAttribute('data-o')||'0',10);});})();
+</script>
+</body>
+</html>
