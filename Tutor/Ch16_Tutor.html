@@ -122,6 +122,10 @@ input.ans.n{text-align:right}
 .say.key .bubble::after{border-right-color:var(--gold-lt)}
 .say.key .bubble::before{border-right-color:var(--gold-dk)}
 .partfb .who{font-weight:700}
+.know{margin:.4rem 0 .6rem;font-size:.92rem;min-width:34rem}
+.know td.ln{width:2.6rem;text-align:center;font-family:Inter,Arial,sans-serif;font-weight:700;color:var(--purple-dk);background:#F7F5FA}
+.know tbody th{font-weight:600;background:#fff}
+.know td.why{font-size:.86rem;color:var(--muted);font-family:Inter,Arial,sans-serif}
 .summary{border-top:3px solid var(--gold);margin-top:1.5rem;padding-top:.6rem}
 .score{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:.4rem 0 1rem;padding:0}
 .score li{background:var(--purple-lt);border:1px solid var(--line);border-radius:999px;padding:.2rem .8rem;font-family:Inter,Arial,sans-serif;font-weight:600;font-size:.9rem}
@@ -269,7 +273,7 @@ function company(){var n;do{n=pick(NAMES);}while(n===lastName);lastName=n;return
 
 /* ---------- worksheet builders ---------- */
 /* given line */
-function G(id,label,val,unit){return {kind:"given",id:id,label:label,val:val,unit:unit||"$"};}
+function G(id,label,val,unit,why){return {kind:"given",id:id,label:label,val:val,unit:unit||"$",why:why||""};}
 /* numeric input line */
 function N(id,label,ans,builds,hint,sol,opt){opt=opt||{};return {kind:"num",id:id,label:label,ans:ans,builds:builds||"",hint:hint,sol:sol,unit:opt.unit||"$",tol:opt.tol==null?1:opt.tol};}
 /* choice input line */
@@ -296,19 +300,19 @@ GEN.dtl={group:"Foundations",name:"Deferred tax liability",blurb:"Depreciation d
   var P=K(rnd(2400,6800,100)),B=orig?K(rnd(0,1200,100)):K(rnd(900,2400,100));
   var D=orig?K(rnd(200,900,100)):K(rnd(200,Math.min(B/1000,900),100));
   var E=orig?B+D:B-D,TI=orig?P-D:P+D,pay=R(TI*r),begL=R(B*r),endL=R(E*r),chg=endL-begL,exp=pay+chg;
-  return {title:co,
+  return {title:co,facts:[["Enacted tax rate (all years)",pc(r),"Enacted tax law. The rate is the same every year, so no scheduling by year is needed."]],
   scenario:'<p>'+esc(co)+' uses accelerated depreciation on its tax return and straight-line depreciation in its financial statements. '+(orig?'In '+Y+', tax depreciation <strong>exceeds</strong> book depreciation, so the difference is <strong>originating</strong>.':'In '+Y+', book depreciation <strong>exceeds</strong> tax depreciation, so the difference is <strong>reversing</strong>.')+' There are no other differences. The enacted tax rate is '+pc(r)+' for all years.</p>',
   key:'<p>Accelerated tax depreciation creates <strong>future taxable amounts</strong>: the company deducts more now and less later, so it owes more tax later. That obligation is a deferred tax liability. When the difference reverses, taxable income exceeds book income and the liability shrinks.</p>',
   parts:[
    sched("Tax schedule for "+Y,[
-     G("A","Pretax accounting income",P),
-     G("B",(orig?"Tax depreciation in excess of book depreciation":"Book depreciation in excess of tax depreciation"),D),
+     G("A","Pretax accounting income",P,null,"The income statement: income before income taxes for "+Y+"."),
+     G("B",(orig?"Tax depreciation in excess of book depreciation":"Book depreciation in excess of tax depreciation"),D,null,orig?"Accelerated depreciation front-loads deductions, so the tax return deducts more than the books this year.":"Later in the asset\u2019s life the tax deductions run out, so book depreciation is now larger. The difference is reversing."),
      N("C","Taxable income",TI,"A, B",orig?"Extra tax depreciation is an extra deduction on the return, so subtract B from A.":"When the difference reverses, tax depreciation is smaller, so add B to A.",m($(P)+(orig?" − ":" + ")+$(D)+" = "+$(TI))),
      N("D","Step 1: Income tax payable",pay,"C × rate","Multiply taxable income (C) by the "+pc(r)+" rate.",m($(TI)+" × "+pc(r)+" = "+$(pay))),
-     G("E","Cumulative temporary difference, beginning of "+Y,B),
+     G("E","Cumulative temporary difference, beginning of "+Y,B,null,"The depreciation difference built up in earlier years: last year\u2019s ending balance carried forward."),
      N("F","Cumulative temporary difference, end of "+Y,E,"E, B",orig?"The difference grew this year: E + B.":"The difference shrank this year: E − B.",m($(B)+(orig?" + ":" − ")+$(D)+" = "+$(E))),
      N("G","Step 2: Deferred tax liability, end of "+Y,endL,"F × rate","Multiply the ending cumulative difference (F) by the enacted rate.",m($(E)+" × "+pc(r)+" = "+$(endL))),
-     G("H","Deferred tax liability, beginning of "+Y,begL),
+     G("H","Deferred tax liability, beginning of "+Y,begL,null,"Last year\u2019s ending DTL. Does it make sense? E × "+pc(r)+" = "+$(R(B*r))+"."),
      N("I","Step 3: Change in the deferred tax liability",chg,"G − H","Ending minus beginning. A decrease is negative.",m($(endL)+" − "+$(begL)+" = "+$(chg))),
      N("J","Step 4: Income tax expense",exp,"D, I","Expense is the plug: payable (D) plus the increase in the DTL (I), or minus a decrease.",m($(pay)+(chg<0?" − "+$(-chg):" + "+$(chg))+" = "+$(exp)))
    ]),
@@ -322,20 +326,20 @@ GEN.dta={group:"Foundations",name:"Deferred tax asset",blurb:"Warranty accruals 
   var co=company(),r=pick([.21,.25,.30]);
   var P=K(rnd(2400,6800,100)),Lb=K(rnd(0,1000,100)),W=K(rnd(300,1200,100));
   var Cp=K(rnd(100,Math.min((Lb+W)/1000,1200),100)),Le=Lb+W-Cp,TI=P+W-Cp,pay=R(TI*r),begA=R(Lb*r),endA=R(Le*r),chg=endA-begA,exp=pay-chg;
-  return {title:co,
+  return {title:co,facts:[["Enacted tax rate (all years)",pc(r),"Enacted tax law. The rate is the same every year, so no scheduling by year is needed."]],
   scenario:'<p>'+esc(co)+' offers a warranty on its products. In its financial statements it accrues warranty expense in the year of sale. For tax purposes, warranty costs are deductible only when paid. There are no other differences. The enacted tax rate is '+pc(r)+' for all years.</p>',
   key:'<p>Accrued warranty expense is recognized in the books before it is deductible. The company will deduct those costs later, so it has <strong>future deductible amounts</strong>. Those future tax savings are a deferred tax asset. An increase in a DTA is a <strong>debit</strong> and reduces income tax expense.</p>',
   parts:[
    sched("Tax schedule for "+Y,[
-     G("A","Pretax accounting income",P),
-     G("B","Warranty expense accrued (books)",W),
-     G("C","Warranty costs paid (deductible on the return)",Cp),
+     G("A","Pretax accounting income",P,null,"The income statement: income before income taxes."),
+     G("B","Warranty expense accrued (books)",W,null,"The books record warranty expense in the year of the sale (matching)."),
+     G("C","Warranty costs paid (deductible on the return)",Cp,null,"Claims actually paid this year. Only these are deductible on the tax return."),
      N("D","Taxable income",TI,"A, B, C","Add back the accrued expense (B), then subtract the costs actually paid (C).",m($(P)+" + "+$(W)+" − "+$(Cp)+" = "+$(TI))),
      N("E","Step 1: Income tax payable",pay,"D × rate","Multiply taxable income (D) by the rate.",m($(TI)+" × "+pc(r)+" = "+$(pay))),
-     G("F","Warranty liability (cumulative difference), beginning of "+Y,Lb),
+     G("F","Warranty liability (cumulative difference), beginning of "+Y,Lb,null,"Warranty accrued but not yet paid, carried over from last year. This is the cumulative difference."),
      N("G","Warranty liability (cumulative difference), end of "+Y,Le,"F, B, C","Beginning liability + expense accrued − costs paid.",m($(Lb)+" + "+$(W)+" − "+$(Cp)+" = "+$(Le))),
      N("H","Step 2: Deferred tax asset, end of "+Y,endA,"G × rate","Multiply the ending cumulative difference (G) by the enacted rate.",m($(Le)+" × "+pc(r)+" = "+$(endA))),
-     G("I","Deferred tax asset, beginning of "+Y,begA),
+     G("I","Deferred tax asset, beginning of "+Y,begA,null,"Last year\u2019s ending DTA. Does it make sense? F × "+pc(r)+" = "+$(begA)+"."),
      N("J","Step 3: Change in the deferred tax asset",chg,"H − I","Ending minus beginning. A decrease is negative.",m($(endA)+" − "+$(begA)+" = "+$(chg))),
      N("K","Step 4: Income tax expense",exp,"E, J","An increase in a DTA reduces expense: payable (E) minus the change (J).",m($(pay)+(chg>=0?" − "+$(chg):" + "+$(-chg))+" = "+$(exp)))
    ]),
@@ -349,7 +353,7 @@ GEN.perm={group:"Foundations",name:"Permanent and temporary differences",blurb:"
   var P=K(rnd(3000,8000,100)),M=K(rnd(100,600,100)),F=K(rnd(100,400,100)),Gp=K(rnd(300,1500,100));
   var TI=P-M+F-Gp,pay=R(TI*r),dtl=R(Gp*r),exp=pay+dtl,etr=Math.round(exp/P*1000)/10;
   var opts=["Permanent difference","Temporary difference"];
-  return {title:co,
+  return {title:co,facts:[["Interest on municipal (tax-exempt) bonds",$(M),"In book income, but never taxable."],["Fines for environmental violations",$(F),"A book expense that is never deductible."],["Installment sale profit deferred for tax",$(Gp),"In book income now; taxed later when collected."],["Enacted tax rate (all years)",pc(r),"Enacted tax law. The rate is the same every year, so no scheduling by year is needed."]],
   scenario:'<p>'+esc(co)+' reports the items below for '+Y+'. The installment sale profit is recognized in the books in '+Y+' but is taxed when cash is collected in later years. There were no deferred tax balances at the beginning of '+Y+'. The enacted tax rate is '+pc(r)+' for all years.</p>',
   key:'<p>A <strong>permanent difference</strong> affects book income or taxable income, but never both, so it never reverses and creates no deferred tax. Permanent differences are why the <strong>effective tax rate</strong> differs from the statutory rate. A <strong>temporary difference</strong> reverses later and creates deferred tax.</p>',
   parts:[
@@ -359,7 +363,7 @@ GEN.perm={group:"Foundations",name:"Permanent and temporary differences",blurb:"
      C("C","Installment sale gross profit deferred for tax, "+$(Gp),opts,1,"Will this profit be taxed eventually?","Temporary: it will be taxed when collected, creating a DTL.")
    ]),
    sched("Tax schedule for "+Y,[
-     G("D","Pretax accounting income",P),
+     G("D","Pretax accounting income",P,null,"The income statement: income before income taxes."),
      N("E","Taxable income",TI,"D, A, B, C","Subtract tax-exempt interest, add back nondeductible fines, subtract the installment profit not yet taxed.",m($(P)+" − "+$(M)+" + "+$(F)+" − "+$(Gp)+" = "+$(TI))),
      N("F","Step 1: Income tax payable",pay,"E × rate","Multiply taxable income (E) by the rate.",m($(TI)+" × "+pc(r)+" = "+$(pay))),
      N("G","Step 2: Deferred tax liability, end of "+Y,dtl,"C × rate","Only the temporary difference creates deferred tax.",m($(Gp)+" × "+pc(r)+" = "+$(dtl))),
@@ -402,20 +406,20 @@ GEN.va={group:"Measurement",name:"Valuation allowance",blurb:"Reduce a deferred 
   var X=K(rnd(1000,3600,100)),U=K(rnd(200,X/1000-300,100)),V0=pick([0,0,K(rnd(20,200,10))]),Xb=K(rnd(600,X/1000,100));
   var dta=R(X*r),dtab=R(Xb*r),dchg=dta-dtab,vae=R(U*r),net=dta-vae,adj=vae-V0;
   var TI=K(rnd(4000,8000,100)),pay=R(TI*r),exp=pay-dchg+adj;
-  return {title:co,
+  return {title:co,facts:[["Enacted tax rate (all years)",pc(r),"Enacted tax law. The rate is the same every year, so no scheduling by year is needed."]],
   scenario:'<p>At December 31, '+Y+', '+esc(co)+' has future deductible amounts from accrued expenses. After weighing all available evidence, including recent losses in one division, management concludes it is more likely than not that <strong>'+$(U)+'</strong> of those amounts will <strong>not</strong> be realized. Taxable income for '+Y+' is '+$(TI)+'. The enacted tax rate is '+pc(r)+' for all years.</p>',
   key:'<p>A deferred tax asset is recognized for <strong>all</strong> deductible temporary differences. It is then reduced by a <strong>valuation allowance</strong> if it is more likely than not (more than 50%) that some of it will not be realized. Increasing the allowance increases income tax expense; decreasing it lowers expense.</p>',
   parts:[
    sched("Tax schedule for "+Y,[
-     G("A","Taxable income",TI),
+     G("A","Taxable income",TI,null,"This year\u2019s tax return."),
      N("B","Step 1: Income tax payable",pay,"A × rate","Multiply taxable income by the rate.",m($(TI)+" × "+pc(r)+" = "+$(pay))),
-     G("C","Cumulative future deductible amounts, end of "+Y,X),
+     G("C","Cumulative future deductible amounts, end of "+Y,X,null,"Accrued expenses booked but not yet deducted, totaled at year-end."),
      N("D","Step 2: Deferred tax asset, end of "+Y+" (before any allowance)",dta,"C × rate","Multiply all future deductible amounts by the enacted rate.",m($(X)+" × "+pc(r)+" = "+$(dta))),
-     G("E","Deferred tax asset, beginning of "+Y,dtab),
+     G("E","Deferred tax asset, beginning of "+Y,dtab,null,"Last year\u2019s ending balance."),
      N("F","Step 3: Change in the deferred tax asset",dchg,"D − E","Ending minus beginning.",m($(dta)+" − "+$(dtab)+" = "+$(dchg))),
-     G("G","Deductible amounts not expected to be realized",U),
+     G("G","Deductible amounts not expected to be realized",U,null,"Management\u2019s judgment after weighing the positive and negative evidence."),
      N("H","Valuation allowance required, end of "+Y,vae,"G × rate","Multiply only the amounts that will not be realized by the rate.",m($(U)+" × "+pc(r)+" = "+$(vae))),
-     G("I","Valuation allowance, beginning of "+Y,V0),
+     G("I","Valuation allowance, beginning of "+Y,V0,null,"Last year\u2019s ending allowance."),
      N("J","Adjustment to the valuation allowance",adj,"H − I","Required ending balance minus the beginning balance. A decrease is negative.",m($(vae)+" − "+$(V0)+" = "+$(adj))),
      N("K","Net deferred tax asset reported",net,"D − H","Deferred tax asset minus the valuation allowance.",m($(dta)+" − "+$(vae)+" = "+$(net))),
      N("L","Step 4: Income tax expense",exp,"B, F, J","Payable (B), minus the increase in the DTA (F), plus the increase in the allowance (J).",m($(pay)+(dchg>=0?" − "+$(dchg):" + "+$(-dchg))+(adj>=0?" + "+$(adj):" − "+$(-adj))+" = "+$(exp)))
@@ -431,18 +435,18 @@ GEN.sched={group:"Measurement",name:"Multiple enacted rates",blurb:"Schedule rev
   var co=company(),t=pick([[.30,.25,.21],[.25,.30,.21],[.21,.25,.30],[.25,.21,.20],[.30,.21,.25]]),r0=t[0],r1=t[1],r2=t[2];
   var P=K(rnd(3000,7000,100)),a=K(rnd(300,1200,100)),b=K(rnd(300,1200,100)),Gp=a+b;
   var TI=P-Gp,pay=R(TI*r0),d1=R(a*r1),d2=R(b*r2),dtl=d1+d2,exp=pay+dtl;
-  return {title:co,
+  return {title:co,facts:[["Enacted rate, "+Y,pc(r0),"Used for this year\u2019s tax return."],["Enacted rate, "+(Y+1),pc(r1),"Already law, so it applies to amounts reversing next year."],["Enacted rate, "+(Y+2),pc(r2),"Already law for the year after."]],
   scenario:'<p>In '+Y+', '+esc(co)+' sold land on an installment basis. The full gross profit of '+$(Gp)+' is recognized in the books in '+Y+'. For tax purposes it is taxed as cash is collected: '+$(a)+' in '+(Y+1)+' and '+$(b)+' in '+(Y+2)+'. There are no other differences and no beginning deferred tax balances. Enacted tax law sets these rates: '+pc(r0)+' for '+Y+', '+pc(r1)+' for '+(Y+1)+', and '+pc(r2)+' for '+(Y+2)+'.</p>',
   key:'<p>Deferred tax is measured using the <strong>enacted</strong> rate for the year each temporary difference reverses. Schedule the future taxable amounts by year, then apply each year\'s rate. Proposed rates are ignored until enacted.</p>',
   parts:[
    sched("Tax schedule for "+Y,[
-     G("A","Pretax accounting income",P),
-     G("B","Installment profit not yet taxable",Gp),
+     G("A","Pretax accounting income",P,null,"The income statement: income before income taxes."),
+     G("B","Installment profit not yet taxable",Gp,null,"The whole profit is in book income now, but it is taxed only as cash is collected."),
      N("C","Taxable income, "+Y,TI,"A − B","Subtract the profit that will be taxed later.",m($(P)+" − "+$(Gp)+" = "+$(TI))),
      N("D","Step 1: Income tax payable, "+Y,pay,"C × "+pc(r0),"Use the "+Y+" rate for the current year.",m($(TI)+" × "+pc(r0)+" = "+$(pay))),
-     G("E","Amount taxable in "+(Y+1),a),
+     G("E","Amount taxable in "+(Y+1),a,null,"Cash expected to be collected next year, so it is taxed next year."),
      N("F","Deferred tax on the "+(Y+1)+" amount",d1,"E × "+pc(r1),"Use the rate enacted for "+(Y+1)+".",m($(a)+" × "+pc(r1)+" = "+$(d1))),
-     G("G","Amount taxable in "+(Y+2),b),
+     G("G","Amount taxable in "+(Y+2),b,null,"Cash expected to be collected the year after."),
      N("H","Deferred tax on the "+(Y+2)+" amount",d2,"G × "+pc(r2),"Use the rate enacted for "+(Y+2)+".",m($(b)+" × "+pc(r2)+" = "+$(d2))),
      N("I","Step 2: Deferred tax liability, end of "+Y,dtl,"F + H","Add the deferred tax for each future year.",m($(d1)+" + "+$(d2)+" = "+$(dtl))),
      N("J","Step 4: Income tax expense",exp,"D, I","Payable plus the increase in the DTL (the beginning balance was zero).",m($(pay)+" + "+$(dtl)+" = "+$(exp)))
@@ -456,13 +460,13 @@ GEN.rate={group:"Measurement",name:"Change in tax rates",blurb:"Remeasure deferr
   var co=company(),pr=pick([[.30,.25],[.25,.21],[.21,.25],[.25,.30],[.30,.21]]),r0=pr[0],r1=pr[1],asset=Math.random()<.5;
   var T=K(rnd(1000,5000,100)),old=R(T*r0),nw=R(T*r1),adj=nw-old,eff=asset?-adj:adj;
   var acct=asset?"Deferred tax asset":"Deferred tax liability",al=acct.toLowerCase();
-  return {title:co,
+  return {title:co,facts:[["Previously enacted rate",pc(r0),"The rate used to measure B."],["Newly enacted rate ("+(Y+1)+" and later)",pc(r1),"Enacted this year, and it applies when the differences reverse."]],
   scenario:'<p>At the end of '+Y+', before any adjustment for a new law, '+esc(co)+' reports a '+al+' of '+$(old)+'. It reflects '+$(T)+' of cumulative future '+(asset?"deductible":"taxable")+' amounts measured at the previously enacted rate of '+pc(r0)+'. Late in '+Y+', Congress enacts a law changing the rate to '+pc(r1)+' for '+(Y+1)+' and later. The temporary differences reverse after '+Y+'.</p>',
   key:'<p>When a new rate is <strong>enacted</strong>, existing deferred tax assets and liabilities are remeasured immediately. The entire effect goes to income tax expense in the period of enactment. Current-year taxes payable are not affected.</p>',
   parts:[
    sched("Remeasurement at December 31, "+Y,[
-     G("A","Cumulative future "+(asset?"deductible":"taxable")+" amounts",T),
-     G("B",acct+" before the change",old),
+     G("A","Cumulative future "+(asset?"deductible":"taxable")+" amounts",T,null,"Every temporary difference still waiting to reverse at year-end."),
+     G("B",acct+" before the change",old,null,"Measured at the old rate. Does it make sense? A × "+pc(r0)+" = "+$(old)+"."),
      N("C","Remeasured "+al+" at "+pc(r1),nw,"A × new rate","Multiply the cumulative difference by the newly enacted rate.",m($(T)+" × "+pc(r1)+" = "+$(nw))),
      N("D","Change in the "+al,adj,"C − B","New balance minus old balance. A decrease is negative.",m($(nw)+" − "+$(old)+" = "+$(adj))),
      N("E","Effect on "+Y+" income tax expense (increase positive, decrease negative)",eff,"D",asset?"A larger DTA lowers expense; a smaller DTA raises it.":"A larger DTL raises expense; a smaller DTL lowers it.",asset?(adj<0?"The DTA falls by "+$(-adj)+", so expense rises by "+$(-adj)+".":"The DTA grows by "+$(adj)+", so expense falls by "+$(adj)+"."):(adj<0?"The DTL falls by "+$(-adj)+", so expense falls by "+$(-adj)+".":"The DTL grows by "+$(adj)+", so expense rises by "+$(adj)+".")),
@@ -477,18 +481,18 @@ GEN.nol={group:"Special topics",name:"Net operating loss carryforward",blurb:"Re
   var co=company(),r=pick([.21,.25]);
   var L=K(rnd(1000,5000,100)),I=K(rnd(2,10,1)*500);
   var dta=R(L*r),netLoss=L-dta,used=Math.min(L,R(.8*I)),TI2=I-used,pay2=R(TI2*r),red=R(used*r),exp2=pay2+red,rem=L-used;
-  return {title:co,
+  return {title:co,facts:[["NOL limit","80% of taxable income","Current tax law: an NOL can offset at most 80% of taxable income in a year."],["Enacted tax rate (all years)",pc(r),"Enacted tax law. The rate is the same every year, so no scheduling by year is needed."]],
   scenario:'<p>After a slow tourist season, '+esc(co)+' reports an operating loss of '+$(L)+' in '+Y+' for both books and taxes. In '+(Y+1)+' it earns pretax accounting income and taxable income (before the NOL deduction) of '+$(I)+'. The NOL carries forward indefinitely but can offset at most <strong>80%</strong> of taxable income in any year; no carryback is allowed. The enacted rate is '+pc(r)+'. No valuation allowance is needed.</p>',
   key:'<p>An NOL carryforward works like a deductible temporary difference: it will reduce future taxable income. Record a <strong>deferred tax asset</strong> and an income tax <strong>benefit</strong> (a credit to income tax expense) in the loss year. Using the NOL later reduces the asset.</p>',
   parts:[
    sched(Y+": the loss year",[
-     G("A","Operating loss",L),
+     G("A","Operating loss",L,null,"Reported on both the income statement and the tax return."),
      N("B","Deferred tax asset for the NOL carryforward",dta,"A × rate","Multiply the NOL by the enacted rate.",m($(L)+" × "+pc(r)+" = "+$(dta))),
      N("C","Net loss after the tax benefit (enter as a positive amount)",netLoss,"A − B","The tax benefit reduces the pretax loss.",m($(L)+" − "+$(dta)+" = "+$(netLoss)))
    ]),
    JE("Journal entry, December 31, "+Y,[["Deferred tax asset",dta,0,"B"],["Income tax expense",0,dta,"B"]],"Record the benefit as a credit to income tax expense (reported as an income tax benefit)."),
    sched((Y+1)+": using the carryforward",[
-     G("D","Income before the NOL deduction",I),
+     G("D","Income before the NOL deduction",I,null,"Next year\u2019s income before using any of the carryforward."),
      N("E","NOL deduction used",used,"A, 80% × D","The smaller of the available NOL and 80% of taxable income.",m("Smaller of "+$(L)+" and 80% × "+$(I)+" ("+$(R(.8*I))+") = "+$(used))),
      N("F","Taxable income after the NOL",TI2,"D − E","Income before the NOL minus the deduction used.",m($(I)+" − "+$(used)+" = "+$(TI2))),
      N("G","Income tax payable",pay2,"F × rate","Multiply taxable income after the NOL by the rate.",m($(TI2)+" × "+pc(r)+" = "+$(pay2))),
@@ -512,13 +516,13 @@ GEN.utp={group:"Special topics",name:"Uncertain tax positions",blurb:"Recognize 
   var tbl='<table><caption>Possible outcomes if the tax authority examines the position</caption><thead><tr><th scope="col" class="n">Tax benefit sustained</th><th scope="col" class="n">Probability</th></tr></thead><tbody>';
   for(i=0;i<5;i++)tbl+='<tr><td class="n">'+$(amts[i])+'</td><td class="n">'+pr[i]+'%</td></tr>';
   tbl+='</tbody></table>';
-  return {title:co,given:tbl,
+  return {title:co,facts:[["Tax rate",pc(r),"Used to turn the deduction into tax saved."]],given:tbl,
   scenario:'<p>On its '+Y+' tax return, '+esc(co)+' takes a '+$(D)+' deduction for research costs on a new product line, saving '+$(B)+' in taxes at the '+pc(r)+' rate. Management believes the position is more likely than not to be sustained, but the amount allowed may be smaller. Pretax accounting income is '+$(P)+'; there are no other differences.</p>',
   key:'<p>Two steps. <strong>Recognition:</strong> a benefit is recognized only if the position is more likely than not to be sustained. <strong>Measurement:</strong> recognize the <strong>largest</strong> benefit whose <strong>cumulative</strong> probability exceeds 50%. The benefit claimed but not recognized is a liability for unrecognized tax benefits.</p>',
   parts:[
    sched("Tax schedule for "+Y,[
-     G("A","Pretax accounting income",P),
-     G("B","Deduction taken on the return",D),
+     G("A","Pretax accounting income",P,null,"The income statement: income before income taxes."),
+     G("B","Deduction taken on the return",D,null,"The full deduction claimed on the return, even though it is uncertain."),
      N("C","Income tax payable (the return includes the full deduction)",pay,"(A − B) × rate","Multiply (pretax income − deduction) by the rate.",m("("+$(P)+" − "+$(D)+") × "+pc(r)+" = "+$(pay))),
      N("D","Tax benefit claimed on the return",B,"B × rate","The deduction times the rate.",m($(D)+" × "+pc(r)+" = "+$(B))),
      N("E","Tax benefit recognized in the financial statements",rec,"outcome table","Start with the largest amount and add probabilities moving down. Stop at the first amount where the running total exceeds 50%.","Cumulative: "+amts.map(function(a,k){return $(a)+" → "+cums[k]+"%";}).join("; ")+". First above 50%: <strong>"+$(rec)+"</strong>."),
@@ -535,13 +539,12 @@ GEN.intra={group:"Special topics",name:"Intraperiod tax allocation",blurb:"Repor
   var Cc=K(rnd(2000,6000,100)),Dd=K(rnd(200,1500,100))*(loss?-1:1),Gn=K(rnd(100,600,100));
   var taxC=R(Cc*r),incC=Cc-taxC,taxD=R(Dd*r),netD=Dd-taxD,NI=incC+netD,taxG=R(Gn*r),oci=Gn-taxG;
   var eqDisc=loss?["Loss from discontinued operations (tax benefit)",0,-taxD,"D"]:["Gain from discontinued operations (tax expense)",taxD,0,"D"];
-  return {title:co,
+  return {title:co,facts:[[(loss?"Loss":"Gain")+" from discontinued operations (pretax)",$(Math.abs(Dd)),"The sold division\u2019s results, reported below continuing operations."],["Unrealized holding gain on AFS debt securities (pretax)",$(Gn),"Reported in other comprehensive income, not net income."],["Tax rate (all items)",pc(r),"Each item carries its own tax at this rate."]],
   scenario:'<p>'+esc(co)+' sold a division in '+Y+' that qualifies as a discontinued operation. It also has an unrealized holding gain on available-for-sale debt securities, reported in other comprehensive income. The tax rate is '+pc(r)+' on all items. Assume all current taxes are payable this year and the OCI tax is deferred.</p>',
-  given:givenTable("Data for "+Y+" (before taxes)",[["Income from continuing operations before income taxes",$(Cc)],[(loss?"Loss":"Gain")+" from discontinued operations",$(Math.abs(Dd))],["Unrealized holding gain on AFS debt securities",$(Gn)],["Tax rate",pc(r)]]),
   key:'<p><strong>Intraperiod tax allocation</strong> assigns tax to the items that cause it. Income tax expense on the face of the income statement relates only to continuing operations. Discontinued operations and OCI are each reported <strong>net of their own tax</strong>.</p>',
   parts:[
    sched("Income statement amounts, "+Y,[
-     G("A","Income from continuing operations before income taxes",Cc),
+     G("A","Income from continuing operations before income taxes",Cc,null,"Continuing operations only. Discontinued operations and OCI are handled separately."),
      N("B","Income tax expense on continuing operations",taxC,"A × rate","Multiply by the rate.",m($(Cc)+" × "+pc(r)+" = "+$(taxC))),
      N("C","Income from continuing operations",incC,"A − B","Pretax minus its tax.",m($(Cc)+" − "+$(taxC)+" = "+$(incC))),
      N("D","Tax effect of discontinued operations ("+(loss?"benefit, enter negative":"expense, enter positive")+")",taxD,"pretax disc. ops × rate",loss?"A loss creates a tax benefit, so enter it as a negative.":"A gain is taxed.",m($(Dd)+" × "+pc(r)+" = "+$(taxD))),
@@ -562,15 +565,15 @@ GEN.bs={group:"Special topics",name:"Balance sheet presentation",blurb:"Net defe
   var T1=K(rnd(1000,4000,100)),T2=K(rnd(300,2000,100)),T3=K(rnd(200,1200,100)),U=K(rnd(0,Math.min(T2/1000,600),100));
   var dtl=R(T1*r),dta=R((T2+T3)*r),va=R(U*r),dtaN=dta-va,net=dtaN-dtl;
   var opts=["Noncurrent asset","Noncurrent liability","Current asset","Current liability"];
-  return {title:co,
+  return {title:co,facts:[["Enacted tax rate (all years)",pc(r),"Enacted tax law. The rate is the same every year, so no scheduling by year is needed."]],
   scenario:'<p>At December 31, '+Y+', '+esc(co)+' has the temporary differences below, all in the same tax jurisdiction. The enacted tax rate is '+pc(r)+'.</p>',
   key:'<p>Within one tax jurisdiction, deferred tax assets (net of any valuation allowance) and deferred tax liabilities are <strong>offset</strong> and reported as one net amount, always classified as <strong>noncurrent</strong> under U.S. GAAP.</p>',
   parts:[
    sched("Deferred tax balances at December 31, "+Y,[
-     G("A","Depreciation (future taxable amounts)",T1),
-     G("B","Warranty liability (future deductible amounts)",T2),
-     G("C","Allowance for uncollectible accounts (future deductible amounts)",T3),
-     G("D","Future deductible amounts not expected to be realized",U),
+     G("A","Depreciation (future taxable amounts)",T1,null,"Accelerated tax depreciation: deducted now, taxable later."),
+     G("B","Warranty liability (future deductible amounts)",T2,null,"Accrued in the books now, deductible when paid."),
+     G("C","Allowance for uncollectible accounts (future deductible amounts)",T3,null,"Estimated in the books now, deductible when accounts are written off."),
+     G("D","Future deductible amounts not expected to be realized",U,null,"Management\u2019s judgment that part of the DTA will not be realized."),
      N("E","Deferred tax liability",dtl,"A × rate","Multiply the future taxable amounts by the rate.",m($(T1)+" × "+pc(r)+" = "+$(dtl))),
      N("F","Deferred tax asset before the valuation allowance",dta,"(B + C) × rate","Add the deductible amounts, then multiply by the rate.",m("("+$(T2)+" + "+$(T3)+") × "+pc(r)+" = "+$(dta))),
      N("G","Valuation allowance",va,"D × rate","Amounts not expected to be realized × rate.",m($(U)+" × "+pc(r)+" = "+$(va))),
@@ -627,8 +630,18 @@ function start(k,focus){
   state={k:k,p:p,parts:[]};
   el("ptype").textContent=GEN[k].name;
   el("work-title").textContent=p.title;
-  el("scenario-say").innerHTML=say(any(["<p>Here's the situation we're working with today.</p>","<p>Let's meet today's company.</p>","<p>Okay, here's what we know.</p>"])+p.scenario);
-  el("given").innerHTML=p.given||"";el("given").hidden=!p.given;
+  var know=[];
+  p.parts.forEach(function(pt){if(pt.type==="sched")pt.rows.forEach(function(r){if(r.kind==="given")know.push([r.id,r.label,r.unit==="%"?pc(r.val):$(r.val),r.why]);});});
+  (p.facts||[]).forEach(function(f){know.push(["",f[0],f[1],f[2]||""]);});
+  var kh="";
+  if(know.length){
+    kh='<p><strong>Here\'s what we know.</strong> '+any(["Before you calculate anything, read down this list and ask yourself whether each one makes sense.","Some of these come from the story above and some from the company\'s records. I noted where each one comes from.","Make sure you can explain where every one of these comes from before you start."])+' The lettered ones are already filled in as the gray lines in your schedule.</p>'+
+      '<div class="scroll"><table class="know"><caption class="sr-only">What we know</caption><thead><tr><th scope="col">Line</th><th scope="col">What we know</th><th scope="col" class="n">Amount</th><th scope="col">Where it comes from</th></tr></thead><tbody>'+
+      know.map(function(k){return '<tr><td class="ln">'+(k[0]||'<span class="sr-only">not in schedule</span>')+'</td><th scope="row">'+k[1]+'</th><td class="n">'+k[2]+'</td><td class="why">'+(k[3]||'')+'</td></tr>';}).join("")+'</tbody></table></div>';
+  }
+  if(p.given)kh+='<p>'+any(["I also have this table for you:","Here\'s one more piece of information:"])+'</p><div class="scroll">'+p.given+'</div>';
+  el("scenario-say").innerHTML=say(any(["<p>Here's the situation we're working with today.</p>","<p>Let's meet today's company.</p>","<p>Okay, here's our company for this one.</p>"])+p.scenario+kh);
+  el("given").innerHTML="";el("given").hidden=true;
   el("key-say").innerHTML=say(p.key,{key:true,label:"Before you start, the key idea"});
   sumEl.hidden=true;sumEl.innerHTML="";
   partsEl.innerHTML="";
