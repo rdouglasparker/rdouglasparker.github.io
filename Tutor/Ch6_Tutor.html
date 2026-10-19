@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Revenue Recognition Tutor</title>
+<meta name="description" content="ACCT 351 practice on revenue recognition and long-term contracts: work a schedule, then record the journal entries, with a guided tutor and new numbers every time.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --purple:#592C88; --purple-dk:#3E1E61; --purple-lt:#F3EEF8;
+  --gold:#C1A875; --gold-lt:#FAF5E9; --gold-dk:#6B5A2E;
+  --ink:#1F1B24; --muted:#4A4453; --line:#D9D2E3; --paper:#FFFFFF; --bg:#EEEAF2;
+  --red:#9B1C1C; --red-lt:#FDECEC; --green:#1D5E3A; --green-lt:#E9F5EE;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Source Serif 4",Georgia,serif;line-height:1.55;font-size:1.02rem}
+.skip{position:absolute;left:-9999px;top:0;background:var(--purple-dk);color:#fff;padding:.5rem 1rem;z-index:10}
+.skip:focus{left:1rem}
+a{color:var(--purple)}
+:focus-visible{outline:3px solid var(--gold-dk);outline-offset:2px}
+.shell{max-width:76rem;margin:1.5rem auto;background:var(--paper);box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.banner{background:var(--purple);color:#fff;padding:1.4rem 2rem 1.2rem;border-bottom:6px solid var(--gold)}
+.banner .kicker{font-family:Inter,Arial,sans-serif;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;margin:0 0 .35rem}
+.banner h1{font-size:1.9rem;line-height:1.2;margin:0 0 .3rem}
+.banner .sub{margin:0;font-family:Inter,Arial,sans-serif;font-size:.95rem}
+.content{padding:1rem 2rem 2rem}
+h2{font-family:Inter,Arial,sans-serif;color:var(--purple-dk);font-size:1.3rem;margin:1.6rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--gold)}
+h3{font-family:Inter,Arial,sans-serif;color:var(--purple);font-size:1.08rem;margin:1.2rem 0 .45rem}
+p{margin:.45rem 0 .7rem}
+.card{border:1px solid var(--line);border-left:6px solid var(--purple);background:var(--purple-lt);padding:.8rem 1.1rem;margin:1rem 0;border-radius:4px}
+.card h2,.card h3{margin-top:.2rem;border:none;padding:0}
+.important{border:2px solid var(--gold-dk);background:var(--gold-lt);padding:.8rem 1.1rem;margin:1rem 0;border-radius:4px}
+.important h3{color:var(--gold-dk);margin-top:.1rem}
+.card ul,.important ul{margin:.3rem 0 .2rem;padding-left:1.3rem}
+.small{font-size:.9rem;color:var(--muted)}
+.math{font-family:"IBM Plex Mono",Consolas,monospace;font-size:.9rem}
+
+/* picker */
+.picker{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));margin:.6rem 0 0}
+.pgroup h3{font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin:.2rem 0 .5rem}
+.pgroup ul{list-style:none;margin:0;padding:0;display:grid;gap:.45rem}
+.type-btn{width:100%;text-align:left;font:inherit;font-family:Inter,Arial,sans-serif;font-size:.93rem;background:#fff;color:var(--ink);border:1px solid var(--line);border-left:5px solid var(--purple);border-radius:4px;padding:.5rem .7rem;cursor:pointer}
+.type-btn strong{display:block;color:var(--purple-dk)}
+.type-btn span{color:var(--muted);font-size:.85rem}
+.type-btn:hover{background:var(--purple-lt)}
+.type-btn[aria-pressed="true"]{border-left-color:var(--gold-dk);background:var(--gold-lt);box-shadow:inset 0 0 0 2px var(--gold)}
+
+/* workspace */
+.work{display:grid;gap:1.5rem;grid-template-columns:minmax(0,1fr);margin-top:1.4rem}
+@media (min-width:64rem){.work{grid-template-columns:minmax(0,1fr) 18.5rem;align-items:start}}
+.prob-head{display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:flex-end;justify-content:space-between;border-bottom:3px solid var(--gold);padding-bottom:.6rem}
+.prob-head h2{border:none;margin:0;padding:0;font-size:1.45rem}
+.eyebrow{font-family:Inter,Arial,sans-serif;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 .15rem;font-weight:700}
+.btns{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+.btn{font-family:Inter,Arial,sans-serif;font-weight:700;font-size:.92rem;padding:.5rem .95rem;border-radius:4px;cursor:pointer;border:2px solid var(--purple);background:var(--purple);color:#fff}
+.btn:hover{background:var(--purple-dk);border-color:var(--purple-dk)}
+.btn.ghost{background:#fff;color:var(--purple)}
+.btn.ghost:hover{background:var(--purple-lt)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+
+table{border-collapse:collapse;width:100%;margin:.5rem 0 .8rem;font-size:.95rem}
+caption{caption-side:top;text-align:left;font-family:Inter,Arial,sans-serif;font-weight:700;color:var(--purple-dk);padding:.2rem 0 .4rem}
+th,td{border:1px solid var(--line);padding:.4rem .55rem;vertical-align:middle}
+thead th{background:var(--purple);color:#fff;font-family:Inter,Arial,sans-serif;font-size:.84rem;text-align:left}
+tbody th{background:#F7F5FA;text-align:left;font-weight:600}
+.n{text-align:right;font-family:"IBM Plex Mono",Consolas,monospace;font-size:.9rem;white-space:nowrap}
+.scroll{overflow-x:auto;position:relative}
+
+.part{border:1px solid var(--line);border-radius:6px;padding:.4rem 1rem 1rem;margin:1.2rem 0;background:#fff}
+.part > h3{display:flex;gap:.6rem;align-items:center}
+.part > h3 .pnum{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;background:var(--purple);color:#fff;border-radius:999px;padding:.12rem .6rem;white-space:nowrap}
+.part.complete{border-color:var(--green);box-shadow:inset 4px 0 0 var(--green)}
+.status{font-family:Inter,Arial,sans-serif;font-size:.85rem;font-weight:700;color:var(--green);margin-left:auto}
+
+/* schedule */
+.sched td.ln{width:2.6rem;text-align:center;font-family:Inter,Arial,sans-serif;font-weight:700;color:var(--purple-dk);background:#F7F5FA}
+.sched td.bo{width:7.5rem;font-family:Inter,Arial,sans-serif;font-size:.8rem;color:var(--muted)}
+.sched td.amt{width:12.5rem}
+.sched tr.given td{background:#FBFAFD}
+.sched label{font-weight:600}
+.inwrap{display:flex;align-items:center;gap:.25rem}
+.inwrap .u{font-family:"IBM Plex Mono",Consolas,monospace;color:var(--muted)}
+input.ans,select.ans{font:inherit;font-family:"IBM Plex Mono",Consolas,monospace;font-size:.95rem;padding:.4rem .5rem;border:2px solid #6E6680;border-radius:4px;width:100%;min-width:0;background:#fff;color:var(--ink)}
+select.ans{font-family:Inter,Arial,sans-serif;font-size:.88rem}
+input.ans.n{text-align:right}
+.ok-f{border-color:var(--green)!important;background:var(--green-lt)!important}
+.bad-f{border-color:var(--red)!important;background:var(--red-lt)!important}
+.fb{font-family:Inter,Arial,sans-serif;font-size:.84rem;margin-top:.3rem}
+.fb:empty{display:none}
+.fb.ok{color:var(--green)}
+.fb.bad{color:var(--red)}
+.fb.sol{color:var(--purple-dk)}
+.fb .math{font-size:.82rem}
+.tag{font-weight:700}
+
+/* journal entry */
+.je td{padding:.3rem .4rem}
+.je td.src{width:7rem;font-family:Inter,Arial,sans-serif;font-size:.8rem;color:var(--muted);text-align:center}
+.je td.d,.je td.c{width:10rem}
+.je td.ac{min-width:14rem}
+.chip{display:inline-block;background:var(--gold-lt);border:1px solid var(--gold-dk);color:var(--gold-dk);border-radius:999px;padding:0 .5rem;font-weight:700}
+.partfb{font-family:Inter,Arial,sans-serif;font-size:.9rem;border-radius:4px;padding:.5rem .8rem;margin:.5rem 0}
+.partfb:empty{display:none}
+.partfb.ok{background:var(--green-lt);border-left:4px solid var(--green)}
+.partfb.bad{background:var(--red-lt);border-left:4px solid var(--red)}
+.partfb.hint{background:var(--gold-lt);border-left:4px solid var(--gold-dk)}
+
+.say{display:flex;gap:.75rem;align-items:flex-start;margin:.8rem 0}
+.avatar{flex:0 0 2.9rem;height:2.9rem;border-radius:50%;background:var(--purple);color:#fff;border:3px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:Inter,Arial,sans-serif;font-weight:700;font-size:1.2rem}
+.say.sm .avatar{flex-basis:2.2rem;height:2.2rem;font-size:.95rem;border-width:2px}
+.bubble{position:relative;background:#fff;border:1px solid var(--line);border-radius:10px;padding:.55rem .95rem;flex:1;min-width:0;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.bubble::before{content:"";position:absolute;left:-8px;top:1rem;border:8px solid transparent;border-left:0;border-right-color:var(--line)}
+.bubble::after{content:"";position:absolute;left:-6px;top:1rem;border:8px solid transparent;border-left:0;border-right-color:#fff}
+.bubble .who{font-family:Inter,Arial,sans-serif;font-weight:700;font-size:.82rem;color:var(--purple-dk);margin:0 0 .15rem;letter-spacing:.02em}
+.bubble p{margin:.3rem 0}
+.bubble ul{margin:.3rem 0 .4rem;padding-left:1.2rem}
+.say.key .bubble{background:var(--gold-lt);border-color:var(--gold-dk)}
+.say.key .bubble::after{border-right-color:var(--gold-lt)}
+.say.key .bubble::before{border-right-color:var(--gold-dk)}
+.partfb .who{font-weight:700}
+.know{margin:.4rem 0 .6rem;font-size:.92rem;min-width:34rem}
+.know td.ln{width:2.6rem;text-align:center;font-family:Inter,Arial,sans-serif;font-weight:700;color:var(--purple-dk);background:#F7F5FA}
+.know tbody th{font-weight:600;background:#fff}
+.know td.why{font-size:.86rem;color:var(--muted);font-family:Inter,Arial,sans-serif}
+.summary{border-top:3px solid var(--gold);margin-top:1.5rem;padding-top:.6rem}
+.score{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:.4rem 0 1rem;padding:0}
+.score li{background:var(--purple-lt);border:1px solid var(--line);border-radius:999px;padding:.2rem .8rem;font-family:Inter,Arial,sans-serif;font-weight:600;font-size:.9rem}
+
+/* sidebar */
+aside.ref{border:1px solid var(--line);border-radius:6px;padding:.4rem 1rem 1rem;background:#FBFAFD}
+@media (min-width:64rem){aside.ref{position:sticky;top:1rem}}
+aside.ref h2{font-size:1.1rem;margin-top:.6rem}
+aside.ref ol{padding-left:1.2rem;margin:.3rem 0}
+aside.ref li{margin:.35rem 0;font-size:.95rem}
+.flow{list-style:none;padding:0;margin:.4rem 0;font-family:Inter,Arial,sans-serif;font-size:.84rem}
+.flow li{border:1px solid var(--line);background:#fff;border-radius:4px;padding:.4rem .55rem;margin:0}
+.flow li+li{margin-top:.3rem}
+.flow li.arrow{border:none;background:none;text-align:center;color:var(--purple);padding:.05rem;font-weight:700}
+aside.ref dl{margin:.3rem 0 0;font-size:.92rem}
+aside.ref dt{font-weight:700;font-family:Inter,Arial,sans-serif;font-size:.88rem;margin-top:.5rem}
+aside.ref dd{margin:0;color:var(--muted)}
+footer{padding:1rem 2rem 1.5rem;font-family:Inter,Arial,sans-serif;font-size:.8rem;color:var(--muted);border-top:1px solid var(--line)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media (max-width:640px){
+  .shell{margin:0}
+  .banner,.content{padding-left:1rem;padding-right:1rem}
+  .sched td.bo{display:none}
+  .sched th.bo{display:none}
+  .sched td.amt{width:8.5rem}
+  table.je{min-width:34rem}
+  .sched td.ln{width:2rem}
+  .prob-head .btns{width:100%}
+  .picker{grid-template-columns:1fr}
+  table{font-size:.88rem}
+}
+@media print{
+  body{background:#fff}
+  .shell{box-shadow:none;margin:0}
+  #picker-sec,.btns,.skip,aside.ref{display:none!important}
+  .banner,thead th,.part > h3 .pnum{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .part{break-inside:avoid}
+}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+</head>
+<body>
+<a class="skip" href="#work-title">Skip to the problem</a>
+<div class="shell">
+<header class="banner">
+  <p class="kicker">ACCT 351 · Intermediate Accounting I · Practice Tutor</p>
+  <h1>Revenue Recognition Tutor</h1>
+  <p class="sub" id="sub">Work the schedule, then record the journal entries. New company and new numbers every time.</p>
+</header>
+
+<main class="content" id="main">
+  <section aria-labelledby="how-title">
+    <h2 id="how-title" class="sr-only">Meet your tutor</h2>
+    <div id="intro"></div>
+  </section>
+
+  <section id="picker-sec" aria-labelledby="pick-title">
+    <h2 id="pick-title">Choose a problem type</h2>
+    <div class="picker" id="picker"></div>
+  </section>
+
+  <div class="work">
+    <section aria-labelledby="work-title" id="worksheet">
+      <div class="prob-head">
+        <div>
+          <p class="eyebrow" id="ptype"></p>
+          <h2 id="work-title" tabindex="-1"></h2>
+        </div>
+        <div class="btns">
+          <button type="button" class="btn" id="new-btn">New numbers</button>
+          <button type="button" class="btn ghost" id="print-btn">Print this problem</button>
+        </div>
+      </div>
+      <div id="scenario-say"></div>
+      <div class="scroll" id="given"></div>
+      <div id="key-say"></div>
+      <div id="parts"></div>
+      <div class="summary" id="summary" hidden tabindex="-1"></div>
+    </section>
+
+    <aside class="ref" aria-labelledby="ref-title">
+      <h2 id="ref-title">The big picture</h2>
+      <ol class="flow" aria-label="The five steps of revenue recognition">
+        <li><strong>1. Identify the contract</strong> with the customer</li>
+        <li><strong>2. Identify the performance obligations</strong>: distinct promises, including material rights</li>
+        <li><strong>3. Determine the transaction price</strong>, including variable consideration</li>
+        <li><strong>4. Allocate the price</strong> by relative standalone selling prices</li>
+        <li><strong>5. Recognize revenue</strong> as each obligation is satisfied, at a point in time or over time</li>
+      </ol>
+      <h2>Quick formulas</h2>
+      <ol>
+        <li><strong>Allocation:</strong> price × (standalone price ÷ total standalone prices).</li>
+        <li><strong>Material right:</strong> (extra discount) × price × redemption rate.</li>
+        <li><strong>Expected value:</strong> Σ outcome × probability. <strong>Most likely amount:</strong> the single likeliest outcome.</li>
+        <li><strong>Percentage of completion:</strong> costs to date ÷ total estimated costs; revenue to date = price × percentage.</li>
+        <li><strong>Loss on the whole contract:</strong> recognize all of it in the first year it is expected, under either method.</li>
+      </ol>
+      <dl>
+        <dt>Performance obligation</dt><dd>A promise to transfer a distinct good or service.</dd>
+        <dt>Material right</dt><dd>An option the customer would not get without the contract, such as an extra discount.</dd>
+        <dt>Breakage</dt><dd>Prepaid rights the customer is expected never to use.</dd>
+        <dt>CIP and billings</dt><dd>Construction in progress holds costs plus profit recognized; billings on construction contract is its contra account.</dd>
+      </dl>
+    </aside>
+  </div>
+</main>
+<footer>
+  <p>All company names and numbers are fictional and randomly generated. The current year updates automatically. Practice covers revenue recognition (ASC 606) and long-term construction contracts in intermediate accounting under U.S. GAAP, focused on the problem types in the homework packets.</p>
+</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+var Y=new Date().getFullYear();
+
+/* ---------- helpers ---------- */
+function rnd(min,max,step){step=step||1;var n=Math.floor((max-min)/step);return min+step*Math.floor(Math.random()*(n+1));}
+function pick(a){return a[Math.floor(Math.random()*a.length)];}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function R(n){return Math.round(n);}
+function fmt(n){var a=Math.abs(n);return Math.abs(a-Math.round(a))<0.005?Math.round(a).toLocaleString("en-US"):a.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});}
+function $(n){return (n<=-0.005?"−$":"$")+fmt(n);}
+function pc(r){return (Math.round(r*1000)/10)+"%";}
+function K(n){return n*1000;}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];});}
+function m(s){return '<span class="math">'+s+'</span>';}
+
+/* ---------- the tutor ---------- */
+var TUTORS=[
+ {name:"Jordan",bio:"a senior accounting major who works in the Forsyth tutoring lab",style:"Let's take it one line at a time."},
+ {name:"Riley",bio:"a MAcc student who interned on a financial reporting team in Asheville",style:"Revenue is all about promises: what did the company promise, and how much of the price goes with each promise?"},
+ {name:"Avery",bio:"a graduate assistant who never met a journal entry that didn't balance",style:"If it doesn't balance, something's hiding. We'll find it."},
+ {name:"Quinn",bio:"a senior studying for the CPA exam",style:"This exact topic shows up on the CPA exam, so it's worth getting comfortable."},
+ {name:"Casey",bio:"a Catamount tutor who loves turning messy numbers into clean financial statements",style:"Every one of these entries follows a pattern. Once you see it, you'll see it everywhere."}
+];
+var T=(function(){var last=-1;try{last=parseInt(localStorage.getItem("ch6tutor")||"-1",10);}catch(e){}
+  var i;do{i=Math.floor(Math.random()*TUTORS.length);}while(i===last&&TUTORS.length>1);
+  try{localStorage.setItem("ch6tutor",String(i));}catch(e){}return TUTORS[i];})();
+function say(html,opt){opt=opt||{};return '<div class="say'+(opt.sm?' sm':'')+(opt.key?' key':'')+'"><span class="avatar" aria-hidden="true">'+T.name.charAt(0)+'</span><div class="bubble"><p class="who">'+(opt.label||T.name)+'</p>'+html+'</div></div>';}
+function any(a){return a[Math.floor(Math.random()*a.length)];}
+var PRAISE=["Nice, that's it.","Exactly right.","You've got it.","Yes! Right on.","Perfect.","That's the one."];
+var NUDGE=["Close. Here's a nudge:","Not quite yet. Try this:","Almost. Think about it this way:","Hmm, let's rethink that one:"];
+var NAMES=["Blue Ridge Brewing Co.","Tuckasegee Timber Works","Cullowhee Creek Canoe Co.","Balsam Gap Bakery","Whiteside Mountain Outfitters","Pisgah Pine Furniture","Fontana Lake Marine","Cashiers Valley Cabinetry","Dillsboro Depot Mercantile","Mount Mitchell Mills","Looking Glass Falls Lodge","Hiwassee River Rafting","Black Balsam Bicycles","Waterrock Knob Woodworks","Sylva Summit Coffee Roasters","Nantahala Gorge Gear Co.","Cherohala Skyway Cycles","Highlands Plateau Provisions","Franklin Gem Mine Supply","Brevard Waterfall Works","Bryson City Rail & Trail","Maggie Valley Mountain Crafts","Linville Gorge Logistics","Lake Glenville Marina","Shining Rock Solar","Panthertown Valley Paper Co.","Jackson County Apple Orchards","Catamount Peak Construction","Smoky Mountain Sawmill","Little Tennessee Trout Farms","Wayah Bald Wind Energy","Scaly Mountain Ski Supply","Cowee Valley Ceramics","Chimney Rock Climbing Co."];
+var lastName="";
+function company(){var n;do{n=pick(NAMES);}while(n===lastName);lastName=n;return n;}
+
+/* ---------- worksheet builders ---------- */
+/* given line */
+function G(id,label,val,unit,why){return {kind:"given",id:id,label:label,val:val,unit:unit||"$",why:why||""};}
+/* numeric input line */
+function N(id,label,ans,builds,hint,sol,opt){opt=opt||{};return {kind:"num",id:id,label:label,ans:ans,builds:builds||"",hint:hint,sol:sol,unit:opt.unit||"$",tol:opt.tol==null?1:opt.tol};}
+/* choice input line */
+function C(id,label,options,ans,hint,sol,builds){return {kind:"choice",id:id,label:label,options:options,ans:ans,builds:builds||"",hint:hint,sol:sol};}
+function sched(title,rows,intro){return {type:"sched",title:title,rows:rows,intro:intro||""};}
+/* journal entry: lines [account, debit, credit, sourceLine] ; zero lines dropped */
+function JE(title,lines,intro,opt){
+  var L=[];lines.forEach(function(l){var d=Math.round((l[1]||0)*100)/100,c=Math.round((l[2]||0)*100)/100;if(!d&&!c)return;L.push({acct:l[0],dr:d,cr:c,src:l[3]||""});});
+  return {type:"je",title:title,lines:L,intro:intro||"",tol:(opt&&opt.tol)||1};
+}
+/* turn a signed change in a deferred account into a JE line */
+
+
+function givenTable(cap,rows){var h='<table><caption>'+esc(cap)+'</caption><thead><tr><th scope="col">Item</th><th scope="col" class="n">Amount</th></tr></thead><tbody>';rows.forEach(function(r){h+='<tr><th scope="row">'+r[0]+'</th><td class="n">'+r[1]+'</td></tr>';});return h+'</tbody></table>';}
+
+/* ---------- problem generators: revenue recognition and long-term contracts ---------- */
+var GEN={};
+var MON=["January","February","March","April","May","June","July","August","September","October","November","December"];
+function d2(x){return Math.round(x*100)/100;}
+function p2(x){return (Math.round(x*100)/100)+"%";}            /* x already in percent units */
+function c2(n){return (n<0?"−$":"$")+Math.abs(n).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});}
+var lastCo={};
+function ctx(list,key){var c;do{c=pick(list);}while(list.length>1&&lastCo[key]===c.co);lastCo[key]=c.co;return c;}
+
+var REVPOOL=["Cash","Accounts Receivable","Bonus Receivable","Deferred Revenue","Deferred Revenue—Membership","Deferred Revenue—Discount Voucher","Deferred Revenue—Visit Pass","Deferred Revenue—Coupons","Unearned Revenue","Refund Liability","Warranty Liability","Membership Revenue","Visit Pass Revenue","Sales Revenue","Service Revenue","Interest Revenue","Warranty Expense"];
+var ACCT={CIP:"Construction in progress (CIP)",CASHM:"Cash, materials, etc.",AR:"Accounts receivable",BILL:"Billings on construction contract",CASH:"Cash",COST:"Cost of construction",REV:"Revenue from long-term contracts",LOSS:"Loss on long-term contracts"};
+var CONPOOL=[ACCT.CIP,ACCT.CASHM,ACCT.AR,ACCT.BILL,ACCT.CASH,ACCT.COST,ACCT.REV,ACCT.LOSS,"Deferred revenue","Inventory","Accounts payable","Contract liability"];
+
+/* =====================================================================
+   REVENUE RECOGNITION
+   ===================================================================== */
+var VOUCHER_CTX=[
+ {co:"Balsam Gap Fitness",mem:"one-year gym membership",cls:"spin classes"},
+ {co:"Cullowhee Climbing Gym",mem:"one-year climbing membership",cls:"lead-climbing clinics"},
+ {co:"Waynesville Aquatic Club",mem:"one-year pool membership",cls:"swim lessons"},
+ {co:"Sylva Summit Yoga & Fitness",mem:"one-year studio membership",cls:"yoga classes"},
+ {co:"Brevard Paddle Club",mem:"one-year boathouse membership",cls:"kayak skills classes"}];
+
+GEN.voucher={group:"Revenue recognition",name:"Membership with a discount voucher",blurb:"A voucher that is a material right: find its value and allocate the price.",make:function(){
+  var x=ctx(VOUCHER_CTX,"v"),M=rnd(600,960,20),A=M-rnd(1,4,1)*10,Cp=rnd(300,600,20),vd=pick([.25,.30,.40]),nd=pick([.05,.10,.15]),r=pick([.30,.40,.50,.60]);
+  var inc=d2((vd-nd)*Cp),EV=d2(inc*r),TS=d2(M+EV),mp=d2(M/TS*100),ma=d2(A*mp/100),va=d2(A-ma);
+  return {title:x.co,pool:REVPOOL,
+  scenario:'<p>'+esc(x.co)+' sells a <strong>'+x.mem+'</strong> for '+$(A)+'. The deal also includes a voucher for '+pc(vd)+' off a one-year enrollment in '+x.cls+'. The membership normally sells for '+$(M)+' on its own, and a one-year class enrollment sells for '+$(Cp)+'. Anyone, member or not, can get '+pc(nd)+' off a class enrollment through the club\'s normal promotion. The club expects '+pc(r)+' of the vouchers to be redeemed.</p>',
+  key:'<p>A voucher is a separate performance obligation only if it gives the customer a <strong>material right</strong>: a discount the customer could not get without buying the membership. Value it at its <strong>expected value</strong>: (voucher discount − discount anyone can get) × price × chance it is used. Then allocate the package price by <strong>relative standalone selling prices</strong>. Round the percentage to two decimals, then round dollars to the cent.</p>',
+  parts:[
+   sched("Performance obligations and allocation",[
+    G("A","Price paid for the package",A,null,"What the customer pays today."),
+    G("B","Standalone selling price of the membership",M,null,"The usual price of the membership alone."),
+    G("C","Price of a one-year class enrollment",Cp,null,"The normal price of the classes."),
+    G("D","Voucher discount",vd,"%","From the deal."),
+    G("E","Discount anyone can get",nd,"%","The normal promotion, available without buying a membership."),
+    G("F","Expected redemption rate",r,"%","Management's estimate."),
+    C("G","Is the membership a separate performance obligation?",["Yes","No"],0,"Does the club promise to provide it, and is it distinct?","Yes. Access to the facility is the main promise in the contract."),
+    C("H","Is the voucher a separate performance obligation?",["Yes, it gives a material right","No, it is just marketing"],0,"Could a nonmember get the same discount?","Yes. A nonmember gets only "+pc(nd)+" off, so the extra "+pc(vd-nd)+" is a right the customer pays for as part of the package."),
+    N("I","Incremental discount from the voucher",inc,"(D − E) × C","Only the discount beyond what anyone can get counts.",m("("+pc(vd)+" − "+pc(nd)+") × "+$(Cp)+" = "+c2(inc)),{tol:.02}),
+    N("J","Standalone selling price of the voucher (expected value)",EV,"I × F","Multiply by the chance the voucher is actually used.",m(c2(inc)+" × "+pc(r)+" = "+c2(EV)),{tol:.02}),
+    N("K","Total standalone selling prices",TS,"B + J","Add the standalone prices of both performance obligations.",m($(M)+" + "+c2(EV)+" = "+c2(TS)),{tol:.02}),
+    N("L","Membership's share of the total (percent, two decimals)",mp,"B ÷ K","Membership standalone price ÷ total standalone prices.",m($(M)+" ÷ "+c2(TS)+" = "+p2(mp)),{unit:"%",tol:.011}),
+    N("M","Price allocated to the membership",ma,"A × L","Apply the rounded percentage to the price paid.",m($(A)+" × "+p2(mp)+" = "+c2(ma)),{tol:.05}),
+    N("N","Price allocated to the voucher",va,"A − M","The rest of the price goes to the voucher.",m($(A)+" − "+c2(ma)+" = "+c2(va)),{tol:.05})]),
+   JE("Record the sale of one membership",[["Cash",A,0,"A"],["Deferred Revenue—Membership",0,ma,"M"],["Deferred Revenue—Discount Voucher",0,va,"N"]],"Nothing has been delivered yet, so both credits are deferred revenue.")],
+  take:"<p>The "+c2(ma)+" for the membership becomes revenue month by month over the year. The "+c2(va)+" for the voucher becomes revenue when members use their vouchers or when the vouchers expire.</p>"};
+}};
+
+var PASS_CTX=[
+ {co:"Maggie Valley Climbing Gym",pass:"Summit 30 pass",v:30,day:18},
+ {co:"Jackson County Rec Center",pass:"Trailhead 50 pass",v:50,day:15},
+ {co:"Pisgah Hot Springs Spa",pass:"Soak 20 pass",v:20,day:35},
+ {co:"Nantahala Gorge Fitness",pass:"River 40 pass",v:40,day:16},
+ {co:"Lake Junaluska Pool & Fitness",pass:"Lakeside 25 pass",v:25,day:22}];
+
+GEN.pass={group:"Revenue recognition",name:"Prepaid visit pass",blurb:"A pass with unused visits and an option priced at its standalone price.",make:function(){
+  var x=ctx(PASS_CTX,"p"),V=x.v,day=x.day,A=R(V*day*pick([.60,.65,.70])/10)*10,used=V-rnd(Math.max(3,R(V*.1)),R(V*.3),1),per=d2(A/used),k=rnd(3,6,1),rec=d2(per*k);
+  return {title:x.co,pool:REVPOOL,
+  scenario:'<p>'+esc(x.co)+' sells a <strong>'+x.pass+'</strong>: '+V+' prepaid visits to be used within one year, for '+$(A)+' paid up front. Pass holders who use all '+V+' visits can pay '+$(day)+' for each extra visit during the year. Nonmembers also pay '+$(day)+' for a single visit. From experience, pass holders make an average of '+used+' visits before the pass expires. In its first month, one customer uses the pass '+k+' times.</p>',
+  key:'<p>An option to buy more goods or services is a performance obligation only if it is a <strong>material right</strong>. If the customer pays the same price anyone else pays, it is not. Here the whole price goes to the visits. Because customers are expected to leave some visits unused (<strong>breakage</strong>), revenue for each visit is the price ÷ the number of visits <strong>expected to be used</strong>.</p>',
+  parts:[
+   sched("Performance obligations and allocation",[
+    G("A","Price of the pass",A,null,"Paid up front."),
+    G("B","Visits included",V,"txt","From the pass terms."),
+    G("C","Visits a typical pass holder actually makes",used,"txt","Based on experience. The rest is breakage."),
+    G("D","Fee for each extra visit (also the nonmember price)",day,null,"From the pass terms and the price list."),
+    C("E","Is the option to buy extra visits a separate performance obligation?",["No, the fee equals the standalone price, so it is not a material right","Yes, it is a material right"],0,"Compare the fee with what a nonmember pays.","No. Pass holders pay the same "+$(day)+" anyone pays, so the option gives no material right and gets none of the price."),
+    N("F","Price allocated to the visits in the pass",A,"A","The option gets nothing, so the visits get the whole price.",m($(A))),
+    N("G","Revenue to recognize per visit (to the cent)",per,"F ÷ C","Divide by the visits expected to be used, not by "+V+".",m($(A)+" ÷ "+used+" = "+c2(per)),{tol:.01}),
+    N("H","Revenue for the customer's "+k+" visits this month",rec,"G × "+k,"Revenue is earned as the visits are used.",m(c2(per)+" × "+k+" = "+c2(rec)),{tol:.05})]),
+   JE("Record the sale of one pass",[["Cash",A,0,"A"],["Deferred Revenue—Visit Pass",0,A,"F"]],"The club has been paid but has not provided any visits yet."),
+   JE("Record revenue for the first month's visits",[["Deferred Revenue—Visit Pass",rec,0,"H"],["Visit Pass Revenue",0,rec,"H"]])],
+  take:"<p>Spreading "+$(A)+" over the "+used+" visits customers really make means the expected breakage is recognized gradually, as visits happen, instead of all at once when the pass expires.</p>"};
+}};
+
+var BUNDLE_CTX=[
+ {co:"Fontana Digital",main:"Ridgeline tablet",add:"e-reader"},
+ {co:"Catamount Cycles",main:"Trail Pro electric bike",add:"hitch bike rack"},
+ {co:"Pisgah Optics",main:"Overlook camera drone",add:"spare battery kit"},
+ {co:"Blue Ridge Audio",main:"Summit home speaker system",add:"wireless subwoofer"},
+ {co:"Whiteside Outdoor Tech",main:"Peakfinder GPS watch",add:"heart-rate chest strap"}];
+
+GEN.bundle={group:"Revenue recognition",name:"Bundled product with coupons",blurb:"Decide what is a performance obligation, then allocate a bundle price.",make:function(){
+  var x=ctx(BUNDLE_CTX,"b"),S=rnd(500,1400,5),A=S+rnd(2,8,1)*5,rp=rnd(10,25,1)*20,dc=pick([.40,.50]),cp=R(rp*(1-dc)),r=pick([.20,.25,.30,.35]),ew=rnd(10,30,1)*5,ewr=pick([.30,.40,.45]),U=rnd(40,120,5)*1000,wm=pick([6,12]);
+  var disc=rp-cp,EV=d2(disc*r),TS=d2(S+EV),sp=d2(S/TS*100),sa=d2(A*sp/100),ca=d2(A-sa),cash=A*U,rev=d2(sa*U),def=d2(cash-rev);
+  return {title:x.co,pool:REVPOOL,
+  scenario:'<p>'+esc(x.co)+' sells a <strong>'+x.main+' package</strong> for '+$(A)+' cash. The package includes:</p><ul><li>the '+x.main+';</li><li>a '+wm+'-month limited warranty that covers repairs for defects;</li><li>a coupon to buy the '+x.add+' for '+$(cp)+', which is '+pc(dc)+' off its regular price of '+$(rp)+' (the company expects '+pc(r)+' of these coupons to be used);</li><li>a coupon to buy a one-year extended warranty for '+$(ew)+', the same price the company charges anyone for it ('+pc(ewr)+' of customers are expected to buy one).</li></ul><p>The company never sells the '+x.main+' alone, but estimates it would sell for '+$(S)+'. This year it sold '+U.toLocaleString("en-US")+' packages. Ignore any sales of extended warranties.</p>',
+  key:'<p>Check each promise. A warranty that only guarantees the product works (an <strong>assurance-type warranty</strong>) is not a performance obligation; the company accrues an estimated warranty expense instead. A coupon is a performance obligation only if its discount is a <strong>material right</strong>. A coupon at the normal price is not. Value a material right at expected value, then allocate the package price by relative standalone selling prices. Round the percentage to two decimals and each package\'s allocation to the cent, then multiply by packages sold.</p>',
+  parts:[
+   sched("Performance obligations and allocation",[
+    G("A","Package price",A,null,"Cash received per package."),
+    G("B","Estimated standalone price of the "+x.main,S,null,"Management's estimate."),
+    G("C","Regular price of the "+x.add,rp,null,"From the price list."),
+    G("D","Coupon price of the "+x.add,cp,null,"From the coupon."),
+    G("E","Expected coupon redemption rate",r,"%","Management's estimate."),
+    G("F","Packages sold",U.toLocaleString("en-US"),"txt","Sales records for the year."),
+    C("G","Is the "+x.main+" a separate performance obligation?",["Yes","No"],0,"It is the main promise.","Yes. It is the product the customer is buying."),
+    C("H","Is the "+wm+"-month limited warranty a separate performance obligation?",["No, it is an assurance-type warranty","Yes, it is a service the customer pays for"],0,"Does it do more than promise the product works as intended?","No. It only assures the product isn't defective, so it gets none of the price; the company accrues warranty expense."),
+    C("I","Is the "+x.add+" coupon a separate performance obligation?",["Yes, it is a material right","No"],0,"Can customers get "+pc(dc)+" off without buying the package?","Yes. The "+pc(dc)+" discount is available only through the package, so it is a material right."),
+    C("J","Is the extended warranty coupon a separate performance obligation?",["No, the coupon price equals the standalone price","Yes, it is a material right"],0,"Compare the coupon price with what anyone pays.","No. Anyone can buy the extended warranty for "+$(ew)+", so the coupon gives no material right."),
+    N("K","Discount per "+x.add+" coupon",disc,"C − D","Regular price less coupon price.",m($(rp)+" − "+$(cp)+" = "+$(disc))),
+    N("L","Standalone selling price of the coupon (expected value)",EV,"K × E","Multiply by the chance it is used.",m($(disc)+" × "+pc(r)+" = "+c2(EV)),{tol:.02}),
+    N("M","Total standalone selling prices",TS,"B + L","Only the two performance obligations count.",m($(S)+" + "+c2(EV)+" = "+c2(TS)),{tol:.02}),
+    N("N",x.main+"'s share (percent, two decimals)",sp,"B ÷ M","Standalone price ÷ total.",m($(S)+" ÷ "+c2(TS)+" = "+p2(sp)),{unit:"%",tol:.011}),
+    N("O","Allocated to the "+x.main+", per package",sa,"A × N","Apply the rounded percentage.",m($(A)+" × "+p2(sp)+" = "+c2(sa)),{tol:.05}),
+    N("P","Allocated to the coupon, per package",ca,"A − O","The rest of the price.",m($(A)+" − "+c2(sa)+" = "+c2(ca)),{tol:.05}),
+    N("Q","Total cash received",cash,"A × F","Price × packages.",m($(A)+" × "+U.toLocaleString("en-US")+" = "+$(cash))),
+    N("R","Sales revenue for the year",rev,"O × F","Per-package allocation × packages.",m(c2(sa)+" × "+U.toLocaleString("en-US")+" = "+c2(rev)),{tol:U*.06}),
+    N("S","Deferred revenue for the coupons",def,"Q − R","The rest waits until coupons are used or expire.",m($(cash)+" − "+c2(rev)+" = "+c2(def)),{tol:U*.06})]),
+   JE("Record the year's package sales",[["Cash",cash,0,"Q"],["Sales Revenue",0,rev,"R"],["Deferred Revenue—Coupons",0,def,"S"]],"The products were delivered, but the coupons have not been used yet.",{tol:U*.06})],
+  take:"<p>Only two of the four promises got part of the price. The warranty is handled with a warranty expense estimate, and the extended warranty coupon is ignored until someone actually buys a warranty. Small rounding differences on totals are normal.</p>"};
+  /* JE tolerance scaled to packages sold */
+}};
+
+var EV_CTX=[
+ {co:"Tuckasegee Efficiency Partners",cl:"Cowee Valley Manufacturing",job:"a cost-reduction program"},
+ {co:"Blue Ridge Lean Consulting",cl:"Franklin Gem & Mineral Supply",job:"an inventory-reduction project"},
+ {co:"Haywood Process Advisors",cl:"Canton Paper Products",job:"an energy-savings program"},
+ {co:"Smoky Mountain Energy Auditors",cl:"Western Carolina Regional Hospital",job:"a utility-cost program"}];
+
+GEN.expval={group:"Revenue recognition",name:"Variable consideration: expected value",blurb:"A bonus-or-penalty contract estimated with probabilities.",make:function(){
+  var x=ctx(EV_CTX,"e"),n=pick([4,6,8]),m0=rnd(30,60,1)*1000,B=R(m0*pick([.4,.5,.6])/1000)*1000,p=pick([.65,.70,.75,.80,.85,.90]);
+  var EV=d2(B*(2*p-1)),F=d2(EV/n),Gm=d2(m0+F),endM=MON[n-1],bon=d2(B-EV),pen=d2(B+EV);
+  return {title:x.co,pool:REVPOOL,
+  scenario:'<p>On January 1, '+Y+', '+esc(x.co)+' agrees to run '+x.job+' for '+esc(x.cl)+' over '+n+' months. It receives '+$(m0)+' at the end of each month. If savings reach the target, '+esc(x.cl)+' pays an extra '+$(B)+' at the end of the contract; if they fall short, '+esc(x.co)+' refunds '+$(B)+'. The company estimates a '+pc(p)+' chance of reaching the target and uses the <strong>expected value</strong> method.</p>',
+  key:'<p>When the price depends on what happens later, it includes <strong>variable consideration</strong>. The <strong>expected value</strong> method weights each possible outcome by its probability, which works well when there are many possible outcomes or many similar contracts. Recognize the estimate evenly as the service is performed, and hold the not-yet-collected part in <strong>Bonus Receivable</strong>. When the outcome is known, settle the receivable and adjust revenue.</p>',
+  parts:[
+   sched("Estimate the transaction price",[
+    G("A","Fixed payment each month",m0,null,"From the contract."),
+    G("B","Months in the contract",n,"txt","From the contract."),
+    G("C","Bonus if the target is met, or refund if it is missed",B,null,"From the contract."),
+    G("D","Probability of meeting the target",p,"%","Management's estimate."),
+    N("E","Expected value of the bonus or refund",EV,"C × D − C × (1 − D)","Weight +bonus and −refund by their probabilities.",m($(B)+" × "+pc(p)+" − "+$(B)+" × "+pc(1-p)+" = "+c2(EV)),{tol:.05}),
+    N("F","Variable consideration earned each month",F,"E ÷ B","Spread evenly over the months of service.",m(c2(EV)+" ÷ "+n+" = "+c2(F)),{tol:.02}),
+    N("G","Revenue recognized each month",Gm,"A + F","Fixed plus estimated variable.",m($(m0)+" + "+c2(F)+" = "+c2(Gm)),{tol:.02})]),
+   JE("January 31: Collect the payment and recognize revenue",[["Cash",m0,0,"A"],["Bonus Receivable",F,0,"F"],["Service Revenue",0,Gm,"G"]]),
+   sched("Settle at the end of the contract",[
+    N("H","Bonus Receivable balance after "+n+" months",EV,"F × B","One month of variable consideration per month.",m(c2(F)+" × "+n+" ≈ "+c2(EV)),{tol:.1}),
+    N("I","Extra revenue if the target is met",bon,"C − H","Cash received beyond the receivable.",m($(B)+" − "+c2(EV)+" = "+c2(bon)),{tol:.1}),
+    N("J","Revenue reversed if the target is missed",pen,"C + H","The refund plus the receivable that will never be collected.",m($(B)+" + "+c2(EV)+" = "+c2(pen)),{tol:.1})]),
+   JE(endM+" 30/31: Target met, receive the bonus",[["Cash",B,0,"C"],["Bonus Receivable",0,EV,"H"],["Service Revenue",0,bon,"I"]]),
+   JE(endM+" 30/31: Instead, target missed, pay the refund",[["Service Revenue",pen,0,"J"],["Cash",0,B,"C"],["Bonus Receivable",0,EV,"H"]])],
+  take:"<p>The estimate of "+c2(EV)+" was never the amount actually received: the result is either +"+$(B)+" or −"+$(B)+". Expected value spreads a reasonable estimate over the service, and the final entry corrects revenue once the outcome is known.</p>"};
+}};
+
+var ML_CTX=[
+ {co:"Pigeon River Elevator Services",what:"maintain the elevators in a 30-story office tower in Asheville"},
+ {co:"Hazelwood HVAC Services",what:"maintain the heating and cooling systems at a Sylva medical center"},
+ {co:"Cherohala Fire Systems",what:"maintain the sprinkler and alarm systems at a Waynesville resort"},
+ {co:"Linville Gorge Lift Maintenance",what:"maintain the chairlifts at a Banner Elk ski area"}];
+
+GEN.mostlikely={group:"Revenue recognition",name:"Variable consideration: most likely amount",blurb:"An all-or-nothing bonus, then a change in estimate.",make:function(){
+  var x=ctx(ML_CTX,"l"),n=pick([8,10,12]),F=rnd(80,150,1)*1000,B=R(F*pick([.4,.5])/1000)*1000,k=pick([4,5,6]);
+  var mf=d2(F/n),mb=d2(B/n),tot=d2(mf+mb),catch_=d2(mb*k),rk=d2(mf+catch_),km=MON[k-1];
+  return {title:x.co,pool:REVPOOL,
+  scenario:'<p>On January 1, '+Y+', '+esc(x.co)+' signs a contract to '+x.what+' for '+n+' months and receives a fixed payment of '+$(F)+' up front. It will receive a '+$(B)+' bonus at the end of the contract if there are no unexpected delays or outages. The company estimates variable consideration with the <strong>most likely amount</strong>.</p><ul><li><strong>Case 1:</strong> The client allows access only two hours a day, so the company expects delays and does not expect to earn the bonus.</li><li><strong>Case 2:</strong> Instead, the company has unlimited access and has never missed a bonus under these terms.</li><li><strong>Case 3:</strong> Same facts as Case 1, but on '+km+' 30/31 the company learns the equipment is new and delays are now very unlikely.</li></ul>',
+  key:'<p>The <strong>most likely amount</strong> method fits an all-or-nothing outcome: the bonus is either earned or not, so include the full bonus or nothing. Include variable consideration only if it is probable that a significant revenue reversal will not happen later (the <strong>constraint</strong>). When the estimate changes, make a <strong>cumulative catch-up</strong>: recognize the bonus for every month already worked.</p>',
+  parts:[
+   sched("Case 1: Bonus not expected",[
+    G("A","Fixed payment received up front",F,null,"From the contract."),
+    G("B","Months in the contract",n,"txt","From the contract."),
+    G("C","Possible bonus",B,null,"From the contract."),
+    C("D","How much variable consideration is included in the price in Case 1?",["$0, because the most likely outcome is no bonus","The full "+$(B),"An expected value"],0,"With delays expected, which single outcome is most likely?","$0. The bonus is unlikely, so including it would risk a revenue reversal."),
+    N("E","Fixed revenue earned each month",mf,"A ÷ B","Spread the fixed payment over the service period.",m($(F)+" ÷ "+n+" = "+c2(mf)),{tol:.02})]),
+   JE("Case 1, January 1: Receive the fixed payment",[["Cash",F,0,"A"],["Deferred Revenue",0,F,"A"]],"No service has been performed yet."),
+   sched("Case 2: Bonus expected from the start",[
+    N("F","Bonus revenue earned each month",mb,"C ÷ B","The most likely amount is the full bonus, spread over the months.",m($(B)+" ÷ "+n+" = "+c2(mb)),{tol:.02}),
+    N("G","Total revenue each month",tot,"E + F","Fixed plus bonus.",m(c2(mf)+" + "+c2(mb)+" = "+c2(tot)),{tol:.02})]),
+   JE("Case 2, January 31: Recognize one month of revenue",[["Deferred Revenue",mf,0,"E"],["Bonus Receivable",mb,0,"F"],["Service Revenue",0,tot,"G"]]),
+   sched("Case 3: The estimate changes in "+km,[
+    N("H","Bonus revenue to catch up through "+km+" ("+k+" months)",catch_,"F × "+k,"Recognize the bonus for every month worked so far, including "+km+".",m(c2(mb)+" × "+k+" = "+c2(catch_)),{tol:.05}),
+    N("I","Revenue recognized for "+km,rk,"E + H",km+"'s fixed revenue plus the catch-up.",m(c2(mf)+" + "+c2(catch_)+" = "+c2(rk)),{tol:.05})]),
+   JE("Case 3, "+km+" 30/31: Recognize "+km+" revenue and the change in estimate",[["Deferred Revenue",mf,0,"E"],["Bonus Receivable",catch_,0,"H"],["Service Revenue",0,rk,"I"]])],
+  take:"<p>A change in estimate is not an error, so earlier months are never restated. The catch-up of "+c2(catch_)+" brings revenue to date up to what it would have been if the bonus had been expected from the start.</p>"};
+}};
+
+/* =====================================================================
+   LONG-TERM CONTRACTS (same scenario engine as the homework packets)
+   ===================================================================== */
+var CON_CTX=[
+ {co:"Cullasaja Bridge Builders",ctl:"Dana Moss",proj:"Big Witch Gap Bridge",cust:"the National Park Service"},
+ {co:"Pigeon River Constructors",ctl:"Sam Owenby",proj:"Fines Creek Overpass",cust:"the N.C. Department of Transportation"},
+ {co:"Hazelwood Heavy Civil",ctl:"Morgan Queen",proj:"Scott Creek Greenway Bridge",cust:"the Town of Sylva"},
+ {co:"Cowee Ridge Contractors",ctl:"Taylor Shuler",proj:"Little Tennessee River Bridge",cust:"Macon County"},
+ {co:"Snowbird Mountain Builders",ctl:"Jesse Crisp",proj:"Yellow Creek Viaduct",cust:"the N.C. Department of Transportation"},
+ {co:"Junaluska Structural Co.",ctl:"Robin Hyatt",proj:"Richland Creek Bridge",cust:"Haywood County"}];
+var UNIT=100000;
+function genBC(P){var b1=Math.round(P*pick([0.15,0.20,0.25])),b2=Math.round(P*pick([0.35,0.40,0.45])),b3=P-b1-b2,k1=Math.round(b1*pick([0.80,0.90])),k2=Math.round(b2*pick([0.80,0.90]));return {b:[b1,b2,b3],k:[k1,k2,P-k1-k2]};}
+function drawBase(){var P=pick([80,90,100,110,120,140]),E0=P-pick([15,20,25,30]),c1=Math.round(E0*pick([0.25,0.30,0.35])),c2=Math.round(E0*pick([0.35,0.40,0.45])),e1=E0-c1,e2=E0-c1-c2;return {P:P,c:[c1,c2,e2+pick([1,2,3,4])],e:[e1,e2]};}
+function drawRevised(){var P=pick([80,90,100,110,120,140]),E0=P-pick([15,20,25,30]),E1=P-pick([5,7,10]),c1=Math.round(E0*pick([0.25,0.30,0.35])),cum2=Math.round(E1*pick([0.62,0.66,0.70])),e2=E1-cum2;return {P:P,c:[c1,cum2-c1,e2+pick([1,2,3])],e:[E0-c1,e2]};}
+function drawLoss(){var P=pick([80,90,100,110,120,140]),E0=P-pick([15,20,25,30]),L1=pick([3,4,5]),L2=pick([1,2]),E1=P+L1,c1=Math.round(E0*pick([0.25,0.30,0.35])),cum2=Math.round(E1*pick([0.58,0.60,0.62])),e2=E1-cum2;return {P:P,c:[c1,cum2-c1,e2-(L1-L2)],e:[E0-c1,e2]};}
+function drawLossDone(){var P=pick([80,90,100,110,120,140]),E0=P-pick([15,20,25,30]),L1=pick([3,4,5]),X=pick([1,2]),E1=P+L1,c1=Math.round(E0*pick([0.25,0.30,0.35])),cum2=Math.round(E1*pick([0.58,0.60,0.62,0.66])),e2=E1-cum2;return {P:P,c:[c1,cum2-c1,e2+X],e:[E0-c1,e2]};}
+function computeContract(x,method){
+  var P=x.P,c=x.c,e=x.e,cum=[c[0],c[0]+c[1],c[0]+c[1]+c[2]],A=cum[2],est=[cum[0]+e[0],cum[1]+e[1],A];
+  var o={P:P,c:c,e:e,b:x.b,k:x.k,cum:cum,est:est,A:A,method:method,rev:[0,0,0],cost:[0,0,0],gp:[0,0,0],loss:[0,0,0],yL:-1,L:0,pct:[0,0,0],cumRev:[0,0,0],cumGP:[0,0,0],tp:[0,0,0],lossMode:[false,false,false]};
+  if(method==="completion"){o.rev=[0,0,P];o.cost=[0,0,A];o.gp=[0,0,P-A];o.cumRev=[0,0,P];o.cumGP=[0,0,P-A];}
+  else if(method==="completionLoss"){var yL=-1;for(var q=0;q<2;q++){if(est[q]>P){yL=q;break;}}
+    if(yL>=0){var L=est[yL]-P;o.yL=yL;o.L=L;o.loss[yL]=L;o.rev=[0,0,P];o.cost=[0,0,A-L];o.gp=[0,0,0];o.gp[yL]=-L;o.gp[2]+=P-(A-L);o.cumRev=[0,0,P];o.cumGP=[o.gp[0],o.gp[0]+o.gp[1],o.gp[0]+o.gp[1]+o.gp[2]];}}
+  else{var pr=0,pg=0,pc_=0;for(var y=0;y<3;y++){var pct=cum[y]/est[y],cr=(y===2)?P:Math.round(P*pct),tp=P-est[y],cg,CC;
+    if(tp>=0){CC=cum[y];cg=cr-CC;}else{cg=tp;CC=cr-cg;o.lossMode[y]=true;}
+    o.pct[y]=pct;o.cumRev[y]=cr;o.tp[y]=tp;o.cumGP[y]=cg;o.rev[y]=cr-pr;o.gp[y]=cg-pg;o.cost[y]=CC-pc_;pr=cr;pg=cg;pc_=CC;}}
+  return o;
+}
+function validC(d,t){
+  if(d.c.some(function(v){return v<=0;})||d.e.some(function(v){return v<=0;}))return false;
+  if((t==="A"||t==="B"||t==="C")&&d.gp[2]<=0)return false;
+  if(d.gp.some(function(g){return g!==0&&Math.abs(g)<25000;}))return false;
+  if(t==="A")return d.gp.every(function(g){return g>0;});
+  if(t==="B")return d.gp[0]>0&&d.gp[1]<0&&d.gp[2]>0&&d.est[1]<d.P;
+  if(t==="C")return d.gp[0]>0&&d.gp[1]<0&&d.gp[2]>0&&d.est[1]>d.P&&d.A>d.P;
+  if(t==="D")return d.gp[2]>0;
+  if(t==="E")return d.yL===1&&d.loss[1]>0&&d.est[0]<d.P&&d.gp[2]<0&&d.cost[2]>0&&d.A>d.P;
+  return false;
+}
+function buildContract(t){
+  var draw={A:drawBase,B:drawRevised,C:drawLoss,D:drawBase,E:drawLossDone}[t],method={D:"completion",E:"completionLoss"}[t]||"over";
+  for(var i=0;i<2000;i++){var x=draw(),bc=genBC(x.P),s={P:x.P*UNIT,c:x.c.map(function(v){return v*UNIT;}),e:x.e.map(function(v){return v*UNIT;}),b:bc.b.map(function(v){return v*UNIT;}),k:bc.k.map(function(v){return v*UNIT;})};
+    var d=computeContract(s,method);if(validC(d,t))return d;}
+  throw new Error("no contract scenario");
+}
+function GX(i,l,v,u,w){var g=G(i,l,v,u,w);g.noKnow=true;return g;}
+function sgn(n){return n<0?"−$"+fmt(n):"$"+fmt(n);}
+function gpEntry(d,y,yr,tol,src){
+  if(d.gp[y]>0)return JE("December 31, "+yr+": Recognize revenue and gross profit",[[ACCT.CIP,d.gp[y],0,src.gp],[ACCT.COST,d.cost[y],0,src.cost],[ACCT.REV,0,d.rev[y],src.rev]],"Gross profit is added to CIP.",{tol:tol});
+  return JE("December 31, "+yr+": Recognize revenue and the loss",[[ACCT.COST,d.cost[y],0,src.cost],[ACCT.REV,0,d.rev[y],src.rev],[ACCT.CIP,0,-d.gp[y],src.gp]],"A loss is subtracted from CIP.",{tol:tol});
+}
+
+function makeContract(t){return function(){
+  var x=ctx(CON_CTX,"c"),d=buildContract(t),Ys=[Y-2,Y-1,Y],over=d.method==="over",tol=over?Math.max(2,d.P*0.00006):2,parts=[];
+  var tb='<table><caption>Contract information</caption><thead><tr><th scope="col">Item</th>'+Ys.map(function(y){return '<th scope="col" class="n">'+y+'</th>';}).join("")+'</tr></thead><tbody>'+
+    [["Costs incurred during the year",d.c],["Estimated costs to complete at year-end",[d.e[0],d.e[1],0]],["Billings during the year",d.b],["Cash collections during the year",d.k]].map(function(r){return '<tr><th scope="row">'+r[0]+'</th>'+r[1].map(function(v){return '<td class="n">'+$(v)+'</td>';}).join("")+'</tr>';}).join("")+'</tbody></table>';
+  var desc={A:"The work goes as planned and the contract earns a profit every year.",B:"Costs come in higher than expected in "+Ys[1]+", but the contract still earns a profit overall.",C:"In "+Ys[1]+" the estimate shows the whole contract will lose money.",D:"The contract does not qualify for revenue recognition over time, so revenue is recognized when the bridge is complete.",E:"The contract does not qualify for revenue recognition over time, and in "+Ys[1]+" the estimate shows the whole contract will lose money."}[t];
+  for(var y=0;y<3;y++){
+    var p=String(y+1),yr=Ys[y],rows=[],L="ABCDEFGHIJKLMNOP".split(""),li=0;
+    function id(){return p+L[li++];}
+    var iP,iTD,iEC,iTE,iGP;
+    if(y===0){iP=id();rows.push(G(iP,"Contract price",d.P,null,"From the fixed-price contract."));iTD=id();rows.push(G(iTD,"Costs incurred to date ("+yr+")",d.cum[0],null,"Costs incurred in "+yr+", from the contract table."));}
+    else{var iPr=id();rows.push(GX(iPr,"Costs incurred before "+yr,d.cum[y-1],null,"Your "+Ys[y-1]+" costs to date (line "+(y===1?"1B":"2C")+")."));var iTh=id();rows.push(G(iTh,"Costs incurred in "+yr,d.c[y],null,"From the contract table."));
+      iTD=id();rows.push(N(iTD,"Costs incurred to date",d.cum[y],iPr+" + "+iTh,"Add this year's costs to the earlier ones.",m($(d.cum[y-1])+" + "+$(d.c[y])+" = "+$(d.cum[y]))));}
+    var Pref=y===0?iP:"1A";
+    if(y<2){
+      iEC=id();rows.push(G(iEC,"Estimated costs to complete",d.e[y],null,"The engineers' estimate at year-end, from the contract table."));
+      iTE=id();rows.push(N(iTE,"Total estimated costs",d.est[y],iTD+" + "+iEC,"Costs so far plus costs still to come.",m($(d.cum[y])+" + "+$(d.e[y])+" = "+$(d.est[y]))));
+      iGP=id();rows.push(N(iGP,"Estimated total gross profit (loss) on the contract",d.P-d.est[y],Pref+" − "+iTE,"Contract price less total estimated costs. Use a minus sign for a loss.",m($(d.P)+" − "+$(d.est[y])+" = "+sgn(d.P-d.est[y]))));
+    }else{
+      iTE=iTD;rows.push(C(id(),"The bridge is finished. What are total costs on the contract?",["Total costs incurred to date","Total costs incurred plus the last estimate to complete"],0,"Nothing is left to estimate in the final year.","Actual costs to date, "+$(d.A)+", replace every earlier estimate."));
+    }
+    if(over){
+      var iPct=id(),pctv=d.pct[y]*100;
+      rows.push(N(iPct,"Percentage of completion",y===2?100:pctv,iTD+" ÷ "+iTE,"Cost-to-cost: costs to date ÷ total estimated costs. Don't round it.",y===2?"100%: the bridge is complete.":m($(d.cum[y])+" ÷ "+$(d.est[y])+" = "+(Math.round(pctv*10000)/10000)+"%"),{unit:"%",tol:.01}));
+      var iCR=id();rows.push(N(iCR,"Revenue recognized to date",d.cumRev[y],Pref+" × "+iPct,"Contract price × percentage complete.",m($(d.P)+" × "+(y===2?"100":(Math.round(pctv*10000)/10000))+"% = "+$(d.cumRev[y])),{tol:tol}));
+      var iRev,iPrR;
+      if(y>0){iPrR=id();rows.push(GX(iPrR,"Revenue recognized in earlier years",d.cumRev[y-1],null,"Revenue to date in your "+Ys[y-1]+" schedule."));iRev=id();rows.push(N(iRev,"Revenue recognized in "+yr,d.rev[y],iCR+" − "+iPrR,"Revenue to date less what was already recognized.",m($(d.cumRev[y])+" − "+$(d.cumRev[y-1])+" = "+$(d.rev[y])),{tol:tol}));}
+      else iRev=iCR;
+      var iCG=id();
+      if(d.lossMode[y])rows.push(N(iCG,"Gross profit (loss) recognized to date",d.cumGP[y],iGP,"The whole contract now loses money, so the <strong>entire</strong> expected loss is recognized to date. Don't multiply it by the percentage.","The entire expected loss: "+sgn(d.cumGP[y])+".",{tol:tol}));
+      else rows.push(N(iCG,"Gross profit recognized to date",d.cumGP[y],y===2?iCR+" − "+iTD:iPct+" × "+iGP,"Percentage complete × estimated total gross profit (or revenue to date − costs to date).",m($(d.cumRev[y])+" − "+$(d.cum[y])+" = "+sgn(d.cumGP[y])),{tol:tol}));
+      var iG=iCG,iPG;
+      if(y>0){iPG=id();rows.push(GX(iPG,"Gross profit (loss) recognized in earlier years",d.cumGP[y-1],null,"Gross profit to date in your "+Ys[y-1]+" schedule."));iG=id();
+        rows.push(N(iG,"Gross profit (loss) recognized in "+yr,d.gp[y],iCG+" − "+iPG,"This year's amount is the change in the cumulative figure. It can be negative.",m(sgn(d.cumGP[y])+" − "+sgn(d.cumGP[y-1])+" = "+sgn(d.gp[y])),{tol:tol}));}
+      var iCC=id();rows.push(N(iCC,"Cost of construction for "+yr,d.cost[y],iRev+" − "+iG,"Revenue less gross profit (plus a loss). In a loss year this is more than the costs incurred.",m($(d.rev[y])+" − ("+sgn(d.gp[y])+") = "+$(d.cost[y])),{tol:tol}));
+      parts.push(sched(yr+" schedule",rows,y===0?"Percentage of completion uses the cost-to-cost ratio.":""));
+      if(y===0){parts.push(JE(yr+": Record construction costs",[[ACCT.CIP,d.c[0],0,"1B"],[ACCT.CASHM,0,d.c[0],"1B"]]));parts.push(JE(yr+": Record progress billings",[[ACCT.AR,d.b[0],0,"contract table"],[ACCT.BILL,0,d.b[0],"contract table"]],"Billings come from the contract table and have nothing to do with revenue."));parts.push(JE(yr+": Record cash collections",[[ACCT.CASH,d.k[0],0,"contract table"],[ACCT.AR,0,d.k[0],"contract table"]]));}
+      parts.push(gpEntry(d,y,yr,tol,{gp:iG,cost:iCC,rev:iRev}));
+    }else{
+      if(y<2){
+        var lossY=d.loss[y]>0;
+        rows.push(C(id(),"What does "+esc(x.co)+" recognize in "+yr+"?",["Nothing: revenue and cost wait until the bridge is complete","The entire expected loss on the contract","Revenue and cost based on the percentage complete"],lossY?1:0,"Is the whole contract now expected to lose money?",lossY?"The whole contract is expected to lose "+$(d.L)+", so the entire loss is recognized now, even though no revenue is.":"Nothing. The contract is still expected to be profitable, so everything waits until completion."));
+        if(lossY){var iL=id();rows.push(N(iL,"Loss on long-term contracts for "+yr,d.L,iTE+" − "+Pref,"Total estimated costs less the contract price.",m($(d.est[y])+" − "+$(d.P)+" = "+$(d.L))));}
+        parts.push(sched(yr+" schedule",rows));
+        if(y===0){parts.push(JE(yr+": Record construction costs",[[ACCT.CIP,d.c[0],0,"1B"],[ACCT.CASHM,0,d.c[0],"1B"]]));parts.push(JE(yr+": Record progress billings",[[ACCT.AR,d.b[0],0,"contract table"],[ACCT.BILL,0,d.b[0],"contract table"]],"Billings come from the contract table and have nothing to do with revenue."));parts.push(JE(yr+": Record cash collections",[[ACCT.CASH,d.k[0],0,"contract table"],[ACCT.AR,0,d.k[0],"contract table"]]));}
+        if(lossY)parts.push(JE("December 31, "+yr+": Recognize the expected loss",[[ACCT.LOSS,d.L,0,iL],[ACCT.CIP,0,d.L,iL]],"The loss reduces CIP."));
+        else parts.push({type:"note",html:'<p><strong>December 31, '+yr+':</strong> no entry is needed to recognize revenue or gross profit this year. (Costs, billings, and collections are still recorded.)</p>'});
+      }else{
+        var iLp=null;
+        if(d.L){iLp=id();rows.push(GX(iLp,"Loss already recognized in "+Ys[d.yL],d.L,null,"From your "+Ys[d.yL]+" schedule."));}
+        var iRv=id();rows.push(N(iRv,"Revenue recognized in "+yr,d.P,Pref,"At completion, the whole contract price is revenue.",m($(d.P))));
+        var iCo=id();rows.push(N(iCo,"Cost of construction for "+yr,d.cost[2],d.L?iTD+" − "+iLp:iTD,d.L?"Total costs less the loss already taken out of CIP.":"All costs incurred over the three years.",d.L?m($(d.A)+" − "+$(d.L)+" = "+$(d.cost[2])):m($(d.A))));
+        var iGg=id();rows.push(N(iGg,"Gross profit (loss) recognized in "+yr,d.gp[2],iRv+" − "+iCo,"Revenue less cost of construction. Use a minus sign for a loss.",m($(d.P)+" − "+$(d.cost[2])+" = "+sgn(d.gp[2]))));
+        parts.push(sched(yr+" schedule",rows));
+        parts.push(gpEntry(d,2,yr,2,{gp:iGg,cost:iCo,rev:iRv}));
+      }
+    }
+    if(y===0)parts.push({type:"note",html:'<p><strong>'+Ys[1]+' and '+Ys[2]+':</strong> the costs, billings, and collections entries work exactly like '+Ys[0]+', using each year\'s amounts from the contract table: costs '+$(d.c[1])+' and '+$(d.c[2])+', billings '+$(d.b[1])+' and '+$(d.b[2])+', collections '+$(d.k[1])+' and '+$(d.k[2])+'. The tutor skips them so you can focus on the recognition entries.</p>'});
+  }
+  parts.push(JE("December 31, "+Ys[2]+": Close the billings and CIP accounts",[[ACCT.BILL,d.P,0,"1A"],[ACCT.CIP,0,d.P,"1A"]],"When the bridge is delivered, both accounts equal the contract price."));
+  var keyTxt={A:"Under <strong>percentage of completion</strong>, revenue to date = contract price × (costs to date ÷ total estimated costs). Each year's revenue and gross profit are the <strong>change</strong> in the cumulative amounts. Gross profit is added to CIP, so CIP always equals costs plus profit recognized.",
+   B:"When estimated costs rise, the cumulative gross profit to date can be <strong>lower</strong> than what was already recognized. The difference is a loss in that year, even though the contract is still profitable overall. It is a change in estimate, so earlier years are not restated.",
+   C:"If the <strong>whole contract</strong> is expected to lose money, the <strong>entire</strong> loss is recognized right away, not just a percentage of it. Cost of construction that year is revenue plus the loss, so it is more than the costs actually incurred.",
+   D:"When a contract does not qualify for revenue over time, revenue is recognized <strong>upon completion</strong>. Costs build up in CIP, billings build up in the contra account, and nothing hits the income statement until the bridge is delivered (unless a loss is expected).",
+   E:"Even when revenue waits until completion, an expected loss on the <strong>whole contract</strong> cannot wait. Recognize the entire expected loss in the first year it appears: debit Loss on long-term contracts and credit CIP. At completion, cost of construction is total costs less the loss already taken."}[t];
+  var takeTxt={A:"Over the three years, gross profit totals "+$(d.P-d.A)+", which is the contract price less actual costs. Percentage of completion just spreads it across the years as the work is done.",
+   B:"The "+Ys[1]+" loss of "+$(-d.gp[1])+" came from a change in estimate, not an error, so "+Ys[0]+" was never restated. Total gross profit is still "+$(d.P-d.A)+".",
+   C:"The "+Ys[1]+" entry recognized the entire expected loss. When the final costs came in lower than feared, "+Ys[2]+" showed a gross profit of "+$(d.gp[2])+", so the total loss is "+$(d.A-d.P)+".",
+   D:"Nothing was recognized until "+Ys[2]+", when the full "+$(d.P-d.A)+" gross profit hit the income statement at once. Compare that with how percentage of completion spreads it out.",
+   E:"The "+$(d.L)+" loss was recognized in "+Ys[1]+", and the extra "+$(-d.gp[2])+" overrun appeared in "+Ys[2]+". Total loss: "+$(d.A-d.P)+"."}[t];
+  return {title:x.co,pool:CONPOOL,given:tb,
+   scenario:'<p>'+esc(x.ctl)+', controller of '+esc(x.co)+', is documenting a three-year, fixed-price contract with '+x.cust+' to build the '+x.proj+' for '+$(d.P)+'. Construction began in '+Ys[0]+' and the bridge was completed in '+Ys[2]+'. '+desc+'</p>'+(over?'<p>Revenue is recognized over time using the cost-to-cost percentage of completion. Carry the percentage at full precision.</p>':''),
+   key:'<p>'+keyTxt+' Construction costs go into <strong>Construction in progress (CIP)</strong>; progress billings go into <strong>Billings on construction contract</strong>, a contra account to CIP.</p>',
+   parts:parts,take:'<p>'+takeTxt+'</p>'};
+};}
+
+GEN.pocprofit={group:"Long-term contracts",name:"Over time: profit every year",blurb:"Percentage of completion with a profitable contract.",make:makeContract("A")};
+GEN.poclossyear={group:"Long-term contracts",name:"Over time: loss in one year",blurb:"Costs rise, so one year shows a loss, but the contract is still profitable.",make:makeContract("B")};
+GEN.poclosstotal={group:"Long-term contracts",name:"Over time: loss on the whole contract",blurb:"Recognize the entire expected loss when it first appears.",make:makeContract("C")};
+GEN.ccprofit={group:"Long-term contracts",name:"Upon completion: profitable contract",blurb:"Nothing is recognized until the bridge is finished.",make:makeContract("D")};
+GEN.ccloss={group:"Long-term contracts",name:"Upon completion: loss on the whole contract",blurb:"The loss can't wait for completion.",make:makeContract("E")};
+
+var ORDER=["voucher","pass","bundle","expval","mostlikely","pocprofit","poclossyear","poclosstotal","ccprofit","ccloss"];
+var POOL=REVPOOL;
+
+/* ---------- UI ---------- */
+var el=function(id){return document.getElementById(id);};
+var picker=el("picker"),partsEl=el("parts"),sumEl=el("summary");
+var state=null,typeBtns={};
+
+(function buildPicker(){
+  var groups={},gi=0;
+  ORDER.forEach(function(k){var g=GEN[k].group;(groups[g]=groups[g]||[]).push(k);});
+  Object.keys(groups).forEach(function(g){
+    var div=document.createElement("div");div.className="pgroup";
+    var hid="pg-"+(gi++);
+    div.innerHTML='<h3 id="'+hid+'">'+esc(g)+'</h3>';
+    var ul=document.createElement("ul");ul.setAttribute("aria-labelledby",hid);
+    groups[g].forEach(function(k){
+      var li=document.createElement("li"),b=document.createElement("button");
+      b.type="button";b.className="type-btn";b.setAttribute("aria-pressed","false");
+      b.innerHTML='<strong>'+esc(GEN[k].name)+'</strong><span>'+esc(GEN[k].blurb)+'</span>';
+      b.addEventListener("click",function(){start(k,true);});
+      typeBtns[k]=b;li.appendChild(b);ul.appendChild(li);
+    });
+    div.appendChild(ul);picker.appendChild(div);
+  });
+})();
+
+function parseNum(s){
+  s=String(s).trim().replace(/−/g,"-");
+  if(!s)return null;
+  var neg=false;
+  if(/^\(.*\)$/.test(s)){neg=true;s=s.slice(1,-1).trim();}
+  s=s.replace(/[$,%\s]/g,"");
+  if(s.charAt(0)==="-"){neg=!neg;s=s.slice(1);}
+  if(!/^(\d+\.?\d*|\.\d+)$/.test(s))return NaN;
+  var v=parseFloat(s);return neg?-v:v;
+}
+function numOK(v,ans,tol,unit){if(v===null||isNaN(v))return false;if(Math.abs(v-ans)<=tol+1e-9)return true;if(unit==="%"&&Math.abs(v*100-ans)<=tol+1e-9)return true;return false;}
+function showVal(v,unit){return unit==="%"?v+"%":unit==="dec"?String(v):(v<0?"-":"")+fmt(v);}
+function gv(r){return r.unit==="%"?pc(r.val):r.unit==="txt"?esc(r.val):$(r.val);}
+
+function acctList(p){var u=[];p.parts.forEach(function(pt){if(pt.type==="je")pt.lines.forEach(function(l){if(u.indexOf(l.acct)<0)u.push(l.acct);});});
+  var pool=p.pool||POOL;var extra=shuffle(pool.filter(function(a){return u.indexOf(a)<0;})).slice(0,Math.max(4,9-u.length));return u.concat(extra).sort();}
+function start(k,focus){
+  ORDER.forEach(function(x){typeBtns[x].setAttribute("aria-pressed",x===k?"true":"false");});
+  var p=GEN[k].make();
+  state={k:k,p:p,parts:[]};
+  el("ptype").textContent=GEN[k].name;
+  el("work-title").textContent=p.title;
+  var know=[];
+  p.parts.forEach(function(pt){if(pt.type==="sched")pt.rows.forEach(function(r){if(r.kind==="given"&&!r.noKnow)know.push([r.id,r.label,gv(r),r.why]);});});
+  (p.facts||[]).forEach(function(f){know.push(["",f[0],f[1],f[2]||""]);});
+  var kh="";
+  if(know.length){
+    kh='<p><strong>Here\'s what we know.</strong> '+any(["Before you calculate anything, read down this list and ask yourself whether each one makes sense.","Some of these come from the story above and some from the company\'s records. I noted where each one comes from.","Make sure you can explain where every one of these comes from before you start."])+' The lettered ones are already filled in as the gray lines in your schedule.</p>'+
+      '<div class="scroll"><table class="know"><caption class="sr-only">What we know</caption><thead><tr><th scope="col">Line</th><th scope="col">What we know</th><th scope="col" class="n">Amount</th><th scope="col">Where it comes from</th></tr></thead><tbody>'+
+      know.map(function(k){return '<tr><td class="ln">'+(k[0]||'<span class="sr-only">not in schedule</span>')+'</td><th scope="row">'+k[1]+'</th><td class="n">'+k[2]+'</td><td class="why">'+(k[3]||'')+'</td></tr>';}).join("")+'</tbody></table></div>';
+  }
+  if(p.given)kh+='<p>'+any(["I also have this table for you:","Here\'s one more piece of information:"])+'</p><div class="scroll">'+p.given+'</div>';
+  el("scenario-say").innerHTML=say(any(["<p>Here's the situation we're working with today.</p>","<p>Let's meet today's company.</p>","<p>Okay, here's our company for this one.</p>"])+p.scenario+kh);
+  el("given").innerHTML="";el("given").hidden=true;
+  el("key-say").innerHTML=say(p.key,{key:true,label:"Before you start, the key idea"});
+  sumEl.hidden=true;sumEl.innerHTML="";
+  partsEl.innerHTML="";
+  var n=0;
+  p.parts.forEach(function(pt,pi){
+    if(pt.type==="note"){var d=document.createElement("div");d.className="part";d.innerHTML=pt.html;partsEl.appendChild(d);state.parts.push({done:true,note:true});return;}
+    n++;
+    var ps={pt:pt,checks:0,done:false,firstRight:0,items:0,idx:pi};
+    state.parts.push(ps);
+    partsEl.appendChild(pt.type==="sched"?buildSched(ps,n,pi):buildJE(ps,n,pi,p.accts||acctList(p)));
+  });
+  if(focus){el("work-title").focus({preventScroll:true});el("worksheet").scrollIntoView({block:"start"});}
+}
+
+/* ----- schedule part ----- */
+function buildSched(ps,n,pi){
+  var pt=ps.pt,sec=document.createElement("section");sec.className="part";sec.id="part-"+pi;
+  var hid="ph-"+pi;
+  var hasBuilds=pt.rows.some(function(r){return r.builds;});
+  var h='<h3 id="'+hid+'"><span class="pnum">Part '+n+'</span> '+esc(pt.title)+'<span class="status" id="st-'+pi+'"></span></h3>'+say('<p>'+(n===1?any(["Start here. Fill in the white boxes; the given amounts are already in place.","Let's build the schedule. Use the Builds on column if you get stuck.","First, the numbers. Work top to bottom and each line sets up the next."]):any(["Next up. Keep going, using what you found above.","On to this part. The lines from earlier will help here."]))+(pt.intro?' '+pt.intro:'')+'</p>',{sm:true});
+  h+='<div class="scroll"><table class="sched"><caption class="sr-only">'+esc(pt.title)+'</caption><thead><tr><th scope="col">Line</th><th scope="col">Item</th>'+(hasBuilds?'<th scope="col" class="bo">Builds on</th>':'')+'<th scope="col" class="n">Amount</th></tr></thead><tbody>';
+  pt.rows.forEach(function(r,ri){
+    var rid="r"+pi+"-"+ri;
+    if(r.kind==="given"){
+      h+='<tr class="given"><td class="ln">'+r.id+'</td><td>'+r.label+' <span class="small">(given)</span></td>'+(hasBuilds?'<td class="bo"></td>':'')+'<td class="n">'+gv(r)+'</td></tr>';
+      return;
+    }
+    ps.items++;
+    var field;
+    if(r.kind==="choice"){
+      field='<select class="ans" id="'+rid+'" aria-describedby="fb-'+rid+'"><option value="">Select…</option>'+r.options.map(function(o,j){return '<option value="'+j+'">'+esc(o)+'</option>';}).join("")+'</select>';
+    }else{
+      field='<span class="inwrap">'+(r.unit==="$"?'<span class="u" aria-hidden="true">$</span>':'')+'<input class="ans n" id="'+rid+'" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-describedby="fb-'+rid+'">'+(r.unit==="%"?'<span class="u" aria-hidden="true">%</span>':'')+'</span>';
+    }
+    var wide=r.kind==="choice"&&r.options[0].length>20;
+    h+='<tr><td class="ln">'+r.id+'</td><td><label for="'+rid+'">'+r.label+(r.kind==="num"?(r.unit==="%"?' <span class="sr-only">(percent)</span>':' <span class="sr-only">(dollars)</span>'):'')+'</label><div class="fb" id="fb-'+rid+'" role="status"></div>'+(wide?'<div style="margin-top:.35rem">'+field+'</div>':'')+'</td>'+(hasBuilds?'<td class="bo">'+esc(r.builds)+'</td>':'')+'<td class="amt">'+(wide?'<span class="sr-only">Answer is below the item text</span>':field)+'</td></tr>';
+  });
+  h+='</tbody></table></div><div class="partfb" id="pf-'+pi+'" role="status" aria-live="polite"></div><div class="btns"><button type="button" class="btn" id="chk-'+pi+'">Check this part</button><button type="button" class="btn ghost" id="sol-'+pi+'" hidden>Show solution</button></div>';
+  sec.setAttribute("aria-labelledby",hid);
+  sec.innerHTML=h;
+  sec.querySelector("#chk-"+pi).addEventListener("click",function(){checkSched(ps,pi,false);});
+  sec.querySelector("#sol-"+pi).addEventListener("click",function(){checkSched(ps,pi,true);});
+  sec.querySelectorAll("input.ans").forEach(function(inp){inp.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();checkSched(ps,pi,false);}});});
+  return sec;
+}
+
+function checkSched(ps,pi,reveal){
+  if(ps.done)return;
+  var pt=ps.pt,right=0,total=0,blank=0,firstBad=null;
+  pt.rows.forEach(function(r,ri){
+    if(r.kind==="given")return;
+    total++;
+    var rid="r"+pi+"-"+ri,inp=el(rid),fb=el("fb-"+rid);
+    if(inp.disabled){right++;return;}
+    var ok;
+    if(r.kind==="choice")ok=inp.value!==""&&Number(inp.value)===r.ans;
+    else{var v=parseNum(inp.value);if(v===null&&!reveal){blank++;}ok=numOK(v,r.ans,r.tol,r.unit);}
+    if(ok){
+      right++;if(ps.checks===0)ps.firstRight++;
+      inp.classList.remove("bad-f");inp.classList.add("ok-f");inp.removeAttribute("aria-invalid");inp.disabled=true;
+      fb.className="fb ok";fb.innerHTML='<span class="tag">'+any(PRAISE)+'</span> '+r.sol;
+    }else if(reveal){
+      inp.value=r.kind==="choice"?String(r.ans):showVal(r.ans,r.unit);
+      inp.classList.remove("bad-f");inp.disabled=true;inp.removeAttribute("aria-invalid");
+      fb.className="fb sol";fb.innerHTML='<span class="tag">Here\'s how I\'d work it:</span> '+r.sol;
+    }else{
+      inp.classList.remove("ok-f");inp.classList.add("bad-f");inp.setAttribute("aria-invalid","true");
+      fb.className="fb bad";fb.innerHTML='<span class="tag">'+(inp.value===""?"Give this one a try.":any(NUDGE))+'</span> '+r.hint;
+      if(!firstBad)firstBad=inp;
+    }
+  });
+  ps.checks++;
+  var pf=el("pf-"+pi);
+  if(right===total||reveal){completePart(ps,pi,reveal);pf.className="partfb "+(reveal?"hint":"ok");pf.innerHTML='<span class="who">'+T.name+':</span> '+(reveal?"No problem. I filled in the solution with my work under each line. Compare it with yours, then let's keep going.":any(["All "+total+" lines are right. Nicely done!","Every line checks out. On to the next part!","That's all "+total+". You're getting the hang of this."]));}
+  else{pf.className="partfb bad";pf.innerHTML='<span class="who">'+T.name+':</span> '+(right?"You have "+right+" of "+total+" right. ":"Let's look at this together. ")+"I marked the lines to revisit in red and left a hint under each one"+(blank?" ("+blank+" still blank)":"")+". Fix those and check again"+(ps.checks>=1?", or ask me to show the solution.":".");el("sol-"+pi).hidden=false;if(firstBad)firstBad.focus();}
+}
+
+/* ----- journal entry part ----- */
+function buildJE(ps,n,pi,accts){
+  var pt=ps.pt,sec=document.createElement("section");sec.className="part";sec.id="part-"+pi;
+  var hid="ph-"+pi,nl=pt.lines.length;
+  ps.items=nl;
+  var h='<h3 id="'+hid+'"><span class="pnum">Part '+n+'</span> '+esc(pt.title)+'<span class="status" id="st-'+pi+'"></span></h3>';
+  h+=say('<p>'+any(["Now let's turn your schedule into a journal entry.","Time to record it. Every number you need is already in your schedule.","Here's where it comes together: the entry."])+' This one has <strong>'+nl+' lines</strong>; leave the unused amount box empty on each line.'+(pt.intro?' '+pt.intro:'')+'</p>',{sm:true});
+  h+='<div class="scroll"><table class="je"><caption class="sr-only">'+esc(pt.title)+'</caption><thead><tr><th scope="col">Account</th><th scope="col" class="n">Debit</th><th scope="col" class="n">Credit</th><th scope="col">Comes from</th></tr></thead><tbody>';
+  for(var i=0;i<nl;i++){
+    var b="j"+pi+"-"+i;
+    h+='<tr id="row-'+b+'"><td class="ac"><label class="sr-only" for="'+b+'a">Line '+(i+1)+' account</label><select class="ans" id="'+b+'a"><option value="">Select account…</option>'+accts.map(function(a){return '<option>'+esc(a)+'</option>';}).join("")+'</select></td>'+
+       '<td class="d"><label class="sr-only" for="'+b+'d">Line '+(i+1)+' debit (dollars)</label><input class="ans n" id="'+b+'d" type="text" inputmode="decimal" autocomplete="off"></td>'+
+       '<td class="c"><label class="sr-only" for="'+b+'c">Line '+(i+1)+' credit (dollars)</label><input class="ans n" id="'+b+'c" type="text" inputmode="decimal" autocomplete="off"></td>'+
+       '<td class="src" id="'+b+'s"><span class="sr-only">Shown after the entry is correct</span><span aria-hidden="true">—</span></td></tr>';
+  }
+  h+='</tbody></table></div><div class="partfb" id="pf-'+pi+'" role="status" aria-live="polite"></div><div class="btns"><button type="button" class="btn" id="chk-'+pi+'">Check this entry</button><button type="button" class="btn ghost" id="sol-'+pi+'" hidden>Show solution</button></div>';
+  sec.setAttribute("aria-labelledby",hid);
+  sec.innerHTML=h;
+  sec.querySelector("#chk-"+pi).addEventListener("click",function(){checkJE(ps,pi,false);});
+  sec.querySelector("#sol-"+pi).addEventListener("click",function(){checkJE(ps,pi,true);});
+  return sec;
+}
+
+function checkJE(ps,pi,reveal){
+  if(ps.done)return;
+  var pt=ps.pt,nl=pt.lines.length,rows=[],used={},right=0,tD=0,tC=0,blank=0;
+  for(var i=0;i<nl;i++){
+    var b="j"+pi+"-"+i,a=el(b+"a").value,d=parseNum(el(b+"d").value),c=parseNum(el(b+"c").value);
+    if(!a&&d===null&&c===null)blank++;
+    tD+=(d>0?d:0);tC+=(c>0?c:0);
+    rows.push({b:b,a:a,d:d===null?0:d,c:c===null?0:c,bad:isNaN(d)||isNaN(c)});
+  }
+  if(reveal){
+    pt.lines.forEach(function(l,i){var b="j"+pi+"-"+i;el(b+"a").value=l.acct;el(b+"d").value=l.dr?fmt(l.dr):"";el(b+"c").value=l.cr?fmt(l.cr):"";});
+    pt.lines.forEach(function(l,i){markRow("j"+pi+"-"+i,null,l);});
+    completePart(ps,pi,true);
+    var pf=el("pf-"+pi);pf.className="partfb hint";pf.innerHTML='<span class="who">'+T.name+':</span> Here\'s the entry. Look at the <strong>Comes from</strong> column: every amount is a line you already worked in the schedule.';
+    return;
+  }
+  /* match each student row to an unused expected line */
+  var hit=[];
+  rows.forEach(function(r){
+    var m=-1;
+    pt.lines.forEach(function(l,li){if(m<0&&!used[li]&&l.acct===r.a&&!r.bad&&Math.abs(r.d-l.dr)<=pt.tol&&Math.abs(r.c-l.cr)<=pt.tol)m=li;});
+    if(m>=0){used[m]=1;right++;if(ps.checks===0)ps.firstRight++;}
+    hit.push(m);
+  });
+  ps.checks++;
+  rows.forEach(function(r,i){markRow(r.b,hit[i]>=0,hit[i]>=0?pt.lines[hit[i]]:null);});
+  var pf=el("pf-"+pi);
+  if(right===nl){completePart(ps,pi,false);pf.className="partfb ok";pf.innerHTML='<span class="who">'+T.name+':</span> '+any(["That entry is right and it balances!","Debits equal credits and every account is right. Great work!"])+' Check the <strong>Comes from</strong> column to see how each amount flows straight from your schedule.';return;}
+  var msgs=[right?"You have "+right+" of "+nl+" lines right.":"Not there yet, but that's what practice is for."];
+  if(Math.abs(tD-tC)>1)msgs.push("Your debits ("+$(tD)+") don't equal your credits ("+$(tC)+"), so something's off.");
+  var missing=pt.lines.filter(function(l,li){return !used[li];}).map(function(l){return l.acct;});
+  if(ps.checks===1)msgs.push("Here's a hint: this entry uses "+uniq(pt.lines.map(function(l){return l.acct;})).join(", ")+". Each amount is one of the lettered lines in your schedule.");
+  else msgs.push("Still missing: "+uniq(missing).join(", ")+". Ask yourself whether each one is increasing or decreasing, and which side that means. Or I can show you the solution.");
+  pf.className="partfb bad";pf.innerHTML='<span class="who">'+T.name+':</span> '+esc(msgs.join(" "));
+  el("sol-"+pi).hidden=false;
+  var firstBadRow=rows.filter(function(r,i){return hit[i]<0;})[0];if(firstBadRow)el(firstBadRow.b+"a").focus();
+}
+function uniq(a){return a.filter(function(x,i){return a.indexOf(x)===i;});}
+function markRow(b,ok,line){
+  ["a","d","c"].forEach(function(s){var f=el(b+s);f.classList.remove("ok-f","bad-f");f.removeAttribute("aria-invalid");
+    if(ok===true){f.classList.add("ok-f");f.disabled=true;}
+    else if(ok===false){f.classList.add("bad-f");f.setAttribute("aria-invalid","true");}
+    else{f.disabled=true;}});
+  var s=el(b+"s");
+  if(line&&ok!==false)s.innerHTML='<span class="chip">'+(/^[a-z]/.test(line.src)?'':'Line ')+esc(line.src)+'</span>';
+}
+
+function completePart(ps,pi,revealed){
+  ps.done=true;ps.revealed=revealed;
+  var sec=el("part-"+pi);sec.classList.add("complete");
+  el("st-"+pi).textContent=revealed?"Solution shown":"Complete";
+  el("chk-"+pi).disabled=true;el("sol-"+pi).hidden=true;
+  sec.querySelectorAll("input,select").forEach(function(f){f.disabled=true;});
+  if(state.parts.every(function(p){return p.done;}))summary();
+}
+
+function summary(){
+  var p=state.p,tot=0,first=0,rev=0;
+  state.parts.forEach(function(ps){if(ps.note)return;tot+=ps.items;first+=ps.firstRight;if(ps.revealed)rev++;});
+  var cheer=first===tot?"Every answer right on the first try. Impressive!":(first>=tot*.7?"Strong work. You're close to mastering this.":"Good effort. Try another set of numbers and watch how much easier it gets.");
+  sumEl.innerHTML='<h3>Problem complete</h3><ul class="score" aria-label="Your results"><li>Right on the first check: '+first+' of '+tot+'</li><li>Parts with solution shown: '+rev+'</li></ul>'+say('<p>'+cheer+' One last thing I want you to remember:</p>'+p.take)+'<div class="btns"><button type="button" class="btn" id="again-btn">Try another with new numbers</button><button type="button" class="btn ghost" id="pick-btn">Choose a different problem type</button></div>';
+  sumEl.hidden=false;
+  el("again-btn").addEventListener("click",function(){start(state.k,true);});
+  el("pick-btn").addEventListener("click",function(){el("pick-title").scrollIntoView({block:"start"});typeBtns[state.k].focus();});
+  sumEl.focus();
+}
+
+el("intro").innerHTML=say('<p>Hi, I\'m <strong>'+T.name+'</strong>, '+T.bio+'. I\'ll be your tutor for revenue recognition today. '+T.style+'</p>'+
+  '<ul><li>Pick a problem type below. Each one is a <strong>worksheet</strong> with lettered lines (A, B, C …). The <strong>Builds on</strong> column tells you which earlier lines feed each answer.</li>'+
+  '<li>Fill in a part, then press <strong>Check this part</strong>. I\'ll mark answers green or red and give you a hint on the red ones. After your first check, you can ask me to <strong>Show solution</strong>.</li>'+
+  '<li>Then we\'ll turn your schedule into a <strong>journal entry</strong>. Once it\'s right, the <strong>Comes from</strong> column shows where each amount came from.</li></ul>'+
+  '<p class="small">Quick tips: round dollars to the cent where the problem shows cents, otherwise to the dollar; commas optional. Enter a decrease as <span class="math">-12,000</span> or <span class="math">(12,000)</span>, and rates as percents like <span class="math">23.5</span>.</p>',{label:T.name+", your tutor"});
+el("sub").textContent="Your tutor today is "+T.name+". Work the schedule, then record the journal entries.";
+el("new-btn").addEventListener("click",function(){if(state)start(state.k,true);});
+el("print-btn").addEventListener("click",function(){window.print();});
+start("voucher",false);
+
+/* expose for self-checks */
+window.__tutor={GEN:GEN,ORDER:ORDER,start:start,state:function(){return state;}};
+})();
+</script>
+</body>
+</html>
