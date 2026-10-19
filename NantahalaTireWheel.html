@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nantahala Tire &amp; Wheel: Cash Discounts and Sales Returns</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --purple:#592C88; --purple-deep:#38195A; --purple-mid:#6E3FA3;
+    --gold:#B0925C; --gold-soft:#D6C398; --gold-pale:#F1E9D6;
+    --parchment:#F7F4EC; --paper:#FFFEFA; --ink:#221B2E; --slate:#5F5A6B;
+    --line:#DBD3E0; --answer:#1E5C34; --answer-bg:#E7F1E9; --danger:#9C3B34;
+    --shadow: 0 1px 2px rgba(56,25,90,0.07), 0 6px 18px rgba(56,25,90,0.08);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{ background:var(--parchment); color:var(--ink); font-family:'Inter',sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased; }
+  a{ color:inherit; }
+
+  header{ background: linear-gradient(180deg, var(--purple) 0%, var(--purple-deep) 100%); color:#F1E9D6; padding: 30px 6vw 24px; position:relative; }
+  header::after{ content:""; position:absolute; left:0; right:0; bottom:0; height:4px; background: linear-gradient(90deg, var(--gold-soft), var(--gold) 40%, var(--gold-soft) 70%, var(--gold)); }
+  .eyebrow{ font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--gold-soft); margin:0 0 10px; }
+  h1.title{ font-family:'Source Serif 4', serif; font-weight:600; font-size:clamp(24px,3.4vw,34px); margin:0 0 8px; letter-spacing:-0.01em; }
+  .subtitle{ font-size:14.5px; color:#D9CDE5; max-width:680px; margin:0; }
+
+  .id-bar{ max-width:900px; margin:0 auto; padding:18px 6vw 0; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .id-bar label{ font-size:13px; font-weight:600; color:var(--slate); }
+  .id-bar input[type="text"]{ font-family:'IBM Plex Mono', monospace; font-size:13.5px; padding:8px 11px; border:1px solid var(--line); border-radius:5px; background:var(--paper); color:var(--ink); width:180px; }
+  .id-bar input:focus{ outline:none; border-color:var(--purple-mid); box-shadow:0 0 0 3px rgba(89,44,136,0.10); }
+  .id-bar button{ font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600; border-radius:5px; padding:8px 15px; border:1px solid var(--purple); background:var(--purple); color:#fff; cursor:pointer; }
+  .id-bar button:hover{ background:var(--purple-mid); }
+  .id-hint{ font-size:12px; color:var(--slate); width:100%; margin-top:2px; }
+
+  .rounding-note{ max-width:900px; margin:14px auto 0; padding:12px 6vw; font-size:12.5px; color:var(--slate); line-height:1.5; }
+  .rounding-note strong{ color:var(--purple); font-weight:600; }
+
+  main{ max-width:900px; margin:0 auto; padding:10px 6vw 90px; }
+
+  .facts{ background:var(--paper); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); padding:18px 22px; margin-top:20px; font-size:14.5px; }
+  .facts h2{ font-family:'Source Serif 4', serif; font-size:19px; color:var(--purple); margin:0 0 10px; }
+  .facts p{ margin:0 0 10px; } .facts p:last-child{ margin-bottom:0; }
+  .facts span.val{ font-weight:700; color:var(--purple-deep); }
+  .facts table.aging-ref{ width:100%; border-collapse:collapse; font-size:13.5px; margin-top:6px; }
+  .facts table.aging-ref th{ text-align:right; font-size:11.5px; text-transform:uppercase; color:var(--slate); border-bottom:2px solid var(--purple); padding:6px 8px; }
+  .facts table.aging-ref th:first-child{ text-align:left; }
+  .facts table.aging-ref td{ text-align:right; padding:6px 8px; border-bottom:1px solid var(--line); }
+  .facts table.aging-ref td:first-child{ text-align:left; }
+
+  .part{ background:var(--paper); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); padding:24px 26px 26px; margin-top:26px; }
+  .part-label{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--gold); background:var(--purple); display:inline-block; padding:3px 9px; border-radius:4px; letter-spacing:.04em; margin-bottom:12px; }
+  .part h2{ font-family:'Source Serif 4', serif; font-size:21px; font-weight:600; color:var(--purple); margin:0 0 12px; }
+  .scenario{ background:var(--parchment); border-left:3px solid var(--gold); padding:14px 18px; border-radius:0 6px 6px 0; font-size:14.5px; color:var(--ink); margin-bottom:20px; }
+  .scenario p{ margin:0 0 10px; } .scenario p:last-child{ margin-bottom:0; }
+
+  .req{ font-weight:600; font-size:14.5px; color:var(--ink); margin:20px 0 10px; }
+  .req .letter{ font-family:'IBM Plex Mono', monospace; color:var(--purple); margin-right:6px; }
+
+  .work-line{ display:flex; align-items:center; gap:8px; font-size:13.5px; margin:6px 0; flex-wrap:wrap; }
+  .work-line label{ color:var(--slate); min-width:auto; }
+  .work-line input[type="text"]{ font-family:'IBM Plex Mono', monospace; font-size:13.5px; padding:6px 8px; border:1px solid var(--line); border-radius:5px; background:var(--parchment); color:var(--ink); width:130px; }
+
+  table.je{ width:100%; border-collapse:collapse; font-size:13.5px; margin-top:6px; }
+  table.je th{ text-align:left; font-size:11.5px; text-transform:uppercase; letter-spacing:.03em; color:var(--slate); border-bottom:2px solid var(--purple); padding:8px 8px; }
+  table.je td{ border-bottom:1px solid var(--line); padding:8px 8px; }
+  table.je input[type="text"]{ width:100%; font-family:'IBM Plex Mono', monospace; font-size:13.5px; padding:6px 8px; border:1px solid var(--line); border-radius:5px; background:var(--parchment); color:var(--ink); }
+  table.je select.coa-select{ width:100%; font-family:'Inter',sans-serif; font-size:13.5px; padding:6px 8px; border:1px solid var(--line); border-radius:5px; background:var(--parchment); color:var(--ink); }
+  table.je select.coa-select:focus, table.je input[type="text"]:focus, .work-line input:focus, table.aging input:focus{ outline:none; border-color:var(--purple-mid); box-shadow:0 0 0 3px rgba(89,44,136,0.10); background:var(--paper); }
+  table.je td.indent select{ margin-left:0; } table.je td.indent input{ padding-left:22px; }
+  .je-hint{ font-size:12px; color:var(--slate); margin-top:6px; }
+
+  table.aging{ width:100%; border-collapse:collapse; font-size:13.5px; margin-top:6px; }
+  table.aging th{ text-align:right; font-size:11.5px; text-transform:uppercase; letter-spacing:.03em; color:var(--slate); border-bottom:2px solid var(--purple); padding:8px 8px; }
+  table.aging th:first-child{ text-align:left; }
+  table.aging td{ border-bottom:1px solid var(--line); padding:8px 8px; text-align:right; }
+  table.aging td:first-child{ text-align:left; }
+  table.aging input[type="text"]{ width:100%; text-align:right; font-family:'IBM Plex Mono', monospace; font-size:13.5px; padding:6px 8px; border:1px solid var(--line); border-radius:5px; background:var(--parchment); color:var(--ink); }
+  table.aging tr.total-row td{ border-top:2px solid var(--purple); border-bottom:none; font-weight:600; }
+  table.aging td.rate{ text-align:right; font-family:'IBM Plex Mono', monospace; }
+
+  .key{ margin-top:14px; background:var(--answer-bg); border:1px solid #B7D3BE; border-radius:8px; padding:14px 16px; color:var(--answer); font-size:13.5px; }
+  .key strong{ display:block; margin-bottom:6px; font-family:'Source Serif 4', serif; font-size:14.5px; }
+  .key table{ width:100%; border-collapse:collapse; font-size:13px; margin-top:4px; }
+  .key td{ padding:4px 6px; border-bottom:1px dashed #B7D3BE; }
+  .key tr:last-child td{ border-bottom:none; font-weight:600; }
+
+  .check-bar{ margin-top:20px; padding-top:16px; border-top:1px solid var(--line); display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  .btn-check{ font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600; border-radius:5px; padding:9px 18px; border:1px solid var(--purple); background:var(--purple); color:#fff; cursor:pointer; }
+  .btn-check:hover{ background:var(--purple-mid); }
+  .check-summary{ font-size:13.5px; font-weight:600; }
+  .check-summary.good{ color:var(--answer); } .check-summary.bad{ color:var(--danger); }
+  .check-disclaimer{ font-size:11.5px; color:var(--slate); width:100%; margin-top:2px; font-style:italic; }
+  .attempts-note{ font-size:12px; font-weight:600; color:var(--slate); }
+  .attempts-note.low{ color:var(--gold); } .attempts-note.locked{ color:var(--danger); }
+  input:disabled, select:disabled{ opacity:0.7; cursor:not-allowed; }
+
+  .score-bar{ margin-top:26px; background:var(--paper); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); padding:16px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+  .score-bar .score-label{ font-family:'Source Serif 4', serif; font-size:16px; font-weight:600; color:var(--purple); }
+  .score-bar .score-value{ font-family:'IBM Plex Mono', monospace; font-size:18px; font-weight:600; color:var(--ink); }
+  .score-bar .score-breakdown{ font-size:12px; color:var(--slate); width:100%; }
+
+  input.field-correct, select.field-correct{ border-color:var(--answer) !important; background:var(--answer-bg) !important; }
+  input.field-incorrect, select.field-incorrect{ border-color:var(--danger) !important; background:#F3E1DE !important; }
+  input.field-missing, select.field-missing{ border-color:var(--gold) !important; background:var(--gold-pale) !important; }
+  .key-reveal-note{ margin-top:14px; background:var(--gold-pale); border:1px solid var(--gold-soft); border-radius:8px; padding:12px 16px; color:var(--purple-deep); font-size:13.5px; font-weight:600; display:none; }
+
+  .submit-bar{ background:var(--paper); border:1px solid var(--line); border-radius:10px; box-shadow:var(--shadow); padding:22px 26px 24px; margin-top:26px; }
+  .submit-bar h2{ font-family:'Source Serif 4', serif; font-size:19px; font-weight:600; color:var(--purple); margin:0 0 14px; }
+  .submit-row{ display:flex; align-items:center; gap:10px; margin-bottom:12px; flex-wrap:wrap; }
+  .submit-row label{ font-size:13px; font-weight:600; color:var(--slate); }
+  .submit-row input[type="text"]{ font-family:'Inter',sans-serif; font-size:13.5px; padding:8px 11px; border:1px solid var(--line); border-radius:5px; background:var(--parchment); color:var(--ink); width:240px; }
+  .submit-row input:focus{ outline:none; border-color:var(--purple-mid); box-shadow:0 0 0 3px rgba(89,44,136,0.10); }
+  .btn-submit{ font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600; border-radius:5px; padding:10px 18px; border:1px solid var(--purple); background:var(--purple); color:#fff; cursor:pointer; }
+  .btn-submit:hover{ background:var(--purple-mid); }
+  .btn-submit-outline{ background:var(--paper); color:var(--purple); }
+  .btn-submit-outline:hover{ background:var(--parchment); }
+  .submit-status{ font-size:13px; font-weight:600; min-height:18px; margin:10px 0 0; color:var(--answer); }
+  .submit-status.error{ color:var(--danger); }
+  .submit-hint{ font-size:12px; color:var(--slate); margin:6px 0 0; }
+
+  @media print{
+    .print-hide, .id-bar, .check-bar, .rounding-note{ display:none !important; }
+    header{ background:none !important; color:var(--ink) !important; padding:0 0 14px !important; }
+    header::after{ display:none !important; }
+    .eyebrow{ color:var(--purple) !important; } .subtitle{ color:var(--slate) !important; }
+    body{ background:#fff !important; }
+    .part, .facts{ box-shadow:none !important; border:1px solid #999 !important; break-inside:avoid; }
+    .score-bar{ box-shadow:none !important; border:1.5px solid var(--purple) !important; break-inside:avoid; break-before:avoid; }
+    input[type="text"], select{ border:none !important; border-bottom:1px solid #000 !important; background:transparent !important; border-radius:0 !important; color:#000 !important; -webkit-appearance:none; appearance:none; padding:2px 4px !important; }
+    .print-name-line{ display:block !important; }
+  }
+  .print-name-line{ display:none; font-size:13px; color:var(--ink); padding:0 6vw; margin:0 0 10px; }
+  footer{ text-align:center; padding:26px 6vw 40px; font-size:12px; color:var(--slate); }
+  @media (max-width:600px){ header, main, .id-bar{ padding-left:5vw; padding-right:5vw; } table.je, table.aging{ font-size:12.5px; } }
+</style>
+<style id="a11y-fixes">
+  /* Accessibility fixes added Oct 2026: visible keyboard focus, scrollable wide tables, and text colors adjusted to meet WCAG AA contrast. */
+  :focus-visible { outline: 3px solid #341f5c !important; outline-offset: 2px !important; box-shadow: 0 0 0 5px #ffffff !important; }
+  .a11y-scroll { overflow-x: auto; max-width: 100%; }
+  .table-scroll, .a11y-scroll { position: relative; }
+  .a11y-sr { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+  span.part-label { color: #c6b18a !important; }
+</style>
+<style>
+  .facts table.ref, .scenario table.ref{ width:100%; border-collapse:collapse; font-size:13.5px; margin:8px 0 4px; }
+  .facts table.ref caption, .scenario table.ref caption{ text-align:left; font-weight:600; color:var(--purple); padding:4px 0; font-size:13.5px; }
+  .facts table.ref th, .scenario table.ref th{ text-align:right; font-size:11.5px; text-transform:uppercase; color:var(--slate); border-bottom:2px solid var(--purple); padding:6px 8px; }
+  .facts table.ref th:first-child, .scenario table.ref th:first-child, .facts table.ref td:first-child, .scenario table.ref td:first-child{ text-align:left; }
+  .facts table.ref td, .scenario table.ref td{ text-align:right; padding:6px 8px; border-bottom:1px solid var(--line); font-family:'IBM Plex Mono', monospace; }
+  .facts table.ref td:first-child, .scenario table.ref td:first-child{ font-family:'Inter',sans-serif; }
+  .facts table.ref tr.total-row td, .scenario table.ref tr.total-row td{ border-top:2px solid var(--purple); font-weight:600; }
+  .work-line label{ color:#4a4558; }
+  .work-line select{ font-family:'Inter',sans-serif; font-size:13.5px; padding:6px 8px; border:1px solid var(--line); border-radius:5px; background:var(--parchment); color:var(--ink); max-width:100%; }
+  .work-line select:focus{ outline:none; border-color:var(--purple-mid); box-shadow:0 0 0 3px rgba(89,44,136,0.10); background:var(--paper); }
+  .je-title{ font-weight:600; font-size:13.5px; color:var(--purple-deep); margin:16px 0 2px; }
+  .tbl-wrap{ overflow-x:auto; }
+  .skip{ position:absolute; left:-9999px; top:0; background:#fff; color:var(--purple-deep); padding:8px 14px; font-weight:700; z-index:20; }
+  .skip:focus{ left:12px; top:12px; }
+  .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+  @media (max-width:600px){ .work-line input[type="text"]{ width:100%; } table.je{ min-width:520px; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the assignment</a>
+<header>
+  <p class="eyebrow">ACCT 351 · Chapter 7 Homework · Discounts and Returns</p>
+  <h1 class="title">Nantahala Tire &amp; Wheel: Cash Discounts and Sales Returns</h1>
+  <p class="subtitle">Gross and net methods for cash discounts and a refund liability for returns, with numbers generated from your student ID.</p>
+</header>
+
+<p class="print-name-line" id="printNameLine"></p>
+<p class="print-name-line" id="printScoreLine" style="font-weight:600;"></p>
+
+<div class="id-bar" role="region" aria-label="Generate your scenario">
+  <label for="studentId">Student ID</label>
+  <input type="text" id="studentId" placeholder="e.g. 92841016">
+  <button id="genBtn" type="button">Generate scenario</button>
+  <span class="id-hint">Your ID determines your numbers. Everyone gets a different but equally solvable version of this problem.</span>
+</div>
+
+
+
+<main id="main" tabindex="-1">
+  <div class="rounding-note">
+  <strong>Rounding convention:</strong> round every dollar amount to the nearest whole dollar unless the problem shows cents. Enter percentages as numbers (for example, 8.5 for 8.5%).
+</div>
+  <section class="facts" aria-labelledby="facts-h">
+    <h2 id="facts-h">The facts</h2>
+    <p><strong>Nantahala Tire &amp; Wheel</strong> is a tire wholesaler in Bryson City that sells to fleet operators across Western North Carolina. It uses a perpetual inventory system and closes its books on December 31. Parts 1 and 2 record the same sale two ways so you can compare the gross and net methods. Part 3 covers the company's estimate of sales returns.</p>
+  </section>
+
+  <section class="part" data-part-key="p1" aria-labelledby="p1-h">
+    <span class="part-label">Part 1</span>
+    <h2 id="p1-h">Gross method</h2>
+    <div class="scenario"><p>On July 15, <span class="yr" data-o="0">2026</span>, Nantahala sold <span class="val" data-k="U" data-f="n">…</span> tires at <span class="val" data-k="price" data-f="m">…</span> each to Smoky Mountain Fleet Services on terms of <span class="val" data-k="dp" data-f="d">…</span>/10, n/30. Ignore the cost of the tires in Parts 1 and 2.</p></div>
+    <div class="req"><span class="letter">a.</span>Using the <strong>gross method</strong>, record the sale on July 15.</div><p class="je-title" id="g1-t">Entry (a): July 15, <span class="yr" data-o="0">2026</span></p><div class="tbl-wrap"><table class="je" aria-labelledby="g1-t"><thead><tr><th scope="col" style="width:55%;">Account</th><th scope="col" style="width:22%;">Debit</th><th scope="col" style="width:23%;">Credit</th></tr></thead><tbody><tr><td><select class="coa-select" id="g1-a0" aria-label="Entry (a): July 15, {{y0}}, line 1, account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="g1-d0" aria-label="Entry (a): July 15, {{y0}}, line 1, debit" autocomplete="off"></td><td><input type="text" placeholder="$" id="g1-c0" aria-label="Entry (a): July 15, {{y0}}, line 1, credit" autocomplete="off"></td></tr><tr><td><select class="coa-select" id="g1-a1" aria-label="Entry (a): July 15, {{y0}}, line 2, account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="g1-d1" aria-label="Entry (a): July 15, {{y0}}, line 2, debit" autocomplete="off"></td><td><input type="text" placeholder="$" id="g1-c1" aria-label="Entry (a): July 15, {{y0}}, line 2, credit" autocomplete="off"></td></tr></tbody></table></div><div class="req"><span class="letter">b.</span>Record collection on July 23, <span class="yr" data-o="0">2026</span> (within the discount period).</div><p class="je-title" id="g2-t">Entry (b): July 23, <span class="yr" data-o="0">2026</span></p><div class="tbl-wrap"><table class="je" aria-labelledby="g2-t"><thead><tr><th scope="col" style="width:55%;">Account</th><th scope="col" style="width:22%;">Debit</th><th scope="col" style="width:23%;">Credit</th></tr></thead><tbody><tr><td><select class="coa-select" id="g2-a0" aria-label="Entry (b): July 23, {{y0}}, line 1, account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="g2-d0" aria-label="Entry (b): July 23, {{y0}}, line 1, debit" autocomplete="off"></td><td><input type="text" placeholder="$" id="g2-c0" aria-label="Entry (b): July 23, {{y0}}, line 1, credit" autocomplete="off"></td></tr><tr><td><select class="coa-select" id="g2-a1" aria-label="Entry (b): July 23, {{y0}}, line 2, account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="g2-d1" aria-label="Entry (b): July 23, {{y0}}, line 2, debit" autocomplete="off"></td><td><input type="text" placeholder="$" id="g2-c1" aria-label="Entry (b): July 23, {{y0}}, line 2, credit" autocomplete="off"></td></tr><tr><td><select class="coa-select" id="g2-a2" aria-label="Entry (b): July 23, {{y0}}, line 3, account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="g2-d2" aria-label="Entry (b): July 23, {{y0}}, line 3, debit" autocomplete="off"></td><td><input type="text" placeholder="$" id="g2-c2" aria-label="Entry (b): July 23, {{y0}}, line 3, credit" autocomplete="off"></td></tr></tbody></table></div><div class="req"><span class="letter">c.</span>Instead, record collection on August 15, <span class="yr" data-o="0">2026</span> (after the discount period).</div><p class="je-title" id="g3-t">Entry (c): August 15, <span class="yr" data-o="0">2026</span></p><div class="tbl-wrap"><table class="je" aria-labelledby="g3-t"><thead><tr><th scope="col" style="width:55%;">Account</th><th scope="col" style="width:22%;">Debit</th><th scope="col" style="width:23%;">Credit</th></tr></thead><tbody><tr><td><select class="coa-select" id="g3-a0" aria-label="Entry (c): August 15, {{y0}}, line 1, account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="g3-d0" aria-label="Entry (c): August 15, {{y0}}, line 1, debit" autocomplete="off"></td><td><input type="text" placeholder="$" id="g3-c0" aria-label="Entry (c): August 15, {{y0}}, line 1, credit" autocomplete="off"></td></tr><tr><td><select class="coa-select" id="g3-a1" aria-label="Entry (c): August 15, {{y0}}, line 2, account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="g3-d1" aria-label="Entry (c): August 15, {{y0}}, line 2, debit" autocomplete="off"></td><td><input type="text" placeholder="$" id="g3-c1" aria-label="Entry (c): August 15, {{y0}}, line 2, credit" autocomplete="off"></td></tr></tbody></table></div>
+    <div class="check-bar">
+      <button class="btn-check" id="checkP1" type="button">Check my work</button>
+      <span class="check-summary" id="p1Summary" role="status"></span>
+      <span class="attempts-note" id="p1Attempts">3 attempts remaining</span>
+      <span class="check-disclaimer">Checks the accounts you selected and the amounts you entered against the key. Journal entry lines may be in any order.</span>
+    </div>
+    <div class="key" id="p1Key" style="display:none;"></div>
+  </section>
+  <section class="part" data-part-key="p2" aria-labelledby="p2-h">
+    <span class="part-label">Part 2</span>
+    <h2 id="p2-h">Net method</h2>
+    <div class="scenario"><p>On July 15, <span class="yr" data-o="0">2026</span>, Nantahala sold <span class="val" data-k="U" data-f="n">…</span> tires at <span class="val" data-k="price" data-f="m">…</span> each to Smoky Mountain Fleet Services on terms of <span class="val" data-k="dp" data-f="d">…</span>/10, n/30. Ignore the cost of the tires in Parts 1 and 2.</p></div>
+    <div class="req"><span class="letter">a.</span>Using the <strong>net method</strong>, record the sale on July 15.</div><p class="je-title" id="n1-t">Entry (a): July 15, <span class="yr" data-o="0">2026</span></p><div class="tbl-wrap"><table class="je" aria-labelledby="n1-t"><thead><tr><th scope="col" style="width:55%;">Account</th><th scope="col" style="width:22%;">Debit</th><th scope="col" style="width:23%;">Credit</th></tr></thead><tbody><tr><td><select class="coa-select" id="n1-a0" aria-label="Entry (a): July 15, {{y0}}, line 1, account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="n1-d0" aria-label="Entry (a): July 15, {{y0}}, line 1, debit" autocomplete="off"></td><td><input type="text" placeholder="$" id="n1-c0" aria-label="Entry (a): July 15, {{y0}}, line 1, credit" autocomplete="off"></td></tr><tr><td><select class="coa-select" id="n1-a1" aria-label="Entry (a): July 15, {{y0}}, line 2, account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="n1-d1" aria-label="Entry (a): July 15, {{y0}}, line 2, debit" autocomplete="off"></td><td><input type="text" placeholder="$" id="n1-c1" aria-label="Entry (a): July 15, {{y0}}, line 2, credit" autocomplete="off"></td></tr></tbody></table></div><div class="req"><span class="letter">b.</span>Record collection on July 23, <span class="yr" data-o="0">2026</span> (within the discount period).</div><p class="je-title" id="n2-t">Entry (b): July 23, <span class="yr" data-o="0">2026</span></p><div class="tbl-wrap"><table class="je" aria-labelledby="n2-t"><thead><tr><th scope="col" style="width:55%;">Account</th><th scope="col" style="width:22%;">Debit</th><th scope="col" style="width:23%;">Credit</th></tr></thead><tbody><tr><td><select class="coa-select" id="n2-a0" aria-label="Entry (b): July 23, {{y0}}, line 1, account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="n2-d0" aria-label="Entry (b): July 23, {{y0}}, line 1, debit" autocomplete="off"></td><td><input type="text" placeholder="$" id="n2-c0" aria-label="Entry (b): July 23, {{y0}}, line 1, credit" autocomplete="off"></td></tr><tr><td><select class="coa-select" id="n2-a1" aria-label="Entry (b): July 23, {{y0}}, line 2, account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="n2-d1" aria-label="Entry (b): July 23, {{y0}}, line 2, debit" autocomplete="off"></td><td><input type="text" placeholder="$" id="n2-c1" aria-label="Entry (b): July 23, {{y0}}, line 2, credit" autocomplete="off"></td></tr></tbody></table></div><div class="req"><span class="letter">c.</span>Instead, record collection on August 15, <span class="yr" data-o="0">2026</span> (after the discount period).</div><p class="je-title" id="n3-t">Entry (c): August 15, <span class="yr" data-o="0">2026</span></p><div class="tbl-wrap"><table class="je" aria-labelledby="n3-t"><thead><tr><th scope="col" style="width:55%;">Account</th><th scope="col" style="width:22%;">Debit</th><th scope="col" style="width:23%;">Credit</th></tr></thead><tbody><tr><td><select class="coa-select" id="n3-a0" aria-label="Entry (c): August 15, {{y0}}, line 1, account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="n3-d0" aria-label="Entry (c): August 15, {{y0}}, line 1, debit" autocomplete="off"></td><td><input type="text" placeholder="$" id="n3-c0" aria-label="Entry (c): August 15, {{y0}}, line 1, credit" autocomplete="off"></td></tr><tr><td><select class="coa-select" id="n3-a1" aria-label="Entry (c): August 15, {{y0}}, line 2, account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="n3-d1" aria-label="Entry (c): August 15, {{y0}}, line 2, debit" autocomplete="off"></td><td><input type="text" placeholder="$" id="n3-c1" aria-label="Entry (c): August 15, {{y0}}, line 2, credit" autocomplete="off"></td></tr><tr><td><select class="coa-select" id="n3-a2" aria-label="Entry (c): August 15, {{y0}}, line 3, account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="n3-d2" aria-label="Entry (c): August 15, {{y0}}, line 3, debit" autocomplete="off"></td><td><input type="text" placeholder="$" id="n3-c2" aria-label="Entry (c): August 15, {{y0}}, line 3, credit" autocomplete="off"></td></tr></tbody></table></div><div class="req"><span class="letter">d.</span>What annual interest rate does Smoky Mountain effectively pay by skipping the discount? Use a 365-day year: discount % ÷ (100% − discount %) × 365 ÷ 20.</div><div class="work-line"><label for="p2eff">Effective annual rate (%)</label><input type="text" id="p2eff" placeholder="%" autocomplete="off"></div>
+    <div class="check-bar">
+      <button class="btn-check" id="checkP2" type="button">Check my work</button>
+      <span class="check-summary" id="p2Summary" role="status"></span>
+      <span class="attempts-note" id="p2Attempts">3 attempts remaining</span>
+      <span class="check-disclaimer">Checks the accounts you selected and the amounts you entered against the key. Journal entry lines may be in any order.</span>
+    </div>
+    <div class="key" id="p2Key" style="display:none;"></div>
+  </section>
+  <section class="part" data-part-key="p3" aria-labelledby="p3-h">
+    <span class="part-label">Part 3</span>
+    <h2 id="p3-h">Sales returns with a right of return that never expires</h2>
+    <div class="scenario"><p>Nantahala lets customers return tires for a full refund at any time; the right of return never expires. At December 31, <span class="yr" data-o="-1">2025</span>, the company reported a refund liability of <span class="val" data-k="RL0" data-f="m">…</span> and inventory—estimated returns of <span class="val" data-k="IR0" data-f="m">…</span> for <span class="yr" data-o="-1">2025</span> sales. Tires cost <span class="val" data-k="cp" data-f="d">…</span>% of the selling price.</p>
+<ul>
+<li>During <span class="yr" data-o="0">2026</span>, customers returned <span class="val" data-k="RP" data-f="m">…</span> of tires bought in <span class="yr" data-o="-1">2025</span>. All returns are restocked and credited to the customer's account.</li>
+<li>Sales on account in <span class="yr" data-o="0">2026</span> were <span class="val" data-k="S2" data-f="m">…</span>. Customers returned <span class="val" data-k="RC" data-f="m">…</span> of those tires before year-end.</li>
+<li>Management estimates that <span class="val" data-k="estp" data-f="d">…</span>% of <span class="yr" data-o="0">2026</span> sales will eventually be returned. It still expects the rest of the <span class="yr" data-o="-1">2025</span> refund liability to be returned, since the right never expires.</li>
+</ul></div>
+    <div class="req"><span class="letter">a.</span>Record the <span class="yr" data-o="0">2026</span> returns of <span class="yr" data-o="-1">2025</span> sales.</div><p class="je-title" id="r1-t">Entry (a): returns of <span class="yr" data-o="-1">2025</span> sales</p><div class="tbl-wrap"><table class="je" aria-labelledby="r1-t"><thead><tr><th scope="col" style="width:55%;">Account</th><th scope="col" style="width:22%;">Debit</th><th scope="col" style="width:23%;">Credit</th></tr></thead><tbody><tr><td><select class="coa-select" id="r1-a0" aria-label="Entry (a): returns of {{y-1}} sales, line 1, account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="r1-d0" aria-label="Entry (a): returns of {{y-1}} sales, line 1, debit" autocomplete="off"></td><td><input type="text" placeholder="$" id="r1-c0" aria-label="Entry (a): returns of {{y-1}} sales, line 1, credit" autocomplete="off"></td></tr><tr><td><select class="coa-select" id="r1-a1" aria-label="Entry (a): returns of {{y-1}} sales, line 2, account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="r1-d1" aria-label="Entry (a): returns of {{y-1}} sales, line 2, debit" autocomplete="off"></td><td><input type="text" placeholder="$" id="r1-c1" aria-label="Entry (a): returns of {{y-1}} sales, line 2, credit" autocomplete="off"></td></tr><tr><td><select class="coa-select" id="r1-a2" aria-label="Entry (a): returns of {{y-1}} sales, line 3, account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="r1-d2" aria-label="Entry (a): returns of {{y-1}} sales, line 3, debit" autocomplete="off"></td><td><input type="text" placeholder="$" id="r1-c2" aria-label="Entry (a): returns of {{y-1}} sales, line 3, credit" autocomplete="off"></td></tr><tr><td><select class="coa-select" id="r1-a3" aria-label="Entry (a): returns of {{y-1}} sales, line 4, account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="r1-d3" aria-label="Entry (a): returns of {{y-1}} sales, line 4, debit" autocomplete="off"></td><td><input type="text" placeholder="$" id="r1-c3" aria-label="Entry (a): returns of {{y-1}} sales, line 4, credit" autocomplete="off"></td></tr></tbody></table></div><div class="req"><span class="letter">b.</span>Record the <span class="yr" data-o="0">2026</span> returns of <span class="yr" data-o="0">2026</span> sales.</div><p class="je-title" id="r2-t">Entry (b): returns of <span class="yr" data-o="0">2026</span> sales</p><div class="tbl-wrap"><table class="je" aria-labelledby="r2-t"><thead><tr><th scope="col" style="width:55%;">Account</th><th scope="col" style="width:22%;">Debit</th><th scope="col" style="width:23%;">Credit</th></tr></thead><tbody><tr><td><select class="coa-select" id="r2-a0" aria-label="Entry (b): returns of {{y0}} sales, line 1, account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="r2-d0" aria-label="Entry (b): returns of {{y0}} sales, line 1, debit" autocomplete="off"></td><td><input type="text" placeholder="$" id="r2-c0" aria-label="Entry (b): returns of {{y0}} sales, line 1, credit" autocomplete="off"></td></tr><tr><td><select class="coa-select" id="r2-a1" aria-label="Entry (b): returns of {{y0}} sales, line 2, account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="r2-d1" aria-label="Entry (b): returns of {{y0}} sales, line 2, debit" autocomplete="off"></td><td><input type="text" placeholder="$" id="r2-c1" aria-label="Entry (b): returns of {{y0}} sales, line 2, credit" autocomplete="off"></td></tr><tr><td><select class="coa-select" id="r2-a2" aria-label="Entry (b): returns of {{y0}} sales, line 3, account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="r2-d2" aria-label="Entry (b): returns of {{y0}} sales, line 3, debit" autocomplete="off"></td><td><input type="text" placeholder="$" id="r2-c2" aria-label="Entry (b): returns of {{y0}} sales, line 3, credit" autocomplete="off"></td></tr><tr><td><select class="coa-select" id="r2-a3" aria-label="Entry (b): returns of {{y0}} sales, line 4, account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="r2-d3" aria-label="Entry (b): returns of {{y0}} sales, line 4, debit" autocomplete="off"></td><td><input type="text" placeholder="$" id="r2-c3" aria-label="Entry (b): returns of {{y0}} sales, line 4, credit" autocomplete="off"></td></tr></tbody></table></div><div class="req"><span class="letter">c.</span>Record the December 31, <span class="yr" data-o="0">2026</span>, adjusting entry for returns still expected from <span class="yr" data-o="0">2026</span> sales.</div><p class="je-title" id="r3-t">Entry (c): December 31, <span class="yr" data-o="0">2026</span></p><div class="tbl-wrap"><table class="je" aria-labelledby="r3-t"><thead><tr><th scope="col" style="width:55%;">Account</th><th scope="col" style="width:22%;">Debit</th><th scope="col" style="width:23%;">Credit</th></tr></thead><tbody><tr><td><select class="coa-select" id="r3-a0" aria-label="Entry (c): December 31, {{y0}}, line 1, account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="r3-d0" aria-label="Entry (c): December 31, {{y0}}, line 1, debit" autocomplete="off"></td><td><input type="text" placeholder="$" id="r3-c0" aria-label="Entry (c): December 31, {{y0}}, line 1, credit" autocomplete="off"></td></tr><tr><td><select class="coa-select" id="r3-a1" aria-label="Entry (c): December 31, {{y0}}, line 2, account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="r3-d1" aria-label="Entry (c): December 31, {{y0}}, line 2, debit" autocomplete="off"></td><td><input type="text" placeholder="$" id="r3-c1" aria-label="Entry (c): December 31, {{y0}}, line 2, credit" autocomplete="off"></td></tr><tr><td><select class="coa-select" id="r3-a2" aria-label="Entry (c): December 31, {{y0}}, line 3, account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="r3-d2" aria-label="Entry (c): December 31, {{y0}}, line 3, debit" autocomplete="off"></td><td><input type="text" placeholder="$" id="r3-c2" aria-label="Entry (c): December 31, {{y0}}, line 3, credit" autocomplete="off"></td></tr><tr><td><select class="coa-select" id="r3-a3" aria-label="Entry (c): December 31, {{y0}}, line 4, account"><option value="">Select account…</option></select></td><td><input type="text" placeholder="$" id="r3-d3" aria-label="Entry (c): December 31, {{y0}}, line 4, debit" autocomplete="off"></td><td><input type="text" placeholder="$" id="r3-c3" aria-label="Entry (c): December 31, {{y0}}, line 4, credit" autocomplete="off"></td></tr></tbody></table></div><div class="req"><span class="letter">d.</span>Compute the December 31, <span class="yr" data-o="0">2026</span>, balances.</div><div class="work-line"><label for="p3rl">Refund liability, December 31, <span class="yr" data-o="0">2026</span></label><input type="text" id="p3rl" placeholder="$" autocomplete="off"></div><div class="work-line"><label for="p3ir">Inventory—estimated returns, December 31, <span class="yr" data-o="0">2026</span></label><input type="text" id="p3ir" placeholder="$" autocomplete="off"></div><p class="je-hint">Returns of last year's sales were already estimated, so they reduce the refund liability, not sales. For this year, only the returns not yet received need an estimate.</p>
+    <div class="check-bar">
+      <button class="btn-check" id="checkP3" type="button">Check my work</button>
+      <span class="check-summary" id="p3Summary" role="status"></span>
+      <span class="attempts-note" id="p3Attempts">3 attempts remaining</span>
+      <span class="check-disclaimer">Checks the accounts you selected and the amounts you entered against the key. Journal entry lines may be in any order.</span>
+    </div>
+    <div class="key" id="p3Key" style="display:none;"></div>
+  </section>
+
+  <section class="score-bar" aria-label="Assignment score">
+    <span class="score-label">Assignment score</span>
+    <span class="score-value" id="overallScore" role="status">Check each part to see your score</span>
+    <span class="score-breakdown" id="scoreBreakdown"></span>
+  </section>
+
+  <div class="key-reveal-note" id="keyRevealNote">You've used all 3 attempts on every part. The answer key is now shown below each part, and a submission PDF has opened for you to save.</div>
+
+  <section class="submit-bar print-hide" aria-labelledby="submit-h">
+    <h2 id="submit-h">Ready to submit?</h2>
+    <div class="submit-row">
+      <label for="studentName">Your name</label>
+      <input type="text" id="studentName" placeholder="First and last name">
+    </div>
+    <div class="submit-row submit-actions">
+      <button class="btn-submit" id="printBtn" type="button">Print / Save as PDF</button>
+      <button class="btn-submit btn-submit-outline" id="downloadDocxBtn" type="button">Download as Word (.docx)</button>
+    </div>
+    <p class="submit-status" id="submitStatus" role="status"></p>
+    <p class="submit-hint">Both options capture exactly what's filled in above, including your generated scenario numbers. "Print / Save as PDF" works offline; "Download as Word" needs an internet connection to load the export tool.</p>
+  </section>
+</main>
+
+<footer>Nantahala Tire &amp; Wheel &middot; ACCT 351 &middot; Western Carolina University</footer>
+
+<script>
+(function(){
+  "use strict";
+  function hashSeed(str){ var h=2166136261; for(var i=0;i<str.length;i++){ h^=str.charCodeAt(i); h=Math.imul(h,16777619); } return h>>>0; }
+  function mulberry32(seed){ return function(){ seed|=0; seed=seed+0x6D2B79F5|0; var t=Math.imul(seed^seed>>>15,1|seed); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+  function pick(rand, arr){ return arr[Math.floor(rand()*arr.length)]; }
+  function R(n){ return Math.round(n); }
+  function R2(n){ return Math.round(n*100)/100; }
+  var SPEC = [{"key": "p1", "items": [{"t": "je", "id": "g1", "k": "g1", "n": 2, "label": "Entry (a): July 15, {{y0}}"}, {"t": "je", "id": "g2", "k": "g2", "n": 3, "label": "Entry (b): July 23, {{y0}}"}, {"t": "je", "id": "g3", "k": "g3", "n": 2, "label": "Entry (c): August 15, {{y0}}"}]}, {"key": "p2", "items": [{"t": "je", "id": "n1", "k": "n1", "n": 2, "label": "Entry (a): July 15, {{y0}}"}, {"t": "je", "id": "n2", "k": "n2", "n": 2, "label": "Entry (b): July 23, {{y0}}"}, {"t": "je", "id": "n3", "k": "n3", "n": 3, "label": "Entry (c): August 15, {{y0}}"}, {"t": "line", "id": "p2eff", "k": "eff", "f": "p", "tol": 0.05, "label": "Effective annual rate (%)"}]}, {"key": "p3", "items": [{"t": "je", "id": "r1", "k": "r1", "n": 4, "label": "Entry (a): returns of {{y-1}} sales"}, {"t": "je", "id": "r2", "k": "r2", "n": 4, "label": "Entry (b): returns of {{y0}} sales"}, {"t": "je", "id": "r3", "k": "r3", "n": 4, "label": "Entry (c): December 31, {{y0}}"}, {"t": "line", "id": "p3rl", "k": "RLend", "f": "m", "tol": 1, "label": "Refund liability, December 31, {{y0}}"}, {"t": "line", "id": "p3ir", "k": "IRend", "f": "m", "tol": 1, "label": "Inventory\u2014estimated returns, December 31, {{y0}}"}]}];
+  var COA = {"Assets": ["Cash", "Accounts receivable", "Inventory", "Inventory\u2014estimated returns"], "Liabilities": ["Refund liability", "Accounts payable"], "Revenues and contra revenues": ["Sales revenue", "Sales discounts", "Sales returns", "Sales discounts forfeited", "Interest revenue"], "Expenses": ["Cost of goods sold", "Bad debt expense"]};
+  var YEAR = new Date().getFullYear();
+  document.querySelectorAll('.yr').forEach(function(el){ el.textContent = YEAR + parseInt(el.getAttribute('data-o')||'0',10); });
+
+  function money0(n){ var r=Math.round(n); return (r<0?'−':'')+'$'+Math.abs(r).toLocaleString('en-US'); }
+  function money2(n){ return (n<0?'−':'')+'$'+Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+  function fmt(v,f){ if(f==='m2') return money2(v); if(f==='p') return (Math.round(v*100)/100)+'%'; if(f==='d') return String(v); if(f==='n') return Math.round(v).toLocaleString('en-US'); if(f==='t') return String(v); return money0(v); }
+
+  var optHtml='<option value="">Select account…</option>';
+  Object.keys(COA).forEach(function(g){ optHtml+='<optgroup label="'+g+'">'; COA[g].forEach(function(a){ optHtml+='<option value="'+a+'">'+a+'</option>'; }); optHtml+='</optgroup>'; });
+  document.querySelectorAll('select.coa-select').forEach(function(s){ s.innerHTML=optHtml; });
+
+  function GEN(rand){
+
+    function ri(a,b){ return a+Math.floor(rand()*(b-a+1)); }
+    var d={};
+    d.U=pick(rand,[800,1000,1200,1500]); d.price=pick(rand,[45,50,60,75]); d.dr=pick(rand,[0.01,0.02,0.03]);
+    d.dp=Math.round(d.dr*100); d.S=d.U*d.price; d.disc=R(d.S*d.dr); d.net=d.S-d.disc;
+    d.g1=[['Accounts receivable',d.S,0],['Sales revenue',0,d.S]];
+    d.g2=[['Cash',d.net,0],['Sales discounts',d.disc,0],['Accounts receivable',0,d.S]];
+    d.g3=[['Cash',d.S,0],['Accounts receivable',0,d.S]];
+    d.n1=[['Accounts receivable',d.net,0],['Sales revenue',0,d.net]];
+    d.n2=[['Cash',d.net,0],['Accounts receivable',0,d.net]];
+    d.n3=[['Cash',d.S,0],['Accounts receivable',0,d.net],['Sales discounts forfeited',0,d.disc]];
+    d.eff=R2(d.dr/(1-d.dr)*365/20*100);
+    // returns
+    d.RL0=pick(rand,[240000,300000,360000]); d.RP=d.RL0-pick(rand,[40000,50000,60000]);
+    d.S2=pick(rand,[9500000,11500000,12800000]); d.cr=pick(rand,[0.60,0.65,0.70]); d.cp=Math.round(d.cr*100);
+    d.estr=pick(rand,[0.03,0.04,0.05]); d.estp=Math.round(d.estr*100); d.est=R(d.S2*d.estr);
+    d.RC=Math.round(d.est*pick(rand,[0.35,0.40,0.45])/10000)*10000;
+    d.IR0=R(d.RL0*d.cr); d.RPc=R(d.RP*d.cr); d.RCc=R(d.RC*d.cr); d.rem=d.est-d.RC; d.remc=R(d.rem*d.cr);
+    d.r1=[['Refund liability',d.RP,0],['Accounts receivable',0,d.RP],['Inventory',d.RPc,0],['Inventory—estimated returns',0,d.RPc]];
+    d.r2=[['Sales returns',d.RC,0],['Accounts receivable',0,d.RC],['Inventory',d.RCc,0],['Cost of goods sold',0,d.RCc]];
+    d.r3=[['Sales returns',d.rem,0],['Refund liability',0,d.rem],['Inventory—estimated returns',d.remc,0],['Cost of goods sold',0,d.remc]];
+    d.RLend=d.RL0-d.RP+d.rem; d.IRend=d.IR0-d.RPc+d.remc;
+    return d;
+
+  }
+  function generateScenario(id){ return GEN(mulberry32(hashSeed((id||'demo').trim().toLowerCase()))); }
+  function applyScenario(d){ document.querySelectorAll('[data-k]').forEach(function(el){ var v=d[el.getAttribute('data-k')]; el.textContent = v===undefined?'?':fmt(v, el.getAttribute('data-f')||'m'); }); }
+
+  function parseNum(s){ if(s==null) return NaN; var t=String(s).trim(); var neg=/^\(.*\)$/.test(t)||/^[−-]/.test(t.replace(/^\$/,'')); var c=t.replace(/[^0-9.]/g,''); if(c==='') return NaN; var v=parseFloat(c); return neg?-v:v; }
+  function near(a,b,tol){ return !isNaN(a)&&!isNaN(b)&&Math.abs(a-b)<=tol+1e-9; }
+  function el(id){ return document.getElementById(id); }
+  function mark(e,ok){ e.classList.remove('field-correct','field-incorrect','field-missing'); e.classList.add(ok?'field-correct':'field-incorrect'); e.setAttribute('aria-invalid', ok?'false':'true');
+    if(!e.dataset.cb){ e.addEventListener('input',function(){ e.classList.remove('field-correct','field-incorrect'); e.removeAttribute('aria-invalid'); }); e.addEventListener('change',function(){ e.classList.remove('field-correct','field-incorrect'); e.removeAttribute('aria-invalid'); }); e.dataset.cb='1'; } return ok; }
+
+  function itemCount(it){ return it.t==='je' ? it.n*2 : 1; }
+  function partFields(p){ var ids=[]; p.items.forEach(function(it){ if(it.t==='je'){ for(var i=0;i<it.n;i++){ ids.push(it.id+'-a'+i, it.id+'-d'+i, it.id+'-c'+i); } } else ids.push(it.id); }); return ids; }
+  function missingFields(p){ var miss=[]; p.items.forEach(function(it){
+      if(it.t==='je'){ for(var i=0;i<it.n;i++){ var a=el(it.id+'-a'+i), dd=el(it.id+'-d'+i), c=el(it.id+'-c'+i);
+          if(!a.value) miss.push(a); if(!dd.value.trim() && !c.value.trim()) { miss.push(dd); } } }
+      else { var e=el(it.id); if(!e.value || !String(e.value).trim()) miss.push(e); } }); return miss; }
+  function gradeJE(it,d){ var exp=d[it.k], used={}, res=[];
+    for(var i=0;i<it.n;i++){ var a=el(it.id+'-a'+i), dd=el(it.id+'-d'+i), c=el(it.id+'-c'+i), m=-1;
+      exp.forEach(function(x,j){ if(m<0 && !used[j] && x[0]===a.value) m=j; });
+      if(m<0){ mark(a,false); mark(dd,false); mark(c,false); res.push(false,false); continue; }
+      used[m]=1; mark(a,true); res.push(true);
+      var x=exp[m], isDr=x[1]>0, amt=isDr?x[1]:x[2], tgt=isDr?dd:c, other=isDr?c:dd;
+      var ok=near(parseNum(tgt.value),amt,1) && !other.value.trim();
+      mark(tgt,ok); if(other.value.trim()) mark(other,false); else other.classList.remove('field-correct','field-incorrect'); res.push(ok); }
+    return res; }
+  function grade(p,d){ var res=[]; p.items.forEach(function(it){
+      if(it.t==='line'){ res.push(mark(el(it.id), near(parseNum(el(it.id).value), d[it.k], it.tol))); }
+      else if(it.t==='sel'){ res.push(mark(el(it.id), el(it.id).value===d[it.k])); }
+      else res=res.concat(gradeJE(it,d)); }); return res; }
+  function L(s,d){ return s.replace(/\{\{([\w-]+)(?:\|(\w+))?\}\}/g,function(m,k,f){ if(/^y-?\d$/.test(k)) return String(YEAR+parseInt(k.slice(1),10)); return d[k]===undefined?'?':fmt(d[k],f||'m'); }); }
+  function keyRows(p,d){ var rows=[]; p.items.forEach(function(it){ it={t:it.t,k:it.k,f:it.f,label:L(it.label,d)};
+      if(it.t==='line') rows.push([it.label, fmt(d[it.k], it.f)]);
+      else if(it.t==='sel') rows.push([it.label, d[it.k]]);
+      else rows.push([it.label, d[it.k].map(function(x){ return (x[1]>0?'Debit ':'Credit ')+x[0]+' '+money0(x[1]>0?x[1]:x[2]); }).join(' / ')]); }); return rows; }
+
+  var MAX=3, attempts={}, locked={}, score={}, keyShown=false, cur=null;
+  var TOTAL=SPEC.reduce(function(s,p){ return s+p.items.reduce(function(a,it){ return a+itemCount(it); },0); },0), PER=100/TOTAL;
+  SPEC.forEach(function(p){ p.possible=p.items.reduce(function(a,it){ return a+itemCount(it); },0)*PER; });
+
+  function attemptsNote(p){ var e=el(p.key+'Attempts'), r=MAX-attempts[p.key]; e.classList.remove('low','locked');
+    if(r<=0){ e.textContent='No attempts remaining — inputs locked'; e.classList.add('locked'); } else { e.textContent=r+' attempt'+(r===1?'':'s')+' remaining'; if(r===1) e.classList.add('low'); } }
+  function overall(){ var o=el('overallScore'), b=el('scoreBreakdown'); if(!SPEC.some(function(p){ return score[p.key]!=null; })){ o.textContent='Check each part to see your score'; b.textContent=''; return; }
+    o.textContent=SPEC.reduce(function(s,p){ return s+(score[p.key]||0); },0).toFixed(1)+' / 100.0 pts';
+    b.textContent=SPEC.map(function(p,i){ return 'Part '+(i+1)+': '+(score[p.key]==null?'not checked yet':score[p.key].toFixed(1)+' / '+p.possible.toFixed(1)+' pts'); }).join('  ·  '); }
+  function showKeys(){ SPEC.forEach(function(p,i){ var k=el(p.key+'Key'); var html='<strong>Answer key — Part '+(i+1)+'</strong><table>'; keyRows(p,cur).forEach(function(r){ html+='<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>'; }); k.innerHTML=html+'</table>'; k.style.display='block'; }); el('keyRevealNote').style.display='block'; }
+
+  SPEC.forEach(function(p){ var btn=el('check'+p.key.toUpperCase());
+    btn.addEventListener('click', function(){ if(!cur||locked[p.key]) return; var sum=el(p.key+'Summary');
+      partFields(p).forEach(function(id){ el(id).classList.remove('field-missing'); });
+      var miss=missingFields(p);
+      if(miss.length){ miss.forEach(function(e){ e.classList.add('field-missing'); }); sum.textContent='Please fill in every field before checking — '+miss.length+' left blank.'; sum.className='check-summary bad'; miss[0].focus(); return; }
+      var res=grade(p,cur), ok=res.filter(Boolean).length, pts=ok/res.length*p.possible;
+      score[p.key]=pts; sum.textContent=ok+' of '+res.length+' correct — '+pts.toFixed(1)+' of '+p.possible.toFixed(1)+' pts'; sum.className='check-summary '+(ok===res.length?'good':'bad');
+      overall(); attempts[p.key]++; attemptsNote(p);
+      if(attempts[p.key]>=MAX){ locked[p.key]=true; partFields(p).forEach(function(id){ el(id).disabled=true; }); btn.disabled=true; btn.textContent='No attempts remaining'; }
+      if(SPEC.every(function(q){ return locked[q.key]; }) && !keyShown){ keyShown=true; showKeys(); setTimeout(triggerPrint,350); } }); });
+
+  function start(id){ cur=generateScenario(id); applyScenario(cur);
+    SPEC.forEach(function(p){ attempts[p.key]=0; locked[p.key]=false; score[p.key]=null; attemptsNote(p);
+      partFields(p).forEach(function(i){ var e=el(i); e.disabled=false; e.classList.remove('field-correct','field-incorrect','field-missing'); e.removeAttribute('aria-invalid'); });
+      var b=el('check'+p.key.toUpperCase()); b.disabled=false; b.textContent='Check my work';
+      var k=el(p.key+'Key'); k.style.display='none'; k.innerHTML=''; var s=el(p.key+'Summary'); s.textContent=''; s.className='check-summary'; });
+    keyShown=false; el('keyRevealNote').style.display='none'; overall(); }
+  el('genBtn').addEventListener('click', function(){ start(el('studentId').value); });
+  el('studentId').addEventListener('keydown', function(e){ if(e.key==='Enter') start(el('studentId').value); });
+
+  function val(id){ var e=el(id); return e?e.value.trim():''; }
+  el('printBtn').addEventListener('click', triggerPrint);
+  function triggerPrint(){ var name=val('studentName'), id=val('studentId');
+    el('printNameLine').textContent='Name: '+(name||'_______________________')+'     Student ID: '+(id||'_______________________');
+    el('printScoreLine').textContent='Score: '+el('overallScore').textContent+(el('scoreBreakdown').textContent?'  ('+el('scoreBreakdown').textContent+')':'');
+    var t=document.title; document.title='NantahalaTire-DiscountsReturns-'+(id||'submission'); window.print(); document.title=t; }
+
+  var docxP=null;
+  function loadDocx(){ if(window.docx) return Promise.resolve(); if(docxP) return docxP; docxP=new Promise(function(res,rej){ var s=document.createElement('script'); s.src='https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js'; s.onload=function(){ window.docx?res():rej(); }; s.onerror=rej; document.head.appendChild(s); }); return docxP; }
+  function fv(e){ if(e.tagName==='SELECT'){ var o=e.options[e.selectedIndex]; return o&&e.value?o.textContent:'—'; } return e.value||'—'; }
+  function buildDoc(){ var D=window.docx, P='592C88', INK='221B2E';
+    function p(t,b){ return new D.Paragraph({ spacing:{before:60,after:60}, children:[new D.TextRun({text:t,size:20,bold:!!b,color:INK})] }); }
+    function cell(t,w,o){ o=o||{}; return new D.TableCell({ width:{size:w,type:D.WidthType.DXA}, shading:o.fill?{type:D.ShadingType.CLEAR,fill:o.fill}:undefined, margins:{top:60,bottom:60,left:90,right:90}, children:[new D.Paragraph({children:[new D.TextRun({text:t,size:19,bold:!!o.b,color:o.c||INK})]})] }); }
+    function tbl(t){ var hs=Array.from(t.querySelectorAll('thead th')).map(function(th){ return th.textContent.trim(); }); var n=hs.length||1, w=Math.floor(9000/n), rows=[];
+      if(hs.length) rows.push(new D.TableRow({children:hs.map(function(h){ return cell(h,w,{b:true,fill:P,c:'FFFFFF'}); })}));
+      Array.from(t.querySelectorAll('tbody tr')).forEach(function(tr){ rows.push(new D.TableRow({children:Array.from(tr.children).map(function(td){ var f=td.querySelector('input,select'); return cell(f?fv(f):td.textContent.trim(),w); })})); });
+      return new D.Table({ width:{size:w*n,type:D.WidthType.DXA}, columnWidths:new Array(n).fill(w), rows:rows }); }
+    var ch=[new D.Paragraph({ children:[new D.TextRun({text:document.title,bold:true,size:32,color:P})] }), p('Name: '+(val('studentName')||'—')+'     Student ID: '+(val('studentId')||'—'),true), p('Score: '+el('overallScore').textContent+'  '+el('scoreBreakdown').textContent)];
+    document.querySelectorAll('.facts p, .facts table.ref').forEach(function(x){ if(x.tagName==='TABLE'){ ch.push(tbl(x)); ch.push(p('')); } else ch.push(p(x.textContent.trim())); });
+    document.querySelectorAll('.part').forEach(function(part,i){ ch.push(new D.Paragraph({ spacing:{before:220,after:100}, children:[new D.TextRun({text:'Part '+(i+1)+' — '+part.querySelector('h2').textContent,bold:true,size:26,color:P})] }));
+      part.querySelectorAll('.scenario p, .scenario li, .scenario table.ref, .req, .work-line, .je-title, table.je').forEach(function(x){
+        if(x.tagName==='TABLE'){ ch.push(tbl(x)); ch.push(p('')); }
+        else if(x.tagName==='LI') ch.push(p('• '+x.textContent.trim()));
+        else if(x.classList.contains('work-line')){ var lab=x.querySelector('label'), f=x.querySelector('input,select'); ch.push(p((lab?lab.textContent.trim():'')+' '+(f?fv(f):''))); }
+        else ch.push(p(x.textContent.trim(), x.classList.contains('req')||x.classList.contains('je-title'))); }); });
+    return new D.Document({ sections:[{ properties:{ page:{ size:{width:12240,height:15840}, margin:{top:1440,bottom:1440,left:1440,right:1440} } }, children:ch }] }); }
+  el('downloadDocxBtn').addEventListener('click', function(){ var s=el('submitStatus'); s.classList.remove('error'); s.textContent='Preparing your Word document…';
+    loadDocx().then(function(){ return window.docx.Packer.toBlob(buildDoc()); }).then(function(blob){ var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='NantahalaTire-DiscountsReturns-'+(val('studentId')||'submission')+'.docx'; document.body.appendChild(a); a.click(); a.remove(); s.textContent='Downloaded.'; })
+    .catch(function(){ s.classList.add('error'); s.textContent='Could not load the Word export tool (needs internet access). Use Print / Save as PDF instead.'; }); });
+
+  start('');
+  window.__packet={generateScenario:generateScenario, SPEC:SPEC, COA:COA, start:start};
+})();
+</script>
+</body>
+</html>
