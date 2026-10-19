@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cash and Receivables Tutor</title>
+<meta name="description" content="ACCT 351 practice on cash and receivables: work a schedule, then record the journal entries, with a guided tutor and new numbers every time.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --purple:#592C88; --purple-dk:#3E1E61; --purple-lt:#F3EEF8;
+  --gold:#C1A875; --gold-lt:#FAF5E9; --gold-dk:#6B5A2E;
+  --ink:#1F1B24; --muted:#4A4453; --line:#D9D2E3; --paper:#FFFFFF; --bg:#EEEAF2;
+  --red:#9B1C1C; --red-lt:#FDECEC; --green:#1D5E3A; --green-lt:#E9F5EE;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Source Serif 4",Georgia,serif;line-height:1.55;font-size:1.02rem}
+.skip{position:absolute;left:-9999px;top:0;background:var(--purple-dk);color:#fff;padding:.5rem 1rem;z-index:10}
+.skip:focus{left:1rem}
+a{color:var(--purple)}
+:focus-visible{outline:3px solid var(--gold-dk);outline-offset:2px}
+.shell{max-width:76rem;margin:1.5rem auto;background:var(--paper);box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.banner{background:var(--purple);color:#fff;padding:1.4rem 2rem 1.2rem;border-bottom:6px solid var(--gold)}
+.banner .kicker{font-family:Inter,Arial,sans-serif;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;margin:0 0 .35rem}
+.banner h1{font-size:1.9rem;line-height:1.2;margin:0 0 .3rem}
+.banner .sub{margin:0;font-family:Inter,Arial,sans-serif;font-size:.95rem}
+.content{padding:1rem 2rem 2rem}
+h2{font-family:Inter,Arial,sans-serif;color:var(--purple-dk);font-size:1.3rem;margin:1.6rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--gold)}
+h3{font-family:Inter,Arial,sans-serif;color:var(--purple);font-size:1.08rem;margin:1.2rem 0 .45rem}
+p{margin:.45rem 0 .7rem}
+.card{border:1px solid var(--line);border-left:6px solid var(--purple);background:var(--purple-lt);padding:.8rem 1.1rem;margin:1rem 0;border-radius:4px}
+.card h2,.card h3{margin-top:.2rem;border:none;padding:0}
+.important{border:2px solid var(--gold-dk);background:var(--gold-lt);padding:.8rem 1.1rem;margin:1rem 0;border-radius:4px}
+.important h3{color:var(--gold-dk);margin-top:.1rem}
+.card ul,.important ul{margin:.3rem 0 .2rem;padding-left:1.3rem}
+.small{font-size:.9rem;color:var(--muted)}
+.math{font-family:"IBM Plex Mono",Consolas,monospace;font-size:.9rem}
+
+/* picker */
+.picker{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));margin:.6rem 0 0}
+.pgroup h3{font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin:.2rem 0 .5rem}
+.pgroup ul{list-style:none;margin:0;padding:0;display:grid;gap:.45rem}
+.type-btn{width:100%;text-align:left;font:inherit;font-family:Inter,Arial,sans-serif;font-size:.93rem;background:#fff;color:var(--ink);border:1px solid var(--line);border-left:5px solid var(--purple);border-radius:4px;padding:.5rem .7rem;cursor:pointer}
+.type-btn strong{display:block;color:var(--purple-dk)}
+.type-btn span{color:var(--muted);font-size:.85rem}
+.type-btn:hover{background:var(--purple-lt)}
+.type-btn[aria-pressed="true"]{border-left-color:var(--gold-dk);background:var(--gold-lt);box-shadow:inset 0 0 0 2px var(--gold)}
+
+/* workspace */
+.work{display:grid;gap:1.5rem;grid-template-columns:minmax(0,1fr);margin-top:1.4rem}
+@media (min-width:64rem){.work{grid-template-columns:minmax(0,1fr) 18.5rem;align-items:start}}
+.prob-head{display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:flex-end;justify-content:space-between;border-bottom:3px solid var(--gold);padding-bottom:.6rem}
+.prob-head h2{border:none;margin:0;padding:0;font-size:1.45rem}
+.eyebrow{font-family:Inter,Arial,sans-serif;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 .15rem;font-weight:700}
+.btns{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+.btn{font-family:Inter,Arial,sans-serif;font-weight:700;font-size:.92rem;padding:.5rem .95rem;border-radius:4px;cursor:pointer;border:2px solid var(--purple);background:var(--purple);color:#fff}
+.btn:hover{background:var(--purple-dk);border-color:var(--purple-dk)}
+.btn.ghost{background:#fff;color:var(--purple)}
+.btn.ghost:hover{background:var(--purple-lt)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+
+table{border-collapse:collapse;width:100%;margin:.5rem 0 .8rem;font-size:.95rem}
+caption{caption-side:top;text-align:left;font-family:Inter,Arial,sans-serif;font-weight:700;color:var(--purple-dk);padding:.2rem 0 .4rem}
+th,td{border:1px solid var(--line);padding:.4rem .55rem;vertical-align:middle}
+thead th{background:var(--purple);color:#fff;font-family:Inter,Arial,sans-serif;font-size:.84rem;text-align:left}
+tbody th{background:#F7F5FA;text-align:left;font-weight:600}
+.n{text-align:right;font-family:"IBM Plex Mono",Consolas,monospace;font-size:.9rem;white-space:nowrap}
+.scroll{overflow-x:auto;position:relative}
+
+.part{border:1px solid var(--line);border-radius:6px;padding:.4rem 1rem 1rem;margin:1.2rem 0;background:#fff}
+.part > h3{display:flex;gap:.6rem;align-items:center}
+.part > h3 .pnum{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;background:var(--purple);color:#fff;border-radius:999px;padding:.12rem .6rem;white-space:nowrap}
+.part.complete{border-color:var(--green);box-shadow:inset 4px 0 0 var(--green)}
+.status{font-family:Inter,Arial,sans-serif;font-size:.85rem;font-weight:700;color:var(--green);margin-left:auto}
+
+/* schedule */
+.sched td.ln{width:2.6rem;text-align:center;font-family:Inter,Arial,sans-serif;font-weight:700;color:var(--purple-dk);background:#F7F5FA}
+.sched td.bo{width:7.5rem;font-family:Inter,Arial,sans-serif;font-size:.8rem;color:var(--muted)}
+.sched td.amt{width:12.5rem}
+.sched tr.given td{background:#FBFAFD}
+.sched label{font-weight:600}
+.inwrap{display:flex;align-items:center;gap:.25rem}
+.inwrap .u{font-family:"IBM Plex Mono",Consolas,monospace;color:var(--muted)}
+input.ans,select.ans{font:inherit;font-family:"IBM Plex Mono",Consolas,monospace;font-size:.95rem;padding:.4rem .5rem;border:2px solid #6E6680;border-radius:4px;width:100%;min-width:0;background:#fff;color:var(--ink)}
+select.ans{font-family:Inter,Arial,sans-serif;font-size:.88rem}
+input.ans.n{text-align:right}
+.ok-f{border-color:var(--green)!important;background:var(--green-lt)!important}
+.bad-f{border-color:var(--red)!important;background:var(--red-lt)!important}
+.fb{font-family:Inter,Arial,sans-serif;font-size:.84rem;margin-top:.3rem}
+.fb:empty{display:none}
+.fb.ok{color:var(--green)}
+.fb.bad{color:var(--red)}
+.fb.sol{color:var(--purple-dk)}
+.fb .math{font-size:.82rem}
+.tag{font-weight:700}
+
+/* journal entry */
+.je td{padding:.3rem .4rem}
+.je td.src{width:7rem;font-family:Inter,Arial,sans-serif;font-size:.8rem;color:var(--muted);text-align:center}
+.je td.d,.je td.c{width:10rem}
+.je td.ac{min-width:14rem}
+.chip{display:inline-block;background:var(--gold-lt);border:1px solid var(--gold-dk);color:var(--gold-dk);border-radius:999px;padding:0 .5rem;font-weight:700}
+.partfb{font-family:Inter,Arial,sans-serif;font-size:.9rem;border-radius:4px;padding:.5rem .8rem;margin:.5rem 0}
+.partfb:empty{display:none}
+.partfb.ok{background:var(--green-lt);border-left:4px solid var(--green)}
+.partfb.bad{background:var(--red-lt);border-left:4px solid var(--red)}
+.partfb.hint{background:var(--gold-lt);border-left:4px solid var(--gold-dk)}
+
+.say{display:flex;gap:.75rem;align-items:flex-start;margin:.8rem 0}
+.avatar{flex:0 0 2.9rem;height:2.9rem;border-radius:50%;background:var(--purple);color:#fff;border:3px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:Inter,Arial,sans-serif;font-weight:700;font-size:1.2rem}
+.say.sm .avatar{flex-basis:2.2rem;height:2.2rem;font-size:.95rem;border-width:2px}
+.bubble{position:relative;background:#fff;border:1px solid var(--line);border-radius:10px;padding:.55rem .95rem;flex:1;min-width:0;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.bubble::before{content:"";position:absolute;left:-8px;top:1rem;border:8px solid transparent;border-left:0;border-right-color:var(--line)}
+.bubble::after{content:"";position:absolute;left:-6px;top:1rem;border:8px solid transparent;border-left:0;border-right-color:#fff}
+.bubble .who{font-family:Inter,Arial,sans-serif;font-weight:700;font-size:.82rem;color:var(--purple-dk);margin:0 0 .15rem;letter-spacing:.02em}
+.bubble p{margin:.3rem 0}
+.bubble ul{margin:.3rem 0 .4rem;padding-left:1.2rem}
+.say.key .bubble{background:var(--gold-lt);border-color:var(--gold-dk)}
+.say.key .bubble::after{border-right-color:var(--gold-lt)}
+.say.key .bubble::before{border-right-color:var(--gold-dk)}
+.partfb .who{font-weight:700}
+.know{margin:.4rem 0 .6rem;font-size:.92rem;min-width:34rem}
+.know td.ln{width:2.6rem;text-align:center;font-family:Inter,Arial,sans-serif;font-weight:700;color:var(--purple-dk);background:#F7F5FA}
+.know tbody th{font-weight:600;background:#fff}
+.know td.why{font-size:.86rem;color:var(--muted);font-family:Inter,Arial,sans-serif}
+.summary{border-top:3px solid var(--gold);margin-top:1.5rem;padding-top:.6rem}
+.score{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:.4rem 0 1rem;padding:0}
+.score li{background:var(--purple-lt);border:1px solid var(--line);border-radius:999px;padding:.2rem .8rem;font-family:Inter,Arial,sans-serif;font-weight:600;font-size:.9rem}
+
+/* sidebar */
+aside.ref{border:1px solid var(--line);border-radius:6px;padding:.4rem 1rem 1rem;background:#FBFAFD}
+@media (min-width:64rem){aside.ref{position:sticky;top:1rem}}
+aside.ref h2{font-size:1.1rem;margin-top:.6rem}
+aside.ref ol{padding-left:1.2rem;margin:.3rem 0}
+aside.ref li{margin:.35rem 0;font-size:.95rem}
+.flow{list-style:none;padding:0;margin:.4rem 0;font-family:Inter,Arial,sans-serif;font-size:.84rem}
+.flow li{border:1px solid var(--line);background:#fff;border-radius:4px;padding:.4rem .55rem;margin:0}
+.flow li.arrow{border:none;background:none;text-align:center;color:var(--purple);padding:.05rem;font-weight:700}
+aside.ref dl{margin:.3rem 0 0;font-size:.92rem}
+aside.ref dt{font-weight:700;font-family:Inter,Arial,sans-serif;font-size:.88rem;margin-top:.5rem}
+aside.ref dd{margin:0;color:var(--muted)}
+footer{padding:1rem 2rem 1.5rem;font-family:Inter,Arial,sans-serif;font-size:.8rem;color:var(--muted);border-top:1px solid var(--line)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media (max-width:640px){
+  .shell{margin:0}
+  .banner,.content{padding-left:1rem;padding-right:1rem}
+  .sched td.bo{display:none}
+  .sched th.bo{display:none}
+  .sched td.amt{width:8.5rem}
+  table.je{min-width:34rem}
+  .sched td.ln{width:2rem}
+  .prob-head .btns{width:100%}
+  .picker{grid-template-columns:1fr}
+  table{font-size:.88rem}
+}
+@media print{
+  body{background:#fff}
+  .shell{box-shadow:none;margin:0}
+  #picker-sec,.btns,.skip,aside.ref{display:none!important}
+  .banner,thead th,.part > h3 .pnum{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .part{break-inside:avoid}
+}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+</head>
+<body>
+<a class="skip" href="#work-title">Skip to the problem</a>
+<div class="shell">
+<header class="banner">
+  <p class="kicker">ACCT 351 · Intermediate Accounting I · Practice Tutor</p>
+  <h1>Cash and Receivables Tutor</h1>
+  <p class="sub" id="sub">Work the schedule, then record the journal entries. New company and new numbers every time.</p>
+</header>
+
+<main class="content" id="main">
+  <section aria-labelledby="how-title">
+    <h2 id="how-title" class="sr-only">Meet your tutor</h2>
+    <div id="intro"></div>
+  </section>
+
+  <section id="picker-sec" aria-labelledby="pick-title">
+    <h2 id="pick-title">Choose a problem type</h2>
+    <div class="picker" id="picker"></div>
+  </section>
+
+  <div class="work">
+    <section aria-labelledby="work-title" id="worksheet">
+      <div class="prob-head">
+        <div>
+          <p class="eyebrow" id="ptype"></p>
+          <h2 id="work-title" tabindex="-1"></h2>
+        </div>
+        <div class="btns">
+          <button type="button" class="btn" id="new-btn">New numbers</button>
+          <button type="button" class="btn ghost" id="print-btn">Print this problem</button>
+        </div>
+      </div>
+      <div id="scenario-say"></div>
+      <div class="scroll" id="given"></div>
+      <div id="key-say"></div>
+      <div id="parts"></div>
+      <div class="summary" id="summary" hidden tabindex="-1"></div>
+    </section>
+
+    <aside class="ref" aria-labelledby="ref-title">
+      <h2 id="ref-title">The big picture</h2>
+      <ul class="flow" aria-label="How receivables are measured">
+        <li><strong>Amount the seller is entitled to</strong><br>less discounts and returns (variable consideration)</li>
+        <li class="arrow" aria-hidden="true">−</li>
+        <li><strong>Allowance for uncollectible accounts</strong><br>expected credit losses (CECL)</li>
+        <li class="arrow" aria-hidden="true">=</li>
+        <li><strong>Net receivables</strong>: the cash the company expects to collect</li>
+      </ul>
+      <h2>Quick formulas</h2>
+      <ol>
+        <li><strong>Interest:</strong> face × annual rate × months ÷ 12.</li>
+        <li><strong>Bad debt expense (balance sheet approach):</strong> required allowance − pre-adjustment credit balance (or + a debit balance).</li>
+        <li><strong>Discounted note proceeds:</strong> maturity value − (maturity value × bank rate × months left ÷ 12).</li>
+        <li><strong>Receivables turnover:</strong> net sales ÷ average net receivables; days = 365 ÷ turnover.</li>
+      </ol>
+      <dl>
+        <dt>Cash equivalent</dt><dd>Highly liquid investment maturing within three months of the date it was acquired.</dd>
+        <dt>Contra account</dt><dd>Reduces a related account: sales returns and sales discounts reduce revenue; the allowance and discount on notes reduce receivables.</dd>
+        <dt>Secured borrowing vs. sale</dt><dd>If the company surrenders control of the receivables, it is a sale; otherwise it is a loan with the receivables as collateral.</dd>
+      </dl>
+    </aside>
+  </div>
+</main>
+<footer>
+  <p>All company names and numbers are fictional and randomly generated. The current year updates automatically. Practice covers cash and receivables in intermediate accounting under U.S. GAAP.</p>
+</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+var Y=new Date().getFullYear();
+
+/* ---------- helpers ---------- */
+function rnd(min,max,step){step=step||1;var n=Math.floor((max-min)/step);return min+step*Math.floor(Math.random()*(n+1));}
+function pick(a){return a[Math.floor(Math.random()*a.length)];}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function R(n){return Math.round(n);}
+function fmt(n){return Math.abs(R(n)).toLocaleString("en-US");}
+function $(n){return (R(n)<0?"−$":"$")+fmt(n);}
+function pc(r){return (Math.round(r*1000)/10)+"%";}
+function K(n){return n*1000;}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];});}
+function m(s){return '<span class="math">'+s+'</span>';}
+
+/* ---------- the tutor ---------- */
+var TUTORS=[
+ {name:"Jordan",bio:"a senior accounting major who works in the Forsyth tutoring lab",style:"Let's take it one line at a time."},
+ {name:"Riley",bio:"a MAcc student who interned on a financial reporting team in Asheville",style:"Receivables are really a promise of cash. Our job is to report how much of that promise we actually expect to collect."},
+ {name:"Avery",bio:"a graduate assistant who never met a journal entry that didn't balance",style:"If it doesn't balance, something's hiding. We'll find it."},
+ {name:"Quinn",bio:"a senior studying for the CPA exam",style:"This exact topic shows up on the CPA exam, so it's worth getting comfortable."},
+ {name:"Casey",bio:"a Catamount tutor who loves turning messy numbers into clean financial statements",style:"Every one of these entries follows a pattern. Once you see it, you'll see it everywhere."}
+];
+var T=(function(){var last=-1;try{last=parseInt(localStorage.getItem("ch7tutor")||"-1",10);}catch(e){}
+  var i;do{i=Math.floor(Math.random()*TUTORS.length);}while(i===last&&TUTORS.length>1);
+  try{localStorage.setItem("ch7tutor",String(i));}catch(e){}return TUTORS[i];})();
+function say(html,opt){opt=opt||{};return '<div class="say'+(opt.sm?' sm':'')+(opt.key?' key':'')+'"><span class="avatar" aria-hidden="true">'+T.name.charAt(0)+'</span><div class="bubble"><p class="who">'+(opt.label||T.name)+'</p>'+html+'</div></div>';}
+function any(a){return a[Math.floor(Math.random()*a.length)];}
+var PRAISE=["Nice, that's it.","Exactly right.","You've got it.","Yes! Right on.","Perfect.","That's the one."];
+var NUDGE=["Close. Here's a nudge:","Not quite yet. Try this:","Almost. Think about it this way:","Hmm, let's rethink that one:"];
+var NAMES=["Blue Ridge Brewing Co.","Tuckasegee Timber Works","Cullowhee Creek Canoe Co.","Balsam Gap Bakery","Whiteside Mountain Outfitters","Pisgah Pine Furniture","Fontana Lake Marine","Cashiers Valley Cabinetry","Dillsboro Depot Mercantile","Mount Mitchell Mills","Looking Glass Falls Lodge","Hiwassee River Rafting","Black Balsam Bicycles","Waterrock Knob Woodworks","Sylva Summit Coffee Roasters","Nantahala Gorge Gear Co.","Cherohala Skyway Cycles","Highlands Plateau Provisions","Franklin Gem Mine Supply","Brevard Waterfall Works","Bryson City Rail & Trail","Maggie Valley Mountain Crafts","Linville Gorge Logistics","Lake Glenville Marina","Shining Rock Solar","Panthertown Valley Paper Co.","Jackson County Apple Orchards","Catamount Peak Construction","Smoky Mountain Sawmill","Little Tennessee Trout Farms","Wayah Bald Wind Energy","Scaly Mountain Ski Supply","Cowee Valley Ceramics","Chimney Rock Climbing Co."];
+var lastName="";
+function company(){var n;do{n=pick(NAMES);}while(n===lastName);lastName=n;return n;}
+
+/* ---------- worksheet builders ---------- */
+/* given line */
+function G(id,label,val,unit,why){return {kind:"given",id:id,label:label,val:val,unit:unit||"$",why:why||""};}
+/* numeric input line */
+function N(id,label,ans,builds,hint,sol,opt){opt=opt||{};return {kind:"num",id:id,label:label,ans:ans,builds:builds||"",hint:hint,sol:sol,unit:opt.unit||"$",tol:opt.tol==null?1:opt.tol};}
+/* choice input line */
+function C(id,label,options,ans,hint,sol,builds){return {kind:"choice",id:id,label:label,options:options,ans:ans,builds:builds||"",hint:hint,sol:sol};}
+function sched(title,rows,intro){return {type:"sched",title:title,rows:rows,intro:intro||""};}
+/* journal entry: lines [account, debit, credit, sourceLine] ; zero lines dropped */
+function JE(title,lines,intro){
+  var L=[];lines.forEach(function(l){var d=R(l[1]||0),c=R(l[2]||0);if(!d&&!c)return;L.push({acct:l[0],dr:d,cr:c,src:l[3]||""});});
+  return {type:"je",title:title,lines:L,intro:intro||""};
+}
+/* turn a signed change in a deferred account into a JE line */
+
+
+function givenTable(cap,rows){var h='<table><caption>'+esc(cap)+'</caption><thead><tr><th scope="col">Item</th><th scope="col" class="n">Amount</th></tr></thead><tbody>';rows.forEach(function(r){h+='<tr><th scope="row">'+r[0]+'</th><td class="n">'+r[1]+'</td></tr>';});return h+'</tbody></table>';}
+
+/* ---------- problem generators: cash and receivables ---------- */
+var GEN={};
+var MON=["January","February","March","April","May","June","July","August","September","October","November","December"];
+function d2(x){return Math.round(x*100)/100;}
+function d1(x){return Math.round(x*10)/10;}
+
+/* ===== CASH ===== */
+var CASH_OPTS=["Cash and cash equivalents","Short-term investment","Restricted cash (noncurrent asset)","Receivable or prepaid (not cash)","Current liability"];
+var CASH_BANK=[
+ ["Currency and coins in the cash registers",0,"It is available for immediate use."],
+ ["Customer checks received but not yet deposited",0,"Checks and money orders acceptable for deposit count as cash."],
+ ["A Treasury bill bought 60 days before it matures",0,"Its maturity was three months or less when it was purchased, so it is a cash equivalent."],
+ ["A Treasury bill with a one-year original maturity, bought two months before it matures",0,"What matters is the maturity measured from the date this company bought it: two months, so it is a cash equivalent."],
+ ["Commercial paper maturing 75 days after purchase",0,"A highly liquid investment maturing within three months of purchase."],
+ ["Money market fund shares held for daily liquidity",0,"A common cash equivalent."],
+ ["A six-month certificate of deposit bought last month",1,"Its maturity was more than three months when purchased, so it is a short-term investment, not a cash equivalent."],
+ ["A nine-month Treasury bill bought this month",1,"More than three months to maturity when purchased."],
+ ["Cash set aside in a sinking fund to repay bonds due in eight years",2,"Restricted for a long-term purpose, and the related debt is noncurrent, so it is noncurrent."],
+ ["Cash management has set aside to build a new warehouse in three years",2,"Not available for current operations, so it is reported outside current assets."],
+ ["Postdated checks received from customers",3,"They cannot be deposited yet, so they are receivables."],
+ ["IOUs signed by employees for cash advances",3,"These are receivables from employees."],
+ ["Postage stamps on hand",3,"Stamps are a prepaid expense (office supplies), not cash."],
+ ["An overdrawn checking account at a bank where the company has no other accounts",4,"Under U.S. GAAP an overdraft is reported as a current liability."]
+];
+GEN.cashclass={group:"Cash",name:"What counts as cash?",blurb:"Cash, cash equivalents, restricted cash, or not cash at all.",make:function(){
+  var co=company(),items=shuffle(CASH_BANK).slice(0,6),L="ABCDEF";
+  return {title:co,
+  scenario:'<p>The controller at '+esc(co)+' is preparing the year-end balance sheet and needs to know where each of these items belongs.</p>',
+  key:'<p><strong>Cash</strong> is money available for current use with no restriction. <strong>Cash equivalents</strong> are short-term, highly liquid investments with a maturity of <strong>three months or less from the date the company acquires them</strong>. Cash that is restricted for a long-term purpose is reported outside current assets.</p>',
+  parts:[sched("Classify each item",items.map(function(it,i){return C(L[i],it[0],CASH_OPTS,it[1],"Ask two questions: is it available for current use, and if it is an investment, how far away was maturity on the day it was bought?",CASH_OPTS[it[1]]+". "+it[2]);}))],
+  take:"<p>Three months from the purchase date is the cash-equivalent test. Restricted cash follows the purpose of the restriction (and, for debt-related restrictions, the classification of the debt).</p>"};
+}};
+
+GEN.compbal={group:"Cash",name:"Compensating balance",blurb:"Find the effective interest rate on a loan with a required balance.",make:function(){
+  var co=company(),L=K(rnd(2000,12000,500)),r=pick([.06,.07,.08,.09,.10]),cp=pick([.05,.08,.10,.12,.15]);
+  var CB=Math.round(L*cp/1000)*1000,I=R(L*r),U=L-CB,eff=d2(I/U*100),lt=Math.random()<.5;
+  var opts=["Current asset","Noncurrent asset (investments or other assets)"];
+  return {title:co,
+  facts:[["Stated interest rate",pc(r),"From the loan agreement."]],
+  scenario:'<p>'+esc(co)+' borrows '+$(L)+' from Blue Ridge Community Bank at a stated rate of '+pc(r)+'. As a condition of the loan, the bank requires a '+$(CB)+' balance to be kept in a noninterest-bearing account at the bank for the life of the loan. The agreement legally restricts that balance. The loan is a '+(lt?'five-year term loan':'one-year note')+'.</p>',
+  key:'<p>A <strong>compensating balance</strong> compensates the bank for the loan. Because the company cannot use that money, it is really borrowing less than the face amount, so its <strong>effective interest rate</strong> is higher than the stated rate. A legally restricted balance is classified the same way as the related debt, and the arrangement is disclosed.</p>',
+  parts:[sched("Effective rate and classification",[
+    G("A","Amount borrowed",L,null,"The face amount of the loan."),
+    G("B","Required compensating balance",CB,null,"The bank's condition; this money cannot be used."),
+    N("C","Annual interest paid",I,"A × rate","Interest is charged on the full amount borrowed.",m($(L)+" × "+pc(r)+" = "+$(I))),
+    N("D","Cash actually available for use",U,"A − B","Subtract the money that must stay in the account.",m($(L)+" − "+$(CB)+" = "+$(U))),
+    N("E","Effective interest rate (percent, two decimals)",eff,"C ÷ D","Interest divided by the money the company can actually use.",m($(I)+" ÷ "+$(U)+" = "+eff+"%"),{unit:"%",tol:.05}),
+    C("F","Where is the restricted "+$(CB)+" reported?",opts,lt?1:0,"A legally restricted compensating balance follows the classification of the related debt.",lt?"Noncurrent, because the related loan is long-term.":"Current, because the related debt is current.")
+  ])],
+  take:"<p>The stated rate is "+pc(r)+", but the company pays "+$(I)+" for the use of only "+$(U)+", an effective rate of "+eff+"%. Lenders and analysts care about that effective cost.</p>"};
+}};
+
+GEN.bankrec={group:"Cash",name:"Bank reconciliation",blurb:"Reconcile bank and book balances, then record the book adjustments.",make:function(){
+  var co=company(),Cc=rnd(18000,65000,1),DIT=rnd(800,5200,5),OC=rnd(1500,9000,5),bank=Cc-DIT+OC;
+  var np=rnd(5,30,1)*100,iv=rnd(4,30,1)*5,svc=rnd(3,12,1)*5,nsf=rnd(300,2500,5),e=rnd(1,9,1)*90,act=rnd(1500,4800,1),rec=act-e;
+  var book=Cc-(np+iv)+svc+nsf+e;
+  return {title:co,
+  facts:[["Check to a supplier: actual amount",$(act),"The check that cleared the bank shows the true amount."],["Same check as recorded in the books",$(rec),"The bookkeeper recorded it too low."]],
+  scenario:'<p>'+esc(co)+' received its bank statement for June. The statement includes a note receivable the bank collected for the company (principal plus interest), a service charge, and a customer\'s NSF check returned to the company. While reconciling, the accountant also found a supplier check recorded in the books for the wrong amount.</p>',
+  key:'<p>A bank reconciliation brings <strong>both</strong> balances to the same corrected cash balance. Adjust the <strong>bank</strong> side for items the bank hasn\'t recorded yet (deposits in transit, outstanding checks, bank errors). Adjust the <strong>book</strong> side for items the company didn\'t know about (collections, service charges, NSF checks, company errors). <strong>Only the book-side items need journal entries.</strong></p>',
+  parts:[
+   sched("Step 1: Bank balance to corrected balance",[
+     G("A","Balance per bank statement",bank,null,"The bank statement's ending balance."),
+     G("B","Deposits outstanding (in transit)",DIT,null,"Recorded in the books, not yet credited by the bank."),
+     G("C","Checks outstanding",OC,null,"Written and recorded, not yet cleared by the bank."),
+     N("D","Corrected cash balance",Cc,"A + B − C","Add deposits the bank hasn't recorded; subtract checks it hasn't paid yet.",m($(bank)+" + "+$(DIT)+" − "+$(OC)+" = "+$(Cc)))]),
+   sched("Step 2: Book balance to corrected balance",[
+     G("E","Balance per books",book,null,"The general ledger cash account."),
+     G("F","Note collected by the bank ("+$(np)+" principal + "+$(iv)+" interest)",np+iv,null,"Shown on the bank statement; the company learns of it now."),
+     G("G","Bank service charge",svc,null,"Deducted by the bank."),
+     G("H","NSF check returned",nsf,null,"A customer's check bounced; the company must collect again."),
+     N("I","Correction for the understated supplier check",e,"actual − recorded","The books subtracted too little. How much more must come out?",m($(act)+" − "+$(rec)+" = "+$(e))),
+     N("J","Corrected cash balance",Cc,"E + F − G − H − I","Add the collection; subtract the charge, the NSF check, and the error.",m($(book)+" + "+$(np+iv)+" − "+$(svc)+" − "+$(nsf)+" − "+$(e)+" = "+$(Cc))),
+     C("K","Which reconciling items require journal entries?",["Bank side only","Book side only","Both sides"],1,"Which items is the company's ledger missing?","Book side only. The bank-side items are already in the books; the bank will record them soon.")]),
+   JE("Entry 1: Record the note collected by the bank",[["Cash",np+iv,0,"F"],["Notes receivable",0,np,"F"],["Interest revenue",0,iv,"F"]]),
+   JE("Entry 2: Record the other book-side reductions",[["Miscellaneous expense",svc,0,"G"],["Accounts receivable",nsf,0,"H"],["Accounts payable",e,0,"I"],["Cash",0,svc+nsf+e,"G + H + I"]],"The NSF amount goes back into accounts receivable because the customer still owes it.")
+  ],
+  take:"<p>After posting both entries, the cash account shows "+$(Cc)+", matching the corrected bank balance. The deposits in transit and outstanding checks need no entries; they will clear the bank next month.</p>"};
+}};
+
+GEN.petty={group:"Cash",name:"Petty cash",blurb:"Establish and replenish a petty cash fund.",make:function(){
+  var co=company(),F=pick([200,250,300,400,500]),p1=rnd(20,F*0.25,1),p2=rnd(20,F*0.25,1),p3=rnd(20,F*0.2,1),p4=rnd(10,F*0.15,1),T=p1+p2+p3+p4,inc=pick([0,0,100]),cash=F-T;
+  return {title:co,
+  facts:[["Cash counted in the fund at month-end",$(cash),"Cash plus receipts should always equal the fund."]].concat(inc?[["Approved increase in the fund",$(inc),"Management decided the fund is too small."]]:[]),
+  scenario:'<p>On July 1, '+esc(co)+' establishes a '+$(F)+' petty cash fund and names an office manager as custodian. On July 31 the fund is replenished. The custodian has receipts for postage, office supplies, delivery charges, and miscellaneous items.'+(inc?' Management also decides to increase the fund by '+$(inc)+' when it is replenished.':'')+'</p>',
+  key:'<p>A <strong>petty cash fund</strong> handles small payments without writing checks. No entry is made when the custodian pays a bill. Expenses are recorded when the fund is <strong>replenished</strong>, using the receipts. The Petty cash account changes only when the fund is established, increased, or decreased.</p>',
+  parts:[
+   sched("July petty cash",[
+     G("A","Petty cash fund established",F,null,"The fixed amount of the fund."),
+     G("B","Postage receipts",p1,null,"Custodian's receipts."),G("C","Office supplies receipts",p2,null,"Custodian's receipts."),G("D","Delivery receipts",p3,null,"Custodian's receipts."),G("E","Miscellaneous receipts",p4,null,"Custodian's receipts."),
+     N("F","Total receipts",T,"B + C + D + E","Add the receipts.",m($(p1)+" + "+$(p2)+" + "+$(p3)+" + "+$(p4)+" = "+$(T))),
+     N("G","Cash that should be in the fund",F-T,"A − F","Cash plus receipts equals the fund.",m($(F)+" − "+$(T)+" = "+$(F-T))),
+     N("H","Amount of the replenishment check",T+inc,inc?"F + increase":"F",inc?"Replace what was spent, plus the increase.":"Replace exactly what was spent.",m($(T)+(inc?" + "+$(inc):"")+" = "+$(T+inc)))]),
+   JE("July 1: Establish the fund",[["Petty cash",F,0,"A"],["Cash",0,F,"A"]]),
+   JE("July 31: Replenish the fund",[["Postage expense",p1,0,"B"],["Office supplies expense",p2,0,"C"],["Delivery expense",p3,0,"D"],["Miscellaneous expense",p4,0,"E"]].concat(inc?[["Petty cash",inc,0,"increase"]]:[]).concat([["Cash",0,T+inc,"H"]]))
+  ],
+  take:"<p>"+(inc?"Petty cash is debited only for the "+$(inc)+" increase.":"Notice that Petty cash is not debited when the fund is replenished.")+" Expenses are recognized from the receipts, and the checking account pays for them.</p>"};
+}};
+
+/* ===== ACCOUNTS RECEIVABLE ===== */
+GEN.discounts={group:"Accounts receivable",name:"Cash discounts: gross vs. net",blurb:"Record a sale with 2/10, n/30 terms under either method.",make:function(){
+  var co=company(),net=Math.random()<.5,d=pick([.01,.02,.03]),dd=pick([10,15]),S=K(rnd(10,60,1)),P=Math.round(S*pick([.4,.5,.6,.7])/1000)*1000;
+  var A=S-P,disc=R(P*d),cin=P-disc,forf=R(A*d),netS=S-disc,eff=d1(d/(1-d)*365/(30-dd)*100),mN=pick([2,3,4,8,9]);
+  var day=pick([2,3,5]),sale=MON[mN]+" "+day,within=MON[mN]+" "+(day+dd-2),after=MON[mN+1]+" "+(day+1),terms=Math.round(d*100)+"/"+dd+", n/30";
+  var rows=[G("A","Sale price",S,null,"Invoice amount."),G("B","Discount rate offered",d,"%","The "+terms+" terms."),G("C","Amount paid within the discount period",P,null,"Paid on "+within+"."),G("D","Amount paid after the discount period",A,null,"Paid on "+after+".")];
+  rows.push(N("E","Discount taken on the early payment",disc,"C × B","Only the early payment gets the discount.",m($(P)+" × "+pc(d)+" = "+$(disc))));
+  rows.push(N("F","Cash received within the discount period",cin,"C − E","Amount paid minus the discount.",m($(P)+" − "+$(disc)+" = "+$(cin))));
+  if(net){rows.push(N("G","Sale recorded under the net method",R(S*(1-d)),"A × (1 − B)","The net method assumes every customer takes the discount.",m($(S)+" × "+(100-d*100)+"% = "+$(R(S*(1-d))))));
+    rows.push(N("H","Sales discounts forfeited",forf,"D × B","The discount the late payer gave up.",m($(A)+" × "+pc(d)+" = "+$(forf))));}
+  rows.push(N(net?"I":"G","Net sales revenue reported",netS,"A − E","Under either method, net sales are reduced only by discounts actually taken.",m($(S)+" − "+$(disc)+" = "+$(netS))));
+  rows.push(N(net?"J":"H","Effective annual rate of skipping the discount (percent, one decimal)",eff,"B ÷ (1 − B) × 365 ÷ days saved","Discount ÷ amount paid, annualized over the "+(30-dd)+" days between the discount date and the due date.",m(pc(d)+" ÷ "+(100-d*100)+"% × 365 ÷ "+(30-dd)+" = "+eff+"%"),{unit:"%",tol:.2}));
+  var parts=[sched("Discount schedule ("+(net?"net":"gross")+" method)",rows)];
+  if(net){
+    parts.push(JE(sale+": Record the sale",[["Accounts receivable",R(S*(1-d)),0,"G"],["Sales revenue",0,R(S*(1-d)),"G"]]));
+    parts.push(JE(within+": Collection within the discount period",[["Cash",cin,0,"F"],["Accounts receivable",0,cin,"F"]]));
+    parts.push(JE(after+": Collection after the discount period",[["Cash",A,0,"D"],["Accounts receivable",0,A-forf,"D − H"],["Sales discounts forfeited",0,forf,"H"]]));
+  }else{
+    parts.push(JE(sale+": Record the sale",[["Accounts receivable",S,0,"A"],["Sales revenue",0,S,"A"]]));
+    parts.push(JE(within+": Collection within the discount period",[["Cash",cin,0,"F"],["Sales discounts",disc,0,"E"],["Accounts receivable",0,P,"C"]]));
+    parts.push(JE(after+": Collection after the discount period",[["Cash",A,0,"D"],["Accounts receivable",0,A,"D"]]));
+  }
+  return {title:co,
+  scenario:'<p>On '+sale+', '+esc(co)+' sells merchandise on account for '+$(S)+' with terms of <strong>'+terms+'</strong>. The customer pays for '+$(P)+' of the goods on '+within+' (within the discount period) and pays the rest on '+after+'. The company uses the <strong>'+(net?'net':'gross')+' method</strong>. Ignore cost of goods sold.</p>',
+  key:'<p>A <strong>cash (sales) discount</strong> is variable consideration. The <strong>gross method</strong> records the sale at full price and recognizes <em>sales discounts</em> (a contra revenue) only when customers take them. The <strong>net method</strong> records the sale net of the discount and recognizes <em>sales discounts forfeited</em> when customers pay late. Both methods end with the same net sales.</p>',
+  parts:parts,
+  take:"<p>Net sales are "+$(netS)+" either way. The net method is considered conceptually better because a "+eff+"% annual return makes taking the discount the rational choice, so the seller expects to receive the net amount.</p>"};
+}};
+
+GEN.returns={group:"Accounts receivable",name:"Sales returns",blurb:"Record actual returns and a year-end refund liability.",make:function(){
+  var co=company(),S=K(rnd(800,3000,50)),c=pick([.55,.60,.65,.70]),rp=pick([.05,.06,.08,.10]),tot=R(S*rp),act=Math.round(tot*pick([.5,.55,.6,.65,.7])/1000)*1000;
+  var rem=tot-act,ca=R(act*c),cr=R(rem*c),netS=S-tot,cogs=R(S*c)-ca-cr;
+  return {title:co,
+  facts:[["Sales are for cash; refunds are paid in cash","","An assumption that tells you to credit Cash for actual refunds."]],
+  scenario:'<p>In its first year, '+esc(co)+' sells merchandise for '+$(S)+' in cash. The merchandise cost '+pc(c)+' of the selling price, and the company uses a perpetual inventory system. Based on industry experience, '+pc(rp)+' of sales will be returned. Customers returned '+$(act)+' of merchandise during the year, and the company refunded them in cash. Returned goods go back into inventory at cost.</p>',
+  key:'<p>Returns are <strong>variable consideration</strong>, so revenue is reported net of <strong>actual and expected</strong> returns. Actual returns reduce revenue (Sales returns) and put the goods back into inventory. At year-end, the remaining expected returns are recorded as a <strong>refund liability</strong>, with an asset, <strong>inventory—estimated returns</strong>, for the goods expected back.</p>',
+  parts:[
+   sched("Returns schedule",[
+     G("A","Sales revenue",S,null,"This year's sales."),G("B","Expected return rate",rp,"%","Industry experience."),G("C","Cost of goods as a percent of price",c,"%","Cost ÷ selling price."),G("D","Actual returns during the year",act,null,"Refunds already paid."),
+     N("E","Total returns expected from this year's sales",tot,"A × B","Apply the return rate to all of this year's sales.",m($(S)+" × "+pc(rp)+" = "+$(tot))),
+     N("F","Additional returns still expected (refund liability)",rem,"E − D","Total expected minus those already returned.",m($(tot)+" − "+$(act)+" = "+$(rem))),
+     N("G","Cost of the actual returns",ca,"D × C","Returned goods go back to inventory at cost.",m($(act)+" × "+pc(c)+" = "+$(ca))),
+     N("H","Cost of the returns still expected",cr,"F × C","Inventory—estimated returns is measured at cost.",m($(rem)+" × "+pc(c)+" = "+$(cr))),
+     N("I","Net sales revenue reported",netS,"A − E","Revenue less actual and expected returns.",m($(S)+" − "+$(tot)+" = "+$(netS))),
+     N("J","Cost of goods sold reported",cogs,"A × C − G − H","Cost of all sales, less the cost of actual and expected returns.",m($(R(S*c))+" − "+$(ca)+" − "+$(cr)+" = "+$(cogs)))]),
+   JE("During the year: Record the actual returns",[["Sales returns",act,0,"D"],["Cash",0,act,"D"],["Inventory",ca,0,"G"],["Cost of goods sold",0,ca,"G"]]),
+   JE("December 31: Record returns still expected",[["Sales returns",rem,0,"F"],["Refund liability",0,rem,"F"],["Inventory—estimated returns",cr,0,"H"],["Cost of goods sold",0,cr,"H"]])
+  ],
+  take:"<p>The income statement shows net sales of "+$(netS)+" and cost of goods sold of "+$(cogs)+". If next year's returns differ from "+$(rem)+", the difference is a change in estimate recorded next year, not a restatement.</p>"};
+}};
+
+/* ===== BAD DEBTS ===== */
+var AGE_SETS=[[.02,.08,.15,.40],[.03,.10,.20,.50],[.04,.12,.25,.45],[.05,.10,.20,.40],[.01,.05,.15,.35]];
+GEN.aging={group:"Bad debts",name:"Allowance: aging method",blurb:"Use an aging schedule to find the required allowance and bad debt expense.",make:function(){
+  var co=company(),pr=pick(AGE_SETS),a=[K(rnd(150,600,10)),K(rnd(40,180,10)),K(rnd(15,90,5)),K(rnd(5,50,5))];
+  var est=a.map(function(x,i){return R(x*pr[i]);}),req=est.reduce(function(s,x){return s+x;},0),tot=a.reduce(function(s,x){return s+x;},0);
+  var debit=Math.random()<.3,pre=debit?K(rnd(1,6,1)):Math.min(K(rnd(2,30,1)),Math.floor((req-1000)/1000)*1000),bde;pre=Math.max(pre,1000);bde=debit?req+pre:req-pre;
+  var lab=["0–30 days","31–60 days","61–90 days","Over 90 days"];
+  return {title:co,
+  scenario:'<p>At December 31, '+esc(co)+' prepares an aging of its '+$(tot)+' of accounts receivable and applies its estimated loss rates, which reflect historical experience adjusted for current conditions and forecasts. Before adjustment, the allowance for uncollectible accounts has a <strong>'+(debit?'debit':'credit')+'</strong> balance of '+$(pre)+'.'+(debit?' (More accounts were written off this year than the allowance had covered.)':'')+'</p>',
+  key:'<p>The aging method is a <strong>balance sheet approach</strong>: first find the allowance balance needed so net receivables equal the cash expected to be collected. Bad debt expense is the <strong>plug</strong> that moves the allowance from its pre-adjustment balance to that required balance. A debit balance must be covered too, so it <em>adds</em> to the expense.</p>',
+  parts:[
+   sched("Aging schedule",[
+     G("A","Receivables "+lab[0]+" (est. "+pc(pr[0])+" uncollectible)",a[0],null,"From the aging schedule."),G("B","Receivables "+lab[1]+" (est. "+pc(pr[1])+")",a[1],null,"From the aging schedule."),
+     G("C","Receivables "+lab[2]+" (est. "+pc(pr[2])+")",a[2],null,"From the aging schedule."),G("D","Receivables "+lab[3]+" (est. "+pc(pr[3])+")",a[3],null,"Older accounts get higher loss rates."),
+     N("E","Estimated uncollectible: "+lab[0],est[0],"A × rate","Multiply by the loss rate for that age group.",m($(a[0])+" × "+pc(pr[0])+" = "+$(est[0]))),
+     N("F","Estimated uncollectible: "+lab[1],est[1],"B × rate","Multiply by that group's rate.",m($(a[1])+" × "+pc(pr[1])+" = "+$(est[1]))),
+     N("G","Estimated uncollectible: "+lab[2],est[2],"C × rate","Multiply by that group's rate.",m($(a[2])+" × "+pc(pr[2])+" = "+$(est[2]))),
+     N("H","Estimated uncollectible: "+lab[3],est[3],"D × rate","Multiply by that group's rate.",m($(a[3])+" × "+pc(pr[3])+" = "+$(est[3]))),
+     N("I","Required ending allowance",req,"E + F + G + H","Add the four estimates.",m($(est[0])+" + "+$(est[1])+" + "+$(est[2])+" + "+$(est[3])+" = "+$(req))),
+     G("J","Allowance before adjustment ("+(debit?"debit":"credit")+" balance)",pre,null,debit?"Write-offs exceeded the allowance during the year.":"What is left in the allowance before the year-end entry."),
+     N("K","Bad debt expense",bde,"I "+(debit?"+":"−")+" J",debit?"A debit balance must be wiped out and then the full required credit balance built.":"Only the difference between the required and existing balance is needed.",m($(req)+(debit?" + ":" − ")+$(pre)+" = "+$(bde))),
+     N("L","Net accounts receivable reported",tot-req,"total A–D − I","Gross receivables minus the required allowance.",m($(tot)+" − "+$(req)+" = "+$(tot-req)))]),
+   JE("December 31: Adjust the allowance",[["Bad debt expense",bde,0,"K"],["Allowance for uncollectible accounts",0,bde,"K"]])
+  ],
+  take:"<p>The balance sheet reports "+$(tot)+" less an allowance of "+$(req)+", or "+$(tot-req)+" net. Bad debt expense ("+$(bde)+") is whatever it takes to reach the required allowance, which is why it differs from the allowance itself.</p>"};
+}};
+
+GEN.writeoff={group:"Bad debts",name:"Write-offs and recoveries",blurb:"Write off an account, then reinstate and collect it.",make:function(){
+  var co=company(),AR=K(rnd(200,900,10)),AL=Math.round(AR*pick([.04,.05,.06,.08])/1000)*1000,W=rnd(30,Math.min(AL/100*0.6,400),1)*100,X=pick([W,Math.round(W*.5/100)*100,Math.round(W*.4/100)*100]);
+  var cust=pick(["Lake Toxaway Marina","Hiwassee Hardware","Panthertown Outfitters","Cashiers Corner Market","Green River Gear"]);
+  return {title:co,
+  scenario:'<p>'+esc(co)+' uses the allowance method. In March, a customer, '+cust+', files for bankruptcy, and the company writes off its '+$(W)+' account. In October, '+cust+' emerges from bankruptcy and pays '+$(X)+' of the amount written off.</p>',
+  key:'<p>Under the allowance method, the expense was recognized <em>earlier</em>, when the allowance was estimated. Writing off a specific account just removes it from both accounts receivable and the allowance, so it <strong>does not change net receivables or net income</strong>. A recovery first <strong>reinstates</strong> the account (reversing the write-off for the amount collected), then records the collection.</p>',
+  parts:[
+   sched("Effect on net receivables",[
+     G("A","Accounts receivable before the write-off",AR,null,"Gross receivables."),G("B","Allowance for uncollectible accounts before the write-off",AL,null,"Credit balance from earlier estimates."),
+     N("C","Net receivables before the write-off",AR-AL,"A − B","Gross minus the allowance.",m($(AR)+" − "+$(AL)+" = "+$(AR-AL))),
+     G("D","Account written off",W,null,"The bankrupt customer's balance."),
+     N("E","Net receivables after the write-off",AR-AL,"(A − D) − (B − D)","Both accounts fall by the same amount.",m("("+$(AR)+" − "+$(W)+") − ("+$(AL)+" − "+$(W)+") = "+$(AR-AL))),
+     C("F","Effect of the write-off on net income",["No effect","Decreases net income","Increases net income"],0,"Is there an expense account in the write-off entry?","No effect. The expense was recorded when the allowance was estimated."),
+     G("G","Amount later collected",X,null,"The October payment.")]),
+   JE("March: Write off the account",[["Allowance for uncollectible accounts",W,0,"D"],["Accounts receivable",0,W,"D"]]),
+   JE("October: Reinstate the amount being collected",[["Accounts receivable",X,0,"G"],["Allowance for uncollectible accounts",0,X,"G"]]),
+   JE("October: Record the collection",[["Cash",X,0,"G"],["Accounts receivable",0,X,"G"]])
+  ],
+  take:"<p>Reinstating before collecting keeps a record that the customer eventually paid, which helps with future credit decisions. None of the three entries touches bad debt expense.</p>"};
+}};
+
+GEN.pctsales={group:"Bad debts",name:"Percent of sales, then aging",blurb:"Combine the income statement approach with a year-end aging.",make:function(){
+  var co=company(),CS=K(rnd(1500,6000,50)),p=pick([.01,.015,.02,.025]),B0=K(rnd(20,80,1)),est=R(CS*p),Wo=Math.min(K(rnd(10,70,1)),B0+est-5000),bal=B0-Wo+est;
+  var req=Math.max(bal+K(rnd(-8,15,1)),K(5));var adj=req-bal;
+  return {title:co,
+  scenario:'<p>During the year, '+esc(co)+' records bad debt expense each quarter at '+pc(p)+' of credit sales (the income statement approach). Credit sales for the year were '+$(CS)+'. The allowance began the year with a credit balance of '+$(B0)+', and '+$(Wo)+' of accounts were written off during the year. At year-end, an aging of receivables shows the allowance should be '+$(req)+'.</p>',
+  key:'<p>The <strong>income statement approach</strong> estimates expense as a percent of credit sales; the allowance balance is just a by-product. Many companies use it during the year and then <strong>true up</strong> the allowance at year-end with a balance sheet approach such as aging, so net receivables reflect the cash expected to be collected.</p>',
+  parts:[
+   sched("Allowance roll-forward",[
+     G("A","Credit sales for the year",CS,null,"From the sales records."),G("B","Percent of credit sales expected to be uncollectible",p,"%","Company history."),
+     N("C","Bad debt expense recorded during the year",est,"A × B","Apply the rate to credit sales.",m($(CS)+" × "+pc(p)+" = "+$(est))),
+     G("D","Allowance, beginning of year (credit)",B0,null,"Last year's ending balance."),G("E","Accounts written off during the year",Wo,null,"Removed from receivables and the allowance."),
+     N("F","Allowance balance before the year-end adjustment",bal,"D − E + C","Beginning balance, less write-offs, plus this year's estimates.",m($(B0)+" − "+$(Wo)+" + "+$(est)+" = "+$(bal))),
+     G("G","Required allowance from the year-end aging",req,null,"The balance sheet test at year-end."),
+     N("H","Year-end adjustment (decrease negative)",adj,"G − F","Required balance minus what is already there.",m($(req)+" − "+$(bal)+" = "+$(adj))),
+     N("I","Total bad debt expense for the year",est+adj,"C + H","Quarterly estimates plus the year-end adjustment.",m($(est)+(adj<0?" − "+$(-adj):" + "+$(adj))+" = "+$(est+adj)))]),
+   JE("During the year: Quarterly estimates (summary)",[["Bad debt expense",est,0,"C"],["Allowance for uncollectible accounts",0,est,"C"]]),
+   adj===0?{type:"note",html:"<p>No year-end adjustment is needed because the allowance already equals the required balance.</p>"}:
+   JE("December 31: True up the allowance",adj>0?[["Bad debt expense",adj,0,"H"],["Allowance for uncollectible accounts",0,adj,"H"]]:[["Allowance for uncollectible accounts",-adj,0,"H"],["Bad debt expense",0,-adj,"H"]])
+  ],
+  take:"<p>The percent-of-sales estimates are convenient during the year, but the year-end aging decides the balance sheet amount. "+(adj<0?"Here the allowance was too large, so the adjustment reduces expense, a change in estimate.":"The year-end entry brings the allowance up to the required "+$(req)+".")+"</p>"};
+}};
+
+/* ===== NOTES RECEIVABLE ===== */
+GEN.ibnote={group:"Notes receivable",name:"Interest-bearing note",blurb:"Accrue interest at year-end and collect at maturity.",make:function(){
+  var co=company(),F=K(rnd(100,900,10)),r=pick([.06,.07,.08,.09,.10,.12]),mo=pick([6,9]),mi=pick([7,8,9,10]),k=12-mi,tot=R(F*r*mo/12),acc=R(F*r*k/12),rest=tot-acc,mat=MON[(mi+mo)%12];
+  return {title:co,
+  scenario:'<p>On '+MON[mi]+' 1, '+esc(co)+' sells equipment to a customer and accepts a '+$(F)+', '+mo+'-month, '+pc(r)+' note. Principal and all interest are due on '+mat+' 1 of next year. The company\'s fiscal year ends December 31. The '+pc(r)+' rate is appropriate for a note of this type. Ignore cost of goods sold.</p>',
+  key:'<p>Interest on a note = <strong>face amount × annual rate × fraction of the year</strong>. If the note is outstanding at year-end, accrue the interest earned so far. At maturity, collect the face amount plus all the interest, and recognize only the interest earned in the new year as revenue.</p>',
+  parts:[
+   sched("Interest schedule",[
+     G("A","Face amount",F,null,"Principal on the note."),G("B","Annual interest rate",r,"%","Stated on the note."),
+     N("C","Total interest over the life of the note",tot,"A × B × "+mo+"/12","Interest for the full "+mo+" months.",m($(F)+" × "+pc(r)+" × "+mo+"/12 = "+$(tot))),
+     N("D","Interest earned by December 31 ("+k+" months)",acc,"A × B × "+k+"/12","From "+MON[mi]+" 1 to December 31.",m($(F)+" × "+pc(r)+" × "+k+"/12 = "+$(acc))),
+     N("E","Interest earned next year",rest,"C − D","The remaining months.",m($(tot)+" − "+$(acc)+" = "+$(rest))),
+     N("F","Cash collected at maturity",F+tot,"A + C","Principal plus all interest.",m($(F)+" + "+$(tot)+" = "+$(F+tot)))]),
+   JE(MON[mi]+" 1: Accept the note",[["Notes receivable",F,0,"A"],["Sales revenue",0,F,"A"]]),
+   JE("December 31: Accrue interest",[["Interest receivable",acc,0,"D"],["Interest revenue",0,acc,"D"]]),
+   JE(mat+" 1: Collect the note",[["Cash",F+tot,0,"F"],["Interest revenue",0,rest,"E"],["Interest receivable",0,acc,"D"],["Notes receivable",0,F,"A"]])
+  ],
+  take:"<p>Interest revenue is split between two years ("+$(acc)+" this year and "+$(rest)+" next year) based on time, even though all "+$(tot)+" is collected at once.</p>"};
+}};
+
+GEN.nibnote={group:"Notes receivable",name:"Noninterest-bearing note (short term)",blurb:"Interest is built into the face amount as a discount.",make:function(){
+  var co=company(),F=K(rnd(100,900,10)),mo=6,disc=Math.round(F*pick([.03,.04,.05,.06])/1000)*1000,P=F-disc,mi=pick([8,9,10]),k=12-mi,yi=R(disc*k/mo),rest=disc-yi,eff=d2(disc/P*12/mo*100),mat=MON[(mi+mo)%12];
+  return {title:co,
+  scenario:'<p>On '+MON[mi]+' 1, '+esc(co)+' sells merchandise with a cash price of '+$(P)+' and accepts a six-month, <strong>noninterest-bearing</strong> note with a face amount of '+$(F)+', due '+mat+' 1 of next year. The company treats the financing component as significant and records the discount using the gross method. It recognizes interest evenly over the note\'s life. Ignore cost of goods sold.</p>',
+  key:'<p>A "noninterest-bearing" note still bears interest: the interest is the <strong>difference between the face amount and the cash price</strong>. Record the note at face with a contra account, <strong>discount on notes receivable</strong>, and recognize the discount as interest revenue as time passes. Sales revenue is the cash price.</p>',
+  parts:[
+   sched("Discount schedule",[
+     G("A","Face amount of the note",F,null,"What the customer will pay at maturity."),G("B","Cash price of the merchandise",P,null,"What the goods would sell for today."),
+     N("C","Discount (total interest)",disc,"A − B","The extra amount the customer pays for waiting.",m($(F)+" − "+$(P)+" = "+$(disc))),
+     N("D","Interest earned by December 31 ("+k+" of "+mo+" months)",yi,"C × "+k+"/"+mo,"The portion of the discount earned this year.",m($(disc)+" × "+k+"/"+mo+" = "+$(yi))),
+     N("E","Net note receivable on the December 31 balance sheet",F-(disc-yi),"A − (C − D)","Face amount less the discount not yet earned.",m($(F)+" − "+$(disc-yi)+" = "+$(F-(disc-yi)))),
+     N("F","Interest earned next year",rest,"C − D","The rest of the discount.",m($(disc)+" − "+$(yi)+" = "+$(rest))),
+     N("G","Effective annual interest rate (percent, two decimals)",eff,"C ÷ B × 12/"+mo,"Interest ÷ cash price, annualized.",m($(disc)+" ÷ "+$(P)+" × 2 = "+eff+"%"),{unit:"%",tol:.05})]),
+   JE(MON[mi]+" 1: Accept the note",[["Notes receivable",F,0,"A"],["Discount on notes receivable",0,disc,"C"],["Sales revenue",0,P,"B"]]),
+   JE("December 31: Recognize interest earned",[["Discount on notes receivable",yi,0,"D"],["Interest revenue",0,yi,"D"]]),
+   JE(mat+" 1: Collect the note",[["Cash",F,0,"A"],["Discount on notes receivable",rest,0,"F"],["Interest revenue",0,rest,"F"],["Notes receivable",0,F,"A"]])
+  ],
+  take:"<p>Total revenue is still "+$(F)+": "+$(P)+" of sales revenue for the goods and "+$(disc)+" of interest revenue for the financing. For notes due within a year, a company may instead ignore the financing component and record "+$(F)+" of sales revenue.</p>"};
+}};
+
+GEN.ltnote={group:"Notes receivable",name:"Long-term noninterest-bearing note",blurb:"Present value and the effective interest method.",make:function(){
+  var co=company(),F=K(rnd(200,900,10)),r=pick([.08,.09,.10,.12]),n=pick([2,3]),PV=R(F/Math.pow(1+r,n)),disc=F-PV;
+  var bal=PV,ints=[];for(var y=1;y<=n;y++){var it=y<n?R(bal*r):F-bal;ints.push(it);bal+=it;}
+  var rows=[G("A","Face amount due in "+n+" years",F,null,"Paid at the end of year "+n+"."),G("B","Market (effective) interest rate",r,"%","The rate appropriate for this customer and term."),
+    N("C","Present value of the note (sales revenue)",PV,"A ÷ (1 + B)^"+n,"Discount the face amount for "+n+" years at the effective rate.",m($(F)+" ÷ "+(1+r).toFixed(2)+"^"+n+" = "+$(PV))),
+    N("D","Discount on notes receivable",disc,"A − C","The total interest to be earned.",m($(F)+" − "+$(PV)+" = "+$(disc))),
+    N("E","Year 1 interest revenue",ints[0],"C × B","Effective rate × beginning carrying amount.",m($(PV)+" × "+pc(r)+" = "+$(ints[0]))),
+    N("F","Carrying amount at the end of Year 1",PV+ints[0],"C + E","Interest earned increases the carrying amount.",m($(PV)+" + "+$(ints[0])+" = "+$(PV+ints[0]))),
+    N("G","Year 2 interest revenue",ints[1],n===2?"A − F":"F × B",n===2?"In the final year, interest brings the carrying amount to face (any rounding is absorbed here).":"Effective rate × the new carrying amount.",m(n===2?$(F)+" − "+$(PV+ints[0])+" = "+$(ints[1]):$(PV+ints[0])+" × "+pc(r)+" = "+$(ints[1])))];
+  if(n===3){rows.push(N("H","Carrying amount at the end of Year 2",PV+ints[0]+ints[1],"F + G","Add Year 2 interest.",m($(PV+ints[0])+" + "+$(ints[1])+" = "+$(PV+ints[0]+ints[1]))));
+    rows.push(N("I","Year 3 interest revenue",ints[2],"A − H","The final year brings the carrying amount to face.",m($(F)+" − "+$(PV+ints[0]+ints[1])+" = "+$(ints[2]))));}
+  var parts=[sched("Effective interest schedule",rows),JE("January 1, Year 1: Accept the note",[["Notes receivable",F,0,"A"],["Discount on notes receivable",0,disc,"D"],["Sales revenue",0,PV,"C"]]),
+    JE("December 31, Year 1: Recognize interest",[["Discount on notes receivable",ints[0],0,"E"],["Interest revenue",0,ints[0],"E"]])];
+  if(n===3)parts.push(JE("December 31, Year 2: Recognize interest",[["Discount on notes receivable",ints[1],0,"G"],["Interest revenue",0,ints[1],"G"]]));
+  var li=ints[n-1],ll=n===3?"I":"G";
+  parts.push(JE("December 31, Year "+n+": Recognize interest and collect the note",[["Discount on notes receivable",li,0,ll],["Interest revenue",0,li,ll],["Cash",F,0,"A"],["Notes receivable",0,F,"A"]]));
+  return {title:co,
+  scenario:'<p>On January 1, Year 1, '+esc(co)+' sells a piece of custom equipment and accepts a '+n+'-year, <strong>noninterest-bearing</strong> note with a face amount of '+$(F)+', due December 31, Year '+n+'. An interest rate of '+pc(r)+' is appropriate for this customer. Ignore cost of goods sold.</p>',
+  key:'<p>For a long-term note, the time value of money is significant. Record sales revenue at the <strong>present value</strong> of the cash to be received. Then use the <strong>effective interest method</strong>: each year, interest revenue = effective rate × the note\'s carrying amount at the start of the year. The carrying amount grows until it equals face value at maturity.</p>',
+  parts:parts,
+  take:"<p>Sales revenue is "+$(PV)+" (the present value), and "+$(disc)+" of interest revenue is earned over "+n+" years. Interest grows each year because it is computed on a larger carrying amount.</p>"};
+}};
+
+/* ===== FINANCING WITH RECEIVABLES ===== */
+GEN.assign={group:"Financing with receivables",name:"Assigning receivables (secured borrowing)",blurb:"Borrow against specific receivables and remit collections.",make:function(){
+  var co=company(),L=K(rnd(100,800,10)),A=Math.round(L*pick([1.2,1.25,1.3])/1000)*1000,f=pick([.01,.015,.02,.025]),r=pick([.06,.09,.12]),fee=R(A*f),cash=L-fee,Cc=Math.round(L*pick([.4,.5,.6,.7])/1000)*1000,int=R(L*r/12);
+  return {title:co,
+  facts:[["Interest rate on the loan",pc(r),"Paid monthly on the loan balance."]],
+  scenario:'<p>On November 1, '+esc(co)+' borrows '+$(L)+' from Pisgah Finance and signs a promissory note. It assigns '+$(A)+' of specific accounts receivable as collateral. Pisgah charges a finance fee of '+pc(f)+' of the receivables assigned, deducted from the cash advanced. Interest of '+pc(r)+' is payable monthly. '+esc(co)+' keeps collecting the receivables; during November it collects '+$(Cc)+' of them and remits that amount, plus November interest, to Pisgah on November 30.</p>',
+  key:'<p>An <strong>assignment</strong> is a <strong>secured borrowing</strong>: the receivables stay on the company\'s balance sheet as collateral, and the company records a <strong>liability</strong> for the cash received. The finance fee is expensed (it is usually small and short-term). Collections are passed to the lender to pay down the note.</p>',
+  parts:[
+   sched("Borrowing schedule",[
+     G("A","Amount borrowed (note payable)",L,null,"Face amount of the promissory note."),G("B","Receivables assigned",A,null,"More than the loan, to protect the lender."),G("C","Finance fee rate",f,"%","Charged on receivables assigned."),
+     N("D","Finance fee",fee,"B × C","The fee is based on receivables assigned, not the loan.",m($(A)+" × "+pc(f)+" = "+$(fee))),
+     N("E","Cash received on November 1",cash,"A − D","Loan less the fee withheld.",m($(L)+" − "+$(fee)+" = "+$(cash))),
+     G("F","November collections of assigned receivables",Cc,null,"Collected by the company and remitted."),
+     N("G","November interest",int,"A × rate × 1/12","One month of interest on the loan.",m($(L)+" × "+pc(r)+" × 1/12 = "+$(int))),
+     N("H","Note payable balance after the November 30 payment",L-Cc,"A − F","Collections reduce the loan.",m($(L)+" − "+$(Cc)+" = "+$(L-Cc)))]),
+   JE("November 1: Borrow and assign receivables",[["Cash",cash,0,"E"],["Finance charge expense",fee,0,"D"],["Notes payable",0,L,"A"]]),
+   JE("November: Collect assigned receivables",[["Cash",Cc,0,"F"],["Accounts receivable",0,Cc,"F"]]),
+   JE("November 30: Remit collections and interest",[["Notes payable",Cc,0,"F"],["Interest expense",int,0,"G"],["Cash",0,Cc+int,"F + G"]])
+  ],
+  take:"<p>The receivables never leave the balance sheet; the company has a "+$(L-Cc)+" liability left. That is the key difference from a sale, where receivables are removed and no liability is recorded.</p>"};
+}};
+
+GEN.factor={group:"Financing with receivables",name:"Factoring receivables (sale)",blurb:"Sell receivables with or without recourse.",make:function(){
+  var co=company(),rec=Math.random()<.5,BV=K(rnd(200,1200,10)),adv=pick([.85,.88,.90,.92]),fp=pick([.02,.03,.04]),cash=R(BV*adv),fee=R(BV*fp);
+  var FVr=Math.round(BV*(1-adv)*pick([.80,.85,.90])/1000)*1000,rf=FVr-fee,RL=rec?Math.round(BV*pick([.005,.01,.015])/1000)*1000||1000:0,loss=BV-cash-rf+RL;
+  var rows=[G("A","Book value of receivables transferred",BV,null,"Receivables (net) removed from the books."),G("B","Percent advanced immediately by the factor",adv,"%","The factor holds back the rest."),G("C","Factoring fee (percent of receivables)",fp,"%","The factor's charge."),
+    G("D","Fair value of the amount held back",FVr,null,"Management's estimate; the last receivables collected are often reduced by returns."),
+    N("E","Cash received now",cash,"A × B","The advance.",m($(BV)+" × "+pc(adv)+" = "+$(cash))),
+    N("F","Factoring fee",fee,"A × C","Based on the total receivables factored.",m($(BV)+" × "+pc(fp)+" = "+$(fee))),
+    N("G","Receivable from factor",rf,"D − F","Fair value of the holdback, less the fee the factor will keep from it.",m($(FVr)+" − "+$(fee)+" = "+$(rf)))];
+  if(rec)rows.push(G("H","Fair value of the recourse obligation",RL,null,"Estimated payments to the factor for bad debts."));
+  rows.push(N(rec?"I":"H","Loss on sale of receivables",loss,rec?"A − E − G + H":"A − E − G","The loss balances the entry: what was given up minus what was received"+(rec?", plus the recourse liability taken on.":"."),m($(BV)+" − "+$(cash)+" − "+$(rf)+(rec?" + "+$(RL):"")+" = "+$(loss))));
+  rows.push(C(rec?"J":"I","All three surrender-of-control conditions are met. How is the transfer reported?",["As a sale","As a secured borrowing"],0,"What happens when the transferor gives up control?","As a sale: the receivables are derecognized."+(rec?" Recourse does not prevent sale treatment; it adds a liability.":"")));
+  var lines=[["Cash",cash,0,"E"],["Loss on sale of receivables",loss,0,rec?"I":"H"],["Receivable from factor",rf,0,"G"]];
+  if(rec)lines.push(["Recourse liability",0,RL,"H"]);lines.push(["Accounts receivable",0,BV,"A"]);
+  return {title:co,
+  scenario:'<p>In December, '+esc(co)+' factors receivables with a book value of '+$(BV)+' to Smoky Mountain Factors <strong>'+(rec?'with':'without')+' recourse</strong>. The factor immediately pays '+pc(adv)+' of the receivables and holds back the rest. When it has collected enough to cover its advance and a '+pc(fp)+' fee, it remits the excess. '+(rec?'Because the sale is with recourse, '+esc(co)+' must reimburse the factor for receivables that prove uncollectible. ':'')+'The transfer meets all three conditions for surrender of control.</p>',
+  key:'<p>When control is surrendered, factoring is a <strong>sale</strong>: remove the receivables, record what you received at fair value (cash plus a <strong>receivable from factor</strong> for the holdback, net of the fee), and the difference is a <strong>loss on sale</strong>. '+(rec?'Selling <strong>with recourse</strong> keeps the bad-debt risk, so record a <strong>recourse liability</strong> at fair value, which increases the loss.':'Selling <strong>without recourse</strong> moves the bad-debt risk to the factor.')+'</p>',
+  parts:[sched("Factoring schedule",rows),JE("December: Record the factoring",lines)],
+  take:"<p>The loss of "+$(loss)+" is the cost of getting cash now: the fee plus the write-down of the holdback to fair value"+(rec?", plus the recourse obligation":"")+". If all receivables are eventually collected, any excess over the receivable from factor is a gain later.</p>"};
+}};
+
+GEN.discnote={group:"Financing with receivables",name:"Discounting a note receivable",blurb:"Accrue interest, compute proceeds, and record the sale.",make:function(){
+  var co=company(),F=K(rnd(100,600,10)),r=pick([.06,.08,.09,.10]),mo=pick([6,9,12]),k=pick([2,3,4]),b=pick([.08,.10,.11,.12]);
+  var acc=R(F*r*k/12),MV=R(F*(1+r*mo/12)),dsc=R(MV*b*(mo-k)/12),pro=MV-dsc,bv=F+acc,gl=pro-bv,dm=MON[k-1]+" "+[31,28,31,30][k-1];
+  var gain=gl>0;
+  var lines=[["Cash",pro,0,"G"]];if(!gain&&gl!==0)lines.push(["Loss on sale of notes receivable",-gl,0,"I"]);lines.push(["Notes receivable",0,F,"A"]);lines.push(["Interest receivable",0,acc,"C"]);if(gain)lines.push(["Gain on sale of notes receivable",0,gl,"I"]);
+  return {title:co,
+  scenario:'<p>On December 31, '+esc(co)+' sells land and accepts a '+$(F)+', '+mo+'-month, '+pc(r)+' note; principal and interest are due at maturity. On '+dm+' ('+k+' months later), it discounts the note at Western Carolina Bank, which charges a '+pc(b)+' discount rate. The transfer is <strong>without recourse</strong> and qualifies as a sale.</p>',
+  key:'<p><strong>Discounting</strong> a note means transferring it to a bank for cash. Three steps: (1) accrue interest earned up to the transfer date; (2) compute the <strong>maturity value</strong> (face + all interest); (3) subtract the bank\'s <strong>discount</strong> (maturity value × discount rate × time remaining) to get the cash proceeds. Compare proceeds with the note\'s book value (face + accrued interest) for the gain or loss.</p>',
+  parts:[
+   sched("Discounting schedule",[
+     G("A","Face amount",F,null,"Principal on the note."),G("B","Stated interest rate",r,"%","On the note."),
+     N("C","Interest accrued before discounting ("+k+" months)",acc,"A × B × "+k+"/12","Step 1: interest earned while the company held the note.",m($(F)+" × "+pc(r)+" × "+k+"/12 = "+$(acc))),
+     N("D","Maturity value",MV,"A + A × B × "+mo+"/12","Step 2: what the bank will collect at maturity.",m($(F)+" + "+$(R(F*r*mo/12))+" = "+$(MV))),
+     G("E","Bank's discount rate",b,"%","The bank's charge for advancing cash."),
+     N("F","Bank's discount ("+(mo-k)+" months remaining)",dsc,"D × E × "+(mo-k)+"/12","Step 3: computed on the maturity value, for the time left.",m($(MV)+" × "+pc(b)+" × "+(mo-k)+"/12 = "+$(dsc))),
+     N("G","Cash proceeds",pro,"D − F","Maturity value less the discount.",m($(MV)+" − "+$(dsc)+" = "+$(pro))),
+     N("H","Book value of the note at transfer",bv,"A + C","Face plus accrued interest.",m($(F)+" + "+$(acc)+" = "+$(bv))),
+     N("I",(gain?"Gain":"Loss")+" on sale of the note (enter as a positive amount)",Math.abs(gl),"G − H","Proceeds compared with book value.",m($(pro)+" − "+$(bv)+" = "+$(gl)))]),
+   JE(dm+": Accrue interest",[["Interest receivable",acc,0,"C"],["Interest revenue",0,acc,"C"]]),
+   JE(dm+": Discount the note (sale)",lines)
+  ],
+  take:"<p>The bank's discount is computed on the <em>maturity value</em>, not the face amount. Proceeds of "+$(pro)+" versus a book value of "+$(bv)+" give a "+(gain?"gain":"loss")+" of "+$(Math.abs(gl))+".</p>"};
+}};
+
+/* ===== ANALYSIS ===== */
+GEN.ratios={group:"Analysis",name:"Receivables turnover",blurb:"Turnover and average collection period.",make:function(){
+  var co=company(),S=K(rnd(2000,12000,50)),b=K(rnd(200,1500,10)),e=K(rnd(200,1500,10)),avg=R((b+e)/2),t=d2(S/avg),dd=d1(365/(S/avg)),ind=d1(dd+pick([-12,-8,-5,6,9,14]));
+  return {title:co,
+  facts:[["Industry average collection period",ind+" days","Published industry data."]],
+  scenario:'<p>An analyst is evaluating how quickly '+esc(co)+' collects from customers. Net sales for the year were '+$(S)+'. Net accounts receivable were '+$(b)+' at the beginning of the year and '+$(e)+' at the end.</p>',
+  key:'<p>The <strong>receivables turnover ratio</strong> (net sales ÷ average net receivables) shows how many times a year the average receivables balance is collected. The <strong>average collection period</strong> (365 ÷ turnover) estimates how many days a typical receivable is outstanding. Compare with the industry and the company\'s credit terms.</p>',
+  parts:[sched("Receivables analysis",[
+    G("A","Net sales",S,null,"Income statement."),G("B","Net accounts receivable, beginning",b,null,"Last year's balance sheet."),G("C","Net accounts receivable, ending",e,null,"This year's balance sheet."),
+    N("D","Average net accounts receivable",avg,"(B + C) ÷ 2","Average the two balances.",m("("+$(b)+" + "+$(e)+") ÷ 2 = "+$(avg))),
+    N("E","Receivables turnover (times, two decimals)",t,"A ÷ D","Net sales divided by average receivables.",m($(S)+" ÷ "+$(avg)+" = "+t+" times"),{unit:"dec",tol:.02}),
+    N("F","Average collection period (days, one decimal)",dd,"365 ÷ E","Days in the year divided by turnover.",m("365 ÷ "+t+" = "+dd+" days"),{unit:"dec",tol:.3}),
+    C("G","Compared with the industry average of "+ind+" days, the company collects:",["Faster than the industry","Slower than the industry"],dd<ind?0:1,"Fewer days means faster collection.",dd<ind?"Faster: it collects about "+d1(ind-dd)+" days sooner.":"Slower: it takes about "+d1(dd-ind)+" days longer, which could signal loose credit terms or collection problems.")])],
+  take:"<p>A falling turnover (rising collection period) can mean customers are paying more slowly, credit terms were loosened to boost sales, or bad debts may rise. Always compare against the company's own credit terms and its industry.</p>"};
+}};
+
+var ORDER=["cashclass","compbal","bankrec","petty","discounts","returns","aging","writeoff","pctsales","ibnote","nibnote","ltnote","assign","factor","discnote","ratios"];
+var POOL=["Cash","Accounts receivable","Allowance for uncollectible accounts","Bad debt expense","Sales revenue","Sales returns","Sales discounts","Sales discounts forfeited","Refund liability","Inventory","Inventory—estimated returns","Cost of goods sold","Notes receivable","Discount on notes receivable","Interest receivable","Interest revenue","Notes payable","Interest expense","Finance charge expense","Receivable from factor","Recourse liability","Loss on sale of receivables","Loss on sale of notes receivable","Gain on sale of notes receivable","Petty cash","Postage expense","Office supplies expense","Delivery expense","Miscellaneous expense","Accounts payable"];
+
+/* ---------- UI ---------- */
+var el=function(id){return document.getElementById(id);};
+var picker=el("picker"),partsEl=el("parts"),sumEl=el("summary");
+var state=null,typeBtns={};
+
+(function buildPicker(){
+  var groups={},gi=0;
+  ORDER.forEach(function(k){var g=GEN[k].group;(groups[g]=groups[g]||[]).push(k);});
+  Object.keys(groups).forEach(function(g){
+    var div=document.createElement("div");div.className="pgroup";
+    var hid="pg-"+(gi++);
+    div.innerHTML='<h3 id="'+hid+'">'+esc(g)+'</h3>';
+    var ul=document.createElement("ul");ul.setAttribute("aria-labelledby",hid);
+    groups[g].forEach(function(k){
+      var li=document.createElement("li"),b=document.createElement("button");
+      b.type="button";b.className="type-btn";b.setAttribute("aria-pressed","false");
+      b.innerHTML='<strong>'+esc(GEN[k].name)+'</strong><span>'+esc(GEN[k].blurb)+'</span>';
+      b.addEventListener("click",function(){start(k,true);});
+      typeBtns[k]=b;li.appendChild(b);ul.appendChild(li);
+    });
+    div.appendChild(ul);picker.appendChild(div);
+  });
+})();
+
+function parseNum(s){
+  s=String(s).trim().replace(/−/g,"-");
+  if(!s)return null;
+  var neg=false;
+  if(/^\(.*\)$/.test(s)){neg=true;s=s.slice(1,-1).trim();}
+  s=s.replace(/[$,%\s]/g,"");
+  if(s.charAt(0)==="-"){neg=!neg;s=s.slice(1);}
+  if(!/^(\d+\.?\d*|\.\d+)$/.test(s))return NaN;
+  var v=parseFloat(s);return neg?-v:v;
+}
+function numOK(v,ans,tol,unit){if(v===null||isNaN(v))return false;if(Math.abs(v-ans)<=tol+1e-9)return true;if(unit==="%"&&Math.abs(v*100-ans)<=tol+1e-9)return true;return false;}
+function showVal(v,unit){return unit==="%"?v+"%":unit==="dec"?String(v):(v<0?"-":"")+fmt(v);}
+function gv(r){return r.unit==="%"?pc(r.val):r.unit==="txt"?esc(r.val):$(r.val);}
+
+function acctList(p){var u=[];p.parts.forEach(function(pt){if(pt.type==="je")pt.lines.forEach(function(l){if(u.indexOf(l.acct)<0)u.push(l.acct);});});
+  var extra=shuffle(POOL.filter(function(a){return u.indexOf(a)<0;})).slice(0,Math.max(4,9-u.length));return u.concat(extra).sort();}
+function start(k,focus){
+  ORDER.forEach(function(x){typeBtns[x].setAttribute("aria-pressed",x===k?"true":"false");});
+  var p=GEN[k].make();
+  state={k:k,p:p,parts:[]};
+  el("ptype").textContent=GEN[k].name;
+  el("work-title").textContent=p.title;
+  var know=[];
+  p.parts.forEach(function(pt){if(pt.type==="sched")pt.rows.forEach(function(r){if(r.kind==="given")know.push([r.id,r.label,gv(r),r.why]);});});
+  (p.facts||[]).forEach(function(f){know.push(["",f[0],f[1],f[2]||""]);});
+  var kh="";
+  if(know.length){
+    kh='<p><strong>Here\'s what we know.</strong> '+any(["Before you calculate anything, read down this list and ask yourself whether each one makes sense.","Some of these come from the story above and some from the company\'s records. I noted where each one comes from.","Make sure you can explain where every one of these comes from before you start."])+' The lettered ones are already filled in as the gray lines in your schedule.</p>'+
+      '<div class="scroll"><table class="know"><caption class="sr-only">What we know</caption><thead><tr><th scope="col">Line</th><th scope="col">What we know</th><th scope="col" class="n">Amount</th><th scope="col">Where it comes from</th></tr></thead><tbody>'+
+      know.map(function(k){return '<tr><td class="ln">'+(k[0]||'<span class="sr-only">not in schedule</span>')+'</td><th scope="row">'+k[1]+'</th><td class="n">'+k[2]+'</td><td class="why">'+(k[3]||'')+'</td></tr>';}).join("")+'</tbody></table></div>';
+  }
+  if(p.given)kh+='<p>'+any(["I also have this table for you:","Here\'s one more piece of information:"])+'</p><div class="scroll">'+p.given+'</div>';
+  el("scenario-say").innerHTML=say(any(["<p>Here's the situation we're working with today.</p>","<p>Let's meet today's company.</p>","<p>Okay, here's our company for this one.</p>"])+p.scenario+kh);
+  el("given").innerHTML="";el("given").hidden=true;
+  el("key-say").innerHTML=say(p.key,{key:true,label:"Before you start, the key idea"});
+  sumEl.hidden=true;sumEl.innerHTML="";
+  partsEl.innerHTML="";
+  var n=0;
+  p.parts.forEach(function(pt,pi){
+    if(pt.type==="note"){var d=document.createElement("div");d.className="part";d.innerHTML=pt.html;partsEl.appendChild(d);state.parts.push({done:true,note:true});return;}
+    n++;
+    var ps={pt:pt,checks:0,done:false,firstRight:0,items:0,idx:pi};
+    state.parts.push(ps);
+    partsEl.appendChild(pt.type==="sched"?buildSched(ps,n,pi):buildJE(ps,n,pi,p.accts||acctList(p)));
+  });
+  if(focus){el("work-title").focus({preventScroll:true});el("worksheet").scrollIntoView({block:"start"});}
+}
+
+/* ----- schedule part ----- */
+function buildSched(ps,n,pi){
+  var pt=ps.pt,sec=document.createElement("section");sec.className="part";sec.id="part-"+pi;
+  var hid="ph-"+pi;
+  var hasBuilds=pt.rows.some(function(r){return r.builds;});
+  var h='<h3 id="'+hid+'"><span class="pnum">Part '+n+'</span> '+esc(pt.title)+'<span class="status" id="st-'+pi+'"></span></h3>'+say('<p>'+(n===1?any(["Start here. Fill in the white boxes; the given amounts are already in place.","Let's build the schedule. Use the Builds on column if you get stuck.","First, the numbers. Work top to bottom and each line sets up the next."]):any(["Next up. Keep going, using what you found above.","On to this part. The lines from earlier will help here."]))+(pt.intro?' '+pt.intro:'')+'</p>',{sm:true});
+  h+='<div class="scroll"><table class="sched"><caption class="sr-only">'+esc(pt.title)+'</caption><thead><tr><th scope="col">Line</th><th scope="col">Item</th>'+(hasBuilds?'<th scope="col" class="bo">Builds on</th>':'')+'<th scope="col" class="n">Amount</th></tr></thead><tbody>';
+  pt.rows.forEach(function(r,ri){
+    var rid="r"+pi+"-"+ri;
+    if(r.kind==="given"){
+      h+='<tr class="given"><td class="ln">'+r.id+'</td><td>'+r.label+' <span class="small">(given)</span></td>'+(hasBuilds?'<td class="bo"></td>':'')+'<td class="n">'+gv(r)+'</td></tr>';
+      return;
+    }
+    ps.items++;
+    var field;
+    if(r.kind==="choice"){
+      field='<select class="ans" id="'+rid+'" aria-describedby="fb-'+rid+'"><option value="">Select…</option>'+r.options.map(function(o,j){return '<option value="'+j+'">'+esc(o)+'</option>';}).join("")+'</select>';
+    }else{
+      field='<span class="inwrap">'+(r.unit==="$"?'<span class="u" aria-hidden="true">$</span>':'')+'<input class="ans n" id="'+rid+'" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-describedby="fb-'+rid+'">'+(r.unit==="%"?'<span class="u" aria-hidden="true">%</span>':'')+'</span>';
+    }
+    var wide=r.kind==="choice"&&r.options[0].length>20;
+    h+='<tr><td class="ln">'+r.id+'</td><td><label for="'+rid+'">'+r.label+(r.kind==="num"?(r.unit==="%"?' <span class="sr-only">(percent)</span>':' <span class="sr-only">(dollars)</span>'):'')+'</label><div class="fb" id="fb-'+rid+'" role="status"></div>'+(wide?'<div style="margin-top:.35rem">'+field+'</div>':'')+'</td>'+(hasBuilds?'<td class="bo">'+esc(r.builds)+'</td>':'')+'<td class="amt">'+(wide?'<span class="sr-only">Answer is below the item text</span>':field)+'</td></tr>';
+  });
+  h+='</tbody></table></div><div class="partfb" id="pf-'+pi+'" role="status" aria-live="polite"></div><div class="btns"><button type="button" class="btn" id="chk-'+pi+'">Check this part</button><button type="button" class="btn ghost" id="sol-'+pi+'" hidden>Show solution</button></div>';
+  sec.setAttribute("aria-labelledby",hid);
+  sec.innerHTML=h;
+  sec.querySelector("#chk-"+pi).addEventListener("click",function(){checkSched(ps,pi,false);});
+  sec.querySelector("#sol-"+pi).addEventListener("click",function(){checkSched(ps,pi,true);});
+  sec.querySelectorAll("input.ans").forEach(function(inp){inp.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();checkSched(ps,pi,false);}});});
+  return sec;
+}
+
+function checkSched(ps,pi,reveal){
+  if(ps.done)return;
+  var pt=ps.pt,right=0,total=0,blank=0,firstBad=null;
+  pt.rows.forEach(function(r,ri){
+    if(r.kind==="given")return;
+    total++;
+    var rid="r"+pi+"-"+ri,inp=el(rid),fb=el("fb-"+rid);
+    if(inp.disabled){right++;return;}
+    var ok;
+    if(r.kind==="choice")ok=inp.value!==""&&Number(inp.value)===r.ans;
+    else{var v=parseNum(inp.value);if(v===null&&!reveal){blank++;}ok=numOK(v,r.ans,r.tol,r.unit);}
+    if(ok){
+      right++;if(ps.checks===0)ps.firstRight++;
+      inp.classList.remove("bad-f");inp.classList.add("ok-f");inp.removeAttribute("aria-invalid");inp.disabled=true;
+      fb.className="fb ok";fb.innerHTML='<span class="tag">'+any(PRAISE)+'</span> '+r.sol;
+    }else if(reveal){
+      inp.value=r.kind==="choice"?String(r.ans):showVal(r.ans,r.unit);
+      inp.classList.remove("bad-f");inp.disabled=true;inp.removeAttribute("aria-invalid");
+      fb.className="fb sol";fb.innerHTML='<span class="tag">Here\'s how I\'d work it:</span> '+r.sol;
+    }else{
+      inp.classList.remove("ok-f");inp.classList.add("bad-f");inp.setAttribute("aria-invalid","true");
+      fb.className="fb bad";fb.innerHTML='<span class="tag">'+(inp.value===""?"Give this one a try.":any(NUDGE))+'</span> '+r.hint;
+      if(!firstBad)firstBad=inp;
+    }
+  });
+  ps.checks++;
+  var pf=el("pf-"+pi);
+  if(right===total||reveal){completePart(ps,pi,reveal);pf.className="partfb "+(reveal?"hint":"ok");pf.innerHTML='<span class="who">'+T.name+':</span> '+(reveal?"No problem. I filled in the solution with my work under each line. Compare it with yours, then let's keep going.":any(["All "+total+" lines are right. Nicely done!","Every line checks out. On to the next part!","That's all "+total+". You're getting the hang of this."]));}
+  else{pf.className="partfb bad";pf.innerHTML='<span class="who">'+T.name+':</span> '+(right?"You have "+right+" of "+total+" right. ":"Let's look at this together. ")+"I marked the lines to revisit in red and left a hint under each one"+(blank?" ("+blank+" still blank)":"")+". Fix those and check again"+(ps.checks>=1?", or ask me to show the solution.":".");el("sol-"+pi).hidden=false;if(firstBad)firstBad.focus();}
+}
+
+/* ----- journal entry part ----- */
+function buildJE(ps,n,pi,accts){
+  var pt=ps.pt,sec=document.createElement("section");sec.className="part";sec.id="part-"+pi;
+  var hid="ph-"+pi,nl=pt.lines.length;
+  ps.items=nl;
+  var h='<h3 id="'+hid+'"><span class="pnum">Part '+n+'</span> '+esc(pt.title)+'<span class="status" id="st-'+pi+'"></span></h3>';
+  h+=say('<p>'+any(["Now let's turn your schedule into a journal entry.","Time to record it. Every number you need is already in your schedule.","Here's where it comes together: the entry."])+' This one has <strong>'+nl+' lines</strong>; leave the unused amount box empty on each line.'+(pt.intro?' '+pt.intro:'')+'</p>',{sm:true});
+  h+='<div class="scroll"><table class="je"><caption class="sr-only">'+esc(pt.title)+'</caption><thead><tr><th scope="col">Account</th><th scope="col" class="n">Debit</th><th scope="col" class="n">Credit</th><th scope="col">Comes from</th></tr></thead><tbody>';
+  for(var i=0;i<nl;i++){
+    var b="j"+pi+"-"+i;
+    h+='<tr id="row-'+b+'"><td class="ac"><label class="sr-only" for="'+b+'a">Line '+(i+1)+' account</label><select class="ans" id="'+b+'a"><option value="">Select account…</option>'+accts.map(function(a){return '<option>'+esc(a)+'</option>';}).join("")+'</select></td>'+
+       '<td class="d"><label class="sr-only" for="'+b+'d">Line '+(i+1)+' debit (dollars)</label><input class="ans n" id="'+b+'d" type="text" inputmode="decimal" autocomplete="off"></td>'+
+       '<td class="c"><label class="sr-only" for="'+b+'c">Line '+(i+1)+' credit (dollars)</label><input class="ans n" id="'+b+'c" type="text" inputmode="decimal" autocomplete="off"></td>'+
+       '<td class="src" id="'+b+'s"><span class="sr-only">Shown after the entry is correct</span><span aria-hidden="true">—</span></td></tr>';
+  }
+  h+='</tbody></table></div><div class="partfb" id="pf-'+pi+'" role="status" aria-live="polite"></div><div class="btns"><button type="button" class="btn" id="chk-'+pi+'">Check this entry</button><button type="button" class="btn ghost" id="sol-'+pi+'" hidden>Show solution</button></div>';
+  sec.setAttribute("aria-labelledby",hid);
+  sec.innerHTML=h;
+  sec.querySelector("#chk-"+pi).addEventListener("click",function(){checkJE(ps,pi,false);});
+  sec.querySelector("#sol-"+pi).addEventListener("click",function(){checkJE(ps,pi,true);});
+  return sec;
+}
+
+function checkJE(ps,pi,reveal){
+  if(ps.done)return;
+  var pt=ps.pt,nl=pt.lines.length,rows=[],used={},right=0,tD=0,tC=0,blank=0;
+  for(var i=0;i<nl;i++){
+    var b="j"+pi+"-"+i,a=el(b+"a").value,d=parseNum(el(b+"d").value),c=parseNum(el(b+"c").value);
+    if(!a&&d===null&&c===null)blank++;
+    tD+=(d>0?d:0);tC+=(c>0?c:0);
+    rows.push({b:b,a:a,d:d===null?0:d,c:c===null?0:c,bad:isNaN(d)||isNaN(c)});
+  }
+  if(reveal){
+    pt.lines.forEach(function(l,i){var b="j"+pi+"-"+i;el(b+"a").value=l.acct;el(b+"d").value=l.dr?fmt(l.dr):"";el(b+"c").value=l.cr?fmt(l.cr):"";});
+    pt.lines.forEach(function(l,i){markRow("j"+pi+"-"+i,null,l);});
+    completePart(ps,pi,true);
+    var pf=el("pf-"+pi);pf.className="partfb hint";pf.innerHTML='<span class="who">'+T.name+':</span> Here\'s the entry. Look at the <strong>Comes from</strong> column: every amount is a line you already worked in the schedule.';
+    return;
+  }
+  /* match each student row to an unused expected line */
+  var hit=[];
+  rows.forEach(function(r){
+    var m=-1;
+    pt.lines.forEach(function(l,li){if(m<0&&!used[li]&&l.acct===r.a&&!r.bad&&Math.abs(r.d-l.dr)<=1&&Math.abs(r.c-l.cr)<=1)m=li;});
+    if(m>=0){used[m]=1;right++;if(ps.checks===0)ps.firstRight++;}
+    hit.push(m);
+  });
+  ps.checks++;
+  rows.forEach(function(r,i){markRow(r.b,hit[i]>=0,hit[i]>=0?pt.lines[hit[i]]:null);});
+  var pf=el("pf-"+pi);
+  if(right===nl){completePart(ps,pi,false);pf.className="partfb ok";pf.innerHTML='<span class="who">'+T.name+':</span> '+any(["That entry is right and it balances!","Debits equal credits and every account is right. Great work!"])+' Check the <strong>Comes from</strong> column to see how each amount flows straight from your schedule.';return;}
+  var msgs=[right?"You have "+right+" of "+nl+" lines right.":"Not there yet, but that's what practice is for."];
+  if(Math.abs(tD-tC)>1)msgs.push("Your debits ("+$(tD)+") don't equal your credits ("+$(tC)+"), so something's off.");
+  var missing=pt.lines.filter(function(l,li){return !used[li];}).map(function(l){return l.acct;});
+  if(ps.checks===1)msgs.push("Here's a hint: this entry uses "+uniq(pt.lines.map(function(l){return l.acct;})).join(", ")+". Each amount is one of the lettered lines in your schedule.");
+  else msgs.push("Still missing: "+uniq(missing).join(", ")+". Ask yourself whether each one is increasing or decreasing, and which side that means. Or I can show you the solution.");
+  pf.className="partfb bad";pf.innerHTML='<span class="who">'+T.name+':</span> '+esc(msgs.join(" "));
+  el("sol-"+pi).hidden=false;
+  var firstBadRow=rows.filter(function(r,i){return hit[i]<0;})[0];if(firstBadRow)el(firstBadRow.b+"a").focus();
+}
+function uniq(a){return a.filter(function(x,i){return a.indexOf(x)===i;});}
+function markRow(b,ok,line){
+  ["a","d","c"].forEach(function(s){var f=el(b+s);f.classList.remove("ok-f","bad-f");f.removeAttribute("aria-invalid");
+    if(ok===true){f.classList.add("ok-f");f.disabled=true;}
+    else if(ok===false){f.classList.add("bad-f");f.setAttribute("aria-invalid","true");}
+    else{f.disabled=true;}});
+  var s=el(b+"s");
+  if(line&&ok!==false)s.innerHTML='<span class="chip">Line '+esc(line.src)+'</span>';
+}
+
+function completePart(ps,pi,revealed){
+  ps.done=true;ps.revealed=revealed;
+  var sec=el("part-"+pi);sec.classList.add("complete");
+  el("st-"+pi).textContent=revealed?"Solution shown":"Complete";
+  el("chk-"+pi).disabled=true;el("sol-"+pi).hidden=true;
+  sec.querySelectorAll("input,select").forEach(function(f){f.disabled=true;});
+  if(state.parts.every(function(p){return p.done;}))summary();
+}
+
+function summary(){
+  var p=state.p,tot=0,first=0,rev=0;
+  state.parts.forEach(function(ps){if(ps.note)return;tot+=ps.items;first+=ps.firstRight;if(ps.revealed)rev++;});
+  var cheer=first===tot?"Every answer right on the first try. Impressive!":(first>=tot*.7?"Strong work. You're close to mastering this.":"Good effort. Try another set of numbers and watch how much easier it gets.");
+  sumEl.innerHTML='<h3>Problem complete</h3><ul class="score" aria-label="Your results"><li>Right on the first check: '+first+' of '+tot+'</li><li>Parts with solution shown: '+rev+'</li></ul>'+say('<p>'+cheer+' One last thing I want you to remember:</p>'+p.take)+'<div class="btns"><button type="button" class="btn" id="again-btn">Try another with new numbers</button><button type="button" class="btn ghost" id="pick-btn">Choose a different problem type</button></div>';
+  sumEl.hidden=false;
+  el("again-btn").addEventListener("click",function(){start(state.k,true);});
+  el("pick-btn").addEventListener("click",function(){el("pick-title").scrollIntoView({block:"start"});typeBtns[state.k].focus();});
+  sumEl.focus();
+}
+
+el("intro").innerHTML=say('<p>Hi, I\'m <strong>'+T.name+'</strong>, '+T.bio+'. I\'ll be your tutor for cash and receivables today. '+T.style+'</p>'+
+  '<ul><li>Pick a problem type below. Each one is a <strong>worksheet</strong> with lettered lines (A, B, C …). The <strong>Builds on</strong> column tells you which earlier lines feed each answer.</li>'+
+  '<li>Fill in a part, then press <strong>Check this part</strong>. I\'ll mark answers green or red and give you a hint on the red ones. After your first check, you can ask me to <strong>Show solution</strong>.</li>'+
+  '<li>Then we\'ll turn your schedule into a <strong>journal entry</strong>. Once it\'s right, the <strong>Comes from</strong> column shows where each amount came from.</li></ul>'+
+  '<p class="small">Quick tips: whole dollars, commas optional. Enter a decrease as <span class="math">-12,000</span> or <span class="math">(12,000)</span>, and rates as percents like <span class="math">23.5</span>.</p>',{label:T.name+", your tutor"});
+el("sub").textContent="Your tutor today is "+T.name+". Work the schedule, then record the journal entries.";
+el("new-btn").addEventListener("click",function(){if(state)start(state.k,true);});
+el("print-btn").addEventListener("click",function(){window.print();});
+start("discounts",false);
+
+/* expose for self-checks */
+window.__tutor={GEN:GEN,ORDER:ORDER,start:start,state:function(){return state;}};
+})();
+</script>
+</body>
+</html>
