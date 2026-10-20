@@ -2,68 +2,136 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ch. 7 Walkthrough — Notes Receivable &amp; Financing Receivables</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Notes Receivable and Financing with Receivables — Guided Walkthrough</title>
 <style>
-  :root{
-    --purple: #4b2e6f; --purple-dark: #33204d; --purple-pale: #f3effa;
-    --gold: #c9a227; --gold-pale: #faf4de;
-    --ink: #23202b; --paper: #fffdf9; --line: #e2dcea;
-    --green: #1e7a4c; --green-bg: #e9f6ee; --red: #a3312a; --red-bg: #fbeceb;
-    --mono: 'IBM Plex Mono', ui-monospace, monospace;
-    --serif: 'Source Serif 4', Georgia, serif;
-    --sans: 'Inter', -apple-system, sans-serif;
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+  :root {
+    --wcu-purple: #4B2E83; --wcu-purple-dark: #341f5c; --wcu-gold: #C8A24A;
+    --ink: #232023; --paper: #fdfcfb; --panel: #f7f3ec; --rule: #e2d9c8; --gold-light: #f4ecd8;
+    --muted: #5f5955; --warn: #6b4f0e; --warn-bg: #FBF3DC;
+    --ok: #1e5e32; --ok-bg: #e6f2e9; --no: #8c1d18; --no-bg: #fbe9e7;
+    --border-strong: #8a7f6c;
   }
-  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Inter:wght@400;500;600;700&display=swap');
-  *{box-sizing:border-box;}
-  body{ margin:0; background:var(--paper); color:var(--ink); font-family:var(--sans); line-height:1.6; }
-  header.top{ background:var(--purple); color:#fff; padding:2.2rem 1.5rem 2.6rem; position:relative; overflow:hidden;}
-  header.top::after{ content:""; position:absolute; right:-40px; bottom:-60px; width:220px; height:220px; border-radius:50%; background:var(--purple-dark); opacity:.5;}
-  header.top .eyebrow{ font-family:var(--mono); font-size:.78rem; color:var(--gold); margin-bottom:.5rem; position:relative;}
-  header.top h1{ margin:0 0 .4rem; font-family:var(--serif); font-weight:600; font-size:1.9rem; max-width:38rem; position:relative;}
-  header.top p{ margin:0; max-width:34rem; color:#e6ddf2; font-size:.98rem; position:relative;}
-  main{ max-width:44rem; margin:0 auto; padding:2.4rem 1.5rem 5rem; }
-  .problem{ margin-top:3rem; padding-top:1.6rem; border-top:3px solid var(--purple); }
-  .problem h2{ font-family:var(--serif); font-size:1.5rem; color:var(--purple-dark); margin:0 0 .3rem; }
-  .problem .facts{ background:var(--purple-pale); border-left:4px solid var(--purple); padding:1rem 1.2rem; border-radius:4px; font-size:.95rem; margin:1rem 0 1.8rem;}
-  .facts p{margin:.3rem 0;} .facts strong{color:var(--purple-dark);}
-  .step{ margin:2.2rem 0; }
-  .step .step-label{ font-family:var(--mono); font-size:.75rem; color:var(--gold); background:var(--purple-dark); display:inline-block; padding:.2rem .55rem; border-radius:3px; margin-bottom:.7rem;}
-  .step h3{ font-family:var(--serif); font-size:1.15rem; margin:.2rem 0 .6rem; color:var(--ink); }
-  .step .narrative{ font-family:var(--serif); font-size:1.02rem; color:#3a3542; }
-  .step .narrative p{ margin:.55rem 0; }
-  .step .narrative .think{ background:var(--gold-pale); border:1px dashed var(--gold); border-radius:6px; padding:.8rem 1rem; font-family:var(--sans); font-size:.92rem; margin:1rem 0;}
-  .reveal-btn{ font-family:var(--sans); font-weight:600; font-size:.9rem; color:#fff; background:var(--purple); border:none; border-radius:5px; padding:.6rem 1.1rem; cursor:pointer; margin-top:.4rem;}
-  .reveal-btn:hover{ background:var(--purple-dark); }
-  .reveal-btn.shown{ background:#8a7c98; }
-  .entry-wrap{ display:none; margin-top:1.1rem; animation:fadein .35s ease; }
-  .entry-wrap.open{ display:block; }
-  @keyframes fadein{ from{opacity:0; transform:translateY(-4px);} to{opacity:1; transform:translateY(0);} }
-  .entry-date{ font-family:var(--mono); font-size:.85rem; color:var(--purple-dark); font-weight:600; margin-bottom:.4rem;}
-  table.jtable{ width:100%; border-collapse:collapse; font-family:var(--mono); font-size:.82rem; background:#fff; border:1px solid var(--line);}
-  table.jtable th{ background:var(--purple-dark); color:#fff; font-family:var(--sans); font-weight:600; font-size:.72rem; padding:.5rem .4rem; text-align:center;}
-  table.jtable td{ padding:.5rem .5rem; border-top:1px solid var(--line); text-align:center; }
-  table.jtable td.acct{ text-align:left; padding-left:.9rem; }
-  table.jtable td.acct.credit{ padding-left:2.2rem; color:#4a4552;}
-  table.jtable td.amt{ font-weight:600; }
-  .up{ color:var(--green); font-weight:700; } .down{ color:var(--red); font-weight:700; } .dash{ color:#c3bccb; }
-  .statement-row{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:.7rem; margin-top:.9rem; }
-  .stbox{ background:var(--purple-pale); border-radius:6px; padding:.65rem .75rem; font-size:.8rem;}
-  .stbox .lbl{ font-family:var(--sans); font-weight:700; color:var(--purple-dark); font-size:.7rem; text-transform:uppercase; letter-spacing:.03em; display:block; margin-bottom:.25rem;}
-  .stbox .val{ font-family:var(--mono); }
-  .stbox.no-effect{ background:#f1eff4; color:#8b8494; }
-  .callout{ background:var(--gold-pale); border-left:4px solid var(--gold); border-radius:4px; padding:.8rem 1rem; font-size:.9rem; margin:1.4rem 0;}
-  .callout strong{ color:var(--purple-dark); }
-  .checkyourself{ background:var(--green-bg); border:1px solid #b9dfc8; border-radius:6px; padding:1rem 1.1rem; margin-top:1.6rem; font-size:.92rem;}
-  .checkyourself .lbl{ font-family:var(--sans); font-weight:700; color:var(--green); font-size:.78rem; text-transform:uppercase; letter-spacing:.03em; display:block; margin-bottom:.4rem;}
-  .answer-note{ background:var(--red-bg); border:1px solid #e2b6b1; border-radius:6px; padding:.8rem 1rem; font-size:.85rem; margin-top:1rem; color:#5c231e;}
-  .answer-note strong{ color:var(--red); }
-  .tblock{ background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:.9rem 1rem; font-family:var(--mono); font-size:.85rem; margin:.6rem 0;}
-  .tblock .tt{ font-family:var(--sans); font-weight:600; font-size:.78rem; color:var(--purple-dark); margin-bottom:.4rem;}
-  .tblock .line{ display:flex; justify-content:space-between; padding:.15rem 0; }
-  .tblock .line.total{ border-top:1px solid var(--line); margin-top:.3rem; padding-top:.4rem; font-weight:700;}
-  .noentry{ font-family:var(--mono); background:#f1eff4; border:1px dashed #b3a6bf; border-radius:6px; padding:.8rem 1rem; text-align:center; color:#5c526b; }
-  footer{ text-align:center; padding:2rem; font-family:var(--mono); font-size:.75rem; color:#a89bb5; }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .progress-fill { transition: none !important; } }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; line-height: 1.55; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+  .skip-link { position: absolute; left: 1rem; top: -3rem; background: #fff; color: var(--wcu-purple-dark); font-weight: 700; padding: 0.5rem 0.9rem; border: 2px solid var(--wcu-purple); border-radius: 5px; z-index: 10; }
+  .skip-link:focus { top: 1rem; }
+  a { color: var(--wcu-purple); }
+  header { background: linear-gradient(135deg, var(--wcu-purple) 0%, var(--wcu-purple-dark) 100%); color: #fff; padding: 2.2rem 1.5rem 1.8rem; border-bottom: 6px solid var(--wcu-gold); }
+  header .inner { max-width: 780px; margin: 0 auto; }
+  header .eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: #e3c77f; margin: 0 0 0.4rem; }
+  header h1 { font-family: 'Source Serif 4', serif; font-weight: 700; font-size: 1.9rem; margin: 0 0 0.3rem; }
+  header p.sub { margin: 0; color: #ece6f5; font-size: 0.98rem; }
+  .progress-bar { margin: 0 0 0.4rem; padding: 0; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .progress-track { flex: 1; height: 8px; background: var(--rule); border-radius: 4px; overflow: hidden; border: 1px solid var(--border-strong); }
+  .progress-fill { height: 100%; width: 0%; background: var(--wcu-purple); transition: width 0.3s ease; }
+  .progress-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--muted); white-space: nowrap; }
+  main { max-width: 780px; margin: 0 auto; padding: 1.2rem 1.5rem 4rem; }
+  main:focus { outline: none; }
+  .lo-block { margin-bottom: 2.8rem; }
+  h2 { font-family: 'Source Serif 4', serif; font-size: 1.5rem; margin: 0 0 0.8rem; color: var(--wcu-purple-dark); border-bottom: 2px solid var(--rule); padding-bottom: 0.4rem; }
+  p { margin: 0.6rem 0; }
+  ul, ol { padding-left: 1.4rem; }
+  li { margin-bottom: 0.4rem; }
+  .key-idea { background: var(--panel); border-left: 4px solid var(--wcu-gold); padding: 0.9rem 1.1rem; border-radius: 0 6px 6px 0; margin: 0.9rem 0; }
+  .key-idea strong { color: var(--wcu-purple-dark); }
+  .facts { background: #fff; border: 1px solid var(--rule); border-radius: 8px; padding: 1rem 1.2rem; margin: 1rem 0 1.6rem; }
+  .ex-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--wcu-purple); margin: 0 0 0.4rem; line-height: 1.4; }
+  .facts ul { margin: 0.4rem 0 0; }
+  .example { background: #fff; border: 1px solid var(--rule); border-radius: 8px; padding: 1rem 1.2rem 1.2rem; margin: 1.1rem 0; }
+  .table-wrap { overflow-x: auto; }
+  .table-wrap:focus-visible { outline: 3px solid var(--wcu-purple); outline-offset: 2px; }
+  table.data { border-collapse: collapse; width: 100%; margin: 0.7rem 0; font-size: 0.88rem; }
+  table.data caption { text-align: left; font-weight: 600; font-size: 0.85rem; color: var(--wcu-purple-dark); padding: 0 0 0.3rem; }
+  table.data th, table.data td { border: 1px solid var(--rule); padding: 0.4rem 0.55rem; text-align: left; vertical-align: top; }
+  table.data thead th { background: var(--panel); color: var(--wcu-purple-dark); font-family: 'IBM Plex Mono', monospace; font-size: 0.74rem; text-transform: uppercase; }
+  table.data tbody th { font-weight: 500; min-width: 9rem; }
+  table.data thead th.num { white-space: normal; }
+  table.data td.num, table.data th.num { text-align: right; font-family: 'IBM Plex Mono', monospace; white-space: nowrap; }
+  table.data tr.total-row th, table.data tr.total-row td { background: var(--panel); font-weight: 700; }
+  table.data tr.sub-head th { font-style: italic; font-weight: 600; color: var(--wcu-purple-dark); }
+  table.data th.indent { padding-left: 1.5rem; }
+  .result-ok { color: var(--ok); background: var(--ok-bg); font-weight: 700; }
+  .result-no { color: var(--no); background: var(--no-bg); font-weight: 700; }
+
+  .input-block { display: flex; flex-direction: column; gap: 0.6rem; margin: 0.9rem 0 0.6rem; padding: 0.9rem; background: var(--panel); border-radius: 6px; }
+  .input-item { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+  .input-item label { flex: 1 1 280px; font-size: 0.9rem; font-weight: 600; color: var(--wcu-purple-dark); }
+  .input-item .unit { font-family: 'IBM Plex Mono', monospace; color: var(--muted); }
+  .input-item input[type="number"], .input-item select { font-family: 'IBM Plex Mono', monospace; font-size: 0.92rem; padding: 0.45rem 0.6rem; border: 1px solid var(--border-strong); border-radius: 5px; background: #fff; color: var(--ink); min-height: 2.4rem; }
+  .input-item input[type="number"] { width: 150px; }
+  .input-item select { min-width: 190px; font-family: 'Inter', sans-serif; }
+  .input-item input:focus-visible, .input-item select:focus-visible { outline: 3px solid var(--wcu-purple); outline-offset: 2px; border-color: var(--wcu-purple); }
+  .input-item [aria-invalid="true"] { border: 2px solid var(--no); }
+  .reveal-btn { align-self: flex-start; font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #fff; background: var(--wcu-purple); border: none; padding: 0.6rem 1.1rem; border-radius: 5px; cursor: pointer; margin-top: 0.2rem; min-height: 2.75rem; }
+  .reveal-btn:hover { background: var(--wcu-purple-dark); }
+  .reveal-btn:focus-visible { outline: 3px solid var(--wcu-purple-dark); outline-offset: 3px; box-shadow: 0 0 0 3px #fff inset; }
+
+  .feedback:empty { display: none; }
+  .feedback { font-weight: 600; padding: 0.6rem 0.9rem; border-radius: 6px; margin: 0.4rem 0 0.2rem; font-size: 0.92rem; color: var(--warn); background: var(--warn-bg); border: 1px solid #d9c58f; }
+
+  .solution { margin-top: 0.9rem; padding-top: 0.9rem; border-top: 1px dashed var(--border-strong); }
+  .solution[hidden] { display: none; }
+  .solution-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--wcu-purple); margin: 1rem 0 0.4rem; }
+  .solution-label:first-child { margin-top: 0; }
+  .solution-label:focus { outline: 3px solid var(--wcu-purple); outline-offset: 3px; }
+  .final-answer { font-size: 1rem; margin-top: 0.6rem; }
+  .final-answer strong { color: var(--wcu-purple-dark); }
+
+  table.je-table { border-collapse: collapse; width: 100%; margin: 0.4rem 0 0.2rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.83rem; }
+  table.je-table caption { text-align: left; }
+  table.je-table th { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; color: var(--muted); text-align: left; padding: 0.2rem 0.3rem; border-bottom: 1px solid var(--rule); }
+  table.je-table th.amt { text-align: right; }
+  table.je-table td { padding: 0.26rem 0.3rem; vertical-align: top; }
+  table.je-table td.je-debit-amt, table.je-table td.je-credit-amt { text-align: right; width: 105px; white-space: nowrap; }
+  table.je-table td.indent { padding-left: 1.8rem; }
+  .je-desc { font-size: 0.85rem; color: var(--muted); font-style: italic; margin: 0.2rem 0 0.9rem; }
+  .date-tag { display: inline-block; font-family: 'IBM Plex Mono', monospace; font-weight: 700; font-size: 0.75rem; color: #fff; background: var(--wcu-purple-dark); padding: 0.12rem 0.5rem; border-radius: 4px; margin-top: 0.4rem; }
+
+  .steps-grid { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 1rem; align-items: start; margin: 0.6rem 0; }
+  @media (max-width: 620px) { .steps-grid { grid-template-columns: 1fr; } }
+  ol.four-step { list-style: none; padding: 0.7rem 0.9rem; margin: 0; background: var(--gold-light); border-radius: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 0.84rem; }
+  ol.four-step li { margin: 0.2rem 0; }
+  ol.four-step li strong { color: var(--wcu-purple-dark); }
+  table.t-acct { border-collapse: collapse; width: 100%; font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem; }
+  table.t-acct caption { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--wcu-purple-dark); font-size: 0.86rem; padding-bottom: 0.2rem; border-bottom: 2px solid var(--ink); }
+  table.t-acct th, table.t-acct td { padding: 0.25rem 0.4rem; }
+  table.t-acct thead th { font-size: 0.7rem; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  table.t-acct tbody th { text-align: left; font-weight: 400; font-family: 'Inter', sans-serif; font-size: 0.8rem; color: var(--muted); }
+  table.t-acct td { text-align: right; width: 28%; }
+  table.t-acct td.dr { border-right: 2px solid var(--ink); }
+  table.t-acct tr.bal td, table.t-acct tr.bal th { border-top: 1px solid var(--ink); font-weight: 700; color: var(--ink); }
+
+  code { font-family: 'IBM Plex Mono', monospace; background: var(--panel); padding: 0 0.25rem; border-radius: 3px; }
+  /* Journal-entry input grid (students build the entry before revealing) */
+  .je-input { margin: 0.2rem 0 0.1rem; }
+  .je-input + .je-input { margin-top: 0.8rem; }
+  .je-head { font-size: 0.9rem; font-weight: 700; color: var(--wcu-purple-dark); margin: 0.2rem 0 0.3rem; }
+  table.je-entry { border-collapse: collapse; width: 100%; min-width: 560px; background: #fff; border: 1px solid var(--border-strong); font-size: 0.88rem; }
+  table.je-entry thead th { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; color: var(--muted); text-align: left; padding: 0.35rem 0.45rem; border-bottom: 1px solid var(--rule); background: #fff; }
+  table.je-entry thead th.amt { text-align: right; }
+  table.je-entry tbody th.ln { font-family: 'IBM Plex Mono', monospace; font-weight: 500; color: var(--muted); width: 2.6rem; text-align: center; padding: 0.3rem; border-top: 1px solid var(--rule); }
+  table.je-entry td { padding: 0.3rem 0.45rem; vertical-align: middle; border-top: 1px solid var(--rule); }
+  table.je-entry select { width: 100%; min-width: 210px; font-family: 'Inter', sans-serif; font-size: 0.9rem; padding: 0.4rem 0.5rem; border: 1px solid var(--border-strong); border-radius: 5px; background: #fff; color: var(--ink); min-height: 2.4rem; }
+  table.je-entry input { width: 100%; min-width: 100px; font-family: 'IBM Plex Mono', monospace; font-size: 0.9rem; padding: 0.4rem 0.5rem; border: 1px solid var(--border-strong); border-radius: 5px; background: #fff; color: var(--ink); text-align: right; min-height: 2.4rem; }
+  table.je-entry td.amt-cell { width: 118px; }
+  table.je-entry td.row-status { width: 5.9rem; font-weight: 700; font-size: 0.8rem; white-space: nowrap; }
+  table.je-entry select:focus-visible, table.je-entry input:focus-visible { outline: 3px solid var(--wcu-purple); outline-offset: 2px; border-color: var(--wcu-purple); }
+  table.je-entry [aria-invalid="true"] { border: 2px solid var(--no); }
+  table.data td.je-cell { font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; }
+  .je-none { font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; margin: 0.3rem 0 0.9rem; }
+
+  /* Summary boxes */
+  .checkpoint { background: var(--panel); border-radius: 8px; padding: 0.8rem 1.1rem; margin: 0.9rem 0 0.4rem; font-size: 0.92rem; }
+  .checkpoint strong { color: var(--wcu-purple-dark); }
+  .patterns { background: var(--gold-light); border-radius: 8px; padding: 0.9rem 1.1rem; margin: 0.8rem 0 0.2rem; }
+  .patterns p { margin: 0.3rem 0; }
+  .loss-flag { display: inline-block; font-family: 'IBM Plex Mono', monospace; font-weight: 700; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; color: #fff; background: #8c1d18; padding: 0.12rem 0.5rem; border-radius: 4px; margin-left: 0.4rem; vertical-align: middle; }
+  footer { text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--muted); padding: 1.5rem; }
 </style>
 <style id="a11y-fixes">
   /* Accessibility fixes added Oct 2026: visible keyboard focus, scrollable wide tables, and text colors adjusted to meet WCAG AA contrast. */
@@ -71,360 +139,655 @@
   .a11y-scroll { overflow-x: auto; max-width: 100%; }
   .table-scroll, .a11y-scroll { position: relative; }
   .a11y-sr { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
-  footer { color: #766d7f !important; }
-  button.reveal-btn.shown { background-color: #796d86 !important; }
-  span.val { color: #6c6773 !important; }
+</style>
+<style>
+  .effects { font-size: 0.88rem; color: var(--ink); background: var(--panel); border-radius: 6px; padding: 0.55rem 0.9rem; margin: 0.4rem 0 0.9rem; }
+  .effects strong { color: var(--wcu-purple-dark); }
 </style>
 </head>
 <body>
 
-<header class="top">
-  <div class="eyebrow">ACCT 351 · Intermediate Accounting I · Chapter 7</div>
-  <h1>Notes Receivable &amp; Financing Receivables</h1>
-  <p>A guided walkthrough of Evergreen Company's full receivables cycle and Lonergan Company's choice between assigning and factoring.</p>
+<a class="skip-link" href="#main">Skip to the walkthrough</a>
+
+<header>
+  <div class="inner">
+    <p class="eyebrow">Guided Walkthrough · Not Graded</p>
+    <h1>Notes Receivable and Financing with Receivables</h1>
+    <p class="sub">Record notes, factor and discount receivables, and compare assigning with factoring.</p>
+  </div>
 </header>
 
-<main>
-  <div class="callout">
-    <strong>How this works:</strong> Read the reasoning, picture the entry yourself, then click "Reveal the entry" to check your thinking.
+<main id="main" tabindex="-1">
+<div class="progress-bar">
+  <div class="progress-track" id="progressBar" role="progressbar" aria-label="Walkthrough progress" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-label" id="progressLabel" aria-hidden="true">0 revealed</div>
+</div>
+
+  <div class="key-idea">
+    <p style="margin:0"><strong>How this works:</strong> Work each problem on your own first and enter your answer in every box. For journal entries, choose an account and enter its amount in either the Debit or the Credit column, one account per line; use only the lines you need and leave the rest blank. If a transaction needs no journal entry, choose <strong>No entry required</strong> on the first line and leave the amounts blank. Then select <strong>Reveal Answer</strong> to see the correct answer next to yours, along with a detailed explanation and the journal entries. Enter all amounts as positive numbers. Answers within $1 of the solution count as a match (rounding). This page isn't graded and doesn't get submitted anywhere; it's just for practice.</p>
   </div>
 
-  <!-- ============================================================ -->
-  <!-- PROBLEM 1: EVERGREEN -->
-  <!-- ============================================================ -->
-  <section class="problem">
-    <h2>Problem 1 — Evergreen Company</h2>
+  <div class="key-idea">
+    <p style="margin:0"><strong>Key idea:</strong> A note receivable is recorded at its present value, so any interest hidden in its face amount is recognized over time. When a company uses receivables to raise cash, the key question is whether it <strong>borrowed</strong> against them (they stay on the books as collateral) or <strong>sold</strong> them (they leave the books, and any fee is a loss).</p>
+  </div>
+  <section class="lo-block" aria-labelledby="s-notes">
+    <h2 id="s-notes">Notes Receivable, Factoring, and Discounting</h2>
     <div class="facts">
-      <p>Fiscal year-end: <strong>December 31</strong>. Ignore COGS entries for merchandise sales throughout.</p>
-      <p>A running set of receivables transactions from late February through the end of April, with year-end adjustments still to come.</p>
+      <p class="ex-label">The company used in Problems 1–8</p>
+      <p><strong>Nantahala Gear Company</strong> sells paddling and climbing equipment to outfitters. Its fiscal year ends <strong>December 31</strong>. Ignore cost of goods sold for every sale in Problems 1–8. During <span class="yr0">2026</span>:</p>
+      <ul>
+        <li><strong>Feb. 28:</strong> Sold merchandise to Fontana Outfitters for a <strong>$24,000, 9%, 7-month note</strong>. 9% is an appropriate rate for a note of this type.</li>
+        <li><strong>Mar. 31:</strong> Sold merchandise with a fair value of <strong>$13,800</strong> to Highlands Ridge Lodge for a <strong>$15,000, 1-year noninterest-bearing note</strong>.</li>
+        <li><strong>Apr. 3:</strong> Sold <strong>$14,000</strong> of merchandise to Cashiers Trading Post on account, terms 2/10, n/30 (gross method).</li>
+        <li><strong>Apr. 11:</strong> Cashiers Trading Post returned merchandise and received a <strong>$5,200</strong> reduction of its account.</li>
+        <li><strong>Apr. 17:</strong> Received payment from Cashiers Trading Post for the balance due.</li>
+        <li><strong>Apr. 30:</strong> Factored <strong>$72,000</strong> of accounts receivable to a bank <strong>without recourse</strong> for a <strong>3%</strong> finance charge; the sale criteria are met.</li>
+        <li><strong>Apr. 30:</strong> Discounted the Fontana Outfitters note at the bank <strong>without recourse</strong>; the bank's discount rate is <strong>12%</strong>, and the sale criteria are met.</li>
+        <li><strong>Sep. 30:</strong> Fontana Outfitters paid the maturity value of its note.</li>
+      </ul>
     </div>
-
-    <div class="step">
-      <span class="step-label">FEB 28</span>
-      <h3>An interest-bearing note at a market rate</h3>
-      <div class="narrative">
-        <p>Evergreen sells $18,000 of merchandise to Lennox and takes an 8%, 7-month note instead of cash. Since 8% is stated to be the appropriate market rate for a note like this, there's no hidden discount to unwind — the note's face amount already equals its present value. This is the simple case.</p>
+    <article class="example" id="p1" aria-labelledby="p1-h">
+      <h3 class="ex-label" id="p1-h">Problem 1 — An Interest-Bearing Note at a Market Rate (Feb. 28)</h3>
+      <p>Record the February 28 sale to Fontana Outfitters.</p>
+      <div class="input-block" role="group" aria-labelledby="p1-h">
+        <div class="input-item"><label for="p1-a">Is a discount on notes receivable needed for this note?</label>
+          <select id="p1-a" class="ans" data-label="Discount needed?" data-answer="No; the stated rate equals the market rate, so face value equals present value"><option value="">Select…</option><option>No; the stated rate equals the market rate, so face value equals present value</option><option>Yes; every note receivable is recorded with a discount</option></select></div>
+        <div class="je-input" data-title="Feb. 28, {yr0}" data-rows="3" data-key='[{&quot;a&quot;: &quot;Notes receivable&quot;, &quot;dr&quot;: 24000}, {&quot;a&quot;: &quot;Sales revenue&quot;, &quot;cr&quot;: 24000}]'></div>
+        <button type="button" class="reveal-btn" data-problem="p1" aria-expanded="false" aria-controls="p1-sol">Reveal Answer<span class="sr-only"> for Problem 1</span></button>
       </div>
-      <button class="reveal-btn" onclick="toggleEntry(this,'e-1')">Reveal the entry</button>
-      <div class="entry-wrap" id="e-1">
-        <div class="entry-date">February 28, 2024</div>
-        <table class="jtable">
-          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
-          <tr><td class="acct">Notes Receivable</td><td class="amt">18,000</td><td></td><td class="chg up">↑18,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
-          <tr><td class="acct credit">Sales Revenue</td><td></td><td class="amt">18,000</td><td class="dash">—</td><td class="dash">—</td><td class="chg up">↑18,000</td><td class="chg up">↑18,000</td><td class="dash">—</td><td class="chg up">↑18,000</td></tr>
-        </table>
-        <div class="statement-row">
-          <div class="stbox"><span class="lbl">Balance Sheet</span><span class="val">Assets ↑18,000 = Equity ↑18,000</span></div>
-          <div class="stbox"><span class="lbl">Income Statement</span><span class="val">Revenue ↑18,000 → NI ↑18,000</span></div>
-          <div class="stbox no-effect"><span class="lbl">Statement of CF</span><span class="val">No effect — no cash yet</span></div>
-        </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p1-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 1"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 1</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+        <h4 class="solution-label">Explanation</h4>
+        <p>Because 9% is the appropriate market rate for a note like this, the note's face amount already equals its present value. There's no hidden interest to separate out; this is the simple case.</p>
+        <div class="date-tag" aria-hidden="true">Feb. 28, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Feb. 28, <span class="yr0">2026</span></caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Notes receivable</td><td class="je-debit-amt">24,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Sales revenue</td><td class="je-debit-amt"></td><td class="je-credit-amt">24,000</td></tr></tbody>
+        </table></div>
+        <p class="effects"><strong>Balance sheet:</strong> Assets ↑ $24,000; equity ↑ $24,000 · <strong>Income statement:</strong> Revenue ↑ $24,000 · <strong>Cash flows:</strong> No effect (no cash yet)</p>
       </div>
-    </div>
-
-    <div class="step">
-      <span class="step-label">MAR 31</span>
-      <h3>A noninterest-bearing note — imputing the real rate</h3>
-      <div class="narrative">
-        <p>Maddox's note has no stated interest, but that doesn't mean there's no interest — it just means the interest is buried inside the $13,000 face amount. The merchandise's <strong>fair value, $11,960</strong>, tells you what was actually sold today; the $1,040 gap is interest Evergreen will earn over the year until the note matures.</p>
-        <p>So the note goes on the books at its $13,000 face, revenue is recognized at the $11,960 it's really worth today, and a <em>Discount on Notes Receivable</em> — a contra-asset — soaks up the difference until it's earned.</p>
-        <div class="think">💭 Think it through: why record revenue at $11,960 instead of the $13,000 the note promises to pay?</div>
+    </article>
+    <article class="example" id="p2" aria-labelledby="p2-h">
+      <h3 class="ex-label" id="p2-h">Problem 2 — A Noninterest-Bearing Note (Mar. 31)</h3>
+      <p>Record the March 31 sale to Highlands Ridge Lodge.</p>
+      <div class="input-block" role="group" aria-labelledby="p2-h">
+        <div class="input-item"><label for="p2-a">Discount on notes receivable:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p2-a" class="ans" data-label="Discount on notes receivable" data-answer="1200" data-unit="$"></div>
+        <div class="input-item"><label for="p2-b">Sales revenue recognized:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p2-b" class="ans" data-label="Sales revenue" data-answer="13800" data-unit="$"></div>
+        <div class="je-input" data-title="Mar. 31, {yr0}" data-rows="4" data-key='[{&quot;a&quot;: &quot;Notes receivable&quot;, &quot;dr&quot;: 15000}, {&quot;a&quot;: &quot;Discount on notes receivable&quot;, &quot;cr&quot;: 1200}, {&quot;a&quot;: &quot;Sales revenue&quot;, &quot;cr&quot;: 13800}]'></div>
+        <button type="button" class="reveal-btn" data-problem="p2" aria-expanded="false" aria-controls="p2-sol">Reveal Answer<span class="sr-only"> for Problem 2</span></button>
       </div>
-      <button class="reveal-btn" onclick="toggleEntry(this,'e-2')">Reveal the entry</button>
-      <div class="entry-wrap" id="e-2">
-        <div class="entry-date">March 31, 2024</div>
-        <table class="jtable">
-          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
-          <tr><td class="acct">Notes Receivable</td><td class="amt">13,000</td><td></td><td class="chg up">↑13,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
-          <tr><td class="acct credit">Discount on Notes Receivable</td><td></td><td class="amt">1,040</td><td class="chg down">↓1,040</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
-          <tr><td class="acct credit">Sales Revenue</td><td></td><td class="amt">11,960</td><td class="dash">—</td><td class="dash">—</td><td class="chg up">↑11,960</td><td class="chg up">↑11,960</td><td class="dash">—</td><td class="chg up">↑11,960</td></tr>
-        </table>
-        <div class="statement-row">
-          <div class="stbox"><span class="lbl">Balance Sheet</span><span class="val">Net assets ↑11,960 = Equity ↑11,960</span></div>
-          <div class="stbox"><span class="lbl">Income Statement</span><span class="val">Revenue ↑11,960 → NI ↑11,960</span></div>
-          <div class="stbox no-effect"><span class="lbl">Statement of CF</span><span class="val">No effect — no cash yet</span></div>
-        </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p2-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 2"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 2</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+        <h4 class="solution-label">Explanation</h4>
+        <p>A note with no stated interest still includes interest; it's just buried in the face amount. The merchandise's fair value, $13,800, tells you what was actually sold today. The $1,200 difference is interest Nantahala Gear Company will earn over the year until the note matures.</p>
+        <div class="date-tag" aria-hidden="true">Mar. 31, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Mar. 31, <span class="yr0">2026</span></caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Notes receivable</td><td class="je-debit-amt">15,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Discount on notes receivable</td><td class="je-debit-amt"></td><td class="je-credit-amt">1,200</td></tr><tr><td class="indent">Sales revenue</td><td class="je-debit-amt"></td><td class="je-credit-amt">13,800</td></tr></tbody>
+        </table></div>
+        <p class="effects"><strong>Balance sheet:</strong> Net assets ↑ $13,800; equity ↑ $13,800 · <strong>Income statement:</strong> Revenue ↑ $13,800 · <strong>Cash flows:</strong> No effect (no cash yet)</p>
+        <p>The note goes on the books at its face amount, revenue is recognized at what the sale is really worth today, and <strong>Discount on notes receivable</strong> (a contra-asset) holds the unearned interest until it's earned.</p>
       </div>
-    </div>
-
-    <div class="step">
-      <span class="step-label">APR 3 &amp; APR 11</span>
-      <h3>An ordinary credit sale — then a return</h3>
-      <div class="narrative">
-        <p>Carr Company buys $11,000 of merchandise on 3/10, n/30 terms — the same gross-method logic as the Harwell problem. Eight days later, part of that sale comes back: Evergreen knocks $6,700 off Carr's receivable. Since COGS is being ignored throughout this problem, the return is purely a revenue reversal.</p>
+    </article>
+    <article class="example" id="p3" aria-labelledby="p3-h">
+      <h3 class="ex-label" id="p3-h">Problem 3 — A Credit Sale and a Return (Apr. 3 and Apr. 11)</h3>
+      <p>Record the April 3 sale to Cashiers Trading Post and the April 11 return.</p>
+      <div class="input-block" role="group" aria-labelledby="p3-h">
+        <div class="je-input" data-title="Apr. 3, {yr0}" data-rows="3" data-key='[{&quot;a&quot;: &quot;Accounts receivable&quot;, &quot;dr&quot;: 14000}, {&quot;a&quot;: &quot;Sales revenue&quot;, &quot;cr&quot;: 14000}]'></div>
+        <div class="je-input" data-title="Apr. 11, {yr0}" data-rows="3" data-key='[{&quot;a&quot;: &quot;Sales returns&quot;, &quot;dr&quot;: 5200}, {&quot;a&quot;: &quot;Accounts receivable&quot;, &quot;cr&quot;: 5200}]'></div>
+        <button type="button" class="reveal-btn" data-problem="p3" aria-expanded="false" aria-controls="p3-sol">Reveal Answer<span class="sr-only"> for Problem 3</span></button>
       </div>
-      <button class="reveal-btn" onclick="toggleEntry(this,'e-3')">Reveal both entries</button>
-      <div class="entry-wrap" id="e-3">
-        <div class="entry-date">April 3, 2024 — the sale</div>
-        <table class="jtable">
-          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
-          <tr><td class="acct">Accounts Receivable</td><td class="amt">11,000</td><td></td><td class="chg up">↑11,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
-          <tr><td class="acct credit">Sales Revenue</td><td></td><td class="amt">11,000</td><td class="dash">—</td><td class="dash">—</td><td class="chg up">↑11,000</td><td class="chg up">↑11,000</td><td class="dash">—</td><td class="chg up">↑11,000</td></tr>
-        </table>
-        <div class="entry-date" style="margin-top:.9rem;">April 11, 2024 — the return</div>
-        <table class="jtable">
-          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
-          <tr><td class="acct">Sales Returns</td><td class="amt">6,700</td><td></td><td class="dash">—</td><td class="dash">—</td><td class="chg down">↓6,700</td><td class="chg down">↓6,700</td><td class="dash">—</td><td class="chg down">↓6,700</td></tr>
-          <tr><td class="acct credit">Accounts Receivable</td><td></td><td class="amt">6,700</td><td class="chg down">↓6,700</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
-        </table>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p3-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 3"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 3</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+        <h4 class="solution-label">Explanation</h4>
+        <p>Under the gross method, the sale is recorded at the full invoice price. The return reduces both the receivable and revenue; because cost of goods sold is ignored here, there's no inventory side to record.</p>
+        <div class="date-tag" aria-hidden="true">Apr. 3, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Apr. 3, <span class="yr0">2026</span></caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Accounts receivable</td><td class="je-debit-amt">14,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Sales revenue</td><td class="je-debit-amt"></td><td class="je-credit-amt">14,000</td></tr></tbody>
+        </table></div>
+        <div class="date-tag" aria-hidden="true">Apr. 11, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Apr. 11, <span class="yr0">2026</span></caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Sales returns</td><td class="je-debit-amt">5,200</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Accounts receivable</td><td class="je-debit-amt"></td><td class="je-credit-amt">5,200</td></tr></tbody>
+        </table></div><p class="je-desc">Sales returns is a contra-revenue account that reduces net sales.</p>
       </div>
-    </div>
-
-    <div class="step">
-      <span class="step-label">APR 17</span>
-      <h3>Carr pays — but too late for the discount</h3>
-      <div class="narrative">
-        <p>The discount window from April 3 closes on April 13 (10 days). April 17 is outside it, so Carr pays the full remaining balance: $11,000 − $6,700 = $4,300, no discount.</p>
+    </article>
+    <article class="example" id="p4" aria-labelledby="p4-h">
+      <h3 class="ex-label" id="p4-h">Problem 4 — Payment After the Discount Period (Apr. 17)</h3>
+      <p>Record Cashiers Trading Post's April 17 payment.</p>
+      <div class="input-block" role="group" aria-labelledby="p4-h">
+        <div class="input-item"><label for="p4-a">Cash received:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p4-a" class="ans" data-label="Cash received" data-answer="8800" data-unit="$"></div>
+        <div class="input-item"><label for="p4-b">Does the customer receive the 2% discount?</label>
+          <select id="p4-b" class="ans" data-label="Discount taken?" data-answer="No; the discount period ended April 13"><option value="">Select…</option><option>No; the discount period ended April 13</option><option>Yes; it paid within 30 days</option></select></div>
+        <div class="je-input" data-title="Apr. 17, {yr0}" data-rows="3" data-key='[{&quot;a&quot;: &quot;Cash&quot;, &quot;dr&quot;: 8800}, {&quot;a&quot;: &quot;Accounts receivable&quot;, &quot;cr&quot;: 8800}]'></div>
+        <button type="button" class="reveal-btn" data-problem="p4" aria-expanded="false" aria-controls="p4-sol">Reveal Answer<span class="sr-only"> for Problem 4</span></button>
       </div>
-      <button class="reveal-btn" onclick="toggleEntry(this,'e-4')">Reveal the entry</button>
-      <div class="entry-wrap" id="e-4">
-        <div class="entry-date">April 17, 2024</div>
-        <table class="jtable">
-          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
-          <tr><td class="acct">Cash</td><td class="amt">4,300</td><td></td><td class="chg up">↑4,300</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
-          <tr><td class="acct credit">Accounts Receivable</td><td></td><td class="amt">4,300</td><td class="chg down">↓4,300</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
-        </table>
-        <div class="statement-row">
-          <div class="stbox no-effect"><span class="lbl">Balance Sheet</span><span class="val">Asset mix shifts; total unchanged</span></div>
-          <div class="stbox no-effect"><span class="lbl">Income Statement</span><span class="val">No effect</span></div>
-          <div class="stbox"><span class="lbl">Statement of CF</span><span class="val">+4,300 operating inflow</span></div>
-        </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p4-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 4"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 4</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+        <h4 class="solution-label">Explanation</h4>
+        <p>The 10-day discount window from April 3 closed on April 13. April 17 is outside it, so Cashiers Trading Post pays the full remaining balance: $14,000 − $5,200 = <strong>$8,800</strong>.</p>
+        <div class="date-tag" aria-hidden="true">Apr. 17, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Apr. 17, <span class="yr0">2026</span></caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Cash</td><td class="je-debit-amt">8,800</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Accounts receivable</td><td class="je-debit-amt"></td><td class="je-credit-amt">8,800</td></tr></tbody>
+        </table></div>
+        <p class="effects"><strong>Balance sheet:</strong> Asset mix shifts; total assets unchanged · <strong>Income statement:</strong> No effect · <strong>Cash flows:</strong> +$8,800 operating inflow</p>
       </div>
-    </div>
-
-    <div class="step">
-      <span class="step-label">APR 30 · PART 1</span>
-      <h3>Factoring $67,000 of receivables without recourse</h3>
-      <div class="narrative">
-        <p>"Without recourse" and "sale criteria met" together mean this is a true sale — the receivables leave Evergreen's books entirely, and Evergreen is done with them. The bank isn't lending against them; it owns them now, risk and all. The 2% finance charge is the price of getting cash today instead of waiting for customers to pay — that's a loss, not an expense.</p>
+    </article>
+    <article class="example" id="p5" aria-labelledby="p5-h">
+      <h3 class="ex-label" id="p5-h">Problem 5 — Factoring Receivables Without Recourse (Apr. 30)</h3>
+      <p>Record the factoring of $72,000 of accounts receivable.</p>
+      <div class="input-block" role="group" aria-labelledby="p5-h">
+        <div class="input-item"><label for="p5-a">Finance charge (loss):<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p5-a" class="ans" data-label="Loss on sale of receivables" data-answer="2160" data-unit="$"></div>
+        <div class="input-item"><label for="p5-b">Cash received:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p5-b" class="ans" data-label="Cash received" data-answer="69840" data-unit="$"></div>
+        <div class="je-input" data-title="Apr. 30, {yr0} (factoring)" data-rows="4" data-key='[{&quot;a&quot;: &quot;Cash&quot;, &quot;dr&quot;: 69840}, {&quot;a&quot;: &quot;Loss on sale of receivables&quot;, &quot;dr&quot;: 2160}, {&quot;a&quot;: &quot;Accounts receivable&quot;, &quot;cr&quot;: 72000}]'></div>
+        <button type="button" class="reveal-btn" data-problem="p5" aria-expanded="false" aria-controls="p5-sol">Reveal Answer<span class="sr-only"> for Problem 5</span></button>
       </div>
-      <button class="reveal-btn" onclick="toggleEntry(this,'e-5')">Reveal the entry</button>
-      <div class="entry-wrap" id="e-5">
-        <div class="entry-date">April 30, 2024</div>
-        <table class="jtable">
-          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
-          <tr><td class="acct">Cash</td><td class="amt">65,660</td><td></td><td class="chg up">↑65,660</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
-          <tr><td class="acct">Loss on Sale of Receivables</td><td class="amt">1,340</td><td></td><td class="dash">—</td><td class="dash">—</td><td class="chg down">↓1,340</td><td class="dash">—</td><td class="chg up">↑1,340</td><td class="chg down">↓1,340</td></tr>
-          <tr><td class="acct credit">Accounts Receivable</td><td></td><td class="amt">67,000</td><td class="chg down">↓67,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
-        </table>
-        <div class="statement-row">
-          <div class="stbox"><span class="lbl">Balance Sheet</span><span class="val">Assets net ↓1,340 = Equity ↓1,340</span></div>
-          <div class="stbox"><span class="lbl">Income Statement</span><span class="val">Loss ↑1,340 → NI ↓1,340</span></div>
-          <div class="stbox"><span class="lbl">Statement of CF</span><span class="val">+65,660 operating inflow</span></div>
-        </div>
-        <div class="answer-note"><strong>Where the numbers come from:</strong> 2% × $67,000 = $1,340 finance charge; $67,000 − $1,340 = $65,660 cash.</div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p5-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 5"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 5</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+        <h4 class="solution-label">Explanation</h4>
+        <p>"Without recourse" and "sale criteria met" together mean this is a true sale. The receivables leave Nantahala Gear Company's books entirely; the bank owns them now, along with the risk that customers won't pay. The finance charge is the price of getting cash today instead of waiting, so it's recorded as a loss.</p>
+        <ul><li>Finance charge: 3% × $72,000 = <strong>$2,160</strong></li><li>Cash: $72,000 − $2,160 = <strong>$69,840</strong></li></ul>
+        <div class="date-tag" aria-hidden="true">Apr. 30, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Apr. 30, <span class="yr0">2026</span></caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Cash</td><td class="je-debit-amt">69,840</td><td class="je-credit-amt"></td></tr><tr><td>Loss on sale of receivables</td><td class="je-debit-amt">2,160</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Accounts receivable</td><td class="je-debit-amt"></td><td class="je-credit-amt">72,000</td></tr></tbody>
+        </table></div>
+        <p class="effects"><strong>Balance sheet:</strong> Assets net ↓ $2,160; equity ↓ $2,160 · <strong>Income statement:</strong> Loss ↑ $2,160 · <strong>Cash flows:</strong> +$69,840 operating inflow</p>
       </div>
-    </div>
-
-    <div class="step">
-      <span class="step-label">APR 30 · PART 2</span>
-      <h3>Discounting the Lennox note at the bank</h3>
-      <div class="narrative">
-        <p>This is a two-step move. First, Evergreen owns two months of accrued (unpaid) interest on the Lennox note as of April 30 — that has to go on the books before anything else happens, because it's part of what's being sold.</p>
-        <p>Then the note itself (plus that accrued interest) is discounted to the bank at the bank's own 10% rate, applied over the <em>remaining</em> five months to maturity — not the original 7. The bank effectively buys the note's future maturity value at a discount; whatever cash Evergreen nets versus its carrying amount is a gain or loss.</p>
-        <div class="think">💭 Think it through: the note's 8% rate and the bank's 10% discount rate are two completely different numbers doing two different jobs. What is each one used for?</div>
+    </article>
+    <article class="example" id="p6" aria-labelledby="p6-h">
+      <h3 class="ex-label" id="p6-h">Problem 6 — Discounting the Note at the Bank (Apr. 30)</h3>
+      <p>First accrue the interest earned on the Fontana Outfitters note through April 30. Then record the discounting of the note.</p>
+      <div class="input-block" role="group" aria-labelledby="p6-h">
+        <div class="input-item"><label for="p6-a">Maturity value of the note:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p6-a" class="ans" data-label="Maturity value" data-answer="25260" data-unit="$"></div>
+        <div class="input-item"><label for="p6-b">Bank discount:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p6-b" class="ans" data-label="Bank discount" data-answer="1263" data-unit="$"></div>
+        <div class="input-item"><label for="p6-c">Cash proceeds from the bank:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p6-c" class="ans" data-label="Cash proceeds" data-answer="23997" data-unit="$"></div>
+        <div class="input-item"><label for="p6-d">Accrued interest through April 30:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p6-d" class="ans" data-label="Accrued interest" data-answer="360" data-unit="$"></div>
+        <div class="input-item"><label for="p6-e">Loss on discounting:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p6-e" class="ans" data-label="Loss on sale of note" data-answer="363" data-unit="$"></div>
+        <div class="je-input" data-title="Apr. 30, {yr0} (accrue interest)" data-rows="3" data-key='[{&quot;a&quot;: &quot;Interest receivable&quot;, &quot;dr&quot;: 360}, {&quot;a&quot;: &quot;Interest revenue&quot;, &quot;cr&quot;: 360}]'></div>
+        <div class="je-input" data-title="Apr. 30, {yr0} (discount the note)" data-rows="4" data-key='[{&quot;a&quot;: &quot;Cash&quot;, &quot;dr&quot;: 23997}, {&quot;a&quot;: &quot;Loss on sale of note receivable&quot;, &quot;dr&quot;: 363}, {&quot;a&quot;: &quot;Notes receivable&quot;, &quot;cr&quot;: 24000}, {&quot;a&quot;: &quot;Interest receivable&quot;, &quot;cr&quot;: 360}]'></div>
+        <button type="button" class="reveal-btn" data-problem="p6" aria-expanded="false" aria-controls="p6-sol">Reveal Answer<span class="sr-only"> for Problem 6</span></button>
       </div>
-      <button class="reveal-btn" onclick="toggleEntry(this,'e-6')">Reveal the entries</button>
-      <div class="entry-wrap" id="e-6">
-        <div class="tblock">
-          <div class="tt">Getting to the numbers</div>
-          <div class="line"><span>Maturity value: $18,000 + (8% × 7/12 × 18,000)</span><span>$18,840</span></div>
-          <div class="line"><span>Bank discount: 10% × 5/12 × $18,840</span><span>(785)</span></div>
-          <div class="line total"><span>Cash proceeds from bank</span><span>$18,055</span></div>
-          <div class="line" style="margin-top:.5rem;"><span>Accrued interest to date (2 months): 8% × 2/12 × 18,000</span><span>$240</span></div>
-          <div class="line"><span>Carrying value being given up: $18,000 + $240</span><span>$18,240</span></div>
-          <div class="line total"><span>Loss on discounting: $18,240 − $18,055</span><span>$185</span></div>
-        </div>
-        <div class="entry-date">April 30, 2024 — accrue interest to date</div>
-        <table class="jtable">
-          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
-          <tr><td class="acct">Interest Receivable</td><td class="amt">240</td><td></td><td class="chg up">↑240</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
-          <tr><td class="acct credit">Interest Revenue</td><td></td><td class="amt">240</td><td class="dash">—</td><td class="dash">—</td><td class="chg up">↑240</td><td class="chg up">↑240</td><td class="dash">—</td><td class="chg up">↑240</td></tr>
-        </table>
-        <div class="entry-date" style="margin-top:.9rem;">April 30, 2024 — discount the note, without recourse</div>
-        <table class="jtable">
-          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
-          <tr><td class="acct">Cash</td><td class="amt">18,055</td><td></td><td class="chg up">↑18,055</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
-          <tr><td class="acct">Loss on Sale of Note Receivable</td><td class="amt">185</td><td></td><td class="dash">—</td><td class="dash">—</td><td class="chg down">↓185</td><td class="dash">—</td><td class="chg up">↑185</td><td class="chg down">↓185</td></tr>
-          <tr><td class="acct credit">Notes Receivable</td><td></td><td class="amt">18,000</td><td class="chg down">↓18,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
-          <tr><td class="acct credit">Interest Receivable</td><td></td><td class="amt">240</td><td class="chg down">↓240</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
-        </table>
-        <div class="statement-row">
-          <div class="stbox"><span class="lbl">Balance Sheet</span><span class="val">Assets net ↓185 (before interest accrual) = Equity ↓185</span></div>
-          <div class="stbox"><span class="lbl">Income Statement</span><span class="val">Interest Rev ↑240, Loss ↑185 → NI ↑55 net</span></div>
-          <div class="stbox"><span class="lbl">Statement of CF</span><span class="val">+18,055 operating inflow</span></div>
-        </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p6-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 6"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 6</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+        <h4 class="solution-label">Explanation</h4>
+        <p>This is a two-step move. First, Nantahala Gear Company has earned two months of interest (Feb. 28 to Apr. 30) that hasn't been recorded yet, and that interest is part of what's being sold. Second, the bank buys the note's <em>maturity value</em>, discounted at the bank's 12% rate for the five months remaining until maturity.</p>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Getting to the numbers"><table class="data">
+          <caption>Getting to the numbers</caption>
+          <thead><tr><th scope="col"><span class="sr-only">Item</span></th><th scope="col" class="num">Amount</th></tr></thead>
+          <tbody><tr><th scope="row">Maturity value: $24,000 + ($24,000 × 9% × 7/12)</th><td class="num">$25,260</td></tr><tr><th scope="row">Bank discount: $25,260 × 12% × 5/12</th><td class="num">(1,263)</td></tr><tr><th scope="row">Cash proceeds</th><td class="num">$23,997</td></tr><tr><th scope="row">Carrying amount: $24,000 + accrued interest ($24,000 × 9% × 2/12 = $360)</th><td class="num">$24,360</td></tr><tr><th scope="row">Loss: $24,360 − $23,997</th><td class="num">$363</td></tr></tbody></table></div>
+        <div class="date-tag" aria-hidden="true">Apr. 30, <span class="yr0">2026</span> — accrue interest</div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Apr. 30, <span class="yr0">2026</span> — accrue interest</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Interest receivable</td><td class="je-debit-amt">360</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Interest revenue</td><td class="je-debit-amt"></td><td class="je-credit-amt">360</td></tr></tbody>
+        </table></div>
+        <div class="date-tag" aria-hidden="true">Apr. 30, <span class="yr0">2026</span> — discount the note</div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Apr. 30, <span class="yr0">2026</span> — discount the note</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Cash</td><td class="je-debit-amt">23,997</td><td class="je-credit-amt"></td></tr><tr><td>Loss on sale of note receivable</td><td class="je-debit-amt">363</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Notes receivable</td><td class="je-debit-amt"></td><td class="je-credit-amt">24,000</td></tr><tr><td class="indent">Interest receivable</td><td class="je-debit-amt"></td><td class="je-credit-amt">360</td></tr></tbody>
+        </table></div>
+        <p class="effects"><strong>Balance sheet:</strong> Note and interest receivable leave the books; cash ↑ $23,997 · <strong>Income statement:</strong> Interest revenue ↑ $360; loss ↑ $363 · <strong>Cash flows:</strong> +$23,997 operating inflow</p>
+        <p>The note's 9% rate determines the maturity value and the accrued interest. The bank's 12% rate determines the discount. They're two different numbers doing two different jobs.</p>
       </div>
-    </div>
-
-    <div class="step">
-      <span class="step-label">SEP 30</span>
-      <h3>Lennox pays the note — but not to Evergreen</h3>
-      <div class="narrative">
-        <p>This is the conceptual punchline of the whole problem. Evergreen sold this note <em>without recourse</em> back on April 30 — it's off Evergreen's books for good, gain or loss already recognized. When Lennox eventually pays, it pays the bank, which now owns the note. Evergreen has no journal entry at all.</p>
+    </article>
+    <article class="example" id="p7" aria-labelledby="p7-h">
+      <h3 class="ex-label" id="p7-h">Problem 7 — The Note Is Paid at Maturity (Sep. 30)</h3>
+      <p>Fontana Outfitters pays the maturity value of its note on September 30. Record any entry Nantahala Gear Company needs.</p>
+      <div class="input-block" role="group" aria-labelledby="p7-h">
+        <div class="input-item"><label for="p7-a">Who receives Fontana Outfitters's payment?</label>
+          <select id="p7-a" class="ans" data-label="Who is paid" data-answer="The bank"><option value="">Select…</option><option>The bank</option><option>Nantahala Gear Company</option></select></div>
+        <div class="je-input" data-title="Sep. 30, {yr0}" data-rows="3" data-key='[{&quot;a&quot;: &quot;No entry required&quot;}]'></div>
+        <button type="button" class="reveal-btn" data-problem="p7" aria-expanded="false" aria-controls="p7-sol">Reveal Answer<span class="sr-only"> for Problem 7</span></button>
       </div>
-      <div class="noentry">No entry required — Evergreen no longer holds this receivable.</div>
-    </div>
-
-    <div class="step">
-      <span class="step-label">DEC 31 — YEAR-END ADJUSTMENTS</span>
-      <h3>What's still outstanding needs one adjustment: the Maddox discount</h3>
-      <div class="narrative">
-        <p>By December 31, the Lennox note and the factored receivables are long gone from Evergreen's books — nothing to adjust there. The only open item is the Maddox note, which has now earned 9 months of its implicit interest (March 31 to December 31). The full-year discount was $1,040, so 9/12 of it has now been earned and needs to move out of the contra-asset and into revenue.</p>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p7-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 7"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 7</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+        <h4 class="solution-label">Explanation</h4>
+        <p>Nantahala Gear Company sold this note without recourse on April 30. It's off the books for good, and the loss was already recognized. When Fontana Outfitters pays, it pays the bank, which owns the note now.</p>
+        <p class="je-none"><strong>No entry required.</strong> Nantahala Gear Company no longer holds this receivable.</p>
       </div>
-      <button class="reveal-btn" onclick="toggleEntry(this,'e-7')">Reveal the entry</button>
-      <div class="entry-wrap" id="e-7">
-        <div class="entry-date">December 31, 2024</div>
-        <table class="jtable">
-          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
-          <tr><td class="acct">Discount on Notes Receivable</td><td class="amt">780</td><td></td><td class="chg up">↑780</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
-          <tr><td class="acct credit">Interest Revenue</td><td></td><td class="amt">780</td><td class="dash">—</td><td class="dash">—</td><td class="chg up">↑780</td><td class="chg up">↑780</td><td class="dash">—</td><td class="chg up">↑780</td></tr>
-        </table>
-        <div class="statement-row">
-          <div class="stbox"><span class="lbl">Balance Sheet</span><span class="val">Assets ↑780 = Equity ↑780</span></div>
-          <div class="stbox"><span class="lbl">Income Statement</span><span class="val">Interest Rev ↑780 → NI ↑780</span></div>
-          <div class="stbox no-effect"><span class="lbl">Statement of CF</span><span class="val">No effect — non-cash</span></div>
-        </div>
-        <div class="answer-note"><strong>Where 780 comes from:</strong> $1,040 total discount × 9/12 = $780 (straight-line amortization over the note's one-year term).</div>
+    </article>
+    <article class="example" id="p8" aria-labelledby="p8-h">
+      <h3 class="ex-label" id="p8-h">Problem 8 — Year-End Adjustment (Dec. 31)</h3>
+      <p>Record the adjusting entry Nantahala Gear Company needs at December 31, <span class="yr0">2026</span>. Use straight-line amortization of any discount.</p>
+      <div class="input-block" role="group" aria-labelledby="p8-h">
+        <div class="input-item"><label for="p8-a">Interest earned on the {H} note through Dec. 31:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p8-a" class="ans" data-label="Interest earned" data-answer="900" data-unit="$"></div>
+        <div class="je-input" data-title="Dec. 31, {yr0}" data-rows="3" data-key='[{&quot;a&quot;: &quot;Discount on notes receivable&quot;, &quot;dr&quot;: 900}, {&quot;a&quot;: &quot;Interest revenue&quot;, &quot;cr&quot;: 900}]'></div>
+        <button type="button" class="reveal-btn" data-problem="p8" aria-expanded="false" aria-controls="p8-sol">Reveal Answer<span class="sr-only"> for Problem 8</span></button>
       </div>
-    </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p8-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 8"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 8</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+        <h4 class="solution-label">Explanation</h4>
+        <p>By December 31, the Fontana Outfitters note and the factored receivables are gone from the books, so there's nothing to adjust for them. The only open item is the Highlands Ridge Lodge note, which has earned nine months (Mar. 31 to Dec. 31) of its implicit interest.</p>
+        <p class="final-answer"><strong>$1,200 × 9/12 = $900</strong></p>
+        <div class="date-tag" aria-hidden="true">Dec. 31, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Dec. 31, <span class="yr0">2026</span></caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Discount on notes receivable</td><td class="je-debit-amt">900</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Interest revenue</td><td class="je-debit-amt"></td><td class="je-credit-amt">900</td></tr></tbody>
+        </table></div>
+        <p class="effects"><strong>Balance sheet:</strong> Net notes receivable ↑ $900; equity ↑ $900 · <strong>Income statement:</strong> Interest revenue ↑ $900 · <strong>Cash flows:</strong> No effect (non-cash)</p>
+        <p>Reducing the contra-asset increases the note's carrying amount toward its $15,000 face value as interest is earned.</p>
+      </div>
+    </article>
   </section>
-
-  <!-- ============================================================ -->
-  <!-- PROBLEM 2: LONERGAN -->
-  <!-- ============================================================ -->
-  <section class="problem">
-    <h2>Problem 2 — Lonergan Company</h2>
+  <section class="lo-block" aria-labelledby="s-assign">
+    <h2 id="s-assign">Assigning vs. Factoring Receivables</h2>
     <div class="facts">
-      <p>End of June 2024: Accounts Receivable = <strong>$960,000</strong>. Lonergan needs about <strong>$590,000</strong> in cash and is weighing two bank offers on July 1.</p>
-      <p><strong>Alternative A (assignment):</strong> borrow $590,000 on a note, pledging the entire $960,000 AR balance as collateral. Each month, remit collections plus 12% interest on the note's beginning balance.</p>
-      <p><strong>Alternative B (factoring):</strong> transfer $640,000 of specific receivables to the bank without recourse; sale criteria met; 4% factoring fee.</p>
+      <p class="ex-label">The company used in Problems 9–12</p>
+      <p>At the end of June <span class="yr0">2026</span>, <strong>Blue Ridge Paper Supply</strong> has accounts receivable of <strong>$880,000</strong>. It needs about <strong>$540,000</strong> in cash and is considering two offers from its bank on July 1:</p>
+      <ul>
+        <li><strong>Alternative A (assignment):</strong> Borrow $540,000 on a note, assigning the entire $880,000 of receivables as collateral. At the end of each month, remit collections to the bank along with <strong>12%</strong> annual interest on the note's beginning-of-month balance.</li>
+        <li><strong>Alternative B (factoring):</strong> Transfer <strong>$600,000</strong> of specific receivables to the bank <strong>without recourse</strong> for a <strong>3.5%</strong> fee; the sale criteria are met.</li>
+        <li>By July 31, <strong>80%</strong> of the end-of-June receivables are collected.</li>
+      </ul>
     </div>
-
-    <div class="step">
-      <span class="step-label">THE BIG IDEA</span>
-      <h3>Borrowing against receivables vs. selling them</h3>
-      <div class="narrative">
-        <p>These two alternatives look similar — both get Lonergan cash today using its receivables — but they're structurally opposite. In <strong>Alternative A</strong>, the receivables never leave Lonergan's balance sheet; they're just collateral for a loan. Lonergan still owns them, still collects them, and still owes the bank money. In <strong>Alternative B</strong>, the receivables are truly sold — they disappear from Lonergan's books, and with them, all further involvement.</p>
+    <article class="example" id="p9" aria-labelledby="p9-h">
+      <h3 class="ex-label" id="p9-h">Problem 9 — Alternative A: Signing the Note (July 1)</h3>
+      <p>Record the July 1 entry under Alternative A.</p>
+      <div class="input-block" role="group" aria-labelledby="p9-h">
+        <div class="input-item"><label for="p9-a">Where do the assigned receivables appear after July 1?</label>
+          <select id="p9-a" class="ans" data-label="Assigned receivables" data-answer="They stay on the balance sheet, with the assignment disclosed in the notes"><option value="">Select…</option><option>They stay on the balance sheet, with the assignment disclosed in the notes</option><option>They are removed from the balance sheet</option></select></div>
+        <div class="je-input" data-title="July 1, {yr0} (Alternative A)" data-rows="3" data-key='[{&quot;a&quot;: &quot;Cash&quot;, &quot;dr&quot;: 540000}, {&quot;a&quot;: &quot;Notes payable&quot;, &quot;cr&quot;: 540000}]'></div>
+        <button type="button" class="reveal-btn" data-problem="p9" aria-expanded="false" aria-controls="p9-sol">Reveal Answer<span class="sr-only"> for Problem 9</span></button>
       </div>
-    </div>
-
-    <div class="step">
-      <span class="step-label">JULY 1</span>
-      <h3>Alternative A — signing the note</h3>
-      <div class="narrative">
-        <p>Since this is a loan, not a sale, the $960,000 of assigned receivables stays exactly where it is on the balance sheet (typically just disclosed as pledged, in the notes). The only new item is the debt itself.</p>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p9-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 9"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 9</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+        <h4 class="solution-label">Explanation</h4>
+        <p>Borrowing against receivables and selling them both bring in cash today, but they're opposite transactions. An assignment is a <strong>loan</strong>: Blue Ridge Paper Supply still owns the receivables, still collects them, and owes the bank. The only new item is the debt.</p>
+        <div class="date-tag" aria-hidden="true">July 1, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, July 1, <span class="yr0">2026</span></caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Cash</td><td class="je-debit-amt">540,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Notes payable</td><td class="je-debit-amt"></td><td class="je-credit-amt">540,000</td></tr></tbody>
+        </table></div>
+        <p class="effects"><strong>Balance sheet:</strong> Assets ↑ $540,000; liabilities ↑ $540,000 · <strong>Income statement:</strong> No effect · <strong>Cash flows:</strong> +$540,000 financing inflow</p>
       </div>
-      <button class="reveal-btn" onclick="toggleEntry(this,'l-1')">Reveal the entry</button>
-      <div class="entry-wrap" id="l-1">
-        <div class="entry-date">July 1, 2024 — Alternative A</div>
-        <table class="jtable">
-          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
-          <tr><td class="acct">Cash</td><td class="amt">590,000</td><td></td><td class="chg up">↑590,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
-          <tr><td class="acct credit">Notes Payable</td><td></td><td class="amt">590,000</td><td class="dash">—</td><td class="chg up">↑590,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
-        </table>
-        <div class="statement-row">
-          <div class="stbox"><span class="lbl">Balance Sheet</span><span class="val">Assets ↑590,000 = Liabilities ↑590,000</span></div>
-          <div class="stbox no-effect"><span class="lbl">Income Statement</span><span class="val">No effect</span></div>
-          <div class="stbox"><span class="lbl">Statement of CF</span><span class="val">+590,000 financing inflow</span></div>
-        </div>
+    </article>
+    <article class="example" id="p10" aria-labelledby="p10-h">
+      <h3 class="ex-label" id="p10-h">Problem 10 — Alternative B: Selling the Receivables (July 1)</h3>
+      <p>Record the July 1 entry under Alternative B.</p>
+      <div class="input-block" role="group" aria-labelledby="p10-h">
+        <div class="input-item"><label for="p10-a">Factoring fee (loss):<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p10-a" class="ans" data-label="Loss on sale of receivables" data-answer="21000" data-unit="$"></div>
+        <div class="je-input" data-title="July 1, {yr0} (Alternative B)" data-rows="4" data-key='[{&quot;a&quot;: &quot;Cash&quot;, &quot;dr&quot;: 579000}, {&quot;a&quot;: &quot;Loss on sale of receivables&quot;, &quot;dr&quot;: 21000}, {&quot;a&quot;: &quot;Accounts receivable&quot;, &quot;cr&quot;: 600000}]'></div>
+        <button type="button" class="reveal-btn" data-problem="p10" aria-expanded="false" aria-controls="p10-sol">Reveal Answer<span class="sr-only"> for Problem 10</span></button>
       </div>
-    </div>
-
-    <div class="step">
-      <span class="step-label">JULY 1</span>
-      <h3>Alternative B — selling the receivables</h3>
-      <div class="narrative">
-        <p>Same logic as Evergreen's factoring transaction earlier: without recourse plus sale criteria met means a true sale. The $640,000 of specific receivables come off the books, cash comes in net of the 4% fee, and the fee itself is a loss.</p>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p10-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 10"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 10</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+        <h4 class="solution-label">Explanation</h4>
+        <p>Same logic as Nantahala Gear Company's factoring: without recourse plus sale criteria met means a true sale. The $600,000 of receivables leave the books, cash comes in net of the fee, and the fee is a loss.</p>
+        <ul><li>Fee: 3.5% × $600,000 = <strong>$21,000</strong></li><li>Cash: $600,000 − $21,000 = <strong>$579,000</strong></li></ul>
+        <div class="date-tag" aria-hidden="true">July 1, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, July 1, <span class="yr0">2026</span></caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Cash</td><td class="je-debit-amt">579,000</td><td class="je-credit-amt"></td></tr><tr><td>Loss on sale of receivables</td><td class="je-debit-amt">21,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Accounts receivable</td><td class="je-debit-amt"></td><td class="je-credit-amt">600,000</td></tr></tbody>
+        </table></div>
+        <p class="effects"><strong>Balance sheet:</strong> Assets net ↓ $21,000; equity ↓ $21,000 · <strong>Income statement:</strong> Loss ↑ $21,000 · <strong>Cash flows:</strong> +$579,000 operating inflow</p>
       </div>
-      <button class="reveal-btn" onclick="toggleEntry(this,'l-2')">Reveal the entry</button>
-      <div class="entry-wrap" id="l-2">
-        <div class="entry-date">July 1, 2024 — Alternative B</div>
-        <table class="jtable">
-          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
-          <tr><td class="acct">Cash</td><td class="amt">614,400</td><td></td><td class="chg up">↑614,400</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
-          <tr><td class="acct">Loss on Sale of Receivables</td><td class="amt">25,600</td><td></td><td class="dash">—</td><td class="dash">—</td><td class="chg down">↓25,600</td><td class="dash">—</td><td class="chg up">↑25,600</td><td class="chg down">↓25,600</td></tr>
-          <tr><td class="acct credit">Accounts Receivable</td><td></td><td class="amt">640,000</td><td class="chg down">↓640,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
-        </table>
-        <div class="statement-row">
-          <div class="stbox"><span class="lbl">Balance Sheet</span><span class="val">Assets net ↓25,600 = Equity ↓25,600</span></div>
-          <div class="stbox"><span class="lbl">Income Statement</span><span class="val">Loss ↑25,600 → NI ↓25,600</span></div>
-          <div class="stbox"><span class="lbl">Statement of CF</span><span class="val">+614,400 operating inflow</span></div>
-        </div>
-        <div class="answer-note"><strong>Where the numbers come from:</strong> 4% × $640,000 = $25,600 fee; $640,000 − $25,600 = $614,400 cash.</div>
+    </article>
+    <article class="example" id="p11" aria-labelledby="p11-h">
+      <h3 class="ex-label" id="p11-h">Problem 11 — Alternative A: Collections and the Remittance (July 31)</h3>
+      <p>Under Alternative A, record the July collections and the July 31 remittance to the bank. Collections are more than enough to pay off the note, so the remittance pays the July interest and retires the note in full.</p>
+      <div class="input-block" role="group" aria-labelledby="p11-h">
+        <div class="input-item"><label for="p11-a">Cash collected from customers:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p11-a" class="ans" data-label="Collections" data-answer="704000" data-unit="$"></div>
+        <div class="input-item"><label for="p11-b">Interest for July:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p11-b" class="ans" data-label="Interest for July" data-answer="5400" data-unit="$"></div>
+        <div class="je-input" data-title="July 31, {yr0} (collect from customers)" data-rows="3" data-key='[{&quot;a&quot;: &quot;Cash&quot;, &quot;dr&quot;: 704000}, {&quot;a&quot;: &quot;Accounts receivable&quot;, &quot;cr&quot;: 704000}]'></div>
+        <div class="je-input" data-title="July 31, {yr0} (remit to the bank)" data-rows="4" data-key='[{&quot;a&quot;: &quot;Interest expense&quot;, &quot;dr&quot;: 5400}, {&quot;a&quot;: &quot;Notes payable&quot;, &quot;dr&quot;: 540000}, {&quot;a&quot;: &quot;Cash&quot;, &quot;cr&quot;: 545400}]'></div>
+        <button type="button" class="reveal-btn" data-problem="p11" aria-expanded="false" aria-controls="p11-sol">Reveal Answer<span class="sr-only"> for Problem 11</span></button>
       </div>
-    </div>
-
-    <div class="step">
-      <span class="step-label">JULY 31</span>
-      <h3>80% collected — what happens under each alternative</h3>
-      <div class="narrative">
-        <p>This is where the two alternatives really diverge. Under <strong>Alternative A</strong>, Lonergan still owns <em>all</em> $960,000 of receivables, so 80% of the whole thing — <strong>$768,000</strong> — flows through Lonergan's own Cash and AR accounts. Under <strong>Alternative B</strong>, only the $320,000 that <em>wasn't</em> factored still belongs to Lonergan; the $640,000 piece is the bank's problem now, and customers pay the bank directly with no entry on Lonergan's books at all.</p>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p11-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 11"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 11</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+        <h4 class="solution-label">Explanation</h4>
+        <p>Blue Ridge Paper Supply still owns all $880,000 of receivables, so 80% of the whole balance, <strong>$704,000</strong>, flows through its own Cash and Accounts receivable accounts. It then owes one month of interest: $540,000 × 12% × 1/12 = <strong>$5,400</strong>.</p>
+        <div class="date-tag" aria-hidden="true">July 31, <span class="yr0">2026</span> — collect from customers</div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, July 31, <span class="yr0">2026</span> — collect from customers</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Cash</td><td class="je-debit-amt">704,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Accounts receivable</td><td class="je-debit-amt"></td><td class="je-credit-amt">704,000</td></tr></tbody>
+        </table></div>
+        <div class="date-tag" aria-hidden="true">July 31, <span class="yr0">2026</span> — remit to the bank</div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, July 31, <span class="yr0">2026</span> — remit to the bank</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Interest expense</td><td class="je-debit-amt">5,400</td><td class="je-credit-amt"></td></tr><tr><td>Notes payable</td><td class="je-debit-amt">540,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Cash</td><td class="je-debit-amt"></td><td class="je-credit-amt">545,400</td></tr></tbody>
+        </table></div>
+        <p class="effects"><strong>Balance sheet:</strong> Cash ↓ $545,400; liabilities ↓ $540,000; equity ↓ $5,400 · <strong>Income statement:</strong> Interest expense ↑ $5,400 · <strong>Cash flows:</strong> −$540,000 financing; −$5,400 operating</p>
+        <p>Blue Ridge Paper Supply keeps the $158,600 left over after the note is retired. The assignment only ever secured the bank up to what it was owed.</p>
       </div>
-
-      <h3 style="font-size:1rem; margin-top:1.2rem;">Alternative A: collection, then remittance to the bank</h3>
-      <div class="narrative">
-        <p>Lonergan first collects the $768,000 like normal. Then it owes the bank interest for July — 12% annual, one month, on the note's <em>beginning</em> balance of $590,000 — plus, since collections comfortably exceed what's owed, it can retire the note entirely in this one remittance. Whatever's left over after paying off principal and interest stays with Lonergan; the assignment only ever secured the bank up to what it was owed.</p>
+    </article>
+    <article class="example" id="p12" aria-labelledby="p12-h">
+      <h3 class="ex-label" id="p12-h">Problem 12 — Alternative B: Collecting What Wasn't Factored (July 31)</h3>
+      <p>Under Alternative B, record the July collections.</p>
+      <div class="input-block" role="group" aria-labelledby="p12-h">
+        <div class="input-item"><label for="p12-a">Cash collected by Blue Ridge Paper Supply:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p12-a" class="ans" data-label="Collections" data-answer="224000" data-unit="$"></div>
+        <div class="je-input" data-title="July 31, {yr0} (Alternative B)" data-rows="3" data-key='[{&quot;a&quot;: &quot;Cash&quot;, &quot;dr&quot;: 224000}, {&quot;a&quot;: &quot;Accounts receivable&quot;, &quot;cr&quot;: 224000}]'></div>
+        <button type="button" class="reveal-btn" data-problem="p12" aria-expanded="false" aria-controls="p12-sol">Reveal Answer<span class="sr-only"> for Problem 12</span></button>
       </div>
-      <button class="reveal-btn" onclick="toggleEntry(this,'l-3')">Reveal the entries</button>
-      <div class="entry-wrap" id="l-3">
-        <div class="entry-date">July 31, 2024 — collect from customers</div>
-        <table class="jtable">
-          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
-          <tr><td class="acct">Cash</td><td class="amt">768,000</td><td></td><td class="chg up">↑768,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
-          <tr><td class="acct credit">Accounts Receivable</td><td></td><td class="amt">768,000</td><td class="chg down">↓768,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
-        </table>
-        <div class="entry-date" style="margin-top:.9rem;">July 31, 2024 — remit to the bank</div>
-        <table class="jtable">
-          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
-          <tr><td class="acct">Interest Expense</td><td class="amt">5,900</td><td></td><td class="dash">—</td><td class="dash">—</td><td class="chg down">↓5,900</td><td class="dash">—</td><td class="chg up">↑5,900</td><td class="chg down">↓5,900</td></tr>
-          <tr><td class="acct">Notes Payable</td><td class="amt">590,000</td><td></td><td class="dash">—</td><td class="chg down">↓590,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
-          <tr><td class="acct credit">Cash</td><td></td><td class="amt">595,900</td><td class="chg down">↓595,900</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
-        </table>
-        <div class="statement-row">
-          <div class="stbox"><span class="lbl">Balance Sheet</span><span class="val">Assets ↓595,900, Liabilities ↓590,000 → Equity ↓5,900</span></div>
-          <div class="stbox"><span class="lbl">Income Statement</span><span class="val">Interest Exp ↑5,900 → NI ↓5,900</span></div>
-          <div class="stbox"><span class="lbl">Statement of CF</span><span class="val">−595,900 (financing: −590,000; operating: −5,900)</span></div>
-        </div>
-        <div class="answer-note"><strong>Where the numbers come from:</strong> Interest = 12% × $590,000 × 1/12 = $5,900. Lonergan keeps the $768,000 − $595,900 = $172,100 left over after the note is fully retired.</div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p12-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 12"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 12</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+        <h4 class="solution-label">Explanation</h4>
+        <p>Only $880,000 − $600,000 = $280,000 of receivables still belong to Blue Ridge Paper Supply. Customers on the factored accounts pay the bank directly, with no entry on Blue Ridge Paper Supply's books. 80% × $280,000 = <strong>$224,000</strong>.</p>
+        <div class="date-tag" aria-hidden="true">July 31, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, July 31, <span class="yr0">2026</span></caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Cash</td><td class="je-debit-amt">224,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Accounts receivable</td><td class="je-debit-amt"></td><td class="je-credit-amt">224,000</td></tr></tbody>
+        </table></div>
+        <p class="effects"><strong>Balance sheet:</strong> Asset mix shifts; total unchanged · <strong>Income statement:</strong> No effect · <strong>Cash flows:</strong> +$224,000 operating inflow</p>
+        <div class="patterns"><p><strong>The takeaway:</strong> same 80% collection rate, very different bookkeeping, because the two alternatives answer one question differently: does the company still own the receivable?</p></div>
       </div>
-
-      <h3 style="font-size:1rem; margin-top:1.6rem;">Alternative B: collecting what wasn't factored</h3>
-      <div class="narrative">
-        <p>Only $960,000 − $640,000 = $320,000 of receivables are still Lonergan's own. 80% of that — $256,000 — is a completely ordinary collection, with nothing owed to any bank.</p>
-      </div>
-      <button class="reveal-btn" onclick="toggleEntry(this,'l-4')">Reveal the entry</button>
-      <div class="entry-wrap" id="l-4">
-        <div class="entry-date">July 31, 2024 — Alternative B</div>
-        <table class="jtable">
-          <tr><th>Account</th><th>DR</th><th>CR</th><th>A</th><th>L</th><th>E</th><th>Rev</th><th>Exp</th><th>NI</th></tr>
-          <tr><td class="acct">Cash</td><td class="amt">256,000</td><td></td><td class="chg up">↑256,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
-          <tr><td class="acct credit">Accounts Receivable</td><td></td><td class="amt">256,000</td><td class="chg down">↓256,000</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
-        </table>
-        <div class="statement-row">
-          <div class="stbox no-effect"><span class="lbl">Balance Sheet</span><span class="val">Asset mix shifts; total unchanged</span></div>
-          <div class="stbox no-effect"><span class="lbl">Income Statement</span><span class="val">No effect</span></div>
-          <div class="stbox"><span class="lbl">Statement of CF</span><span class="val">+256,000 operating inflow</span></div>
-        </div>
-        <div class="checkyourself">
-          <span class="lbl">The takeaway</span>
-          Same 80% collection rate, wildly different bookkeeping — because the two alternatives answer a different question: does Lonergan still own the receivable, or not?
-        </div>
-      </div>
-    </div>
+    </article>
   </section>
-
 </main>
 
-<footer>ACCT 351 · Chapter 7 · Handout 3 of 3</footer>
+<footer>Notes Receivable and Financing with Receivables · Guided Walkthrough (Ungraded)</footer>
 
+<script>window.JE_ACCOUNTS = ["Cash", "Accounts receivable", "Notes receivable", "Discount on notes receivable", "Interest receivable", "Interest revenue", "Sales revenue", "Sales returns", "Loss on sale of receivables", "Loss on sale of note receivable", "Notes payable", "Interest expense", "No entry required"];</script>
 <script>
-function toggleEntry(btn, id){
-  var el = document.getElementById(id);
-  var open = el.classList.toggle('open');
-  btn.textContent = open ? 'Hide the entry' : 'Reveal the entry';
-  btn.classList.toggle('shown', open);
-}
+  // ===== Guided walkthrough engine: enter answers (and journal entries), then reveal =====
+
+  // Keeps the dates current automatically, with no recoding needed each year.
+  // yr0 is always the current calendar year; yr1..yr4 follow and yrm1/yrPrev, yrm2 precede.
+  var YEARS = (function () {
+    var yr0 = new Date().getFullYear();
+    var years = { yrm2: yr0 - 2, yrm1: yr0 - 1, yrPrev: yr0 - 1, yr0: yr0, yr1: yr0 + 1, yr2: yr0 + 2, yr3: yr0 + 3, yr4: yr0 + 4 };
+    Object.keys(years).forEach(function (cls) {
+      document.querySelectorAll('.' + cls).forEach(function (el) { el.textContent = years[cls]; });
+    });
+    return years;
+  })();
+
+  function tok(s) {
+    return String(s).replace(/\{(yr[A-Za-z0-9]+)\}/g, function (m, k) { return YEARS.hasOwnProperty(k) ? YEARS[k] : m; });
+  }
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function fmt(val, unit) {
+    var n = Number(val);
+    var abs = Math.abs(n).toLocaleString('en-US', { maximumFractionDigits: 2 });
+    if (unit === '$') { return (n < 0 ? '−$' : '$') + abs; }
+    if (unit === '%') { return (n < 0 ? '−' : '') + abs + '%'; }
+    return (n < 0 ? '−' : '') + abs;
+  }
+
+  // Year tokens inside option text and aria-labels
+  document.querySelectorAll('option').forEach(function (o) {
+    if (/\{yr/.test(o.textContent)) { if (!o.hasAttribute('value')) { o.value = o.textContent; } o.textContent = tok(o.textContent); }
+  });
+  document.querySelectorAll('[aria-label*="{yr"]').forEach(function (el) { el.setAttribute('aria-label', tok(el.getAttribute('aria-label'))); });
+
+  // ----- Journal-entry input grids -----
+  var NO_ENTRY = 'No entry required';
+  var ACCTS = (window.JE_ACCOUNTS || []).slice();
+  (function buildJE() {
+    var opts = '<option value="">Select account…</option>' + ACCTS.map(function (a) { return '<option>' + esc(a) + '</option>'; }).join('');
+    var n = 0;
+    document.querySelectorAll('.je-input').forEach(function (box) {
+      n++;
+      var title = tok(box.getAttribute('data-title'));
+      var rows = Number(box.getAttribute('data-rows') || 3);
+      var id = 'je' + n;
+      var h = '<p class="je-head" id="' + id + '-h">Journal entry: ' + esc(title) + '</p>' +
+        '<div class="table-wrap"><table class="je-entry" aria-labelledby="' + id + '-h"><thead><tr>' +
+        '<th scope="col">Line</th><th scope="col">Account</th><th scope="col" class="amt">Debit ($)</th><th scope="col" class="amt">Credit ($)</th><th scope="col">Check</th>' +
+        '</tr></thead><tbody>';
+      for (var i = 1; i <= rows; i++) {
+        var nm = esc(title) + ' entry, line ' + i;
+        h += '<tr><th scope="row" class="ln">' + i + '</th>' +
+          '<td><select class="je-acct" aria-label="' + nm + ', account">' + opts + '</select></td>' +
+          '<td class="amt-cell"><input type="number" step="any" inputmode="decimal" class="je-dr" aria-label="' + nm + ', debit amount in dollars"></td>' +
+          '<td class="amt-cell"><input type="number" step="any" inputmode="decimal" class="je-cr" aria-label="' + nm + ', credit amount in dollars"></td>' +
+          '<td class="row-status"></td></tr>';
+      }
+      h += '</tbody></table></div>';
+      box.innerHTML = h;
+    });
+  })();
+
+  function jeKey(box) { return JSON.parse(box.getAttribute('data-key')); }
+  function lineText(acct, side, amt) {
+    if (acct === NO_ENTRY) { return NO_ENTRY; }
+    return (side === 'dr' ? 'Dr ' : 'Cr ') + acct + ' ' + Number(amt).toLocaleString('en-US', { maximumFractionDigits: 2 });
+  }
+  function jeRows(box) {
+    var out = [];
+    box.querySelectorAll('tbody tr').forEach(function (tr) {
+      var s = tr.querySelector('.je-acct'), d = tr.querySelector('.je-dr'), c = tr.querySelector('.je-cr');
+      out.push({ tr: tr, sel: s, dr: d, cr: c, acct: s.value, drv: d.value, crv: c.value,
+        blank: !s.value && d.value === '' && c.value === '' });
+    });
+    return out;
+  }
+  // Returns the first incomplete control (and flags it), or null if the entry is complete.
+  function jeValidate(box) {
+    var first = null, used = 0;
+    function bad(el) { el.setAttribute('aria-invalid', 'true'); if (!first) { first = el; } }
+    jeRows(box).forEach(function (r) {
+      [r.sel, r.dr, r.cr].forEach(function (el) { el.removeAttribute('aria-invalid'); });
+      if (r.blank) { return; }
+      used++;
+      if (!r.acct) { bad(r.sel); return; }
+      if (r.acct === NO_ENTRY) { if (r.drv !== '') { bad(r.dr); } if (r.crv !== '') { bad(r.cr); } return; }
+      if (r.drv === '' && r.crv === '') { bad(r.dr); }
+      else if (r.drv !== '' && r.crv !== '') { bad(r.cr); }
+    });
+    if (!used) { bad(jeRows(box)[0].sel); }
+    return first;
+  }
+  // Order doesn't matter: each line must match one answer line (account, side, amount within $1).
+  function jeGrade(box) {
+    var key = jeKey(box), taken = key.map(function () { return false; }), allOk = true, yours = [];
+    jeRows(box).forEach(function (r) {
+      var cell = r.tr.querySelector('.row-status');
+      cell.className = 'row-status'; cell.innerHTML = '';
+      if (r.blank) { return; }
+      var side = r.acct === NO_ENTRY ? '' : (r.drv !== '' ? 'dr' : 'cr');
+      var amt = side === 'dr' ? Number(r.drv) : (side === 'cr' ? Number(r.crv) : 0);
+      yours.push(lineText(r.acct, side, amt));
+      var hit = -1;
+      key.forEach(function (k, i) {
+        if (hit > -1 || taken[i] || k.a !== r.acct) { return; }
+        if (r.acct === NO_ENTRY) { hit = i; return; }
+        var kside = k.hasOwnProperty('dr') ? 'dr' : 'cr';
+        if (kside === side && Math.abs(Number(k[kside]) - amt) <= 1) { hit = i; }
+      });
+      if (hit > -1) { taken[hit] = true; } else { allOk = false; }
+      cell.className = 'row-status ' + (hit > -1 ? 'result-ok' : 'result-no');
+      cell.innerHTML = hit > -1 ? '<span aria-hidden="true">✓ </span>Correct' : '<span aria-hidden="true">✗ </span>Review';
+    });
+    if (taken.indexOf(false) > -1) { allOk = false; }
+    var answer = key.map(function (k) {
+      var side = k.hasOwnProperty('dr') ? 'dr' : (k.hasOwnProperty('cr') ? 'cr' : '');
+      return lineText(k.a, side, k[side]);
+    });
+    return { ok: allOk, yours: yours, answer: answer, label: 'Journal entry: ' + tok(box.getAttribute('data-title')) };
+  }
+
+  // ----- Reveal -----
+  var REVEALED = {};
+  var TOTAL = document.querySelectorAll('.example').length;
+  function updateProgress() {
+    var count = Object.keys(REVEALED).length;
+    var bar = document.getElementById('progressBar');
+    bar.setAttribute('aria-valuemax', TOTAL);
+    bar.setAttribute('aria-valuenow', count);
+    bar.setAttribute('aria-valuetext', count + ' of ' + TOTAL + ' problems revealed');
+    document.getElementById('progressLabel').textContent = count + ' of ' + TOTAL + ' revealed';
+    document.getElementById('progressFill').style.width = (count / TOTAL * 100) + '%';
+  }
+  function isMatch(el) {
+    var ans = el.getAttribute('data-answer');
+    if (el.tagName === 'SELECT') { return el.value === ans; }
+    var unit = el.getAttribute('data-unit') || '';
+    var tol = el.hasAttribute('data-tol') ? Number(el.getAttribute('data-tol')) : (unit === '%' ? 0.05 : 1);
+    return Math.abs(Number(el.value) - Number(ans)) <= tol;
+  }
+  function resultCell(ok) {
+    return '<td class="' + (ok ? 'result-ok' : 'result-no') + '">' + (ok ? '<span aria-hidden="true">✓ </span>Matches' : '<span aria-hidden="true">✗ </span>Review') + '</td>';
+  }
+  function reveal(id) {
+    var box = document.getElementById(id);
+    var inputs = box.querySelectorAll('.ans');
+    var jes = box.querySelectorAll('.je-input');
+    var fb = box.querySelector('.feedback');
+    var firstMissing = null;
+    inputs.forEach(function (el) {
+      var empty = (el.value === '' || el.value === null);
+      if (empty) { el.setAttribute('aria-invalid', 'true'); if (!firstMissing) { firstMissing = el; } }
+      else { el.removeAttribute('aria-invalid'); }
+    });
+    jes.forEach(function (j) { var b = jeValidate(j); if (b && !firstMissing) { firstMissing = b; } });
+    if (firstMissing) {
+      fb.textContent = jes.length
+        ? 'Finish every answer first. In each journal entry, every line you use needs an account and one amount (a debit or a credit); leave extra lines blank. Then select Reveal Answer.'
+        : 'Enter an answer in every box first, then select Reveal Answer.';
+      firstMissing.focus();
+      return;
+    }
+    fb.textContent = '';
+
+    var rows = '';
+    inputs.forEach(function (el) {
+      var label = tok(el.getAttribute('data-label'));
+      var unit = el.getAttribute('data-unit') || '';
+      var yours, answer;
+      if (el.tagName === 'SELECT') {
+        yours = el.options[el.selectedIndex].text;
+        var a = el.querySelector('option[value="' + el.getAttribute('data-answer').replace(/"/g, '\\"') + '"]') ||
+          Array.prototype.filter.call(el.options, function (o) { return o.value === el.getAttribute('data-answer'); })[0];
+        answer = a ? a.text : el.getAttribute('data-answer');
+      } else {
+        yours = fmt(el.value, unit);
+        answer = fmt(el.getAttribute('data-answer'), unit);
+      }
+      rows += '<tr><th scope="row">' + esc(label) + '</th><td>' + esc(yours) + '</td><td><strong>' + esc(answer) + '</strong></td>' + resultCell(isMatch(el)) + '</tr>';
+    });
+    jes.forEach(function (j) {
+      var g = jeGrade(j);
+      rows += '<tr><th scope="row">' + esc(g.label) + '</th><td class="je-cell">' + g.yours.map(esc).join('<br>') +
+        '</td><td class="je-cell"><strong>' + g.answer.map(esc).join('<br>') + '</strong></td>' + resultCell(g.ok) + '</tr>';
+    });
+    box.querySelector('.compare-body').innerHTML = rows;
+    var sol = box.querySelector('.solution');
+    sol.hidden = false;
+    box.querySelector('.reveal-btn').setAttribute('aria-expanded', 'true');
+    var head = sol.querySelector('.solution-label');
+    if (head) { head.focus(); }
+    REVEALED[id] = true;
+    updateProgress();
+  }
+
+  document.querySelectorAll('.reveal-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () { reveal(btn.getAttribute('data-problem')); });
+  });
+  ['input', 'change'].forEach(function (ev) {
+    document.addEventListener(ev, function (e) {
+      if (e.target.getAttribute && e.target.getAttribute('aria-invalid') === 'true' && e.target.value !== '') { e.target.removeAttribute('aria-invalid'); }
+    });
+  });
+  updateProgress();
 </script>
+
 <script id="a11y-fixes-js">
 /* Accessibility support added Oct 2026: names for unlabeled form fields, scrollable wide tables, and screen-reader announcements of results. */
 (function () {
