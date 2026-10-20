@@ -88,7 +88,8 @@
   table.je-table th.amt { text-align: right; }
   table.je-table td { padding: 0.26rem 0.3rem; vertical-align: top; }
   table.je-table td.je-debit-amt, table.je-table td.je-credit-amt { text-align: right; width: 105px; white-space: nowrap; }
-  table.je-table td.indent { padding-left: 1.8rem; }
+  table.je-table td.indent, table.je-table th.indent { padding-left: 1.8rem; }
+  table.je-table tbody th { font-family: 'IBM Plex Mono', monospace; font-size: 0.83rem; font-weight: 400; text-transform: none; color: var(--ink); border-bottom: 0; padding: 0.26rem 0.3rem; vertical-align: top; }
   .je-desc { font-size: 0.85rem; color: var(--muted); font-style: italic; margin: 0.2rem 0 0.9rem; }
   .date-tag { display: inline-block; font-family: 'IBM Plex Mono', monospace; font-weight: 700; font-size: 0.75rem; color: #fff; background: var(--wcu-purple-dark); padding: 0.12rem 0.5rem; border-radius: 4px; margin-top: 0.4rem; }
 
@@ -106,6 +107,21 @@
   table.t-acct td.dr { border-right: 2px solid var(--ink); }
   table.t-acct tr.bal td, table.t-acct tr.bal th { border-top: 1px solid var(--ink); font-weight: 700; color: var(--ink); }
 
+  .je-input { margin: 0.2rem 0 0.1rem; }
+  .je-input + .je-input { margin-top: 0.8rem; }
+  .je-head { font-size: 0.9rem; font-weight: 700; color: var(--wcu-purple-dark); margin: 0.2rem 0 0.3rem; }
+  table.je-entry { border-collapse: collapse; width: 100%; min-width: 560px; background: #fff; border: 1px solid var(--border-strong); font-size: 0.88rem; }
+  table.je-entry thead th { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; color: var(--muted); text-align: left; padding: 0.35rem 0.45rem; border-bottom: 1px solid var(--rule); background: #fff; }
+  table.je-entry thead th.amt { text-align: right; }
+  table.je-entry tbody th.ln { font-family: 'IBM Plex Mono', monospace; font-weight: 500; color: var(--muted); width: 2.6rem; text-align: center; padding: 0.3rem; border-top: 1px solid var(--rule); }
+  table.je-entry td { padding: 0.3rem 0.45rem; vertical-align: middle; border-top: 1px solid var(--rule); }
+  table.je-entry select { width: 100%; min-width: 210px; font-family: 'Inter', sans-serif; font-size: 0.9rem; padding: 0.4rem 0.5rem; border: 1px solid var(--border-strong); border-radius: 5px; background: #fff; color: var(--ink); min-height: 2.4rem; }
+  table.je-entry input { width: 100%; min-width: 100px; font-family: 'IBM Plex Mono', monospace; font-size: 0.9rem; padding: 0.4rem 0.5rem; border: 1px solid var(--border-strong); border-radius: 5px; background: #fff; color: var(--ink); text-align: right; min-height: 2.4rem; }
+  table.je-entry td.amt-cell { width: 118px; }
+  table.je-entry td.row-status { width: 5.9rem; font-weight: 700; font-size: 0.8rem; white-space: nowrap; }
+  table.je-entry select:focus-visible, table.je-entry input:focus-visible { outline: 3px solid var(--wcu-purple); outline-offset: 2px; border-color: var(--wcu-purple); }
+  table.je-entry [aria-invalid="true"] { border: 2px solid var(--no); }
+  table.data td.je-cell { font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; }
   code { font-family: 'IBM Plex Mono', monospace; background: var(--panel); padding: 0 0.25rem; border-radius: 3px; }
   footer { text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--muted); padding: 1.5rem; }
 </style>
@@ -137,7 +153,7 @@
 </div>
 
   <div class="key-idea">
-    <p style="margin:0"><strong>How this works:</strong> Work each problem on your own first and enter your answer in every box. Then select <strong>Reveal Answer</strong> to see the correct answer next to yours, along with a detailed explanation and the journal entries. Enter all amounts as positive numbers; the questions tell you whether an amount is an increase or a decrease. Answers within $1 of the solution count as a match (rounding). This page isn't graded and doesn't get submitted anywhere; it's just for practice.</p>
+    <p style="margin:0"><strong>How this works:</strong> Work each problem on your own first and enter your answer in every box. For journal entries, choose an account and enter its amount in either the Debit or the Credit column, one account per line; use only the lines you need and leave the rest blank. Record each year-end tax entry as one combined entry. Then select <strong>Reveal Answer</strong> to see the correct answer next to yours, along with a detailed explanation and the journal entries. Enter all amounts as positive numbers; the questions tell you whether an amount is an increase or a decrease. Answers within $1 of the solution count as a match (rounding). This page isn't graded and doesn't get submitted anywhere; it's just for practice.</p>
   </div>
 
   <div class="key-idea">
@@ -255,7 +271,7 @@
         </ul>
         <p>Together, the future taxable amounts equal the $80,000 temporary difference that originated in <span class="yr0">2026</span>. Multiply by the enacted tax rate for the years they reverse:</p>
         <p class="final-answer"><strong>$80,000 × 25% = $20,000 deferred tax liability</strong></p>
-        <div class="table-wrap" role="region" tabindex="0" aria-label="Catamount Climbing Gear — 2026 (in dollars; amounts in parentheses reduce income)"><table class="data">
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Catamount Climbing Gear — {yr0} (in dollars; amounts in parentheses reduce income)"><table class="data">
           <caption>Catamount Climbing Gear — <span class="yr0">2026</span> (in dollars; amounts in parentheses reduce income)</caption>
           <thead><tr><th scope="col"><span class="sr-only">Item</span></th><th scope="col" class="num">Current year <span class="yr0">2026</span></th><th scope="col" class="num">Future taxable <span class="yr1">2027</span></th><th scope="col" class="num">Future taxable <span class="yr2">2028</span></th><th scope="col" class="num">Future taxable total</th></tr></thead>
           <tbody><tr><th scope="row">Pretax accounting income</th><td class="num">$500,000</td><td class="num"></td><td class="num"></td><td class="num"></td></tr><tr class="sub-head"><th scope="row">Temporary difference:</th><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td></tr><tr><th scope="row" class="indent">Depreciation ($100,000 − $180,000)</th><td class="num">(80,000)</td><td class="num">$10,000</td><td class="num">$70,000</td><td class="num">$80,000</td></tr><tr class="total-row"><th scope="row">Taxable income (tax return)</th><td class="num">$420,000</td><td class="num"></td><td class="num"></td><td class="num"></td></tr><tr><th scope="row">Enacted tax rate</th><td class="num">25%</td><td class="num">25%</td><td class="num">25%</td><td class="num">25%</td></tr><tr><th scope="row">Tax payable</th><td class="num">$105,000</td><td class="num"></td><td class="num"></td><td class="num"></td></tr><tr><th scope="row">Deferred tax liability</th><td class="num"></td><td class="num"></td><td class="num"></td><td class="num">$20,000</td></tr></tbody></table></div>
@@ -265,7 +281,7 @@
     <article class="example" id="p4" aria-labelledby="p4-h">
       <h3 class="ex-label" id="p4-h">Problem 4 — Steps 3 and 4: Income Tax Expense and the Entry</h3>
       
-      <p>Catamount's deferred tax liability had a $0 beginning balance. Find the change needed in the account (Step 3) and total income tax expense for <span class="yr0">2026</span> (Step 4).</p>
+      <p>Catamount's deferred tax liability had a $0 beginning balance. Find the change needed in the account (Step 3) and total income tax expense for <span class="yr0">2026</span> (Step 4). Then record the year-end income tax entry.</p>
       <div class="input-block" role="group" aria-labelledby="p4-h">
         <div class="input-item"><label for="p4-a">Does the deferred tax liability need to increase or decrease?</label>
           <select id="p4-a" class="ans" data-label="Direction of DTL change" data-answer="Increase"><option value="">Select…</option><option>Increase</option><option>Decrease</option></select></div>
@@ -273,6 +289,7 @@
           <input type="number" step="any" inputmode="decimal" id="p4-b" class="ans" data-label="DTL change" data-answer="20000" data-unit="$"></div>
         <div class="input-item"><label for="p4-c">Income tax expense, <span class="yr0">2026</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
           <input type="number" step="any" inputmode="decimal" id="p4-c" class="ans" data-label="Income tax expense" data-answer="125000" data-unit="$"></div>
+        <div class="je-input" data-title="Dec. 31, {yr0}" data-rows="3" data-key='[{"a": "Income tax expense", "dr": 125000}, {"a": "Income tax payable", "cr": 105000}, {"a": "Deferred tax liability", "cr": 20000}]'></div>
         <button type="button" class="reveal-btn" data-problem="p4" aria-expanded="false" aria-controls="p4-sol">Reveal Answer<span class="sr-only"> for Problem 4</span></button>
       </div>
       <div class="feedback" role="alert"></div>
@@ -294,9 +311,9 @@
         
         <div class="date-tag" aria-hidden="true">Dec. 31, <span class="yr0">2026</span></div>
         <div><table class="je-table">
-          <caption class="sr-only">Journal entry, Dec. 31, 2026</caption>
+          <caption class="sr-only">Journal entry, Dec. 31, <span class="yr0">2026</span></caption>
           <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
-          <tbody><tr><td>Income tax expense (to balance)</td><td class="je-debit-amt">125,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Income tax payable (determined above)</td><td class="je-debit-amt"></td><td class="je-credit-amt">105,000</td></tr><tr><td class="indent">Deferred tax liability (determined above)</td><td class="je-debit-amt"></td><td class="je-credit-amt">20,000</td></tr></tbody>
+          <tbody><tr><th scope="row">Income tax expense (to balance)</th><td class="je-debit-amt">125,000</td><td class="je-credit-amt"></td></tr><tr><th scope="row" class="indent">Income tax payable (determined above)</th><td class="je-debit-amt"></td><td class="je-credit-amt">105,000</td></tr><tr><th scope="row" class="indent">Deferred tax liability (determined above)</th><td class="je-debit-amt"></td><td class="je-credit-amt">20,000</td></tr></tbody>
         </table></div><p class="je-desc">Notice that $125,000 is exactly 25% of the $500,000 pretax accounting income. With only a temporary difference, tax expense matches the income actually reported in the income statement.</p>
       </div>
     </article>
@@ -339,7 +356,7 @@
     <article class="example" id="p6" aria-labelledby="p6-h">
       <h3 class="ex-label" id="p6-h">Problem 6 — The Difference Starts to Reverse (<span class="yr1">2027</span>)</h3>
       
-      <p>In <span class="yr1">2027</span>, Catamount reports $100,000 of depreciation expense but deducts only $90,000 on its tax return. Pretax accounting income is again $500,000. Work all four steps for <span class="yr1">2027</span>.</p>
+      <p>In <span class="yr1">2027</span>, Catamount reports $100,000 of depreciation expense but deducts only $90,000 on its tax return. Pretax accounting income is again $500,000. Work all four steps for <span class="yr1">2027</span>, then record the year-end income tax entry.</p>
       <div class="input-block" role="group" aria-labelledby="p6-h">
         <div class="input-item"><label for="p6-a">Step 1 — Income tax payable, <span class="yr1">2027</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
           <input type="number" step="any" inputmode="decimal" id="p6-a" class="ans" data-label="Income tax payable" data-answer="127500" data-unit="$"></div>
@@ -351,6 +368,7 @@
           <input type="number" step="any" inputmode="decimal" id="p6-d" class="ans" data-label="DTL change" data-answer="2500" data-unit="$"></div>
         <div class="input-item"><label for="p6-e">Step 4 — Income tax expense, <span class="yr1">2027</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
           <input type="number" step="any" inputmode="decimal" id="p6-e" class="ans" data-label="Income tax expense" data-answer="125000" data-unit="$"></div>
+        <div class="je-input" data-title="Dec. 31, {yr1}" data-rows="3" data-key='[{"a": "Income tax expense", "dr": 125000}, {"a": "Deferred tax liability", "dr": 2500}, {"a": "Income tax payable", "cr": 127500}]'></div>
         <button type="button" class="reveal-btn" data-problem="p6" aria-expanded="false" aria-controls="p6-sol">Reveal Answer<span class="sr-only"> for Problem 6</span></button>
       </div>
       <div class="feedback" role="alert"></div>
@@ -363,7 +381,7 @@
         </table></div>
         
         <h4 class="solution-label">Explanation</h4>
-        <div class="table-wrap" role="region" tabindex="0" aria-label="Catamount Climbing Gear — 2027 (in dollars)"><table class="data">
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Catamount Climbing Gear — {yr1} (in dollars)"><table class="data">
           <caption>Catamount Climbing Gear — <span class="yr1">2027</span> (in dollars)</caption>
           <thead><tr><th scope="col"><span class="sr-only">Item</span></th><th scope="col" class="num">Current year <span class="yr1">2027</span></th><th scope="col" class="num">Future taxable <span class="yr2">2028</span></th></tr></thead>
           <tbody><tr><th scope="row">Pretax accounting income</th><td class="num">$500,000</td><td class="num"></td></tr><tr class="sub-head"><th scope="row">Temporary difference:</th><td class="num"></td><td class="num"></td></tr><tr><th scope="row" class="indent">Depreciation ($100,000 − $90,000)</th><td class="num">10,000</td><td class="num">$70,000</td></tr><tr class="total-row"><th scope="row">Taxable income (tax return)</th><td class="num">$510,000</td><td class="num"></td></tr><tr><th scope="row">Enacted tax rate</th><td class="num">25%</td><td class="num">25%</td></tr><tr><th scope="row">Tax payable</th><td class="num">$127,500</td><td class="num"></td></tr><tr><th scope="row">Deferred tax liability</th><td class="num"></td><td class="num">$17,500</td></tr></tbody></table></div>
@@ -375,16 +393,16 @@
         
         <div class="date-tag" aria-hidden="true">Dec. 31, <span class="yr1">2027</span></div>
         <div><table class="je-table">
-          <caption class="sr-only">Journal entry, Dec. 31, 2027</caption>
+          <caption class="sr-only">Journal entry, Dec. 31, <span class="yr1">2027</span></caption>
           <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
-          <tbody><tr><td>Income tax expense (to balance)</td><td class="je-debit-amt">125,000</td><td class="je-credit-amt"></td></tr><tr><td>Deferred tax liability (determined above)</td><td class="je-debit-amt">2,500</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Income tax payable (determined above)</td><td class="je-debit-amt"></td><td class="je-credit-amt">127,500</td></tr></tbody>
+          <tbody><tr><th scope="row">Income tax expense (to balance)</th><td class="je-debit-amt">125,000</td><td class="je-credit-amt"></td></tr><tr><th scope="row">Deferred tax liability (determined above)</th><td class="je-debit-amt">2,500</td><td class="je-credit-amt"></td></tr><tr><th scope="row" class="indent">Income tax payable (determined above)</th><td class="je-debit-amt"></td><td class="je-credit-amt">127,500</td></tr></tbody>
         </table></div><p class="je-desc">The DTL decreases (debit) because part of the deferred tax is now being paid. Tax expense is the current portion ($127,500) minus the decrease in the DTL ($2,500).</p>
       </div>
     </article>
     <article class="example" id="p7" aria-labelledby="p7-h">
       <h3 class="ex-label" id="p7-h">Problem 7 — Full Reversal (<span class="yr2">2028</span>)</h3>
       
-      <p>In <span class="yr2">2028</span>, Catamount reports $100,000 of depreciation expense and deducts only $30,000 on its tax return. Pretax accounting income is $500,000. Complete the four steps for <span class="yr2">2028</span>.</p>
+      <p>In <span class="yr2">2028</span>, Catamount reports $100,000 of depreciation expense and deducts only $30,000 on its tax return. Pretax accounting income is $500,000. Complete the four steps for <span class="yr2">2028</span>, then record the year-end income tax entry.</p>
       <div class="input-block" role="group" aria-labelledby="p7-h">
         <div class="input-item"><label for="p7-a">Step 1 — Income tax payable, <span class="yr2">2028</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
           <input type="number" step="any" inputmode="decimal" id="p7-a" class="ans" data-label="Income tax payable" data-answer="142500" data-unit="$"></div>
@@ -394,6 +412,7 @@
           <input type="number" step="any" inputmode="decimal" id="p7-c" class="ans" data-label="DTL decrease" data-answer="17500" data-unit="$"></div>
         <div class="input-item"><label for="p7-d">Step 4 — Income tax expense, <span class="yr2">2028</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
           <input type="number" step="any" inputmode="decimal" id="p7-d" class="ans" data-label="Income tax expense" data-answer="125000" data-unit="$"></div>
+        <div class="je-input" data-title="Dec. 31, {yr2}" data-rows="3" data-key='[{"a": "Income tax expense", "dr": 125000}, {"a": "Deferred tax liability", "dr": 17500}, {"a": "Income tax payable", "cr": 142500}]'></div>
         <button type="button" class="reveal-btn" data-problem="p7" aria-expanded="false" aria-controls="p7-sol">Reveal Answer<span class="sr-only"> for Problem 7</span></button>
       </div>
       <div class="feedback" role="alert"></div>
@@ -414,9 +433,9 @@
         
         <div class="date-tag" aria-hidden="true">Dec. 31, <span class="yr2">2028</span></div>
         <div><table class="je-table">
-          <caption class="sr-only">Journal entry, Dec. 31, 2028</caption>
+          <caption class="sr-only">Journal entry, Dec. 31, <span class="yr2">2028</span></caption>
           <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
-          <tbody><tr><td>Income tax expense (to balance)</td><td class="je-debit-amt">125,000</td><td class="je-credit-amt"></td></tr><tr><td>Deferred tax liability (determined above)</td><td class="je-debit-amt">17,500</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Income tax payable (determined above)</td><td class="je-debit-amt"></td><td class="je-credit-amt">142,500</td></tr></tbody>
+          <tbody><tr><th scope="row">Income tax expense (to balance)</th><td class="je-debit-amt">125,000</td><td class="je-credit-amt"></td></tr><tr><th scope="row">Deferred tax liability (determined above)</th><td class="je-debit-amt">17,500</td><td class="je-credit-amt"></td></tr><tr><th scope="row" class="indent">Income tax payable (determined above)</th><td class="je-debit-amt"></td><td class="je-credit-amt">142,500</td></tr></tbody>
         </table></div>
         <p>Look at the whole life of the machine: the DTL <strong>increased</strong> when the temporary difference originated and <strong>decreased</strong> as it reversed, ending at zero. Total tax payable over three years ($105,000 + $127,500 + $142,500 = $375,000) equals total tax expense ($125,000 × 3). The tax wasn't avoided, only deferred.</p>
       </div>
@@ -450,7 +469,7 @@
         </table></div>
         
         <h4 class="solution-label">Explanation</h4>
-        <div class="table-wrap" role="region" tabindex="0" aria-label="Income statement (partial), 2026"><table class="data">
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Income statement (partial), {yr0}"><table class="data">
           <caption>Income statement (partial), <span class="yr0">2026</span></caption>
           <thead><tr><th scope="col"><span class="sr-only">Item</span></th><th scope="col" class="num">Amount</th></tr></thead>
           <tbody><tr><th scope="row">Pretax accounting income</th><td class="num">$500,000</td></tr><tr><th scope="row">Less: Income tax expense</th><td class="num">(125,000)</td></tr><tr class="total-row"><th scope="row">Net income</th><td class="num">$375,000</td></tr></tbody></table></div>
@@ -461,7 +480,7 @@
     <article class="example" id="p9" aria-labelledby="p9-h">
       <h3 class="ex-label" id="p9-h">Problem 9 — The Mirror Image: A Deferred Tax Asset</h3>
       
-      <p><strong>Cullowhee Creek Outfitters</strong> began selling kayaks with a two-year warranty in <span class="yr0">2026</span>. It reports pretax accounting income of <strong>$300,000</strong>, which includes <strong>$40,000</strong> of estimated warranty expense. No warranty claims were paid in <span class="yr0">2026</span>. Warranty costs are tax deductible only when paid, which Cullowhee Creek expects in <span class="yr1">2027</span> and <span class="yr2">2028</span>. The enacted tax rate is 25%, and this is the only difference.</p>
+      <p><strong>Cullowhee Creek Outfitters</strong> began selling kayaks with a two-year warranty in <span class="yr0">2026</span>. It reports pretax accounting income of <strong>$300,000</strong>, which includes <strong>$40,000</strong> of estimated warranty expense. No warranty claims were paid in <span class="yr0">2026</span>. Warranty costs are tax deductible only when paid, which Cullowhee Creek expects in <span class="yr1">2027</span> and <span class="yr2">2028</span>. The enacted tax rate is 25%, and this is the only difference. Work the four steps, then record the year-end income tax entry.</p>
       <div class="input-block" role="group" aria-labelledby="p9-h">
         <div class="input-item"><label for="p9-a">Taxable income (tax return), <span class="yr0">2026</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
           <input type="number" step="any" inputmode="decimal" id="p9-a" class="ans" data-label="Taxable income" data-answer="340000" data-unit="$"></div>
@@ -471,6 +490,7 @@
           <input type="number" step="any" inputmode="decimal" id="p9-c" class="ans" data-label="DTA ending balance" data-answer="10000" data-unit="$"></div>
         <div class="input-item"><label for="p9-d">Income tax expense:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
           <input type="number" step="any" inputmode="decimal" id="p9-d" class="ans" data-label="Income tax expense" data-answer="75000" data-unit="$"></div>
+        <div class="je-input" data-title="Dec. 31, {yr0}" data-rows="3" data-key='[{"a": "Income tax expense", "dr": 75000}, {"a": "Deferred tax asset", "dr": 10000}, {"a": "Income tax payable", "cr": 85000}]'></div>
         <button type="button" class="reveal-btn" data-problem="p9" aria-expanded="false" aria-controls="p9-sol">Reveal Answer<span class="sr-only"> for Problem 9</span></button>
       </div>
       <div class="feedback" role="alert"></div>
@@ -483,7 +503,7 @@
         </table></div>
         
         <h4 class="solution-label">Explanation</h4>
-        <div class="table-wrap" role="region" tabindex="0" aria-label="Cullowhee Creek Outfitters — 2026 (in dollars)"><table class="data">
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Cullowhee Creek Outfitters — {yr0} (in dollars)"><table class="data">
           <caption>Cullowhee Creek Outfitters — <span class="yr0">2026</span> (in dollars)</caption>
           <thead><tr><th scope="col"><span class="sr-only">Item</span></th><th scope="col" class="num">Current year <span class="yr0">2026</span></th><th scope="col" class="num">Future deductible amounts</th></tr></thead>
           <tbody><tr><th scope="row">Pretax accounting income</th><td class="num">$300,000</td><td class="num"></td></tr><tr class="sub-head"><th scope="row">Temporary difference:</th><td class="num"></td><td class="num"></td></tr><tr><th scope="row" class="indent">Estimated warranty expense</th><td class="num">40,000</td><td class="num">$(40,000)</td></tr><tr class="total-row"><th scope="row">Taxable income (tax return)</th><td class="num">$340,000</td><td class="num"></td></tr><tr><th scope="row">Enacted tax rate</th><td class="num">25%</td><td class="num">25%</td></tr><tr><th scope="row">Tax payable</th><td class="num">$85,000</td><td class="num"></td></tr><tr><th scope="row">Deferred tax asset</th><td class="num"></td><td class="num">$10,000</td></tr></tbody></table></div>
@@ -495,9 +515,9 @@
         
         <div class="date-tag" aria-hidden="true">Dec. 31, <span class="yr0">2026</span></div>
         <div><table class="je-table">
-          <caption class="sr-only">Journal entry, Dec. 31, 2026</caption>
+          <caption class="sr-only">Journal entry, Dec. 31, <span class="yr0">2026</span></caption>
           <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
-          <tbody><tr><td>Income tax expense (to balance)</td><td class="je-debit-amt">75,000</td><td class="je-credit-amt"></td></tr><tr><td>Deferred tax asset (determined above)</td><td class="je-debit-amt">10,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Income tax payable (determined above)</td><td class="je-debit-amt"></td><td class="je-credit-amt">85,000</td></tr></tbody>
+          <tbody><tr><th scope="row">Income tax expense (to balance)</th><td class="je-debit-amt">75,000</td><td class="je-credit-amt"></td></tr><tr><th scope="row">Deferred tax asset (determined above)</th><td class="je-debit-amt">10,000</td><td class="je-credit-amt"></td></tr><tr><th scope="row" class="indent">Income tax payable (determined above)</th><td class="je-debit-amt"></td><td class="je-credit-amt">85,000</td></tr></tbody>
         </table></div><p class="je-desc">An increase in a DTA reduces tax expense: $85,000 currently payable − $10,000 deferred = $75,000, which is again 25% of the $300,000 pretax accounting income.</p>
         <h4 class="solution-label">Putting it together</h4>
         <div class="table-wrap" role="region" tabindex="0" aria-label="Comparing the two single-difference examples"><table class="data">
@@ -511,25 +531,29 @@
 
 <footer>Introducing Deferred Taxes · Guided Walkthrough (Ungraded)</footer>
 
+<script>window.JE_ACCOUNTS = ["Deferred tax asset", "Deferred tax liability", "Income tax expense", "Income tax payable", "No entry required"];</script>
 <script>
-  var REVEALED = {};
-  var TOTAL = document.querySelectorAll('.example').length;
+  // ===== Guided walkthrough engine: enter answers (and journal entries), then reveal =====
 
-  function updateProgress() {
-    var count = Object.keys(REVEALED).length;
-    var bar = document.getElementById('progressBar');
-    bar.setAttribute('aria-valuenow', count);
-    bar.setAttribute('aria-valuetext', count + ' of ' + TOTAL + ' problems revealed');
-    document.getElementById('progressLabel').textContent = count + ' of ' + TOTAL + ' revealed';
-    document.getElementById('progressFill').style.width = (count / TOTAL * 100) + '%';
+  // Keeps the dates current automatically, with no recoding needed each year.
+  // yr0 is always the current calendar year; yr1..yr4 follow and yrm1/yrPrev, yrm2 precede.
+  var YEARS = (function () {
+    var yr0 = new Date().getFullYear();
+    var years = { yrm2: yr0 - 2, yrm1: yr0 - 1, yrPrev: yr0 - 1, yr0: yr0, yr1: yr0 + 1, yr2: yr0 + 2, yr3: yr0 + 3, yr4: yr0 + 4 };
+    Object.keys(years).forEach(function (cls) {
+      document.querySelectorAll('.' + cls).forEach(function (el) { el.textContent = years[cls]; });
+    });
+    return years;
+  })();
+
+  function tok(s) {
+    return String(s).replace(/\{(yr[A-Za-z0-9]+)\}/g, function (m, k) { return YEARS.hasOwnProperty(k) ? YEARS[k] : m; });
   }
-
   function esc(s) {
     return String(s).replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
     });
   }
-
   function fmt(val, unit) {
     var n = Number(val);
     var abs = Math.abs(n).toLocaleString('en-US', { maximumFractionDigits: 2 });
@@ -538,6 +562,111 @@
     return (n < 0 ? '−' : '') + abs;
   }
 
+  // Year tokens inside option text and aria-labels
+  document.querySelectorAll('option').forEach(function (o) {
+    if (/\{yr/.test(o.textContent)) { if (!o.hasAttribute('value')) { o.value = o.textContent; } o.textContent = tok(o.textContent); }
+  });
+  document.querySelectorAll('[aria-label*="{yr"]').forEach(function (el) { el.setAttribute('aria-label', tok(el.getAttribute('aria-label'))); });
+
+  // ----- Journal-entry input grids -----
+  var NO_ENTRY = 'No entry required';
+  var ACCTS = (window.JE_ACCOUNTS || []).slice();
+  (function buildJE() {
+    var opts = '<option value="">Select account…</option>' + ACCTS.map(function (a) { return '<option>' + esc(a) + '</option>'; }).join('');
+    var n = 0;
+    document.querySelectorAll('.je-input').forEach(function (box) {
+      n++;
+      var title = tok(box.getAttribute('data-title'));
+      var rows = Number(box.getAttribute('data-rows') || 3);
+      var id = 'je' + n;
+      var h = '<p class="je-head" id="' + id + '-h">Journal entry: ' + esc(title) + '</p>' +
+        '<div class="table-wrap"><table class="je-entry" aria-labelledby="' + id + '-h"><thead><tr>' +
+        '<th scope="col">Line</th><th scope="col">Account</th><th scope="col" class="amt">Debit ($)</th><th scope="col" class="amt">Credit ($)</th><th scope="col">Check</th>' +
+        '</tr></thead><tbody>';
+      for (var i = 1; i <= rows; i++) {
+        var nm = esc(title) + ' entry, line ' + i;
+        h += '<tr><th scope="row" class="ln">' + i + '</th>' +
+          '<td><select class="je-acct" aria-label="' + nm + ', account">' + opts + '</select></td>' +
+          '<td class="amt-cell"><input type="number" step="any" inputmode="decimal" class="je-dr" aria-label="' + nm + ', debit amount in dollars"></td>' +
+          '<td class="amt-cell"><input type="number" step="any" inputmode="decimal" class="je-cr" aria-label="' + nm + ', credit amount in dollars"></td>' +
+          '<td class="row-status"></td></tr>';
+      }
+      h += '</tbody></table></div>';
+      box.innerHTML = h;
+    });
+  })();
+
+  function jeKey(box) { return JSON.parse(box.getAttribute('data-key')); }
+  function lineText(acct, side, amt) {
+    if (acct === NO_ENTRY) { return NO_ENTRY; }
+    return (side === 'dr' ? 'Dr ' : 'Cr ') + acct + ' ' + Number(amt).toLocaleString('en-US', { maximumFractionDigits: 2 });
+  }
+  function jeRows(box) {
+    var out = [];
+    box.querySelectorAll('tbody tr').forEach(function (tr) {
+      var s = tr.querySelector('.je-acct'), d = tr.querySelector('.je-dr'), c = tr.querySelector('.je-cr');
+      out.push({ tr: tr, sel: s, dr: d, cr: c, acct: s.value, drv: d.value, crv: c.value,
+        blank: !s.value && d.value === '' && c.value === '' });
+    });
+    return out;
+  }
+  // Returns the first incomplete control (and flags it), or null if the entry is complete.
+  function jeValidate(box) {
+    var first = null, used = 0;
+    function bad(el) { el.setAttribute('aria-invalid', 'true'); if (!first) { first = el; } }
+    jeRows(box).forEach(function (r) {
+      [r.sel, r.dr, r.cr].forEach(function (el) { el.removeAttribute('aria-invalid'); });
+      if (r.blank) { return; }
+      used++;
+      if (!r.acct) { bad(r.sel); return; }
+      if (r.acct === NO_ENTRY) { if (r.drv !== '') { bad(r.dr); } if (r.crv !== '') { bad(r.cr); } return; }
+      if (r.drv === '' && r.crv === '') { bad(r.dr); }
+      else if (r.drv !== '' && r.crv !== '') { bad(r.cr); }
+    });
+    if (!used) { bad(jeRows(box)[0].sel); }
+    return first;
+  }
+  // Order doesn't matter: each line must match one answer line (account, side, amount within $1).
+  function jeGrade(box) {
+    var key = jeKey(box), taken = key.map(function () { return false; }), allOk = true, yours = [];
+    jeRows(box).forEach(function (r) {
+      var cell = r.tr.querySelector('.row-status');
+      cell.className = 'row-status'; cell.innerHTML = '';
+      if (r.blank) { return; }
+      var side = r.acct === NO_ENTRY ? '' : (r.drv !== '' ? 'dr' : 'cr');
+      var amt = side === 'dr' ? Number(r.drv) : (side === 'cr' ? Number(r.crv) : 0);
+      yours.push(lineText(r.acct, side, amt));
+      var hit = -1;
+      key.forEach(function (k, i) {
+        if (hit > -1 || taken[i] || k.a !== r.acct) { return; }
+        if (r.acct === NO_ENTRY) { hit = i; return; }
+        var kside = k.hasOwnProperty('dr') ? 'dr' : 'cr';
+        if (kside === side && Math.abs(Number(k[kside]) - amt) <= 1) { hit = i; }
+      });
+      if (hit > -1) { taken[hit] = true; } else { allOk = false; }
+      cell.className = 'row-status ' + (hit > -1 ? 'result-ok' : 'result-no');
+      cell.innerHTML = hit > -1 ? '<span aria-hidden="true">✓ </span>Correct' : '<span aria-hidden="true">✗ </span>Review';
+    });
+    if (taken.indexOf(false) > -1) { allOk = false; }
+    var answer = key.map(function (k) {
+      var side = k.hasOwnProperty('dr') ? 'dr' : (k.hasOwnProperty('cr') ? 'cr' : '');
+      return lineText(k.a, side, k[side]);
+    });
+    return { ok: allOk, yours: yours, answer: answer, label: 'Journal entry: ' + tok(box.getAttribute('data-title')) };
+  }
+
+  // ----- Reveal -----
+  var REVEALED = {};
+  var TOTAL = document.querySelectorAll('.example').length;
+  function updateProgress() {
+    var count = Object.keys(REVEALED).length;
+    var bar = document.getElementById('progressBar');
+    bar.setAttribute('aria-valuemax', TOTAL);
+    bar.setAttribute('aria-valuenow', count);
+    bar.setAttribute('aria-valuetext', count + ' of ' + TOTAL + ' problems revealed');
+    document.getElementById('progressLabel').textContent = count + ' of ' + TOTAL + ' revealed';
+    document.getElementById('progressFill').style.width = (count / TOTAL * 100) + '%';
+  }
   function isMatch(el) {
     var ans = el.getAttribute('data-answer');
     if (el.tagName === 'SELECT') { return el.value === ans; }
@@ -545,10 +674,13 @@
     var tol = el.hasAttribute('data-tol') ? Number(el.getAttribute('data-tol')) : (unit === '%' ? 0.05 : 1);
     return Math.abs(Number(el.value) - Number(ans)) <= tol;
   }
-
+  function resultCell(ok) {
+    return '<td class="' + (ok ? 'result-ok' : 'result-no') + '">' + (ok ? '<span aria-hidden="true">✓ </span>Matches' : '<span aria-hidden="true">✗ </span>Review') + '</td>';
+  }
   function reveal(id) {
     var box = document.getElementById(id);
     var inputs = box.querySelectorAll('.ans');
+    var jes = box.querySelectorAll('.je-input');
     var fb = box.querySelector('.feedback');
     var firstMissing = null;
     inputs.forEach(function (el) {
@@ -556,8 +688,11 @@
       if (empty) { el.setAttribute('aria-invalid', 'true'); if (!firstMissing) { firstMissing = el; } }
       else { el.removeAttribute('aria-invalid'); }
     });
+    jes.forEach(function (j) { var b = jeValidate(j); if (b && !firstMissing) { firstMissing = b; } });
     if (firstMissing) {
-      fb.textContent = 'Enter an answer in every box first, then select Reveal Answer.';
+      fb.textContent = jes.length
+        ? 'Finish every answer first. In each journal entry, every line you use needs an account and one amount (a debit or a credit); leave extra lines blank. Then select Reveal Answer.'
+        : 'Enter an answer in every box first, then select Reveal Answer.';
       firstMissing.focus();
       return;
     }
@@ -565,19 +700,24 @@
 
     var rows = '';
     inputs.forEach(function (el) {
-      var label = el.getAttribute('data-label').replace(/\{(yrm?\d)\}/g, function (m, k) { return YEARS[k]; });
+      var label = tok(el.getAttribute('data-label'));
       var unit = el.getAttribute('data-unit') || '';
       var yours, answer;
       if (el.tagName === 'SELECT') {
-        yours = el.value;
-        answer = el.getAttribute('data-answer');
+        yours = el.options[el.selectedIndex].text;
+        var a = el.querySelector('option[value="' + el.getAttribute('data-answer').replace(/"/g, '\\"') + '"]') ||
+          Array.prototype.filter.call(el.options, function (o) { return o.value === el.getAttribute('data-answer'); })[0];
+        answer = a ? a.text : el.getAttribute('data-answer');
       } else {
         yours = fmt(el.value, unit);
         answer = fmt(el.getAttribute('data-answer'), unit);
       }
-      var ok = isMatch(el);
-      rows += '<tr><th scope="row">' + esc(label) + '</th><td>' + esc(yours) + '</td><td><strong>' + esc(answer) + '</strong></td>' +
-        '<td class="' + (ok ? 'result-ok' : 'result-no') + '">' + (ok ? '<span aria-hidden="true">✓ </span>Matches' : '<span aria-hidden="true">✗ </span>Review') + '</td></tr>';
+      rows += '<tr><th scope="row">' + esc(label) + '</th><td>' + esc(yours) + '</td><td><strong>' + esc(answer) + '</strong></td>' + resultCell(isMatch(el)) + '</tr>';
+    });
+    jes.forEach(function (j) {
+      var g = jeGrade(j);
+      rows += '<tr><th scope="row">' + esc(g.label) + '</th><td class="je-cell">' + g.yours.map(esc).join('<br>') +
+        '</td><td class="je-cell"><strong>' + g.answer.map(esc).join('<br>') + '</strong></td>' + resultCell(g.ok) + '</tr>';
     });
     box.querySelector('.compare-body').innerHTML = rows;
     var sol = box.querySelector('.solution');
@@ -592,23 +732,14 @@
   document.querySelectorAll('.reveal-btn').forEach(function (btn) {
     btn.addEventListener('click', function () { reveal(btn.getAttribute('data-problem')); });
   });
-
-  // Keeps the dates current automatically, with no recoding needed each year.
-  // yr0 is always the current calendar year; yr1..yr4 follow and yrm1, yrm2 precede.
-  var YEARS = (function () {
-    var yr0 = new Date().getFullYear();
-    var years = { yrm2: yr0 - 2, yrm1: yr0 - 1, yr0: yr0, yr1: yr0 + 1, yr2: yr0 + 2, yr3: yr0 + 3, yr4: yr0 + 4 };
-    Object.keys(years).forEach(function (cls) {
-      document.querySelectorAll('.' + cls).forEach(function (el) { el.textContent = years[cls]; });
+  ['input', 'change'].forEach(function (ev) {
+    document.addEventListener(ev, function (e) {
+      if (e.target.getAttribute && e.target.getAttribute('aria-invalid') === 'true' && e.target.value !== '') { e.target.removeAttribute('aria-invalid'); }
     });
-    return years;
-  })();
-
-  TOTAL = document.querySelectorAll('.example').length;
+  });
   updateProgress();
 </script>
 
-<script>document.getElementById('progressBar').setAttribute('aria-valuemax', document.querySelectorAll('.example').length);</script>
 <script id="a11y-fixes-js">
 /* Accessibility support added Oct 2026: names for unlabeled form fields, scrollable wide tables, and screen-reader announcements of results. */
 (function () {
