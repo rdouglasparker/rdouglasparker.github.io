@@ -96,16 +96,16 @@ footer{max-width:960px;margin:0 auto;padding:1rem 1.25rem 2rem;color:var(--muted
 <a class="skip" href="#main">Skip to main content</a>
 
 <header class="banner"><div class="inner">
-<p class="eyebrow">ACCT 351 · Enrichment Path</p>
+<p class="eyebrow">ACCT 351 · Extra Credit</p>
 <h1>Challenge Case: The Quarter-End Request</h1>
 <p class="sub">Apply the conceptual framework and ethical reasoning to a covenant-driven accounting request and a standard-setting fight.</p>
 </div></header>
 <main id="main" tabindex="-1">
 
 <div class="card">
-<h2 style="margin-top:0">Challenge case — for students who demonstrated mastery on the readiness check</h2>
+<h2 style="margin-top:0">Challenge case — optional extra credit for all students</h2>
 <p>This case asks you to apply the conceptual framework and the ethics framework to a realistic quarter-end request, then respond to a standard-setting controversy. Objective items are checked instantly. For written items, draft your answer first; the model response unlocks once you have written at least 150 characters.</p>
-<p>When you finish, select <em>Copy my written responses</em> at the bottom and paste them into the Canvas assignment.</p>
+<p>When you finish, take the Extra Credit: Challenge Case Quiz in Canvas.</p>
 <div class="summary" id="progress" aria-live="polite">Progress: 0 of 0 answered correctly</div>
 </div>
 
@@ -187,8 +187,8 @@ footer{max-width:960px;margin:0 auto;padding:1rem 1.25rem 2rem;color:var(--muted
 </div>
 
 <div class="card">
-<h2 style="margin-top:0">Submit your work</h2>
-<p>Select the button to copy your written responses, then paste them into the Canvas assignment text box.</p>
+<h2 style="margin-top:0">Earn the extra credit</h2>
+<p>When you finish, return to Canvas and take the <strong>Extra Credit: Challenge Case Quiz</strong> (10 questions about this case, graded automatically). Your written responses here are for practice and are not submitted. If you want to keep them, copy them with the button below.</p>
 <button type="button" class="btn gold" id="copybtn">Copy my written responses</button>
 <div id="copymsg" class="fb" aria-live="polite"></div>
 </div>
@@ -237,7 +237,7 @@ document.querySelectorAll('.yr').forEach(e=>e.textContent=new Date().getFullYear
     const parts=[...document.querySelectorAll('.written')].map((w,i)=>'Response '+(i+1)+': '+w.querySelector('label').textContent+'\n'+w.querySelector('textarea').value.trim());
     const txt='Challenge Case — Blue Ridge Paddle & Pack\n\n'+parts.join('\n\n');
     const m=document.getElementById('copymsg');
-    try{await navigator.clipboard.writeText(txt);m.textContent='✓ Copied. Paste into the Canvas assignment.';m.className='fb ok';}
+    try{await navigator.clipboard.writeText(txt);m.textContent='✓ Copied to your clipboard.';m.className='fb ok';}
     catch(e){m.textContent='Copy was blocked by the browser. Select and copy your responses manually.';m.className='fb no';}
   });
 })();
