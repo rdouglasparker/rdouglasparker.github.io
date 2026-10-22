@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guided Walkthrough: Concepts in Action</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --purple:#592C88; --purple-dk:#3B1D5C; --purple-lt:#F3EEF9; --gold:#FFC425; --gold-lt:#FFF6DA;
+  --ink:#1F1A24; --muted:#4F4A55; --line:#D9D2E3; --paper:#FFFFFF; --bg:#FAF8FC;
+  --ok:#1E6B3A; --ok-bg:#E6F4EA; --bad:#A4161A; --bad-bg:#FBE9EA; --key:#14532D; --key-bg:#E7F5EC;
+}
+*{box-sizing:border-box}
+html{font-size:17px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Source Serif 4",Georgia,serif;line-height:1.6}
+a{color:var(--purple)} a:hover{color:var(--purple-dk)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;box-shadow:0 0 0 5px var(--purple-dk)}
+.skip{position:absolute;left:-999px;top:0;background:var(--gold);color:var(--ink);padding:.5rem 1rem;z-index:10;font-family:Inter,Arial,sans-serif}
+.skip:focus{left:1rem}
+header.banner{background:var(--purple);color:#fff;border-bottom:6px solid var(--gold)}
+header.banner .inner{max-width:960px;margin:0 auto;padding:1.6rem 1.25rem 1.3rem}
+header.banner .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:0 0 .35rem}
+header.banner h1{font-family:Inter,Arial,sans-serif;font-weight:800;font-size:1.9rem;line-height:1.2;margin:0}
+header.banner p.sub{margin:.5rem 0 0;color:#EDE6F5;font-size:1rem}
+.instructor-banner{background:#A4161A;color:#fff;font-family:Inter,Arial,sans-serif;font-weight:700;text-align:center;padding:.6rem 1rem;letter-spacing:.03em}
+main{max-width:960px;margin:0 auto;padding:1.5rem 1.25rem 3rem}
+h2{font-family:Inter,Arial,sans-serif;color:var(--purple-dk);font-size:1.45rem;margin:2.2rem 0 .6rem;padding-bottom:.3rem;border-bottom:3px solid var(--gold)}
+h3{font-family:Inter,Arial,sans-serif;color:var(--purple);font-size:1.15rem;margin:1.6rem 0 .4rem}
+h4{font-family:Inter,Arial,sans-serif;font-size:1rem;margin:1.2rem 0 .3rem;color:var(--ink)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:1.1rem 1.25rem;margin:1rem 0;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.toc{background:var(--purple-lt);border-left:6px solid var(--purple)}
+.toc ol{margin:.3rem 0 0 1.2rem;padding:0}
+.callout{border-radius:8px;padding:.9rem 1.1rem;margin:1rem 0;border-left:6px solid}
+.callout .label{display:block;font-family:Inter,Arial,sans-serif;font-weight:800;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.25rem}
+.callout.key{background:var(--gold-lt);border-color:var(--gold)}
+.callout.important{background:#FFF1F1;border-color:var(--bad)}
+.callout.tip{background:var(--purple-lt);border-color:var(--purple)}
+.callout.ifrs{background:#EEF5FB;border-color:#1D4E89}
+.callout.update{background:#F1F7EE;border-color:var(--ok)}
+.def{font-weight:700;color:var(--purple-dk)}
+table{border-collapse:collapse;width:100%;margin:.8rem 0;font-size:.95rem;background:#fff}
+caption{text-align:left;font-family:Inter,Arial,sans-serif;font-weight:700;color:var(--purple-dk);padding:.3rem 0}
+th,td{border:1px solid var(--line);padding:.5rem .65rem;vertical-align:top;text-align:left}
+thead th{background:var(--purple);color:#fff;font-family:Inter,Arial,sans-serif;font-size:.9rem}
+tbody th{background:var(--purple-lt);font-family:Inter,Arial,sans-serif}
+td.num,th.num{text-align:right;font-family:"IBM Plex Mono",monospace;white-space:nowrap}
+tr.total td{font-weight:700;border-top:2px solid var(--ink)}
+.table-wrap{overflow-x:auto}
+.mono{font-family:"IBM Plex Mono",monospace}
+.formula{font-family:"IBM Plex Mono",monospace;background:var(--purple-lt);padding:.6rem .9rem;border-radius:6px;display:block;margin:.6rem 0}
+/* Interactive */
+.step{background:#fff;border:1px solid var(--line);border-left:6px solid var(--purple);border-radius:10px;padding:1rem 1.2rem;margin:1.2rem 0}
+.step h3{margin-top:0}
+.q{margin:.9rem 0;padding:.75rem .9rem;border:1px solid var(--line);border-radius:8px;background:#fff}
+.q > label,.q .prompt{display:block;font-weight:600;margin-bottom:.4rem}
+input[type=text],input[type=number],select,textarea{font:inherit;font-family:"IBM Plex Mono",monospace;font-size:.95rem;padding:.45rem .55rem;border:2px solid #77707F;border-radius:6px;background:#fff;color:var(--ink);max-width:100%}
+input.money{width:11rem;text-align:right}
+select{font-family:Inter,Arial,sans-serif;min-width:16rem}
+textarea{width:100%;min-height:7rem;font-family:"Source Serif 4",Georgia,serif}
+input.correct,select.correct{border-color:var(--ok);background:var(--ok-bg)}
+input.wrong,select.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.btn{font-family:Inter,Arial,sans-serif;font-weight:700;font-size:.95rem;border:2px solid var(--purple);background:var(--purple);color:#fff;border-radius:8px;padding:.55rem 1.1rem;cursor:pointer;margin:.4rem .4rem .4rem 0}
+.btn:hover{background:var(--purple-dk)}
+.btn.secondary{background:#fff;color:var(--purple)}
+.btn.gold{background:var(--gold);border-color:#B88A00;color:var(--ink)}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+.fb{margin-top:.5rem;font-family:Inter,Arial,sans-serif;font-size:.93rem;font-weight:600}
+.fb.ok{color:var(--ok)} .fb.no{color:var(--bad)}
+.explain{display:none;margin-top:.6rem;background:var(--key-bg);border-left:5px solid var(--key);padding:.7rem .9rem;border-radius:6px}
+.explain.show{display:block}
+.key{background:var(--key-bg);border:2px solid var(--key);color:var(--key);font-family:"IBM Plex Mono",monospace;font-size:.88rem;padding:.25rem .5rem;border-radius:5px;display:inline-block;margin-top:.35rem}
+.summary{font-family:Inter,Arial,sans-serif;font-weight:700;padding:.6rem .9rem;border-radius:8px;background:var(--purple-lt);margin:.6rem 0}
+.idbar{display:flex;flex-wrap:wrap;gap:.6rem;align-items:flex-end;background:var(--gold-lt);border:2px solid var(--gold);border-radius:10px;padding:1rem 1.2rem}
+.idbar label{font-family:Inter,Arial,sans-serif;font-weight:700;display:block}
+.problem{background:#fff;border:1px solid var(--line);border-radius:10px;padding:1.1rem 1.25rem;margin:1.4rem 0}
+.problem > h2{margin-top:.2rem}
+.part{break-inside:auto}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+.pill{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.75rem;background:var(--purple);color:#fff;border-radius:999px;padding:.1rem .55rem;vertical-align:middle}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media (max-width:720px){.grid2{grid-template-columns:1fr} header.banner h1{font-size:1.5rem} select{min-width:0;width:100%}}
+footer{max-width:960px;margin:0 auto;padding:1rem 1.25rem 2rem;color:var(--muted);font-size:.85rem;font-family:Inter,Arial,sans-serif}
+@media print{
+  .btn,.skip,.idbar .btn{display:none!important}
+  body{background:#fff}
+  .problem{page-break-before:always;border:none}
+  h2,h3{break-after:avoid}
+  .explain{display:block}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+
+<header class="banner"><div class="inner">
+<p class="eyebrow">ACCT 351 · Guided Walkthrough</p>
+<h1>The Conceptual Framework in Action</h1>
+<p class="sub">Identify qualitative characteristics, elements, assumptions, principles, and fair value levels in real-world situations.</p>
+</div></header>
+<main id="main" tabindex="-1">
+
+<div class="card">
+<h2 style="margin-top:0">How this walkthrough works</h2>
+<p>Each item gives you a short situation from a Western North Carolina business. Choose your answer, select <em>Check answer</em>, and then open the explanation. The explanations show the <strong>clue words</strong> that point to each concept, so you can spot them on quizzes.</p>
+<div class="summary" id="progress" aria-live="polite">Progress: 0 of 0 answered correctly</div>
+<p style="margin-bottom:0">Keep the <strong>Part B notes</strong> open in another tab — especially the cheat sheet at the end.</p>
+</div>
+
+<div class="step">
+<h3>Step 1 — Qualitative characteristics</h3>
+<p>Ask: <em>Is this about whether information can change a decision (relevance), whether it depicts reality (faithful representation), or a quality that makes good information better (enhancing)?</em></p>
+<div class="q" data-kind="sel" data-answer="Consistency">
+<label for="q22">Sylva Sporting Goods changed its inventory method three years in a row. Which characteristic is most jeopardized?</label>
+<select id="q22" aria-describedby="q22-fb"><option value="">— Select —</option><option value="Predictive value">Predictive value</option><option value="Confirmatory value">Confirmatory value</option><option value="Materiality">Materiality</option><option value="Completeness">Completeness</option><option value="Neutrality">Neutrality</option><option value="Free from error">Free from error</option><option value="Comparability">Comparability</option><option value="Consistency">Consistency</option><option value="Verifiability">Verifiability</option><option value="Timeliness">Timeliness</option><option value="Understandability">Understandability</option><option value="Cost constraint">Cost constraint</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q22-ex">Show explanation</button></div>
+<div class="fb" id="q22-fb" aria-live="polite"></div>
+<div class="explain" id="q22-ex"><p>Changing methods over time makes it hard to compare the <em>same company</em> across periods. Consistency is part of comparability; a change must be disclosed.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Confirmatory value">
+<label for="q23">An investor uses this year's reported earnings of Dillsboro Depot to revise the estimate she made last year. That use reflects which quality?</label>
+<select id="q23" aria-describedby="q23-fb"><option value="">— Select —</option><option value="Predictive value">Predictive value</option><option value="Confirmatory value">Confirmatory value</option><option value="Materiality">Materiality</option><option value="Completeness">Completeness</option><option value="Neutrality">Neutrality</option><option value="Free from error">Free from error</option><option value="Comparability">Comparability</option><option value="Consistency">Consistency</option><option value="Verifiability">Verifiability</option><option value="Timeliness">Timeliness</option><option value="Understandability">Understandability</option><option value="Cost constraint">Cost constraint</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q23-ex">Show explanation</button></div>
+<div class="fb" id="q23-fb" aria-live="polite"></div>
+<div class="explain" id="q23-ex"><p>Clue: information that <strong>confirms or changes prior expectations</strong> has confirmatory value. Using earnings to forecast next year would be predictive value.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Materiality">
+<label for="q24">A $4,000 lawsuit settlement is ignored by a $2 billion company, but the same amount would be reported by a two-person bakery. Which concept explains the difference?</label>
+<select id="q24" aria-describedby="q24-fb"><option value="">— Select —</option><option value="Predictive value">Predictive value</option><option value="Confirmatory value">Confirmatory value</option><option value="Materiality">Materiality</option><option value="Completeness">Completeness</option><option value="Neutrality">Neutrality</option><option value="Free from error">Free from error</option><option value="Comparability">Comparability</option><option value="Consistency">Consistency</option><option value="Verifiability">Verifiability</option><option value="Timeliness">Timeliness</option><option value="Understandability">Understandability</option><option value="Cost constraint">Cost constraint</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q24-ex">Show explanation</button></div>
+<div class="fb" id="q24-fb" aria-live="polite"></div>
+<div class="explain" id="q24-ex"><p>Materiality is company-specific: whether an item would probably affect a user's judgment depends on its size <em>relative to the company</em> and its nature.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Verifiability">
+<label for="q25">Two independent appraisers value the same Blue Ridge Parkway–adjacent parcel within 2% of each other. Which characteristic does this demonstrate?</label>
+<select id="q25" aria-describedby="q25-fb"><option value="">— Select —</option><option value="Predictive value">Predictive value</option><option value="Confirmatory value">Confirmatory value</option><option value="Materiality">Materiality</option><option value="Completeness">Completeness</option><option value="Neutrality">Neutrality</option><option value="Free from error">Free from error</option><option value="Comparability">Comparability</option><option value="Consistency">Consistency</option><option value="Verifiability">Verifiability</option><option value="Timeliness">Timeliness</option><option value="Understandability">Understandability</option><option value="Cost constraint">Cost constraint</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q25-ex">Show explanation</button></div>
+<div class="fb" id="q25-fb" aria-live="polite"></div>
+<div class="explain" id="q25-ex"><p>Verifiability means different knowledgeable, independent measurers would reach consensus. Appraisals are verified indirectly; historical cost would be verified directly.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Neutrality">
+<label for="q26">An industry group lobbies for a standard designed to make its members' profits look higher. Which aspect of faithful representation would that standard violate?</label>
+<select id="q26" aria-describedby="q26-fb"><option value="">— Select —</option><option value="Predictive value">Predictive value</option><option value="Confirmatory value">Confirmatory value</option><option value="Materiality">Materiality</option><option value="Completeness">Completeness</option><option value="Neutrality">Neutrality</option><option value="Free from error">Free from error</option><option value="Comparability">Comparability</option><option value="Consistency">Consistency</option><option value="Verifiability">Verifiability</option><option value="Timeliness">Timeliness</option><option value="Understandability">Understandability</option><option value="Cost constraint">Cost constraint</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q26-ex">Show explanation</button></div>
+<div class="fb" id="q26-fb" aria-live="polite"></div>
+<div class="explain" id="q26-ex"><p>Standards should be free from bias and should not favor particular groups or outcomes. Lobbying for favorable economic consequences threatens neutrality.</p></div>
+</div>
+</div>
+
+<div class="step">
+<h3>Step 2 — Elements of financial statements</h3>
+<p>Ask: <em>Is it a resource, an obligation, or the residual? If it's a change in equity, is it from central operations, a peripheral transaction, or a transaction with owners?</em></p>
+<div class="q" data-kind="sel" data-answer="Gains">
+<label for="q27">Cullowhee Cycle Works sells a used delivery van for $3,000 more than its book value.</label>
+<select id="q27" aria-describedby="q27-fb"><option value="">— Select —</option><option value="Assets">Assets</option><option value="Liabilities">Liabilities</option><option value="Equity">Equity</option><option value="Investments by owners">Investments by owners</option><option value="Distributions to owners">Distributions to owners</option><option value="Revenues">Revenues</option><option value="Expenses">Expenses</option><option value="Gains">Gains</option><option value="Losses">Losses</option><option value="Comprehensive income">Comprehensive income</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q27-ex">Show explanation</button></div>
+<div class="fb" id="q27-fb" aria-live="polite"></div>
+<div class="explain" id="q27-ex"><p>A bike shop doesn't sell vans as part of its central operations, so the excess is a <strong>gain</strong> (a peripheral or incidental transaction).</p></div>
+</div><div class="q" data-kind="sel" data-answer="Distributions to owners">
+<label for="q28">Catamount Craft Brewing pays a cash dividend to its shareholders.</label>
+<select id="q28" aria-describedby="q28-fb"><option value="">— Select —</option><option value="Assets">Assets</option><option value="Liabilities">Liabilities</option><option value="Equity">Equity</option><option value="Investments by owners">Investments by owners</option><option value="Distributions to owners">Distributions to owners</option><option value="Revenues">Revenues</option><option value="Expenses">Expenses</option><option value="Gains">Gains</option><option value="Losses">Losses</option><option value="Comprehensive income">Comprehensive income</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q28-ex">Show explanation</button></div>
+<div class="fb" id="q28-fb" aria-live="polite"></div>
+<div class="explain" id="q28-ex"><p>A transfer to owners that decreases equity is a distribution to owners. Dividends are not expenses.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Liabilities">
+<label for="q29">Franklin Gem Mine receives payment in advance for school field trips it will host next spring. Which element should the advance create?</label>
+<select id="q29" aria-describedby="q29-fb"><option value="">— Select —</option><option value="Assets">Assets</option><option value="Liabilities">Liabilities</option><option value="Equity">Equity</option><option value="Investments by owners">Investments by owners</option><option value="Distributions to owners">Distributions to owners</option><option value="Revenues">Revenues</option><option value="Expenses">Expenses</option><option value="Gains">Gains</option><option value="Losses">Losses</option><option value="Comprehensive income">Comprehensive income</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q29-ex">Show explanation</button></div>
+<div class="fb" id="q29-fb" aria-live="polite"></div>
+<div class="explain" id="q29-ex"><p>Franklin Gem Mine now owes services in the future — a present obligation from a past event. Revenue will be recognized when the field trips occur.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Comprehensive income">
+<label for="q30">The total change in Waynesville Woodworks' equity during the year from all nonowner sources.</label>
+<select id="q30" aria-describedby="q30-fb"><option value="">— Select —</option><option value="Assets">Assets</option><option value="Liabilities">Liabilities</option><option value="Equity">Equity</option><option value="Investments by owners">Investments by owners</option><option value="Distributions to owners">Distributions to owners</option><option value="Revenues">Revenues</option><option value="Expenses">Expenses</option><option value="Gains">Gains</option><option value="Losses">Losses</option><option value="Comprehensive income">Comprehensive income</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q30-ex">Show explanation</button></div>
+<div class="fb" id="q30-fb" aria-live="polite"></div>
+<div class="explain" id="q30-ex"><p>Comprehensive income includes every change in equity except investments by and distributions to owners.</p></div>
+</div>
+</div>
+
+<div class="step">
+<h3>Step 3 — Assumptions and principles: agree or disagree?</h3>
+<p>For each practice, decide whether it follows GAAP, then name the concept it applies (if you agree) or violates (if you disagree).</p>
+<div class="card"><p><strong>Situation.</strong> Hannah Brooks, sole owner of Brooks Mountain Realty, paid her family's home mortgage from the business checking account and recorded it as office rent expense.</p><div class="q" data-kind="sel" data-answer="Disagree — concept violated">
+<label for="q31">Do you agree with the practice?</label>
+<select id="q31" aria-describedby="q31-fb"><option value="">— Select —</option><option value="Agree — concept applied">Agree — concept applied</option><option value="Disagree — concept violated">Disagree — concept violated</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q31-ex">Show explanation</button></div>
+<div class="fb" id="q31-fb" aria-live="polite"></div>
+<div class="explain" id="q31-ex"><p>The owner's personal transactions must be kept separate from the business. Clue: <strong>personal</strong> expense run through the company.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Economic entity assumption">
+<label for="q32">Which concept is applied or violated?</label>
+<select id="q32" aria-describedby="q32-fb"><option value="">— Select —</option><option value="Economic entity assumption">Economic entity assumption</option><option value="Going concern assumption">Going concern assumption</option><option value="Periodicity assumption">Periodicity assumption</option><option value="Monetary unit assumption">Monetary unit assumption</option><option value="Historical cost principle">Historical cost principle</option><option value="Revenue recognition">Revenue recognition</option><option value="Expense recognition">Expense recognition</option><option value="Full-disclosure principle">Full-disclosure principle</option><option value="Materiality and cost constraint">Materiality and cost constraint</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q32-ex">Show explanation</button></div>
+<div class="fb" id="q32-fb" aria-live="polite"></div>
+<div class="explain" id="q32-ex"><p>The owner's personal transactions must be kept separate from the business. Clue: <strong>personal</strong> expense run through the company.</p></div>
+</div></div><div class="card"><p><strong>Situation.</strong> Balsam Gap Lumber bought land at a bankruptcy auction for $410,000. It was appraised at $560,000, so the company recorded the land at $560,000.</p><div class="q" data-kind="sel" data-answer="Disagree — concept violated">
+<label for="q33">Do you agree with the practice?</label>
+<select id="q33" aria-describedby="q33-fb"><option value="">— Select —</option><option value="Agree — concept applied">Agree — concept applied</option><option value="Disagree — concept violated">Disagree — concept violated</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q33-ex">Show explanation</button></div>
+<div class="fb" id="q33-fb" aria-live="polite"></div>
+<div class="explain" id="q33-ex"><p>Land is recorded at what was given up to acquire it — $410,000. A "bargain" purchase does not justify recording a gain or a higher cost.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Historical cost principle">
+<label for="q34">Which concept is applied or violated?</label>
+<select id="q34" aria-describedby="q34-fb"><option value="">— Select —</option><option value="Economic entity assumption">Economic entity assumption</option><option value="Going concern assumption">Going concern assumption</option><option value="Periodicity assumption">Periodicity assumption</option><option value="Monetary unit assumption">Monetary unit assumption</option><option value="Historical cost principle">Historical cost principle</option><option value="Revenue recognition">Revenue recognition</option><option value="Expense recognition">Expense recognition</option><option value="Full-disclosure principle">Full-disclosure principle</option><option value="Materiality and cost constraint">Materiality and cost constraint</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q34-ex">Show explanation</button></div>
+<div class="fb" id="q34-fb" aria-live="polite"></div>
+<div class="explain" id="q34-ex"><p>Land is recorded at what was given up to acquire it — $410,000. A "bargain" purchase does not justify recording a gain or a higher cost.</p></div>
+</div></div><div class="card"><p><strong>Situation.</strong> Nantahala Rafting Co. received full payment in March for summer trips and recorded the revenue when the trips took place in July.</p><div class="q" data-kind="sel" data-answer="Agree — concept applied">
+<label for="q35">Do you agree with the practice?</label>
+<select id="q35" aria-describedby="q35-fb"><option value="">— Select —</option><option value="Agree — concept applied">Agree — concept applied</option><option value="Disagree — concept violated">Disagree — concept violated</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q35-ex">Show explanation</button></div>
+<div class="fb" id="q35-fb" aria-live="polite"></div>
+<div class="explain" id="q35-ex"><p>Revenue is recognized when the service is transferred to the customer, not when cash is received. Until July, the advance is a liability.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Revenue recognition">
+<label for="q36">Which concept is applied or violated?</label>
+<select id="q36" aria-describedby="q36-fb"><option value="">— Select —</option><option value="Economic entity assumption">Economic entity assumption</option><option value="Going concern assumption">Going concern assumption</option><option value="Periodicity assumption">Periodicity assumption</option><option value="Monetary unit assumption">Monetary unit assumption</option><option value="Historical cost principle">Historical cost principle</option><option value="Revenue recognition">Revenue recognition</option><option value="Expense recognition">Expense recognition</option><option value="Full-disclosure principle">Full-disclosure principle</option><option value="Materiality and cost constraint">Materiality and cost constraint</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q36-ex">Show explanation</button></div>
+<div class="fb" id="q36-fb" aria-live="polite"></div>
+<div class="explain" id="q36-ex"><p>Revenue is recognized when the service is transferred to the customer, not when cash is received. Until July, the advance is a liability.</p></div>
+</div></div><div class="card"><p><strong>Situation.</strong> Smoky Mountain Print Shop bought a $1,400,000 press (a material amount) expected to last 10 years and expensed the entire cost immediately.</p><div class="q" data-kind="sel" data-answer="Disagree — concept violated">
+<label for="q37">Do you agree with the practice?</label>
+<select id="q37" aria-describedby="q37-fb"><option value="">— Select —</option><option value="Agree — concept applied">Agree — concept applied</option><option value="Disagree — concept violated">Disagree — concept violated</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q37-ex">Show explanation</button></div>
+<div class="fb" id="q37-fb" aria-live="polite"></div>
+<div class="explain" id="q37-ex"><p>A long-lived asset that benefits many periods should be depreciated — a systematic and rational allocation. Because the amount is material, immediate expensing is not acceptable.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Expense recognition">
+<label for="q38">Which concept is applied or violated?</label>
+<select id="q38" aria-describedby="q38-fb"><option value="">— Select —</option><option value="Economic entity assumption">Economic entity assumption</option><option value="Going concern assumption">Going concern assumption</option><option value="Periodicity assumption">Periodicity assumption</option><option value="Monetary unit assumption">Monetary unit assumption</option><option value="Historical cost principle">Historical cost principle</option><option value="Revenue recognition">Revenue recognition</option><option value="Expense recognition">Expense recognition</option><option value="Full-disclosure principle">Full-disclosure principle</option><option value="Materiality and cost constraint">Materiality and cost constraint</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q38-ex">Show explanation</button></div>
+<div class="fb" id="q38-fb" aria-live="polite"></div>
+<div class="explain" id="q38-ex"><p>A long-lived asset that benefits many periods should be depreciated — a systematic and rational allocation. Because the amount is material, immediate expensing is not acceptable.</p></div>
+</div></div><div class="card"><p><strong>Situation.</strong> Highlands Data Systems faces a $5 million lawsuit (material) that has not been resolved. It said nothing in its financial statements because "nothing is final yet."</p><div class="q" data-kind="sel" data-answer="Disagree — concept violated">
+<label for="q39">Do you agree with the practice?</label>
+<select id="q39" aria-describedby="q39-fb"><option value="">— Select —</option><option value="Agree — concept applied">Agree — concept applied</option><option value="Disagree — concept violated">Disagree — concept violated</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q39-ex">Show explanation</button></div>
+<div class="fb" id="q39-fb" aria-live="polite"></div>
+<div class="explain" id="q39-ex"><p>Information that could affect users' decisions — like pending material litigation — must be disclosed in the notes even if unresolved.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Full-disclosure principle">
+<label for="q40">Which concept is applied or violated?</label>
+<select id="q40" aria-describedby="q40-fb"><option value="">— Select —</option><option value="Economic entity assumption">Economic entity assumption</option><option value="Going concern assumption">Going concern assumption</option><option value="Periodicity assumption">Periodicity assumption</option><option value="Monetary unit assumption">Monetary unit assumption</option><option value="Historical cost principle">Historical cost principle</option><option value="Revenue recognition">Revenue recognition</option><option value="Expense recognition">Expense recognition</option><option value="Full-disclosure principle">Full-disclosure principle</option><option value="Materiality and cost constraint">Materiality and cost constraint</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q40-ex">Show explanation</button></div>
+<div class="fb" id="q40-fb" aria-live="polite"></div>
+<div class="explain" id="q40-ex"><p>Information that could affect users' decisions — like pending material litigation — must be disclosed in the notes even if unresolved.</p></div>
+</div></div><div class="card"><p><strong>Situation.</strong> A large university bookstore bought a $60 electric pencil sharpener with a five-year life and expensed it immediately.</p><div class="q" data-kind="sel" data-answer="Agree — concept applied">
+<label for="q41">Do you agree with the practice?</label>
+<select id="q41" aria-describedby="q41-fb"><option value="">— Select —</option><option value="Agree — concept applied">Agree — concept applied</option><option value="Disagree — concept violated">Disagree — concept violated</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q41-ex">Show explanation</button></div>
+<div class="fb" id="q41-fb" aria-live="polite"></div>
+<div class="explain" id="q41-ex"><p>The amount is immaterial, and the cost of tracking and depreciating it exceeds the benefit. Clue: a <strong>small</strong> long-lived item.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Materiality and cost constraint">
+<label for="q42">Which concept is applied or violated?</label>
+<select id="q42" aria-describedby="q42-fb"><option value="">— Select —</option><option value="Economic entity assumption">Economic entity assumption</option><option value="Going concern assumption">Going concern assumption</option><option value="Periodicity assumption">Periodicity assumption</option><option value="Monetary unit assumption">Monetary unit assumption</option><option value="Historical cost principle">Historical cost principle</option><option value="Revenue recognition">Revenue recognition</option><option value="Expense recognition">Expense recognition</option><option value="Full-disclosure principle">Full-disclosure principle</option><option value="Materiality and cost constraint">Materiality and cost constraint</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q42-ex">Show explanation</button></div>
+<div class="fb" id="q42-fb" aria-live="polite"></div>
+<div class="explain" id="q42-ex"><p>The amount is immaterial, and the cost of tracking and depreciating it exceeds the benefit. Clue: a <strong>small</strong> long-lived item.</p></div>
+</div></div>
+</div>
+
+<div class="step">
+<h3>Step 4 — Measurement</h3>
+<div class="q" data-kind="num" data-answer="22000">
+<label for="q43">Tuck River Pottery has finished vases with an expected selling price of $26,000. Packaging and shipping to retailers will cost $1,500, and a sales commission of $2,500 will be paid. What is the net realizable value?</label>
+<span aria-hidden="true">$</span><input id="q43" type="text" inputmode="decimal" class="money" autocomplete="off" aria-describedby="q43-fb">
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q43-ex">Show explanation</button></div>
+<div class="fb" id="q43-fb" aria-live="polite"></div>
+<div class="explain" id="q43-ex"><p>NRV = expected selling price − reasonably predictable costs of completion, disposal, and transportation = $26,000 − $1,500 − $2,500 = <strong>$22,000</strong>.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Level 1">
+<label for="q44">An investment in shares of a company listed on Nasdaq is valued at the closing quoted price. Which fair value input level is this?</label>
+<select id="q44" aria-describedby="q44-fb"><option value="">— Select —</option><option value="Level 1">Level 1</option><option value="Level 2">Level 2</option><option value="Level 3">Level 3</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q44-ex">Show explanation</button></div>
+<div class="fb" id="q44-fb" aria-live="polite"></div>
+<div class="explain" id="q44-ex"><p>Quoted prices in active markets for <strong>identical</strong> assets are Level 1 — the most preferred inputs.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Level 2">
+<label for="q45">A warehouse received in a noncash exchange is valued using recent sale prices per square foot of similar warehouses in the area.</label>
+<select id="q45" aria-describedby="q45-fb"><option value="">— Select —</option><option value="Level 1">Level 1</option><option value="Level 2">Level 2</option><option value="Level 3">Level 3</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q45-ex">Show explanation</button></div>
+<div class="fb" id="q45-fb" aria-live="polite"></div>
+<div class="explain" id="q45-ex"><p>Observable prices for <strong>similar</strong> (not identical) items are Level 2.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Level 3">
+<label for="q46">An environmental cleanup obligation is valued using the company's own estimates of future cash flows, discounted to present value.</label>
+<select id="q46" aria-describedby="q46-fb"><option value="">— Select —</option><option value="Level 1">Level 1</option><option value="Level 2">Level 2</option><option value="Level 3">Level 3</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q46-ex">Show explanation</button></div>
+<div class="fb" id="q46-fb" aria-live="polite"></div>
+<div class="explain" id="q46-ex"><p>The company's own, <strong>unobservable</strong> assumptions are Level 3 — the least preferred and least verifiable inputs.</p></div>
+</div>
+</div>
+
+<div class="step">
+<h3>Step 5 — Who does what in standard setting?</h3>
+<div class="q" data-kind="sel" data-answer="Securities and Exchange Commission (SEC)">
+<label for="q47">Which body has the legal authority to set accounting standards for U.S. public companies?</label>
+<select id="q47" aria-describedby="q47-fb"><option value="">— Select —</option><option value="Securities and Exchange Commission (SEC)">Securities and Exchange Commission (SEC)</option><option value="Financial Accounting Standards Board (FASB)">Financial Accounting Standards Board (FASB)</option><option value="Financial Accounting Foundation (FAF)">Financial Accounting Foundation (FAF)</option><option value="Emerging Issues Task Force (EITF)">Emerging Issues Task Force (EITF)</option><option value="Private Company Council (PCC)">Private Company Council (PCC)</option><option value="International Accounting Standards Board (IASB)">International Accounting Standards Board (IASB)</option><option value="IFRS Foundation">IFRS Foundation</option><option value="Public Company Accounting Oversight Board (PCAOB)">Public Company Accounting Oversight Board (PCAOB)</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q47-ex">Show explanation</button></div>
+<div class="fb" id="q47-fb" aria-live="polite"></div>
+<div class="explain" id="q47-ex"><p>The 1934 Securities Exchange Act gave the SEC that authority. The SEC delegates the task to the FASB but retains the power to override it.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Financial Accounting Foundation (FAF)">
+<label for="q48">Which body selects FASB members, funds its activities, and provides oversight?</label>
+<select id="q48" aria-describedby="q48-fb"><option value="">— Select —</option><option value="Securities and Exchange Commission (SEC)">Securities and Exchange Commission (SEC)</option><option value="Financial Accounting Standards Board (FASB)">Financial Accounting Standards Board (FASB)</option><option value="Financial Accounting Foundation (FAF)">Financial Accounting Foundation (FAF)</option><option value="Emerging Issues Task Force (EITF)">Emerging Issues Task Force (EITF)</option><option value="Private Company Council (PCC)">Private Company Council (PCC)</option><option value="International Accounting Standards Board (IASB)">International Accounting Standards Board (IASB)</option><option value="IFRS Foundation">IFRS Foundation</option><option value="Public Company Accounting Oversight Board (PCAOB)">Public Company Accounting Oversight Board (PCAOB)</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q48-ex">Show explanation</button></div>
+<div class="fb" id="q48-fb" aria-live="polite"></div>
+<div class="explain" id="q48-ex"><p>The FAF is the FASB's parent foundation. Its IFRS counterpart is the IFRS Foundation.</p></div>
+</div><div class="q" data-kind="sel" data-answer="International Accounting Standards Board (IASB)">
+<label for="q49">Which body issues International Financial Reporting Standards?</label>
+<select id="q49" aria-describedby="q49-fb"><option value="">— Select —</option><option value="Securities and Exchange Commission (SEC)">Securities and Exchange Commission (SEC)</option><option value="Financial Accounting Standards Board (FASB)">Financial Accounting Standards Board (FASB)</option><option value="Financial Accounting Foundation (FAF)">Financial Accounting Foundation (FAF)</option><option value="Emerging Issues Task Force (EITF)">Emerging Issues Task Force (EITF)</option><option value="Private Company Council (PCC)">Private Company Council (PCC)</option><option value="International Accounting Standards Board (IASB)">International Accounting Standards Board (IASB)</option><option value="IFRS Foundation">IFRS Foundation</option><option value="Public Company Accounting Oversight Board (PCAOB)">Public Company Accounting Oversight Board (PCAOB)</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q49-ex">Show explanation</button></div>
+<div class="fb" id="q49-fb" aria-live="polite"></div>
+<div class="explain" id="q49-ex"><p>The IASB replaced the IASC in 2001 and issues IFRS. The IFRS Foundation oversees and funds it.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Public Company Accounting Oversight Board (PCAOB)">
+<label for="q50">Which body, created by the Sarbanes-Oxley Act, regulates the auditors of public companies?</label>
+<select id="q50" aria-describedby="q50-fb"><option value="">— Select —</option><option value="Securities and Exchange Commission (SEC)">Securities and Exchange Commission (SEC)</option><option value="Financial Accounting Standards Board (FASB)">Financial Accounting Standards Board (FASB)</option><option value="Financial Accounting Foundation (FAF)">Financial Accounting Foundation (FAF)</option><option value="Emerging Issues Task Force (EITF)">Emerging Issues Task Force (EITF)</option><option value="Private Company Council (PCC)">Private Company Council (PCC)</option><option value="International Accounting Standards Board (IASB)">International Accounting Standards Board (IASB)</option><option value="IFRS Foundation">IFRS Foundation</option><option value="Public Company Accounting Oversight Board (PCAOB)">Public Company Accounting Oversight Board (PCAOB)</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q50-ex">Show explanation</button></div>
+<div class="fb" id="q50-fb" aria-live="polite"></div>
+<div class="explain" id="q50-ex"><p>SOX created the PCAOB to regulate auditors and the non-audit services they provide to audit clients.</p></div>
+</div>
+</div>
+
+<div class="callout key"><span class="label">Clue words to remember</span>
+<ul style="margin:.2rem 0 0">
+<li><strong>Personal</strong> → economic entity · <strong>liquidation</strong> → going concern · <strong>quarterly / every three years</strong> → periodicity · <strong>inflation</strong> → monetary unit</li>
+<li><strong>Appraised / market value of land</strong> → historical cost · <strong>order received / cash in advance</strong> → revenue recognition</li>
+<li><strong>Expensed a long-lived asset / depreciation</strong> → expense recognition · <strong>not disclosed</strong> → full disclosure · <strong>small item expensed</strong> → materiality</li>
+</ul></div>
+
+</main>
+<footer>ACCT 351 · Intermediate Accounting I · Western Carolina University · <span class="yr"></span></footer>
+<script>
+document.querySelectorAll('.yr').forEach(e=>e.textContent=new Date().getFullYear());
+
+(function(){
+  const Y=new Date().getFullYear();
+  document.querySelectorAll('.y1').forEach(e=>e.textContent=Y-1);
+  document.querySelectorAll('.y2').forEach(e=>e.textContent=Y);
+  const qs=[...document.querySelectorAll('.q:not(.written)')];
+  const prog=document.getElementById('progress');
+  function parse(s){s=String(s).trim().replace(/[$,\s]/g,'');let neg=false;if(/^\(.*\)$/.test(s)){neg=true;s=s.slice(1,-1);}const v=parseFloat(s);if(isNaN(v))return NaN;return neg?-v:v;}
+  function update(){const c=qs.filter(q=>q.dataset.ok==='1').length;if(prog)prog.textContent='Progress: '+c+' of '+qs.length+' answered correctly';}
+  qs.forEach(q=>{
+    const inp=q.querySelector('input,select'),chk=q.querySelector('.check'),rev=q.querySelector('.reveal'),fb=q.querySelector('.fb'),ex=q.querySelector('.explain');
+    inp.addEventListener('input',()=>{chk.disabled=inp.value.trim()==='';});
+    inp.addEventListener('change',()=>{chk.disabled=inp.value.trim()==='';});
+    inp.addEventListener('keydown',e=>{if(e.key==='Enter'&&!chk.disabled){e.preventDefault();chk.click();}});
+    chk.addEventListener('click',()=>{
+      let ok;
+      if(q.dataset.kind==='num'){ok=Math.abs(parse(inp.value)-parseFloat(q.dataset.answer))<0.5;}
+      else ok=inp.value===q.dataset.answer;
+      inp.classList.toggle('correct',ok);inp.classList.toggle('wrong',!ok);
+      inp.setAttribute('aria-invalid',ok?'false':'true');
+      fb.className='fb '+(ok?'ok':'no');
+      fb.textContent=ok?'✓ Correct.':'✗ Not quite. Try again, or open the explanation.';
+      q.dataset.ok=ok?'1':'0';
+      rev.disabled=false;update();
+    });
+    rev.addEventListener('click',()=>{const s=ex.classList.toggle('show');rev.setAttribute('aria-expanded',s);rev.textContent=s?'Hide explanation':'Show explanation';});
+  });
+  update();
+})();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guided Walkthrough: Cash vs. Accrual</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --purple:#592C88; --purple-dk:#3B1D5C; --purple-lt:#F3EEF9; --gold:#FFC425; --gold-lt:#FFF6DA;
+  --ink:#1F1A24; --muted:#4F4A55; --line:#D9D2E3; --paper:#FFFFFF; --bg:#FAF8FC;
+  --ok:#1E6B3A; --ok-bg:#E6F4EA; --bad:#A4161A; --bad-bg:#FBE9EA; --key:#14532D; --key-bg:#E7F5EC;
+}
+*{box-sizing:border-box}
+html{font-size:17px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Source Serif 4",Georgia,serif;line-height:1.6}
+a{color:var(--purple)} a:hover{color:var(--purple-dk)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;box-shadow:0 0 0 5px var(--purple-dk)}
+.skip{position:absolute;left:-999px;top:0;background:var(--gold);color:var(--ink);padding:.5rem 1rem;z-index:10;font-family:Inter,Arial,sans-serif}
+.skip:focus{left:1rem}
+header.banner{background:var(--purple);color:#fff;border-bottom:6px solid var(--gold)}
+header.banner .inner{max-width:960px;margin:0 auto;padding:1.6rem 1.25rem 1.3rem}
+header.banner .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:0 0 .35rem}
+header.banner h1{font-family:Inter,Arial,sans-serif;font-weight:800;font-size:1.9rem;line-height:1.2;margin:0}
+header.banner p.sub{margin:.5rem 0 0;color:#EDE6F5;font-size:1rem}
+.instructor-banner{background:#A4161A;color:#fff;font-family:Inter,Arial,sans-serif;font-weight:700;text-align:center;padding:.6rem 1rem;letter-spacing:.03em}
+main{max-width:960px;margin:0 auto;padding:1.5rem 1.25rem 3rem}
+h2{font-family:Inter,Arial,sans-serif;color:var(--purple-dk);font-size:1.45rem;margin:2.2rem 0 .6rem;padding-bottom:.3rem;border-bottom:3px solid var(--gold)}
+h3{font-family:Inter,Arial,sans-serif;color:var(--purple);font-size:1.15rem;margin:1.6rem 0 .4rem}
+h4{font-family:Inter,Arial,sans-serif;font-size:1rem;margin:1.2rem 0 .3rem;color:var(--ink)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:1.1rem 1.25rem;margin:1rem 0;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.toc{background:var(--purple-lt);border-left:6px solid var(--purple)}
+.toc ol{margin:.3rem 0 0 1.2rem;padding:0}
+.callout{border-radius:8px;padding:.9rem 1.1rem;margin:1rem 0;border-left:6px solid}
+.callout .label{display:block;font-family:Inter,Arial,sans-serif;font-weight:800;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.25rem}
+.callout.key{background:var(--gold-lt);border-color:var(--gold)}
+.callout.important{background:#FFF1F1;border-color:var(--bad)}
+.callout.tip{background:var(--purple-lt);border-color:var(--purple)}
+.callout.ifrs{background:#EEF5FB;border-color:#1D4E89}
+.callout.update{background:#F1F7EE;border-color:var(--ok)}
+.def{font-weight:700;color:var(--purple-dk)}
+table{border-collapse:collapse;width:100%;margin:.8rem 0;font-size:.95rem;background:#fff}
+caption{text-align:left;font-family:Inter,Arial,sans-serif;font-weight:700;color:var(--purple-dk);padding:.3rem 0}
+th,td{border:1px solid var(--line);padding:.5rem .65rem;vertical-align:top;text-align:left}
+thead th{background:var(--purple);color:#fff;font-family:Inter,Arial,sans-serif;font-size:.9rem}
+tbody th{background:var(--purple-lt);font-family:Inter,Arial,sans-serif}
+td.num,th.num{text-align:right;font-family:"IBM Plex Mono",monospace;white-space:nowrap}
+tr.total td{font-weight:700;border-top:2px solid var(--ink)}
+.table-wrap{overflow-x:auto}
+.mono{font-family:"IBM Plex Mono",monospace}
+.formula{font-family:"IBM Plex Mono",monospace;background:var(--purple-lt);padding:.6rem .9rem;border-radius:6px;display:block;margin:.6rem 0}
+/* Interactive */
+.step{background:#fff;border:1px solid var(--line);border-left:6px solid var(--purple);border-radius:10px;padding:1rem 1.2rem;margin:1.2rem 0}
+.step h3{margin-top:0}
+.q{margin:.9rem 0;padding:.75rem .9rem;border:1px solid var(--line);border-radius:8px;background:#fff}
+.q > label,.q .prompt{display:block;font-weight:600;margin-bottom:.4rem}
+input[type=text],input[type=number],select,textarea{font:inherit;font-family:"IBM Plex Mono",monospace;font-size:.95rem;padding:.45rem .55rem;border:2px solid #77707F;border-radius:6px;background:#fff;color:var(--ink);max-width:100%}
+input.money{width:11rem;text-align:right}
+select{font-family:Inter,Arial,sans-serif;min-width:16rem}
+textarea{width:100%;min-height:7rem;font-family:"Source Serif 4",Georgia,serif}
+input.correct,select.correct{border-color:var(--ok);background:var(--ok-bg)}
+input.wrong,select.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.btn{font-family:Inter,Arial,sans-serif;font-weight:700;font-size:.95rem;border:2px solid var(--purple);background:var(--purple);color:#fff;border-radius:8px;padding:.55rem 1.1rem;cursor:pointer;margin:.4rem .4rem .4rem 0}
+.btn:hover{background:var(--purple-dk)}
+.btn.secondary{background:#fff;color:var(--purple)}
+.btn.gold{background:var(--gold);border-color:#B88A00;color:var(--ink)}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+.fb{margin-top:.5rem;font-family:Inter,Arial,sans-serif;font-size:.93rem;font-weight:600}
+.fb.ok{color:var(--ok)} .fb.no{color:var(--bad)}
+.explain{display:none;margin-top:.6rem;background:var(--key-bg);border-left:5px solid var(--key);padding:.7rem .9rem;border-radius:6px}
+.explain.show{display:block}
+.key{background:var(--key-bg);border:2px solid var(--key);color:var(--key);font-family:"IBM Plex Mono",monospace;font-size:.88rem;padding:.25rem .5rem;border-radius:5px;display:inline-block;margin-top:.35rem}
+.summary{font-family:Inter,Arial,sans-serif;font-weight:700;padding:.6rem .9rem;border-radius:8px;background:var(--purple-lt);margin:.6rem 0}
+.idbar{display:flex;flex-wrap:wrap;gap:.6rem;align-items:flex-end;background:var(--gold-lt);border:2px solid var(--gold);border-radius:10px;padding:1rem 1.2rem}
+.idbar label{font-family:Inter,Arial,sans-serif;font-weight:700;display:block}
+.problem{background:#fff;border:1px solid var(--line);border-radius:10px;padding:1.1rem 1.25rem;margin:1.4rem 0}
+.problem > h2{margin-top:.2rem}
+.part{break-inside:auto}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+.pill{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.75rem;background:var(--purple);color:#fff;border-radius:999px;padding:.1rem .55rem;vertical-align:middle}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media (max-width:720px){.grid2{grid-template-columns:1fr} header.banner h1{font-size:1.5rem} select{min-width:0;width:100%}}
+footer{max-width:960px;margin:0 auto;padding:1rem 1.25rem 2rem;color:var(--muted);font-size:.85rem;font-family:Inter,Arial,sans-serif}
+@media print{
+  .btn,.skip,.idbar .btn{display:none!important}
+  body{background:#fff}
+  .problem{page-break-before:always;border:none}
+  h2,h3{break-after:avoid}
+  .explain{display:block}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+
+<header class="banner"><div class="inner">
+<p class="eyebrow">ACCT 351 · Guided Walkthrough</p>
+<h1>Cash Basis vs. Accrual Basis</h1>
+<p class="sub">Work a two-year example step by step: enter each answer, check it, then read the explanation.</p>
+</div></header>
+<main id="main" tabindex="-1">
+
+<div class="card">
+<h2 style="margin-top:0">How this walkthrough works</h2>
+<p>Each step asks you to <strong>enter an answer first</strong>. The <em>Check answer</em> button unlocks once you type something; the <em>Show explanation</em> button unlocks after your first check. Work in order — later steps build on earlier ones.</p>
+<div class="summary" id="progress" aria-live="polite">Progress: 0 of 0 answered correctly</div>
+</div>
+
+<h2>The scenario: Ramsey Ridge Event Services</h2>
+<p>Ramsey Ridge Event Services plans and staffs concerts and conferences in the mountains around Cullowhee. It began operations on January 1, <span class="y1"></span>. Its first two years of activity were:</p>
+<div class="table-wrap"><table>
+<caption>Ramsey Ridge Event Services — activity</caption>
+<thead><tr><th scope="col">Item</th><th scope="col" class="num"><span class="y1"></span></th><th scope="col" class="num"><span class="y2"></span></th></tr></thead>
+<tbody>
+<tr><th scope="row">Amounts billed to clients for services performed</th><td class="num">$250,000</td><td class="num">$310,000</td></tr>
+<tr><th scope="row">Cash collected from clients</th><td class="num">$205,000</td><td class="num">$325,000</td></tr>
+<tr><th scope="row">Salaries paid to staff for work done that year</th><td class="num">$110,000</td><td class="num">$125,000</td></tr>
+</tbody></table></div>
+<ul>
+<li>On January 1, <span class="y1"></span>, Ramsey Ridge paid <span class="mono">$36,000</span> for a <strong>three-year</strong> liability insurance policy.</li>
+<li>Utilities and equipment fuel cost <span class="mono">$18,000</span> in <span class="y1"></span>; <span class="mono">$3,000</span> of that was still unpaid at year-end and was paid in January <span class="y2"></span>. The <span class="y2"></span> cost of <span class="mono">$20,000</span> was paid in full during <span class="y2"></span>.</li>
+<li>No bad debts are expected.</li>
+</ul>
+
+<div class="step">
+<h3>Step 1 — Cash basis: net operating cash flow</h3>
+<p>Under the cash basis, only cash in and cash out counts. List every operating cash receipt and payment in each year.</p>
+<div class="q" data-kind="num" data-answer="44000">
+<label for="q7">Net operating cash flow for <span class="y1"></span></label>
+<span aria-hidden="true">$</span><input id="q7" type="text" inputmode="decimal" class="money" autocomplete="off" aria-describedby="q7-fb">
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q7-ex">Show explanation</button></div>
+<div class="fb" id="q7-fb" aria-live="polite"></div>
+<div class="explain" id="q7-ex"><p>Cash collected $205,000 − salaries $110,000 − insurance paid up front $36,000 − utilities actually paid ($18,000 − $3,000 unpaid = $15,000) = <strong>$44,000</strong>.</p><p>Notice that the full three years of insurance hits year 1 under the cash basis.</p></div>
+</div><div class="q" data-kind="num" data-answer="177000">
+<label for="q8">Net operating cash flow for <span class="y2"></span></label>
+<span aria-hidden="true">$</span><input id="q8" type="text" inputmode="decimal" class="money" autocomplete="off" aria-describedby="q8-fb">
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q8-ex">Show explanation</button></div>
+<div class="fb" id="q8-fb" aria-live="polite"></div>
+<div class="explain" id="q8-ex"><p>Cash collected $325,000 − salaries $125,000 − utilities paid ($3,000 from last year + $20,000 this year = $23,000) = <strong>$177,000</strong>. No insurance is paid in year 2.</p></div>
+</div>
+</div>
+
+<div class="step">
+<h3>Step 2 — Accrual basis: revenue</h3>
+<p>Revenue is recognized when the service is <strong>performed</strong> (transferred to the client), not when cash arrives.</p>
+<div class="q" data-kind="num" data-answer="250000">
+<label for="q9">Revenue for <span class="y1"></span></label>
+<span aria-hidden="true">$</span><input id="q9" type="text" inputmode="decimal" class="money" autocomplete="off" aria-describedby="q9-fb">
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q9-ex">Show explanation</button></div>
+<div class="fb" id="q9-fb" aria-live="polite"></div>
+<div class="explain" id="q9-ex"><p>Ramsey Ridge performed and billed <strong>$250,000</strong> of services. The $45,000 not yet collected is still revenue — it becomes accounts receivable.</p></div>
+</div><div class="q" data-kind="num" data-answer="310000">
+<label for="q10">Revenue for <span class="y2"></span></label>
+<span aria-hidden="true">$</span><input id="q10" type="text" inputmode="decimal" class="money" autocomplete="off" aria-describedby="q10-fb">
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q10-ex">Show explanation</button></div>
+<div class="fb" id="q10-fb" aria-live="polite"></div>
+<div class="explain" id="q10-ex"><p><strong>$310,000</strong> of services performed. Some of the $325,000 collected relates to year-1 billings, so collections exceed revenue this year.</p></div>
+</div>
+</div>
+
+<div class="step">
+<h3>Step 3 — Accrual basis: expenses</h3>
+<div class="q" data-kind="num" data-answer="12000">
+<label for="q11">Insurance expense for <span class="y1"></span></label>
+<span aria-hidden="true">$</span><input id="q11" type="text" inputmode="decimal" class="money" autocomplete="off" aria-describedby="q11-fb">
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q11-ex">Show explanation</button></div>
+<div class="fb" id="q11-fb" aria-live="polite"></div>
+<div class="explain" id="q11-ex"><p>$36,000 ÷ 3 years = <strong>$12,000</strong> per year. The cost is allocated to the periods that receive the coverage — a <em>systematic and rational allocation</em>. The remaining $24,000 is an asset (prepaid insurance).</p></div>
+</div><div class="q" data-kind="num" data-answer="18000">
+<label for="q12">Utilities and fuel expense for <span class="y1"></span></label>
+<span aria-hidden="true">$</span><input id="q12" type="text" inputmode="decimal" class="money" autocomplete="off" aria-describedby="q12-fb">
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q12-ex">Show explanation</button></div>
+<div class="fb" id="q12-fb" aria-live="polite"></div>
+<div class="explain" id="q12-ex"><p>The expense is the cost of resources <strong>used</strong> in year 1: <strong>$18,000</strong>, even though only $15,000 was paid. The unpaid $3,000 is a liability.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Associated with revenues of a specific time period">
+<label for="q13">Which expense recognition approach best describes salaries expense here?</label>
+<select id="q13" aria-describedby="q13-fb"><option value="">— Select —</option><option value="Exact cause-and-effect relationship">Exact cause-and-effect relationship</option><option value="Associated with revenues of a specific time period">Associated with revenues of a specific time period</option><option value="Systematic and rational allocation">Systematic and rational allocation</option><option value="Recognized in the period incurred without regard to revenue">Recognized in the period incurred without regard to revenue</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q13-ex">Show explanation</button></div>
+<div class="fb" id="q13-fb" aria-live="polite"></div>
+<div class="explain" id="q13-ex"><p>Staff salaries aren't tied to a specific event or sale; they benefit the company during the year in which revenue is earned, so they are expensed in that period.</p></div>
+</div>
+</div>
+
+<div class="step">
+<h3>Step 4 — Accrual basis: net income</h3>
+<div class="q" data-kind="num" data-answer="110000">
+<label for="q14">Net income for <span class="y1"></span></label>
+<span aria-hidden="true">$</span><input id="q14" type="text" inputmode="decimal" class="money" autocomplete="off" aria-describedby="q14-fb">
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q14-ex">Show explanation</button></div>
+<div class="fb" id="q14-fb" aria-live="polite"></div>
+<div class="explain" id="q14-ex"><p>$250,000 − salaries $110,000 − insurance $12,000 − utilities $18,000 = <strong>$110,000</strong>.</p></div>
+</div><div class="q" data-kind="num" data-answer="153000">
+<label for="q15">Net income for <span class="y2"></span></label>
+<span aria-hidden="true">$</span><input id="q15" type="text" inputmode="decimal" class="money" autocomplete="off" aria-describedby="q15-fb">
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q15-ex">Show explanation</button></div>
+<div class="fb" id="q15-fb" aria-live="polite"></div>
+<div class="explain" id="q15-ex"><p>$310,000 − salaries $125,000 − insurance $12,000 − utilities $20,000 = <strong>$153,000</strong>.</p></div>
+</div>
+</div>
+
+<div class="step">
+<h3>Step 5 — The balance sheet connection</h3>
+<p>Every difference between cash flow and income leaves a footprint on the balance sheet.</p>
+<div class="q" data-kind="num" data-answer="45000">
+<label for="q16">Accounts receivable at the end of <span class="y1"></span></label>
+<span aria-hidden="true">$</span><input id="q16" type="text" inputmode="decimal" class="money" autocomplete="off" aria-describedby="q16-fb">
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q16-ex">Show explanation</button></div>
+<div class="fb" id="q16-fb" aria-live="polite"></div>
+<div class="explain" id="q16-ex"><p>Billed $250,000 − collected $205,000 = <strong>$45,000</strong>.</p></div>
+</div><div class="q" data-kind="num" data-answer="30000">
+<label for="q17">Accounts receivable at the end of <span class="y2"></span></label>
+<span aria-hidden="true">$</span><input id="q17" type="text" inputmode="decimal" class="money" autocomplete="off" aria-describedby="q17-fb">
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q17-ex">Show explanation</button></div>
+<div class="fb" id="q17-fb" aria-live="polite"></div>
+<div class="explain" id="q17-ex"><p>Beginning $45,000 + billed $310,000 − collected $325,000 = <strong>$30,000</strong>.</p></div>
+</div><div class="q" data-kind="num" data-answer="12000">
+<label for="q18">Prepaid insurance at the end of <span class="y2"></span></label>
+<span aria-hidden="true">$</span><input id="q18" type="text" inputmode="decimal" class="money" autocomplete="off" aria-describedby="q18-fb">
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q18-ex">Show explanation</button></div>
+<div class="fb" id="q18-fb" aria-live="polite"></div>
+<div class="explain" id="q18-ex"><p>$36,000 − two years used ($24,000) = <strong>$12,000</strong> — one more year of coverage remains.</p></div>
+</div><div class="q" data-kind="num" data-answer="3000">
+<label for="q19">Utilities payable at the end of <span class="y1"></span></label>
+<span aria-hidden="true">$</span><input id="q19" type="text" inputmode="decimal" class="money" autocomplete="off" aria-describedby="q19-fb">
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q19-ex">Show explanation</button></div>
+<div class="fb" id="q19-fb" aria-live="polite"></div>
+<div class="explain" id="q19-ex"><p>The <strong>$3,000</strong> of year-1 cost not yet paid. It is settled in year 2, which is why year-2 utility payments ($23,000) exceed year-2 expense ($20,000).</p></div>
+</div>
+</div>
+
+<div class="step">
+<h3>Step 6 — Pull it together</h3>
+<div class="q" data-kind="num" data-answer="42000">
+<label for="q20">Over the two years combined, by how much does total net income exceed total net operating cash flow?</label>
+<span aria-hidden="true">$</span><input id="q20" type="text" inputmode="decimal" class="money" autocomplete="off" aria-describedby="q20-fb">
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q20-ex">Show explanation</button></div>
+<div class="fb" id="q20-fb" aria-live="polite"></div>
+<div class="explain" id="q20-ex"><p>Income $263,000 − cash flow $221,000 = <strong>$42,000</strong>. That gap equals the ending balances still "in the pipeline": receivables of $30,000 + prepaid insurance of $12,000. Once the receivables are collected and the policy expires, the totals will match — the models differ only in <em>timing</em>.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Net income">
+<label for="q21">Which measure is the better predictor of Ramsey Ridge's future operating cash flows?</label>
+<select id="q21" aria-describedby="q21-fb"><option value="">— Select —</option><option value="Net operating cash flow">Net operating cash flow</option><option value="Net income">Net income</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q21-ex">Show explanation</button></div>
+<div class="fb" id="q21-fb" aria-live="polite"></div>
+<div class="explain" id="q21-ex"><p>Year-1 cash flow ($44,000) was depressed by the up-front insurance payment and slow collections, then jumped to $177,000. Net income ($110,000 → $153,000) tracks the growth in services performed and is the better indicator of ongoing cash-generating ability.</p></div>
+</div>
+</div>
+
+<div class="callout key"><span class="label">Takeaways</span>
+<ul style="margin:.2rem 0 0">
+<li>Revenue follows the <strong>transfer of services</strong>; expenses follow the <strong>use of resources</strong>.</li>
+<li>Receivables, prepaid assets, and payables are the bridge between cash flow and income.</li>
+<li>Over a company's whole life the totals converge; accrual accounting gives a better <em>period-by-period</em> picture.</li>
+</ul></div>
+
+</main>
+<footer>ACCT 351 · Intermediate Accounting I · Western Carolina University · <span class="yr"></span></footer>
+<script>
+document.querySelectorAll('.yr').forEach(e=>e.textContent=new Date().getFullYear());
+
+(function(){
+  const Y=new Date().getFullYear();
+  document.querySelectorAll('.y1').forEach(e=>e.textContent=Y-1);
+  document.querySelectorAll('.y2').forEach(e=>e.textContent=Y);
+  const qs=[...document.querySelectorAll('.q:not(.written)')];
+  const prog=document.getElementById('progress');
+  function parse(s){s=String(s).trim().replace(/[$,\s]/g,'');let neg=false;if(/^\(.*\)$/.test(s)){neg=true;s=s.slice(1,-1);}const v=parseFloat(s);if(isNaN(v))return NaN;return neg?-v:v;}
+  function update(){const c=qs.filter(q=>q.dataset.ok==='1').length;if(prog)prog.textContent='Progress: '+c+' of '+qs.length+' answered correctly';}
+  qs.forEach(q=>{
+    const inp=q.querySelector('input,select'),chk=q.querySelector('.check'),rev=q.querySelector('.reveal'),fb=q.querySelector('.fb'),ex=q.querySelector('.explain');
+    inp.addEventListener('input',()=>{chk.disabled=inp.value.trim()==='';});
+    inp.addEventListener('change',()=>{chk.disabled=inp.value.trim()==='';});
+    inp.addEventListener('keydown',e=>{if(e.key==='Enter'&&!chk.disabled){e.preventDefault();chk.click();}});
+    chk.addEventListener('click',()=>{
+      let ok;
+      if(q.dataset.kind==='num'){ok=Math.abs(parse(inp.value)-parseFloat(q.dataset.answer))<0.5;}
+      else ok=inp.value===q.dataset.answer;
+      inp.classList.toggle('correct',ok);inp.classList.toggle('wrong',!ok);
+      inp.setAttribute('aria-invalid',ok?'false':'true');
+      fb.className='fb '+(ok?'ok':'no');
+      fb.textContent=ok?'✓ Correct.':'✗ Not quite. Try again, or open the explanation.';
+      q.dataset.ok=ok?'1':'0';
+      rev.disabled=false;update();
+    });
+    rev.addEventListener('click',()=>{const s=ex.classList.toggle('show');rev.setAttribute('aria-expanded',s);rev.textContent=s?'Hide explanation':'Show explanation';});
+  });
+  update();
+})();
+
+</script>
+</body>
+</html>
