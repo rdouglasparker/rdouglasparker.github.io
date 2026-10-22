@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Homework: Financial Accounting Environment &amp; Conceptual Framework</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --purple:#592C88; --purple-dk:#3B1D5C; --purple-lt:#F3EEF9; --gold:#FFC425; --gold-lt:#FFF6DA;
+  --ink:#1F1A24; --muted:#4F4A55; --line:#D9D2E3; --paper:#FFFFFF; --bg:#FAF8FC;
+  --ok:#1E6B3A; --ok-bg:#E6F4EA; --bad:#A4161A; --bad-bg:#FBE9EA; --key:#14532D; --key-bg:#E7F5EC;
+}
+*{box-sizing:border-box}
+html{font-size:17px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Source Serif 4",Georgia,serif;line-height:1.6}
+a{color:var(--purple)} a:hover{color:var(--purple-dk)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;box-shadow:0 0 0 5px var(--purple-dk)}
+.skip{position:absolute;left:-999px;top:0;background:var(--gold);color:var(--ink);padding:.5rem 1rem;z-index:10;font-family:Inter,Arial,sans-serif}
+.skip:focus{left:1rem}
+header.banner{background:var(--purple);color:#fff;border-bottom:6px solid var(--gold)}
+header.banner .inner{max-width:960px;margin:0 auto;padding:1.6rem 1.25rem 1.3rem}
+header.banner .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:0 0 .35rem}
+header.banner h1{font-family:Inter,Arial,sans-serif;font-weight:800;font-size:1.9rem;line-height:1.2;margin:0}
+header.banner p.sub{margin:.5rem 0 0;color:#EDE6F5;font-size:1rem}
+.instructor-banner{background:#A4161A;color:#fff;font-family:Inter,Arial,sans-serif;font-weight:700;text-align:center;padding:.6rem 1rem;letter-spacing:.03em}
+main{max-width:960px;margin:0 auto;padding:1.5rem 1.25rem 3rem}
+h2{font-family:Inter,Arial,sans-serif;color:var(--purple-dk);font-size:1.45rem;margin:2.2rem 0 .6rem;padding-bottom:.3rem;border-bottom:3px solid var(--gold)}
+h3{font-family:Inter,Arial,sans-serif;color:var(--purple);font-size:1.15rem;margin:1.6rem 0 .4rem}
+h4{font-family:Inter,Arial,sans-serif;font-size:1rem;margin:1.2rem 0 .3rem;color:var(--ink)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:1.1rem 1.25rem;margin:1rem 0;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.toc{background:var(--purple-lt);border-left:6px solid var(--purple)}
+.toc ol{margin:.3rem 0 0 1.2rem;padding:0}
+.callout{border-radius:8px;padding:.9rem 1.1rem;margin:1rem 0;border-left:6px solid}
+.callout .label{display:block;font-family:Inter,Arial,sans-serif;font-weight:800;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.25rem}
+.callout.key{background:var(--gold-lt);border-color:var(--gold)}
+.callout.important{background:#FFF1F1;border-color:var(--bad)}
+.callout.tip{background:var(--purple-lt);border-color:var(--purple)}
+.callout.ifrs{background:#EEF5FB;border-color:#1D4E89}
+.callout.update{background:#F1F7EE;border-color:var(--ok)}
+.def{font-weight:700;color:var(--purple-dk)}
+table{border-collapse:collapse;width:100%;margin:.8rem 0;font-size:.95rem;background:#fff}
+caption{text-align:left;font-family:Inter,Arial,sans-serif;font-weight:700;color:var(--purple-dk);padding:.3rem 0}
+th,td{border:1px solid var(--line);padding:.5rem .65rem;vertical-align:top;text-align:left}
+thead th{background:var(--purple);color:#fff;font-family:Inter,Arial,sans-serif;font-size:.9rem}
+tbody th{background:var(--purple-lt);font-family:Inter,Arial,sans-serif}
+td.num,th.num{text-align:right;font-family:"IBM Plex Mono",monospace;white-space:nowrap}
+tr.total td{font-weight:700;border-top:2px solid var(--ink)}
+.table-wrap{overflow-x:auto}
+.mono{font-family:"IBM Plex Mono",monospace}
+.formula{font-family:"IBM Plex Mono",monospace;background:var(--purple-lt);padding:.6rem .9rem;border-radius:6px;display:block;margin:.6rem 0}
+/* Interactive */
+.step{background:#fff;border:1px solid var(--line);border-left:6px solid var(--purple);border-radius:10px;padding:1rem 1.2rem;margin:1.2rem 0}
+.step h3{margin-top:0}
+.q{margin:.9rem 0;padding:.75rem .9rem;border:1px solid var(--line);border-radius:8px;background:#fff}
+.q > label,.q .prompt{display:block;font-weight:600;margin-bottom:.4rem}
+input[type=text],input[type=number],select,textarea{font:inherit;font-family:"IBM Plex Mono",monospace;font-size:.95rem;padding:.45rem .55rem;border:2px solid #77707F;border-radius:6px;background:#fff;color:var(--ink);max-width:100%}
+input.money{width:11rem;text-align:right}
+select{font-family:Inter,Arial,sans-serif;min-width:16rem}
+textarea{width:100%;min-height:7rem;font-family:"Source Serif 4",Georgia,serif}
+input.correct,select.correct{border-color:var(--ok);background:var(--ok-bg)}
+input.wrong,select.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.btn{font-family:Inter,Arial,sans-serif;font-weight:700;font-size:.95rem;border:2px solid var(--purple);background:var(--purple);color:#fff;border-radius:8px;padding:.55rem 1.1rem;cursor:pointer;margin:.4rem .4rem .4rem 0}
+.btn:hover{background:var(--purple-dk)}
+.btn.secondary{background:#fff;color:var(--purple)}
+.btn.gold{background:var(--gold);border-color:#B88A00;color:var(--ink)}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+.fb{margin-top:.5rem;font-family:Inter,Arial,sans-serif;font-size:.93rem;font-weight:600}
+.fb.ok{color:var(--ok)} .fb.no{color:var(--bad)}
+.explain{display:none;margin-top:.6rem;background:var(--key-bg);border-left:5px solid var(--key);padding:.7rem .9rem;border-radius:6px}
+.explain.show{display:block}
+.key{background:var(--key-bg);border:2px solid var(--key);color:var(--key);font-family:"IBM Plex Mono",monospace;font-size:.88rem;padding:.25rem .5rem;border-radius:5px;display:inline-block;margin-top:.35rem}
+.summary{font-family:Inter,Arial,sans-serif;font-weight:700;padding:.6rem .9rem;border-radius:8px;background:var(--purple-lt);margin:.6rem 0}
+.idbar{display:flex;flex-wrap:wrap;gap:.6rem;align-items:flex-end;background:var(--gold-lt);border:2px solid var(--gold);border-radius:10px;padding:1rem 1.2rem}
+.idbar label{font-family:Inter,Arial,sans-serif;font-weight:700;display:block}
+.problem{background:#fff;border:1px solid var(--line);border-radius:10px;padding:1.1rem 1.25rem;margin:1.4rem 0}
+.problem > h2{margin-top:.2rem}
+.part{break-inside:auto}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+.pill{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.75rem;background:var(--purple);color:#fff;border-radius:999px;padding:.1rem .55rem;vertical-align:middle}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media (max-width:720px){.grid2{grid-template-columns:1fr} header.banner h1{font-size:1.5rem} select{min-width:0;width:100%}}
+footer{max-width:960px;margin:0 auto;padding:1rem 1.25rem 2rem;color:var(--muted);font-size:.85rem;font-family:Inter,Arial,sans-serif}
+@media print{
+  .btn,.skip,.idbar .btn{display:none!important}
+  body{background:#fff}
+  .problem{page-break-before:always;border:none}
+  h2,h3{break-after:avoid}
+  .explain{display:block}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+
+<header class="banner"><div class="inner">
+<p class="eyebrow">ACCT 351 · Homework</p>
+<h1>Homework: Environment & Conceptual Framework</h1>
+<p class="sub">Cash vs. accrual, assumptions and principles, elements, qualitative characteristics, and measurement.</p>
+</div></header>
+<main id="main" tabindex="-1">
+
+<div class="card">
+<h2 style="margin-top:0">Instructions</h2>
+<ol>
+<li>Enter your <strong>WCU student ID</strong> and select <em>Load my problems</em>. Your company names, amounts, and situations are generated from your ID, so every student's packet is different — but yours is the same every time you load it.</li>
+<li>Work all five problems. Use a minus sign for negative amounts. You may enter amounts with or without dollar signs and commas.</li>
+<li>Select <em>Check my work</em> as often as you like. Each answer is marked ✓ Correct or ✗ Incorrect, and each problem shows how many you have correct.</li>
+<li>When finished, select <em>Print / Save as PDF</em> and upload the PDF to the Canvas assignment.</li>
+</ol>
+</div>
+<div class="idbar" role="group" aria-labelledby="idlbl">
+<div><label id="idlbl" for="sid">Student ID</label><input id="sid" type="text" inputmode="numeric" autocomplete="off" aria-describedby="idmsg" style="width:14rem"></div>
+<button type="button" class="btn" id="loadbtn">Load my problems</button>
+<div id="idmsg" class="fb" aria-live="polite" style="flex-basis:100%"></div>
+</div>
+<div id="hw"></div>
+<div id="actions" hidden>
+<button type="button" class="btn gold" id="checkbtn">Check my work</button>
+<button type="button" class="btn secondary" id="printbtn">Print / Save as PDF</button>
+<div id="overall" class="summary" tabindex="-1" aria-live="polite" hidden></div>
+</div>
+
+</main>
+<footer>ACCT 351 · Intermediate Accounting I · Western Carolina University · <span class="yr"></span></footer>
+<script>
+document.querySelectorAll('.yr').forEach(e=>e.textContent=new Date().getFullYear());
+(function(){
+'use strict';
+const INSTRUCTOR = window.__INSTRUCTOR__ === true;
+const Y = new Date().getFullYear(), Y1 = Y-1, Y2 = Y;
+function fnv1a(s){let h=0x811c9dc5;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,0x01000193);}return h>>>0;}
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+let R;
+const ri=(a,b)=>a+Math.floor(R()*(b-a+1));
+const pick=a=>a[Math.floor(R()*a.length)];
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(R()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+const $=n=>'$'+Math.round(n).toLocaleString('en-US');
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+const SERVICE_CO=['Catamount Peak Consulting','Cullowhee Valley Event Co.','Reid Gym Sports Medicine','Hunter Library Archival Services','Killian Knob Web Design','Forsyth Hall Tax & Advisory','Speas Ridge Engineering','Ramsey Center Productions','Tuckasegee Trail Tech Support','Balsam Range Marketing Group'];
+const COS=['Sylva Supply Co.','Webster Wood Products','Dillsboro Station Outfitters','Jackson County Brewing','Whittier Ceramics','Caney Fork Construction','Glenville Lake Marine','Cashiers Crossroads Hardware','Bryson Ridge Bakery','Scotts Creek Software','Little Savannah Tools','Pinnacle Park Printing','Panthertown Gear Co.','Wolf Ridge Apparel','East LaPorte Electric'];
+const OWNERS=['Maya Ledford','Jordan Ensley','Avery Queen','Riley Shook','Sam Cagle','Taylor Moody','Casey Buchanan','Morgan Painter'];
+
+const CONCEPTS=['Economic entity assumption','Going concern assumption','Periodicity assumption','Monetary unit assumption','Historical cost principle','Revenue recognition','Expense recognition','Full-disclosure principle','Materiality and cost constraint'];
+const AD=['Agree','Disagree'];
+const ELEMENTS=['Assets','Liabilities','Equity','Investments by owners','Distributions to owners','Revenues','Expenses','Gains','Losses','Comprehensive income'];
+const QCS=['Relevance','Predictive value','Confirmatory value','Materiality','Faithful representation','Completeness','Neutrality','Comparability','Consistency','Verifiability','Timeliness','Understandability','Cost constraint'];
+const LEVELS=['Level 1','Level 2','Level 3'];
+
+function conceptPool(){
+  const c=()=>pick(COS), o=()=>pick(OWNERS), k=(a,b)=>ri(a,b)*1000;
+  return [
+   ()=>{const n=o(),co='the '+n.split(' ')[1]+' Studio';return{t:`${n} is the sole owner of ${co}. The business paid ${$(ri(3,9)*100)} for ${n}'s personal home internet bill and recorded it as utilities expense.`,a:'Disagree',c:'Economic entity assumption'};},
+   ()=>{const n=o();return{t:`${n}, sole owner of ${c()}, personally borrowed ${$(k(150,400))} to buy a family home. The loan was not recorded in the company's books.`,a:'Agree',c:'Economic entity assumption'};},
+   ()=>{const cost=k(200,500),fv=cost+k(80,250);return{t:`${c()} bought land three years ago for ${$(cost)}. Because the land is now appraised at ${$(fv)}, the controller increased its carrying value to ${$(fv)}.`,a:'Disagree',c:'Historical cost principle'};},
+   ()=>{const cost=k(120,300),fv=cost+k(50,200);return{t:`${c()} reports land on its balance sheet at its ${$(cost)} purchase price, even though its current fair value is about ${$(fv)}.`,a:'Agree',c:'Historical cost principle'};},
+   ()=>({t:`${c()} recorded ${$(k(40,90))} of sales revenue on December 20, ${Y1}, the day a customer's order was received. The goods will ship in January ${Y2}.`,a:'Disagree',c:'Revenue recognition'}),
+   ()=>({t:`${c()} records revenue when products are delivered to customers, even though customers have 30 days to pay.`,a:'Agree',c:'Revenue recognition'}),
+   ()=>({t:`${c()} received a ${$(k(20,60))} deposit in November ${Y1} for custom work to be completed and delivered in March ${Y2}, and recorded the full amount as ${Y1} revenue.`,a:'Disagree',c:'Revenue recognition'}),
+   ()=>({t:`${c()} purchased a ${$(k(600,1500))} production machine (a material amount) with a 10-year life and recorded the entire cost as an expense.`,a:'Disagree',c:'Expense recognition'}),
+   ()=>({t:`${c()} depreciates its delivery trucks over their estimated useful lives.`,a:'Agree',c:'Expense recognition'}),
+   ()=>{const r=ri(12,30)*2000;return{t:`At the beginning of ${Y1}, ${c()} paid ${$(r)} for a two-year warehouse lease and recorded it as an asset to be expensed equally over the two years.`,a:'Agree',c:'Expense recognition'};},
+   ()=>({t:`${c()} is the defendant in a ${$(k(1500,4000))} lawsuit (a material amount) and is uninsured. It did not mention the suit in its financial statements because no verdict has been reached.`,a:'Disagree',c:'Full-disclosure principle'}),
+   ()=>({t:`${c()} included a note in its financial statements describing a pending lawsuit against the company.`,a:'Agree',c:'Full-disclosure principle'}),
+   ()=>({t:`${c()}, which has outside lenders and investors, provides financial statements to external users only once every three years.`,a:'Disagree',c:'Periodicity assumption'}),
+   ()=>({t:`${c()}, a publicly traded company, files quarterly and annual financial statements with the SEC.`,a:'Agree',c:'Periodicity assumption'}),
+   ()=>({t:`Because of recent inflation, ${c()} adjusted every asset and liability on its balance sheet to reflect changes in the purchasing power of the dollar.`,a:'Disagree',c:'Monetary unit assumption'}),
+   ()=>({t:`${c()}, a company with annual revenue over ${$(k(80,300)*1000)}, bought small hand tools costing ${$(ri(4,9)*100)} that will last several years, and expensed them immediately.`,a:'Agree',c:'Materiality and cost constraint'}),
+   ()=>({t:`${c()} is profitable with no plans to close, yet it measured its equipment at the amount it would bring in a forced liquidation sale.`,a:'Disagree',c:'Going concern assumption'}),
+   ()=>({t:`${c()} reports its buildings at depreciated cost rather than liquidation value because it expects to keep operating.`,a:'Agree',c:'Going concern assumption'})
+  ];
+}
+const ELEM_POOL=[
+ ['An obligation to transfer cash or other resources as a result of a past transaction','Liabilities'],
+ ['Dividends paid by a corporation to its shareholders','Distributions to owners'],
+ ['An inflow of assets from providing services as part of central operations','Revenues'],
+ ['The increase in equity during a period from all nonowner sources','Comprehensive income'],
+ ['An increase in equity from a peripheral or incidental transaction','Gains'],
+ ['A bakery sells one of its ovens for less than the oven\'s book value','Losses'],
+ ['The owners\' residual interest in the assets of the company','Equity'],
+ ['A resource controlled by the company that is expected to provide future economic benefits','Assets'],
+ ['An owner contributes cash to the corporation in exchange for shares of stock','Investments by owners'],
+ ['The using up of assets to produce revenue from central operations','Expenses'],
+ ['Rent collected in advance for months the tenant has not yet occupied','Liabilities'],
+ ['Office supplies on hand at year-end','Assets'],
+ ['Uninsured flood damage to a retailer\'s warehouse','Losses']
+];
+const QC_POOL=[
+ ['Two outdoor retailers use the same inventory method, making their gross margins easier to evaluate side by side.','Comparability'],
+ ['A company uses the same depreciation method year after year.','Consistency'],
+ ['The SEC requires registrants to file quarterly reports in addition to annual reports.','Timeliness'],
+ ['An analyst uses current-year earnings to forecast next year\'s cash flows.','Predictive value'],
+ ['A lender uses this year\'s results to confirm the cash-flow estimate it made last year.','Confirmatory value'],
+ ['There is agreement between a measure or description and the economic phenomenon it purports to represent.','Faithful representation'],
+ ['Several independent appraisers arrive at nearly the same value for a building.','Verifiability'],
+ ['A standard is written to produce high-quality information rather than to help a particular industry.','Neutrality'],
+ ['The financial statements include all information necessary to depict the economic phenomenon.','Completeness'],
+ ['A company should provide information only if the perceived benefits exceed the costs of providing it.','Cost constraint'],
+ ['Users with a reasonable knowledge of business who study the information diligently can comprehend it.','Understandability'],
+ ['An omitted item is small enough that including it would not affect a user\'s judgment.','Materiality'],
+ ['Information is capable of making a difference in a user\'s decision.','Relevance']
+];
+const FV_POOL=[
+ ['Shares of common stock traded on the New York Stock Exchange, valued at the closing price','Level 1'],
+ ['Corporate bonds traded actively on an exchange, valued at their quoted price','Level 1'],
+ ['A building received in a noncash exchange, valued using recent sales of similar buildings','Level 2'],
+ ['An interest rate swap valued using observable market interest rate yield curves','Level 2'],
+ ['An asset retirement obligation valued using the company\'s own cash flow estimates','Level 3'],
+ ['An investment in a private start-up valued using the company\'s internal cash flow projections','Level 3']
+];
+
+function sel(id,label,opts,ans){
+  return `<div class="q"><label for="${id}">${label}</label><select id="${id}" data-ans="${esc(ans)}"><option value="">— Select —</option>${opts.map(o=>`<option value="${esc(o)}">${esc(o)}</option>`).join('')}</select><span class="mark" aria-live="polite"></span>${INSTRUCTOR?`<div class="key">Answer: ${esc(ans)}</div>`:''}</div>`;
+}
+function num(id,label,ans,unit){
+  unit=unit||'$';
+  const disp=unit==='%'?ans.toFixed(1)+'%':$(ans);
+  return `<div class="q"><label for="${id}">${label}</label>${unit==='$'?'<span aria-hidden="true">$ </span>':''}<input id="${id}" type="text" inputmode="decimal" class="money" autocomplete="off" data-ans="${ans}" data-unit="${unit}">${unit==='%'?'<span aria-hidden="true"> %</span>':''}<span class="mark" aria-live="polite"></span>${INSTRUCTOR?`<div class="key">Answer: ${disp}</div>`:''}</div>`;
+}
+
+function build(id){
+  R=mulberry32(fnv1a('ACCT351-CH1|'+id.trim().toUpperCase()));
+  let h='';
+  // ---------- Problem 1 ----------
+  const co=pick(SERVICE_CO);
+  const billed1=ri(36,64)*5000, billed2=billed1+ri(4,16)*5000;
+  const ar1=ri(4,12)*5000, col1=billed1-ar1;
+  const ar2=ri(1,Math.max(1,ar1/5000-1))*5000, col2=ar1+billed2-ar2;
+  const sal1=ri(16,28)*5000, sal2=sal1+ri(1,4)*5000;
+  const n=pick([2,3,4]), per=ri(6,14)*1000, prem=n*per;
+  const ut1=ri(12,24)*1000, unp=ri(2,5)*1000, ut2=ut1+ri(1,4)*1000;
+  const A={c1:col1-sal1-prem-(ut1-unp), c2:col2-sal2-(unp+ut2), n1:billed1-sal1-per-ut1, n2:billed2-sal2-per-ut2, ar1, ar2, pp:prem-2*per, up:unp};
+  h+=`<section class="problem part" aria-labelledby="p1h"><h2 id="p1h">Problem 1 — Cash Basis vs. Accrual Basis</h2>
+  <p><strong>${co}</strong> began operations on January 1, ${Y1}. Its first two years of activity were:</p>
+  <div class="table-wrap"><table><caption>${co} — activity</caption><thead><tr><th scope="col">Item</th><th scope="col" class="num">${Y1}</th><th scope="col" class="num">${Y2}</th></tr></thead><tbody>
+  <tr><th scope="row">Amounts billed to clients for services performed</th><td class="num">${$(billed1)}</td><td class="num">${$(billed2)}</td></tr>
+  <tr><th scope="row">Cash collected from clients</th><td class="num">${$(col1)}</td><td class="num">${$(col2)}</td></tr>
+  <tr><th scope="row">Salaries paid to employees for work done that year</th><td class="num">${$(sal1)}</td><td class="num">${$(sal2)}</td></tr></tbody></table></div>
+  <ul><li>On January 1, ${Y1}, the company paid ${$(prem)} for a ${n}-year insurance policy.</li>
+  <li>Utilities cost ${$(ut1)} in ${Y1}; ${$(unp)} of that was unpaid at year-end and was paid in January ${Y2}. The ${Y2} utilities cost of ${$(ut2)} was paid in full in ${Y2}.</li>
+  <li>No bad debts are anticipated. Enter negative amounts with a minus sign.</li></ul>
+  <h3>Required</h3>
+  ${num('p1a',`1. Net operating cash flow for ${Y1}`,A.c1)}${num('p1b',`2. Net operating cash flow for ${Y2}`,A.c2)}
+  ${num('p1c',`3. Accrual net income for ${Y1}`,A.n1)}${num('p1d',`4. Accrual net income for ${Y2}`,A.n2)}
+  ${num('p1e',`5. Accounts receivable at December 31, ${Y1}`,A.ar1)}${num('p1f',`6. Accounts receivable at December 31, ${Y2}`,A.ar2)}
+  ${num('p1g',`7. Prepaid insurance at December 31, ${Y2}`,A.pp)}${num('p1h',`8. Utilities payable at December 31, ${Y1}`,A.up)}
+  <div class="summary" data-part="p1" aria-live="polite"></div></section>`;
+  // ---------- Problem 2 ----------
+  const pool=shuffle(conceptPool()).slice(0,8).map(f=>f());
+  h+=`<section class="problem part" aria-labelledby="p2h"><h2 id="p2h">Problem 2 — Assumptions and Principles: Agree or Disagree?</h2>
+  <p>For each situation, (a) indicate whether you <strong>agree</strong> or <strong>disagree</strong> with the financial reporting practice, and (b) select the accounting concept that is <strong>applied</strong> (if you agree) or <strong>violated</strong> (if you disagree).</p>`;
+  pool.forEach((s,i)=>{h+=`<div class="card"><p><strong>${i+1}.</strong> ${s.t}</p>${sel(`p2a${i}`,`${i+1}(a) Agree or disagree?`,AD,s.a)}${sel(`p2b${i}`,`${i+1}(b) Concept applied or violated`,CONCEPTS,s.c)}</div>`;});
+  h+=`<div class="summary" data-part="p2" aria-live="polite"></div></section>`;
+  // ---------- Problem 3 ----------
+  const el=shuffle(ELEM_POOL).slice(0,8);
+  h+=`<section class="problem part" aria-labelledby="p3h"><h2 id="p3h">Problem 3 — Elements of Financial Statements</h2><p>Select the financial statement element that best fits each item.</p>`;
+  el.forEach((e,i)=>{h+=sel(`p3${i}`,`${i+1}. ${e[0]}`,ELEMENTS,e[1]);});
+  h+=`<div class="summary" data-part="p3" aria-live="polite"></div></section>`;
+  // ---------- Problem 4 ----------
+  const qc=shuffle(QC_POOL).slice(0,6);
+  h+=`<section class="problem part" aria-labelledby="p4h"><h2 id="p4h">Problem 4 — Qualitative Characteristics and Constraints</h2><p>Select the characteristic or constraint that each statement describes.</p>`;
+  qc.forEach((e,i)=>{h+=sel(`p4${i}`,`${i+1}. ${e[0]}`,QCS,e[1]);});
+  h+=`<div class="summary" data-part="p4" aria-live="polite"></div></section>`;
+  // ---------- Problem 5 ----------
+  const inv=ri(8,40)*500, div=ri(2,12)*50, gain=ri(-4,14)*100, sale=inv+gain;
+  const ror=Math.round((div+gain)/inv*1000)/10;
+  const sp=ri(20,60)*1000, comp=ri(10,40)*100, ship=ri(4,15)*100, nrv=sp-comp-ship;
+  const co5=pick(COS), co6=pick(COS.filter(x=>x!==co5));
+  const fv=shuffle(FV_POOL).slice(0,3);
+  h+=`<section class="problem part" aria-labelledby="p5h"><h2 id="p5h">Problem 5 — Return, Measurement, and Fair Value</h2>
+  <p><strong>Part A.</strong> On December 31, ${Y1}, an investor bought shares of ${co5} for ${$(inv)}. During ${Y2} she received ${$(div)} in dividends, and on December 31, ${Y2}, she sold the shares for ${$(sale)}.</p>
+  ${num('p5a',`1. Rate of return on the investment for ${Y2} (round to one decimal place, e.g., 7.5)`,ror,'%')}
+  <p><strong>Part B.</strong> ${co6} has partially finished inventory that it expects to sell for ${$(sp)} in the ordinary course of business. It expects to spend ${$(comp)} to finish the goods and ${$(ship)} to ship them to customers.</p>
+  ${num('p5b','2. Net realizable value of the inventory',nrv)}
+  <p><strong>Part C.</strong> Identify the level of the fair value hierarchy for the primary input used in each measurement.</p>
+  ${fv.map((f,i)=>sel(`p5c${i}`,`${i+3}. ${f[0]}`,LEVELS,f[1])).join('')}
+  <div class="summary" data-part="p5" aria-live="polite"></div></section>`;
+  return h;
+}
+
+function parse(s){s=String(s).trim().replace(/[$,%\s]/g,'');let neg=false;if(/^\(.*\)$/.test(s)){neg=true;s=s.slice(1,-1);}const v=parseFloat(s);return isNaN(v)?NaN:(neg?-v:v);}
+function grade(){
+  let tot=0,ok=0;
+  document.querySelectorAll('.summary[data-part]').forEach(sum=>{
+    const sec=sum.closest('section');let t=0,c=0;
+    sec.querySelectorAll('[data-ans]').forEach(f=>{
+      t++;const m=f.parentElement.querySelector('.mark');let good;
+      if(f.tagName==='SELECT')good=f.value===f.dataset.ans;
+      else{const tol=f.dataset.unit==='%'?0.051:0.5;good=Math.abs(parse(f.value)-parseFloat(f.dataset.ans))<tol;}
+      if(f.value.trim()===''){good=false;}
+      f.classList.toggle('correct',good);f.classList.toggle('wrong',!good);f.setAttribute('aria-invalid',good?'false':'true');
+      m.textContent=good?' ✓ Correct':(f.value.trim()===''?' ✗ No answer':' ✗ Incorrect');m.className='mark fb '+(good?'ok':'no');
+      if(good)c++;});
+    sum.textContent=c+' of '+t+' correct';tot+=t;ok+=c;});
+  const o=document.getElementById('overall');o.textContent='Overall: '+ok+' of '+tot+' correct ('+Math.round(ok/tot*100)+'%)';o.hidden=false;o.focus();
+}
+function load(){
+  const v=document.getElementById('sid').value.trim();
+  const msg=document.getElementById('idmsg');
+  if(!/^\d{6,12}$/.test(v)){msg.textContent='Enter your WCU student ID number (digits only, e.g., 92xxxxxxx).';msg.className='fb no';document.getElementById('sid').focus();return;}
+  msg.textContent='Problems loaded for ID '+v+'. Your numbers and situations are unique to this ID.';msg.className='fb ok';
+  document.getElementById('hw').innerHTML=build(v);
+  document.getElementById('actions').hidden=false;
+  document.getElementById('overall').hidden=true;
+  document.querySelectorAll('.yr1').forEach(e=>e.textContent=Y1);
+}
+document.getElementById('loadbtn').addEventListener('click',load);
+document.getElementById('sid').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();load();}});
+document.getElementById('checkbtn').addEventListener('click',grade);
+document.getElementById('printbtn').addEventListener('click',()=>window.print());
+window.__hw={build,fnv1a,mulberry32,grade,load};
+})();
+
+</script>
+</body>
+</html>
