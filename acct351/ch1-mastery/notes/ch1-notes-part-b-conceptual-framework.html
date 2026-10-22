@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Conceptual Framework — Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --purple:#592C88; --purple-dk:#3B1D5C; --purple-lt:#F3EEF9; --gold:#FFC425; --gold-lt:#FFF6DA;
+  --ink:#1F1A24; --muted:#4F4A55; --line:#D9D2E3; --paper:#FFFFFF; --bg:#FAF8FC;
+  --ok:#1E6B3A; --ok-bg:#E6F4EA; --bad:#A4161A; --bad-bg:#FBE9EA; --key:#14532D; --key-bg:#E7F5EC;
+}
+*{box-sizing:border-box}
+html{font-size:17px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Source Serif 4",Georgia,serif;line-height:1.6}
+a{color:var(--purple)} a:hover{color:var(--purple-dk)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;box-shadow:0 0 0 5px var(--purple-dk)}
+.skip{position:absolute;left:-999px;top:0;background:var(--gold);color:var(--ink);padding:.5rem 1rem;z-index:10;font-family:Inter,Arial,sans-serif}
+.skip:focus{left:1rem}
+header.banner{background:var(--purple);color:#fff;border-bottom:6px solid var(--gold)}
+header.banner .inner{max-width:960px;margin:0 auto;padding:1.6rem 1.25rem 1.3rem}
+header.banner .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:0 0 .35rem}
+header.banner h1{font-family:Inter,Arial,sans-serif;font-weight:800;font-size:1.9rem;line-height:1.2;margin:0}
+header.banner p.sub{margin:.5rem 0 0;color:#EDE6F5;font-size:1rem}
+.instructor-banner{background:#A4161A;color:#fff;font-family:Inter,Arial,sans-serif;font-weight:700;text-align:center;padding:.6rem 1rem;letter-spacing:.03em}
+main{max-width:960px;margin:0 auto;padding:1.5rem 1.25rem 3rem}
+h2{font-family:Inter,Arial,sans-serif;color:var(--purple-dk);font-size:1.45rem;margin:2.2rem 0 .6rem;padding-bottom:.3rem;border-bottom:3px solid var(--gold)}
+h3{font-family:Inter,Arial,sans-serif;color:var(--purple);font-size:1.15rem;margin:1.6rem 0 .4rem}
+h4{font-family:Inter,Arial,sans-serif;font-size:1rem;margin:1.2rem 0 .3rem;color:var(--ink)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:1.1rem 1.25rem;margin:1rem 0;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.toc{background:var(--purple-lt);border-left:6px solid var(--purple)}
+.toc ol{margin:.3rem 0 0 1.2rem;padding:0}
+.callout{border-radius:8px;padding:.9rem 1.1rem;margin:1rem 0;border-left:6px solid}
+.callout .label{display:block;font-family:Inter,Arial,sans-serif;font-weight:800;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.25rem}
+.callout.key{background:var(--gold-lt);border-color:var(--gold)}
+.callout.important{background:#FFF1F1;border-color:var(--bad)}
+.callout.tip{background:var(--purple-lt);border-color:var(--purple)}
+.callout.ifrs{background:#EEF5FB;border-color:#1D4E89}
+.callout.update{background:#F1F7EE;border-color:var(--ok)}
+.def{font-weight:700;color:var(--purple-dk)}
+table{border-collapse:collapse;width:100%;margin:.8rem 0;font-size:.95rem;background:#fff}
+caption{text-align:left;font-family:Inter,Arial,sans-serif;font-weight:700;color:var(--purple-dk);padding:.3rem 0}
+th,td{border:1px solid var(--line);padding:.5rem .65rem;vertical-align:top;text-align:left}
+thead th{background:var(--purple);color:#fff;font-family:Inter,Arial,sans-serif;font-size:.9rem}
+tbody th{background:var(--purple-lt);font-family:Inter,Arial,sans-serif}
+td.num,th.num{text-align:right;font-family:"IBM Plex Mono",monospace;white-space:nowrap}
+tr.total td{font-weight:700;border-top:2px solid var(--ink)}
+.table-wrap{overflow-x:auto}
+.mono{font-family:"IBM Plex Mono",monospace}
+.formula{font-family:"IBM Plex Mono",monospace;background:var(--purple-lt);padding:.6rem .9rem;border-radius:6px;display:block;margin:.6rem 0}
+/* Interactive */
+.step{background:#fff;border:1px solid var(--line);border-left:6px solid var(--purple);border-radius:10px;padding:1rem 1.2rem;margin:1.2rem 0}
+.step h3{margin-top:0}
+.q{margin:.9rem 0;padding:.75rem .9rem;border:1px solid var(--line);border-radius:8px;background:#fff}
+.q > label,.q .prompt{display:block;font-weight:600;margin-bottom:.4rem}
+input[type=text],input[type=number],select,textarea{font:inherit;font-family:"IBM Plex Mono",monospace;font-size:.95rem;padding:.45rem .55rem;border:2px solid #77707F;border-radius:6px;background:#fff;color:var(--ink);max-width:100%}
+input.money{width:11rem;text-align:right}
+select{font-family:Inter,Arial,sans-serif;min-width:16rem}
+textarea{width:100%;min-height:7rem;font-family:"Source Serif 4",Georgia,serif}
+input.correct,select.correct{border-color:var(--ok);background:var(--ok-bg)}
+input.wrong,select.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.btn{font-family:Inter,Arial,sans-serif;font-weight:700;font-size:.95rem;border:2px solid var(--purple);background:var(--purple);color:#fff;border-radius:8px;padding:.55rem 1.1rem;cursor:pointer;margin:.4rem .4rem .4rem 0}
+.btn:hover{background:var(--purple-dk)}
+.btn.secondary{background:#fff;color:var(--purple)}
+.btn.gold{background:var(--gold);border-color:#B88A00;color:var(--ink)}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+.fb{margin-top:.5rem;font-family:Inter,Arial,sans-serif;font-size:.93rem;font-weight:600}
+.fb.ok{color:var(--ok)} .fb.no{color:var(--bad)}
+.explain{display:none;margin-top:.6rem;background:var(--key-bg);border-left:5px solid var(--key);padding:.7rem .9rem;border-radius:6px}
+.explain.show{display:block}
+.key{background:var(--key-bg);border:2px solid var(--key);color:var(--key);font-family:"IBM Plex Mono",monospace;font-size:.88rem;padding:.25rem .5rem;border-radius:5px;display:inline-block;margin-top:.35rem}
+.summary{font-family:Inter,Arial,sans-serif;font-weight:700;padding:.6rem .9rem;border-radius:8px;background:var(--purple-lt);margin:.6rem 0}
+.idbar{display:flex;flex-wrap:wrap;gap:.6rem;align-items:flex-end;background:var(--gold-lt);border:2px solid var(--gold);border-radius:10px;padding:1rem 1.2rem}
+.idbar label{font-family:Inter,Arial,sans-serif;font-weight:700;display:block}
+.problem{background:#fff;border:1px solid var(--line);border-radius:10px;padding:1.1rem 1.25rem;margin:1.4rem 0}
+.problem > h2{margin-top:.2rem}
+.part{break-inside:auto}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+.pill{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.75rem;background:var(--purple);color:#fff;border-radius:999px;padding:.1rem .55rem;vertical-align:middle}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media (max-width:720px){.grid2{grid-template-columns:1fr} header.banner h1{font-size:1.5rem} select{min-width:0;width:100%}}
+footer{max-width:960px;margin:0 auto;padding:1rem 1.25rem 2rem;color:var(--muted);font-size:.85rem;font-family:Inter,Arial,sans-serif}
+@media print{
+  .btn,.skip,.idbar .btn{display:none!important}
+  body{background:#fff}
+  .problem{page-break-before:always;border:none}
+  h2,h3{break-after:avoid}
+  .explain{display:block}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+
+<header class="banner"><div class="inner">
+<p class="eyebrow">ACCT 351 · Reading Notes · Part B</p>
+<h1>The Conceptual Framework</h1>
+<p class="sub">Objective, qualitative characteristics, elements, assumptions, and recognition, measurement, and disclosure concepts.</p>
+</div></header>
+<main id="main" tabindex="-1">
+<nav class="card toc" aria-labelledby="toc-h">
+  <h2 id="toc-h" style="margin-top:0;border:none">In these notes</h2>
+  <ol>
+    <li><a href="#b1">Purpose of the conceptual framework</a></li>
+    <li><a href="#b2">The objective of financial reporting</a></li>
+    <li><a href="#b3">Qualitative characteristics</a></li>
+    <li><a href="#b4">The cost constraint</a></li>
+    <li><a href="#b5">Elements of financial statements</a></li>
+    <li><a href="#b6">The four underlying assumptions</a></li>
+    <li><a href="#b7">Recognition: revenues and expenses</a></li>
+    <li><a href="#b8">Measurement attributes and fair value</a></li>
+    <li><a href="#b9">Disclosure</a></li>
+    <li><a href="#b10">Revenue/expense vs. asset/liability approach</a></li>
+    <li><a href="#b11">U.S. GAAP vs. IFRS frameworks and recent developments</a></li>
+    <li><a href="#b12">Concept-identification cheat sheet</a></li>
+  </ol>
+</nav>
+
+<section aria-labelledby="b1">
+<h2 id="b1">1. Purpose of the conceptual framework</h2>
+<p>The conceptual framework is often called an <strong>"accounting constitution."</strong> It is a coherent system of interrelated <strong>objectives and fundamentals</strong> intended to lead to consistent standards and to prescribe the nature, function, and limits of financial accounting and reporting. It does <strong>not</strong> directly prescribe GAAP.</p>
+<p>The FASB communicates the framework through <span class="def">Statements of Financial Accounting Concepts (SFACs)</span>:</p>
+<div class="table-wrap"><table>
+<caption>Concepts statements you will hear referenced</caption>
+<thead><tr><th scope="col">Statement</th><th scope="col">Topic</th></tr></thead>
+<tbody>
+<tr><th scope="row">SFAC 8</th><td>Objective of financial reporting, qualitative characteristics — and now the chapters on elements, recognition, measurement, presentation, and notes</td></tr>
+<tr><th scope="row">SFAC 7</th><td>Using cash flow information and present value in accounting measurements</td></tr>
+<tr><th scope="row">SFAC 6 (historical)</th><td>Defines the 10 elements of financial statements (now superseded by SFAC 8, Chapter 4)</td></tr>
+<tr><th scope="row">SFAC 5 (historical)</th><td>Recognition and measurement concepts (now superseded by SFAC 8, Chapters 5 and 6)</td></tr>
+</tbody></table></div>
+<div class="callout important"><span class="label">Not authoritative</span>
+In U.S. GAAP, the framework guides the <strong>FASB</strong> when it develops standards. It is not part of the Codification, and a company may not use it to override a specific standard.</div>
+</section>
+
+<section aria-labelledby="b2">
+<h2 id="b2">2. The objective of financial reporting</h2>
+<div class="callout key"><span class="label">Objective</span>
+Provide financial information about the reporting entity that is <strong>useful to present and potential investors, lenders, and other creditors</strong> (capital providers) in making decisions about providing resources to the entity — buying, selling, or holding equity or debt, and providing or settling loans.</div>
+<p>Capital providers care about the <strong>amount, timing, and uncertainty</strong> of future cash flows. Information about the company's <strong>economic resources</strong> (assets) and <strong>claims</strong> against them (liabilities) also helps users identify financial strengths and weaknesses and assess <strong>liquidity</strong> and <strong>solvency</strong>.</p>
+</section>
+
+<section aria-labelledby="b3">
+<h2 id="b3">3. Qualitative characteristics</h2>
+<p>The framework arranges the qualities that make information <strong>decision-useful</strong> in a hierarchy.</p>
+<figure class="card" aria-labelledby="hier-cap">
+<figcaption id="hier-cap"><strong>Hierarchy of qualitative characteristics (text version)</strong></figcaption>
+<ul>
+<li><strong>Goal:</strong> Decision usefulness</li>
+<li><strong>Fundamental characteristics</strong>
+ <ul>
+ <li><strong>Relevance</strong> — predictive value, confirmatory value, materiality</li>
+ <li><strong>Faithful representation</strong> — completeness, neutrality, free from error</li>
+ </ul></li>
+<li><strong>Enhancing characteristics:</strong> comparability (including consistency), verifiability, timeliness, understandability</li>
+<li><strong>Pervasive constraint:</strong> cost (benefits must exceed costs)</li>
+</ul>
+</figure>
+
+<h3>Fundamental characteristic #1: Relevance</h3>
+<p>Information is <span class="def">relevant</span> if it can make a difference in a decision. It has:</p>
+<ul>
+<li><span class="def">Predictive value</span> — helps users predict future outcomes (e.g., this year's net income helps forecast future cash flows).</li>
+<li><span class="def">Confirmatory value</span> — helps users confirm or change prior expectations.</li>
+</ul>
+<p>Predictive and confirmatory value sit at the heart of <strong>earnings quality</strong> — the ability of reported earnings to predict future earnings.</p>
+<p><span class="def">Materiality</span> is a company-specific aspect of relevance. Information is material if including or correcting it would probably affect a user's judgment. It depends on:</p>
+<ul>
+<li><strong>Magnitude</strong> — <span class="mono">$15,000</span> of anticipated bad debts is immaterial for a multibillion-dollar retailer but could be very material for a single campus coffee shop.</li>
+<li><strong>Nature</strong> — a small bribe to a foreign official, or a small amount that turns a net loss into net income, can be material for <em>qualitative</em> reasons.</li>
+</ul>
+<p>The FASB has avoided bright-line materiality thresholds; materiality is left to the judgment of preparers and auditors.</p>
+
+<h3>Fundamental characteristic #2: Faithful representation</h3>
+<p>Information is <span class="def">faithfully represented</span> when there is agreement between a measure or description and the real-world phenomenon it purports to represent. (If "inventory" included accounts receivable, it would not be faithfully represented.) It requires information to be:</p>
+<ul>
+<li><span class="def">Complete</span> — includes everything necessary to depict the phenomenon.</li>
+<li><span class="def">Neutral</span> — free from bias; standards should not be designed to favor particular companies, groups, or outcomes.</li>
+<li><span class="def">Free from error</span> — no errors or omissions in the amount or process. An estimate can be faithfully represented if it is clearly described as an estimate and users understand its potential inaccuracy.</li>
+</ul>
+<div class="callout tip"><span class="label">What about conservatism?</span>
+<span class="def">Conservatism</span> means requiring more verification before recognizing good news than bad news, so losses hit income sooner than gains and net assets tend to be biased downward. The framework <strong>explicitly rejects</strong> conservatism because it conflicts with neutrality. Even so, it persists in practice — e.g., companies write down inventory and long-lived assets for declines in value but generally may not write them up. Justifications include reduced litigation risk and earlier triggering of debt covenants that protect creditors.</div>
+
+<h3>Enhancing characteristics</h3>
+<div class="table-wrap"><table>
+<caption>The four enhancing qualitative characteristics</caption>
+<thead><tr><th scope="col">Characteristic</th><th scope="col">Meaning</th><th scope="col">Example</th></tr></thead>
+<tbody>
+<tr><th scope="row">Comparability</th><td>Users can see similarities and differences across companies</td><td>Two competing outfitters both use FIFO, making gross margins easier to compare</td></tr>
+<tr><th scope="row">Consistency (part of comparability)</th><td>Same methods used over time within a company</td><td>A change in accounting policy must be disclosed; Note 1 summarizes significant accounting policies</td></tr>
+<tr><th scope="row">Verifiability</th><td>Knowledgeable, independent measurers would reach consensus that the information is faithfully represented</td><td>Land's historical cost (traced to the purchase) is directly verifiable; its appraised fair value is only indirectly verifiable</td></tr>
+<tr><th scope="row">Timeliness</th><td>Available early enough to affect decisions</td><td>SEC registrants file quarterly (10-Q) as well as annual (10-K) reports</td></tr>
+<tr><th scope="row">Understandability</th><td>Users with a reasonable understanding of business who study the information diligently can comprehend it</td><td>Clear captions and disclosure notes</td></tr>
+</tbody></table></div>
+<p>The term <strong>objectivity</strong> is often linked with verifiability: historical cost is objective; fair value estimates can be subjective.</p>
+</section>
+
+<section aria-labelledby="b4">
+<h2 id="b4">4. The cost constraint</h2>
+<p>The <span class="def">cost effectiveness constraint</span> says the benefits of providing information must exceed its costs. Costs include gathering, processing, and disseminating information; users' interpretation costs; and adverse economic consequences. Example: segment disclosures (ASC 280) impose <strong>competitive disadvantage costs</strong> because rivals can see disaggregated data. Benefits — better resource allocation — are real but impossible to quantify precisely, which is one reason the FASB's due process seeks such broad input.</p>
+<p>Together with <strong>materiality</strong>, the cost constraint explains practical choices like expensing a <span class="mono">$90</span> stapler that will last years instead of capitalizing and depreciating it.</p>
+</section>
+
+<section aria-labelledby="b5">
+<h2 id="b5">5. Elements of financial statements</h2>
+<p>The <strong>elements</strong> are the building blocks with which financial statements are constructed. There are <strong>10</strong>:</p>
+<div class="table-wrap"><table>
+<caption>The 10 elements (traditional definitions)</caption>
+<thead><tr><th scope="col">Element</th><th scope="col">Definition</th></tr></thead>
+<tbody>
+<tr><th scope="row">Assets</th><td>Probable future economic benefits obtained or controlled by a particular entity as a result of past transactions or events</td></tr>
+<tr><th scope="row">Liabilities</th><td>Probable future sacrifices of economic benefits arising from present obligations to transfer assets or provide services to other entities in the future as a result of past transactions or events</td></tr>
+<tr><th scope="row">Equity (net assets)</th><td>The residual interest in assets after deducting liabilities (shareholders' equity for a corporation)</td></tr>
+<tr><th scope="row">Investments by owners</th><td>Increases in equity from transfers of something of value to the entity to obtain or increase ownership interests</td></tr>
+<tr><th scope="row">Distributions to owners</th><td>Decreases in equity from transfers to owners (e.g., dividends)</td></tr>
+<tr><th scope="row">Comprehensive income</th><td>The change in equity during a period from nonowner sources — all changes except investments by and distributions to owners</td></tr>
+<tr><th scope="row">Revenues</th><td>Inflows or other enhancements of assets, or settlements of liabilities, from delivering goods, rendering services, or other ongoing major or central operations</td></tr>
+<tr><th scope="row">Expenses</th><td>Outflows or other using up of assets, or incurrences of liabilities, from delivering goods, rendering services, or other ongoing major or central operations</td></tr>
+<tr><th scope="row">Gains</th><td>Increases in equity from peripheral or incidental transactions</td></tr>
+<tr><th scope="row">Losses</th><td>Decreases in equity from peripheral or incidental transactions</td></tr>
+</tbody></table></div>
+<div class="callout tip"><span class="label">Sort them</span>
+<strong>Balance sheet (a point in time):</strong> assets, liabilities, equity. <strong>Changes during a period:</strong> revenues, expenses, gains, losses (which together make up comprehensive income), plus investments by and distributions to owners.<br>
+Revenue vs. gain? Ask whether it comes from <strong>central operations</strong> (revenue) or a <strong>peripheral</strong> transaction (gain). Selling a used delivery van for more than its book value is a gain for a bakery; it would be revenue for a car dealer.</div>
+<div class="callout update"><span class="label">Current development</span>
+In December 2021 the FASB finalized Chapter 4 of Concepts Statement 8, which updates these definitions. An <strong>asset</strong> is now "a present right of an entity to an economic benefit," and a <strong>liability</strong> is "a present obligation of an entity to transfer an economic benefit." The word "probable" is gone. Revenues and expenses are no longer tied to "ongoing major or central operations," and gains and losses are no longer tied to "peripheral or incidental" transactions. The FASB completed the remaining framework chapters — recognition and derecognition, and measurement — by 2024. Existing standards in the Codification were not changed by these chapters.</div>
+</section>
+
+<section aria-labelledby="b6">
+<h2 id="b6">6. The four underlying assumptions</h2>
+<div class="table-wrap"><table>
+<caption>Assumptions underlying GAAP</caption>
+<thead><tr><th scope="col">Assumption</th><th scope="col">Description</th><th scope="col">Implication / example</th></tr></thead>
+<tbody>
+<tr><th scope="row">Economic entity</th><td>All economic events can be identified with a particular economic entity</td><td>The owner's personal residence is not an asset of her sole proprietorship. A parent and its controlled subsidiaries (&gt;50% voting stock) are separate <em>legal</em> entities but one <em>accounting</em> entity — consolidated statements.</td></tr>
+<tr><th scope="row">Going concern</th><td>Absent information to the contrary, the entity will continue to operate indefinitely</td><td>Justifies historical cost and depreciating a building over 40 years. If liquidation were imminent, assets and liabilities would be measured at liquidation values.</td></tr>
+<tr><th scope="row">Periodicity</th><td>The life of a company can be divided into artificial time periods</td><td>Supports <strong>timeliness</strong>: quarterly and annual SEC reports. Companies often choose a <span class="def">natural business year</span> ending at the low point of activity — many retailers end their fiscal year around January 31.</td></tr>
+<tr><th scope="row">Monetary unit</th><td>Elements are measured in nominal units of money, without adjustment for changes in purchasing power</td><td>U.S. dollar in the United States, euro in the EU. <strong>Inflation</strong> strains this assumption because dollars spent in different years have different purchasing power.</td></tr>
+</tbody></table></div>
+</section>
+
+<section aria-labelledby="b7">
+<h2 id="b7">7. Recognition: revenues and expenses</h2>
+<p><span class="def">Recognition</span> is the process of admitting information into the basic financial statements. <span class="def">Measurement</span> associates numerical amounts with the elements. <span class="def">Disclosure</span> includes pertinent information that is not recognized in the statements themselves.</p>
+<h3>General recognition criteria</h3>
+<p>Subject to the cost constraint and materiality, an item is recognized when it:</p>
+<ol>
+<li><strong>Meets the definition</strong> of an element.</li>
+<li>Has a relevant attribute that is <strong>measurable</strong> with sufficient reliability.</li>
+<li>Is <strong>relevant</strong> — capable of making a difference in decisions.</li>
+<li>Is <strong>reliable</strong> — representationally faithful, verifiable, and neutral.</li>
+</ol>
+
+<h3>Revenue recognition</h3>
+<p>Historically, the <strong>realization principle</strong> required (1) an earnings process that is complete or virtually complete and (2) reasonable certainty of collection. Today, under <strong>ASC 606</strong>, companies recognize revenue <strong>when goods or services are transferred to customers</strong>, in the amount the company <strong>expects to be entitled to receive</strong>.</p>
+<ul>
+<li>Most sales of goods → <strong>at a point in time</strong> (usually delivery).</li>
+<li>Services like renting apartments or lending money → <strong>over time</strong> as the service is provided.</li>
+<li>No revenue if collection of the amount the seller is entitled to is not <strong>probable</strong>.</li>
+</ul>
+<p>Revenue recognition does not depend on when cash is received — that is the accrual model at work.</p>
+
+<h3>Expense recognition — four approaches</h3>
+<p>Expenses are recognized, where possible, by <strong>matching</strong> them with revenues from the same transactions or events. Because many costs relate only indirectly to revenue, four approaches are used:</p>
+<div class="table-wrap"><table>
+<caption>Four ways to recognize expenses</caption>
+<thead><tr><th scope="col">Approach</th><th scope="col">Example</th></tr></thead>
+<tbody>
+<tr><th scope="row">1. Exact cause-and-effect relationship</th><td>Cost of goods sold; sales commissions</td></tr>
+<tr><th scope="row">2. Associate with revenues of a specific time period</th><td>Monthly salary of an office administrator</td></tr>
+<tr><th scope="row">3. Systematic and rational allocation over periods benefited</th><td>Straight-line depreciation of equipment; amortization</td></tr>
+<tr><th scope="row">4. In the period incurred, without regard to revenue</th><td>Advertising — it is impossible to tell when, whether, or how much revenue results</td></tr>
+</tbody></table></div>
+<p>Note: the conceptual framework does not formally use the term "matching principle." Standard setters worry that applying matching too broadly would put amounts on the balance sheet that don't meet the definition of an asset.</p>
+</section>
+
+<section aria-labelledby="b8">
+<h2 id="b8">8. Measurement attributes and fair value</h2>
+<p>GAAP uses a <span class="def">mixed-attribute model</span>: the attribute chosen for an item should maximize relevance and faithful representation. Five attributes:</p>
+<div class="table-wrap"><table>
+<caption>Measurement attributes</caption>
+<thead><tr><th scope="col">Attribute</th><th scope="col">Meaning</th><th scope="col">Typical use</th></tr></thead>
+<tbody>
+<tr><th scope="row">Historical cost</th><td>Value given (asset) or received (liability) in the original exchange; later adjusted for depreciation/amortization</td><td>Land, equipment (depreciated cost)</td></tr>
+<tr><th scope="row">Net realizable value (NRV)</th><td>Estimated selling price in the ordinary course of business less reasonably predictable costs of completion, disposal, and transportation</td><td>Inventory at lower of cost or NRV; receivables</td></tr>
+<tr><th scope="row">Current cost</th><td>Cost to acquire the same item today</td><td>Sometimes reported in inflationary economies</td></tr>
+<tr><th scope="row">Present value</th><td>Discounted future cash flows (SFAC 7) — objective is to approximate fair value</td><td>Long-term notes, bonds, leases, pensions</td></tr>
+<tr><th scope="row">Fair value</th><td>Price received to sell an asset or paid to transfer a liability in an orderly transaction between market participants at the measurement date</td><td>Many investments; impairment tests</td></tr>
+</tbody></table></div>
+<div class="card">
+<h4 style="margin-top:0">NRV example — Tuck River Kayak Works</h4>
+<p>Unfinished kayaks could be sold for <span class="mono">$14,500</span> after <span class="mono">$1,800</span> of finishing work and <span class="mono">$700</span> of shipping.</p>
+<p class="mono">NRV = $14,500 − $1,800 − $700 = $12,000</p>
+</div>
+<p><strong>Why historical cost?</strong> (1) It reflects actual cash paid or received, and (2) it results from an exchange between independent parties, so it is objective and highly verifiable.</p>
+
+<h3>Fair value measurement (ASC 820)</h3>
+<p>Fair value takes the perspective of <strong>market participants</strong>, not the specific company. (If a company buys a patent only to keep a rival from using it, it still values the patent at what a market participant would pay.)</p>
+<p><strong>Valuation techniques:</strong></p>
+<ul>
+<li><strong>Market approach</strong> — market information (e.g., earnings × P/E multiples of similar companies).</li>
+<li><strong>Income approach</strong> — convert estimated future amounts to a single present value.</li>
+<li><strong>Cost approach</strong> — what it would cost to buy or build an asset of similar quality and condition.</li>
+</ul>
+<div class="table-wrap"><table>
+<caption>Fair value hierarchy of inputs (Level 1 is most preferred)</caption>
+<thead><tr><th scope="col">Level</th><th scope="col">Inputs</th><th scope="col">Example</th></tr></thead>
+<tbody>
+<tr><th scope="row">Level 1</th><td>Quoted prices in active markets for <strong>identical</strong> assets or liabilities</td><td>Shares of stock traded on the NYSE or Nasdaq</td></tr>
+<tr><th scope="row">Level 2</th><td>Observable inputs other than Level 1 quoted prices — prices for <strong>similar</strong> items, or inputs derived from observable market data</td><td>A building acquired in a noncash exchange, valued from recent sales of similar buildings or price per square foot</td></tr>
+<tr><th scope="row">Level 3</th><td><strong>Unobservable</strong> inputs reflecting the entity's own assumptions about what market participants would use</td><td>An asset retirement obligation valued with the company's own cash flow estimates</td></tr>
+</tbody></table></div>
+<p>Companies must disclose the inputs used; for recurring Level 3 measurements they also disclose the effect on earnings.</p>
+<div class="grid2">
+<div class="callout key"><span class="label">For fair value</span>Highly <strong>relevant</strong>; historical cost may be stale for many decisions.</div>
+<div class="callout important"><span class="label">Against fair value</span>Estimates — especially Level 3 — may lack <strong>faithful representation</strong> and verifiability and may invite earnings manipulation.</div>
+</div>
+<h3>The fair value option (ASC 825)</h3>
+<p>Companies may <strong>elect</strong> to report most <strong>financial</strong> assets and liabilities (investments, notes, bonds payable) at fair value, with changes in fair value reported as gains and losses in income. It reduces inconsistencies when related items are measured differently and offers an alternative to complex hedge accounting. It does <strong>not</strong> extend to nonfinancial assets such as land or buildings, and some financial items (e.g., pension obligations) are excluded.</p>
+</section>
+
+<section aria-labelledby="b9">
+<h2 id="b9">9. Disclosure</h2>
+<p>The <span class="def">full-disclosure principle</span> says financial reports should include any information that could affect the decisions of external users — subject to the cost constraint. Information can be disclosed through:</p>
+<ol>
+<li><strong>Parenthetical or modifying comments</strong> on the face of the statements.</li>
+<li><strong>Disclosure notes</strong> — accounting policies, contractual agreements, pending litigation, and more.</li>
+<li><strong>Supplemental schedules and tables</strong> with more detail than the primary statements.</li>
+</ol>
+<p>"Disclosure overload" is a common complaint. In 2018 the FASB added Chapter 8, <em>Notes to Financial Statements</em>, to Concepts Statement 8 — a set of questions the Board uses to decide which notes new standards should require.</p>
+</section>
+
+<section aria-labelledby="b10">
+<h2 id="b10">10. Revenue/expense vs. asset/liability approach</h2>
+<div class="table-wrap"><table>
+<caption>Two approaches to standard setting</caption>
+<thead><tr><th scope="col"></th><th scope="col">Revenue/expense approach</th><th scope="col">Asset/liability approach</th></tr></thead>
+<tbody>
+<tr><th scope="row">Starting point</th><td>Principles for recognizing revenues and expenses</td><td>Recognize and measure the assets and liabilities that exist at the balance sheet date</td></tr>
+<tr><th scope="row">Then…</th><td>Record whatever assets and liabilities are needed to make the balance sheet reconcile</td><td>Recognize revenues, expenses, gains, and losses as the changes in those assets and liabilities</td></tr>
+<tr><th scope="row">Sales example</th><td>Has the good or service been delivered? If so, record revenue and the related receivable</td><td>Does an enforceable receivable (a probable future benefit) exist? Record the revenue implied by that asset inflow</td></tr>
+<tr><th scope="row">Matching?</th><td>Yes — match expenses to revenues</td><td>No — recognize expenses for the net assets used up</td></tr>
+</tbody></table></div>
+<p>U.S. GAAP and IFRS have been moving <strong>toward the asset/liability approach</strong> (recent standards on revenue, investments, and income taxes), and with it, toward greater use of <strong>fair value</strong>. Both approaches often produce the same results, but the emphasis can change recognition and measurement in important ways.</p>
+</section>
+
+<section aria-labelledby="b11">
+<h2 id="b11">11. U.S. GAAP vs. IFRS frameworks</h2>
+<div class="callout ifrs"><span class="label">IFRS comparison</span>
+<ul style="margin:.2rem 0 0">
+<li><strong>Role of the framework.</strong> In U.S. GAAP, the framework mainly guides <strong>standard setters</strong>. Under IFRS it guides standard setters <strong>and</strong> gives <strong>practitioners</strong> a basis for judgments when no IFRS standard applies.</li>
+<li><strong>2018 revised IFRS framework</strong> includes explicit definitions of materiality, reporting entity, and executory contracts, and explicit criteria for derecognition.</li>
+<li><strong>Asset and liability definitions.</strong> IFRS definitions do not depend on probability ("a present economic resource controlled by the entity as a result of past events"). The FASB's 2021 definitions moved in the same direction.</li>
+<li><strong>Organizations.</strong> Similar structures (SEC/Monitoring Board, FAF/IFRS Foundation, FASB/IASB), and both face political pressure.</li>
+</ul></div>
+</section>
+
+<section aria-labelledby="b12">
+<h2 id="b12">12. Concept-identification cheat sheet</h2>
+<p>Many practice items describe a situation and ask which concept is <strong>applied</strong> or <strong>violated</strong>. Look for these clues:</p>
+<div class="table-wrap"><table>
+<caption>Clues that point to each concept</caption>
+<thead><tr><th scope="col">If the situation involves…</th><th scope="col">Think…</th></tr></thead>
+<tbody>
+<tr><th scope="row">Owner's personal expenses or assets mixed with the business</th><td>Economic entity assumption</td></tr>
+<tr><th scope="row">Liquidation values; depreciating over a long life</th><td>Going concern assumption</td></tr>
+<tr><th scope="row">Quarterly/annual reports; how often statements are issued</th><td>Periodicity assumption (and timeliness)</td></tr>
+<tr><th scope="row">Inflation or price-level adjustments</th><td>Monetary unit assumption</td></tr>
+<tr><th scope="row">Writing an asset up to appraised value; "bargain purchase" recorded above cost</th><td>Historical cost principle</td></tr>
+<tr><th scope="row">Recording a sale when an order is received or cash is collected in advance</th><td>Revenue recognition (transfer of goods/services)</td></tr>
+<tr><th scope="row">Expensing an asset with a multi-year life all at once; depreciation; advertising</th><td>Expense recognition (matching / systematic and rational / period incurred)</td></tr>
+<tr><th scope="row">A pending lawsuit, policy change, or contract not mentioned</th><td>Full-disclosure principle (and consistency for policy changes)</td></tr>
+<tr><th scope="row">Expensing a small, long-lived item</th><td>Materiality and the cost constraint</td></tr>
+</tbody></table></div>
+</section>
+
+</main>
+<footer>ACCT 351 · Intermediate Accounting I · Western Carolina University · <span class="yr"></span></footer>
+<script>
+document.querySelectorAll('.yr').forEach(e=>e.textContent=new Date().getFullYear());
+
+</script>
+</body>
+</html>
