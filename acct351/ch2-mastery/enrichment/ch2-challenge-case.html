@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Extra Credit: The Loan Application</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --purple:#592C88; --purple-dk:#3B1D5C; --purple-lt:#F3EEF9; --gold:#FFC425; --gold-lt:#FFF6DA;
+  --ink:#1F1A24; --muted:#4F4A55; --line:#D9D2E3; --paper:#FFFFFF; --bg:#FAF8FC;
+  --ok:#1E6B3A; --ok-bg:#E6F4EA; --bad:#A4161A; --bad-bg:#FBE9EA; --key:#14532D; --key-bg:#E7F5EC;
+}
+*{box-sizing:border-box}
+html{font-size:17px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Source Serif 4",Georgia,serif;line-height:1.6}
+a{color:var(--purple)} a:hover{color:var(--purple-dk)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;box-shadow:0 0 0 5px var(--purple-dk)}
+.skip{position:absolute;left:-999px;top:0;background:var(--gold);color:var(--ink);padding:.5rem 1rem;z-index:10;font-family:Inter,Arial,sans-serif}
+.skip:focus{left:1rem}
+header.banner{background:var(--purple);color:#fff;border-bottom:6px solid var(--gold)}
+header.banner .inner{max-width:960px;margin:0 auto;padding:1.6rem 1.25rem 1.3rem}
+header.banner .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:0 0 .35rem}
+header.banner h1{font-family:Inter,Arial,sans-serif;font-weight:800;font-size:1.9rem;line-height:1.2;margin:0}
+header.banner p.sub{margin:.5rem 0 0;color:#EDE6F5;font-size:1rem}
+.instructor-banner{background:#A4161A;color:#fff;font-family:Inter,Arial,sans-serif;font-weight:700;text-align:center;padding:.6rem 1rem;letter-spacing:.03em}
+main{max-width:960px;margin:0 auto;padding:1.5rem 1.25rem 3rem}
+h2{font-family:Inter,Arial,sans-serif;color:var(--purple-dk);font-size:1.45rem;margin:2.2rem 0 .6rem;padding-bottom:.3rem;border-bottom:3px solid var(--gold)}
+h3{font-family:Inter,Arial,sans-serif;color:var(--purple);font-size:1.15rem;margin:1.6rem 0 .4rem}
+h4{font-family:Inter,Arial,sans-serif;font-size:1rem;margin:1.2rem 0 .3rem;color:var(--ink)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:1.1rem 1.25rem;margin:1rem 0;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.toc{background:var(--purple-lt);border-left:6px solid var(--purple)}
+.toc ol{margin:.3rem 0 0 1.2rem;padding:0}
+.callout{border-radius:8px;padding:.9rem 1.1rem;margin:1rem 0;border-left:6px solid}
+.callout .label{display:block;font-family:Inter,Arial,sans-serif;font-weight:800;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.25rem}
+.callout.key{background:var(--gold-lt);border-color:var(--gold)}
+.callout.important{background:#FFF1F1;border-color:var(--bad)}
+.callout.tip{background:var(--purple-lt);border-color:var(--purple)}
+.callout.ifrs{background:#EEF5FB;border-color:#1D4E89}
+.callout.update{background:#F1F7EE;border-color:var(--ok)}
+.def{font-weight:700;color:var(--purple-dk)}
+table{border-collapse:collapse;width:100%;margin:.8rem 0;font-size:.95rem;background:#fff}
+caption{text-align:left;font-family:Inter,Arial,sans-serif;font-weight:700;color:var(--purple-dk);padding:.3rem 0}
+th,td{border:1px solid var(--line);padding:.5rem .65rem;vertical-align:top;text-align:left}
+thead th{background:var(--purple);color:#fff;font-family:Inter,Arial,sans-serif;font-size:.9rem}
+tbody th{background:var(--purple-lt);font-family:Inter,Arial,sans-serif}
+td.num,th.num{text-align:right;font-family:"IBM Plex Mono",monospace;white-space:nowrap}
+tr.total td{font-weight:700;border-top:2px solid var(--ink)}
+.table-wrap{overflow-x:auto}
+.mono{font-family:"IBM Plex Mono",monospace}
+.formula{font-family:"IBM Plex Mono",monospace;background:var(--purple-lt);padding:.6rem .9rem;border-radius:6px;display:block;margin:.6rem 0}
+/* Interactive */
+.step{background:#fff;border:1px solid var(--line);border-left:6px solid var(--purple);border-radius:10px;padding:1rem 1.2rem;margin:1.2rem 0}
+.step h3{margin-top:0}
+.q{margin:.9rem 0;padding:.75rem .9rem;border:1px solid var(--line);border-radius:8px;background:#fff}
+.q > label,.q .prompt{display:block;font-weight:600;margin-bottom:.4rem}
+input[type=text],input[type=number],select,textarea{font:inherit;font-family:"IBM Plex Mono",monospace;font-size:.95rem;padding:.45rem .55rem;border:2px solid #77707F;border-radius:6px;background:#fff;color:var(--ink);max-width:100%}
+input.money{width:11rem;text-align:right}
+select{font-family:Inter,Arial,sans-serif;min-width:16rem}
+textarea{width:100%;min-height:7rem;font-family:"Source Serif 4",Georgia,serif}
+input.correct,select.correct{border-color:var(--ok);background:var(--ok-bg)}
+input.wrong,select.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.btn{font-family:Inter,Arial,sans-serif;font-weight:700;font-size:.95rem;border:2px solid var(--purple);background:var(--purple);color:#fff;border-radius:8px;padding:.55rem 1.1rem;cursor:pointer;margin:.4rem .4rem .4rem 0}
+.btn:hover{background:var(--purple-dk)}
+.btn.secondary{background:#fff;color:var(--purple)}
+.btn.gold{background:var(--gold);border-color:#B88A00;color:var(--ink)}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+.fb{margin-top:.5rem;font-family:Inter,Arial,sans-serif;font-size:.93rem;font-weight:600}
+.fb.ok{color:var(--ok)} .fb.no{color:var(--bad)}
+.explain{display:none;margin-top:.6rem;background:var(--key-bg);border-left:5px solid var(--key);padding:.7rem .9rem;border-radius:6px}
+.explain.show{display:block}
+.key{background:var(--key-bg);border:2px solid var(--key);color:var(--key);font-family:"IBM Plex Mono",monospace;font-size:.88rem;padding:.25rem .5rem;border-radius:5px;display:inline-block;margin-top:.35rem}
+.summary{font-family:Inter,Arial,sans-serif;font-weight:700;padding:.6rem .9rem;border-radius:8px;background:var(--purple-lt);margin:.6rem 0}
+.idbar{display:flex;flex-wrap:wrap;gap:.6rem;align-items:flex-end;background:var(--gold-lt);border:2px solid var(--gold);border-radius:10px;padding:1rem 1.2rem}
+.idbar label{font-family:Inter,Arial,sans-serif;font-weight:700;display:block}
+.problem{background:#fff;border:1px solid var(--line);border-radius:10px;padding:1.1rem 1.25rem;margin:1.4rem 0}
+.problem > h2{margin-top:.2rem}
+.part{break-inside:auto}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+.pill{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.75rem;background:var(--purple);color:#fff;border-radius:999px;padding:.1rem .55rem;vertical-align:middle}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media (max-width:720px){.grid2{grid-template-columns:1fr} header.banner h1{font-size:1.5rem} select{min-width:0;width:100%}}
+footer{max-width:960px;margin:0 auto;padding:1rem 1.25rem 2rem;color:var(--muted);font-size:.85rem;font-family:Inter,Arial,sans-serif}
+@media print{
+  .btn,.skip,.idbar .btn{display:none!important}
+  body{background:#fff}
+  .problem{page-break-before:always;border:none}
+  h2,h3{break-after:avoid}
+  .explain{display:block}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+table.je{width:auto;min-width:min(100%,560px)}
+table.je td.cr{padding-left:2.4rem}
+table.je td.num{min-width:7rem}
+.tacct{display:inline-block;vertical-align:top;margin:.4rem 1rem .8rem 0;min-width:220px}
+.tacct table{margin:0}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+
+<header class="banner"><div class="inner">
+<p class="eyebrow">ACCT 351 · Extra Credit</p>
+<h1>Extra Credit Case: The Loan Application</h1>
+<p class="sub">Adjust a start-up's first-year income statement before it goes to the bank.</p>
+</div></header>
+<main id="main" tabindex="-1">
+<div class="card"><h2 style="margin-top:0">Instructions</h2>
+<p>This optional case is open to every student and is worth up to <strong>2 extra-credit points</strong>.</p><ol>
+<li>Enter your <strong>WCU student ID</strong> and select <em>Load my case</em>. Your amounts and answer order are generated from your ID.</li>
+<li>Work all three parts. Round to whole dollars.</li>
+<li>Select <em>Check my work</em> as often as you like. Your extra credit is your percent correct × 2 points.</li>
+<li>When finished, select <em>Print / Save as PDF</em> and upload the PDF to the Canvas extra-credit assignment.</li></ol></div><div class="idbar" role="group" aria-labelledby="idlbl">
+<div><label id="idlbl" for="sid">Student ID</label><input id="sid" type="text" inputmode="numeric" autocomplete="off" aria-describedby="idmsg" style="width:14rem"></div>
+<button type="button" class="btn" id="loadbtn">Load my case</button>
+<div id="idmsg" class="fb" aria-live="polite" style="flex-basis:100%"></div>
+</div>
+<div id="hw"></div>
+<div id="actions" hidden>
+<button type="button" class="btn gold" id="checkbtn">Check my work</button>
+<button type="button" class="btn secondary" id="printbtn">Print / Save as PDF</button>
+<div id="overall" class="summary" tabindex="-1" aria-live="polite" hidden></div>
+</div>
+</main>
+<footer>ACCT 351 · Intermediate Accounting I · Western Carolina University · <span class="yr"></span></footer>
+<script>
+document.querySelectorAll('.yr').forEach(e=>e.textContent=new Date().getFullYear());
+(function(){
+'use strict';
+const INSTRUCTOR = window.__INSTRUCTOR__ === true;
+const Y = new Date().getFullYear();
+function fnv1a(s){let h=0x811c9dc5;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,0x01000193);}return h>>>0;}
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+let R;
+const ri=(a,b)=>a+Math.floor(R()*(b-a+1));
+const pick=a=>a[Math.floor(R()*a.length)];
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(R()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+const $=n=>(n<0?'−$':'$')+Math.abs(Math.round(n)).toLocaleString('en-US');
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let qn=0;
+function sel(label,opts,ans,noShuffle){const id='c'+(++qn);const o=noShuffle?opts:shuffle(opts);return `<div class="q"><label for="${id}">${label}</label><select id="${id}" data-ans="${esc(ans)}"><option value="">— Select —</option>${o.map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join('')}</select><span class="mark" aria-live="polite"></span>${INSTRUCTOR?`<div class="key">Answer: ${esc(ans)}</div>`:''}</div>`;}
+function num(label,ans){const id='c'+(++qn);return `<div class="q"><label for="${id}">${label}</label><span aria-hidden="true">$ </span><input id="${id}" type="text" inputmode="decimal" class="money" autocomplete="off" data-ans="${ans}"><span class="mark" aria-live="polite"></span>${INSTRUCTOR?`<div class="key">Answer: ${$(ans)}</div>`:''}</div>`;}
+const FIRMS=['Blue Ridge Aerial Mapping','Catamount Data Labs','Tuckasegee Web Studio','Pinnacle Peak Analytics','Balsam Range Design Co.'];
+const BANKS=['Smoky Valley Bank','Cullowhee Community Bank','Tuckasegee Savings Bank','Mountain Commerce Bank'];
+const TYPES=['Prepaid expense','Unearned revenue','Accrued liability','Accrued receivable','Depreciation (prepayment of a long-lived asset)'];
+const DIR=['Increase net income','Decrease net income'];
+
+function build(id){
+  R=mulberry32(fnv1a('ACCT351-CH2-CASE|'+id.trim().toUpperCase()));qn=0;
+  const firm=pick(FIRMS),bank=pick(BANKS),loan=ri(3,6)*5000;
+  const rev=ri(90,140)*1000,sal=ri(28,40)*1000,X=ri(8,16)*50,rent=18*X,sup=ri(30,60)*100,adv=ri(8,20)*100,util=ri(24,40)*100;
+  const exp=sal+rent+sup+adv+util,ni=rev-exp;
+  const E=ri(8,20)*5000,dep=E/5,D=ri(8,15)*1000,W=ri(10,30)*100,S=ri(5,15)*100,A=ri(10,30)*100,pre=6*X;
+  const cni=ni-dep+pre-D+S-W+A;
+  const adj=shuffle([
+   ['They paid '+$(E)+' for computers and drones on July 1, when they began operations, and expect them to last five years with no residual value.','Depreciation (prepayment of a long-lived asset)','Decrease net income',dep],
+   [`They rent office space for ${$(X)} a month. They paid monthly from July through December; then in January they paid a full year's rent in advance (January–December). All of these payments are included in rent expense.`,'Prepaid expense','Increase net income',pre],
+   [`Consulting revenue includes a ${$(D)} deposit received in June for a project that will be performed in August.`,'Unearned revenue','Decrease net income',D],
+   [`All supplies purchased were expensed. A June 30 count shows ${$(S)} of supplies still on hand.`,'Prepaid expense','Increase net income',S],
+   [`Their part-time analyst earned ${$(W)} during the last week of June; it will be paid on July 3.`,'Accrued liability','Decrease net income',W],
+   [`They finished a mapping job for Jackson County on June 29 and will bill the county ${$(A)} in July.`,'Accrued receivable','Increase net income',A]]);
+  let h=`<section class="problem part" aria-labelledby="c1h"><h2 id="c1h">Part 1 — The Loan Application</h2>
+  <div class="card"><p>Two of your friends started <strong>${firm}</strong>, a drone-mapping and data consulting firm, on July 1 of last year. They want to borrow <strong>${$(loan)}</strong> from <strong>${bank}</strong> for new equipment and submitted this income statement for their first year, ended June 30, ${Y}:</p>
+  <div class="table-wrap"><table><caption>${firm} — income statement as submitted</caption><tbody>
+  <tr><th scope="row">Consulting revenue</th><td class="num">${$(rev)}</td></tr>
+  <tr><th scope="row">Salaries expense</th><td class="num">(${$(sal)})</td></tr><tr><th scope="row">Rent expense</th><td class="num">(${$(rent)})</td></tr>
+  <tr><th scope="row">Supplies expense</th><td class="num">(${$(sup)})</td></tr><tr><th scope="row">Advertising expense</th><td class="num">(${$(adv)})</td></tr>
+  <tr><th scope="row">Utilities expense</th><td class="num">(${$(util)})</td></tr>
+  <tr class="total"><th scope="row">Net income</th><td class="num">${$(ni)}</td></tr></tbody></table></div>
+  <p>The loan officer notices there is no depreciation and asks them to revise the statement after year-end adjustments. You learn the following.</p></div>
+  <h3>For each item, classify the adjustment, state its effect on net income, and enter the amount.</h3>`;
+  adj.forEach((a,i)=>{h+=`<div class="card"><p><strong>${i+1}.</strong> ${a[0]}</p>${sel(`${i+1}(a) Type of adjustment`,TYPES,a[1],true)}${sel(`${i+1}(b) Effect on net income`,DIR,a[2],true)}${num(`${i+1}(c) Amount of the adjustment`,a[3])}</div>`;});
+  h+=`<div class="summary" data-part="c1" aria-live="polite"></div></section>`;
+  h+=`<section class="problem part" aria-labelledby="c2h"><h2 id="c2h">Part 2 — The Revised Statements</h2>
+  ${num('1. Corrected net income for the year ended June 30',cni)}
+  ${num('2. By how much was net income overstated in the submitted statement?',ni-cni)}
+  ${num('3. Book value of the equipment on the June 30 balance sheet',E-dep)}
+  ${num('4. Prepaid rent on the June 30 balance sheet',pre)}
+  ${num('5. Total liabilities created by the adjustments (unearned revenue plus salaries payable)',D+W)}
+  <div class="summary" data-part="c2" aria-live="polite"></div></section>`;
+  h+=`<section class="problem part" aria-labelledby="c3h"><h2 id="c3h">Part 3 — What It Means</h2>
+  ${sel('1. What is the main purpose of the adjusting entries in this case?',['To record revenues when earned and expenses when incurred, so the statements follow the accrual model','To make the cash balance agree with the bank statement','To increase net income for the loan officer','To close the temporary accounts to retained earnings'],'To record revenues when earned and expenses when incurred, so the statements follow the accrual model')}
+  ${sel('2. Did the firm do as well in its first year as your friends thought?',['No — corrected net income is lower than reported','Yes — corrected net income is higher than reported','Yes — adjustments never change net income'],'No — corrected net income is lower than reported')}
+  ${sel('3. Leaving out depreciation most directly violates which concept?',['Expense recognition','Revenue recognition','The monetary unit assumption','The going concern assumption'],'Expense recognition')}
+  ${sel('4. Treating the August project deposit as revenue in June most directly violates which concept?',['Revenue recognition','Expense recognition','The economic entity assumption','The historical cost principle'],'Revenue recognition')}
+  ${sel('5. Which qualitative characteristic did the submitted statement lack most?',['Faithful representation','Timeliness','Comparability','Understandability'],'Faithful representation')}
+  <div class="summary" data-part="c3" aria-live="polite"></div></section>`;
+  return h;
+}
+function parse(s){s=String(s).trim().replace(/−/g,'-').replace(/[$,\s]/g,'');let neg=false;if(/^\(.*\)$/.test(s)){neg=true;s=s.slice(1,-1);}const v=parseFloat(s);return isNaN(v)?NaN:(neg?-v:v);}
+function grade(){
+  let tot=0,ok=0;
+  document.querySelectorAll('.summary[data-part]').forEach(sum=>{
+    const sec=sum.closest('section');let t=0,c=0;
+    sec.querySelectorAll('[data-ans]').forEach(f=>{
+      t++;const m=f.parentElement.querySelector('.mark');const blank=f.value.trim()==='';
+      const good=!blank&&(f.tagName==='SELECT'?f.value===f.dataset.ans:Math.abs(parse(f.value)-parseFloat(f.dataset.ans))<0.5);
+      f.classList.toggle('correct',good);f.classList.toggle('wrong',!good);f.setAttribute('aria-invalid',good?'false':'true');
+      m.textContent=good?' ✓ Correct':(blank?' ✗ No answer':' ✗ Incorrect');m.className='mark fb '+(good?'ok':'no');if(good)c++;});
+    sum.textContent=c+' of '+t+' correct';tot+=t;ok+=c;});
+  const o=document.getElementById('overall');
+  o.textContent='Overall: '+ok+' of '+tot+' correct ('+Math.round(ok/tot*100)+'%) — Extra credit earned: '+(ok/tot*2).toFixed(2)+' of 2.00 points';o.hidden=false;o.focus();
+}
+function load(){
+  const v=document.getElementById('sid').value.trim();const msg=document.getElementById('idmsg');
+  if(!/^\d{6,12}$/.test(v)){msg.textContent='Enter your WCU student ID number (digits only, e.g., 92xxxxxxx).';msg.className='fb no';document.getElementById('sid').focus();return;}
+  msg.textContent='Case loaded for ID '+v+'. Your amounts and answer order are unique to this ID.';msg.className='fb ok';
+  document.getElementById('hw').innerHTML=build(v);document.getElementById('actions').hidden=false;document.getElementById('overall').hidden=true;
+}
+document.getElementById('loadbtn').addEventListener('click',load);
+document.getElementById('sid').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();load();}});
+document.getElementById('checkbtn').addEventListener('click',grade);
+document.getElementById('printbtn').addEventListener('click',()=>window.print());
+window.__hw={build,grade,load};
+})();
+
+</script>
+</body>
+</html>
