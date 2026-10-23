@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recording Transactions — Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --purple:#592C88; --purple-dk:#3B1D5C; --purple-lt:#F3EEF9; --gold:#FFC425; --gold-lt:#FFF6DA;
+  --ink:#1F1A24; --muted:#4F4A55; --line:#D9D2E3; --paper:#FFFFFF; --bg:#FAF8FC;
+  --ok:#1E6B3A; --ok-bg:#E6F4EA; --bad:#A4161A; --bad-bg:#FBE9EA; --key:#14532D; --key-bg:#E7F5EC;
+}
+*{box-sizing:border-box}
+html{font-size:17px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Source Serif 4",Georgia,serif;line-height:1.6}
+a{color:var(--purple)} a:hover{color:var(--purple-dk)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;box-shadow:0 0 0 5px var(--purple-dk)}
+.skip{position:absolute;left:-999px;top:0;background:var(--gold);color:var(--ink);padding:.5rem 1rem;z-index:10;font-family:Inter,Arial,sans-serif}
+.skip:focus{left:1rem}
+header.banner{background:var(--purple);color:#fff;border-bottom:6px solid var(--gold)}
+header.banner .inner{max-width:960px;margin:0 auto;padding:1.6rem 1.25rem 1.3rem}
+header.banner .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:0 0 .35rem}
+header.banner h1{font-family:Inter,Arial,sans-serif;font-weight:800;font-size:1.9rem;line-height:1.2;margin:0}
+header.banner p.sub{margin:.5rem 0 0;color:#EDE6F5;font-size:1rem}
+.instructor-banner{background:#A4161A;color:#fff;font-family:Inter,Arial,sans-serif;font-weight:700;text-align:center;padding:.6rem 1rem;letter-spacing:.03em}
+main{max-width:960px;margin:0 auto;padding:1.5rem 1.25rem 3rem}
+h2{font-family:Inter,Arial,sans-serif;color:var(--purple-dk);font-size:1.45rem;margin:2.2rem 0 .6rem;padding-bottom:.3rem;border-bottom:3px solid var(--gold)}
+h3{font-family:Inter,Arial,sans-serif;color:var(--purple);font-size:1.15rem;margin:1.6rem 0 .4rem}
+h4{font-family:Inter,Arial,sans-serif;font-size:1rem;margin:1.2rem 0 .3rem;color:var(--ink)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:1.1rem 1.25rem;margin:1rem 0;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.toc{background:var(--purple-lt);border-left:6px solid var(--purple)}
+.toc ol{margin:.3rem 0 0 1.2rem;padding:0}
+.callout{border-radius:8px;padding:.9rem 1.1rem;margin:1rem 0;border-left:6px solid}
+.callout .label{display:block;font-family:Inter,Arial,sans-serif;font-weight:800;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.25rem}
+.callout.key{background:var(--gold-lt);border-color:var(--gold)}
+.callout.important{background:#FFF1F1;border-color:var(--bad)}
+.callout.tip{background:var(--purple-lt);border-color:var(--purple)}
+.callout.ifrs{background:#EEF5FB;border-color:#1D4E89}
+.callout.update{background:#F1F7EE;border-color:var(--ok)}
+.def{font-weight:700;color:var(--purple-dk)}
+table{border-collapse:collapse;width:100%;margin:.8rem 0;font-size:.95rem;background:#fff}
+caption{text-align:left;font-family:Inter,Arial,sans-serif;font-weight:700;color:var(--purple-dk);padding:.3rem 0}
+th,td{border:1px solid var(--line);padding:.5rem .65rem;vertical-align:top;text-align:left}
+thead th{background:var(--purple);color:#fff;font-family:Inter,Arial,sans-serif;font-size:.9rem}
+tbody th{background:var(--purple-lt);font-family:Inter,Arial,sans-serif}
+td.num,th.num{text-align:right;font-family:"IBM Plex Mono",monospace;white-space:nowrap}
+tr.total td{font-weight:700;border-top:2px solid var(--ink)}
+.table-wrap{overflow-x:auto}
+.mono{font-family:"IBM Plex Mono",monospace}
+.formula{font-family:"IBM Plex Mono",monospace;background:var(--purple-lt);padding:.6rem .9rem;border-radius:6px;display:block;margin:.6rem 0}
+/* Interactive */
+.step{background:#fff;border:1px solid var(--line);border-left:6px solid var(--purple);border-radius:10px;padding:1rem 1.2rem;margin:1.2rem 0}
+.step h3{margin-top:0}
+.q{margin:.9rem 0;padding:.75rem .9rem;border:1px solid var(--line);border-radius:8px;background:#fff}
+.q > label,.q .prompt{display:block;font-weight:600;margin-bottom:.4rem}
+input[type=text],input[type=number],select,textarea{font:inherit;font-family:"IBM Plex Mono",monospace;font-size:.95rem;padding:.45rem .55rem;border:2px solid #77707F;border-radius:6px;background:#fff;color:var(--ink);max-width:100%}
+input.money{width:11rem;text-align:right}
+select{font-family:Inter,Arial,sans-serif;min-width:16rem}
+textarea{width:100%;min-height:7rem;font-family:"Source Serif 4",Georgia,serif}
+input.correct,select.correct{border-color:var(--ok);background:var(--ok-bg)}
+input.wrong,select.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.btn{font-family:Inter,Arial,sans-serif;font-weight:700;font-size:.95rem;border:2px solid var(--purple);background:var(--purple);color:#fff;border-radius:8px;padding:.55rem 1.1rem;cursor:pointer;margin:.4rem .4rem .4rem 0}
+.btn:hover{background:var(--purple-dk)}
+.btn.secondary{background:#fff;color:var(--purple)}
+.btn.gold{background:var(--gold);border-color:#B88A00;color:var(--ink)}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+.fb{margin-top:.5rem;font-family:Inter,Arial,sans-serif;font-size:.93rem;font-weight:600}
+.fb.ok{color:var(--ok)} .fb.no{color:var(--bad)}
+.explain{display:none;margin-top:.6rem;background:var(--key-bg);border-left:5px solid var(--key);padding:.7rem .9rem;border-radius:6px}
+.explain.show{display:block}
+.key{background:var(--key-bg);border:2px solid var(--key);color:var(--key);font-family:"IBM Plex Mono",monospace;font-size:.88rem;padding:.25rem .5rem;border-radius:5px;display:inline-block;margin-top:.35rem}
+.summary{font-family:Inter,Arial,sans-serif;font-weight:700;padding:.6rem .9rem;border-radius:8px;background:var(--purple-lt);margin:.6rem 0}
+.idbar{display:flex;flex-wrap:wrap;gap:.6rem;align-items:flex-end;background:var(--gold-lt);border:2px solid var(--gold);border-radius:10px;padding:1rem 1.2rem}
+.idbar label{font-family:Inter,Arial,sans-serif;font-weight:700;display:block}
+.problem{background:#fff;border:1px solid var(--line);border-radius:10px;padding:1.1rem 1.25rem;margin:1.4rem 0}
+.problem > h2{margin-top:.2rem}
+.part{break-inside:auto}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+.pill{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.75rem;background:var(--purple);color:#fff;border-radius:999px;padding:.1rem .55rem;vertical-align:middle}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media (max-width:720px){.grid2{grid-template-columns:1fr} header.banner h1{font-size:1.5rem} select{min-width:0;width:100%}}
+footer{max-width:960px;margin:0 auto;padding:1rem 1.25rem 2rem;color:var(--muted);font-size:.85rem;font-family:Inter,Arial,sans-serif}
+@media print{
+  .btn,.skip,.idbar .btn{display:none!important}
+  body{background:#fff}
+  .problem{page-break-before:always;border:none}
+  h2,h3{break-after:avoid}
+  .explain{display:block}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+table.je{width:auto;min-width:min(100%,560px)}
+table.je td.cr{padding-left:2.4rem}
+table.je td.num{min-width:7rem}
+.tacct{display:inline-block;vertical-align:top;margin:.4rem 1rem .8rem 0;min-width:220px}
+.tacct table{margin:0}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+
+<header class="banner"><div class="inner">
+<p class="eyebrow">ACCT 351 · Reading Notes · Part A</p>
+<h1>The Accounting Equation and Recording Transactions</h1>
+<p class="sub">The accounting equation, debits and credits, the processing cycle, journal entries, posting, and the trial balance.</p>
+</div></header>
+<main id="main" tabindex="-1">
+
+<nav class="card toc" aria-labelledby="toc-h">
+<h2 id="toc-h" style="margin-top:0;border:none">In these notes</h2>
+<ol>
+<li><a href="#a1">The accounting equation and the dual effect</a></li>
+<li><a href="#a2">Accounts, debits, and credits</a></li>
+<li><a href="#a3">The accounting processing cycle</a></li>
+<li><a href="#a4">Steps 1–3: Analyze and record transactions</a></li>
+<li><a href="#a5">Step 4: Post to the general ledger</a></li>
+<li><a href="#a6">Step 5: The unadjusted trial balance</a></li>
+<li><a href="#a7">Subsidiary ledgers and special journals</a></li>
+<li><a href="#a8">Summary table</a></li>
+</ol>
+</nav>
+
+<section aria-labelledby="a1">
+<h2 id="a1">1. The accounting equation and the dual effect</h2>
+<p>Every accounting system rests on the <span class="def">accounting equation</span>:</p>
+<span class="formula">Assets = Liabilities + Shareholders' Equity</span>
+<p>Assets are the company's resources. Liabilities and shareholders' equity are the <strong>claims</strong> to those resources — creditors' claims and owners' claims. Shareholders' equity has two sources:</p>
+<ul>
+<li><span class="def">Paid-in capital</span> — amounts invested by shareholders (e.g., common stock).</li>
+<li><span class="def">Retained earnings</span> — net income earned over the life of the company, less dividends distributed.</li>
+</ul>
+<span class="formula">Assets = Liabilities + Paid-in Capital + (Revenues − Expenses − Dividends)</span>
+<p>The equation must always balance, so every transaction has a <span class="def">dual effect</span>: at least two accounts change. A purchase of equipment for cash increases one asset and decreases another; borrowing cash increases an asset and a liability.</p>
+<div class="grid2">
+<div class="card"><h4 style="margin-top:0">External events</h4><p style="margin:0">An exchange between the company and a separate entity — selling services, buying supplies, borrowing from a bank, paying employees. These are called <span class="def">transactions</span>.</p></div>
+<div class="card"><h4 style="margin-top:0">Internal events</h4><p style="margin:0">Affect financial position without an exchange with another entity — using up supplies, depreciating equipment, earning revenue that was collected in advance. These are mostly captured by <strong>adjusting entries</strong>.</p></div>
+</div>
+</section>
+
+<section aria-labelledby="a2">
+<h2 id="a2">2. Accounts, debits, and credits</h2>
+<p>An <span class="def">account</span> accumulates the increases and decreases in one financial statement item. The left side of an account is the <span class="def">debit</span> side; the right side is the <span class="def">credit</span> side. "Debit" and "credit" just mean left and right — not good or bad.</p>
+<div class="table-wrap"><table>
+<caption>Debit and credit rules and normal balances</caption>
+<thead><tr><th scope="col">Account type</th><th scope="col">Increase with</th><th scope="col">Decrease with</th><th scope="col">Normal balance</th></tr></thead>
+<tbody>
+<tr><th scope="row">Assets</th><td>Debit</td><td>Credit</td><td>Debit</td></tr>
+<tr><th scope="row">Liabilities</th><td>Credit</td><td>Debit</td><td>Credit</td></tr>
+<tr><th scope="row">Paid-in capital (common stock)</th><td>Credit</td><td>Debit</td><td>Credit</td></tr>
+<tr><th scope="row">Retained earnings</th><td>Credit</td><td>Debit</td><td>Credit</td></tr>
+<tr><th scope="row">Revenues and gains</th><td>Credit</td><td>Debit</td><td>Credit</td></tr>
+<tr><th scope="row">Expenses and losses</th><td>Debit</td><td>Credit</td><td>Debit</td></tr>
+<tr><th scope="row">Dividends</th><td>Debit</td><td>Credit</td><td>Debit</td></tr>
+<tr><th scope="row">Contra assets (e.g., accumulated depreciation, allowance for uncollectible accounts)</th><td>Credit</td><td>Debit</td><td>Credit</td></tr>
+</tbody></table></div>
+<div class="callout key"><span class="label">Why expenses and dividends are debits</span>
+Revenues increase retained earnings, so they follow retained earnings' credit rule. Expenses and dividends <em>decrease</em> retained earnings, so they increase with debits. In every entry, <strong>total debits = total credits</strong>, which keeps the equation in balance.</div>
+<h3>Permanent vs. temporary accounts</h3>
+<ul>
+<li><span class="def">Permanent (real) accounts</span> — assets, liabilities, and shareholders' equity. Their balances carry forward from period to period.</li>
+<li><span class="def">Temporary (nominal) accounts</span> — revenues, expenses, gains, losses, and dividends. They measure changes in retained earnings for one period and are <strong>closed</strong> to retained earnings at the end of each year.</li>
+</ul>
+<p>The <span class="def">general ledger</span> is the collection of all accounts. A <span class="def">chart of accounts</span> lists every account and its number.</p>
+</section>
+
+<section aria-labelledby="a3">
+<h2 id="a3">3. The accounting processing cycle</h2>
+<div class="table-wrap"><table>
+<caption>The ten steps</caption>
+<thead><tr><th scope="col">When</th><th scope="col">Step</th></tr></thead>
+<tbody>
+<tr><th scope="row" rowspan="4">During the period</th><td>1. Obtain information about transactions from source documents</td></tr>
+<tr><td>2. Analyze the transaction</td></tr>
+<tr><td>3. Record the transaction in a journal</td></tr>
+<tr><td>4. Post from the journal to the general ledger accounts</td></tr>
+<tr><th scope="row" rowspan="4">At the end of each period</th><td>5. Prepare an unadjusted trial balance</td></tr>
+<tr><td>6. Record adjusting entries and post them to the general ledger</td></tr>
+<tr><td>7. Prepare an adjusted trial balance</td></tr>
+<tr><td>8. Prepare financial statements</td></tr>
+<tr><th scope="row" rowspan="2">At the end of the year</th><td>9. Close the temporary accounts to retained earnings</td></tr>
+<tr><td>10. Prepare a post-closing trial balance</td></tr>
+</tbody></table></div>
+<p>Computerized systems automate posting and trial balances, but the logic is the same — and understanding it is what lets you spot errors and judge whether the output makes sense.</p>
+</section>
+
+<section aria-labelledby="a4">
+<h2 id="a4">4. Steps 1–3: Analyze and record transactions</h2>
+<p><span class="def">Source documents</span> — invoices, receipts, bank statements, contracts — provide the evidence for each transaction. You analyze each one by asking:</p>
+<ol>
+<li>Which accounts are affected?</li>
+<li>Does each account increase or decrease?</li>
+<li>Which accounts are debited and which are credited, and for how much?</li>
+</ol>
+<p>The result is recorded chronologically in a <span class="def">journal</span> (the "book of original entry") as a <span class="def">journal entry</span>: date, accounts debited (listed first), accounts credited (indented), amounts, and a brief explanation.</p>
+
+<h3>Example: Cullowhee Ridge Climbing Co. — July transactions</h3>
+<p>Cullowhee Ridge Climbing Co. opened an indoor climbing gym near campus on July 1.</p>
+<div class="table-wrap"><table>
+<caption>July transactions and their analysis</caption>
+<thead><tr><th scope="col">#</th><th scope="col">Transaction</th><th scope="col">Analysis</th></tr></thead>
+<tbody>
+<tr><th scope="row">1</th><td>Jul 1: Issued 4,000 shares of common stock for $80,000 cash.</td><td>Cash (asset) ↑ debit; Common Stock (equity) ↑ credit</td></tr>
+<tr><th scope="row">2</th><td>Jul 1: Borrowed $30,000 from Smoky Valley Bank on a one-year, 6% note; interest is due at maturity.</td><td>Cash ↑ debit; Notes Payable (liability) ↑ credit</td></tr>
+<tr><th scope="row">3</th><td>Jul 1: Paid $36,000 for climbing walls and equipment with a six-year life.</td><td>Equipment ↑ debit; Cash ↓ credit</td></tr>
+<tr><th scope="row">4</th><td>Jul 1: Paid $9,000 rent in advance for July through December.</td><td>Prepaid Rent (asset) ↑ debit; Cash ↓ credit</td></tr>
+<tr><th scope="row">5</th><td>Jul 3: Purchased $2,400 of supplies on account.</td><td>Supplies ↑ debit; Accounts Payable ↑ credit</td></tr>
+<tr><th scope="row">6</th><td>Jul 5: Collected $12,000 for 12-month memberships beginning July 1.</td><td>Cash ↑ debit; Unearned Membership Revenue (liability) ↑ credit — the service hasn't been provided yet</td></tr>
+<tr><th scope="row">7</th><td>July: Collected $15,500 cash for day passes and classes.</td><td>Cash ↑ debit; Service Revenue ↑ credit</td></tr>
+<tr><th scope="row">8</th><td>Jul 20: Billed Camp Tuckasegee $3,200 for group climbing sessions provided.</td><td>Accounts Receivable ↑ debit; Service Revenue ↑ credit</td></tr>
+<tr><th scope="row">9</th><td>Jul 25: Paid $1,500 on account to the supplies vendor.</td><td>Accounts Payable ↓ debit; Cash ↓ credit</td></tr>
+<tr><th scope="row">10</th><td>Jul 31: Paid staff salaries of $6,800.</td><td>Salaries Expense ↑ debit; Cash ↓ credit</td></tr>
+<tr><th scope="row">11</th><td>Jul 31: Paid a $1,000 cash dividend.</td><td>Dividends ↑ debit; Cash ↓ credit</td></tr>
+</tbody></table></div>
+<p>Three of the journal entries:</p>
+<div class="table-wrap"><table class="je"><caption>Jul 1 — Issue common stock</caption><thead><tr><th scope="col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Cash</td><td class="num">80,000</td><td class="num"></td></tr><tr><td class="cr">Common Stock</td><td class="num"></td><td class="num">80,000</td></tr></tbody></table></div>
+<div class="table-wrap"><table class="je"><caption>Jul 5 — Collect memberships in advance</caption><thead><tr><th scope="col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Cash</td><td class="num">12,000</td><td class="num"></td></tr><tr><td class="cr">Unearned Membership Revenue</td><td class="num"></td><td class="num">12,000</td></tr></tbody></table></div>
+<div class="table-wrap"><table class="je"><caption>Jul 20 — Services provided on account</caption><thead><tr><th scope="col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Accounts Receivable</td><td class="num">3,200</td><td class="num"></td></tr><tr><td class="cr">Service Revenue</td><td class="num"></td><td class="num">3,200</td></tr></tbody></table></div>
+<div class="callout tip"><span class="label">Watch for these</span>
+<ul style="margin:.2rem 0 0">
+<li>Cash received <strong>before</strong> the service is performed creates a <strong>liability</strong> (unearned revenue), not revenue.</li>
+<li>Paying an account payable is <strong>not</strong> an expense — the expense was recognized (or the asset recorded) when the item was bought.</li>
+<li>Dividends are <strong>not</strong> an expense; they are a distribution to owners.</li>
+</ul></div>
+</section>
+
+<section aria-labelledby="a5">
+<h2 id="a5">5. Step 4: Post to the general ledger</h2>
+<p><span class="def">Posting</span> transfers each debit and credit from the journal to the related ledger account so you can see each account's running balance. A T-account is a simple way to show a ledger account by hand.</p>
+<div class="table-wrap"><table>
+<caption>Cash T-account for July (debits left, credits right)</caption>
+<thead><tr><th scope="col" class="num">Debit</th><th scope="col">Transaction</th><th scope="col" class="num">Credit</th><th scope="col">Transaction</th></tr></thead>
+<tbody>
+<tr><td class="num">80,000</td><td>1 Stock issued</td><td class="num">36,000</td><td>3 Equipment</td></tr>
+<tr><td class="num">30,000</td><td>2 Note payable</td><td class="num">9,000</td><td>4 Prepaid rent</td></tr>
+<tr><td class="num">12,000</td><td>6 Memberships</td><td class="num">1,500</td><td>9 Paid on account</td></tr>
+<tr><td class="num">15,500</td><td>7 Day passes</td><td class="num">6,800</td><td>10 Salaries</td></tr>
+<tr><td class="num"></td><td></td><td class="num">1,000</td><td>11 Dividends</td></tr>
+<tr class="total"><td class="num">83,200</td><td>Ending balance (debit)</td><td class="num"></td><td></td></tr>
+</tbody></table></div>
+</section>
+
+<section aria-labelledby="a6">
+<h2 id="a6">6. Step 5: The unadjusted trial balance</h2>
+<p>A <span class="def">trial balance</span> lists every account and its balance at a point in time. If total debits equal total credits, the ledger is in balance.</p>
+<div class="table-wrap"><table><caption>Cullowhee Ridge Climbing Co. — Unadjusted trial balance, July 31</caption><thead><tr><th scope="col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><th scope="row">Cash</th><td class="num">83,200</td><td class="num"></td></tr><tr><th scope="row">Accounts Receivable</th><td class="num">3,200</td><td class="num"></td></tr><tr><th scope="row">Supplies</th><td class="num">2,400</td><td class="num"></td></tr><tr><th scope="row">Prepaid Rent</th><td class="num">9,000</td><td class="num"></td></tr><tr><th scope="row">Equipment</th><td class="num">36,000</td><td class="num"></td></tr><tr><th scope="row">Accounts Payable</th><td class="num"></td><td class="num">900</td></tr><tr><th scope="row">Unearned Membership Revenue</th><td class="num"></td><td class="num">12,000</td></tr><tr><th scope="row">Notes Payable</th><td class="num"></td><td class="num">30,000</td></tr><tr><th scope="row">Common Stock</th><td class="num"></td><td class="num">80,000</td></tr><tr><th scope="row">Dividends</th><td class="num">1,000</td><td class="num"></td></tr><tr><th scope="row">Service Revenue</th><td class="num"></td><td class="num">18,700</td></tr><tr><th scope="row">Salaries Expense</th><td class="num">6,800</td><td class="num"></td></tr><tr class="total"><th scope="row">Totals</th><td class="num">141,600</td><td class="num">141,600</td></tr></tbody></table></div>
+<div class="callout important"><span class="label">A balanced trial balance is not proof of accuracy</span>
+It will <strong>not</strong> catch an entry that was never recorded, an entry recorded twice, the wrong amount on both sides, or a debit or credit posted to the wrong account. It <strong>will</strong> flag a one-sided error, such as posting only the debit, or transposed digits on one side.</div>
+</section>
+
+<section aria-labelledby="a7">
+<h2 id="a7">7. Subsidiary ledgers and special journals</h2>
+<p>Companies with many similar transactions use:</p>
+<ul>
+<li><span class="def">Subsidiary ledgers</span> — detail for a general ledger <span class="def">control account</span>. The accounts receivable subsidiary ledger holds a separate account for each customer; the total of the subsidiary ledger must equal the control account balance.</li>
+<li><span class="def">Special journals</span> — record repetitive transactions efficiently: the sales journal (credit sales), cash receipts journal, purchases journal (credit purchases), and cash disbursements journal. Everything else goes in the general journal.</li>
+</ul>
+</section>
+
+<section aria-labelledby="a8">
+<h2 id="a8">8. Summary table</h2>
+<div class="table-wrap"><table>
+<caption>Recording the accounting cycle — at a glance</caption>
+<thead><tr><th scope="col">Topic</th><th scope="col">Remember this</th></tr></thead>
+<tbody>
+<tr><th scope="row">Accounting equation</th><td>A = L + Paid-in Capital + Retained Earnings; every transaction has a dual effect</td></tr>
+<tr><th scope="row">Debit rules</th><td>Debits increase assets, expenses, and dividends; credits increase liabilities, equity, and revenues</td></tr>
+<tr><th scope="row">Permanent vs. temporary</th><td>Balance sheet accounts carry forward; revenues, expenses, and dividends are closed each year</td></tr>
+<tr><th scope="row">Journal → ledger</th><td>Record chronologically in the journal, then post to accounts in the ledger</td></tr>
+<tr><th scope="row">Trial balance</th><td>Checks debits = credits; does not prove the records are correct</td></tr>
+</tbody></table></div>
+<p>Continue to <strong>Part B: Adjusting Entries, Financial Statements, and Closing</strong>.</p>
+</section>
+
+</main>
+<footer>ACCT 351 · Intermediate Accounting I · Western Carolina University · <span class="yr"></span></footer>
+<script>
+document.querySelectorAll('.yr').forEach(e=>e.textContent=new Date().getFullYear());
+
+</script>
+</body>
+</html>

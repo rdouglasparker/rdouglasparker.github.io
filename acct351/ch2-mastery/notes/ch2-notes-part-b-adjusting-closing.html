@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adjusting, Reporting, and Closing — Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --purple:#592C88; --purple-dk:#3B1D5C; --purple-lt:#F3EEF9; --gold:#FFC425; --gold-lt:#FFF6DA;
+  --ink:#1F1A24; --muted:#4F4A55; --line:#D9D2E3; --paper:#FFFFFF; --bg:#FAF8FC;
+  --ok:#1E6B3A; --ok-bg:#E6F4EA; --bad:#A4161A; --bad-bg:#FBE9EA; --key:#14532D; --key-bg:#E7F5EC;
+}
+*{box-sizing:border-box}
+html{font-size:17px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Source Serif 4",Georgia,serif;line-height:1.6}
+a{color:var(--purple)} a:hover{color:var(--purple-dk)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;box-shadow:0 0 0 5px var(--purple-dk)}
+.skip{position:absolute;left:-999px;top:0;background:var(--gold);color:var(--ink);padding:.5rem 1rem;z-index:10;font-family:Inter,Arial,sans-serif}
+.skip:focus{left:1rem}
+header.banner{background:var(--purple);color:#fff;border-bottom:6px solid var(--gold)}
+header.banner .inner{max-width:960px;margin:0 auto;padding:1.6rem 1.25rem 1.3rem}
+header.banner .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:0 0 .35rem}
+header.banner h1{font-family:Inter,Arial,sans-serif;font-weight:800;font-size:1.9rem;line-height:1.2;margin:0}
+header.banner p.sub{margin:.5rem 0 0;color:#EDE6F5;font-size:1rem}
+.instructor-banner{background:#A4161A;color:#fff;font-family:Inter,Arial,sans-serif;font-weight:700;text-align:center;padding:.6rem 1rem;letter-spacing:.03em}
+main{max-width:960px;margin:0 auto;padding:1.5rem 1.25rem 3rem}
+h2{font-family:Inter,Arial,sans-serif;color:var(--purple-dk);font-size:1.45rem;margin:2.2rem 0 .6rem;padding-bottom:.3rem;border-bottom:3px solid var(--gold)}
+h3{font-family:Inter,Arial,sans-serif;color:var(--purple);font-size:1.15rem;margin:1.6rem 0 .4rem}
+h4{font-family:Inter,Arial,sans-serif;font-size:1rem;margin:1.2rem 0 .3rem;color:var(--ink)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:1.1rem 1.25rem;margin:1rem 0;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.toc{background:var(--purple-lt);border-left:6px solid var(--purple)}
+.toc ol{margin:.3rem 0 0 1.2rem;padding:0}
+.callout{border-radius:8px;padding:.9rem 1.1rem;margin:1rem 0;border-left:6px solid}
+.callout .label{display:block;font-family:Inter,Arial,sans-serif;font-weight:800;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.25rem}
+.callout.key{background:var(--gold-lt);border-color:var(--gold)}
+.callout.important{background:#FFF1F1;border-color:var(--bad)}
+.callout.tip{background:var(--purple-lt);border-color:var(--purple)}
+.callout.ifrs{background:#EEF5FB;border-color:#1D4E89}
+.callout.update{background:#F1F7EE;border-color:var(--ok)}
+.def{font-weight:700;color:var(--purple-dk)}
+table{border-collapse:collapse;width:100%;margin:.8rem 0;font-size:.95rem;background:#fff}
+caption{text-align:left;font-family:Inter,Arial,sans-serif;font-weight:700;color:var(--purple-dk);padding:.3rem 0}
+th,td{border:1px solid var(--line);padding:.5rem .65rem;vertical-align:top;text-align:left}
+thead th{background:var(--purple);color:#fff;font-family:Inter,Arial,sans-serif;font-size:.9rem}
+tbody th{background:var(--purple-lt);font-family:Inter,Arial,sans-serif}
+td.num,th.num{text-align:right;font-family:"IBM Plex Mono",monospace;white-space:nowrap}
+tr.total td{font-weight:700;border-top:2px solid var(--ink)}
+.table-wrap{overflow-x:auto}
+.mono{font-family:"IBM Plex Mono",monospace}
+.formula{font-family:"IBM Plex Mono",monospace;background:var(--purple-lt);padding:.6rem .9rem;border-radius:6px;display:block;margin:.6rem 0}
+/* Interactive */
+.step{background:#fff;border:1px solid var(--line);border-left:6px solid var(--purple);border-radius:10px;padding:1rem 1.2rem;margin:1.2rem 0}
+.step h3{margin-top:0}
+.q{margin:.9rem 0;padding:.75rem .9rem;border:1px solid var(--line);border-radius:8px;background:#fff}
+.q > label,.q .prompt{display:block;font-weight:600;margin-bottom:.4rem}
+input[type=text],input[type=number],select,textarea{font:inherit;font-family:"IBM Plex Mono",monospace;font-size:.95rem;padding:.45rem .55rem;border:2px solid #77707F;border-radius:6px;background:#fff;color:var(--ink);max-width:100%}
+input.money{width:11rem;text-align:right}
+select{font-family:Inter,Arial,sans-serif;min-width:16rem}
+textarea{width:100%;min-height:7rem;font-family:"Source Serif 4",Georgia,serif}
+input.correct,select.correct{border-color:var(--ok);background:var(--ok-bg)}
+input.wrong,select.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.btn{font-family:Inter,Arial,sans-serif;font-weight:700;font-size:.95rem;border:2px solid var(--purple);background:var(--purple);color:#fff;border-radius:8px;padding:.55rem 1.1rem;cursor:pointer;margin:.4rem .4rem .4rem 0}
+.btn:hover{background:var(--purple-dk)}
+.btn.secondary{background:#fff;color:var(--purple)}
+.btn.gold{background:var(--gold);border-color:#B88A00;color:var(--ink)}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+.fb{margin-top:.5rem;font-family:Inter,Arial,sans-serif;font-size:.93rem;font-weight:600}
+.fb.ok{color:var(--ok)} .fb.no{color:var(--bad)}
+.explain{display:none;margin-top:.6rem;background:var(--key-bg);border-left:5px solid var(--key);padding:.7rem .9rem;border-radius:6px}
+.explain.show{display:block}
+.key{background:var(--key-bg);border:2px solid var(--key);color:var(--key);font-family:"IBM Plex Mono",monospace;font-size:.88rem;padding:.25rem .5rem;border-radius:5px;display:inline-block;margin-top:.35rem}
+.summary{font-family:Inter,Arial,sans-serif;font-weight:700;padding:.6rem .9rem;border-radius:8px;background:var(--purple-lt);margin:.6rem 0}
+.idbar{display:flex;flex-wrap:wrap;gap:.6rem;align-items:flex-end;background:var(--gold-lt);border:2px solid var(--gold);border-radius:10px;padding:1rem 1.2rem}
+.idbar label{font-family:Inter,Arial,sans-serif;font-weight:700;display:block}
+.problem{background:#fff;border:1px solid var(--line);border-radius:10px;padding:1.1rem 1.25rem;margin:1.4rem 0}
+.problem > h2{margin-top:.2rem}
+.part{break-inside:auto}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+.pill{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.75rem;background:var(--purple);color:#fff;border-radius:999px;padding:.1rem .55rem;vertical-align:middle}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media (max-width:720px){.grid2{grid-template-columns:1fr} header.banner h1{font-size:1.5rem} select{min-width:0;width:100%}}
+footer{max-width:960px;margin:0 auto;padding:1rem 1.25rem 2rem;color:var(--muted);font-size:.85rem;font-family:Inter,Arial,sans-serif}
+@media print{
+  .btn,.skip,.idbar .btn{display:none!important}
+  body{background:#fff}
+  .problem{page-break-before:always;border:none}
+  h2,h3{break-after:avoid}
+  .explain{display:block}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+table.je{width:auto;min-width:min(100%,560px)}
+table.je td.cr{padding-left:2.4rem}
+table.je td.num{min-width:7rem}
+.tacct{display:inline-block;vertical-align:top;margin:.4rem 1rem .8rem 0;min-width:220px}
+.tacct table{margin:0}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+
+<header class="banner"><div class="inner">
+<p class="eyebrow">ACCT 351 · Reading Notes · Part B</p>
+<h1>Adjusting Entries, Financial Statements, and Closing</h1>
+<p class="sub">Prepayments, accruals, and estimates; the adjusted trial balance; the statements; closing; and cash-to-accrual conversion.</p>
+</div></header>
+<main id="main" tabindex="-1">
+
+<nav class="card toc" aria-labelledby="toc-h">
+<h2 id="toc-h" style="margin-top:0;border:none">In these notes</h2>
+<ol>
+<li><a href="#b1">Why adjusting entries are needed</a></li>
+<li><a href="#b2">Prepayments</a></li>
+<li><a href="#b3">Accruals</a></li>
+<li><a href="#b4">Estimates</a></li>
+<li><a href="#b5">The adjusted trial balance</a></li>
+<li><a href="#b6">Preparing the financial statements</a></li>
+<li><a href="#b7">The closing process</a></li>
+<li><a href="#b8">Converting from cash basis to accrual basis</a></li>
+<li><a href="#b9">Worksheets and reversing entries</a></li>
+<li><a href="#b10">Adjusting entry cheat sheet</a></li>
+</ol>
+</nav>
+
+<section aria-labelledby="b1">
+<h2 id="b1">1. Why adjusting entries are needed</h2>
+<p>Journal entries during the period capture external transactions when they happen. But under accrual accounting, revenues must be recognized when goods or services are transferred and expenses when resources are used — which often doesn't line up with when cash moves or when a source document arrives. <span class="def">Adjusting entries</span>, recorded at the end of each reporting period, bring the accounts up to date.</p>
+<div class="callout key"><span class="label">Two rules for every adjusting entry</span>
+<ol style="margin:.2rem 0 0">
+<li>Each one affects at least one <strong>income statement</strong> account (revenue or expense) and one <strong>balance sheet</strong> account (asset or liability).</li>
+<li>Adjusting entries <strong>never</strong> involve cash.</li>
+</ol></div>
+<div class="table-wrap"><table>
+<caption>Three categories of adjusting entries</caption>
+<thead><tr><th scope="col">Category</th><th scope="col">Cash flow timing</th><th scope="col">Types</th></tr></thead>
+<tbody>
+<tr><th scope="row">Prepayments</th><td>Cash flow comes <strong>before</strong> expense or revenue recognition</td><td>Prepaid expenses; unearned (deferred) revenues</td></tr>
+<tr><th scope="row">Accruals</th><td>Cash flow comes <strong>after</strong> expense or revenue recognition</td><td>Accrued liabilities (expenses); accrued receivables (revenues)</td></tr>
+<tr><th scope="row">Estimates</th><td>Amount depends on a judgment about the future</td><td>Bad debts (uncollectible accounts)</td></tr>
+</tbody></table></div>
+<p>The examples below continue <strong>Cullowhee Ridge Climbing Co.</strong> at July 31 (see the unadjusted trial balance in Part A).</p>
+</section>
+
+<section aria-labelledby="b2">
+<h2 id="b2">2. Prepayments</h2>
+<h3>Prepaid expenses</h3>
+<p>The company paid for a benefit in advance and recorded an <strong>asset</strong>. At period-end, the portion used up becomes expense: <strong>debit an expense, credit the asset</strong>.</p>
+<div class="table-wrap"><table class="je"><caption>(a) Rent: $9,000 covered six months; one month used ($9,000 ÷ 6)</caption><thead><tr><th scope="col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Rent Expense</td><td class="num">1,500</td><td class="num"></td></tr><tr><td class="cr">Prepaid Rent</td><td class="num"></td><td class="num">1,500</td></tr></tbody></table></div>
+<div class="table-wrap"><table class="je"><caption>(b) Supplies: $2,400 purchased; a count shows $1,600 on hand</caption><thead><tr><th scope="col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Supplies Expense</td><td class="num">800</td><td class="num"></td></tr><tr><td class="cr">Supplies</td><td class="num"></td><td class="num">800</td></tr></tbody></table></div>
+<h3>Depreciation — a prepayment for a long-lived asset</h3>
+<p>Buying equipment is a prepayment for several years of service. <span class="def">Depreciation</span> allocates the cost to the periods that benefit. The credit goes to <span class="def">Accumulated Depreciation</span>, a <span class="def">contra asset</span> that keeps the original cost intact while reducing the asset's <span class="def">book value</span>.</p>
+<div class="table-wrap"><table class="je"><caption>(c) Depreciation: $36,000 ÷ 6 years ÷ 12 months</caption><thead><tr><th scope="col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Depreciation Expense</td><td class="num">500</td><td class="num"></td></tr><tr><td class="cr">Accumulated Depreciation—Equipment</td><td class="num"></td><td class="num">500</td></tr></tbody></table></div>
+<h3>Unearned (deferred) revenues</h3>
+<p>The company collected cash before providing the service and recorded a <strong>liability</strong>. As the service is provided, the liability becomes revenue: <strong>debit the liability, credit revenue</strong>.</p>
+<div class="table-wrap"><table class="je"><caption>(d) Memberships: $12,000 for 12 months; one month earned</caption><thead><tr><th scope="col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Unearned Membership Revenue</td><td class="num">1,000</td><td class="num"></td></tr><tr><td class="cr">Membership Revenue</td><td class="num"></td><td class="num">1,000</td></tr></tbody></table></div>
+<div class="callout tip"><span class="label">Alternative approach</span>
+Some companies record prepayments directly to an expense (or revenue) when the cash moves. Then the adjusting entry does the reverse — it moves the <em>unexpired</em> portion to an asset (or the <em>unearned</em> portion to a liability). The ending balances are identical either way; only the adjusting entry differs.</div>
+</section>
+
+<section aria-labelledby="b3">
+<h2 id="b3">3. Accruals</h2>
+<h3>Accrued liabilities (accrued expenses)</h3>
+<p>The company has used a resource or incurred an obligation but hasn't paid or recorded it: <strong>debit an expense, credit a liability</strong>.</p>
+<div class="table-wrap"><table class="je"><caption>(e) Salaries: staff earned $700 on July 29–31; payday is August 5</caption><thead><tr><th scope="col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Salaries Expense</td><td class="num">700</td><td class="num"></td></tr><tr><td class="cr">Salaries Payable</td><td class="num"></td><td class="num">700</td></tr></tbody></table></div>
+<p>Interest accrues with the passage of time:</p>
+<span class="formula">Interest = Principal × Annual rate × Fraction of the year</span>
+<div class="table-wrap"><table class="je"><caption>(f) Interest: $30,000 × 6% × 1/12</caption><thead><tr><th scope="col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Interest Expense</td><td class="num">150</td><td class="num"></td></tr><tr><td class="cr">Interest Payable</td><td class="num"></td><td class="num">150</td></tr></tbody></table></div>
+<h3>Accrued receivables (accrued revenues)</h3>
+<p>The company has provided a service (or earned interest) but hasn't billed or collected it: <strong>debit a receivable, credit revenue</strong>.</p>
+<div class="table-wrap"><table class="je"><caption>(g) Lessons provided to a school group on July 30, billed in August</caption><thead><tr><th scope="col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Accounts Receivable</td><td class="num">600</td><td class="num"></td></tr><tr><td class="cr">Service Revenue</td><td class="num"></td><td class="num">600</td></tr></tbody></table></div>
+</section>
+
+<section aria-labelledby="b4">
+<h2 id="b4">4. Estimates</h2>
+<p>Some amounts can only be estimated. The most common is <span class="def">bad debt expense</span>: at period-end the company estimates how much of its receivables won't be collected. The credit goes to <span class="def">Allowance for Uncollectible Accounts</span>, a contra asset to Accounts Receivable.</p>
+<div class="table-wrap"><table class="je"><caption>(h) Estimated uncollectible receivables of $200</caption><thead><tr><th scope="col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Bad Debt Expense</td><td class="num">200</td><td class="num"></td></tr><tr><td class="cr">Allowance for Uncollectible Accounts</td><td class="num"></td><td class="num">200</td></tr></tbody></table></div>
+<p>Estimates are revised as new information arrives; that topic is developed further when receivables are covered in depth.</p>
+</section>
+
+<section aria-labelledby="b5">
+<h2 id="b5">5. The adjusted trial balance</h2>
+<div class="table-wrap"><table><caption>Cullowhee Ridge Climbing Co. — Adjusted trial balance, July 31</caption><thead><tr><th scope="col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><th scope="row">Cash</th><td class="num">83,200</td><td class="num"></td></tr><tr><th scope="row">Accounts Receivable</th><td class="num">3,800</td><td class="num"></td></tr><tr><th scope="row">Allowance for Uncollectible Accounts</th><td class="num"></td><td class="num">200</td></tr><tr><th scope="row">Supplies</th><td class="num">1,600</td><td class="num"></td></tr><tr><th scope="row">Prepaid Rent</th><td class="num">7,500</td><td class="num"></td></tr><tr><th scope="row">Equipment</th><td class="num">36,000</td><td class="num"></td></tr><tr><th scope="row">Accumulated Depreciation—Equipment</th><td class="num"></td><td class="num">500</td></tr><tr><th scope="row">Accounts Payable</th><td class="num"></td><td class="num">900</td></tr><tr><th scope="row">Salaries Payable</th><td class="num"></td><td class="num">700</td></tr><tr><th scope="row">Interest Payable</th><td class="num"></td><td class="num">150</td></tr><tr><th scope="row">Unearned Membership Revenue</th><td class="num"></td><td class="num">11,000</td></tr><tr><th scope="row">Notes Payable</th><td class="num"></td><td class="num">30,000</td></tr><tr><th scope="row">Common Stock</th><td class="num"></td><td class="num">80,000</td></tr><tr><th scope="row">Retained Earnings</th><td class="num"></td><td class="num">0</td></tr><tr><th scope="row">Dividends</th><td class="num">1,000</td><td class="num"></td></tr><tr><th scope="row">Service Revenue</th><td class="num"></td><td class="num">19,300</td></tr><tr><th scope="row">Membership Revenue</th><td class="num"></td><td class="num">1,000</td></tr><tr><th scope="row">Salaries Expense</th><td class="num">7,500</td><td class="num"></td></tr><tr><th scope="row">Rent Expense</th><td class="num">1,500</td><td class="num"></td></tr><tr><th scope="row">Supplies Expense</th><td class="num">800</td><td class="num"></td></tr><tr><th scope="row">Depreciation Expense</th><td class="num">500</td><td class="num"></td></tr><tr><th scope="row">Interest Expense</th><td class="num">150</td><td class="num"></td></tr><tr><th scope="row">Bad Debt Expense</th><td class="num">200</td><td class="num"></td></tr><tr class="total"><th scope="row">Totals</th><td class="num">143,750</td><td class="num">143,750</td></tr></tbody></table></div>
+</section>
+
+<section aria-labelledby="b6">
+<h2 id="b6">6. Preparing the financial statements</h2>
+<div class="grid2">
+<div>
+<div class="table-wrap"><table>
+<caption>Income statement — month ended July 31</caption>
+<tbody>
+<tr><th scope="row">Service revenue</th><td class="num">$19,300</td></tr>
+<tr><th scope="row">Membership revenue</th><td class="num">1,000</td></tr>
+<tr class="total"><th scope="row">Total revenues</th><td class="num">20,300</td></tr>
+<tr><th scope="row">Salaries expense</th><td class="num">7,500</td></tr>
+<tr><th scope="row">Rent expense</th><td class="num">1,500</td></tr>
+<tr><th scope="row">Supplies expense</th><td class="num">800</td></tr>
+<tr><th scope="row">Depreciation expense</th><td class="num">500</td></tr>
+<tr><th scope="row">Interest expense</th><td class="num">150</td></tr>
+<tr><th scope="row">Bad debt expense</th><td class="num">200</td></tr>
+<tr class="total"><th scope="row">Total expenses</th><td class="num">10,650</td></tr>
+<tr class="total"><th scope="row">Net income</th><td class="num">$9,650</td></tr>
+</tbody></table></div>
+<div class="table-wrap"><table>
+<caption>Retained earnings — July</caption>
+<tbody>
+<tr><th scope="row">Beginning balance</th><td class="num">$0</td></tr>
+<tr><th scope="row">Add: net income</th><td class="num">9,650</td></tr>
+<tr><th scope="row">Less: dividends</th><td class="num">(1,000)</td></tr>
+<tr class="total"><th scope="row">Ending balance</th><td class="num">$8,650</td></tr>
+</tbody></table></div>
+</div>
+<div class="table-wrap"><table>
+<caption>Balance sheet — July 31</caption>
+<tbody>
+<tr><th scope="row">Cash</th><td class="num">$83,200</td></tr>
+<tr><th scope="row">Accounts receivable, net of $200 allowance</th><td class="num">3,600</td></tr>
+<tr><th scope="row">Supplies</th><td class="num">1,600</td></tr>
+<tr><th scope="row">Prepaid rent</th><td class="num">7,500</td></tr>
+<tr><th scope="row">Equipment, net of $500 accumulated depreciation</th><td class="num">35,500</td></tr>
+<tr class="total"><th scope="row">Total assets</th><td class="num">$131,400</td></tr>
+<tr><th scope="row">Accounts payable</th><td class="num">$900</td></tr>
+<tr><th scope="row">Salaries payable</th><td class="num">700</td></tr>
+<tr><th scope="row">Interest payable</th><td class="num">150</td></tr>
+<tr><th scope="row">Unearned membership revenue</th><td class="num">11,000</td></tr>
+<tr><th scope="row">Notes payable</th><td class="num">30,000</td></tr>
+<tr class="total"><th scope="row">Total liabilities</th><td class="num">42,750</td></tr>
+<tr><th scope="row">Common stock</th><td class="num">80,000</td></tr>
+<tr><th scope="row">Retained earnings</th><td class="num">8,650</td></tr>
+<tr class="total"><th scope="row">Total liabilities and equity</th><td class="num">$131,400</td></tr>
+</tbody></table></div>
+</div>
+<p>The statements are prepared in order — <strong>income statement → statement of shareholders' equity (retained earnings) → balance sheet</strong> — because net income feeds retained earnings, which feeds the balance sheet. The <strong>statement of cash flows</strong> classifies cash receipts and payments as <strong>operating</strong>, <strong>investing</strong> (e.g., buying equipment), or <strong>financing</strong> (e.g., issuing stock, borrowing, paying dividends).</p>
+<p>On a classified balance sheet, <strong>current</strong> assets are expected to be converted to cash or used within one year (or the operating cycle, if longer); <strong>current</strong> liabilities will be paid with current assets in that time.</p>
+</section>
+
+<section aria-labelledby="b7">
+<h2 id="b7">7. The closing process</h2>
+<p>At year-end, <span class="def">closing entries</span> (1) transfer the balances of the temporary accounts to retained earnings and (2) reset the temporary accounts to zero for the next year. (To illustrate, we close Cullowhee Ridge Climbing Co.'s July balances as if July were the year-end.)</p>
+<div class="table-wrap"><table class="je"><caption>Close revenues</caption><thead><tr><th scope="col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Service Revenue</td><td class="num">19,300</td><td class="num"></td></tr><tr><td>Membership Revenue</td><td class="num">1,000</td><td class="num"></td></tr><tr><td class="cr">Retained Earnings</td><td class="num"></td><td class="num">20,300</td></tr></tbody></table></div>
+<div class="table-wrap"><table class="je"><caption>Close expenses</caption><thead><tr><th scope="col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Retained Earnings</td><td class="num">10,650</td><td class="num"></td></tr><tr><td class="cr">Salaries Expense</td><td class="num"></td><td class="num">7,500</td></tr><tr><td class="cr">Rent Expense</td><td class="num"></td><td class="num">1,500</td></tr><tr><td class="cr">Supplies Expense</td><td class="num"></td><td class="num">800</td></tr><tr><td class="cr">Depreciation Expense</td><td class="num"></td><td class="num">500</td></tr><tr><td class="cr">Interest Expense</td><td class="num"></td><td class="num">150</td></tr><tr><td class="cr">Bad Debt Expense</td><td class="num"></td><td class="num">200</td></tr></tbody></table></div>
+<div class="table-wrap"><table class="je"><caption>Close dividends</caption><thead><tr><th scope="col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Retained Earnings</td><td class="num">1,000</td><td class="num"></td></tr><tr><td class="cr">Dividends</td><td class="num"></td><td class="num">1,000</td></tr></tbody></table></div>
+<p>Some companies first close revenues and expenses to a temporary <span class="def">Income Summary</span> account and then close its balance (net income) to retained earnings. The result is the same.</p>
+<p>The <span class="def">post-closing trial balance</span> lists only permanent accounts. Retained earnings now shows its ending balance ($8,650), and all revenue, expense, and dividend accounts are zero.</p>
+</section>
+
+<section aria-labelledby="b8">
+<h2 id="b8">8. Converting from cash basis to accrual basis</h2>
+<p>Small businesses sometimes keep cash-basis records that must be converted to accrual-basis amounts. Use the change in the related balance sheet account:</p>
+<div class="table-wrap"><table>
+<caption>Conversion formulas</caption>
+<thead><tr><th scope="col">Accrual amount</th><th scope="col">Start with cash, then…</th></tr></thead>
+<tbody>
+<tr><th scope="row">Revenue</th><td>Cash collected + increase in receivables (− decrease) − increase in unearned revenue (+ decrease)</td></tr>
+<tr><th scope="row">Expense with a payable</th><td>Cash paid + increase in the payable (− decrease)</td></tr>
+<tr><th scope="row">Expense with a prepaid asset</th><td>Cash paid − increase in the prepaid asset (+ decrease)</td></tr>
+</tbody></table></div>
+<div class="card">
+<h4 style="margin-top:0">Example — Sylva Shuttle Service</h4>
+<ul>
+<li>Insurance: paid $20,000 cash; prepaid insurance fell from $5,000 to $3,000. Insurance expense = $20,000 + $2,000 decrease = <strong>$22,000</strong>.</li>
+<li>Salaries: paid $150,000; salaries payable rose from $12,000 to $18,000. Salaries expense = $150,000 + $6,000 = <strong>$156,000</strong>.</li>
+<li>Revenue: collected $410,000; receivables fell from $40,000 to $32,000; unearned revenue rose from $6,000 to $9,000. Revenue = $410,000 − $8,000 − $3,000 = <strong>$399,000</strong>.</li>
+</ul>
+<p style="margin-bottom:0">Check the logic with a T-account: beginning balance + additions − reductions = ending balance.</p>
+</div>
+</section>
+
+<section aria-labelledby="b9">
+<h2 id="b9">9. Worksheets and reversing entries</h2>
+<ul>
+<li>A <span class="def">worksheet</span> is an optional spreadsheet tool: unadjusted trial balance → adjusting entries → adjusted trial balance → income statement and balance sheet columns. It helps organize the end-of-period process but is not a financial statement.</li>
+<li><span class="def">Reversing entries</span> are optional entries made on the first day of the next period that reverse certain adjusting entries (usually accruals). They let routine entries be recorded the normal way. Example: after accruing $700 of salaries on July 31, an August 1 reversing entry (debit Salaries Payable, credit Salaries Expense) lets the August 5 payroll be recorded as a simple debit to expense — the net August expense is still correct.</li>
+</ul>
+</section>
+
+<section aria-labelledby="b10">
+<h2 id="b10">10. Adjusting entry cheat sheet</h2>
+<div class="table-wrap"><table>
+<caption>Typical adjusting entries</caption>
+<thead><tr><th scope="col">Type</th><th scope="col">Debit</th><th scope="col">Credit</th><th scope="col">If omitted…</th></tr></thead>
+<tbody>
+<tr><th scope="row">Prepaid expense used</th><td>Expense</td><td>Prepaid asset</td><td>Expenses understated; net income and assets overstated</td></tr>
+<tr><th scope="row">Depreciation</th><td>Depreciation Expense</td><td>Accumulated Depreciation</td><td>Expenses understated; net income and assets overstated</td></tr>
+<tr><th scope="row">Unearned revenue earned</th><td>Unearned Revenue</td><td>Revenue</td><td>Revenues and net income understated; liabilities overstated</td></tr>
+<tr><th scope="row">Accrued expense</th><td>Expense</td><td>Payable</td><td>Expenses and liabilities understated; net income overstated</td></tr>
+<tr><th scope="row">Accrued revenue</th><td>Receivable</td><td>Revenue</td><td>Revenues, net income, and assets understated</td></tr>
+<tr><th scope="row">Bad debts</th><td>Bad Debt Expense</td><td>Allowance for Uncollectible Accounts</td><td>Expenses understated; net income and assets overstated</td></tr>
+</tbody></table></div>
+</section>
+
+</main>
+<footer>ACCT 351 · Intermediate Accounting I · Western Carolina University · <span class="yr"></span></footer>
+<script>
+document.querySelectorAll('.yr').forEach(e=>e.textContent=new Date().getFullYear());
+
+</script>
+</body>
+</html>
