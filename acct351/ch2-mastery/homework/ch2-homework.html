@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Homework: The Accounting Process</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --purple:#592C88; --purple-dk:#3B1D5C; --purple-lt:#F3EEF9; --gold:#FFC425; --gold-lt:#FFF6DA;
+  --ink:#1F1A24; --muted:#4F4A55; --line:#D9D2E3; --paper:#FFFFFF; --bg:#FAF8FC;
+  --ok:#1E6B3A; --ok-bg:#E6F4EA; --bad:#A4161A; --bad-bg:#FBE9EA; --key:#14532D; --key-bg:#E7F5EC;
+}
+*{box-sizing:border-box}
+html{font-size:17px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Source Serif 4",Georgia,serif;line-height:1.6}
+a{color:var(--purple)} a:hover{color:var(--purple-dk)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;box-shadow:0 0 0 5px var(--purple-dk)}
+.skip{position:absolute;left:-999px;top:0;background:var(--gold);color:var(--ink);padding:.5rem 1rem;z-index:10;font-family:Inter,Arial,sans-serif}
+.skip:focus{left:1rem}
+header.banner{background:var(--purple);color:#fff;border-bottom:6px solid var(--gold)}
+header.banner .inner{max-width:960px;margin:0 auto;padding:1.6rem 1.25rem 1.3rem}
+header.banner .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:0 0 .35rem}
+header.banner h1{font-family:Inter,Arial,sans-serif;font-weight:800;font-size:1.9rem;line-height:1.2;margin:0}
+header.banner p.sub{margin:.5rem 0 0;color:#EDE6F5;font-size:1rem}
+.instructor-banner{background:#A4161A;color:#fff;font-family:Inter,Arial,sans-serif;font-weight:700;text-align:center;padding:.6rem 1rem;letter-spacing:.03em}
+main{max-width:960px;margin:0 auto;padding:1.5rem 1.25rem 3rem}
+h2{font-family:Inter,Arial,sans-serif;color:var(--purple-dk);font-size:1.45rem;margin:2.2rem 0 .6rem;padding-bottom:.3rem;border-bottom:3px solid var(--gold)}
+h3{font-family:Inter,Arial,sans-serif;color:var(--purple);font-size:1.15rem;margin:1.6rem 0 .4rem}
+h4{font-family:Inter,Arial,sans-serif;font-size:1rem;margin:1.2rem 0 .3rem;color:var(--ink)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:1.1rem 1.25rem;margin:1rem 0;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.toc{background:var(--purple-lt);border-left:6px solid var(--purple)}
+.toc ol{margin:.3rem 0 0 1.2rem;padding:0}
+.callout{border-radius:8px;padding:.9rem 1.1rem;margin:1rem 0;border-left:6px solid}
+.callout .label{display:block;font-family:Inter,Arial,sans-serif;font-weight:800;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.25rem}
+.callout.key{background:var(--gold-lt);border-color:var(--gold)}
+.callout.important{background:#FFF1F1;border-color:var(--bad)}
+.callout.tip{background:var(--purple-lt);border-color:var(--purple)}
+.callout.ifrs{background:#EEF5FB;border-color:#1D4E89}
+.callout.update{background:#F1F7EE;border-color:var(--ok)}
+.def{font-weight:700;color:var(--purple-dk)}
+table{border-collapse:collapse;width:100%;margin:.8rem 0;font-size:.95rem;background:#fff}
+caption{text-align:left;font-family:Inter,Arial,sans-serif;font-weight:700;color:var(--purple-dk);padding:.3rem 0}
+th,td{border:1px solid var(--line);padding:.5rem .65rem;vertical-align:top;text-align:left}
+thead th{background:var(--purple);color:#fff;font-family:Inter,Arial,sans-serif;font-size:.9rem}
+tbody th{background:var(--purple-lt);font-family:Inter,Arial,sans-serif}
+td.num,th.num{text-align:right;font-family:"IBM Plex Mono",monospace;white-space:nowrap}
+tr.total td{font-weight:700;border-top:2px solid var(--ink)}
+.table-wrap{overflow-x:auto}
+.mono{font-family:"IBM Plex Mono",monospace}
+.formula{font-family:"IBM Plex Mono",monospace;background:var(--purple-lt);padding:.6rem .9rem;border-radius:6px;display:block;margin:.6rem 0}
+/* Interactive */
+.step{background:#fff;border:1px solid var(--line);border-left:6px solid var(--purple);border-radius:10px;padding:1rem 1.2rem;margin:1.2rem 0}
+.step h3{margin-top:0}
+.q{margin:.9rem 0;padding:.75rem .9rem;border:1px solid var(--line);border-radius:8px;background:#fff}
+.q > label,.q .prompt{display:block;font-weight:600;margin-bottom:.4rem}
+input[type=text],input[type=number],select,textarea{font:inherit;font-family:"IBM Plex Mono",monospace;font-size:.95rem;padding:.45rem .55rem;border:2px solid #77707F;border-radius:6px;background:#fff;color:var(--ink);max-width:100%}
+input.money{width:11rem;text-align:right}
+select{font-family:Inter,Arial,sans-serif;min-width:16rem}
+textarea{width:100%;min-height:7rem;font-family:"Source Serif 4",Georgia,serif}
+input.correct,select.correct{border-color:var(--ok);background:var(--ok-bg)}
+input.wrong,select.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.btn{font-family:Inter,Arial,sans-serif;font-weight:700;font-size:.95rem;border:2px solid var(--purple);background:var(--purple);color:#fff;border-radius:8px;padding:.55rem 1.1rem;cursor:pointer;margin:.4rem .4rem .4rem 0}
+.btn:hover{background:var(--purple-dk)}
+.btn.secondary{background:#fff;color:var(--purple)}
+.btn.gold{background:var(--gold);border-color:#B88A00;color:var(--ink)}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+.fb{margin-top:.5rem;font-family:Inter,Arial,sans-serif;font-size:.93rem;font-weight:600}
+.fb.ok{color:var(--ok)} .fb.no{color:var(--bad)}
+.explain{display:none;margin-top:.6rem;background:var(--key-bg);border-left:5px solid var(--key);padding:.7rem .9rem;border-radius:6px}
+.explain.show{display:block}
+.key{background:var(--key-bg);border:2px solid var(--key);color:var(--key);font-family:"IBM Plex Mono",monospace;font-size:.88rem;padding:.25rem .5rem;border-radius:5px;display:inline-block;margin-top:.35rem}
+.summary{font-family:Inter,Arial,sans-serif;font-weight:700;padding:.6rem .9rem;border-radius:8px;background:var(--purple-lt);margin:.6rem 0}
+.idbar{display:flex;flex-wrap:wrap;gap:.6rem;align-items:flex-end;background:var(--gold-lt);border:2px solid var(--gold);border-radius:10px;padding:1rem 1.2rem}
+.idbar label{font-family:Inter,Arial,sans-serif;font-weight:700;display:block}
+.problem{background:#fff;border:1px solid var(--line);border-radius:10px;padding:1.1rem 1.25rem;margin:1.4rem 0}
+.problem > h2{margin-top:.2rem}
+.part{break-inside:auto}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+.pill{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.75rem;background:var(--purple);color:#fff;border-radius:999px;padding:.1rem .55rem;vertical-align:middle}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media (max-width:720px){.grid2{grid-template-columns:1fr} header.banner h1{font-size:1.5rem} select{min-width:0;width:100%}}
+footer{max-width:960px;margin:0 auto;padding:1rem 1.25rem 2rem;color:var(--muted);font-size:.85rem;font-family:Inter,Arial,sans-serif}
+@media print{
+  .btn,.skip,.idbar .btn{display:none!important}
+  body{background:#fff}
+  .problem{page-break-before:always;border:none}
+  h2,h3{break-after:avoid}
+  .explain{display:block}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+table.je{width:auto;min-width:min(100%,560px)}
+table.je td.cr{padding-left:2.4rem}
+table.je td.num{min-width:7rem}
+.tacct{display:inline-block;vertical-align:top;margin:.4rem 1rem .8rem 0;min-width:220px}
+.tacct table{margin:0}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+
+<header class="banner"><div class="inner">
+<p class="eyebrow">ACCT 351 · Homework</p>
+<h1>Homework: The Accounting Process</h1>
+<p class="sub">Journal entries, adjusting entries and their effects, statements and closing, and cash-to-accrual conversion.</p>
+</div></header>
+<main id="main" tabindex="-1">
+<div class="card"><h2 style="margin-top:0">Instructions</h2><ol>
+<li>Enter your <strong>WCU student ID</strong> and select <em>Load my problems</em>. Your company, amounts, and transactions are generated from your ID.</li>
+<li>Work all five problems. Account lists are in alphabetical order. Round to whole dollars, and use a minus sign for negative amounts.</li>
+<li>Select <em>Check my work</em> as often as you like. Each answer is marked ✓ Correct or ✗ Incorrect.</li>
+<li>When finished, select <em>Print / Save as PDF</em> and upload the PDF to the Canvas assignment.</li></ol></div><div class="idbar" role="group" aria-labelledby="idlbl">
+<div><label id="idlbl" for="sid">Student ID</label><input id="sid" type="text" inputmode="numeric" autocomplete="off" aria-describedby="idmsg" style="width:14rem"></div>
+<button type="button" class="btn" id="loadbtn">Load my problems</button>
+<div id="idmsg" class="fb" aria-live="polite" style="flex-basis:100%"></div>
+</div>
+<div id="hw"></div>
+<div id="actions" hidden>
+<button type="button" class="btn gold" id="checkbtn">Check my work</button>
+<button type="button" class="btn secondary" id="printbtn">Print / Save as PDF</button>
+<div id="overall" class="summary" tabindex="-1" aria-live="polite" hidden></div>
+</div>
+</main>
+<footer>ACCT 351 · Intermediate Accounting I · Western Carolina University · <span class="yr"></span></footer>
+<script>
+document.querySelectorAll('.yr').forEach(e=>e.textContent=new Date().getFullYear());
+(function(){
+'use strict';
+const INSTRUCTOR = window.__INSTRUCTOR__ === true;
+const Y = new Date().getFullYear();
+function fnv1a(s){let h=0x811c9dc5;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,0x01000193);}return h>>>0;}
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+let R;
+const ri=(a,b)=>a+Math.floor(R()*(b-a+1));
+const pick=a=>a[Math.floor(R()*a.length)];
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(R()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+const $=n=>(n<0?'−$':'$')+Math.abs(Math.round(n)).toLocaleString('en-US');
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const ACC=['Accounts Payable','Accounts Receivable','Accumulated Depreciation','Allowance for Uncollectible Accounts','Bad Debt Expense','Cash','Common Stock','Depreciation Expense','Dividends','Equipment','Insurance Expense','Interest Expense','Interest Payable','Interest Receivable','Interest Revenue','Notes Payable','Prepaid Insurance','Prepaid Rent','Rent Expense','Retained Earnings','Salaries Expense','Salaries Payable','Service Revenue','Supplies','Supplies Expense','Unearned Revenue','Utilities Expense'];
+const TYPES=['Prepaid expense','Unearned revenue','Accrued liability','Accrued receivable','Estimate'];
+const EFF=['Overstated','Understated','No effect'];
+const YN=['Yes','No'];
+const COS=['Sylva Summit Outfitters','Webster Creek Landscaping','Dillsboro Depot Repair','Glenville Lake Marina Services','Cashiers Valley Event Rentals','Scotts Creek Software Services','Whittier River Tours','Caney Fork Electric','Hunter Library Archival Services','Reid Gym Sports Medicine','Panthertown Trail Guides','Little Savannah Tutoring'];
+let qn=0;
+function sel(label,opts,ans){const id='h'+(++qn);return `<div class="q"><label for="${id}">${label}</label><select id="${id}" data-ans="${esc(ans)}"><option value="">— Select —</option>${opts.map(o=>`<option value="${esc(o)}">${esc(o)}</option>`).join('')}</select><span class="mark" aria-live="polite"></span>${INSTRUCTOR?`<div class="key">Answer: ${esc(ans)}</div>`:''}</div>`;}
+function num(label,ans){const id='h'+(++qn);return `<div class="q"><label for="${id}">${label}</label><span aria-hidden="true">$ </span><input id="${id}" type="text" inputmode="decimal" class="money" autocomplete="off" data-ans="${ans}"><span class="mark" aria-live="polite"></span>${INSTRUCTOR?`<div class="key">Answer: ${$(ans)}</div>`:''}</div>`;}
+function entry(n,text,dr,cr,amt){return `<div class="card"><p><strong>${n}.</strong> ${text}</p>${sel(`${n}(a) Account debited`,ACC,dr)}${sel(`${n}(b) Account credited`,ACC,cr)}${num(`${n}(c) Amount`,amt)}</div>`;}
+
+function build(id){
+  R=mulberry32(fnv1a('ACCT351-CH2|'+id.trim().toUpperCase())); qn=0;
+  const co=pick(COS); const k=(a,b,s)=>ri(a,b)*(s||100);
+  let h='';
+  // ---- Problem 1: journal entries
+  const T=[
+   ()=>{const a=k(200,600,250);return[`Issued common stock to investors for ${$(a)} cash.`,'Cash','Common Stock',a];},
+   ()=>{const a=k(20,80,500);return[`Borrowed ${$(a)} from a local bank, signing a note payable.`,'Cash','Notes Payable',a];},
+   ()=>{const a=k(30,120,250);return[`Purchased equipment for ${$(a)} cash.`,'Equipment','Cash',a];},
+   ()=>{const a=k(20,80,500);return[`Purchased equipment by signing a ${$(a)} note payable.`,'Equipment','Notes Payable',a];},
+   ()=>{const a=k(6,24,600);return[`Paid ${$(a)} in advance for 12 months of office rent.`,'Prepaid Rent','Cash',a];},
+   ()=>{const a=k(12,48,100);return[`Paid ${$(a)} for a one-year insurance policy.`,'Prepaid Insurance','Cash',a];},
+   ()=>{const a=k(8,40,100);return[`Purchased ${$(a)} of supplies on account.`,'Supplies','Accounts Payable',a];},
+   ()=>{const a=k(20,90,100);return[`Received ${$(a)} from a customer for services to be performed next quarter.`,'Cash','Unearned Revenue',a];},
+   ()=>{const a=k(40,160,100);return[`Performed services and collected ${$(a)} in cash.`,'Cash','Service Revenue',a];},
+   ()=>{const a=k(40,160,100);return[`Performed services on account, ${$(a)}.`,'Accounts Receivable','Service Revenue',a];},
+   ()=>{const a=k(20,90,100);return[`Collected ${$(a)} from customers on account.`,'Cash','Accounts Receivable',a];},
+   ()=>{const a=k(5,30,100);return[`Paid ${$(a)} owed to a supplier on account.`,'Accounts Payable','Cash',a];},
+   ()=>{const a=k(30,120,100);return[`Paid employees ${$(a)} for work performed this month.`,'Salaries Expense','Cash',a];},
+   ()=>{const a=k(4,20,100);return[`Paid the monthly utility bill, ${$(a)}.`,'Utilities Expense','Cash',a];},
+   ()=>{const a=k(5,30,100);return[`Declared and paid a cash dividend of ${$(a)}.`,'Dividends','Cash',a];},
+   ()=>{const a=k(10,40,100);return[`Paid employees ${$(a)} of salaries that had been accrued at the end of last month.`,'Salaries Payable','Cash',a];}];
+  const p1=shuffle(T).slice(0,8).map(f=>f());
+  h+=`<section class="problem part" aria-labelledby="p1h"><h2 id="p1h">Problem 1 — Journal Entries</h2><p><strong>${co}</strong> had the following transactions during ${Y}. For each, select the account debited and the account credited, and enter the amount. (Account lists are alphabetical.)</p>`;
+  p1.forEach((t,i)=>{h+=entry(i+1,t[0],t[1],t[2],t[3]);});
+  h+=`<div class="summary" data-part="p1" aria-live="polite"></div></section>`;
+  // ---- Problem 2: adjusting entries
+  const A=[
+   ()=>{const m=pick([3,4,5,6]),prem=ri(2,8)*1200;const start={3:'October 1',4:'September 1',5:'August 1',6:'July 1'}[m];return[`On ${start}, the company paid ${$(prem)} for a 12-month insurance policy and debited Prepaid Insurance.`,'Prepaid expense','Insurance Expense','Prepaid Insurance',prem*m/12];},
+   ()=>{const beg=k(4,12,100),buy=k(20,60,100),end=k(5,15,100);return[`Supplies on hand at January 1 were ${$(beg)}; supplies purchased during the year were ${$(buy)}. A December 31 count shows ${$(end)} on hand.`,'Prepaid expense','Supplies Expense','Supplies',beg+buy-end];},
+   ()=>{const L=pick([4,5,8,10]),c=L*k(20,90,100);return[`Equipment purchased on January 1 for ${$(c)} has a ${L}-year useful life and no residual value. Record a full year of depreciation.`,'Prepaid expense','Depreciation Expense','Accumulated Depreciation',c/L];},
+   ()=>{const r=ri(4,15)*1200;return[`On October 1, the company paid ${$(r)} for 12 months of rent and debited Prepaid Rent.`,'Prepaid expense','Rent Expense','Prepaid Rent',r/4];},
+   ()=>{const u=ri(5,20)*600;return[`On November 1, a client paid ${$(u)} in advance for six months of services, and the company credited Unearned Revenue.`,'Unearned revenue','Unearned Revenue','Service Revenue',u/3];},
+   ()=>{const w=ri(10,40)*500;return[`Employees earn ${$(w)} per five-day workweek and are paid each Friday. December 31 falls on a Wednesday, so three days of wages are unpaid.`,'Accrued liability','Salaries Expense','Salaries Payable',w*3/5];},
+   ()=>{const p=ri(2,10)*6000,r=pick([4,5,6,8]);return[`On September 1, the company borrowed ${$(p)} on a one-year, ${r}% note; principal and interest are due at maturity.`,'Accrued liability','Interest Expense','Interest Payable',p*r/100*4/12];},
+   ()=>{const p=ri(2,10)*4000,r=pick([3,6,9]);return[`On October 1, the company accepted a ${$(p)}, ${r}% one-year note receivable from a customer; interest is due at maturity.`,'Accrued receivable','Interest Receivable','Interest Revenue',p*r/100*3/12];},
+   ()=>{const a=k(10,60,100);return[`Services of ${$(a)} were performed in late December but will not be billed until January.`,'Accrued receivable','Accounts Receivable','Service Revenue',a];},
+   ()=>{const a=k(5,40,100);return[`Management estimates that ${$(a)} of year-end accounts receivable will prove uncollectible.`,'Estimate','Bad Debt Expense','Allowance for Uncollectible Accounts',a];}];
+  const p2=shuffle(A).slice(0,6).map(f=>f());
+  h+=`<section class="problem part" aria-labelledby="p2h"><h2 id="p2h">Problem 2 — Adjusting Entries</h2><p>Prepare ${co}'s adjusting entries at December 31, ${Y}, its fiscal year-end. For each, identify the type of adjustment, the accounts, and the amount (round to whole dollars).</p>`;
+  p2.forEach((t,i)=>{h+=`<div class="card"><p><strong>${i+1}.</strong> ${t[0]}</p>${sel(`${i+1}(a) Type of adjustment`,TYPES,t[1])}${sel(`${i+1}(b) Account debited`,ACC,t[2])}${sel(`${i+1}(c) Account credited`,ACC,t[3])}${num(`${i+1}(d) Amount`,Math.round(t[4]))}</div>`;});
+  h+=`<div class="summary" data-part="p2" aria-live="polite"></div></section>`;
+  // ---- Problem 3: effects
+  const U=k(400,900,100),D=k(30,120,100),S=k(10,60,100),E=k(15,70,100),Ac=k(10,50,100);
+  const fx=shuffle([
+   ['Depreciation expense was not recorded',['Overstated','Overstated','No effect']],
+   ['Accrued salaries were not recorded',['Overstated','No effect','Understated']],
+   ['Unearned revenue that has been earned was not adjusted',['Understated','No effect','Overstated']],
+   ['Accrued service revenue was not recorded',['Understated','Understated','No effect']],
+   ['Supplies used were not recorded',['Overstated','Overstated','No effect']],
+   ['Accrued interest on a note payable was not recorded',['Overstated','No effect','Understated']]]).slice(0,3);
+  h+=`<section class="problem part" aria-labelledby="p3h"><h2 id="p3h">Problem 3 — Effects of Adjusting Entries</h2>
+  <p><strong>Part A.</strong> Before any adjusting entries, a company's ${Y} income statement shows net income of ${$(U)}. These adjustments were overlooked:</p>
+  <ul><li>Depreciation on equipment, ${$(D)}</li><li>Salaries earned by employees but unpaid at year-end, ${$(S)}</li><li>Revenue earned from customer advances previously recorded as unearned revenue, ${$(E)}</li><li>Services performed but not yet billed, ${$(Ac)}</li></ul>
+  ${num('1. Corrected (adjusted) net income',U-D-S+E+Ac)}
+  <p><strong>Part B.</strong> For each error, indicate the effect on the year-end financial statements.</p>`;
+  fx.forEach((f,i)=>{h+=`<div class="card"><p><strong>${i+2}.</strong> ${f[0]}.</p>${sel(`${i+2}(a) Net income`,EFF,f[1][0])}${sel(`${i+2}(b) Total assets`,EFF,f[1][1])}${sel(`${i+2}(c) Total liabilities`,EFF,f[1][2])}</div>`;});
+  h+=`<div class="summary" data-part="p3" aria-live="polite"></div></section>`;
+  // ---- Problem 4: statements and closing
+  const SR=k(300,700,100),IR=k(5,30,100),SE=k(120,260,100),RE_=k(30,80,100),DE=k(20,60,100),UE=k(10,40,100),DV=k(10,60,100),BR=k(100,400,100);
+  const rev=SR+IR,exp=SE+RE_+DE+UE,ni=rev-exp,er=BR+ni-DV;
+  const pc=shuffle([['Unearned Revenue','Yes'],['Accumulated Depreciation','Yes'],['Salaries Payable','Yes'],['Retained Earnings','Yes'],['Dividends','No'],['Interest Revenue','No'],['Depreciation Expense','No'],['Service Revenue','No']]).slice(0,4);
+  h+=`<section class="problem part" aria-labelledby="p4h"><h2 id="p4h">Problem 4 — Financial Statements and Closing</h2>
+  <p>Selected accounts from ${co}'s adjusted trial balance at December 31, ${Y}:</p>
+  <div class="table-wrap"><table><caption>Selected adjusted balances</caption><thead><tr><th scope="col">Account</th><th scope="col" class="num">Balance</th></tr></thead><tbody>
+  <tr><th scope="row">Retained Earnings (January 1)</th><td class="num">${$(BR)}</td></tr><tr><th scope="row">Dividends</th><td class="num">${$(DV)}</td></tr>
+  <tr><th scope="row">Service Revenue</th><td class="num">${$(SR)}</td></tr><tr><th scope="row">Interest Revenue</th><td class="num">${$(IR)}</td></tr>
+  <tr><th scope="row">Salaries Expense</th><td class="num">${$(SE)}</td></tr><tr><th scope="row">Rent Expense</th><td class="num">${$(RE_)}</td></tr>
+  <tr><th scope="row">Depreciation Expense</th><td class="num">${$(DE)}</td></tr><tr><th scope="row">Utilities Expense</th><td class="num">${$(UE)}</td></tr></tbody></table></div>
+  ${num('1. Total revenues',rev)}${num('2. Total expenses',exp)}${num('3. Net income',ni)}${num('4. Retained earnings at December 31 (after closing)',er)}
+  ${num('5. Amount credited to Retained Earnings when closing the revenue accounts',rev)}
+  <p>Would each account appear on the post-closing trial balance?</p>
+  ${pc.map((p,i)=>sel(`${i+6}. ${p[0]}`,YN,p[1])).join('')}
+  <div class="summary" data-part="p4" aria-live="polite"></div></section>`;
+  // ---- Problem 5: cash to accrual
+  const cc=k(300,800,100),arB=k(20,60,100),arE=k(20,60,100),unB=k(5,20,100),unE=k(5,20,100);
+  const sp=k(100,300,100),spB=k(5,20,100),spE=k(5,20,100);
+  const ip=k(10,40,100),ipB=k(2,9,100),ipE=k(2,9,100);
+  h+=`<section class="problem part" aria-labelledby="p5h"><h2 id="p5h">Problem 5 — Converting Cash Basis to Accrual Basis</h2>
+  <p>A small business that keeps cash-basis records provides the following for ${Y}:</p>
+  <div class="table-wrap"><table><caption>Cash-basis amounts and balance sheet accounts</caption><thead><tr><th scope="col">Item</th><th scope="col" class="num">Cash paid / received</th><th scope="col" class="num">January 1</th><th scope="col" class="num">December 31</th></tr></thead><tbody>
+  <tr><th scope="row">Cash collected from customers / Accounts Receivable</th><td class="num">${$(cc)}</td><td class="num">${$(arB)}</td><td class="num">${$(arE)}</td></tr>
+  <tr><th scope="row">Unearned Revenue</th><td class="num">—</td><td class="num">${$(unB)}</td><td class="num">${$(unE)}</td></tr>
+  <tr><th scope="row">Cash paid for salaries / Salaries Payable</th><td class="num">${$(sp)}</td><td class="num">${$(spB)}</td><td class="num">${$(spE)}</td></tr>
+  <tr><th scope="row">Cash paid for insurance / Prepaid Insurance</th><td class="num">${$(ip)}</td><td class="num">${$(ipB)}</td><td class="num">${$(ipE)}</td></tr></tbody></table></div>
+  ${num('1. Accrual-basis service revenue',cc+(arE-arB)-(unE-unB))}${num('2. Accrual-basis salaries expense',sp+(spE-spB))}${num('3. Accrual-basis insurance expense',ip-(ipE-ipB))}
+  <div class="summary" data-part="p5" aria-live="polite"></div></section>`;
+  return h;
+}
+function parse(s){s=String(s).trim().replace(/−/g,'-').replace(/[$,\s]/g,'');let neg=false;if(/^\(.*\)$/.test(s)){neg=true;s=s.slice(1,-1);}const v=parseFloat(s);return isNaN(v)?NaN:(neg?-v:v);}
+function grade(){
+  let tot=0,ok=0;
+  document.querySelectorAll('.summary[data-part]').forEach(sum=>{
+    const sec=sum.closest('section');let t=0,c=0;
+    sec.querySelectorAll('[data-ans]').forEach(f=>{
+      t++;const m=f.parentElement.querySelector('.mark');const blank=f.value.trim()==='';
+      const good=!blank&&(f.tagName==='SELECT'?f.value===f.dataset.ans:Math.abs(parse(f.value)-parseFloat(f.dataset.ans))<0.5);
+      f.classList.toggle('correct',good);f.classList.toggle('wrong',!good);f.setAttribute('aria-invalid',good?'false':'true');
+      m.textContent=good?' ✓ Correct':(blank?' ✗ No answer':' ✗ Incorrect');m.className='mark fb '+(good?'ok':'no');if(good)c++;});
+    sum.textContent=c+' of '+t+' correct';tot+=t;ok+=c;});
+  const o=document.getElementById('overall');o.textContent='Overall: '+ok+' of '+tot+' correct ('+Math.round(ok/tot*100)+'%)';o.hidden=false;o.focus();
+}
+function load(){
+  const v=document.getElementById('sid').value.trim();const msg=document.getElementById('idmsg');
+  if(!/^\d{6,12}$/.test(v)){msg.textContent='Enter your WCU student ID number (digits only, e.g., 92xxxxxxx).';msg.className='fb no';document.getElementById('sid').focus();return;}
+  msg.textContent='Problems loaded for ID '+v+'. Your numbers and situations are unique to this ID.';msg.className='fb ok';
+  document.getElementById('hw').innerHTML=build(v);document.getElementById('actions').hidden=false;document.getElementById('overall').hidden=true;
+}
+document.getElementById('loadbtn').addEventListener('click',load);
+document.getElementById('sid').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();load();}});
+document.getElementById('checkbtn').addEventListener('click',grade);
+document.getElementById('printbtn').addEventListener('click',()=>window.print());
+window.__hw={build,grade,load};
+})();
+
+</script>
+</body>
+</html>
