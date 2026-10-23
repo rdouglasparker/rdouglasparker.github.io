@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guided Walkthrough: Adjusting and Closing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --purple:#592C88; --purple-dk:#3B1D5C; --purple-lt:#F3EEF9; --gold:#FFC425; --gold-lt:#FFF6DA;
+  --ink:#1F1A24; --muted:#4F4A55; --line:#D9D2E3; --paper:#FFFFFF; --bg:#FAF8FC;
+  --ok:#1E6B3A; --ok-bg:#E6F4EA; --bad:#A4161A; --bad-bg:#FBE9EA; --key:#14532D; --key-bg:#E7F5EC;
+}
+*{box-sizing:border-box}
+html{font-size:17px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Source Serif 4",Georgia,serif;line-height:1.6}
+a{color:var(--purple)} a:hover{color:var(--purple-dk)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;box-shadow:0 0 0 5px var(--purple-dk)}
+.skip{position:absolute;left:-999px;top:0;background:var(--gold);color:var(--ink);padding:.5rem 1rem;z-index:10;font-family:Inter,Arial,sans-serif}
+.skip:focus{left:1rem}
+header.banner{background:var(--purple);color:#fff;border-bottom:6px solid var(--gold)}
+header.banner .inner{max-width:960px;margin:0 auto;padding:1.6rem 1.25rem 1.3rem}
+header.banner .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:0 0 .35rem}
+header.banner h1{font-family:Inter,Arial,sans-serif;font-weight:800;font-size:1.9rem;line-height:1.2;margin:0}
+header.banner p.sub{margin:.5rem 0 0;color:#EDE6F5;font-size:1rem}
+.instructor-banner{background:#A4161A;color:#fff;font-family:Inter,Arial,sans-serif;font-weight:700;text-align:center;padding:.6rem 1rem;letter-spacing:.03em}
+main{max-width:960px;margin:0 auto;padding:1.5rem 1.25rem 3rem}
+h2{font-family:Inter,Arial,sans-serif;color:var(--purple-dk);font-size:1.45rem;margin:2.2rem 0 .6rem;padding-bottom:.3rem;border-bottom:3px solid var(--gold)}
+h3{font-family:Inter,Arial,sans-serif;color:var(--purple);font-size:1.15rem;margin:1.6rem 0 .4rem}
+h4{font-family:Inter,Arial,sans-serif;font-size:1rem;margin:1.2rem 0 .3rem;color:var(--ink)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:1.1rem 1.25rem;margin:1rem 0;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.toc{background:var(--purple-lt);border-left:6px solid var(--purple)}
+.toc ol{margin:.3rem 0 0 1.2rem;padding:0}
+.callout{border-radius:8px;padding:.9rem 1.1rem;margin:1rem 0;border-left:6px solid}
+.callout .label{display:block;font-family:Inter,Arial,sans-serif;font-weight:800;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.25rem}
+.callout.key{background:var(--gold-lt);border-color:var(--gold)}
+.callout.important{background:#FFF1F1;border-color:var(--bad)}
+.callout.tip{background:var(--purple-lt);border-color:var(--purple)}
+.callout.ifrs{background:#EEF5FB;border-color:#1D4E89}
+.callout.update{background:#F1F7EE;border-color:var(--ok)}
+.def{font-weight:700;color:var(--purple-dk)}
+table{border-collapse:collapse;width:100%;margin:.8rem 0;font-size:.95rem;background:#fff}
+caption{text-align:left;font-family:Inter,Arial,sans-serif;font-weight:700;color:var(--purple-dk);padding:.3rem 0}
+th,td{border:1px solid var(--line);padding:.5rem .65rem;vertical-align:top;text-align:left}
+thead th{background:var(--purple);color:#fff;font-family:Inter,Arial,sans-serif;font-size:.9rem}
+tbody th{background:var(--purple-lt);font-family:Inter,Arial,sans-serif}
+td.num,th.num{text-align:right;font-family:"IBM Plex Mono",monospace;white-space:nowrap}
+tr.total td{font-weight:700;border-top:2px solid var(--ink)}
+.table-wrap{overflow-x:auto}
+.mono{font-family:"IBM Plex Mono",monospace}
+.formula{font-family:"IBM Plex Mono",monospace;background:var(--purple-lt);padding:.6rem .9rem;border-radius:6px;display:block;margin:.6rem 0}
+/* Interactive */
+.step{background:#fff;border:1px solid var(--line);border-left:6px solid var(--purple);border-radius:10px;padding:1rem 1.2rem;margin:1.2rem 0}
+.step h3{margin-top:0}
+.q{margin:.9rem 0;padding:.75rem .9rem;border:1px solid var(--line);border-radius:8px;background:#fff}
+.q > label,.q .prompt{display:block;font-weight:600;margin-bottom:.4rem}
+input[type=text],input[type=number],select,textarea{font:inherit;font-family:"IBM Plex Mono",monospace;font-size:.95rem;padding:.45rem .55rem;border:2px solid #77707F;border-radius:6px;background:#fff;color:var(--ink);max-width:100%}
+input.money{width:11rem;text-align:right}
+select{font-family:Inter,Arial,sans-serif;min-width:16rem}
+textarea{width:100%;min-height:7rem;font-family:"Source Serif 4",Georgia,serif}
+input.correct,select.correct{border-color:var(--ok);background:var(--ok-bg)}
+input.wrong,select.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.btn{font-family:Inter,Arial,sans-serif;font-weight:700;font-size:.95rem;border:2px solid var(--purple);background:var(--purple);color:#fff;border-radius:8px;padding:.55rem 1.1rem;cursor:pointer;margin:.4rem .4rem .4rem 0}
+.btn:hover{background:var(--purple-dk)}
+.btn.secondary{background:#fff;color:var(--purple)}
+.btn.gold{background:var(--gold);border-color:#B88A00;color:var(--ink)}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+.fb{margin-top:.5rem;font-family:Inter,Arial,sans-serif;font-size:.93rem;font-weight:600}
+.fb.ok{color:var(--ok)} .fb.no{color:var(--bad)}
+.explain{display:none;margin-top:.6rem;background:var(--key-bg);border-left:5px solid var(--key);padding:.7rem .9rem;border-radius:6px}
+.explain.show{display:block}
+.key{background:var(--key-bg);border:2px solid var(--key);color:var(--key);font-family:"IBM Plex Mono",monospace;font-size:.88rem;padding:.25rem .5rem;border-radius:5px;display:inline-block;margin-top:.35rem}
+.summary{font-family:Inter,Arial,sans-serif;font-weight:700;padding:.6rem .9rem;border-radius:8px;background:var(--purple-lt);margin:.6rem 0}
+.idbar{display:flex;flex-wrap:wrap;gap:.6rem;align-items:flex-end;background:var(--gold-lt);border:2px solid var(--gold);border-radius:10px;padding:1rem 1.2rem}
+.idbar label{font-family:Inter,Arial,sans-serif;font-weight:700;display:block}
+.problem{background:#fff;border:1px solid var(--line);border-radius:10px;padding:1.1rem 1.25rem;margin:1.4rem 0}
+.problem > h2{margin-top:.2rem}
+.part{break-inside:auto}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+.pill{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.75rem;background:var(--purple);color:#fff;border-radius:999px;padding:.1rem .55rem;vertical-align:middle}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media (max-width:720px){.grid2{grid-template-columns:1fr} header.banner h1{font-size:1.5rem} select{min-width:0;width:100%}}
+footer{max-width:960px;margin:0 auto;padding:1rem 1.25rem 2rem;color:var(--muted);font-size:.85rem;font-family:Inter,Arial,sans-serif}
+@media print{
+  .btn,.skip,.idbar .btn{display:none!important}
+  body{background:#fff}
+  .problem{page-break-before:always;border:none}
+  h2,h3{break-after:avoid}
+  .explain{display:block}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+table.je{width:auto;min-width:min(100%,560px)}
+table.je td.cr{padding-left:2.4rem}
+table.je td.num{min-width:7rem}
+.tacct{display:inline-block;vertical-align:top;margin:.4rem 1rem .8rem 0;min-width:220px}
+.tacct table{margin:0}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+
+<header class="banner"><div class="inner">
+<p class="eyebrow">ACCT 351 · Guided Walkthrough</p>
+<h1>Adjusting Entries and Closing</h1>
+<p class="sub">Classify and record month-end adjustments, measure their effects, and close the books.</p>
+</div></header>
+<main id="main" tabindex="-1">
+<div class="card"><h2 style="margin-top:0">How this walkthrough works</h2>
+<p>Enter or select each answer first — <em>Check answer</em> unlocks once you do. After checking, open the explanation. Account lists are in alphabetical order.</p><div class="summary" id="progress" aria-live="polite">Progress: 0 of 0 answered correctly</div></div>
+<h2>The scenario: Balsam Gap Bike Works, August 31</h2>
+<p>Continue with Balsam Gap Bike Works. Its unadjusted trial balance shows net income of <span class="mono">$7,200</span> (service revenue only, no expenses recorded yet). Use the information below to prepare the August 31 adjusting entries. Round to whole dollars.</p>
+<div class="step"><h3>Step 1 — Prepare the adjusting entries</h3>
+<div class="card"><p><strong>1.</strong> The 12-month insurance policy cost $3,600 and began August 1.</p><div class="q" data-kind="sel" data-answer="Prepaid expense">
+<label for="q31">1(a) Type of adjustment</label>
+<select id="q31" aria-describedby="q31-fb"><option value="">— Select —</option><option value="Prepaid expense">Prepaid expense</option><option value="Unearned revenue">Unearned revenue</option><option value="Accrued liability">Accrued liability</option><option value="Accrued receivable">Accrued receivable</option><option value="Estimate">Estimate</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q31-ex">Show explanation</button></div>
+<div class="fb" id="q31-fb" aria-live="polite"></div>
+<div class="explain" id="q31-ex"><p>Cash was paid before the expense was incurred → prepayment. One month used: $3,600 ÷ 12 = <strong>$300</strong>.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Insurance Expense">
+<label for="q32">1(b) Account debited</label>
+<select id="q32" aria-describedby="q32-fb"><option value="">— Select —</option><option value="Accounts Payable">Accounts Payable</option><option value="Accounts Receivable">Accounts Receivable</option><option value="Accumulated Depreciation">Accumulated Depreciation</option><option value="Allowance for Uncollectible Accounts">Allowance for Uncollectible Accounts</option><option value="Bad Debt Expense">Bad Debt Expense</option><option value="Cash">Cash</option><option value="Common Stock">Common Stock</option><option value="Depreciation Expense">Depreciation Expense</option><option value="Dividends">Dividends</option><option value="Equipment">Equipment</option><option value="Insurance Expense">Insurance Expense</option><option value="Interest Expense">Interest Expense</option><option value="Interest Payable">Interest Payable</option><option value="Interest Receivable">Interest Receivable</option><option value="Interest Revenue">Interest Revenue</option><option value="Notes Payable">Notes Payable</option><option value="Prepaid Insurance">Prepaid Insurance</option><option value="Prepaid Rent">Prepaid Rent</option><option value="Rent Expense">Rent Expense</option><option value="Retained Earnings">Retained Earnings</option><option value="Salaries Expense">Salaries Expense</option><option value="Salaries Payable">Salaries Payable</option><option value="Service Revenue">Service Revenue</option><option value="Supplies">Supplies</option><option value="Supplies Expense">Supplies Expense</option><option value="Unearned Revenue">Unearned Revenue</option><option value="Utilities Expense">Utilities Expense</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q32-ex">Show explanation</button></div>
+<div class="fb" id="q32-fb" aria-live="polite"></div>
+<div class="explain" id="q32-ex"><p>Cash was paid before the expense was incurred → prepayment. One month used: $3,600 ÷ 12 = <strong>$300</strong>.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Prepaid Insurance">
+<label for="q33">1(c) Account credited</label>
+<select id="q33" aria-describedby="q33-fb"><option value="">— Select —</option><option value="Accounts Payable">Accounts Payable</option><option value="Accounts Receivable">Accounts Receivable</option><option value="Accumulated Depreciation">Accumulated Depreciation</option><option value="Allowance for Uncollectible Accounts">Allowance for Uncollectible Accounts</option><option value="Bad Debt Expense">Bad Debt Expense</option><option value="Cash">Cash</option><option value="Common Stock">Common Stock</option><option value="Depreciation Expense">Depreciation Expense</option><option value="Dividends">Dividends</option><option value="Equipment">Equipment</option><option value="Insurance Expense">Insurance Expense</option><option value="Interest Expense">Interest Expense</option><option value="Interest Payable">Interest Payable</option><option value="Interest Receivable">Interest Receivable</option><option value="Interest Revenue">Interest Revenue</option><option value="Notes Payable">Notes Payable</option><option value="Prepaid Insurance">Prepaid Insurance</option><option value="Prepaid Rent">Prepaid Rent</option><option value="Rent Expense">Rent Expense</option><option value="Retained Earnings">Retained Earnings</option><option value="Salaries Expense">Salaries Expense</option><option value="Salaries Payable">Salaries Payable</option><option value="Service Revenue">Service Revenue</option><option value="Supplies">Supplies</option><option value="Supplies Expense">Supplies Expense</option><option value="Unearned Revenue">Unearned Revenue</option><option value="Utilities Expense">Utilities Expense</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q33-ex">Show explanation</button></div>
+<div class="fb" id="q33-fb" aria-live="polite"></div>
+<div class="explain" id="q33-ex"><p>Cash was paid before the expense was incurred → prepayment. One month used: $3,600 ÷ 12 = <strong>$300</strong>.</p></div>
+</div><div class="q" data-kind="num" data-answer="300">
+<label for="q34">1(d) Amount</label>
+<span aria-hidden="true">$</span><input id="q34" type="text" inputmode="decimal" class="money" autocomplete="off" aria-describedby="q34-fb">
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q34-ex">Show explanation</button></div>
+<div class="fb" id="q34-fb" aria-live="polite"></div>
+<div class="explain" id="q34-ex"><p>Cash was paid before the expense was incurred → prepayment. One month used: $3,600 ÷ 12 = <strong>$300</strong>.</p></div>
+</div></div><div class="card"><p><strong>2.</strong> A count shows $1,150 of parts and supplies on hand (purchased $1,800).</p><div class="q" data-kind="sel" data-answer="Prepaid expense">
+<label for="q35">2(a) Type of adjustment</label>
+<select id="q35" aria-describedby="q35-fb"><option value="">— Select —</option><option value="Prepaid expense">Prepaid expense</option><option value="Unearned revenue">Unearned revenue</option><option value="Accrued liability">Accrued liability</option><option value="Accrued receivable">Accrued receivable</option><option value="Estimate">Estimate</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q35-ex">Show explanation</button></div>
+<div class="fb" id="q35-fb" aria-live="polite"></div>
+<div class="explain" id="q35-ex"><p>Supplies used = $1,800 − $1,150 = <strong>$650</strong>.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Supplies Expense">
+<label for="q36">2(b) Account debited</label>
+<select id="q36" aria-describedby="q36-fb"><option value="">— Select —</option><option value="Accounts Payable">Accounts Payable</option><option value="Accounts Receivable">Accounts Receivable</option><option value="Accumulated Depreciation">Accumulated Depreciation</option><option value="Allowance for Uncollectible Accounts">Allowance for Uncollectible Accounts</option><option value="Bad Debt Expense">Bad Debt Expense</option><option value="Cash">Cash</option><option value="Common Stock">Common Stock</option><option value="Depreciation Expense">Depreciation Expense</option><option value="Dividends">Dividends</option><option value="Equipment">Equipment</option><option value="Insurance Expense">Insurance Expense</option><option value="Interest Expense">Interest Expense</option><option value="Interest Payable">Interest Payable</option><option value="Interest Receivable">Interest Receivable</option><option value="Interest Revenue">Interest Revenue</option><option value="Notes Payable">Notes Payable</option><option value="Prepaid Insurance">Prepaid Insurance</option><option value="Prepaid Rent">Prepaid Rent</option><option value="Rent Expense">Rent Expense</option><option value="Retained Earnings">Retained Earnings</option><option value="Salaries Expense">Salaries Expense</option><option value="Salaries Payable">Salaries Payable</option><option value="Service Revenue">Service Revenue</option><option value="Supplies">Supplies</option><option value="Supplies Expense">Supplies Expense</option><option value="Unearned Revenue">Unearned Revenue</option><option value="Utilities Expense">Utilities Expense</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q36-ex">Show explanation</button></div>
+<div class="fb" id="q36-fb" aria-live="polite"></div>
+<div class="explain" id="q36-ex"><p>Supplies used = $1,800 − $1,150 = <strong>$650</strong>.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Supplies">
+<label for="q37">2(c) Account credited</label>
+<select id="q37" aria-describedby="q37-fb"><option value="">— Select —</option><option value="Accounts Payable">Accounts Payable</option><option value="Accounts Receivable">Accounts Receivable</option><option value="Accumulated Depreciation">Accumulated Depreciation</option><option value="Allowance for Uncollectible Accounts">Allowance for Uncollectible Accounts</option><option value="Bad Debt Expense">Bad Debt Expense</option><option value="Cash">Cash</option><option value="Common Stock">Common Stock</option><option value="Depreciation Expense">Depreciation Expense</option><option value="Dividends">Dividends</option><option value="Equipment">Equipment</option><option value="Insurance Expense">Insurance Expense</option><option value="Interest Expense">Interest Expense</option><option value="Interest Payable">Interest Payable</option><option value="Interest Receivable">Interest Receivable</option><option value="Interest Revenue">Interest Revenue</option><option value="Notes Payable">Notes Payable</option><option value="Prepaid Insurance">Prepaid Insurance</option><option value="Prepaid Rent">Prepaid Rent</option><option value="Rent Expense">Rent Expense</option><option value="Retained Earnings">Retained Earnings</option><option value="Salaries Expense">Salaries Expense</option><option value="Salaries Payable">Salaries Payable</option><option value="Service Revenue">Service Revenue</option><option value="Supplies">Supplies</option><option value="Supplies Expense">Supplies Expense</option><option value="Unearned Revenue">Unearned Revenue</option><option value="Utilities Expense">Utilities Expense</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q37-ex">Show explanation</button></div>
+<div class="fb" id="q37-fb" aria-live="polite"></div>
+<div class="explain" id="q37-ex"><p>Supplies used = $1,800 − $1,150 = <strong>$650</strong>.</p></div>
+</div><div class="q" data-kind="num" data-answer="650">
+<label for="q38">2(d) Amount</label>
+<span aria-hidden="true">$</span><input id="q38" type="text" inputmode="decimal" class="money" autocomplete="off" aria-describedby="q38-fb">
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q38-ex">Show explanation</button></div>
+<div class="fb" id="q38-fb" aria-live="polite"></div>
+<div class="explain" id="q38-ex"><p>Supplies used = $1,800 − $1,150 = <strong>$650</strong>.</p></div>
+</div></div><div class="card"><p><strong>3.</strong> The $24,000 of equipment has a four-year useful life and no residual value.</p><div class="q" data-kind="sel" data-answer="Prepaid expense">
+<label for="q39">3(a) Type of adjustment</label>
+<select id="q39" aria-describedby="q39-fb"><option value="">— Select —</option><option value="Prepaid expense">Prepaid expense</option><option value="Unearned revenue">Unearned revenue</option><option value="Accrued liability">Accrued liability</option><option value="Accrued receivable">Accrued receivable</option><option value="Estimate">Estimate</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q39-ex">Show explanation</button></div>
+<div class="fb" id="q39-fb" aria-live="polite"></div>
+<div class="explain" id="q39-ex"><p>Depreciation is a prepayment for a long-lived asset: $24,000 ÷ 4 years ÷ 12 months = <strong>$500</strong>. The credit goes to the contra asset.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Depreciation Expense">
+<label for="q40">3(b) Account debited</label>
+<select id="q40" aria-describedby="q40-fb"><option value="">— Select —</option><option value="Accounts Payable">Accounts Payable</option><option value="Accounts Receivable">Accounts Receivable</option><option value="Accumulated Depreciation">Accumulated Depreciation</option><option value="Allowance for Uncollectible Accounts">Allowance for Uncollectible Accounts</option><option value="Bad Debt Expense">Bad Debt Expense</option><option value="Cash">Cash</option><option value="Common Stock">Common Stock</option><option value="Depreciation Expense">Depreciation Expense</option><option value="Dividends">Dividends</option><option value="Equipment">Equipment</option><option value="Insurance Expense">Insurance Expense</option><option value="Interest Expense">Interest Expense</option><option value="Interest Payable">Interest Payable</option><option value="Interest Receivable">Interest Receivable</option><option value="Interest Revenue">Interest Revenue</option><option value="Notes Payable">Notes Payable</option><option value="Prepaid Insurance">Prepaid Insurance</option><option value="Prepaid Rent">Prepaid Rent</option><option value="Rent Expense">Rent Expense</option><option value="Retained Earnings">Retained Earnings</option><option value="Salaries Expense">Salaries Expense</option><option value="Salaries Payable">Salaries Payable</option><option value="Service Revenue">Service Revenue</option><option value="Supplies">Supplies</option><option value="Supplies Expense">Supplies Expense</option><option value="Unearned Revenue">Unearned Revenue</option><option value="Utilities Expense">Utilities Expense</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q40-ex">Show explanation</button></div>
+<div class="fb" id="q40-fb" aria-live="polite"></div>
+<div class="explain" id="q40-ex"><p>Depreciation is a prepayment for a long-lived asset: $24,000 ÷ 4 years ÷ 12 months = <strong>$500</strong>. The credit goes to the contra asset.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Accumulated Depreciation">
+<label for="q41">3(c) Account credited</label>
+<select id="q41" aria-describedby="q41-fb"><option value="">— Select —</option><option value="Accounts Payable">Accounts Payable</option><option value="Accounts Receivable">Accounts Receivable</option><option value="Accumulated Depreciation">Accumulated Depreciation</option><option value="Allowance for Uncollectible Accounts">Allowance for Uncollectible Accounts</option><option value="Bad Debt Expense">Bad Debt Expense</option><option value="Cash">Cash</option><option value="Common Stock">Common Stock</option><option value="Depreciation Expense">Depreciation Expense</option><option value="Dividends">Dividends</option><option value="Equipment">Equipment</option><option value="Insurance Expense">Insurance Expense</option><option value="Interest Expense">Interest Expense</option><option value="Interest Payable">Interest Payable</option><option value="Interest Receivable">Interest Receivable</option><option value="Interest Revenue">Interest Revenue</option><option value="Notes Payable">Notes Payable</option><option value="Prepaid Insurance">Prepaid Insurance</option><option value="Prepaid Rent">Prepaid Rent</option><option value="Rent Expense">Rent Expense</option><option value="Retained Earnings">Retained Earnings</option><option value="Salaries Expense">Salaries Expense</option><option value="Salaries Payable">Salaries Payable</option><option value="Service Revenue">Service Revenue</option><option value="Supplies">Supplies</option><option value="Supplies Expense">Supplies Expense</option><option value="Unearned Revenue">Unearned Revenue</option><option value="Utilities Expense">Utilities Expense</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q41-ex">Show explanation</button></div>
+<div class="fb" id="q41-fb" aria-live="polite"></div>
+<div class="explain" id="q41-ex"><p>Depreciation is a prepayment for a long-lived asset: $24,000 ÷ 4 years ÷ 12 months = <strong>$500</strong>. The credit goes to the contra asset.</p></div>
+</div><div class="q" data-kind="num" data-answer="500">
+<label for="q42">3(d) Amount</label>
+<span aria-hidden="true">$</span><input id="q42" type="text" inputmode="decimal" class="money" autocomplete="off" aria-describedby="q42-fb">
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q42-ex">Show explanation</button></div>
+<div class="fb" id="q42-fb" aria-live="polite"></div>
+<div class="explain" id="q42-ex"><p>Depreciation is a prepayment for a long-lived asset: $24,000 ÷ 4 years ÷ 12 months = <strong>$500</strong>. The credit goes to the contra asset.</p></div>
+</div></div><div class="card"><p><strong>4.</strong> Of the $4,500 collected in advance from the tour company, $1,200 of rentals were provided on August 30–31.</p><div class="q" data-kind="sel" data-answer="Unearned revenue">
+<label for="q43">4(a) Type of adjustment</label>
+<select id="q43" aria-describedby="q43-fb"><option value="">— Select —</option><option value="Prepaid expense">Prepaid expense</option><option value="Unearned revenue">Unearned revenue</option><option value="Accrued liability">Accrued liability</option><option value="Accrued receivable">Accrued receivable</option><option value="Estimate">Estimate</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q43-ex">Show explanation</button></div>
+<div class="fb" id="q43-fb" aria-live="polite"></div>
+<div class="explain" id="q43-ex"><p>Cash came first, so this is a prepayment of revenue. The liability decreases and <strong>$1,200</strong> of revenue is recognized.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Unearned Revenue">
+<label for="q44">4(b) Account debited</label>
+<select id="q44" aria-describedby="q44-fb"><option value="">— Select —</option><option value="Accounts Payable">Accounts Payable</option><option value="Accounts Receivable">Accounts Receivable</option><option value="Accumulated Depreciation">Accumulated Depreciation</option><option value="Allowance for Uncollectible Accounts">Allowance for Uncollectible Accounts</option><option value="Bad Debt Expense">Bad Debt Expense</option><option value="Cash">Cash</option><option value="Common Stock">Common Stock</option><option value="Depreciation Expense">Depreciation Expense</option><option value="Dividends">Dividends</option><option value="Equipment">Equipment</option><option value="Insurance Expense">Insurance Expense</option><option value="Interest Expense">Interest Expense</option><option value="Interest Payable">Interest Payable</option><option value="Interest Receivable">Interest Receivable</option><option value="Interest Revenue">Interest Revenue</option><option value="Notes Payable">Notes Payable</option><option value="Prepaid Insurance">Prepaid Insurance</option><option value="Prepaid Rent">Prepaid Rent</option><option value="Rent Expense">Rent Expense</option><option value="Retained Earnings">Retained Earnings</option><option value="Salaries Expense">Salaries Expense</option><option value="Salaries Payable">Salaries Payable</option><option value="Service Revenue">Service Revenue</option><option value="Supplies">Supplies</option><option value="Supplies Expense">Supplies Expense</option><option value="Unearned Revenue">Unearned Revenue</option><option value="Utilities Expense">Utilities Expense</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q44-ex">Show explanation</button></div>
+<div class="fb" id="q44-fb" aria-live="polite"></div>
+<div class="explain" id="q44-ex"><p>Cash came first, so this is a prepayment of revenue. The liability decreases and <strong>$1,200</strong> of revenue is recognized.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Service Revenue">
+<label for="q45">4(c) Account credited</label>
+<select id="q45" aria-describedby="q45-fb"><option value="">— Select —</option><option value="Accounts Payable">Accounts Payable</option><option value="Accounts Receivable">Accounts Receivable</option><option value="Accumulated Depreciation">Accumulated Depreciation</option><option value="Allowance for Uncollectible Accounts">Allowance for Uncollectible Accounts</option><option value="Bad Debt Expense">Bad Debt Expense</option><option value="Cash">Cash</option><option value="Common Stock">Common Stock</option><option value="Depreciation Expense">Depreciation Expense</option><option value="Dividends">Dividends</option><option value="Equipment">Equipment</option><option value="Insurance Expense">Insurance Expense</option><option value="Interest Expense">Interest Expense</option><option value="Interest Payable">Interest Payable</option><option value="Interest Receivable">Interest Receivable</option><option value="Interest Revenue">Interest Revenue</option><option value="Notes Payable">Notes Payable</option><option value="Prepaid Insurance">Prepaid Insurance</option><option value="Prepaid Rent">Prepaid Rent</option><option value="Rent Expense">Rent Expense</option><option value="Retained Earnings">Retained Earnings</option><option value="Salaries Expense">Salaries Expense</option><option value="Salaries Payable">Salaries Payable</option><option value="Service Revenue">Service Revenue</option><option value="Supplies">Supplies</option><option value="Supplies Expense">Supplies Expense</option><option value="Unearned Revenue">Unearned Revenue</option><option value="Utilities Expense">Utilities Expense</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q45-ex">Show explanation</button></div>
+<div class="fb" id="q45-fb" aria-live="polite"></div>
+<div class="explain" id="q45-ex"><p>Cash came first, so this is a prepayment of revenue. The liability decreases and <strong>$1,200</strong> of revenue is recognized.</p></div>
+</div><div class="q" data-kind="num" data-answer="1200">
+<label for="q46">4(d) Amount</label>
+<span aria-hidden="true">$</span><input id="q46" type="text" inputmode="decimal" class="money" autocomplete="off" aria-describedby="q46-fb">
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q46-ex">Show explanation</button></div>
+<div class="fb" id="q46-fb" aria-live="polite"></div>
+<div class="explain" id="q46-ex"><p>Cash came first, so this is a prepayment of revenue. The liability decreases and <strong>$1,200</strong> of revenue is recognized.</p></div>
+</div></div><div class="card"><p><strong>5.</strong> Mechanics earned $1,400 of wages in the last week of August that will be paid on September 3.</p><div class="q" data-kind="sel" data-answer="Accrued liability">
+<label for="q47">5(a) Type of adjustment</label>
+<select id="q47" aria-describedby="q47-fb"><option value="">— Select —</option><option value="Prepaid expense">Prepaid expense</option><option value="Unearned revenue">Unearned revenue</option><option value="Accrued liability">Accrued liability</option><option value="Accrued receivable">Accrued receivable</option><option value="Estimate">Estimate</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q47-ex">Show explanation</button></div>
+<div class="fb" id="q47-fb" aria-live="polite"></div>
+<div class="explain" id="q47-ex"><p>The expense was incurred before payment → accrual. Record the expense and the liability: <strong>$1,400</strong>.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Salaries Expense">
+<label for="q48">5(b) Account debited</label>
+<select id="q48" aria-describedby="q48-fb"><option value="">— Select —</option><option value="Accounts Payable">Accounts Payable</option><option value="Accounts Receivable">Accounts Receivable</option><option value="Accumulated Depreciation">Accumulated Depreciation</option><option value="Allowance for Uncollectible Accounts">Allowance for Uncollectible Accounts</option><option value="Bad Debt Expense">Bad Debt Expense</option><option value="Cash">Cash</option><option value="Common Stock">Common Stock</option><option value="Depreciation Expense">Depreciation Expense</option><option value="Dividends">Dividends</option><option value="Equipment">Equipment</option><option value="Insurance Expense">Insurance Expense</option><option value="Interest Expense">Interest Expense</option><option value="Interest Payable">Interest Payable</option><option value="Interest Receivable">Interest Receivable</option><option value="Interest Revenue">Interest Revenue</option><option value="Notes Payable">Notes Payable</option><option value="Prepaid Insurance">Prepaid Insurance</option><option value="Prepaid Rent">Prepaid Rent</option><option value="Rent Expense">Rent Expense</option><option value="Retained Earnings">Retained Earnings</option><option value="Salaries Expense">Salaries Expense</option><option value="Salaries Payable">Salaries Payable</option><option value="Service Revenue">Service Revenue</option><option value="Supplies">Supplies</option><option value="Supplies Expense">Supplies Expense</option><option value="Unearned Revenue">Unearned Revenue</option><option value="Utilities Expense">Utilities Expense</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q48-ex">Show explanation</button></div>
+<div class="fb" id="q48-fb" aria-live="polite"></div>
+<div class="explain" id="q48-ex"><p>The expense was incurred before payment → accrual. Record the expense and the liability: <strong>$1,400</strong>.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Salaries Payable">
+<label for="q49">5(c) Account credited</label>
+<select id="q49" aria-describedby="q49-fb"><option value="">— Select —</option><option value="Accounts Payable">Accounts Payable</option><option value="Accounts Receivable">Accounts Receivable</option><option value="Accumulated Depreciation">Accumulated Depreciation</option><option value="Allowance for Uncollectible Accounts">Allowance for Uncollectible Accounts</option><option value="Bad Debt Expense">Bad Debt Expense</option><option value="Cash">Cash</option><option value="Common Stock">Common Stock</option><option value="Depreciation Expense">Depreciation Expense</option><option value="Dividends">Dividends</option><option value="Equipment">Equipment</option><option value="Insurance Expense">Insurance Expense</option><option value="Interest Expense">Interest Expense</option><option value="Interest Payable">Interest Payable</option><option value="Interest Receivable">Interest Receivable</option><option value="Interest Revenue">Interest Revenue</option><option value="Notes Payable">Notes Payable</option><option value="Prepaid Insurance">Prepaid Insurance</option><option value="Prepaid Rent">Prepaid Rent</option><option value="Rent Expense">Rent Expense</option><option value="Retained Earnings">Retained Earnings</option><option value="Salaries Expense">Salaries Expense</option><option value="Salaries Payable">Salaries Payable</option><option value="Service Revenue">Service Revenue</option><option value="Supplies">Supplies</option><option value="Supplies Expense">Supplies Expense</option><option value="Unearned Revenue">Unearned Revenue</option><option value="Utilities Expense">Utilities Expense</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q49-ex">Show explanation</button></div>
+<div class="fb" id="q49-fb" aria-live="polite"></div>
+<div class="explain" id="q49-ex"><p>The expense was incurred before payment → accrual. Record the expense and the liability: <strong>$1,400</strong>.</p></div>
+</div><div class="q" data-kind="num" data-answer="1400">
+<label for="q50">5(d) Amount</label>
+<span aria-hidden="true">$</span><input id="q50" type="text" inputmode="decimal" class="money" autocomplete="off" aria-describedby="q50-fb">
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q50-ex">Show explanation</button></div>
+<div class="fb" id="q50-fb" aria-live="polite"></div>
+<div class="explain" id="q50-ex"><p>The expense was incurred before payment → accrual. Record the expense and the liability: <strong>$1,400</strong>.</p></div>
+</div></div><div class="card"><p><strong>6.</strong> Repairs of $500 were completed for a local college team on August 31 but not yet billed.</p><div class="q" data-kind="sel" data-answer="Accrued receivable">
+<label for="q51">6(a) Type of adjustment</label>
+<select id="q51" aria-describedby="q51-fb"><option value="">— Select —</option><option value="Prepaid expense">Prepaid expense</option><option value="Unearned revenue">Unearned revenue</option><option value="Accrued liability">Accrued liability</option><option value="Accrued receivable">Accrued receivable</option><option value="Estimate">Estimate</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q51-ex">Show explanation</button></div>
+<div class="fb" id="q51-fb" aria-live="polite"></div>
+<div class="explain" id="q51-ex"><p>Revenue was earned before billing or collection → accrued receivable of <strong>$500</strong>.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Accounts Receivable">
+<label for="q52">6(b) Account debited</label>
+<select id="q52" aria-describedby="q52-fb"><option value="">— Select —</option><option value="Accounts Payable">Accounts Payable</option><option value="Accounts Receivable">Accounts Receivable</option><option value="Accumulated Depreciation">Accumulated Depreciation</option><option value="Allowance for Uncollectible Accounts">Allowance for Uncollectible Accounts</option><option value="Bad Debt Expense">Bad Debt Expense</option><option value="Cash">Cash</option><option value="Common Stock">Common Stock</option><option value="Depreciation Expense">Depreciation Expense</option><option value="Dividends">Dividends</option><option value="Equipment">Equipment</option><option value="Insurance Expense">Insurance Expense</option><option value="Interest Expense">Interest Expense</option><option value="Interest Payable">Interest Payable</option><option value="Interest Receivable">Interest Receivable</option><option value="Interest Revenue">Interest Revenue</option><option value="Notes Payable">Notes Payable</option><option value="Prepaid Insurance">Prepaid Insurance</option><option value="Prepaid Rent">Prepaid Rent</option><option value="Rent Expense">Rent Expense</option><option value="Retained Earnings">Retained Earnings</option><option value="Salaries Expense">Salaries Expense</option><option value="Salaries Payable">Salaries Payable</option><option value="Service Revenue">Service Revenue</option><option value="Supplies">Supplies</option><option value="Supplies Expense">Supplies Expense</option><option value="Unearned Revenue">Unearned Revenue</option><option value="Utilities Expense">Utilities Expense</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q52-ex">Show explanation</button></div>
+<div class="fb" id="q52-fb" aria-live="polite"></div>
+<div class="explain" id="q52-ex"><p>Revenue was earned before billing or collection → accrued receivable of <strong>$500</strong>.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Service Revenue">
+<label for="q53">6(c) Account credited</label>
+<select id="q53" aria-describedby="q53-fb"><option value="">— Select —</option><option value="Accounts Payable">Accounts Payable</option><option value="Accounts Receivable">Accounts Receivable</option><option value="Accumulated Depreciation">Accumulated Depreciation</option><option value="Allowance for Uncollectible Accounts">Allowance for Uncollectible Accounts</option><option value="Bad Debt Expense">Bad Debt Expense</option><option value="Cash">Cash</option><option value="Common Stock">Common Stock</option><option value="Depreciation Expense">Depreciation Expense</option><option value="Dividends">Dividends</option><option value="Equipment">Equipment</option><option value="Insurance Expense">Insurance Expense</option><option value="Interest Expense">Interest Expense</option><option value="Interest Payable">Interest Payable</option><option value="Interest Receivable">Interest Receivable</option><option value="Interest Revenue">Interest Revenue</option><option value="Notes Payable">Notes Payable</option><option value="Prepaid Insurance">Prepaid Insurance</option><option value="Prepaid Rent">Prepaid Rent</option><option value="Rent Expense">Rent Expense</option><option value="Retained Earnings">Retained Earnings</option><option value="Salaries Expense">Salaries Expense</option><option value="Salaries Payable">Salaries Payable</option><option value="Service Revenue">Service Revenue</option><option value="Supplies">Supplies</option><option value="Supplies Expense">Supplies Expense</option><option value="Unearned Revenue">Unearned Revenue</option><option value="Utilities Expense">Utilities Expense</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q53-ex">Show explanation</button></div>
+<div class="fb" id="q53-fb" aria-live="polite"></div>
+<div class="explain" id="q53-ex"><p>Revenue was earned before billing or collection → accrued receivable of <strong>$500</strong>.</p></div>
+</div><div class="q" data-kind="num" data-answer="500">
+<label for="q54">6(d) Amount</label>
+<span aria-hidden="true">$</span><input id="q54" type="text" inputmode="decimal" class="money" autocomplete="off" aria-describedby="q54-fb">
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q54-ex">Show explanation</button></div>
+<div class="fb" id="q54-fb" aria-live="polite"></div>
+<div class="explain" id="q54-ex"><p>Revenue was earned before billing or collection → accrued receivable of <strong>$500</strong>.</p></div>
+</div></div><div class="card"><p><strong>7.</strong> Management estimates $150 of accounts receivable will not be collected.</p><div class="q" data-kind="sel" data-answer="Estimate">
+<label for="q55">7(a) Type of adjustment</label>
+<select id="q55" aria-describedby="q55-fb"><option value="">— Select —</option><option value="Prepaid expense">Prepaid expense</option><option value="Unearned revenue">Unearned revenue</option><option value="Accrued liability">Accrued liability</option><option value="Accrued receivable">Accrued receivable</option><option value="Estimate">Estimate</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q55-ex">Show explanation</button></div>
+<div class="fb" id="q55-fb" aria-live="polite"></div>
+<div class="explain" id="q55-ex"><p>Bad debts are an estimate. Credit the contra asset, not Accounts Receivable, because no specific customer has defaulted yet.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Bad Debt Expense">
+<label for="q56">7(b) Account debited</label>
+<select id="q56" aria-describedby="q56-fb"><option value="">— Select —</option><option value="Accounts Payable">Accounts Payable</option><option value="Accounts Receivable">Accounts Receivable</option><option value="Accumulated Depreciation">Accumulated Depreciation</option><option value="Allowance for Uncollectible Accounts">Allowance for Uncollectible Accounts</option><option value="Bad Debt Expense">Bad Debt Expense</option><option value="Cash">Cash</option><option value="Common Stock">Common Stock</option><option value="Depreciation Expense">Depreciation Expense</option><option value="Dividends">Dividends</option><option value="Equipment">Equipment</option><option value="Insurance Expense">Insurance Expense</option><option value="Interest Expense">Interest Expense</option><option value="Interest Payable">Interest Payable</option><option value="Interest Receivable">Interest Receivable</option><option value="Interest Revenue">Interest Revenue</option><option value="Notes Payable">Notes Payable</option><option value="Prepaid Insurance">Prepaid Insurance</option><option value="Prepaid Rent">Prepaid Rent</option><option value="Rent Expense">Rent Expense</option><option value="Retained Earnings">Retained Earnings</option><option value="Salaries Expense">Salaries Expense</option><option value="Salaries Payable">Salaries Payable</option><option value="Service Revenue">Service Revenue</option><option value="Supplies">Supplies</option><option value="Supplies Expense">Supplies Expense</option><option value="Unearned Revenue">Unearned Revenue</option><option value="Utilities Expense">Utilities Expense</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q56-ex">Show explanation</button></div>
+<div class="fb" id="q56-fb" aria-live="polite"></div>
+<div class="explain" id="q56-ex"><p>Bad debts are an estimate. Credit the contra asset, not Accounts Receivable, because no specific customer has defaulted yet.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Allowance for Uncollectible Accounts">
+<label for="q57">7(c) Account credited</label>
+<select id="q57" aria-describedby="q57-fb"><option value="">— Select —</option><option value="Accounts Payable">Accounts Payable</option><option value="Accounts Receivable">Accounts Receivable</option><option value="Accumulated Depreciation">Accumulated Depreciation</option><option value="Allowance for Uncollectible Accounts">Allowance for Uncollectible Accounts</option><option value="Bad Debt Expense">Bad Debt Expense</option><option value="Cash">Cash</option><option value="Common Stock">Common Stock</option><option value="Depreciation Expense">Depreciation Expense</option><option value="Dividends">Dividends</option><option value="Equipment">Equipment</option><option value="Insurance Expense">Insurance Expense</option><option value="Interest Expense">Interest Expense</option><option value="Interest Payable">Interest Payable</option><option value="Interest Receivable">Interest Receivable</option><option value="Interest Revenue">Interest Revenue</option><option value="Notes Payable">Notes Payable</option><option value="Prepaid Insurance">Prepaid Insurance</option><option value="Prepaid Rent">Prepaid Rent</option><option value="Rent Expense">Rent Expense</option><option value="Retained Earnings">Retained Earnings</option><option value="Salaries Expense">Salaries Expense</option><option value="Salaries Payable">Salaries Payable</option><option value="Service Revenue">Service Revenue</option><option value="Supplies">Supplies</option><option value="Supplies Expense">Supplies Expense</option><option value="Unearned Revenue">Unearned Revenue</option><option value="Utilities Expense">Utilities Expense</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q57-ex">Show explanation</button></div>
+<div class="fb" id="q57-fb" aria-live="polite"></div>
+<div class="explain" id="q57-ex"><p>Bad debts are an estimate. Credit the contra asset, not Accounts Receivable, because no specific customer has defaulted yet.</p></div>
+</div><div class="q" data-kind="num" data-answer="150">
+<label for="q58">7(d) Amount</label>
+<span aria-hidden="true">$</span><input id="q58" type="text" inputmode="decimal" class="money" autocomplete="off" aria-describedby="q58-fb">
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q58-ex">Show explanation</button></div>
+<div class="fb" id="q58-fb" aria-live="polite"></div>
+<div class="explain" id="q58-ex"><p>Bad debts are an estimate. Credit the contra asset, not Accounts Receivable, because no specific customer has defaulted yet.</p></div>
+</div></div>
+</div>
+<div class="step"><h3>Step 2 — Effects on the statements</h3>
+<div class="q" data-kind="num" data-answer="5900">
+<label for="q59">What is adjusted net income for August?</label>
+<span aria-hidden="true">$</span><input id="q59" type="text" inputmode="decimal" class="money" autocomplete="off" aria-describedby="q59-fb">
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q59-ex">Show explanation</button></div>
+<div class="fb" id="q59-fb" aria-live="polite"></div>
+<div class="explain" id="q59-ex"><p>Revenue: $7,200 + $1,200 + $500 = $8,900. Expenses: $300 + $650 + $500 + $1,400 + $150 = $3,000. Net income = <strong>$5,900</strong>.</p></div>
+</div><div class="q" data-kind="num" data-answer="3300">
+<label for="q60">What is the ending balance of Unearned Revenue?</label>
+<span aria-hidden="true">$</span><input id="q60" type="text" inputmode="decimal" class="money" autocomplete="off" aria-describedby="q60-fb">
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q60-ex">Show explanation</button></div>
+<div class="fb" id="q60-fb" aria-live="polite"></div>
+<div class="explain" id="q60-ex"><p>$4,500 − $1,200 = <strong>$3,300</strong>.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Overstated">
+<label for="q61">If the salaries accrual (entry 5) had been omitted, net income would be:</label>
+<select id="q61" aria-describedby="q61-fb"><option value="">— Select —</option><option value="Overstated">Overstated</option><option value="Understated">Understated</option><option value="Unaffected">Unaffected</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q61-ex">Show explanation</button></div>
+<div class="fb" id="q61-fb" aria-live="polite"></div>
+<div class="explain" id="q61-ex"><p>Expenses would be understated by $1,400, so net income is overstated. Liabilities would also be understated.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Overstated">
+<label for="q62">If the unearned revenue adjustment (entry 4) had been omitted, liabilities would be:</label>
+<select id="q62" aria-describedby="q62-fb"><option value="">— Select —</option><option value="Overstated">Overstated</option><option value="Understated">Understated</option><option value="Unaffected">Unaffected</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q62-ex">Show explanation</button></div>
+<div class="fb" id="q62-fb" aria-live="polite"></div>
+<div class="explain" id="q62-ex"><p>Unearned Revenue would still show the full $4,500 even though $1,200 was earned — liabilities overstated and revenue understated.</p></div>
+</div>
+</div>
+<div class="step"><h3>Step 3 — Close the books</h3>
+<p>Assume August 31 is the fiscal year-end.</p>
+<div class="q" data-kind="sel" data-answer="Service Revenue">
+<label for="q63">Which account is debited to close Service Revenue?</label>
+<select id="q63" aria-describedby="q63-fb"><option value="">— Select —</option><option value="Service Revenue">Service Revenue</option><option value="Retained Earnings">Retained Earnings</option><option value="Cash">Cash</option><option value="Dividends">Dividends</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q63-ex">Show explanation</button></div>
+<div class="fb" id="q63-fb" aria-live="polite"></div>
+<div class="explain" id="q63-ex"><p>Revenue has a credit balance, so it is debited to bring it to zero; Retained Earnings is credited.</p></div>
+</div><div class="q" data-kind="num" data-answer="5300">
+<label for="q64">After closing, what is the ending balance of Retained Earnings? (Beginning balance was $0; dividends were $600.)</label>
+<span aria-hidden="true">$</span><input id="q64" type="text" inputmode="decimal" class="money" autocomplete="off" aria-describedby="q64-fb">
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q64-ex">Show explanation</button></div>
+<div class="fb" id="q64-fb" aria-live="polite"></div>
+<div class="explain" id="q64-ex"><p>$0 + $5,900 net income − $600 dividends = <strong>$5,300</strong>.</p></div>
+</div><div class="q" data-kind="sel" data-answer="Accumulated Depreciation">
+<label for="q65">Which of these accounts appears on the post-closing trial balance?</label>
+<select id="q65" aria-describedby="q65-fb"><option value="">— Select —</option><option value="Accumulated Depreciation">Accumulated Depreciation</option><option value="Depreciation Expense">Depreciation Expense</option><option value="Service Revenue">Service Revenue</option><option value="Dividends">Dividends</option></select>
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q65-ex">Show explanation</button></div>
+<div class="fb" id="q65-fb" aria-live="polite"></div>
+<div class="explain" id="q65-ex"><p>Only permanent accounts remain after closing. Accumulated Depreciation is a balance sheet (contra asset) account.</p></div>
+</div>
+</div>
+<div class="step"><h3>Step 4 — Cash to accrual</h3>
+<div class="q" data-kind="num" data-answer="66000">
+<label for="q66">A different company paid $64,000 for salaries this year. Salaries payable was $3,000 at the start of the year and $5,000 at the end. What is salaries expense?</label>
+<span aria-hidden="true">$</span><input id="q66" type="text" inputmode="decimal" class="money" autocomplete="off" aria-describedby="q66-fb">
+<div><button type="button" class="btn check" disabled>Check answer</button><button type="button" class="btn secondary reveal" disabled aria-expanded="false" aria-controls="q66-ex">Show explanation</button></div>
+<div class="fb" id="q66-fb" aria-live="polite"></div>
+<div class="explain" id="q66-ex"><p>Cash paid + increase in the payable: $64,000 + $2,000 = <strong>$66,000</strong>. The extra $2,000 was earned this year but not yet paid.</p></div>
+</div>
+</div>
+<div class="callout key"><span class="label">Takeaways</span>
+<ul style="margin:.2rem 0 0"><li>Every adjusting entry hits one income statement account and one balance sheet account — never cash.</li>
+<li>Prepayments: cash first. Accruals: cash later. Estimates: judgment.</li></ul></div>
+
+</main>
+<footer>ACCT 351 · Intermediate Accounting I · Western Carolina University · <span class="yr"></span></footer>
+<script>
+document.querySelectorAll('.yr').forEach(e=>e.textContent=new Date().getFullYear());
+
+(function(){
+  const Y=new Date().getFullYear();
+  document.querySelectorAll('.y1').forEach(e=>e.textContent=Y-1);
+  document.querySelectorAll('.y2').forEach(e=>e.textContent=Y);
+  const qs=[...document.querySelectorAll('.q:not(.written)')];
+  const prog=document.getElementById('progress');
+  function parse(s){s=String(s).trim().replace(/[$,\s]/g,'');let neg=false;if(/^\(.*\)$/.test(s)){neg=true;s=s.slice(1,-1);}const v=parseFloat(s);if(isNaN(v))return NaN;return neg?-v:v;}
+  function update(){const c=qs.filter(q=>q.dataset.ok==='1').length;if(prog)prog.textContent='Progress: '+c+' of '+qs.length+' answered correctly';}
+  qs.forEach(q=>{
+    const inp=q.querySelector('input,select'),chk=q.querySelector('.check'),rev=q.querySelector('.reveal'),fb=q.querySelector('.fb'),ex=q.querySelector('.explain');
+    inp.addEventListener('input',()=>{chk.disabled=inp.value.trim()==='';});
+    inp.addEventListener('change',()=>{chk.disabled=inp.value.trim()==='';});
+    inp.addEventListener('keydown',e=>{if(e.key==='Enter'&&!chk.disabled){e.preventDefault();chk.click();}});
+    chk.addEventListener('click',()=>{
+      let ok;
+      if(q.dataset.kind==='num'){ok=Math.abs(parse(inp.value)-parseFloat(q.dataset.answer))<0.5;}
+      else ok=inp.value===q.dataset.answer;
+      inp.classList.toggle('correct',ok);inp.classList.toggle('wrong',!ok);
+      inp.setAttribute('aria-invalid',ok?'false':'true');
+      fb.className='fb '+(ok?'ok':'no');
+      fb.textContent=ok?'✓ Correct.':'✗ Not quite. Try again, or open the explanation.';
+      q.dataset.ok=ok?'1':'0';
+      rev.disabled=false;update();
+    });
+    rev.addEventListener('click',()=>{const s=ex.classList.toggle('show');rev.setAttribute('aria-expanded',s);rev.textContent=s?'Hide explanation':'Show explanation';});
+  });
+  update();
+})();
+
+</script>
+</body>
+</html>
