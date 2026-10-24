@@ -629,5 +629,75 @@ generateScenario();
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 })();
 </script>
+<!-- Print grade summary (added Oct 2026): shows name, ID, and grade at the top of the printed PDF -->
+<style id="print-grade-style">
+  .print-grade { display: none; }
+  @media print {
+    .print-grade { display: block !important; border: 2px solid #341f5c; border-radius: 6px; padding: 0.7rem 1rem; margin: 0 0 1.2rem; font-family: 'Inter', system-ui, sans-serif; color: #1f1b24; background: #fff; break-inside: avoid; page-break-inside: avoid; }
+    .print-grade p { margin: 0.15rem 0; font-size: 0.92rem; }
+    .print-grade .pg-total { font-size: 1.15rem; font-weight: 800; color: #341f5c; margin-bottom: 0.35rem; }
+    .print-grade ul { margin: 0.35rem 0 0 1.1rem; padding: 0; font-size: 0.85rem; }
+  }
+</style>
+<script id="print-grade-script">
+(function () {
+  function txt(id) { var el = document.getElementById(id); return el ? (el.value || '').trim() : ''; }
+  function partLabel(scoreEl, n) {
+    var heads = document.querySelectorAll('h2, h3'), label = 'Part ' + n;
+    for (var i = 0; i < heads.length; i++) {
+      var h = heads[i];
+      if (/^\s*Part\s+(\d|[A-Z]\b)/.test(h.textContent) && (h.compareDocumentPosition(scoreEl) & Node.DOCUMENT_POSITION_FOLLOWING)) label = h.textContent.trim();
+    }
+    return label;
+  }
+  function build() {
+    var box = document.getElementById('printGrade');
+    if (!box) {
+      box = document.createElement('section');
+      box.id = 'printGrade';
+      box.className = 'print-grade';
+      box.setAttribute('aria-hidden', 'true');
+      var main = document.querySelector('main') || document.body;
+      main.insertBefore(box, main.firstChild);
+    }
+    var scores = document.querySelectorAll('.part-score[id^="score-"]');
+    var correct = 0, total = 0, checked = 0, rows = [];
+    for (var i = 0; i < scores.length; i++) {
+      var t = scores[i].textContent || '';
+      var m = t.match(/(\d+)\s+of\s+(\d+)\s+(.*?)\s*correct\s*\(attempt\s+(\d+)\s+of\s+(\d+)\)/i);
+      var label = partLabel(scores[i], i + 1);
+      if (m) {
+        correct += +m[1]; total += +m[2]; checked++;
+        rows.push(label + ': ' + m[1] + ' of ' + m[2] + ' ' + m[3] + ' correct (attempt ' + m[4] + ' of ' + m[5] + ')');
+      } else {
+        rows.push(label + ': not checked');
+      }
+    }
+    var grade;
+    if (!scores.length || !checked) grade = 'Grade: not checked yet';
+    else {
+      var pct = Math.round(correct / total * 1000) / 10;
+      if (checked < scores.length) grade = 'Grade: Incomplete — ' + correct + ' of ' + total + ' correct on checked parts (' + pct + '%); ' + (scores.length - checked) + ' part(s) not checked';
+      else grade = 'Grade: ' + correct + ' of ' + total + ' correct (' + pct + '%)';
+    }
+    var name = txt('studentName'), id = txt('studentId');
+    var d = new Date();
+    box.innerHTML = '';
+    function p(text, cls) { var e = document.createElement('p'); e.textContent = text; if (cls) e.className = cls; box.appendChild(e); }
+    p(grade, 'pg-total');
+    p('Name: ' + (name || '_______________________') + '  \u00b7  Student ID: ' + (id || '_______________________'));
+    p('Printed: ' + d.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) + ' ' + d.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' }));
+    var ul = document.createElement('ul');
+    rows.forEach(function (r) { var li = document.createElement('li'); li.textContent = r; ul.appendChild(li); });
+    if (rows.length) box.appendChild(ul);
+  }
+  window.addEventListener('beforeprint', build);
+  if (window.matchMedia) {
+    var mq = window.matchMedia('print');
+    var cb = function (e) { if (e.matches) build(); };
+    if (mq.addEventListener) mq.addEventListener('change', cb); else if (mq.addListener) mq.addListener(cb);
+  }
+})();
+</script>
 </body>
 </html>
