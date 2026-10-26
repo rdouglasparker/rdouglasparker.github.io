@@ -120,6 +120,15 @@
   .toc { columns: 2 16rem; margin: 0.4rem 0 0; }
   .toc li { break-inside: avoid; }
 </style>
+<style>
+  .notes { background: #fff; border: 1px solid var(--rule); border-top: 4px solid var(--wcu-purple); border-radius: 8px; padding: 1rem 1.2rem 0.6rem; margin: 1rem 0 1.6rem; }
+  .notes > h3 { font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--wcu-purple); margin: 0 0 0.6rem; }
+  .notes h4 { font-family: 'Source Serif 4', serif; font-size: 1.08rem; color: var(--wcu-purple-dark); margin: 1.1rem 0 0.3rem; }
+  .notes h4:first-of-type { margin-top: 0.2rem; }
+  .notes .asc { font-family: 'IBM Plex Mono', monospace; font-size: 0.74rem; color: var(--muted); }
+  .notes .tip { background: var(--gold-light); border-radius: 6px; padding: 0.55rem 0.8rem; margin: 0.6rem 0; font-size: 0.93rem; }
+  .notes .tip strong { color: var(--warn); }
+</style>
 </head>
 <body>
 
@@ -129,7 +138,7 @@
   <div class="inner">
     <p class="eyebrow">ACCT 351 · Exam Study Guide · Not Graded</p>
     <h1>Revenue Recognition, Cash, and Receivables</h1>
-    <p class="sub">Sixteen practice problems with step-by-step solutions to help you focus your exam preparation.</p>
+    <p class="sub">Concept notes and sixteen practice problems with step-by-step solutions to help you focus your exam preparation.</p>
   </div>
 </header>
 
@@ -141,7 +150,7 @@
 </div>
 
   <div class="key-idea">
-    <p style="margin:0"><strong>How this works:</strong> Work each problem on your own first and enter your answer in every box. Then select <strong>Reveal Answer</strong> to see the correct answer next to yours, along with a detailed explanation and the journal entries. Enter all amounts as positive numbers; the questions tell you whether an amount is a gain or a loss. Answers within $1 of the solution count as a match (rounding). This page isn't graded and doesn't get submitted anywhere; it's just for practice. Have a calculator handy.</p>
+    <p style="margin:0"><strong>How this works:</strong> Each section starts with <strong>concept notes</strong> covering the rules, definitions, and journal entries you need for both the multiple-choice questions and the problems. Read the notes, then work each problem on your own first and enter your answer in every box. Then select <strong>Reveal Answer</strong> to see the correct answer next to yours, along with a detailed explanation and the journal entries. Enter all amounts as positive numbers; the questions tell you whether an amount is a gain or a loss. Answers within $1 of the solution count as a match (rounding). This page isn't graded and doesn't get submitted anywhere; it's just for practice. Have a calculator handy.</p>
   </div>
 
   <section class="facts" aria-labelledby="focus-h">
@@ -149,6 +158,17 @@
     <p>These two topics cover a lot of ground. Spend most of your time on the <strong>High priority</strong> skills: they take the most practice to do quickly and accurately. Make sure you can explain the <strong>Know it</strong> items in a sentence or two and handle a quick calculation.</p>
     <ul class="focus-list"><li><span class="pri pri-high">High priority</span><span><a href="#p1">The five-step model and when promises are one obligation or several</a></span></li><li><span class="pri pri-high">High priority</span><span><a href="#p4">Allocating a bundled price by standalone selling price</a></span></li><li><span class="pri pri-high">High priority</span><span><a href="#p5">Deferred revenue for multi-year services, including current vs. noncurrent</a></span></li><li><span class="pri pri-high">High priority</span><span><a href="#p6">Long-term contracts over time: amounts to date, then this year&#x27;s share</a></span></li><li><span class="pri pri-high">High priority</span><span><a href="#p7">Estimate changes that create a gross loss in one year</a></span></li><li><span class="pri pri-high">High priority</span><span><a href="#p12">The allowance method: write-offs, recoveries, and the year-end adjustment</a></span></li><li><span class="pri pri-high">High priority</span><span><a href="#p13">Aging schedules and a debit balance before adjustment</a></span></li><li><span class="pri pri-high">High priority</span><span><a href="#p14">Notes receivable: interest accruals and collection at maturity</a></span></li><li><span class="pri pri-high">High priority</span><span><a href="#p11">Gross vs. net method for cash discounts</a></span></li><li><span class="pri pri-know">Know it</span><span><a href="#p2">Variable consideration: expected value vs. most likely amount</a></span></li><li><span class="pri pri-know">Know it</span><span><a href="#p3">Right of return</a></span></li><li><span class="pri pri-know">Know it</span><span><a href="#p8">Contracts with a projected overall loss</a></span></li><li><span class="pri pri-know">Know it</span><span><a href="#p9">What belongs in cash and cash equivalents</a></span></li><li><span class="pri pri-know">Know it</span><span><a href="#p10">Bank reconciliations</a></span></li><li><span class="pri pri-know">Know it</span><span><a href="#p15">Factoring: sale vs. secured borrowing</a></span></li><li><span class="pri pri-know">Know it</span><span><a href="#p16">Receivables turnover and average collection period</a></span></li></ul>
   </section>
+
+  <nav class="facts" aria-labelledby="toc-h">
+    <h2 class="ex-label" id="toc-h" style="border:0;padding:0;font-size:0.78rem">Contents</h2>
+    <ol class="toc">
+      <li><a href="#s-five">Revenue recognition: the five-step model</a></li>
+      <li><a href="#s-pos">Multiple performance obligations and warranties</a></li>
+      <li><a href="#s-ltc">Long-term contracts</a></li>
+      <li><a href="#s-cash">Cash</a></li>
+      <li><a href="#s-rec">Receivables</a></li>
+    </ol>
+  </nav>
 
   <section class="facts" aria-labelledby="exam-h">
     <h2 class="ex-label" id="exam-h" style="border:0;padding:0;font-size:0.78rem">Before exam day</h2>
@@ -161,6 +181,54 @@
   <section class="lo-block" aria-labelledby="s-five">
     <h2 id="s-five">Revenue Recognition: The Five-Step Model</h2>
     <div class="key-idea"><p style="margin:0"><strong>Key idea:</strong> Revenue is recognized when (or as) a seller transfers control of goods or services to a customer, in an amount that reflects what the seller expects to be entitled to receive.</p></div>
+    <section class="notes" aria-labelledby="n-five">
+      <h3 id="n-five">Concept notes: the revenue recognition model</h3>
+      
+      <p class="asc">FASB ASC 606, Revenue from Contracts with Customers</p>
+      <h4>The five steps</h4>
+      <div class="table-wrap" role="region" tabindex="0" aria-label="The five-step model"><table class="data">
+          <caption>The five-step model</caption>
+          <thead><tr><th scope="col">Step</th><th scope="col">What you decide</th><th scope="col">Key points</th></tr></thead>
+          <tbody><tr><th scope="row">1. Identify the contract</th><td>Is there an enforceable agreement?</td><td>Approved and committed parties; identifiable rights and payment terms; commercial substance; collection is <strong>probable</strong>.</td></tr><tr><th scope="row">2. Identify the performance obligations</th><td>What did the seller promise?</td><td>Each <strong>distinct</strong> good or service is a separate obligation.</td></tr><tr><th scope="row">3. Determine the transaction price</th><td>How much will the seller receive?</td><td>Includes estimates of variable consideration (subject to the constraint).</td></tr><tr><th scope="row">4. Allocate the price</th><td>How much belongs to each obligation?</td><td>In proportion to standalone selling prices.</td></tr><tr><th scope="row">5. Recognize revenue</th><td>When is each obligation satisfied?</td><td>When (or as) control transfers: at a point in time or over time.</td></tr></tbody></table></div>
+      <h4>Is a promise distinct?</h4>
+      <p>It must pass <strong>both</strong> tests:</p>
+      <ul>
+        <li><strong>Capable of being distinct:</strong> the customer could benefit from it alone or with resources readily available (it's sold separately, for example).</li>
+        <li><strong>Separately identifiable in the contract:</strong> it is not significantly integrated with, does not significantly modify or customize, and is not highly dependent on the other promises.</li>
+      </ul>
+      <p>If installation significantly customizes software so that the two work only as a combined output, they are <strong>one</strong> performance obligation, even if each could be sold on its own.</p>
+      <h4>Over time or at a point in time?</h4>
+      <p>An obligation is satisfied <strong>over time</strong> if any one of these is true; otherwise it's satisfied at a point in time:</p>
+      <ul>
+        <li>The customer simultaneously receives and consumes the benefit as the seller performs (cleaning, subscriptions, support).</li>
+        <li>The seller's work creates or enhances an asset the customer controls (building on the customer's land).</li>
+        <li>The asset has no alternative use to the seller, and the seller has a right to payment for work completed to date.</li>
+      </ul>
+      <p>At a point in time, signs that control has passed include legal title, physical possession, the right to payment, risks and rewards of ownership, and customer acceptance.</p>
+      <h4>Variable consideration</h4>
+      <div class="table-wrap" role="region" tabindex="0" aria-label="Estimating variable consideration"><table class="data">
+          <caption>Estimating variable consideration</caption>
+          <thead><tr><th scope="col">Method</th><th scope="col">Use it when</th><th scope="col">How</th></tr></thead>
+          <tbody><tr><th scope="row">Expected value</th><td>There are many possible outcomes</td><td>Probability-weighted sum of the possible amounts</td></tr><tr><th scope="row">Most likely amount</th><td>There are only two outcomes (bonus or no bonus)</td><td>The single most likely amount: the full bonus if earning it is more likely than not, otherwise zero</td></tr></tbody></table></div>
+      <p><strong>The constraint:</strong> include variable consideration only to the extent it is <em>probable</em> that a significant reversal of revenue will not occur later. Update estimates each reporting date.</p>
+      <h4>Principal or agent?</h4>
+      <p>The question is whether the seller <strong>controls</strong> the good or service before it transfers to the customer. Indicators that the seller is the principal: it is primarily responsible for fulfilling the promise, it bears inventory risk, and it has discretion to set the price.</p>
+      <div class="table-wrap" role="region" tabindex="0" aria-label="Principal vs. agent"><table class="data">
+          <caption>Principal vs. agent</caption>
+          <thead><tr><th scope="col"><span class="sr-only">Item</span></th><th scope="col">Principal</th><th scope="col">Agent</th></tr></thead>
+          <tbody><tr><th scope="row">Controls the good before transfer?</th><td>Yes</td><td>No</td></tr><tr><th scope="row">Revenue reported</th><td>Gross: the full sales price</td><td>Net: only its commission or fee</td></tr><tr><th scope="row">Example</th><td>A craft shop selling quilts it owns for $150</td><td>A website keeping 20% of a $150 quilt sale: revenue is $30</td></tr></tbody></table></div>
+      <h4>Consignments</h4>
+      <p>The <strong>consignor</strong> (owner) ships goods to a <strong>consignee</strong> (seller) who sells them for a commission. Control stays with the consignor, so the goods stay in the consignor's inventory, and the consignor recognizes revenue only when the consignee <strong>sells to an end customer</strong>. The consignee records only its commission revenue.</p>
+      <h4>Licenses of intellectual property</h4>
+      <div class="table-wrap" role="region" tabindex="0" aria-label="Licenses"><table class="data">
+          <caption>Licenses</caption>
+          <thead><tr><th scope="col">Type of license</th><th scope="col">Typical examples</th><th scope="col">Revenue recognized</th></tr></thead>
+          <tbody><tr><th scope="row">Right to <strong>use</strong> functional IP</th><td>Software, films, music, drug formulas</td><td>At the point in time the license transfers</td></tr><tr><th scope="row">Right to <strong>access</strong> symbolic IP</th><td>Brand names, logos, franchise rights, team names</td><td>Over the license period, because the licensor keeps supporting the IP's value</td></tr></tbody></table></div>
+      <h4>Right of return</h4>
+      <p>Recognize revenue only for goods expected to be kept. Expected returns create a <strong>refund liability</strong> (instead of revenue) and an <strong>inventory — estimated returns</strong> asset (instead of cost of goods sold).</p>
+      <p class="tip"><strong>Study tip:</strong> When a question says a company &ldquo;expects&rdquo; returns, reduce revenue by the expected returns. Gross sales minus expected returns is net revenue.</p>
+
+    </section>
     
     <article class="example" id="p1" aria-labelledby="p1-h">
       <h3 class="ex-label" id="p1-h">Problem 1 — The Five-Step Model: Ground Rules</h3>
@@ -271,8 +339,31 @@
     </article>
   </section>
   <section class="lo-block" aria-labelledby="s-pos">
-    <h2 id="s-pos">Contracts With Multiple Performance Obligations</h2>
+    <h2 id="s-pos">Contracts With Multiple Performance Obligations and Warranties</h2>
     <div class="key-idea"><p style="margin:0"><strong>Key idea:</strong> Allocate the transaction price in proportion to standalone selling prices, then recognize each piece on its own timetable: some at a point in time, some over time.</p></div>
+    <section class="notes" aria-labelledby="n-pos">
+      <h3 id="n-pos">Concept notes: multiple performance obligations and warranties</h3>
+      
+      <h4>Allocating the transaction price</h4>
+      <p>Allocate in proportion to <strong>standalone selling prices</strong> (what the seller charges for each item sold separately). Any bundle discount is spread across all the obligations.</p>
+      <p class="final-answer"><strong>Allocated price = Transaction price × (Item's standalone price ÷ Total standalone prices)</strong></p>
+      <p>When a standalone price isn't observable, estimate it with the adjusted market assessment approach, the expected cost plus margin approach, or (in limited cases) the residual approach.</p>
+      <h4>Deferred revenue (contract liability)</h4>
+      <ul>
+        <li>Cash received before an obligation is satisfied is credited to <strong>Deferred revenue</strong>, a liability.</li>
+        <li>As the obligation is satisfied, debit Deferred revenue and credit a revenue account (Sales revenue or Service revenue).</li>
+        <li>For services over time, revenue per month = allocated price ÷ months of service.</li>
+        <li>On the balance sheet, the portion to be earned in the next 12 months is <strong>current</strong>; the rest is <strong>noncurrent</strong>.</li>
+        <li>A <strong>contract asset</strong> arises when the seller has performed but its right to payment depends on something other than the passage of time; once the right is unconditional, it's a receivable.</li>
+      </ul>
+      <h4>Warranties</h4>
+      <div class="table-wrap" role="region" tabindex="0" aria-label="Assurance-type vs. service-type warranties"><table class="data">
+          <caption>Assurance-type vs. service-type warranties</caption>
+          <thead><tr><th scope="col"><span class="sr-only">Item</span></th><th scope="col">Assurance-type</th><th scope="col">Service-type (extended)</th></tr></thead>
+          <tbody><tr><th scope="row">What it promises</th><td>The product works as specified (defects)</td><td>Extra coverage or service beyond that assurance</td></tr><tr><th scope="row">Usually</th><td>Included in the price at no extra charge</td><td>Sold separately, or covers a longer period</td></tr><tr><th scope="row">Separate performance obligation?</th><td>No</td><td>Yes</td></tr><tr><th scope="row">Accounting</th><td>Accrue the expected cost: debit Warranty expense, credit Warranty liability, in the year of sale</td><td>Allocate part of the price to it, credit Deferred revenue, and recognize revenue over the coverage period</td></tr></tbody></table></div>
+      <p class="tip"><strong>Study tip:</strong> A warranty against defects included at no extra charge is assurance-type, so it gets no share of the transaction price. Only a service-type warranty is a performance obligation.</p>
+
+    </section>
     
     <article class="example" id="p4" aria-labelledby="p4-h">
       <h3 class="ex-label" id="p4-h">Problem 4 — Allocating the Transaction Price</h3>
@@ -396,6 +487,34 @@
   <section class="lo-block" aria-labelledby="s-ltc">
     <h2 id="s-ltc">Long-Term Contracts</h2>
     <div class="key-idea"><p style="margin:0"><strong>Key idea:</strong> Over-time recognition uses a cumulative catch-up. Each year: percent complete × contract totals = amounts to date; then subtract what earlier years already recognized.</p></div>
+    <section class="notes" aria-labelledby="n-ltc">
+      <h3 id="n-ltc">Concept notes: long-term contracts</h3>
+      
+      <h4>Over time vs. at completion</h4>
+      <p>Most long-term construction contracts qualify for revenue <strong>over time</strong> (the customer controls the asset as it's built, or it has no alternative use and the builder has a right to payment). If a contract doesn't qualify, revenue and gross profit are recognized at a point in time, <strong>when the project is completed</strong>.</p>
+      <h4>Cost-to-cost: the yearly routine</h4>
+      <ol>
+        <li>Estimated total cost = costs incurred to date + estimated costs to complete.</li>
+        <li>Percent complete = costs incurred to date ÷ estimated total cost.</li>
+        <li>Revenue to date = contract price × percent complete. Gross profit to date = (price − estimated total cost) × percent complete.</li>
+        <li>This year's amount = amount to date − amounts recognized in prior years.</li>
+      </ol>
+      <p>Changes in estimates are handled in the <strong>current and future</strong> periods. Prior years are never restated; the cumulative catch-up absorbs the change.</p>
+      <h4>Accounts and entries</h4>
+      <div class="table-wrap" role="region" tabindex="0" aria-label="Long-term contract entries"><table class="data">
+          <caption>Long-term contract entries</caption>
+          <thead><tr><th scope="col">Event</th><th scope="col">Debit</th><th scope="col">Credit</th></tr></thead>
+          <tbody><tr><th scope="row">Costs incurred</th><td>Construction in progress</td><td>Cash, materials, etc.</td></tr><tr><th scope="row">Progress billings</th><td>Accounts receivable</td><td>Billings on construction contract</td></tr><tr><th scope="row">Cash collected</th><td>Cash</td><td>Accounts receivable</td></tr><tr><th scope="row">Recognize revenue (profit year)</th><td>Construction in progress (gross profit) + Cost of construction</td><td>Revenue from long-term contracts</td></tr><tr><th scope="row">Recognize revenue (loss year)</th><td>Cost of construction</td><td>Revenue from long-term contracts + Construction in progress (gross profit)</td></tr></tbody></table></div>
+      <h4>Losses</h4>
+      <ul>
+        <li><strong>Loss in one period, profitable overall:</strong> estimated total gross profit dropped, so gross profit to date is less than what was already recognized. The difference is a loss this year.</li>
+        <li><strong>Loss on the entire contract:</strong> estimated total cost exceeds the price. Recognize the <strong>entire</strong> projected loss immediately (and reverse any profit recognized earlier), whether revenue is recognized over time or at completion.</li>
+      </ul>
+      <h4>Balance sheet</h4>
+      <p>Compare construction in progress (costs + gross profit recognized) with billings on construction contract. If CIP is larger, report a <strong>contract asset</strong>; if billings are larger, report a <strong>contract liability</strong>.</p>
+      <p class="tip"><strong>Study tip:</strong> Always compute amounts to date first, then subtract prior years. Most errors come from multiplying this year's costs by this year's percent.</p>
+
+    </section>
     
     <article class="example" id="p6" aria-labelledby="p6-h">
       <h3 class="ex-label" id="p6-h">Problem 6 — Long-Term Contract: Two Profitable Years</h3>
@@ -560,6 +679,27 @@
   <section class="lo-block" aria-labelledby="s-cash">
     <h2 id="s-cash">Cash</h2>
     <div class="key-idea"><p style="margin:0"><strong>Key idea:</strong> Cash and cash equivalents must be available for current use. Anything restricted, longer-term, or not really cash is reported somewhere else.</p></div>
+    <section class="notes" aria-labelledby="n-cash">
+      <h3 id="n-cash">Concept notes: cash</h3>
+      
+      <p class="asc">FASB ASC 305, Cash and Cash Equivalents; ASC 230, Statement of Cash Flows</p>
+      <h4>What's included</h4>
+      <ul>
+        <li><strong>Cash:</strong> currency and coins, checking and savings balances, and checks received from customers and not yet deposited.</li>
+        <li><strong>Cash equivalents:</strong> short-term, highly liquid investments readily convertible to cash, with an <strong>original maturity of three months or less</strong> when acquired: Treasury bills, commercial paper, money market funds.</li>
+      </ul>
+      <div class="table-wrap" role="region" tabindex="0" aria-label="Items that are NOT cash and cash equivalents"><table class="data">
+          <caption>Items that are NOT cash and cash equivalents</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Where it goes</th></tr></thead>
+          <tbody><tr><th scope="row">Certificate of deposit or T-bill with more than 3 months to maturity when bought</th><td>Short-term (or long-term) investment</td></tr><tr><th scope="row">Legally restricted compensating balance; cash set aside for a specific purpose</th><td>Restricted cash: current or noncurrent depending on the related obligation</td></tr><tr><th scope="row">Customer's postdated check; IOUs from employees</th><td>Receivable</td></tr><tr><th scope="row">Postage stamps; travel advances</th><td>Prepaid expense</td></tr><tr><th scope="row">Bank overdraft</th><td>Current liability (unless offset at the same bank)</td></tr></tbody></table></div>
+      <h4>Bank reconciliations</h4>
+      <ul>
+        <li><strong>Bank side</strong> (no entries needed): add deposits in transit, deduct outstanding checks, correct bank errors.</li>
+        <li><strong>Book side</strong> (every item needs an entry): add collections by the bank and interest earned; deduct service charges and NSF checks; correct book errors.</li>
+        <li>Both sides must reach the same corrected cash balance.</li>
+      </ul>
+
+    </section>
     
     <article class="example" id="p9" aria-labelledby="p9-h">
       <h3 class="ex-label" id="p9-h">Problem 9 — What Counts as Cash and Cash Equivalents?</h3>
@@ -646,6 +786,46 @@
   <section class="lo-block" aria-labelledby="s-rec">
     <h2 id="s-rec">Receivables</h2>
     <div class="key-idea"><p style="margin:0"><strong>Key idea:</strong> Receivables are reported at net realizable value: the amount the company expects to collect. Discounts, returns, and expected credit losses all reduce that amount.</p></div>
+    <section class="notes" aria-labelledby="n-rec">
+      <h3 id="n-rec">Concept notes: receivables</h3>
+      
+      <p class="asc">FASB ASC 310, Receivables; ASC 326, Credit Losses; ASC 860, Transfers and Servicing</p>
+      <h4>Cash discounts</h4>
+      <div class="table-wrap" role="region" tabindex="0" aria-label="Gross vs. net method (terms 2/10, n/30 on a $5,000 sale)"><table class="data">
+          <caption>Gross vs. net method (terms 2/10, n/30 on a $5,000 sale)</caption>
+          <thead><tr><th scope="col"><span class="sr-only">Item</span></th><th scope="col">Gross method</th><th scope="col">Net method</th></tr></thead>
+          <tbody><tr><th scope="row">Sale recorded at</th><td>$5,000</td><td>$4,900</td></tr><tr><th scope="row">Paid within discount period</th><td>Debit Cash 4,900 and Sales discounts 100; credit Accounts receivable 5,000</td><td>Debit Cash 4,900; credit Accounts receivable 4,900</td></tr><tr><th scope="row">Paid after discount period</th><td>Debit Cash 5,000; credit Accounts receivable 5,000</td><td>Debit Cash 5,000; credit Accounts receivable 4,900 and Interest revenue (sales discounts forfeited) 100</td></tr></tbody></table></div>
+      <p>Sales discounts is a contra revenue account. Under either method, sales returns also reduce revenue.</p>
+      <h4>Uncollectible accounts: the allowance method</h4>
+      <ul>
+        <li>GAAP requires the <strong>allowance method</strong>: estimate expected credit losses at year-end (CECL, the current expected credit loss model), using history, current conditions, and reasonable forecasts. The direct write-off method isn't GAAP when losses are material.</li>
+        <li><strong>Income statement approach:</strong> bad debt expense = % × credit sales. The expense is calculated directly.</li>
+        <li><strong>Balance sheet approach (aging):</strong> the required <em>ending allowance</em> is calculated; bad debt expense is the amount needed to reach it. Unadjusted credit balance: subtract it. Unadjusted debit balance: add it.</li>
+      </ul>
+      <div class="table-wrap" role="region" tabindex="0" aria-label="Allowance method entries"><table class="data">
+          <caption>Allowance method entries</caption>
+          <thead><tr><th scope="col">Event</th><th scope="col">Entry</th><th scope="col">Effect on net receivables</th></tr></thead>
+          <tbody><tr><th scope="row">Year-end estimate</th><td>Debit Bad debt expense; credit Allowance for uncollectible accounts</td><td>Decreases</td></tr><tr><th scope="row">Write-off</th><td>Debit Allowance for uncollectible accounts; credit Accounts receivable</td><td>None</td></tr><tr><th scope="row">Recovery (two entries)</th><td>(1) Debit Accounts receivable; credit Allowance. (2) Debit Cash; credit Accounts receivable</td><td>None</td></tr></tbody></table></div>
+      <p>Accounts receivable is reported at <strong>net realizable value</strong>: Accounts receivable − Allowance for uncollectible accounts.</p>
+      <h4>Notes receivable</h4>
+      <ul>
+        <li>Interest = face amount × annual rate × (months ÷ 12).</li>
+        <li>Interest is earned with time: at year-end, accrue it (debit Interest receivable; credit Interest revenue).</li>
+        <li>At maturity, cash = face + total interest. Credit Notes receivable, credit Interest receivable for the amount accrued, and credit Interest revenue only for the interest earned this year.</li>
+        <li>A note accepted to settle an overdue account: debit Notes receivable; credit Accounts receivable.</li>
+      </ul>
+      <h4>Transfers of receivables</h4>
+      <p>A transfer is a <strong>sale</strong> only if the transferor surrenders control: the receivables are isolated from the transferor, the transferee can pledge or sell them, and the transferor keeps no effective control (such as an agreement to repurchase them before maturity). Otherwise it's a <strong>secured borrowing</strong>: the receivables stay on the books and the cash received is a liability.</p>
+      <ul>
+        <li><strong>Without recourse:</strong> the factor bears the credit risk. Loss on sale = the fee.</li>
+        <li><strong>With recourse:</strong> the seller keeps some credit risk. If it's still a sale, record a recourse liability and add it to the loss. Recourse alone doesn't make it a borrowing.</li>
+      </ul>
+      <h4>Receivables ratios</h4>
+      <p class="final-answer"><strong>Receivables turnover = Net sales ÷ Average accounts receivable (net)</strong></p>
+      <p class="final-answer"><strong>Average collection period = 365 ÷ Receivables turnover</strong></p>
+      <p class="tip"><strong>Study tip:</strong> Use the average of beginning and ending receivables, not the ending balance.</p>
+
+    </section>
     
     <article class="example" id="p11" aria-labelledby="p11-h">
       <h3 class="ex-label" id="p11-h">Problem 11 — Cash Discounts: Gross vs. Net Method</h3>
