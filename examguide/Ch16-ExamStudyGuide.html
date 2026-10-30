@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Accounting for Income Taxes — Exam Study Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+  :root {
+    --wcu-purple: #4B2E83; --wcu-purple-dark: #341f5c; --wcu-gold: #C8A24A;
+    --ink: #232023; --paper: #fdfcfb; --panel: #f7f3ec; --rule: #e2d9c8; --gold-light: #f4ecd8;
+    --muted: #5f5955; --warn: #6b4f0e; --warn-bg: #FBF3DC;
+    --ok: #1e5e32; --ok-bg: #e6f2e9; --no: #8c1d18; --no-bg: #fbe9e7;
+    --border-strong: #8a7f6c;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .progress-fill { transition: none !important; } }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; line-height: 1.55; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+  .skip-link { position: absolute; left: 1rem; top: -3rem; background: #fff; color: var(--wcu-purple-dark); font-weight: 700; padding: 0.5rem 0.9rem; border: 2px solid var(--wcu-purple); border-radius: 5px; z-index: 10; }
+  .skip-link:focus { top: 1rem; }
+  a { color: var(--wcu-purple); }
+  header { background: linear-gradient(135deg, var(--wcu-purple) 0%, var(--wcu-purple-dark) 100%); color: #fff; padding: 2.2rem 1.5rem 1.8rem; border-bottom: 6px solid var(--wcu-gold); }
+  header .inner { max-width: 780px; margin: 0 auto; }
+  header .eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: #e3c77f; margin: 0 0 0.4rem; }
+  header h1 { font-family: 'Source Serif 4', serif; font-weight: 700; font-size: 1.9rem; margin: 0 0 0.3rem; }
+  header p.sub { margin: 0; color: #ece6f5; font-size: 0.98rem; }
+  .progress-bar { margin: 0 0 0.4rem; padding: 0; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .progress-track { flex: 1; height: 8px; background: var(--rule); border-radius: 4px; overflow: hidden; border: 1px solid var(--border-strong); }
+  .progress-fill { height: 100%; width: 0%; background: var(--wcu-purple); transition: width 0.3s ease; }
+  .progress-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--muted); white-space: nowrap; }
+  main { max-width: 780px; margin: 0 auto; padding: 1.2rem 1.5rem 4rem; }
+  main:focus { outline: none; }
+  .lo-block { margin-bottom: 2.8rem; }
+  h2 { font-family: 'Source Serif 4', serif; font-size: 1.5rem; margin: 0 0 0.8rem; color: var(--wcu-purple-dark); border-bottom: 2px solid var(--rule); padding-bottom: 0.4rem; }
+  p { margin: 0.6rem 0; }
+  ul, ol { padding-left: 1.4rem; }
+  li { margin-bottom: 0.4rem; }
+  .key-idea { background: var(--panel); border-left: 4px solid var(--wcu-gold); padding: 0.9rem 1.1rem; border-radius: 0 6px 6px 0; margin: 0.9rem 0; }
+  .key-idea strong { color: var(--wcu-purple-dark); }
+  .facts { background: #fff; border: 1px solid var(--rule); border-radius: 8px; padding: 1rem 1.2rem; margin: 1rem 0 1.6rem; }
+  .ex-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--wcu-purple); margin: 0 0 0.4rem; line-height: 1.4; }
+  .facts ul { margin: 0.4rem 0 0; }
+  .example { background: #fff; border: 1px solid var(--rule); border-radius: 8px; padding: 1rem 1.2rem 1.2rem; margin: 1.1rem 0; }
+  .table-wrap { overflow-x: auto; }
+  .table-wrap:focus-visible { outline: 3px solid var(--wcu-purple); outline-offset: 2px; }
+  table.data { border-collapse: collapse; width: 100%; margin: 0.7rem 0; font-size: 0.88rem; }
+  table.data caption { text-align: left; font-weight: 600; font-size: 0.85rem; color: var(--wcu-purple-dark); padding: 0 0 0.3rem; }
+  table.data th, table.data td { border: 1px solid var(--rule); padding: 0.4rem 0.55rem; text-align: left; vertical-align: top; }
+  table.data thead th { background: var(--panel); color: var(--wcu-purple-dark); font-family: 'IBM Plex Mono', monospace; font-size: 0.74rem; text-transform: uppercase; }
+  table.data tbody th { font-weight: 500; min-width: 9rem; }
+  table.data thead th.num { white-space: normal; }
+  table.data td.num, table.data th.num { text-align: right; font-family: 'IBM Plex Mono', monospace; white-space: nowrap; }
+  table.data tr.total-row th, table.data tr.total-row td { background: var(--panel); font-weight: 700; }
+  table.data tr.sub-head th { font-style: italic; font-weight: 600; color: var(--wcu-purple-dark); }
+  table.data th.indent { padding-left: 1.5rem; }
+  .result-ok { color: var(--ok); background: var(--ok-bg); font-weight: 700; }
+  .result-no { color: var(--no); background: var(--no-bg); font-weight: 700; }
+
+  .input-block { display: flex; flex-direction: column; gap: 0.6rem; margin: 0.9rem 0 0.6rem; padding: 0.9rem; background: var(--panel); border-radius: 6px; }
+  .input-item { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+  .input-item label { flex: 1 1 280px; font-size: 0.9rem; font-weight: 600; color: var(--wcu-purple-dark); }
+  .input-item .unit { font-family: 'IBM Plex Mono', monospace; color: var(--muted); }
+  .input-item input[type="number"], .input-item select { font-family: 'IBM Plex Mono', monospace; font-size: 0.92rem; padding: 0.45rem 0.6rem; border: 1px solid var(--border-strong); border-radius: 5px; background: #fff; color: var(--ink); min-height: 2.4rem; }
+  .input-item input[type="number"] { width: 150px; }
+  .input-item select { min-width: 190px; font-family: 'Inter', sans-serif; }
+  .input-item input:focus-visible, .input-item select:focus-visible { outline: 3px solid var(--wcu-purple); outline-offset: 2px; border-color: var(--wcu-purple); }
+  .input-item [aria-invalid="true"] { border: 2px solid var(--no); }
+  .reveal-btn { align-self: flex-start; font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #fff; background: var(--wcu-purple); border: none; padding: 0.6rem 1.1rem; border-radius: 5px; cursor: pointer; margin-top: 0.2rem; min-height: 2.75rem; }
+  .reveal-btn:hover { background: var(--wcu-purple-dark); }
+  .reveal-btn:focus-visible { outline: 3px solid var(--wcu-purple-dark); outline-offset: 3px; box-shadow: 0 0 0 3px #fff inset; }
+
+  .feedback:empty { display: none; }
+  .feedback { font-weight: 600; padding: 0.6rem 0.9rem; border-radius: 6px; margin: 0.4rem 0 0.2rem; font-size: 0.92rem; color: var(--warn); background: var(--warn-bg); border: 1px solid #d9c58f; }
+
+  .solution { margin-top: 0.9rem; padding-top: 0.9rem; border-top: 1px dashed var(--border-strong); }
+  .solution[hidden] { display: none; }
+  .solution-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--wcu-purple); margin: 1rem 0 0.4rem; }
+  .solution-label:first-child { margin-top: 0; }
+  .solution-label:focus { outline: 3px solid var(--wcu-purple); outline-offset: 3px; }
+  .final-answer { font-size: 1rem; margin-top: 0.6rem; }
+  .final-answer strong { color: var(--wcu-purple-dark); }
+
+  table.je-table { border-collapse: collapse; width: 100%; margin: 0.4rem 0 0.2rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.83rem; }
+  table.je-table caption { text-align: left; }
+  table.je-table th { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; color: var(--muted); text-align: left; padding: 0.2rem 0.3rem; border-bottom: 1px solid var(--rule); }
+  table.je-table th.amt { text-align: right; }
+  table.je-table td { padding: 0.26rem 0.3rem; vertical-align: top; }
+  table.je-table td.je-debit-amt, table.je-table td.je-credit-amt { text-align: right; width: 105px; white-space: nowrap; }
+  table.je-table td.indent { padding-left: 1.8rem; }
+  .je-desc { font-size: 0.85rem; color: var(--muted); font-style: italic; margin: 0.2rem 0 0.9rem; }
+  .date-tag { display: inline-block; font-family: 'IBM Plex Mono', monospace; font-weight: 700; font-size: 0.75rem; color: #fff; background: var(--wcu-purple-dark); padding: 0.12rem 0.5rem; border-radius: 4px; margin-top: 0.4rem; }
+
+  .steps-grid { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 1rem; align-items: start; margin: 0.6rem 0; }
+  @media (max-width: 620px) { .steps-grid { grid-template-columns: 1fr; } }
+  ol.four-step { list-style: none; padding: 0.7rem 0.9rem; margin: 0; background: var(--gold-light); border-radius: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 0.84rem; }
+  ol.four-step li { margin: 0.2rem 0; }
+  ol.four-step li strong { color: var(--wcu-purple-dark); }
+  table.t-acct { border-collapse: collapse; width: 100%; font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem; }
+  table.t-acct caption { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--wcu-purple-dark); font-size: 0.86rem; padding-bottom: 0.2rem; border-bottom: 2px solid var(--ink); }
+  table.t-acct th, table.t-acct td { padding: 0.25rem 0.4rem; }
+  table.t-acct thead th { font-size: 0.7rem; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  table.t-acct tbody th { text-align: left; font-weight: 400; font-family: 'Inter', sans-serif; font-size: 0.8rem; color: var(--muted); }
+  table.t-acct td { text-align: right; width: 28%; }
+  table.t-acct td.dr { border-right: 2px solid var(--ink); }
+  table.t-acct tr.bal td, table.t-acct tr.bal th { border-top: 1px solid var(--ink); font-weight: 700; color: var(--ink); }
+
+  code { font-family: 'IBM Plex Mono', monospace; background: var(--panel); padding: 0 0.25rem; border-radius: 3px; }
+  footer { text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--muted); padding: 1.5rem; }
+</style>
+<style>
+  .focus-list { list-style: none; padding: 0; margin: 0.6rem 0 0; }
+  .focus-list li { display: flex; gap: 0.6rem; align-items: baseline; padding: 0.35rem 0; border-bottom: 1px solid var(--rule); }
+  .focus-list li:last-child { border-bottom: 0; }
+  .focus-list a { font-weight: 600; }
+  .pri { flex: 0 0 auto; font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; padding: 0.1rem 0.45rem; border-radius: 4px; border: 1px solid var(--border-strong); }
+  .pri-high { background: var(--wcu-purple); color: #fff; border-color: var(--wcu-purple); }
+  .pri-know { background: var(--gold-light); color: var(--warn); }
+  .toc { columns: 2 16rem; margin: 0.4rem 0 0; }
+  .toc li { break-inside: avoid; }
+</style>
+<style>
+  .notes { background: #fff; border: 1px solid var(--rule); border-top: 4px solid var(--wcu-purple); border-radius: 8px; padding: 1rem 1.2rem 0.6rem; margin: 1rem 0 1.6rem; }
+  .notes > h3 { font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--wcu-purple); margin: 0 0 0.6rem; }
+  .notes h4 { font-family: 'Source Serif 4', serif; font-size: 1.08rem; color: var(--wcu-purple-dark); margin: 1.1rem 0 0.3rem; }
+  .notes h4:first-of-type { margin-top: 0.2rem; }
+  .notes .asc { font-family: 'IBM Plex Mono', monospace; font-size: 0.74rem; color: var(--muted); }
+  .notes .tip { background: var(--gold-light); border-radius: 6px; padding: 0.55rem 0.8rem; margin: 0.6rem 0; font-size: 0.93rem; }
+  .notes .tip strong { color: var(--warn); }
+</style>
+<style>
+  .je-in-head { margin: 0.6rem 0 0; padding-top: 0.6rem; border-top: 1px dashed var(--border-strong); color: var(--wcu-purple-dark); font-size: 0.92rem; }
+  .je-in-head .je-in-note { display: block; font-weight: 400; color: var(--muted); font-size: 0.85rem; margin-top: 0.15rem; }
+  .input-item.je-in select { min-width: 170px; }
+  .je-amt { display: inline-flex; align-items: center; gap: 0.5rem; }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to the study guide</a>
+
+<header>
+  <div class="inner">
+    <p class="eyebrow">ACCT 352 · Exam Study Guide · Not Graded</p>
+    <h1>Accounting for Income Taxes</h1>
+    <p class="sub">Concept notes and ten practice problems with step-by-step solutions to help you focus your exam preparation.</p>
+  </div>
+</header>
+
+
+<main id="main" tabindex="-1">
+<div class="progress-bar">
+  <div class="progress-track" id="progressBar" role="progressbar" aria-label="Study guide progress" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-label" id="progressLabel" aria-hidden="true">0 revealed</div>
+</div>
+
+  <div class="key-idea">
+    <p style="margin:0"><strong>How this works:</strong> Each section starts with <strong>concept notes</strong> covering the rules, definitions, and journal entries you need for both the multiple-choice questions and the problems. Read the notes, then work each problem on your own first and enter your answer in every box. Then select <strong>Reveal Answer</strong> to see the correct answer next to yours, along with a detailed explanation and the journal entries. Enter all amounts as positive numbers. For journal entries, choose Debit, Credit, or Not in this entry for each account listed, and enter 0 for an account that is not in the entry. Answers within $1 of the solution count as a match (rounding). This page isn't graded and doesn't get submitted anywhere; it's just for practice. Have a calculator handy.</p>
+  </div>
+
+  <section class="facts" aria-labelledby="focus-h">
+    <h2 class="ex-label" id="focus-h" style="border:0;padding:0;font-size:0.78rem">Where to focus your study time</h2>
+    <p>Spend most of your time on the <strong>High priority</strong> skills: they take the most practice to do quickly and accurately. Make sure you can explain the <strong>Know it</strong> items in a sentence or two and handle a quick calculation.</p>
+    <ul class="focus-list"><li><span class="pri pri-high">High priority</span><span><a href="#p4">Multiple temporary and permanent differences with beginning deferred balances</a></span></li><li><span class="pri pri-high">High priority</span><span><a href="#p8">Remeasuring deferred taxes when a new tax rate is enacted</a></span></li><li><span class="pri pri-high">High priority</span><span><a href="#p9">NOL carryforwards: the loss year and the 80% limit in the year of use</a></span></li><li><span class="pri pri-high">High priority</span><span><a href="#p1">Sorting differences into DTL, DTA, or permanent</a></span></li><li><span class="pri pri-high">High priority</span><span><a href="#p2">The four-step process and the income tax journal entry</a></span></li><li><span class="pri pri-high">High priority</span><span><a href="#p7">Scheduled (phased-in) enacted rates</a></span></li><li><span class="pri pri-know">Know it</span><span><a href="#p6">Valuation allowance</a></span></li><li><span class="pri pri-know">Know it</span><span><a href="#p5">Balance sheet classification and netting</a></span></li><li><span class="pri pri-know">Know it</span><span><a href="#p10">NOL carrybacks for farm businesses</a></span></li></ul>
+  </section>
+
+  <nav class="facts" aria-labelledby="toc-h">
+    <h2 class="ex-label" id="toc-h" style="border:0;padding:0;font-size:0.78rem">Contents</h2>
+    <ol class="toc">
+      <li><a href="#s-diff">Temporary and permanent differences</a></li>
+      <li><a href="#s-multi">Multiple differences and reporting</a></li>
+      <li><a href="#s-va">Valuation allowance</a></li>
+      <li><a href="#s-rate">Scheduled rates and rate changes</a></li>
+      <li><a href="#s-nol">Net operating losses</a></li>
+    </ol>
+  </nav>
+
+  <section class="facts" aria-labelledby="exam-h">
+    <h2 class="ex-label" id="exam-h" style="border:0;padding:0;font-size:0.78rem">Before exam day</h2>
+    <ul>
+      <li>Practice the income tax journal entry on paper. You'll write entries by hand on the exam.</li>
+      <li>Memorize the four steps: payable, ending deferred balances, change in each, then plug income tax expense.</li>
+      <li>Watch your time. The multiple-difference problem takes the longest; build the taxable income schedule first so the rest falls into place.</li>
+      <li>Bring a calculator. Exam time is 50 minutes.</li>
+    </ul>
+  </section>
+
+  <section class="lo-block" aria-labelledby="s-diff">
+    <h2 id="s-diff">Temporary and Permanent Differences</h2>
+    <div class="key-idea"><p style="margin:0"><strong>Key idea:</strong> Income tax expense includes the tax due now and the change in taxes that will be paid or saved later because of temporary differences. Permanent differences never create deferred taxes.</p></div>
+    <section class="notes" aria-labelledby="n-diff">
+      <h3 id="n-diff">Concept notes: temporary differences, permanent differences, and the four-step process</h3>
+      
+      <p class="asc">FASB ASC 740-10, Income Taxes — Overall</p>
+      <h4>Why deferred taxes exist</h4>
+      <p><strong>Pretax accounting income</strong> follows GAAP; <strong>taxable income</strong> follows the tax code. When the two recognize the same revenue or expense in <em>different years</em>, the difference is <strong>temporary</strong>: it originates now and reverses later. Income tax expense is matched with the income in the income statement, so the future tax effect of a temporary difference is recorded now as a deferred tax liability (DTL) or deferred tax asset (DTA).</p>
+      <h4>The four-step process</h4>
+      <div class="table-wrap" role="region" tabindex="0" aria-label="Recording income taxes in four steps"><table class="data">
+          <caption>Recording income taxes in four steps</caption>
+          <thead><tr><th scope="col">Step</th><th scope="col">What you calculate</th></tr></thead>
+          <tbody><tr><th scope="row">1. Income tax payable</th><td>Taxable income × the current year’s enacted rate</td></tr><tr><th scope="row">2. Ending deferred balances</th><td>Future taxable amounts × enacted future rate = DTL; future deductible amounts × enacted future rate = DTA</td></tr><tr><th scope="row">3. Change in each account</th><td>Ending balance − beginning balance (in the first year, the change is the whole ending balance)</td></tr><tr><th scope="row">4. Income tax expense</th><td>The plug: payable + increase in DTL − increase in DTA (a decrease flips the sign)</td></tr></tbody></table></div>
+      <h4>The income tax entry</h4>
+      <p>Every year-end entry has the same shape. Income tax expense is the amount that makes it balance; a DTA increase is a debit, a DTL increase is a credit (decreases are the reverse).</p>
+      <div class="date-tag" aria-hidden="true">Year-end</div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Year-end</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Income tax expense (to balance)</td><td class="je-debit-amt">amount</td><td class="je-credit-amt"></td></tr><tr><td>Deferred tax asset (if it increases)</td><td class="je-debit-amt">amount</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Deferred tax liability (if it increases)</td><td class="je-debit-amt"></td><td class="je-credit-amt">amount</td></tr><tr><td class="indent">Income tax payable</td><td class="je-debit-amt"></td><td class="je-credit-amt">amount</td></tr></tbody>
+        </table></div>
+      <h4>The four types of temporary differences</h4>
+      <div class="table-wrap" role="region" tabindex="0" aria-label="Types of temporary differences"><table class="data">
+          <caption>Types of temporary differences</caption>
+          <thead><tr><th scope="col"></th><th scope="col">Revenue or gain</th><th scope="col">Expense or loss</th></tr></thead>
+          <tbody><tr><th scope="row"><strong>Creates a DTL</strong> (future taxable amounts)</th><td>Recognized in the income statement <em>before</em> it is taxed. Example: installment sales taxed as cash is collected.</td><td>Deducted on the tax return <em>before</em> it is expensed. Examples: accelerated tax depreciation; prepaid expenses deducted when paid.</td></tr><tr><th scope="row"><strong>Creates a DTA</strong> (future deductible amounts)</th><td>Taxed <em>before</em> it is recognized as revenue. Examples: rent or subscriptions collected in advance.</td><td>Expensed <em>before</em> it is deducted on the tax return. Examples: warranties, loss contingencies, paid future absences, bad debts.</td></tr></tbody></table></div>
+      <p class="tip"><strong>Quick test:</strong> ask what happens <em>to taxable income</em> when the difference reverses. More taxable income later = future taxable amount = DTL. Less taxable income later = future deductible amount = DTA.</p>
+      <h4>Permanent differences</h4>
+      <p>A permanent difference never reverses, so it creates <strong>no</strong> deferred tax. Adjust for it when computing taxable income, then ignore it. Common examples:</p>
+      <ul>
+        <li>Interest on state and municipal bonds (not taxable)</li>
+        <li>Fines and penalties for violating the law (not deductible)</li>
+        <li>Life insurance premiums when the company is the beneficiary (not deductible) and life insurance proceeds (not taxable)</li>
+        <li>The portion of dividends excluded by the dividends-received deduction</li>
+        <li>Compensation expense for some employee stock option plans (not deductible)</li>
+      </ul>
+      <p class="tip"><strong>Check figure:</strong> when the tax rate is the same every year, income tax expense = (pretax accounting income ± permanent differences) × rate. Temporary differences change <em>when</em> tax is paid, not total expense.</p>
+
+    </section>
+    
+    <article class="example" id="p1" aria-labelledby="p1-h">
+      <h3 class="ex-label" id="p1-h">Problem 1 — DTL, DTA, or Permanent?</h3>
+      <p>Classify each item for <strong>Balsam Gap Supply Co.</strong> Assume each one makes pretax accounting income and taxable income differ this year.</p>
+      <div class="input-block" role="group" aria-labelledby="p1-h">
+        <div class="input-item"><label for="p1-a">a. Interest earned on bonds issued by Haywood County:</label>
+          <select id="p1-a" class="ans" data-label="a. Municipal bond interest" data-answer="Permanent difference (no deferred tax)"><option value="">Select…</option><option>Deferred tax liability</option><option>Deferred tax asset</option><option>Permanent difference (no deferred tax)</option></select></div>
+        <div class="input-item"><label for="p1-b">b. Depreciation is accelerated on the tax return and straight-line in the financial statements:</label>
+          <select id="p1-b" class="ans" data-label="b. Accelerated tax depreciation" data-answer="Deferred tax liability"><option value="">Select…</option><option>Deferred tax liability</option><option>Deferred tax asset</option><option>Permanent difference (no deferred tax)</option></select></div>
+        <div class="input-item"><label for="p1-c">c. Warranty costs are accrued in the year of sale and deducted when paid:</label>
+          <select id="p1-c" class="ans" data-label="c. Warranty accrual" data-answer="Deferred tax asset"><option value="">Select…</option><option>Deferred tax liability</option><option>Deferred tax asset</option><option>Permanent difference (no deferred tax)</option></select></div>
+        <div class="input-item"><label for="p1-d">d. Rent collected in advance is taxable when received:</label>
+          <select id="p1-d" class="ans" data-label="d. Rent collected in advance" data-answer="Deferred tax asset"><option value="">Select…</option><option>Deferred tax liability</option><option>Deferred tax asset</option><option>Permanent difference (no deferred tax)</option></select></div>
+        <div class="input-item"><label for="p1-e">e. Gross profit on installment sales is taxed as cash is collected:</label>
+          <select id="p1-e" class="ans" data-label="e. Installment sales" data-answer="Deferred tax liability"><option value="">Select…</option><option>Deferred tax liability</option><option>Deferred tax asset</option><option>Permanent difference (no deferred tax)</option></select></div>
+        <div class="input-item"><label for="p1-f">f. Premiums paid on life insurance for officers, with the company as beneficiary:</label>
+          <select id="p1-f" class="ans" data-label="f. Officers’ life insurance premiums" data-answer="Permanent difference (no deferred tax)"><option value="">Select…</option><option>Deferred tax liability</option><option>Deferred tax asset</option><option>Permanent difference (no deferred tax)</option></select></div>
+        <div class="input-item"><label for="p1-g">g. A two-year insurance policy is paid in advance and deducted on the tax return when paid:</label>
+          <select id="p1-g" class="ans" data-label="g. Prepaid insurance" data-answer="Deferred tax liability"><option value="">Select…</option><option>Deferred tax liability</option><option>Deferred tax asset</option><option>Permanent difference (no deferred tax)</option></select></div>
+        <div class="input-item"><label for="p1-hx">h. A fine paid for an environmental violation:</label>
+          <select id="p1-hx" class="ans" data-label="h. Fine" data-answer="Permanent difference (no deferred tax)"><option value="">Select…</option><option>Deferred tax liability</option><option>Deferred tax asset</option><option>Permanent difference (no deferred tax)</option></select></div>
+        <button type="button" class="reveal-btn" data-problem="p1" aria-expanded="false" aria-controls="p1-sol">Reveal Answer<span class="sr-only"> for Problem 1</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p1-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 1"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 1</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+
+        <h4 class="solution-label">Explanation</h4>
+        <ol type="a">
+ <li><strong>Permanent.</strong> Municipal bond interest is never taxed.</li>
+ <li><strong>DTL.</strong> The tax deduction comes first; in later years tax depreciation is smaller, so taxable income is higher (future taxable amounts).</li>
+ <li><strong>DTA.</strong> The expense comes first; the deduction comes later when claims are paid (future deductible amounts).</li>
+ <li><strong>DTA.</strong> The rent is taxed now but recognized as revenue later, so later taxable income will be lower than accounting income.</li>
+ <li><strong>DTL.</strong> The gross profit is in accounting income now and will be taxed later as cash is collected.</li>
+ <li><strong>Permanent.</strong> These premiums are never deductible.</li>
+ <li><strong>DTL.</strong> This one surprises people: the whole payment is deducted now, but the expense is recognized later, so later taxable income will be higher.</li>
+ <li><strong>Permanent.</strong> Fines are never deductible.</li>
+ </ol>
+      </div>
+    </article>
+    <article class="example" id="p2" aria-labelledby="p2-h">
+      <h3 class="ex-label" id="p2-h">Problem 2 — One Temporary Difference That Creates a DTL</h3>
+      <p><strong>Bearwallow Builders</strong> began operations in <span class="yr0">2026</span>. Pretax accounting income is <strong>$500,000</strong>, which includes <strong>$80,000</strong> of gross profit on installment sales. For tax purposes the gross profit is taxed as cash is collected: $40,000 in <span class="yr1">2027</span> and $40,000 in <span class="yr2">2028</span>. The enacted tax rate is <strong>25%</strong> for all years.</p>
+      <div class="input-block" role="group" aria-labelledby="p2-h">
+        <div class="input-item"><label for="p2-a">Taxable income:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p2-a" class="ans" data-label="Taxable income" data-answer="420000" data-unit="$"></div>
+        <div class="input-item"><label for="p2-b">Income tax payable:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p2-b" class="ans" data-label="Income tax payable" data-answer="105000" data-unit="$"></div>
+        <div class="input-item"><label for="p2-c">Deferred tax liability at year-end:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p2-c" class="ans" data-label="Deferred tax liability at year-end" data-answer="20000" data-unit="$"></div>
+        <div class="input-item"><label for="p2-d">Income tax expense:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p2-d" class="ans" data-label="Income tax expense" data-answer="125000" data-unit="$"></div>
+        <p class="je-in-head"><strong>Journal entry: December 31, <span class="yr0">2026</span></strong> <span class="je-in-note">For each account, choose Debit, Credit, or Not in this entry, then enter the amount (enter 0 if the account is not in the entry).</span></p>
+<div class="input-item je-in"><label for="p2-j0s">Deferred tax asset</label>
+          <select id="p2-j0s" class="ans" data-label="Entry, Dec. 31, {yr0}: Deferred tax asset, debit or credit" data-answer="Not in this entry"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p2-j0a" class="ans" aria-label="Deferred tax asset amount" data-label="Entry, Dec. 31, {yr0}: Deferred tax asset, amount" data-answer="0" data-unit="$"></span></div>
+<div class="input-item je-in"><label for="p2-j1s">Deferred tax liability</label>
+          <select id="p2-j1s" class="ans" data-label="Entry, Dec. 31, {yr0}: Deferred tax liability, debit or credit" data-answer="Credit"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p2-j1a" class="ans" aria-label="Deferred tax liability amount" data-label="Entry, Dec. 31, {yr0}: Deferred tax liability, amount" data-answer="20000" data-unit="$"></span></div>
+<div class="input-item je-in"><label for="p2-j2s">Income tax expense</label>
+          <select id="p2-j2s" class="ans" data-label="Entry, Dec. 31, {yr0}: Income tax expense, debit or credit" data-answer="Debit"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p2-j2a" class="ans" aria-label="Income tax expense amount" data-label="Entry, Dec. 31, {yr0}: Income tax expense, amount" data-answer="125000" data-unit="$"></span></div>
+<div class="input-item je-in"><label for="p2-j3s">Income tax payable</label>
+          <select id="p2-j3s" class="ans" data-label="Entry, Dec. 31, {yr0}: Income tax payable, debit or credit" data-answer="Credit"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p2-j3a" class="ans" aria-label="Income tax payable amount" data-label="Entry, Dec. 31, {yr0}: Income tax payable, amount" data-answer="105000" data-unit="$"></span></div>
+        <button type="button" class="reveal-btn" data-problem="p2" aria-expanded="false" aria-controls="p2-sol">Reveal Answer<span class="sr-only"> for Problem 2</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p2-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 2"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 2</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+
+        <h4 class="solution-label">Explanation</h4>
+        <p class="final-answer"><strong>Taxable income = $500,000 − $80,000 = $420,000; payable = $420,000 × 25% = $105,000</strong></p>
+ <p>Future taxable amounts = $80,000, so the DTL = $80,000 × 25% = <strong>$20,000</strong>. In the first year the change in the DTL is its full balance. Expense = $105,000 + $20,000 = <strong>$125,000</strong> (check: $500,000 × 25%).</p>
+ <div class="date-tag" aria-hidden="true">Dec. 31, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Dec. 31, 2026</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Income tax expense (to balance)</td><td class="je-debit-amt">125,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Income tax payable</td><td class="je-debit-amt"></td><td class="je-credit-amt">105,000</td></tr><tr><td class="indent">Deferred tax liability</td><td class="je-debit-amt"></td><td class="je-credit-amt">20,000</td></tr></tbody>
+        </table></div>
+      </div>
+    </article>
+    <article class="example" id="p3" aria-labelledby="p3-h">
+      <h3 class="ex-label" id="p3-h">Problem 3 — One Temporary Difference That Creates a DTA</h3>
+      <p><strong>Mountain Heritage Press</strong> began publishing a regional magazine in <span class="yr0">2026</span>. During <span class="yr0">2026</span> it collected <strong>$90,000</strong> of subscriptions for issues it will deliver in <span class="yr1">2027</span> ($60,000) and <span class="yr2">2028</span> ($30,000). Subscriptions are taxable when collected. Pretax accounting income for <span class="yr0">2026</span> is <strong>$300,000</strong>, and the enacted tax rate is <strong>25%</strong> for all years.</p>
+      <div class="input-block" role="group" aria-labelledby="p3-h">
+        <div class="input-item"><label for="p3-a">Taxable income:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p3-a" class="ans" data-label="Taxable income" data-answer="390000" data-unit="$"></div>
+        <div class="input-item"><label for="p3-b">Income tax payable:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p3-b" class="ans" data-label="Income tax payable" data-answer="97500" data-unit="$"></div>
+        <div class="input-item"><label for="p3-c">Deferred tax asset at year-end:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p3-c" class="ans" data-label="Deferred tax asset at year-end" data-answer="22500" data-unit="$"></div>
+        <div class="input-item"><label for="p3-d">Income tax expense:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p3-d" class="ans" data-label="Income tax expense" data-answer="75000" data-unit="$"></div>
+        <p class="je-in-head"><strong>Journal entry: December 31, <span class="yr0">2026</span></strong> <span class="je-in-note">For each account, choose Debit, Credit, or Not in this entry, then enter the amount (enter 0 if the account is not in the entry).</span></p>
+<div class="input-item je-in"><label for="p3-j0s">Deferred tax asset</label>
+          <select id="p3-j0s" class="ans" data-label="Entry, Dec. 31, {yr0}: Deferred tax asset, debit or credit" data-answer="Debit"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p3-j0a" class="ans" aria-label="Deferred tax asset amount" data-label="Entry, Dec. 31, {yr0}: Deferred tax asset, amount" data-answer="22500" data-unit="$"></span></div>
+<div class="input-item je-in"><label for="p3-j1s">Deferred tax liability</label>
+          <select id="p3-j1s" class="ans" data-label="Entry, Dec. 31, {yr0}: Deferred tax liability, debit or credit" data-answer="Not in this entry"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p3-j1a" class="ans" aria-label="Deferred tax liability amount" data-label="Entry, Dec. 31, {yr0}: Deferred tax liability, amount" data-answer="0" data-unit="$"></span></div>
+<div class="input-item je-in"><label for="p3-j2s">Income tax expense</label>
+          <select id="p3-j2s" class="ans" data-label="Entry, Dec. 31, {yr0}: Income tax expense, debit or credit" data-answer="Debit"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p3-j2a" class="ans" aria-label="Income tax expense amount" data-label="Entry, Dec. 31, {yr0}: Income tax expense, amount" data-answer="75000" data-unit="$"></span></div>
+<div class="input-item je-in"><label for="p3-j3s">Income tax payable</label>
+          <select id="p3-j3s" class="ans" data-label="Entry, Dec. 31, {yr0}: Income tax payable, debit or credit" data-answer="Credit"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p3-j3a" class="ans" aria-label="Income tax payable amount" data-label="Entry, Dec. 31, {yr0}: Income tax payable, amount" data-answer="97500" data-unit="$"></span></div>
+        <button type="button" class="reveal-btn" data-problem="p3" aria-expanded="false" aria-controls="p3-sol">Reveal Answer<span class="sr-only"> for Problem 3</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p3-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 3"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 3</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+
+        <h4 class="solution-label">Explanation</h4>
+        <p class="final-answer"><strong>Taxable income = $300,000 + $90,000 = $390,000; payable = $97,500</strong></p>
+ <p>When the magazines are delivered, the revenue is in accounting income but was already taxed, so those years have future deductible amounts of $90,000. DTA = $90,000 × 25% = <strong>$22,500</strong>. Expense = $97,500 − $22,500 = <strong>$75,000</strong>.</p>
+ <div class="date-tag" aria-hidden="true">Dec. 31, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Dec. 31, 2026</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Income tax expense (to balance)</td><td class="je-debit-amt">75,000</td><td class="je-credit-amt"></td></tr><tr><td>Deferred tax asset</td><td class="je-debit-amt">22,500</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Income tax payable</td><td class="je-debit-amt"></td><td class="je-credit-amt">97,500</td></tr></tbody>
+        </table></div>
+      </div>
+    </article>
+  </section>
+  <section class="lo-block" aria-labelledby="s-multi">
+    <h2 id="s-multi">Multiple Differences and Financial Statement Reporting</h2>
+    <div class="key-idea"><p style="margin:0"><strong>Key idea:</strong> Reconcile pretax accounting income to taxable income, measure ending deferred balances from year-end temporary differences, and let income tax expense be the plug.</p></div>
+    <section class="notes" aria-labelledby="n-multi">
+      <h3 id="n-multi">Concept notes: multiple differences and reporting</h3>
+      
+      <p class="asc">FASB ASC 740-10-45 (presentation) and 740-10-50 (disclosure)</p>
+      <h4>Work from a schedule</h4>
+      <p>With several differences, start at pretax accounting income and adjust line by line to reach taxable income. Then build a second schedule of the <strong>temporary</strong> differences that still exist at year-end, sorted into future taxable amounts and future deductible amounts.</p>
+      <div class="table-wrap" role="region" tabindex="0" aria-label="Signs in the reconciliation from pretax accounting income to taxable income"><table class="data">
+          <caption>Signs in the reconciliation from pretax accounting income to taxable income</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Adjustment</th></tr></thead>
+          <tbody><tr><th scope="row">Nontaxable revenue (municipal interest)</th><td>Subtract</td></tr><tr><th scope="row">Nondeductible expense (fines, officers’ life insurance)</th><td>Add</td></tr><tr><th scope="row">Tax depreciation greater than book depreciation</th><td>Subtract the excess</td></tr><tr><th scope="row">Installment gross profit not yet taxed</th><td>Subtract</td></tr><tr><th scope="row">Expense accrued but not yet deductible (warranty, contingency, vacation pay)</th><td>Add the expense, subtract the amount paid (net: the increase in the liability)</td></tr><tr><th scope="row">Revenue collected in advance and taxed now</th><td>Add the increase in the unearned revenue balance</td></tr></tbody></table></div>
+      <h4>Use balances, not just this year’s flows</h4>
+      <p>When there are beginning deferred balances, compute the <strong>ending</strong> DTL and DTA from the cumulative temporary differences at year-end, then subtract the beginning balance to find the change. A quick check: the change in each account equals this year’s originating (or reversing) difference × the rate.</p>
+      <h4>Current and deferred components</h4>
+      <p>Income tax expense is disclosed in two pieces: the <strong>current</strong> portion (income tax payable) and the <strong>deferred</strong> portion (the net change in the DTL and DTA). Companies also reconcile their statutory rate with their <strong>effective</strong> rate (income tax expense ÷ pretax accounting income); permanent differences are what move the two apart.</p>
+      <h4>Balance sheet classification</h4>
+      <ul>
+        <li>All deferred tax assets and liabilities are <strong>noncurrent</strong>.</li>
+        <li>Those that relate to the <strong>same tax jurisdiction</strong> (and the same taxpaying component) are netted into one noncurrent amount.</li>
+        <li>Balances from <strong>different</strong> jurisdictions (federal vs. a state, or the U.S. vs. another country) are not offset.</li>
+      </ul>
+
+    </section>
+    
+    <article class="example" id="p4" aria-labelledby="p4-h">
+      <h3 class="ex-label" id="p4-h">Problem 4 — Four Temporary Differences, Two Permanent Differences, Beginning Balances</h3>
+      <p><strong>Fontana Lake Lodges, Inc.</strong> reports pretax accounting income of <strong>$2,000,000</strong> for <span class="yr0">2026</span>. The enacted tax rate is <strong>25%</strong> for all years.</p>
+ <ul>
+ <li><strong>Municipal bond interest</strong> of $60,000 is included in pretax accounting income.</li>
+ <li><strong>Officers’ life insurance premiums</strong> of $16,000 were expensed. Fontana is the beneficiary, so the premiums are not deductible.</li>
+ <li><strong>Depreciation:</strong> tax depreciation exceeds book depreciation by $150,000 in <span class="yr0">2026</span>. At year-end, the carrying amount of the lodges’ equipment exceeds its tax basis by $480,000.</li>
+ <li><strong>Installment sales of timeshare weeks:</strong> gross profit in pretax accounting income exceeds the amount taxed in <span class="yr0">2026</span> by $100,000. Untaxed installment gross profit at year-end totals $260,000.</li>
+ <li><strong>Warranties on boat rentals and gear:</strong> the warranty liability was $60,000 at the start of <span class="yr0">2026</span>. Warranty expense is $70,000 and $45,000 of costs were paid, so the year-end liability is $85,000. Warranty costs are deductible when paid.</li>
+ <li><strong>Rent collected in advance</strong> on lakeside cabins is taxable when collected. Unearned rent was $40,000 at the start of <span class="yr0">2026</span> and $64,000 at year-end.</li>
+ <li><strong>Beginning balances:</strong> DTL $122,500; DTA $25,000. No valuation allowance is needed. All deferred taxes relate to the same tax jurisdiction.</li>
+ </ul>
+      <div class="input-block" role="group" aria-labelledby="p4-h">
+        <div class="input-item"><label for="p4-a">Taxable income:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p4-a" class="ans" data-label="Taxable income" data-answer="1755000" data-unit="$"></div>
+        <div class="input-item"><label for="p4-b">Income tax payable:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p4-b" class="ans" data-label="Income tax payable" data-answer="438750" data-unit="$"></div>
+        <div class="input-item"><label for="p4-c">Deferred tax liability, ending balance:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p4-c" class="ans" data-label="Deferred tax liability, ending balance" data-answer="185000" data-unit="$"></div>
+        <div class="input-item"><label for="p4-d">Increase in the deferred tax liability:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p4-d" class="ans" data-label="Increase in the deferred tax liability" data-answer="62500" data-unit="$"></div>
+        <div class="input-item"><label for="p4-e">Deferred tax asset, ending balance:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p4-e" class="ans" data-label="Deferred tax asset, ending balance" data-answer="37250" data-unit="$"></div>
+        <div class="input-item"><label for="p4-f">Increase in the deferred tax asset:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p4-f" class="ans" data-label="Increase in the deferred tax asset" data-answer="12250" data-unit="$"></div>
+        <div class="input-item"><label for="p4-g">Income tax expense:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p4-g" class="ans" data-label="Income tax expense" data-answer="489000" data-unit="$"></div>
+        <div class="input-item"><label for="p4-hx">Net income:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p4-hx" class="ans" data-label="Net income" data-answer="1511000" data-unit="$"></div>
+        <div class="input-item"><label for="p4-i">Net noncurrent deferred tax liability in the balance sheet:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p4-i" class="ans" data-label="Net noncurrent deferred tax liability in the balance sheet" data-answer="147750" data-unit="$"></div>
+        <p class="je-in-head"><strong>Journal entry: December 31, <span class="yr0">2026</span></strong> <span class="je-in-note">For each account, choose Debit, Credit, or Not in this entry, then enter the amount (enter 0 if the account is not in the entry).</span></p>
+<div class="input-item je-in"><label for="p4-j0s">Deferred tax asset</label>
+          <select id="p4-j0s" class="ans" data-label="Entry, Dec. 31, {yr0}: Deferred tax asset, debit or credit" data-answer="Debit"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p4-j0a" class="ans" aria-label="Deferred tax asset amount" data-label="Entry, Dec. 31, {yr0}: Deferred tax asset, amount" data-answer="12250" data-unit="$"></span></div>
+<div class="input-item je-in"><label for="p4-j1s">Deferred tax liability</label>
+          <select id="p4-j1s" class="ans" data-label="Entry, Dec. 31, {yr0}: Deferred tax liability, debit or credit" data-answer="Credit"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p4-j1a" class="ans" aria-label="Deferred tax liability amount" data-label="Entry, Dec. 31, {yr0}: Deferred tax liability, amount" data-answer="62500" data-unit="$"></span></div>
+<div class="input-item je-in"><label for="p4-j2s">Income tax expense</label>
+          <select id="p4-j2s" class="ans" data-label="Entry, Dec. 31, {yr0}: Income tax expense, debit or credit" data-answer="Debit"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p4-j2a" class="ans" aria-label="Income tax expense amount" data-label="Entry, Dec. 31, {yr0}: Income tax expense, amount" data-answer="489000" data-unit="$"></span></div>
+<div class="input-item je-in"><label for="p4-j3s">Income tax payable</label>
+          <select id="p4-j3s" class="ans" data-label="Entry, Dec. 31, {yr0}: Income tax payable, debit or credit" data-answer="Credit"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p4-j3a" class="ans" aria-label="Income tax payable amount" data-label="Entry, Dec. 31, {yr0}: Income tax payable, amount" data-answer="438750" data-unit="$"></span></div>
+<div class="input-item je-in"><label for="p4-j4s">Valuation allowance</label>
+          <select id="p4-j4s" class="ans" data-label="Entry, Dec. 31, {yr0}: Valuation allowance, debit or credit" data-answer="Not in this entry"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p4-j4a" class="ans" aria-label="Valuation allowance amount" data-label="Entry, Dec. 31, {yr0}: Valuation allowance, amount" data-answer="0" data-unit="$"></span></div>
+        <button type="button" class="reveal-btn" data-problem="p4" aria-expanded="false" aria-controls="p4-sol">Reveal Answer<span class="sr-only"> for Problem 4</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p4-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 4"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 4</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+
+        <h4 class="solution-label">Explanation</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Pretax accounting income to taxable income"><table class="data">
+          <caption>Pretax accounting income to taxable income</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col" class="num">Amount</th></tr></thead>
+          <tbody><tr><th scope="row">Pretax accounting income</th><td class="num">$2,000,000</td></tr><tr><th scope="row">Municipal bond interest (permanent)</th><td class="num">(60,000)</td></tr><tr><th scope="row">Officers’ life insurance premiums (permanent)</th><td class="num">16,000</td></tr><tr><th scope="row">Depreciation (temporary)</th><td class="num">(150,000)</td></tr><tr><th scope="row">Installment sales (temporary)</th><td class="num">(100,000)</td></tr><tr><th scope="row">Warranties: $70,000 − $45,000 (temporary)</th><td class="num">25,000</td></tr><tr><th scope="row">Rent collected in advance: $64,000 − $40,000 (temporary)</th><td class="num">24,000</td></tr><tr class="total-row"><th scope="row"><strong>Taxable income</strong></th><td class="num"><strong>$1,755,000</strong></td></tr></tbody></table></div>
+ <p>Income tax payable = $1,755,000 × 25% = <strong>$438,750</strong>.</p>
+ <div class="table-wrap" role="region" tabindex="0" aria-label="Deferred tax balances at year-end"><table class="data">
+          <caption>Deferred tax balances at year-end</caption>
+          <thead><tr><th scope="col">Temporary difference</th><th scope="col" class="num">Year-end amount</th><th scope="col" class="num">Deferred tax (25%)</th></tr></thead>
+          <tbody><tr><th scope="row">Depreciation (future taxable)</th><td class="num">$480,000</td><td class="num"></td></tr><tr><th scope="row">Installment sales (future taxable)</th><td class="num">260,000</td><td class="num"></td></tr><tr><th scope="row"><strong>Deferred tax liability</strong></th><td class="num"><strong>$740,000</strong></td><td class="num"><strong>$185,000</strong></td></tr><tr><th scope="row">Warranty liability (future deductible)</th><td class="num">$85,000</td><td class="num"></td></tr><tr><th scope="row">Unearned rent (future deductible)</th><td class="num">64,000</td><td class="num"></td></tr><tr><th scope="row"><strong>Deferred tax asset</strong></th><td class="num"><strong>$149,000</strong></td><td class="num"><strong>$37,250</strong></td></tr></tbody></table></div>
+ <p>DTL change = $185,000 − $122,500 = <strong>$62,500 increase</strong> (check: [$150,000 + $100,000] × 25%). DTA change = $37,250 − $25,000 = <strong>$12,250 increase</strong> (check: [$25,000 + $24,000] × 25%).</p>
+ <div class="date-tag" aria-hidden="true">Dec. 31, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Dec. 31, 2026</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Income tax expense (to balance)</td><td class="je-debit-amt">489,000</td><td class="je-credit-amt"></td></tr><tr><td>Deferred tax asset</td><td class="je-debit-amt">12,250</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Deferred tax liability</td><td class="je-debit-amt"></td><td class="je-credit-amt">62,500</td></tr><tr><td class="indent">Income tax payable</td><td class="je-debit-amt"></td><td class="je-credit-amt">438,750</td></tr></tbody>
+        </table></div>
+ <p>Check: ($2,000,000 − $60,000 + $16,000) × 25% = <strong>$489,000</strong>. Current portion $438,750; deferred portion $62,500 − $12,250 = $50,250. Net income = $2,000,000 − $489,000 = <strong>$1,511,000</strong>.</p>
+ <p>Balance sheet: same jurisdiction, so net them: $185,000 − $37,250 = <strong>$147,750 noncurrent deferred tax liability</strong>. The effective tax rate is $489,000 ÷ $2,000,000 = 24.45%, below 25% because the nontaxable interest outweighs the nondeductible premiums.</p>
+      </div>
+    </article>
+    <article class="example" id="p5" aria-labelledby="p5-h">
+      <h3 class="ex-label" id="p5-h">Problem 5 — Balance Sheet Classification</h3>
+      <p>At December 31, <span class="yr0">2026</span>, <strong>Maggie Valley Mercantile</strong> has a federal DTL of <strong>$90,000</strong>, a federal DTA of <strong>$35,000</strong>, and a DTA of <strong>$12,000</strong> from a state where it also files. No valuation allowance is needed.</p>
+      <div class="input-block" role="group" aria-labelledby="p5-h">
+        <div class="input-item"><label for="p5-a">Deferred tax assets and liabilities are classified as:</label>
+          <select id="p5-a" class="ans" data-label="Classification" data-answer="Always noncurrent"><option value="">Select…</option><option>Current or noncurrent, based on the related asset or liability</option><option>Always noncurrent</option><option>Always current</option><option>Current if they reverse within one year</option></select></div>
+        <div class="input-item"><label for="p5-b">Net federal deferred tax liability reported:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p5-b" class="ans" data-label="Net federal deferred tax liability reported" data-answer="55000" data-unit="$"></div>
+        <div class="input-item"><label for="p5-c">State deferred tax asset reported separately:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p5-c" class="ans" data-label="State deferred tax asset reported separately" data-answer="12000" data-unit="$"></div>
+        <button type="button" class="reveal-btn" data-problem="p5" aria-expanded="false" aria-controls="p5-sol">Reveal Answer<span class="sr-only"> for Problem 5</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p5-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 5"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 5</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+
+        <h4 class="solution-label">Explanation</h4>
+        <p>All deferred taxes are <strong>noncurrent</strong>. The two federal balances relate to the same jurisdiction, so they are netted: $90,000 − $35,000 = <strong>$55,000 noncurrent DTL</strong>. The state DTA relates to a different jurisdiction, so it is <strong>not</strong> offset; Maggie Valley reports a separate <strong>$12,000 noncurrent DTA</strong>.</p>
+      </div>
+    </article>
+  </section>
+  <section class="lo-block" aria-labelledby="s-va">
+    <h2 id="s-va">Valuation Allowance</h2>
+    <div class="key-idea"><p style="margin:0"><strong>Key idea:</strong> Recognize every deferred tax asset, then reduce it if it is more likely than not that some of it will not be realized.</p></div>
+    <section class="notes" aria-labelledby="n-va">
+      <h3 id="n-va">Concept notes: the valuation allowance</h3>
+      
+      <p class="asc">FASB ASC 740-10-30-5 and 30-16 through 30-25</p>
+      <h4>Recognize the DTA, then test it</h4>
+      <p>A DTA is recognized for <strong>every</strong> deductible temporary difference and carryforward. Then ask: is it <strong>more likely than not</strong> (greater than 50%) that some or all of it will <em>not</em> be realized? If so, reduce it with a <strong>valuation allowance</strong>, a contra-asset.</p>
+      <div class="date-tag" aria-hidden="true">Year-end</div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Year-end</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Income tax expense</td><td class="je-debit-amt">amount</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Valuation allowance</td><td class="je-debit-amt"></td><td class="je-credit-amt">amount</td></tr></tbody>
+        </table></div><p class="je-desc">Amount = the portion of the DTA not expected to be realized. The entry increases income tax expense.</p>
+      <h4>Evidence to weigh</h4>
+      <ul>
+        <li><strong>Negative:</strong> recent cumulative losses, a history of carryforwards expiring unused, losses expected in early future years.</li>
+        <li><strong>Positive:</strong> existing contracts or backlog that will produce taxable income, DTLs that will reverse and create taxable income, a strong earnings history apart from an unusual loss.</li>
+      </ul>
+      <p>Revisit the allowance every year-end. If prospects improve, reduce the allowance (debit Valuation allowance, credit Income tax expense).</p>
+      <p class="tip"><strong>Watch the wording:</strong> a question that says “more likely than not that one-fourth will <em>not</em> be realized” wants an allowance of one-fourth of the DTA, not three-fourths.</p>
+
+    </section>
+    
+    <article class="example" id="p6" aria-labelledby="p6-h">
+      <h3 class="ex-label" id="p6-h">Problem 6 — Valuation Allowance</h3>
+      <p>In <span class="yr0">2026</span>, its first year, <strong>Whittier Woodworks</strong> has income tax payable of <strong>$150,000</strong> and future deductible amounts of <strong>$256,000</strong> (no future taxable amounts). The tax rate is 25% for all years. Based on the weight of available evidence, it is more likely than not that <strong>one-fourth</strong> of the DTA will not be realized.</p>
+      <div class="input-block" role="group" aria-labelledby="p6-h">
+        <div class="input-item"><label for="p6-a">Deferred tax asset:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p6-a" class="ans" data-label="Deferred tax asset" data-answer="64000" data-unit="$"></div>
+        <div class="input-item"><label for="p6-b">Valuation allowance:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p6-b" class="ans" data-label="Valuation allowance" data-answer="16000" data-unit="$"></div>
+        <div class="input-item"><label for="p6-c">Total income tax expense:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p6-c" class="ans" data-label="Total income tax expense" data-answer="102000" data-unit="$"></div>
+        <div class="input-item"><label for="p6-d">DTA net of the valuation allowance:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p6-d" class="ans" data-label="DTA net of the valuation allowance" data-answer="48000" data-unit="$"></div>
+        <p class="je-in-head"><strong>Journal entry: record income taxes, December 31, <span class="yr0">2026</span></strong> <span class="je-in-note">For each account, choose Debit, Credit, or Not in this entry, then enter the amount (enter 0 if the account is not in the entry).</span></p>
+<div class="input-item je-in"><label for="p6-j0s">Deferred tax asset</label>
+          <select id="p6-j0s" class="ans" data-label="Income tax entry: Deferred tax asset, debit or credit" data-answer="Debit"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p6-j0a" class="ans" aria-label="Deferred tax asset amount" data-label="Income tax entry: Deferred tax asset, amount" data-answer="64000" data-unit="$"></span></div>
+<div class="input-item je-in"><label for="p6-j1s">Income tax expense</label>
+          <select id="p6-j1s" class="ans" data-label="Income tax entry: Income tax expense, debit or credit" data-answer="Debit"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p6-j1a" class="ans" aria-label="Income tax expense amount" data-label="Income tax entry: Income tax expense, amount" data-answer="86000" data-unit="$"></span></div>
+<div class="input-item je-in"><label for="p6-j2s">Income tax payable</label>
+          <select id="p6-j2s" class="ans" data-label="Income tax entry: Income tax payable, debit or credit" data-answer="Credit"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p6-j2a" class="ans" aria-label="Income tax payable amount" data-label="Income tax entry: Income tax payable, amount" data-answer="150000" data-unit="$"></span></div>
+<div class="input-item je-in"><label for="p6-j3s">Valuation allowance</label>
+          <select id="p6-j3s" class="ans" data-label="Income tax entry: Valuation allowance, debit or credit" data-answer="Not in this entry"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p6-j3a" class="ans" aria-label="Valuation allowance amount" data-label="Income tax entry: Valuation allowance, amount" data-answer="0" data-unit="$"></span></div>
+        <p class="je-in-head"><strong>Journal entry: record the valuation allowance, December 31, <span class="yr0">2026</span></strong> <span class="je-in-note">For each account, choose Debit, Credit, or Not in this entry, then enter the amount (enter 0 if the account is not in the entry).</span></p>
+<div class="input-item je-in"><label for="p6-k0s">Deferred tax asset</label>
+          <select id="p6-k0s" class="ans" data-label="Valuation allowance entry: Deferred tax asset, debit or credit" data-answer="Not in this entry"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p6-k0a" class="ans" aria-label="Deferred tax asset amount" data-label="Valuation allowance entry: Deferred tax asset, amount" data-answer="0" data-unit="$"></span></div>
+<div class="input-item je-in"><label for="p6-k1s">Income tax expense</label>
+          <select id="p6-k1s" class="ans" data-label="Valuation allowance entry: Income tax expense, debit or credit" data-answer="Debit"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p6-k1a" class="ans" aria-label="Income tax expense amount" data-label="Valuation allowance entry: Income tax expense, amount" data-answer="16000" data-unit="$"></span></div>
+<div class="input-item je-in"><label for="p6-k2s">Income tax payable</label>
+          <select id="p6-k2s" class="ans" data-label="Valuation allowance entry: Income tax payable, debit or credit" data-answer="Not in this entry"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p6-k2a" class="ans" aria-label="Income tax payable amount" data-label="Valuation allowance entry: Income tax payable, amount" data-answer="0" data-unit="$"></span></div>
+<div class="input-item je-in"><label for="p6-k3s">Valuation allowance</label>
+          <select id="p6-k3s" class="ans" data-label="Valuation allowance entry: Valuation allowance, debit or credit" data-answer="Credit"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p6-k3a" class="ans" aria-label="Valuation allowance amount" data-label="Valuation allowance entry: Valuation allowance, amount" data-answer="16000" data-unit="$"></span></div>
+        <button type="button" class="reveal-btn" data-problem="p6" aria-expanded="false" aria-controls="p6-sol">Reveal Answer<span class="sr-only"> for Problem 6</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p6-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 6"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 6</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+
+        <h4 class="solution-label">Explanation</h4>
+        <p class="final-answer"><strong>DTA = $256,000 × 25% = $64,000; valuation allowance = $64,000 × ¼ = $16,000</strong></p>
+ <div class="date-tag" aria-hidden="true">Dec. 31, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Dec. 31, 2026</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Income tax expense (to balance)</td><td class="je-debit-amt">86,000</td><td class="je-credit-amt"></td></tr><tr><td>Deferred tax asset</td><td class="je-debit-amt">64,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Income tax payable</td><td class="je-debit-amt"></td><td class="je-credit-amt">150,000</td></tr></tbody>
+        </table></div>
+ <div class="date-tag" aria-hidden="true">Dec. 31, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Dec. 31, 2026</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Income tax expense</td><td class="je-debit-amt">16,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Valuation allowance</td><td class="je-debit-amt"></td><td class="je-credit-amt">16,000</td></tr></tbody>
+        </table></div>
+ <p>Total expense = $86,000 + $16,000 = <strong>$102,000</strong>. The DTA is reported net at $64,000 − $16,000 = <strong>$48,000</strong>.</p>
+      </div>
+    </article>
+  </section>
+  <section class="lo-block" aria-labelledby="s-rate">
+    <h2 id="s-rate">Tax Rates: Scheduled Rates and Rate Changes</h2>
+    <div class="key-idea"><p style="margin:0"><strong>Key idea:</strong> Deferred taxes use the enacted rate for each reversal year. When a new rate is enacted, remeasure existing balances in the year of enactment through income tax expense.</p></div>
+    <section class="notes" aria-labelledby="n-rate">
+      <h3 id="n-rate">Concept notes: enacted rates and changes in rates</h3>
+      
+      <p class="asc">FASB ASC 740-10-30-8 (enacted rates) and 740-10-35-4 (changes in tax laws or rates)</p>
+      <h4>Use enacted rates only</h4>
+      <p>Measure deferred taxes with the rate <strong>enacted</strong> for the year each difference will reverse. A rate that is only proposed or expected is ignored until it becomes law.</p>
+      <h4>Scheduled (phased-in) rates</h4>
+      <p>If enacted rates differ by year, multiply each year’s reversal by <em>that</em> year’s rate and add them up. Income tax payable still uses the <em>current</em> year’s rate.</p>
+      <h4>A change in the enacted rate</h4>
+      <p>When a new rate is enacted, remeasure every existing DTL and DTA at the new rate in the <strong>year of enactment</strong>, not the year the rate takes effect and not retrospectively. The adjustment flows through <strong>income tax expense from continuing operations</strong>. Income tax payable for the current year is unaffected unless the current year’s own rate changed.</p>
+      <div class="table-wrap" role="region" tabindex="0" aria-label="How a rate change affects income tax expense"><table class="data">
+          <caption>How a rate change affects income tax expense</caption>
+          <thead><tr><th scope="col"></th><th scope="col">Rate goes up</th><th scope="col">Rate goes down</th></tr></thead>
+          <tbody><tr><th scope="row">Existing DTL</th><td>DTL increases → expense increases</td><td>DTL decreases → expense decreases</td></tr><tr><th scope="row">Existing DTA</th><td>DTA increases → expense decreases</td><td>DTA decreases → expense increases</td></tr></tbody></table></div>
+      <p>Two journal-entry shapes for a rate <em>decrease</em> on $1,000,000 of differences, from 30% to 25%:</p>
+      <div class="date-tag" aria-hidden="true">Year enacted — DTL remeasured</div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Year enacted — DTL remeasured</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Deferred tax liability</td><td class="je-debit-amt">50,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Income tax expense</td><td class="je-debit-amt"></td><td class="je-credit-amt">50,000</td></tr></tbody>
+        </table></div>
+      <div class="date-tag" aria-hidden="true">Year enacted — DTA remeasured</div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Year enacted — DTA remeasured</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Income tax expense</td><td class="je-debit-amt">50,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Deferred tax asset</td><td class="je-debit-amt"></td><td class="je-credit-amt">50,000</td></tr></tbody>
+        </table></div>
+      <p class="tip"><strong>Split the change:</strong> in a year with both a reversal and a rate change, separate the DTL (or DTA) change into (1) the part from this year’s reversal at the <em>old</em> rate and (2) the remeasurement of what remains at the <em>difference</em> in rates. The two pieces add to the total change.</p>
+
+    </section>
+    
+    <article class="example" id="p7" aria-labelledby="p7-h">
+      <h3 class="ex-label" id="p7-h">Problem 7 — Scheduled Tax Rates</h3>
+      <p><strong>Santeetlah Boatworks</strong> began operations in <span class="yr0">2026</span> and reports pretax accounting income of <strong>$800,000</strong>. Tax depreciation exceeds book depreciation by <strong>$120,000</strong> in <span class="yr0">2026</span>; the difference will reverse evenly, $40,000 in each of <span class="yr1">2027</span>, <span class="yr2">2028</span>, and <span class="yr3">2029</span>. Tax law enacted before year-end sets the rate at <strong>25%</strong> for <span class="yr0">2026</span> and <span class="yr1">2027</span> and <strong>30%</strong> for <span class="yr2">2028</span> and later.</p>
+      <div class="input-block" role="group" aria-labelledby="p7-h">
+        <div class="input-item"><label for="p7-a">Income tax payable:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p7-a" class="ans" data-label="Income tax payable" data-answer="170000" data-unit="$"></div>
+        <div class="input-item"><label for="p7-b">Deferred tax liability at year-end:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p7-b" class="ans" data-label="Deferred tax liability at year-end" data-answer="34000" data-unit="$"></div>
+        <div class="input-item"><label for="p7-c">Income tax expense:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p7-c" class="ans" data-label="Income tax expense" data-answer="204000" data-unit="$"></div>
+        <p class="je-in-head"><strong>Journal entry: December 31, <span class="yr0">2026</span></strong> <span class="je-in-note">For each account, choose Debit, Credit, or Not in this entry, then enter the amount (enter 0 if the account is not in the entry).</span></p>
+<div class="input-item je-in"><label for="p7-j0s">Deferred tax asset</label>
+          <select id="p7-j0s" class="ans" data-label="Entry, Dec. 31, {yr0}: Deferred tax asset, debit or credit" data-answer="Not in this entry"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p7-j0a" class="ans" aria-label="Deferred tax asset amount" data-label="Entry, Dec. 31, {yr0}: Deferred tax asset, amount" data-answer="0" data-unit="$"></span></div>
+<div class="input-item je-in"><label for="p7-j1s">Deferred tax liability</label>
+          <select id="p7-j1s" class="ans" data-label="Entry, Dec. 31, {yr0}: Deferred tax liability, debit or credit" data-answer="Credit"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p7-j1a" class="ans" aria-label="Deferred tax liability amount" data-label="Entry, Dec. 31, {yr0}: Deferred tax liability, amount" data-answer="34000" data-unit="$"></span></div>
+<div class="input-item je-in"><label for="p7-j2s">Income tax expense</label>
+          <select id="p7-j2s" class="ans" data-label="Entry, Dec. 31, {yr0}: Income tax expense, debit or credit" data-answer="Debit"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p7-j2a" class="ans" aria-label="Income tax expense amount" data-label="Entry, Dec. 31, {yr0}: Income tax expense, amount" data-answer="204000" data-unit="$"></span></div>
+<div class="input-item je-in"><label for="p7-j3s">Income tax payable</label>
+          <select id="p7-j3s" class="ans" data-label="Entry, Dec. 31, {yr0}: Income tax payable, debit or credit" data-answer="Credit"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p7-j3a" class="ans" aria-label="Income tax payable amount" data-label="Entry, Dec. 31, {yr0}: Income tax payable, amount" data-answer="170000" data-unit="$"></span></div>
+        <button type="button" class="reveal-btn" data-problem="p7" aria-expanded="false" aria-controls="p7-sol">Reveal Answer<span class="sr-only"> for Problem 7</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p7-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 7"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 7</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+
+        <h4 class="solution-label">Explanation</h4>
+        <p class="final-answer"><strong>Payable = ($800,000 − $120,000) × 25% = $170,000</strong></p>
+ <div class="table-wrap" role="region" tabindex="0" aria-label="Deferred tax liability using enacted rates"><table class="data">
+          <caption>Deferred tax liability using enacted rates</caption>
+          <thead><tr><th scope="col">Year</th><th scope="col" class="num">Future taxable amount</th><th scope="col" class="num">Enacted rate</th><th scope="col" class="num">Deferred tax</th></tr></thead>
+          <tbody><tr><th scope="row"><span class="yr1">2027</span></th><td class="num">$40,000</td><td class="num">25%</td><td class="num">$10,000</td></tr><tr><th scope="row"><span class="yr2">2028</span></th><td class="num">40,000</td><td class="num">30%</td><td class="num">12,000</td></tr><tr><th scope="row"><span class="yr3">2029</span></th><td class="num">40,000</td><td class="num">30%</td><td class="num">12,000</td></tr><tr class="total-row"><th scope="row">Total</th><td class="num">$120,000</td><td class="num"></td><td class="num">$34,000</td></tr></tbody></table></div>
+ <div class="date-tag" aria-hidden="true">Dec. 31, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Dec. 31, 2026</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Income tax expense (to balance)</td><td class="je-debit-amt">204,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Income tax payable</td><td class="je-debit-amt"></td><td class="je-credit-amt">170,000</td></tr><tr><td class="indent">Deferred tax liability</td><td class="je-debit-amt"></td><td class="je-credit-amt">34,000</td></tr></tbody>
+        </table></div>
+      </div>
+    </article>
+    <article class="example" id="p8" aria-labelledby="p8-h">
+      <h3 class="ex-label" id="p8-h">Problem 8 — An Enacted Rate Change on a Deferred Tax Asset</h3>
+      <p><strong>Highlands Biscuit Company</strong> had a DTA of <strong>$30,000</strong> on January 1, <span class="yr0">2026</span>, from a $120,000 warranty liability measured at 25%. During <span class="yr0">2026</span>, warranty expense is $50,000 and $40,000 is paid, so the year-end warranty liability is <strong>$130,000</strong>, all expected to be paid (and deducted) in <span class="yr1">2027</span>.</p>
+ <p>Late in <span class="yr0">2026</span>, a new law is enacted raising the tax rate to <strong>30% beginning in <span class="yr1">2027</span></strong>; the <span class="yr0">2026</span> rate stays 25%. Pretax accounting income for <span class="yr0">2026</span> is <strong>$600,000</strong>, and the warranty is the only difference.</p>
+      <div class="input-block" role="group" aria-labelledby="p8-h">
+        <div class="input-item"><label for="p8-a">Income tax payable:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p8-a" class="ans" data-label="Income tax payable" data-answer="152500" data-unit="$"></div>
+        <div class="input-item"><label for="p8-b">Deferred tax asset, December 31:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p8-b" class="ans" data-label="Deferred tax asset, December 31" data-answer="39000" data-unit="$"></div>
+        <div class="input-item"><label for="p8-c">Total increase in the deferred tax asset:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p8-c" class="ans" data-label="Total increase in the deferred tax asset" data-answer="9000" data-unit="$"></div>
+        <div class="input-item"><label for="p8-d">Part of the increase caused by the rate change:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p8-d" class="ans" data-label="Part of the increase caused by the rate change" data-answer="6000" data-unit="$"></div>
+        <div class="input-item"><label for="p8-e">Income tax expense:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p8-e" class="ans" data-label="Income tax expense" data-answer="143500" data-unit="$"></div>
+        <div class="input-item"><label for="p8-f">If the rate had instead dropped to 20%, remeasuring the DTA would have:</label>
+          <select id="p8-f" class="ans" data-label="Effect of a rate decrease on a DTA" data-answer="Increased income tax expense"><option value="">Select…</option><option>Increased income tax expense</option><option>Decreased income tax expense</option><option>Changed retained earnings only</option><option>Had no effect until the warranty is paid</option></select></div>
+        <p class="je-in-head"><strong>Journal entry: December 31, <span class="yr0">2026</span></strong> <span class="je-in-note">For each account, choose Debit, Credit, or Not in this entry, then enter the amount (enter 0 if the account is not in the entry).</span></p>
+<div class="input-item je-in"><label for="p8-j0s">Deferred tax asset</label>
+          <select id="p8-j0s" class="ans" data-label="Entry, Dec. 31, {yr0}: Deferred tax asset, debit or credit" data-answer="Debit"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p8-j0a" class="ans" aria-label="Deferred tax asset amount" data-label="Entry, Dec. 31, {yr0}: Deferred tax asset, amount" data-answer="9000" data-unit="$"></span></div>
+<div class="input-item je-in"><label for="p8-j1s">Deferred tax liability</label>
+          <select id="p8-j1s" class="ans" data-label="Entry, Dec. 31, {yr0}: Deferred tax liability, debit or credit" data-answer="Not in this entry"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p8-j1a" class="ans" aria-label="Deferred tax liability amount" data-label="Entry, Dec. 31, {yr0}: Deferred tax liability, amount" data-answer="0" data-unit="$"></span></div>
+<div class="input-item je-in"><label for="p8-j2s">Income tax expense</label>
+          <select id="p8-j2s" class="ans" data-label="Entry, Dec. 31, {yr0}: Income tax expense, debit or credit" data-answer="Debit"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p8-j2a" class="ans" aria-label="Income tax expense amount" data-label="Entry, Dec. 31, {yr0}: Income tax expense, amount" data-answer="143500" data-unit="$"></span></div>
+<div class="input-item je-in"><label for="p8-j3s">Income tax payable</label>
+          <select id="p8-j3s" class="ans" data-label="Entry, Dec. 31, {yr0}: Income tax payable, debit or credit" data-answer="Credit"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p8-j3a" class="ans" aria-label="Income tax payable amount" data-label="Entry, Dec. 31, {yr0}: Income tax payable, amount" data-answer="152500" data-unit="$"></span></div>
+        <button type="button" class="reveal-btn" data-problem="p8" aria-expanded="false" aria-controls="p8-sol">Reveal Answer<span class="sr-only"> for Problem 8</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p8-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 8"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 8</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+
+        <h4 class="solution-label">Explanation</h4>
+        <p class="final-answer"><strong>Taxable income = $600,000 + ($50,000 − $40,000) = $610,000; payable = $610,000 × 25% = $152,500</strong></p>
+ <p>Ending DTA = $130,000 × 30% = <strong>$39,000</strong>, an increase of $39,000 − $30,000 = <strong>$9,000</strong>:</p>
+ <ul><li>Rate change on the beginning difference: $120,000 × (30% − 25%) = <strong>$6,000</strong></li>
+ <li>This year’s new $10,000 difference at the new rate: $10,000 × 30% = $3,000</li></ul>
+ <div class="date-tag" aria-hidden="true">Dec. 31, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Dec. 31, 2026</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Income tax expense (to balance)</td><td class="je-debit-amt">143,500</td><td class="je-credit-amt"></td></tr><tr><td>Deferred tax asset</td><td class="je-debit-amt">9,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Income tax payable</td><td class="je-debit-amt"></td><td class="je-credit-amt">152,500</td></tr></tbody>
+        </table></div>
+ <p>A higher future rate makes future deductions worth more, so the DTA grows and expense falls. A rate <em>decrease</em> would shrink the DTA and <strong>increase</strong> expense. Compare a DTL: a rate decrease shrinks the DTL and <em>decreases</em> expense.</p>
+      </div>
+    </article>
+  </section>
+  <section class="lo-block" aria-labelledby="s-nol">
+    <h2 id="s-nol">Net Operating Losses</h2>
+    <div class="key-idea"><p style="margin:0"><strong>Key idea:</strong> The tax benefit of an NOL is recognized in the year of the loss: a DTA for a carryforward, a refund receivable for an allowed carryback.</p></div>
+    <section class="notes" aria-labelledby="n-nol">
+      <h3 id="n-nol">Concept notes: net operating losses</h3>
+      
+      <p class="asc">FASB ASC 740-10-25-3 and 740-10-45-6</p>
+      <h4>Carryforwards (most companies)</h4>
+      <ul>
+        <li>An NOL is carried <strong>forward indefinitely</strong>.</li>
+        <li>In any future year it can offset at most <strong>80%</strong> of taxable income; the rest of that year’s income is taxed.</li>
+        <li>In the year of the loss, recognize a <strong>DTA</strong> = NOL × enacted future rate, and an <strong>income tax benefit</strong> (a credit to income tax expense). Apply the valuation allowance test to that DTA.</li>
+      </ul>
+      <div class="date-tag" aria-hidden="true">Year of loss</div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Year of loss</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Deferred tax asset</td><td class="je-debit-amt">amount</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Income tax expense (income tax benefit)</td><td class="je-debit-amt"></td><td class="je-credit-amt">amount</td></tr></tbody>
+        </table></div>
+      <p>In a later profitable year, the NOL used reduces the DTA:</p>
+      <div class="date-tag" aria-hidden="true">Year NOL is used</div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Year NOL is used</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Income tax expense (to balance)</td><td class="je-debit-amt">amount</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Deferred tax asset</td><td class="je-debit-amt"></td><td class="je-credit-amt">amount</td></tr><tr><td class="indent">Income tax payable</td><td class="je-debit-amt"></td><td class="je-credit-amt">amount</td></tr></tbody>
+        </table></div>
+      <h4>Carrybacks (some farm businesses and insurance companies only)</h4>
+      <p>Eligible companies carry an NOL back <strong>two years</strong>, earliest year first, and receive a refund of taxes paid at <em>those years’</em> rates. Any NOL left after the carryback is carried forward. The refund is a current receivable.</p>
+      <div class="date-tag" aria-hidden="true">Year of loss</div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Year of loss</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Income tax refund receivable</td><td class="je-debit-amt">amount</td><td class="je-credit-amt"></td></tr><tr><td>Deferred tax asset (carryforward)</td><td class="je-debit-amt">amount</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Income tax expense (income tax benefit)</td><td class="je-debit-amt"></td><td class="je-credit-amt">amount</td></tr></tbody>
+        </table></div>
+      <h4>Income statement</h4>
+      <p>The benefit is recognized in the <strong>year of the loss</strong> and shown below the operating loss: <em>Operating loss before income taxes − Income tax benefit = Net loss</em>. The benefit can be split into a current portion (carryback refund) and a deferred portion (carryforward).</p>
+      <p class="tip"><strong>Common slip:</strong> the 80% limit applies to the year the NOL is <em>used</em>, not the year of the loss. In the loss year, the DTA is the full NOL × rate.</p>
+
+    </section>
+    
+    <article class="example" id="p9" aria-labelledby="p9-h">
+      <h3 class="ex-label" id="p9-h">Problem 9 — NOL Carryforward: The Loss Year and the Year It Is Used</h3>
+      <p><strong>Waynesville Brewing Co.</strong> reports a net operating loss of <strong>$480,000</strong> for both financial reporting and tax purposes in <span class="yr0">2026</span>. It cannot carry the loss back. The enacted rate is 25% for <span class="yr0">2026</span> and later years, and future taxable income is expected to be sufficient. In <span class="yr1">2027</span>, Waynesville earns <strong>$300,000</strong> before the NOL deduction, with no other differences.</p>
+      <div class="input-block" role="group" aria-labelledby="p9-h">
+        <div class="input-item"><label for="p9-a">Deferred tax asset recognized at the end of <span class="yr0">2026</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p9-a" class="ans" data-label="DTA at end of {yr0}" data-answer="120000" data-unit="$"></div>
+        <div class="input-item"><label for="p9-b"><span class="yr0">2026</span> net loss:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p9-b" class="ans" data-label="{yr0} net loss" data-answer="360000" data-unit="$"></div>
+        <div class="input-item"><label for="p9-c">NOL deducted on the <span class="yr1">2027</span> tax return:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p9-c" class="ans" data-label="NOL deducted in {yr1}" data-answer="240000" data-unit="$"></div>
+        <div class="input-item"><label for="p9-d"><span class="yr1">2027</span> income tax payable:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p9-d" class="ans" data-label="{yr1} income tax payable" data-answer="15000" data-unit="$"></div>
+        <div class="input-item"><label for="p9-e">Deferred tax asset at the end of <span class="yr1">2027</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p9-e" class="ans" data-label="DTA at end of {yr1}" data-answer="60000" data-unit="$"></div>
+        <div class="input-item"><label for="p9-f"><span class="yr1">2027</span> income tax expense:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p9-f" class="ans" data-label="{yr1} income tax expense" data-answer="75000" data-unit="$"></div>
+        <p class="je-in-head"><strong>Journal entry: December 31, <span class="yr0">2026</span> (the loss year)</strong> <span class="je-in-note">For each account, choose Debit, Credit, or Not in this entry, then enter the amount (enter 0 if the account is not in the entry).</span></p>
+<div class="input-item je-in"><label for="p9-j0s">Deferred tax asset</label>
+          <select id="p9-j0s" class="ans" data-label="Entry, Dec. 31, {yr0}: Deferred tax asset, debit or credit" data-answer="Debit"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p9-j0a" class="ans" aria-label="Deferred tax asset amount" data-label="Entry, Dec. 31, {yr0}: Deferred tax asset, amount" data-answer="120000" data-unit="$"></span></div>
+<div class="input-item je-in"><label for="p9-j1s">Income tax expense</label>
+          <select id="p9-j1s" class="ans" data-label="Entry, Dec. 31, {yr0}: Income tax expense, debit or credit" data-answer="Credit"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p9-j1a" class="ans" aria-label="Income tax expense amount" data-label="Entry, Dec. 31, {yr0}: Income tax expense, amount" data-answer="120000" data-unit="$"></span></div>
+<div class="input-item je-in"><label for="p9-j2s">Income tax payable</label>
+          <select id="p9-j2s" class="ans" data-label="Entry, Dec. 31, {yr0}: Income tax payable, debit or credit" data-answer="Not in this entry"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p9-j2a" class="ans" aria-label="Income tax payable amount" data-label="Entry, Dec. 31, {yr0}: Income tax payable, amount" data-answer="0" data-unit="$"></span></div>
+<div class="input-item je-in"><label for="p9-j3s">Income tax refund receivable</label>
+          <select id="p9-j3s" class="ans" data-label="Entry, Dec. 31, {yr0}: Income tax refund receivable, debit or credit" data-answer="Not in this entry"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p9-j3a" class="ans" aria-label="Income tax refund receivable amount" data-label="Entry, Dec. 31, {yr0}: Income tax refund receivable, amount" data-answer="0" data-unit="$"></span></div>
+        <p class="je-in-head"><strong>Journal entry: December 31, <span class="yr1">2027</span> (the NOL is used)</strong> <span class="je-in-note">For each account, choose Debit, Credit, or Not in this entry, then enter the amount (enter 0 if the account is not in the entry).</span></p>
+<div class="input-item je-in"><label for="p9-k0s">Deferred tax asset</label>
+          <select id="p9-k0s" class="ans" data-label="Entry, Dec. 31, {yr1}: Deferred tax asset, debit or credit" data-answer="Credit"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p9-k0a" class="ans" aria-label="Deferred tax asset amount" data-label="Entry, Dec. 31, {yr1}: Deferred tax asset, amount" data-answer="60000" data-unit="$"></span></div>
+<div class="input-item je-in"><label for="p9-k1s">Income tax expense</label>
+          <select id="p9-k1s" class="ans" data-label="Entry, Dec. 31, {yr1}: Income tax expense, debit or credit" data-answer="Debit"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p9-k1a" class="ans" aria-label="Income tax expense amount" data-label="Entry, Dec. 31, {yr1}: Income tax expense, amount" data-answer="75000" data-unit="$"></span></div>
+<div class="input-item je-in"><label for="p9-k2s">Income tax payable</label>
+          <select id="p9-k2s" class="ans" data-label="Entry, Dec. 31, {yr1}: Income tax payable, debit or credit" data-answer="Credit"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p9-k2a" class="ans" aria-label="Income tax payable amount" data-label="Entry, Dec. 31, {yr1}: Income tax payable, amount" data-answer="15000" data-unit="$"></span></div>
+<div class="input-item je-in"><label for="p9-k3s">Valuation allowance</label>
+          <select id="p9-k3s" class="ans" data-label="Entry, Dec. 31, {yr1}: Valuation allowance, debit or credit" data-answer="Not in this entry"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p9-k3a" class="ans" aria-label="Valuation allowance amount" data-label="Entry, Dec. 31, {yr1}: Valuation allowance, amount" data-answer="0" data-unit="$"></span></div>
+        <button type="button" class="reveal-btn" data-problem="p9" aria-expanded="false" aria-controls="p9-sol">Reveal Answer<span class="sr-only"> for Problem 9</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p9-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 9"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 9</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+
+        <h4 class="solution-label">Explanation</h4>
+        <p class="final-answer"><strong><span class="yr0">2026</span>: DTA = $480,000 × 25% = $120,000; net loss = $480,000 − $120,000 = $360,000</strong></p>
+ <div class="date-tag" aria-hidden="true">Dec. 31, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Dec. 31, 2026</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Deferred tax asset</td><td class="je-debit-amt">120,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Income tax expense (income tax benefit)</td><td class="je-debit-amt"></td><td class="je-credit-amt">120,000</td></tr></tbody>
+        </table></div>
+ <div class="table-wrap" role="region" tabindex="0" aria-label="Lower portion of the 2026 income statement"><table class="data">
+          <caption>Lower portion of the <span class="yr0">2026</span> income statement</caption>
+          <thead><tr><th scope="col">Line item</th><th scope="col" class="num">Amount</th></tr></thead>
+          <tbody><tr><th scope="row">Operating loss before income taxes</th><td class="num">$(480,000)</td></tr><tr><th scope="row">Less: Income tax benefit (deferred)</th><td class="num">120,000</td></tr><tr class="total-row"><th scope="row">Net loss</th><td class="num">$(360,000)</td></tr></tbody></table></div>
+ <p><span class="yr1">2027</span>: NOL used = $300,000 × 80% = <strong>$240,000</strong>; taxable income = $60,000; payable = $60,000 × 25% = <strong>$15,000</strong>. NOL left = $480,000 − $240,000 = $240,000, so the DTA = $240,000 × 25% = <strong>$60,000</strong> (a $60,000 decrease).</p>
+ <div class="date-tag" aria-hidden="true">Dec. 31, <span class="yr1">2027</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Dec. 31, 2027</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Income tax expense (to balance)</td><td class="je-debit-amt">75,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Deferred tax asset</td><td class="je-debit-amt"></td><td class="je-credit-amt">60,000</td></tr><tr><td class="indent">Income tax payable</td><td class="je-debit-amt"></td><td class="je-credit-amt">15,000</td></tr></tbody>
+        </table></div>
+ <p>Check: $300,000 × 25% = $75,000; <span class="yr1">2027</span> net income = $225,000.</p>
+      </div>
+    </article>
+    <article class="example" id="p10" aria-labelledby="p10-h">
+      <h3 class="ex-label" id="p10-h">Problem 10 — NOL Carryback and Carryforward (Farm Business)</h3>
+      <p><strong>Ashe County Tree Farm</strong> grows Fraser fir Christmas trees and qualifies to carry an NOL back two years. A blight causes a <strong>$260,000</strong> NOL in <span class="yr0">2026</span>. The enacted rate is 25% for <span class="yr0">2026</span> and later years; future income is expected to be sufficient.</p>
+ <div class="table-wrap" role="region" tabindex="0" aria-label="Prior taxable income and rates"><table class="data">
+          <caption>Prior taxable income and rates</caption>
+          <thead><tr><th scope="col">Year</th><th scope="col" class="num">Taxable income</th><th scope="col" class="num">Tax rate</th><th scope="col" class="num">Tax paid</th></tr></thead>
+          <tbody><tr><th scope="row"><span class="yrm2">2024</span></th><td class="num">$90,000</td><td class="num">30%</td><td class="num">$27,000</td></tr><tr><th scope="row"><span class="yrm1">2025</span></th><td class="num">110,000</td><td class="num">25%</td><td class="num">27,500</td></tr></tbody></table></div>
+      <div class="input-block" role="group" aria-labelledby="p10-h">
+        <div class="input-item"><label for="p10-a">Income tax refund receivable:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p10-a" class="ans" data-label="Income tax refund receivable" data-answer="54500" data-unit="$"></div>
+        <div class="input-item"><label for="p10-b">NOL carryforward:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p10-b" class="ans" data-label="NOL carryforward" data-answer="60000" data-unit="$"></div>
+        <div class="input-item"><label for="p10-c">Deferred tax asset for the carryforward:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p10-c" class="ans" data-label="Deferred tax asset for the carryforward" data-answer="15000" data-unit="$"></div>
+        <div class="input-item"><label for="p10-d">Total income tax benefit:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p10-d" class="ans" data-label="Total income tax benefit" data-answer="69500" data-unit="$"></div>
+        <div class="input-item"><label for="p10-e">Net loss:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p10-e" class="ans" data-label="Net loss" data-answer="190500" data-unit="$"></div>
+        <p class="je-in-head"><strong>Journal entry: December 31, <span class="yr0">2026</span></strong> <span class="je-in-note">For each account, choose Debit, Credit, or Not in this entry, then enter the amount (enter 0 if the account is not in the entry).</span></p>
+<div class="input-item je-in"><label for="p10-j0s">Deferred tax asset</label>
+          <select id="p10-j0s" class="ans" data-label="Entry, Dec. 31, {yr0}: Deferred tax asset, debit or credit" data-answer="Debit"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p10-j0a" class="ans" aria-label="Deferred tax asset amount" data-label="Entry, Dec. 31, {yr0}: Deferred tax asset, amount" data-answer="15000" data-unit="$"></span></div>
+<div class="input-item je-in"><label for="p10-j1s">Income tax expense</label>
+          <select id="p10-j1s" class="ans" data-label="Entry, Dec. 31, {yr0}: Income tax expense, debit or credit" data-answer="Credit"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p10-j1a" class="ans" aria-label="Income tax expense amount" data-label="Entry, Dec. 31, {yr0}: Income tax expense, amount" data-answer="69500" data-unit="$"></span></div>
+<div class="input-item je-in"><label for="p10-j2s">Income tax payable</label>
+          <select id="p10-j2s" class="ans" data-label="Entry, Dec. 31, {yr0}: Income tax payable, debit or credit" data-answer="Not in this entry"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p10-j2a" class="ans" aria-label="Income tax payable amount" data-label="Entry, Dec. 31, {yr0}: Income tax payable, amount" data-answer="0" data-unit="$"></span></div>
+<div class="input-item je-in"><label for="p10-j3s">Income tax refund receivable</label>
+          <select id="p10-j3s" class="ans" data-label="Entry, Dec. 31, {yr0}: Income tax refund receivable, debit or credit" data-answer="Debit"><option value="">Select…</option><option>Debit</option><option>Credit</option><option>Not in this entry</option></select><span class="je-amt"><span class="unit" aria-hidden="true">$</span><input type="number" step="any" inputmode="decimal" id="p10-j3a" class="ans" aria-label="Income tax refund receivable amount" data-label="Entry, Dec. 31, {yr0}: Income tax refund receivable, amount" data-answer="54500" data-unit="$"></span></div>
+        <button type="button" class="reveal-btn" data-problem="p10" aria-expanded="false" aria-controls="p10-sol">Reveal Answer<span class="sr-only"> for Problem 10</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p10-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 10"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 10</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+
+        <h4 class="solution-label">Explanation</h4>
+        <p class="final-answer"><strong>Refund = ($90,000 × 30%) + ($110,000 × 25%) = $27,000 + $27,500 = $54,500</strong></p>
+ <p>Carry back to <span class="yrm2">2024</span> first, then <span class="yrm1">2025</span>, at the rates paid in those years. NOL left = $260,000 − $200,000 = <strong>$60,000</strong>, carried forward: DTA = $60,000 × 25% = <strong>$15,000</strong>. Total benefit = <strong>$69,500</strong>; net loss = $260,000 − $69,500 = <strong>$190,500</strong>.</p>
+ <div class="date-tag" aria-hidden="true">Dec. 31, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Dec. 31, 2026</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Income tax refund receivable</td><td class="je-debit-amt">54,500</td><td class="je-credit-amt"></td></tr><tr><td>Deferred tax asset</td><td class="je-debit-amt">15,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Income tax expense (income tax benefit)</td><td class="je-debit-amt"></td><td class="je-credit-amt">69,500</td></tr></tbody>
+        </table></div>
+      </div>
+    </article>
+  </section>
+</main>
+
+<footer>Accounting for Income Taxes · Exam Study Guide (Ungraded) · All company names are fictional</footer>
+
+<script>
+  var REVEALED = {};
+  var TOTAL = document.querySelectorAll('.example').length;
+
+  function updateProgress() {
+    var count = Object.keys(REVEALED).length;
+    var bar = document.getElementById('progressBar');
+    bar.setAttribute('aria-valuenow', count);
+    bar.setAttribute('aria-valuetext', count + ' of ' + TOTAL + ' problems revealed');
+    document.getElementById('progressLabel').textContent = count + ' of ' + TOTAL + ' revealed';
+    document.getElementById('progressFill').style.width = (count / TOTAL * 100) + '%';
+  }
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function fmt(val, unit) {
+    var n = Number(val);
+    var abs = Math.abs(n).toLocaleString('en-US', { maximumFractionDigits: 2 });
+    if (unit === '$') { return (n < 0 ? '−$' : '$') + abs; }
+    if (unit === '%') { return (n < 0 ? '−' : '') + abs + '%'; }
+    return (n < 0 ? '−' : '') + abs;
+  }
+
+  function isMatch(el) {
+    var ans = el.getAttribute('data-answer');
+    if (el.tagName === 'SELECT') { return el.value === ans; }
+    var unit = el.getAttribute('data-unit') || '';
+    var tol = el.hasAttribute('data-tol') ? Number(el.getAttribute('data-tol')) : (unit === '%' ? 0.05 : 1);
+    return Math.abs(Number(el.value) - Number(ans)) <= tol;
+  }
+
+  function reveal(id) {
+    var box = document.getElementById(id);
+    var inputs = box.querySelectorAll('.ans');
+    var fb = box.querySelector('.feedback');
+    var firstMissing = null;
+    inputs.forEach(function (el) {
+      var empty = (el.value === '' || el.value === null);
+      if (empty) { el.setAttribute('aria-invalid', 'true'); if (!firstMissing) { firstMissing = el; } }
+      else { el.removeAttribute('aria-invalid'); }
+    });
+    if (firstMissing) {
+      fb.textContent = 'Enter an answer in every box first, then select Reveal Answer.';
+      firstMissing.focus();
+      return;
+    }
+    fb.textContent = '';
+
+    var rows = '';
+    inputs.forEach(function (el) {
+      var label = el.getAttribute('data-label').replace(/\{(yrm?\d)\}/g, function (m, k) { return YEARS[k]; });
+      var unit = el.getAttribute('data-unit') || '';
+      var yours, answer;
+      if (el.tagName === 'SELECT') {
+        yours = el.value;
+        answer = el.getAttribute('data-answer');
+      } else {
+        yours = fmt(el.value, unit);
+        answer = fmt(el.getAttribute('data-answer'), unit);
+      }
+      var ok = isMatch(el);
+      rows += '<tr><th scope="row">' + esc(label) + '</th><td>' + esc(yours) + '</td><td><strong>' + esc(answer) + '</strong></td>' +
+        '<td class="' + (ok ? 'result-ok' : 'result-no') + '">' + (ok ? '<span aria-hidden="true">✓ </span>Matches' : '<span aria-hidden="true">✗ </span>Review') + '</td></tr>';
+    });
+    box.querySelector('.compare-body').innerHTML = rows;
+    var sol = box.querySelector('.solution');
+    sol.hidden = false;
+    box.querySelector('.reveal-btn').setAttribute('aria-expanded', 'true');
+    var head = sol.querySelector('.solution-label');
+    if (head) { head.focus(); }
+    REVEALED[id] = true;
+    updateProgress();
+  }
+
+  document.querySelectorAll('.reveal-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () { reveal(btn.getAttribute('data-problem')); });
+  });
+
+  // Keeps the dates current automatically, with no recoding needed each year.
+  // yr0 is always the current calendar year; yr1..yr4 follow and yrm1, yrm2 precede.
+  var YEARS = (function () {
+    var yr0 = new Date().getFullYear();
+    var years = { yrm2: yr0 - 2, yrm1: yr0 - 1, yr0: yr0, yr1: yr0 + 1, yr2: yr0 + 2, yr3: yr0 + 3, yr4: yr0 + 4 };
+    Object.keys(years).forEach(function (cls) {
+      document.querySelectorAll('.' + cls).forEach(function (el) { el.textContent = years[cls]; });
+    });
+    return years;
+  })();
+
+  TOTAL = document.querySelectorAll('.example').length;
+  updateProgress();
+</script>
+
+<script>document.getElementById('progressBar').setAttribute('aria-valuemax', document.querySelectorAll('.example').length);</script>
+</body>
+</html>
