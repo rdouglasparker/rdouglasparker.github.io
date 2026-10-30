@@ -622,7 +622,10 @@ const ASSIGNMENTS = [
   }
 
   function sortFn(a,b){
-    return (a.chapter||'').localeCompare(b.chapter||'', undefined, {numeric:true}) || a.title.localeCompare(b.title);
+    // Within a chapter, chapter notes keep the order they are listed above (overview first, then A, B, ...);
+    // everything else is alphabetical by title.
+    return (a.chapter||'').localeCompare(b.chapter||'', undefined, {numeric:true}) ||
+      (a.type === 'notes' && b.type === 'notes' ? ASSIGNMENTS.indexOf(a) - ASSIGNMENTS.indexOf(b) : a.title.localeCompare(b.title));
   }
 
   function addOpt(sel, value, label){
