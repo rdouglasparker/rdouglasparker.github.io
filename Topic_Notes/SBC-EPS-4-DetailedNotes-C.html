@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diluted Earnings per Share: Detailed Notes C</title>
+<meta name="description" content="Detailed notes on diluted earnings per share: the treasury stock method, the if-converted method, antidilution and ordering, restricted stock, contingently issuable shares, and EPS presentation and disclosure.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple: #4B2E83; --purple-dark: #341f5c; --gold: #C8A24A; --gold-light: #E8CF86;
+    --ink: #232023; --paper: #fdfcfb; --panel: #f7f3ec; --rule: #e2d9c8; --grid: #8a8076;
+    --muted: #5f5a56;
+    --key-bg: #f3eef9; --watch: #9C4221; --watch-title: #7a3418; --watch-bg: #FBEAE2;
+    --ex-bg: #fbf5e4; --good: #2E6B45; --good-bg: #E7F3EB; --link: #4B2E83; --visited: #5b3a9a;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-padding-top: 1rem; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif; font-size: 1.0625rem; line-height: 1.7; }
+  .sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+  .skip-link { position: absolute; left: 0.75rem; top: -4rem; z-index: 100; background: #fff; color: var(--purple-dark); font-family: 'Inter', system-ui, sans-serif; font-weight: 700; padding: 0.7rem 1.1rem; border: 3px solid var(--purple-dark); border-radius: 6px; text-decoration: none; }
+  .skip-link:focus { top: 0.75rem; }
+  :focus-visible { outline: 3px solid var(--purple-dark); outline-offset: 2px; box-shadow: 0 0 0 2px #fff; }
+  main:focus { outline: none; }
+  a { color: var(--link); text-decoration: underline; text-underline-offset: 0.18em; text-decoration-thickness: 0.08em; }
+  a:visited { color: var(--visited); }
+  a:hover { text-decoration-thickness: 0.16em; }
+
+  .site-header { background: linear-gradient(135deg, var(--purple) 0%, var(--purple-dark) 100%); color: #fff; border-bottom: 6px solid var(--gold); }
+  .header-inner { max-width: 70rem; margin: 0 auto; padding: 2.3rem 1.5rem 2rem; }
+  .eyebrow { font-family: 'Inter', system-ui, sans-serif; font-size: 0.95rem; font-weight: 600; letter-spacing: 0.02em; color: var(--gold-light); margin: 0 0 0.5rem; }
+  .site-header h1 { font-family: 'Source Serif 4', Georgia, serif; font-weight: 700; font-size: clamp(1.75rem, 4vw, 2.5rem); line-height: 1.2; margin: 0 0 0.6rem; max-width: 52rem; }
+  .header-sub { margin: 0; color: #ece6f6; font-family: 'Inter', system-ui, sans-serif; font-size: 1.05rem; line-height: 1.5; max-width: 42rem; }
+
+  .layout { display: grid; grid-template-columns: 15rem minmax(0, 46rem); gap: 3rem; max-width: 70rem; margin: 0 auto; padding: 2rem 1.5rem 3rem; }
+  .toc { align-self: start; position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow-y: auto; font-family: 'Inter', system-ui, sans-serif; font-size: 0.92rem; line-height: 1.4; background: var(--panel); border: 1px solid var(--rule); border-top: 5px solid var(--gold); border-radius: 8px; padding: 0.9rem 1rem 1rem; }
+  .toc-title { margin: 0 0 0.5rem; font-weight: 700; color: var(--purple-dark); }
+  .toc ol { margin: 0; padding-left: 1.2rem; }
+  .toc li { margin: 0.35rem 0; }
+  main { min-width: 0; }
+
+  h2, h3, h4 { font-family: 'Source Serif 4', Georgia, serif; color: var(--purple-dark); line-height: 1.3; }
+  h2 { font-size: 1.65rem; margin: 3rem 0 0.9rem; padding-bottom: 0.4rem; border-bottom: 3px solid var(--gold); }
+  main > section:first-child > h2:first-child { margin-top: 0; }
+  h3 { font-size: 1.3rem; margin: 2.2rem 0 0.6rem; }
+  h4 { font-size: 1.1rem; margin: 1.6rem 0 0.4rem; }
+  p { margin: 0.8rem 0; }
+  ul, ol { margin: 0.8rem 0; padding-left: 1.5rem; }
+  li { margin: 0.35rem 0; }
+  strong { color: var(--purple-dark); }
+  code, .mono { font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-size: 0.92em; }
+
+  .lede { font-size: 1.2rem; line-height: 1.6; }
+  .note-small { font-family: 'Inter', system-ui, sans-serif; font-size: 0.9rem; color: var(--muted); }
+
+  .callout { font-family: 'Inter', system-ui, sans-serif; font-size: 0.98rem; line-height: 1.6; border-radius: 8px; border: 1px solid var(--rule); border-left-width: 7px; padding: 0.8rem 1.1rem 0.9rem; margin: 1.5rem 0; }
+  .callout p { margin: 0.5rem 0; }
+  .callout ul, .callout ol { margin: 0.5rem 0; }
+  .callout-title { margin: 0 0 0.25rem !important; font-weight: 700; font-size: 1rem; }
+  .callout.key { background: var(--key-bg); border-color: #d6c9ec; border-left-color: var(--purple); }
+  .callout.key .callout-title { color: var(--purple-dark); }
+  .callout.watch { background: var(--watch-bg); border-color: #efc7b6; border-left-color: var(--watch); }
+  .callout.watch .callout-title { color: var(--watch-title); }
+  .callout.example { background: var(--ex-bg); border-color: #ecdca8; border-left-color: var(--gold); }
+  .callout.example .callout-title { color: #4a3a0c; }
+  .callout.codif { background: #fff; border-color: var(--purple); border-left-color: var(--purple-dark); }
+  .callout.codif .callout-title { color: var(--purple-dark); }
+  .callout.codif ul { padding-left: 1.2rem; }
+  .asc { font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-size: 0.86em; font-weight: 600; color: var(--purple-dark); background: var(--panel); border: 1px solid var(--rule); border-radius: 4px; padding: 0.05em 0.35em; white-space: nowrap; }
+  .callout.global { background: #fff; border-color: var(--grid); border-left-color: var(--grid); }
+  .callout.global .callout-title { color: var(--purple-dark); }
+
+  .example-box { border: 1px solid var(--rule); border-top: 5px solid var(--purple); border-radius: 8px; background: #fff; padding: 0.4rem 1.2rem 1rem; margin: 1.8rem 0; }
+  .example-box > h3, .example-box > h4 { margin-top: 1rem; }
+  .example-box > h3:first-child { margin-top: 0.9rem; border: 0; }
+  .facts { font-family: 'Inter', system-ui, sans-serif; font-size: 0.97rem; background: var(--panel); border-radius: 6px; padding: 0.7rem 1rem; margin: 0.8rem 0; }
+  .facts p { margin: 0.35rem 0; }
+
+  .table-scroll { overflow-x: auto; margin: 1rem 0; }
+  table { border-collapse: separate; border-spacing: 0; width: 100%; min-width: 26rem; border-top: 1px solid var(--grid); border-left: 1px solid var(--grid); font-family: 'Inter', system-ui, sans-serif; font-size: 0.92rem; line-height: 1.45; font-variant-numeric: tabular-nums; }
+  caption { text-align: left; font-weight: 700; color: var(--purple-dark); padding: 0 0 0.5rem; font-size: 0.98rem; }
+  th, td { border: 0; border-right: 1px solid var(--grid); border-bottom: 1px solid var(--grid); padding: 0.45rem 0.65rem; vertical-align: top; text-align: left; }
+  thead th { background: var(--panel); color: var(--purple-dark); }
+  tbody th[scope="row"] { background: #fff; font-weight: 600; color: var(--ink); position: sticky; left: 0; z-index: 1; min-width: 9.5rem; }
+  thead th:first-child { position: sticky; left: 0; z-index: 2; min-width: 9.5rem; }
+  td.num, th.num { text-align: right; }
+  td.num { white-space: nowrap; }
+  tr.sub th, tr.sub td { background: var(--panel); font-weight: 700; }
+  tr.plug th, tr.plug td { background: var(--ex-bg); font-weight: 700; box-shadow: inset 0 3px 0 var(--gold); }
+  tr.step th { border-left: 6px solid var(--purple); }
+  tr.plug th { border-left: 6px solid var(--gold); }
+  table.compact { font-size: 0.88rem; min-width: 24rem; }
+  table.je { min-width: 22rem; }
+  table.je td.num { font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; }
+  table.je td.cr-acct { padding-left: 2.2rem; }
+  table.je th.acct-col { width: 62%; }
+  .je-wrap { margin: 1.1rem 0; }
+  .je-date { font-family: 'Inter', system-ui, sans-serif; font-weight: 700; margin: 0 0 0.3rem; color: var(--purple-dark); }
+
+  ol.steps { list-style: none; counter-reset: step; padding: 0; margin: 1.2rem 0; display: grid; gap: 0.7rem; }
+  ol.steps > li { counter-increment: step; font-family: 'Inter', system-ui, sans-serif; font-size: 0.98rem; line-height: 1.55; margin: 0; padding: 0.7rem 1rem 0.8rem 3.5rem; background: #fff; border: 1px solid var(--rule); border-left: 6px solid var(--purple); border-radius: 8px; position: relative; }
+  ol.steps > li::before { content: counter(step); position: absolute; left: 0.9rem; top: 0.6rem; width: 1.9rem; height: 1.9rem; border-radius: 50%; background: var(--purple); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  ol.steps > li:last-child { border-left-color: var(--gold); }
+  ol.steps > li:last-child::before { background: var(--gold); color: var(--ink); }
+  ol.steps strong { display: block; font-size: 1.02rem; }
+
+  dl.glossary { font-family: 'Inter', system-ui, sans-serif; font-size: 0.96rem; line-height: 1.55; }
+  dl.glossary dt { font-weight: 700; color: var(--purple-dark); margin-top: 0.9rem; }
+  dl.glossary dd { margin: 0.1rem 0 0 0; }
+
+  details { font-family: 'Inter', system-ui, sans-serif; font-size: 0.97rem; line-height: 1.6; border: 1px solid var(--grid); border-radius: 8px; background: #fff; margin: 0.9rem 0; }
+  details > summary { cursor: pointer; font-weight: 700; color: var(--purple-dark); padding: 0.7rem 1rem; min-height: 2.75rem; }
+  details[open] > summary { border-bottom: 1px solid var(--rule); }
+  details > .answer { padding: 0.2rem 1rem 0.9rem; }
+  .practice { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 0.2rem 1.2rem 0.9rem; margin: 1.2rem 0; }
+  .practice h3, .practice h4 { margin-top: 1rem; }
+
+  figure { margin: 1.5rem 0; }
+  figcaption { font-family: 'Inter', system-ui, sans-serif; font-size: 0.9rem; color: var(--muted); margin-top: 0.4rem; }
+  svg text { font-family: 'Inter', system-ui, sans-serif; }
+
+  .pill-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.8rem 0; padding: 0; list-style: none; }
+  .pill-row li { margin: 0; font-family: 'Inter', system-ui, sans-serif; font-size: 0.9rem; font-weight: 600; background: var(--panel); border: 1px solid var(--grid); border-radius: 999px; padding: 0.2rem 0.8rem; }
+
+  .next-box { font-family: 'Inter', system-ui, sans-serif; background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 0.9rem 1.2rem; margin-top: 2.5rem; }
+  footer { font-family: 'Inter', system-ui, sans-serif; text-align: center; font-size: 0.88rem; color: var(--muted); padding: 1.5rem 1rem 2.5rem; border-top: 1px solid var(--rule); }
+
+  @media (max-width: 62rem) {
+    .layout { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; padding-top: 1.5rem; }
+    .toc { position: static; max-height: none; }
+  }
+  @media (max-width: 30rem) {
+    body { font-size: 1rem; }
+    .header-inner { padding: 1.6rem 1rem 1.4rem; }
+    .layout { padding-left: 1rem; padding-right: 1rem; }
+    ol.steps > li { padding-left: 3.1rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+  @media print {
+    body { font-size: 11pt; }
+    .skip-link, .toc { display: none; }
+    .layout { display: block; padding: 0; }
+    .site-header { background: #fff; color: #000; border-bottom: 3px solid #000; }
+    .site-header h1, .header-sub, .eyebrow { color: #000; }
+    .table-scroll { overflow: visible; }
+    a { color: #000; }
+    details > summary { list-style: none; }
+  }
+</style>
+<style id="a11y-fixes">
+  /* Accessibility fixes added Oct 2026: visible keyboard focus, scrollable wide tables, and text colors adjusted to meet WCAG AA contrast. */
+  :focus-visible { outline: 3px solid #341f5c !important; outline-offset: 2px !important; box-shadow: 0 0 0 5px #ffffff !important; }
+  .a11y-scroll { overflow-x: auto; max-width: 100%; }
+  .table-scroll, .a11y-scroll { position: relative; }
+  .a11y-sr { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+</style>
+<style id="print-pdf">
+  .print-btn { font-family: 'Inter', system-ui, sans-serif; font-size: 0.98rem; font-weight: 700; color: #232023; background: #C8A24A; border: 2px solid #C8A24A; border-radius: 6px; padding: 0.55rem 1.1rem; min-height: 2.75rem; margin-top: 1.1rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; }
+  .print-btn:hover { background: #E8CF86; border-color: #E8CF86; }
+  .print-btn:focus-visible { outline: 3px solid #fff !important; outline-offset: 2px !important; box-shadow: 0 0 0 6px #341f5c !important; }
+  .print-only { display: none; }
+  @page { size: letter; margin: 0.5in 0.55in 0.55in; }
+  @media print {
+    /* Plain, compact layout for printing: black text, no shaded boxes, tight spacing. */
+    *, *::before, *::after { background: transparent !important; box-shadow: none !important; color: #000 !important; }
+    html, body { background: #fff !important; }
+    body, p, li, dd, dt, td, th, caption, .callout, .facts, details, table, .eyebrow, .header-sub, .note-small, .lede, ol.steps > li, dl.glossary { font-family: Georgia, 'Times New Roman', serif !important; }
+    body { font-size: 10pt; line-height: 1.32; }
+    .callout, .callout p, .callout li, .facts, .facts p, details, .answer, .answer p, .answer li, ol.steps > li, dl.glossary, dl.glossary dd, .note-small, .lede { font-size: 10pt !important; line-height: 1.32 !important; }
+    .print-btn, .skip-link, .toc, .next-box, figure { display: none !important; }
+    .site-header { border-bottom: 1.5pt solid #000; margin-bottom: 0.15in; }
+    .header-inner { padding: 0 0 0.08in; max-width: none; }
+    .eyebrow { font-size: 8.5pt; margin: 0 0 0.03in; font-weight: 400; }
+    .site-header h1 { font-size: 16pt; margin: 0 0 0.03in; }
+    .header-sub { font-size: 9.5pt; font-style: italic; }
+    .layout { display: block; max-width: none; padding: 0; gap: 0; }
+    main { max-width: none; }
+    p { margin: 0.07in 0; }
+    ul, ol { margin: 0.05in 0; padding-left: 0.25in; }
+    li { margin: 0.02in 0; }
+    h2 { font-size: 12.5pt; margin: 0.18in 0 0.05in; padding-bottom: 0.02in; border-bottom: 0.75pt solid #000; }
+    main > section:first-child > h2:first-child { margin-top: 0; }
+    h3 { font-size: 11pt; margin: 0.12in 0 0.04in; }
+    h4 { font-size: 10pt; margin: 0.08in 0 0.03in; }
+    h2, h3, h4, .callout-title, .je-date, caption, dt { break-after: avoid; page-break-after: avoid; }
+    p, li, dd { orphans: 2; widows: 2; }
+    strong { color: #000 !important; }
+    .lede { font-size: 10pt; }
+    .callout, .example-box, .facts, .practice, details { border: 0 !important; border-radius: 0; padding: 0 !important; margin: 0.07in 0 !important; }
+    .callout { border-left: 2pt solid #000 !important; padding-left: 0.1in !important; }
+    .callout-title { font-size: 10pt; margin: 0 !important; }
+    .example-box > h3:first-child { margin-top: 0.1in; }
+    .facts p { margin: 0.03in 0; font-style: italic; }
+    ol.steps { gap: 0; margin: 0.05in 0; list-style: decimal; padding-left: 0.25in; }
+    ol.steps > li { border: 0 !important; padding: 0 !important; margin: 0.03in 0; font-size: 10pt; }
+    ol.steps > li::before { content: none !important; display: none !important; }
+    ol.steps strong { display: inline; font-size: 10pt; }
+    .asc { border: 0; padding: 0; font-size: 9pt; font-weight: 400; }
+    .table-scroll { overflow: visible !important; margin: 0.05in 0 0.08in; }
+    table { min-width: 0 !important; width: 100%; font-size: 8.5pt; line-height: 1.2; border-top: 0.5pt solid #000; border-left: 0; }
+    caption { font-size: 9pt; padding: 0 0 0.03in; }
+    th, td { padding: 0.025in 0.05in !important; border-right: 0 !important; border-bottom: 0.5pt solid #999 !important; }
+    thead th { border-bottom: 0.75pt solid #000 !important; font-weight: 700; }
+    tbody th[scope="row"] { font-weight: 400; min-width: 0; }
+    thead th:first-child { min-width: 0; }
+    tr.sub th, tr.sub td, tr.plug th, tr.plug td { font-weight: 700; border-top: 0.75pt solid #000 !important; }
+    tr.step th, tr.plug th { border-left: 0 !important; }
+    thead { display: table-header-group; }
+    tr { break-inside: avoid; page-break-inside: avoid; }
+    tbody th[scope="row"], thead th:first-child { position: static !important; }
+    .je-wrap { margin: 0.04in 0 0.06in; break-inside: avoid; page-break-inside: avoid; }
+    .je-date { font-size: 9pt; margin: 0 0 0.02in; }
+    table.je { width: 70%; }
+    table.je td.cr-acct { padding-left: 0.3in !important; }
+    footer { font-family: Georgia, 'Times New Roman', serif !important; }
+    a { text-decoration: none; }
+    a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 8pt; }
+    details > summary { list-style: none; padding: 0 !important; min-height: 0; font-size: 0; }
+    details > summary::-webkit-details-marker { display: none; }
+    details > summary::before { content: "Answer: "; font-size: 10pt; font-weight: 700; }
+    details > .answer { padding: 0 !important; }
+    .practice > h3 { font-size: 10pt; }
+    dl.glossary dt { margin-top: 0.05in; }
+    footer { border-top: 0.5pt solid #000; padding: 0.06in 0 0; margin-top: 0.1in; font-size: 8pt; }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header">
+  <div class="header-inner">
+    <p class="eyebrow">ACCT 352 · Intermediate Accounting II · Detailed Notes C</p>
+    <h1>Diluted Earnings per Share and Reporting EPS</h1>
+    <p class="header-sub">Adding the potential effect of options, restricted stock, convertible securities, and contingent shares, and presenting EPS.</p>
+    <button type="button" class="print-btn" onclick="window.print()">Print or save as PDF</button>
+  </div>
+</header>
+<div class="layout">
+  <nav class="toc" aria-label="On this page">
+    <p class="toc-title">On this page</p>
+    <ol><li><a href="#s-puzzle">A puzzle to start</a></li><li><a href="#s-codif">Where these rules live</a></li><li><a href="#s-options">Options and warrants</a></li><li><a href="#s-convert">Convertible securities</a></li><li><a href="#s-anti">Antidilution and order</a></li><li><a href="#s-contingent">Contingently issuable shares</a></li><li><a href="#s-report">Reporting EPS</a></li><li><a href="#s-ifrs">U.S. GAAP and IFRS</a></li><li><a href="#s-mistakes">Common mistakes</a></li><li><a href="#s-practice">Practice with answers</a></li><li><a href="#s-map">Codification map</a></li><li><a href="#s-terms">Key terms</a></li></ol>
+  </nav>
+  <main id="main" tabindex="-1">
+
+<section>
+  <h2 id="s-puzzle">A puzzle to start</h2>
+
+  <p class="lede">Cullowhee Creek Financial reports basic EPS of $2.00. But executives hold options to buy 4,000,000 shares at $30, bondholders can swap their bonds for 5,000,000 shares, and preferred shareholders can convert into 2,000,000 more. If all of that happened, would $2.00 still describe what each common share earns? Investors want to know the &ldquo;worst case.&rdquo;</p>
+  <p>The answer is to compute EPS twice. <strong>Basic EPS</strong> uses only shares actually outstanding. <strong>Diluted EPS</strong> pretends that every potential common share that would reduce EPS has already become a common share.</p>
+  <div class="callout example"><p class="callout-title">The continuing example</p><p>Cullowhee Creek Financial earned net income of $62,000,000 (tax rate 25%). Weighted-average common shares are 29,500,000 and the 6%, $50 par cumulative preferred dividend is $3,000,000, so basic EPS is $59,000,000 ÷ 29,500,000 = $2.00. The average market price of the common shares during the year was $40. These notes add one potential common share at a time.</p></div>
+
+</section>
+
+<section>
+  <h2 id="s-codif">Where these rules live: the FASB Codification</h2>
+
+  <p>Diluted EPS is also in <strong>Topic 260, Earnings per Share</strong>, mostly in <strong>ASC 260-10-45</strong> (computation and presentation) with illustrations in <strong>260-10-55</strong> and disclosures in <strong>260-10-50</strong>.</p>
+  <div class="callout codif"><p class="callout-title">In the FASB Codification</p><ul><li><span class="asc">ASC 260-10-45-16</span> describes diluted EPS: it measures performance over the period while giving effect to all dilutive potential common shares outstanding.</li><li><span class="asc">ASC 260-10-45-17</span> excludes potential common shares whose effect would be antidilutive.</li></ul></div>
+
+</section>
+
+<section>
+  <h2 id="s-options">Options, rights, and warrants: the treasury stock method</h2>
+
+  <p>For diluted EPS, assume options, rights, and warrants were exercised at the <strong>beginning of the year</strong> (or on the date they were issued, if later). The company would have received cash from the exercise. To make every company&rsquo;s calculation comparable, the standards assume one use of that cash: buying back as many shares as possible at the <strong>average market price</strong> for the year. Only the <strong>net</strong> new shares are added to the denominator. This is the <strong>treasury stock method</strong>. The numerator does not change.</p>
+  <div class="example-box">
+    <h3>Cullowhee Creek Financial: executive stock options</h3>
+    <div class="facts"><p>Executives hold fully vested options to buy 4,000,000 common shares at an exercise price of $30. The average market price was $40.</p></div>
+    <div class="table-scroll"><table class="compact"><caption>Treasury stock method</caption><thead><tr><th scope="col">Item</th><th scope="col">Amount</th></tr></thead><tbody><tr><th scope="row">Shares assumed issued on exercise</th><td>4,000,000</td></tr><tr><th scope="row">Assumed proceeds (4,000,000 × $30)</th><td>$120,000,000</td></tr><tr><th scope="row">Shares assumed repurchased ($120,000,000 ÷ $40)</th><td>(3,000,000)</td></tr><tr class="plug"><th scope="row">Net increase in shares</th><td>1,000,000</td></tr></tbody></table></div>
+    <p>Diluted EPS so far = $59,000,000 ÷ (29,500,000 + 1,000,000) = <strong>$1.93</strong>.</p>
+  </div>
+  <div class="callout key"><p class="callout-title">A quick dilution test for options</p><p>If the exercise price is <strong>below</strong> the average market price, fewer shares can be bought back than are issued, so shares increase and EPS falls: the options are <strong>dilutive</strong>. If the exercise price is <strong>above</strong> the average market price, more shares would be bought back than issued: the options are <strong>antidilutive</strong> and are ignored. (A rational holder would not exercise them anyway.)</p></div>
+  <h3>What counts as &ldquo;proceeds&rdquo;</h3>
+  <p>Assumed proceeds have two components:</p>
+  <ol><li>Cash, if any, the company would receive on exercise (exercise price × shares).</li><li>Compensation from the award that has <strong>not yet been expensed</strong>. The company will still &ldquo;receive&rdquo; those future services. The part already expensed is excluded because it has already reduced earnings; including it would count the dilution twice.</li></ol>
+  <p>For example, if Cullowhee Creek&rsquo;s options had a grant-date fair value of $8 and were only halfway through their vesting period, unexpensed compensation would be 4,000,000 × $8 × ½ = $16,000,000. Proceeds would be $136,000,000, which buys back 3,400,000 shares at $40, for a net increase of 600,000 shares.</p>
+  <h3>Restricted stock and RSUs</h3>
+  <p>Unvested restricted stock and RSUs are potential common shares too, and they also use the treasury stock method. Employees pay nothing, so the only proceeds are the <strong>unexpensed compensation</strong>. (Vested shares are already outstanding and are in basic EPS.)</p>
+  <div class="example-box">
+    <h3>Cullowhee Creek Financial: RSUs</h3>
+    <div class="facts"><p>At the beginning of this year, Cullowhee Creek granted RSUs for 600,000 shares when the share price was $36. The units vest over four years. At year-end, one-fourth of the $21,600,000 total compensation has been expensed.</p></div>
+    <div class="table-scroll"><table class="compact"><caption>Treasury stock method for unvested RSUs</caption><thead><tr><th scope="col">Item</th><th scope="col">Amount</th></tr></thead><tbody><tr><th scope="row">Shares assumed issued at vesting</th><td>600,000</td></tr><tr><th scope="row">Unexpensed compensation ($21,600,000 × ¾)</th><td>$16,200,000</td></tr><tr><th scope="row">Shares assumed repurchased ($16,200,000 ÷ $40)</th><td>(405,000)</td></tr><tr class="plug"><th scope="row">Net increase in shares</th><td>195,000</td></tr></tbody></table></div>
+    <p>(To keep the continuing example simple, the rest of these notes leave the RSUs out.)</p>
+  </div>
+  <h3>Options exercised during the year</h3>
+  <p>If options are actually exercised during the year, the shares issued are added to <em>both</em> basic and diluted EPS, weighted from the exercise date. For diluted EPS only, also add the incremental shares from the treasury stock method for the part of the year <em>before</em> exercise, using the average price for that part of the year. Suppose Cullowhee Creek&rsquo;s 4,000,000 options were exercised on September 1, when the average price since January 1 had been $38: both calculations add 4,000,000 × 4/12 = 1,333,333 shares, and diluted EPS also adds [4,000,000 − ($120,000,000 ÷ $38)] × 8/12 = 561,404 shares.</p>
+  <div class="callout codif"><p class="callout-title">In the FASB Codification</p><ul><li><span class="asc">ASC 260-10-45-23</span> describes the treasury stock method: assume exercise at the beginning of the period (or at issuance, if later) and the use of the proceeds to buy common shares at the average market price during the period.</li><li>The same treasury stock method applies to share-based awards, with unrecognized compensation cost included in the assumed proceeds (see <span class="asc">ASC 260-10-45-22</span> through <span class="asc">45-29</span>).</li></ul></div>
+
+</section>
+
+<section>
+  <h2 id="s-convert">Convertible securities: the if-converted method</h2>
+
+  <p>Convertible bonds, notes, and preferred stock can be exchanged for common shares at the holder&rsquo;s option. For diluted EPS, assume they were converted at the beginning of the year (or when issued, if later). This is the <strong>if-converted method</strong>, and it changes <em>both</em> parts of the fraction:</p>
+  <div class="table-scroll"><table class="compact"><caption>The if-converted method</caption><thead><tr><th scope="col">Security</th><th scope="col">Numerator</th><th scope="col">Denominator</th></tr></thead><tbody><tr><th scope="row">Convertible bonds or notes</th><td>Add back the interest, <strong>after tax</strong>, that would have been avoided</td><td>Add the shares that would have been issued</td></tr><tr><th scope="row">Convertible preferred stock</th><td>Do <strong>not</strong> subtract the preferred dividends that would have been avoided</td><td>Add the shares that would have been issued</td></tr></tbody></table></div>
+  <div class="example-box">
+    <h3>Cullowhee Creek Financial: convertible bonds</h3>
+    <div class="facts"><p>Cullowhee Creek has $100,000,000 of 8% bonds, issued at face value in an earlier year, convertible into 5,000,000 common shares. The tax rate is 25%.</p></div>
+    <div class="table-scroll"><table class="compact"><caption>Effect of the assumed conversion of the bonds</caption><thead><tr><th scope="col">Item</th><th scope="col" class="num">Amount</th></tr></thead><tbody><tr><th scope="row">Interest expense avoided (8% × $100,000,000)</th><td class="num">8,000,000</td></tr><tr><th scope="row">Less: tax deduction lost (25% × $8,000,000)</th><td class="num">(2,000,000)</td></tr><tr class="sub"><th scope="row">After-tax interest added to the numerator</th><td class="num">6,000,000</td></tr><tr><th scope="row">Shares added to the denominator</th><td class="num">5,000,000</td></tr></tbody></table></div>
+    <p>Without the interest, income would be higher, but so would taxes. That is why only the after-tax interest, $8,000,000 × (1 − 25%), is added back.</p>
+  </div>
+  <h3>Three refinements for convertible debt</h3>
+  <ul><li><strong>Issued at a discount or premium.</strong> Add back the full interest <em>expense</em>, including amortization. If the bonds had been issued for $96,000,000 with straight-line amortization over 10 years, the add-back would be [$8,000,000 + $400,000] × 75% = $6,300,000.</li><li><strong>Issued during the year.</strong> Assume conversion on the issue date, not before. Bonds issued on May 1 would add $6,000,000 × 8/12 = $4,000,000 to the numerator and 5,000,000 × 8/12 = 3,333,333 shares to the denominator.</li><li><strong>Actually converted during the year.</strong> Diluted EPS comes out exactly the same as if they had not been converted. The actual shares (weighted after conversion) are in basic EPS, the actual interest savings after conversion are already in net income, and the assumed conversion covers the months before the conversion date.</li></ul>
+  <div class="example-box">
+    <h3>Cullowhee Creek Financial: convertible preferred stock</h3>
+    <div class="facts"><p>Now suppose the 6% cumulative preferred stock is convertible into 2,000,000 common shares.</p></div>
+    <p>If the preferred had been converted, there would be no preferred dividend. So diluted EPS does not subtract the $3,000,000 (it is added back to the basic numerator) and adds 2,000,000 shares to the denominator. Basic EPS still subtracts the dividend; it is unaffected by the conversion feature.</p>
+  </div>
+  <div class="callout codif"><p class="callout-title">In the FASB Codification</p><ul><li><span class="asc">ASC 260-10-45-40</span> describes the if-converted method: add back preferred dividends on convertible preferred, add back interest (net of tax) on convertible debt, and assume the shares were issued at the beginning of the period or at issuance, if later.</li></ul></div>
+
+</section>
+
+<section>
+  <h2 id="s-anti">Antidilution and the order of inclusion</h2>
+
+  <p>A potential common share is <strong>antidilutive</strong> if including it would <em>increase</em> EPS (or reduce a loss per share). Antidilutive securities are left out of diluted EPS, because the goal is to show the maximum <em>dilution</em>.</p>
+  <h3>Testing convertible securities</h3>
+  <p>For options, compare the exercise price with the market price. For convertible securities, both parts of the fraction change, so compute each security&rsquo;s <strong>incremental effect</strong> (earnings per incremental share):</p>
+  <div class="table-scroll"><table class="compact"><caption>Incremental effect of each convertible security</caption><thead><tr><th scope="col">Security</th><th scope="col">Numerator effect</th><th scope="col">Shares added</th><th scope="col">Incremental effect per share</th></tr></thead><tbody><tr><th scope="row">Convertible bonds</th><td>$6,000,000</td><td>5,000,000</td><td>$1.20</td></tr><tr><th scope="row">Convertible preferred stock</th><td>$3,000,000</td><td>2,000,000</td><td>$1.50</td></tr></tbody></table></div>
+  <div class="callout key"><p class="callout-title">The ordering rule</p><p>Start with basic EPS and add the options and warrants first (they change only the denominator). Then add the convertible securities one at a time, <strong>lowest incremental effect first</strong>. Include each one only if its incremental effect is lower than the EPS figure calculated so far; once a security fails, stop. A security that looks dilutive on its own can turn out to be antidilutive after a more dilutive security is included.</p></div>
+  <div class="example-box">
+    <h3>Cullowhee Creek Financial: computing diluted EPS</h3>
+    <div class="facts"><p>Cullowhee Creek Financial earned net income of $62,000,000 (tax rate 25%). Weighted-average common shares are 29,500,000 and the 6%, $50 par cumulative preferred dividend is $3,000,000, so basic EPS is $59,000,000 ÷ 29,500,000 = $2.00. The average market price of the common shares during the year was $40. The company also has the options (4,000,000 shares at $30), the convertible bonds (5,000,000 shares; $6,000,000 after-tax interest), the convertible preferred (2,000,000 shares; $3,000,000 dividends), and warrants to buy 1,500,000 shares at $48.</p></div>
+    <div class="table-scroll"><table class="compact"><caption>Building diluted EPS step by step</caption><thead><tr><th scope="col">Step</th><th scope="col">Numerator</th><th scope="col">Denominator</th><th scope="col">EPS</th><th scope="col">Decision</th></tr></thead><tbody><tr><th scope="row">Basic EPS</th><td>$59,000,000</td><td>29,500,000</td><td>$2.00</td><td></td></tr><tr><th scope="row">+ Options (net 1,000,000 shares)</th><td>$59,000,000</td><td>30,500,000</td><td>$1.93</td><td>Dilutive: include</td></tr><tr><th scope="row">+ Warrants ($48 exercise price > $40 average)</th><td></td><td></td><td></td><td>Antidilutive: exclude</td></tr><tr><th scope="row">+ Bonds ($1.20 < $1.93)</th><td>$65,000,000</td><td>35,500,000</td><td>$1.83</td><td>Dilutive: include</td></tr><tr><th scope="row">+ Preferred ($1.50 < $1.83)</th><td>$68,000,000</td><td>37,500,000</td><td>$1.81</td><td>Dilutive: include</td></tr><tr class="plug"><th scope="row">Diluted EPS</th><td>$68,000,000</td><td>37,500,000</td><td>$1.81</td><td></td></tr></tbody></table></div>
+    <p><strong>When the order matters.</strong> Suppose the preferred were convertible into only 1,600,000 shares. Its incremental effect, $3,000,000 ÷ 1,600,000 = $1.875, is below basic EPS ($2.00), so it looks dilutive. But after the bonds are included, EPS is already $65,000,000 ÷ 35,500,000 = $1.831, and adding the preferred would raise it to $68,000,000 ÷ 37,100,000 = $1.833 (shown to three decimals because the difference is small). It is antidilutive in combination and is excluded; diluted EPS would be $1.83.</p>
+  </div>
+  <h3>Net losses</h3>
+  <p>When a company reports a loss from continuing operations, adding shares makes the loss per share <em>smaller</em>, so every potential common share is antidilutive. Diluted loss per share equals basic loss per share. Potential common shares left out because they are antidilutive must be disclosed.</p>
+  <div class="callout codif"><p class="callout-title">In the FASB Codification</p><ul><li><span class="asc">ASC 260-10-45-17</span> through <span class="asc">45-20</span> exclude antidilutive potential common shares, consider each issue or series separately in sequence from the most dilutive to the least dilutive, and use income from continuing operations as the &ldquo;control number&rdquo; for these tests.</li></ul></div>
+
+</section>
+
+<section>
+  <h2 id="s-contingent">Contingently issuable shares</h2>
+
+  <p>Some agreements promise additional shares if a future condition is met, for example, to the former owners of an acquired company if it reaches an earnings target, or to executives if net income reaches a set level.</p>
+  <ul><li>If the condition <strong>is currently being met</strong> (assuming the current level continues to the end of the contingency period), add the shares to the <strong>diluted</strong> EPS denominator. No numerator change.</li><li>If the condition <strong>is not currently being met</strong>, ignore the shares.</li><li>If all conditions have actually been satisfied, the shares are no longer contingent and are included in <strong>both</strong> basic and diluted EPS.</li></ul>
+  <p>For example, if Cullowhee Creek must issue 1,000,000 shares to executives next year if next year&rsquo;s net income is at least $60,000,000, and this year&rsquo;s net income is $62,000,000, the target is currently being met: diluted EPS adds 1,000,000 shares. If the target were $65,000,000, the shares would be ignored. A share-price condition works the same way, using the share price at the end of the year.</p>
+  <div class="table-scroll"><table class="compact"><caption>Summary: how each potential common share affects EPS</caption><thead><tr><th scope="col">Potential common shares</th><th scope="col">Basic EPS</th><th scope="col">Diluted EPS numerator</th><th scope="col">Diluted EPS denominator</th></tr></thead><tbody><tr><th scope="row">Options, rights, warrants</th><td>No effect</td><td>None</td><td>Add net shares (treasury stock method)</td></tr><tr><th scope="row">Unvested restricted stock and RSUs</th><td>No effect</td><td>None</td><td>Add net shares (treasury stock method, unexpensed compensation as proceeds)</td></tr><tr><th scope="row">Convertible bonds and notes</th><td>No effect</td><td>Add after-tax interest</td><td>Add shares on conversion</td></tr><tr><th scope="row">Convertible preferred stock</th><td>No effect</td><td>Do not subtract the preferred dividends</td><td>Add shares on conversion</td></tr><tr><th scope="row">Contingent shares, condition currently met</th><td>No effect</td><td>None</td><td>Add the shares</td></tr><tr><th scope="row">Contingent shares, condition not currently met</th><td>No effect</td><td>None</td><td>None</td></tr></tbody></table></div>
+  <p class="note-small">In every case: include the effect from the beginning of the year or the issue date, whichever is later, and only if it is dilutive.</p>
+  <div class="callout codif"><p class="callout-title">In the FASB Codification</p><ul><li><span class="asc">ASC 260-10-45-48</span> includes contingently issuable shares in diluted EPS if the conditions would be satisfied if the end of the reporting period were the end of the contingency period.</li></ul></div>
+
+</section>
+
+<section>
+  <h2 id="s-report">Reporting EPS in the financial statements</h2>
+
+  <p>Public companies present basic and diluted EPS on the face of the income statement for every period shown, with equal prominence. A company with a simple capital structure presents basic EPS only.</p>
+  <ul><li>When the income statement reports <strong>discontinued operations</strong>, basic and diluted EPS are reported for <em>income from continuing operations</em> and for <em>net income</em>. The per-share amount for discontinued operations is shown either on the face of the statement or in the notes.</li><li>The same potential common shares used for continuing operations are used for every other diluted per-share amount, even if they would be antidilutive for one of them.</li></ul>
+  <div class="example-box">
+    <h3>Cullowhee Creek Financial: discontinued operations</h3>
+    <div class="facts"><p>Suppose Cullowhee Creek’s $62,000,000 of net income is made up of $66,000,000 of income from continuing operations less a $4,000,000 loss (net of tax) from discontinued operations. Using the diluted shares and adjustments computed above:</p></div>
+    <div class="table-scroll"><table class="compact"><caption>Earnings per share presentation</caption><thead><tr><th scope="col">Earnings per share</th><th scope="col">Basic</th><th scope="col">Diluted</th></tr></thead><tbody><tr><th scope="row">Income from continuing operations</th><td>$2.14</td><td>$1.92</td></tr><tr><th scope="row">Loss from discontinued operations</th><td>(0.14)</td><td>(0.11)</td></tr><tr><th scope="row">Net income</th><td>$2.00</td><td>$1.81</td></tr></tbody></table></div>
+    <p>Basic continuing operations: ($66,000,000 − $3,000,000) ÷ 29,500,000 = $2.14. Diluted continuing operations: ($63,000,000 + $6,000,000 + $3,000,000) ÷ 37,500,000 = $1.92.</p>
+  </div>
+  <h3>Disclosure note</h3>
+  <p>The notes reconcile the numerators and denominators of basic and diluted EPS, show the preferred dividend adjustment, list potential common shares excluded as antidilutive, and describe any transactions after year-end that would materially affect EPS.</p>
+  <div class="table-scroll"><table class="compact"><caption>Cullowhee Creek Financial: earnings per share reconciliation</caption><thead><tr><th scope="col">Item</th><th scope="col">Income (numerator)</th><th scope="col">Shares (denominator)</th><th scope="col">Per share</th></tr></thead><tbody><tr><th scope="row">Net income</th><td>$62,000,000</td><td></td><td></td></tr><tr><th scope="row">Preferred dividends</th><td>(3,000,000)</td><td></td><td></td></tr><tr class="sub"><th scope="row">Basic EPS</th><td>$59,000,000</td><td>29,500,000</td><td>$2.00</td></tr><tr><th scope="row">Stock options</th><td>—</td><td>1,000,000</td><td></td></tr><tr><th scope="row">Convertible bonds</th><td>6,000,000</td><td>5,000,000</td><td></td></tr><tr><th scope="row">Convertible preferred stock</th><td>3,000,000</td><td>2,000,000</td><td></td></tr><tr class="plug"><th scope="row">Diluted EPS</th><td>$68,000,000</td><td>37,500,000</td><td>$1.81</td></tr></tbody></table></div>
+  <p class="note-small">Note: Warrants to buy 1,500,000 shares at $48 were outstanding all year but were excluded from diluted EPS because their exercise price exceeded the average market price.</p>
+  <div class="callout codif"><p class="callout-title">In the FASB Codification</p><ul><li><span class="asc">ASC 260-10-45-2</span> and <span class="asc">45-3</span> require basic and diluted per-share amounts for income from continuing operations and net income on the face of the income statement.</li><li><span class="asc">ASC 260-10-50-1</span> requires the reconciliation of basic and diluted EPS, the effect of preferred dividends, antidilutive securities excluded, and significant subsequent transactions.</li></ul></div>
+
+</section>
+
+<section>
+  <h2 id="s-ifrs">U.S. GAAP and IFRS</h2>
+
+  <p>IAS 33 and Topic 260 are largely converged. The differences that remain involve the treasury stock method (for example, how year-to-date diluted EPS is computed for interim periods), contracts that can be settled in shares or cash, and contingently issuable shares. In this course, use U.S. GAAP.</p>
+
+</section>
+
+<section>
+  <h2 id="s-mistakes">Common mistakes</h2>
+
+  <ul><li><strong>Using the year-end share price in the treasury stock method.</strong> Use the <em>average</em> market price for the period.</li><li><strong>Adding back pretax interest.</strong> Convertible debt adds back interest net of tax.</li><li><strong>Subtracting preferred dividends on convertible preferred in diluted EPS.</strong> They would have been avoided, so they stay in the numerator.</li><li><strong>Including antidilutive securities.</strong> Test each one, and include convertibles in order from most to least dilutive.</li><li><strong>Assuming conversion before a security was issued.</strong> Weight from the issue date.</li><li><strong>Including options or convertibles in basic EPS.</strong> Only shares actually issued are in basic EPS.</li><li><strong>Forgetting contingent shares when the condition is currently met</strong>, or including them when it is not.</li></ul>
+
+</section>
+
+<section>
+  <h2 id="s-practice">Practice with answers</h2>
+
+  <p>Try each problem on paper, then open the answer to check your work.</p>
+  <div class="practice">
+    <h3>Problem 1: Options and convertible bonds</h3>
+    <p>Glenville Lake Partners earned $24,000,000 and has 10,000,000 weighted-average common shares and no preferred stock. Options for 900,000 shares have an exercise price of $20; the average market price was $30. Convertible 6% bonds with a face value of $20,000,000, issued at par, convert into 1,000,000 shares. The tax rate is 25%. Compute basic and diluted EPS.</p>
+    <details><summary>Show the answer</summary><div class="answer"><p>Basic EPS = $24,000,000 ÷ 10,000,000 = <strong>$2.40</strong>. Options: 900,000 − ($18,000,000 ÷ $30 = 600,000) = 300,000 net shares. Bonds: after-tax interest = $1,200,000 × 75% = $900,000; incremental effect $900,000 ÷ 1,000,000 = $0.90, below the $24,000,000 ÷ 10,300,000 = $2.33 after the options, so the bonds are dilutive. Diluted EPS = ($24,000,000 + $900,000) ÷ (10,000,000 + 300,000 + 1,000,000) = $24,900,000 ÷ 11,300,000 = <strong>$2.20</strong>.</p></div></details>
+    <h3>Problem 2: Is the preferred dilutive?</h3>
+    <p>Webster Valley Grocers has basic EPS of $1.50 and, after including its options and bonds, a running diluted EPS of $1.40. Its convertible preferred pays $2,000,000 of dividends and converts into 1,250,000 shares. Should the preferred be included?</p>
+    <details><summary>Show the answer</summary><div class="answer"><p>Incremental effect = $2,000,000 ÷ 1,250,000 = $1.60. Because $1.60 is higher than the $1.40 computed so far (and even higher than basic EPS), including the preferred would raise EPS. It is <strong>antidilutive</strong> and is excluded.</p></div></details>
+    <h3>Problem 3: Unvested RSUs</h3>
+    <p>A company has 400,000 unvested RSUs with $6,000,000 of compensation not yet expensed at year-end. The average share price was $25. How many shares are added to diluted EPS?</p>
+    <details><summary>Show the answer</summary><div class="answer"><p>Shares assumed repurchased = $6,000,000 ÷ $25 = 240,000. Net shares added = 400,000 − 240,000 = <strong>160,000</strong>. No numerator change.</p></div></details>
+    <h3>Problem 4: Contingent shares</h3>
+    <p>A company must issue 500,000 shares next year if next year’s net income is at least $30,000,000, and another 500,000 if it is at least $40,000,000. This year’s net income is $34,000,000. What is added to diluted EPS?</p>
+    <details><summary>Show the answer</summary><div class="answer"><p>The $30,000,000 target is currently being met, so <strong>500,000 shares</strong> are added to the diluted denominator. The $40,000,000 target is not being met, so those shares are ignored.</p></div></details>
+  </div>
+
+</section>
+
+<section>
+  <h2 id="s-map">Codification map</h2>
+
+  <p>Use this table to find the guidance behind each idea in these notes.</p>
+  <div class="table-scroll"><table class="compact"><caption>Where each idea appears in the Codification</caption><thead><tr><th scope="col">Idea in these notes</th><th scope="col">Where to read it</th><th scope="col">In plain words</th></tr></thead><tbody><tr><th scope="row">Diluted EPS objective</th><td><span class="asc">ASC 260-10-45-16</span></td><td>Give effect to all dilutive potential common shares.</td></tr><tr><th scope="row">Antidilution and sequencing</th><td><span class="asc">ASC 260-10-45-17</span> to <span class="asc">45-20</span></td><td>Exclude antidilutive securities; include from most to least dilutive.</td></tr><tr><th scope="row">Treasury stock method</th><td><span class="asc">ASC 260-10-45-23</span></td><td>Assume exercise and repurchase at the average market price.</td></tr><tr><th scope="row">Share-based awards</th><td><span class="asc">ASC 260-10-45-22</span> to <span class="asc">45-29</span></td><td>Use the treasury stock method; proceeds include unrecognized compensation.</td></tr><tr><th scope="row">If-converted method</th><td><span class="asc">ASC 260-10-45-40</span></td><td>Add back after-tax interest or preferred dividends; add the shares.</td></tr><tr><th scope="row">Contingently issuable shares</th><td><span class="asc">ASC 260-10-45-48</span></td><td>Include if the conditions are currently being met.</td></tr><tr><th scope="row">Disclosures</th><td><span class="asc">ASC 260-10-50-1</span></td><td>Reconciliation, preferred dividends, antidilutive securities, subsequent events.</td></tr></tbody></table></div>
+
+</section>
+
+<section>
+  <h2 id="s-terms">Key terms</h2>
+
+  <dl class="glossary"><dt>Diluted EPS</dt><dd>EPS computed as if all dilutive potential common shares had become common shares.</dd><dt>Treasury stock method</dt><dd>Assumes options, warrants, and unvested shares are exercised or vested and the proceeds buy back shares at the average market price; adds the net shares.</dd><dt>Assumed proceeds</dt><dd>Cash from an assumed exercise plus compensation not yet expensed.</dd><dt>If-converted method</dt><dd>Assumes convertible securities were converted; adds back after-tax interest or preferred dividends and adds the shares.</dd><dt>Antidilutive security</dt><dd>A potential common share whose inclusion would increase EPS or decrease a loss per share; excluded from diluted EPS.</dd><dt>Incremental effect</dt><dd>The numerator effect of a convertible security divided by the shares it adds; used to test and rank convertibles.</dd><dt>Contingently issuable shares</dt><dd>Shares to be issued if a future condition is met; included in diluted EPS if the condition is currently being met.</dd><dt>Control number</dt><dd>Income from continuing operations, the figure used to decide whether potential common shares are dilutive.</dd></dl>
+  <div class="next-box"><p><strong>Where to go next.</strong> Return to the Unit Overview cheat sheet, then work the guided walkthrough and the homework problems for diluted EPS.</p></div>
+
+</section>
+
+  </main>
+</div>
+<footer>Detailed Notes C: Diluted Earnings per Share &middot; ACCT 352 &middot; Western Carolina University<br>All companies in these notes are fictional.</footer>
+<script>
+/* Progressive enhancements (the page works without them):
+   1. Expand the answer boxes when printing, then restore them.
+   2. Make a table wrapper keyboard-focusable only when the table is wider than the screen. */
+(function () {
+  var opened = [];
+  window.addEventListener('beforeprint', function () {
+    opened = [];
+    document.querySelectorAll('details:not([open])').forEach(function (d) { d.setAttribute('open', ''); opened.push(d); });
+  });
+  window.addEventListener('afterprint', function () {
+    opened.forEach(function (d) { d.removeAttribute('open'); });
+    opened = [];
+  });
+  var n = 0;
+  function sizeScrollers() {
+    document.querySelectorAll('.table-scroll').forEach(function (w) {
+      var cap = w.querySelector('caption');
+      if (w.scrollWidth > w.clientWidth + 1) {
+        if (cap && !cap.id) { cap.id = 'tcap-' + (++n); }
+        w.setAttribute('tabindex', '0');
+        w.setAttribute('role', 'group');
+        if (cap) { w.setAttribute('aria-labelledby', cap.id); }
+      } else {
+        w.removeAttribute('tabindex'); w.removeAttribute('role'); w.removeAttribute('aria-labelledby');
+      }
+    });
+  }
+  var t;
+  window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(sizeScrollers, 150); });
+  window.addEventListener('load', sizeScrollers);
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(sizeScrollers); }
+})();
+</script>
+<script id="a11y-fixes-js">
+/* Accessibility support added Oct 2026: names for unlabeled form fields, scrollable wide tables, and screen-reader announcements of results. */
+(function () {
+  var LIVE = !document.querySelector('[aria-live],[role="status"],[role="alert"]');
+  function txt(el) { return el ? (el.textContent || '').replace(/\s+/g, ' ').trim() : ''; }
+  function hasName(el) {
+    if (el.getAttribute('aria-label') || el.getAttribute('aria-labelledby') || el.getAttribute('title')) return true;
+    if (el.id) { try { if (document.querySelector('label[for="' + CSS.escape(el.id) + '"]')) return true; } catch (e) {} }
+    return !!el.closest('label');
+  }
+  function heading(el) {
+    var box = el.closest('fieldset,[class*="block"],[class*="part"],[class*="card"],section,article,.example,.problem');
+    while (box) {
+      var h = box.querySelector('legend,caption,h2,h3,h4,h5,[class*="title"],[class*="label"],[class*="recap"]');
+      if (h && txt(h)) return txt(h).slice(0, 80);
+      box = box.parentElement ? box.parentElement.closest('fieldset,section,article,[class*="block"],[class*="part"]') : null;
+    }
+    return '';
+  }
+  function nameFor(el) {
+    var bits = [], tr = el.closest('tr'), table = el.closest('table');
+    var cap = table && table.querySelector('caption');
+    var h = heading(el); if (h) bits.push(h); else if (cap && txt(cap)) bits.push(txt(cap).slice(0, 80));
+    if (tr && table) {
+      var cell = el.closest('td,th'), rows = Array.prototype.slice.call(table.rows), ri = rows.indexOf(tr);
+      var rowHead = tr.querySelector('th[scope="row"]') || (tr.cells[0] && tr.cells[0] !== cell && !tr.cells[0].querySelector('input,select,textarea') ? tr.cells[0] : null);
+      var head = table.tHead && table.tHead.rows.length ? table.tHead.rows[table.tHead.rows.length - 1] : (rows[0] && rows[0] !== tr && !rows[0].querySelector('input,select') ? rows[0] : null);
+      var colHead = head && cell ? head.cells[cell.cellIndex] : null;
+      var bodyIdx = table.tHead ? ri - table.tHead.rows.length + 1 : ri + (head ? 0 : 1);
+      if (rowHead && txt(rowHead)) bits.push(txt(rowHead).slice(0, 80)); else bits.push('line ' + bodyIdx);
+      if (colHead && txt(colHead)) bits.push(txt(colHead).slice(0, 40));
+      else if (el.tagName === 'SELECT') bits.push('account');
+    } else {
+      var prev = el.previousElementSibling; if (prev && txt(prev)) bits.push(txt(prev).slice(0, 80));
+      if (el.placeholder) bits.push(el.placeholder);
+    }
+    if (!bits.length) bits.push(el.tagName === 'SELECT' ? 'Choose an option' : 'Answer');
+    return bits.join(', ');
+  }
+  function labelAll(root) {
+    (root || document).querySelectorAll('input:not([type="hidden"]):not([type="button"]):not([type="submit"]),select,textarea').forEach(function (el) {
+      if (!hasName(el)) el.setAttribute('aria-label', nameFor(el));
+    });
+  }
+  function wrapTables() {
+    document.querySelectorAll('table').forEach(function (t) {
+      if (t.closest('.a11y-scroll')) return;
+      var p = t.parentElement, s = p ? getComputedStyle(p) : null;
+      if (s && /auto|scroll/.test(s.overflowX)) return;
+      var avail = p ? p.clientWidth : 0;
+      if (!avail || t.scrollWidth <= avail + 1) return;
+      var w = document.createElement('div'); w.className = 'a11y-scroll';
+      if (!t.querySelector('input,select,textarea,button,a[href]')) {
+        w.setAttribute('role', 'region'); w.tabIndex = 0;
+        var c = t.querySelector('caption'); w.setAttribute('aria-label', (c && txt(c)) || 'Table (scrolls sideways)');
+      }
+      p.insertBefore(w, t); w.appendChild(t);
+    });
+  }
+  var live = null;
+  if (LIVE) {
+    live = document.createElement('div'); live.className = 'a11y-sr'; live.setAttribute('aria-live', 'polite'); live.setAttribute('role', 'status');
+    document.body.appendChild(live);
+  }
+  var RESULT = /(score|result|feedback|status|summary|message|msg|grade|total|verdict|outcome)/i;
+  var collecting = false, found = [];
+  function say(msg) { if (!live || !msg) return; live.textContent = ''; setTimeout(function () { live.textContent = msg; }, 60); }
+  var pending;
+  var mo = new MutationObserver(function (muts) {
+    clearTimeout(pending);
+    pending = setTimeout(function () { labelAll(); wrapTables(); }, 50);
+    if (!collecting) return;
+    muts.forEach(function (m) {
+      var n = m.target.nodeType === 1 ? m.target : m.target.parentElement;
+      while (n && n !== document.body) {
+        if (n === live) return;
+        if (RESULT.test((n.id || '') + ' ' + (typeof n.className === 'string' ? n.className : ''))) { if (found.indexOf(n) < 0) found.push(n); return; }
+        n = n.parentElement;
+      }
+    });
+  });
+  function start() {
+    labelAll(); wrapTables();
+    mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+    document.addEventListener('click', function (e) {
+      if (!live || !e.target.closest('button')) return;
+      collecting = true; found = [];
+      setTimeout(function () {
+        collecting = false;
+        var msg = found.map(txt).filter(Boolean).join(' ').slice(0, 300);
+        say(msg);
+      }, 400);
+    }, true);
+    var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(wrapTables, 150); });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
+})();
+</script>
+</body>
+</html>
