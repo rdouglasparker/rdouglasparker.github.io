@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Share-Based Compensation — Guided Walkthrough</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+  :root {
+    --wcu-purple: #4B2E83; --wcu-purple-dark: #341f5c; --wcu-gold: #C8A24A;
+    --ink: #232023; --paper: #fdfcfb; --panel: #f7f3ec; --rule: #e2d9c8; --gold-light: #f4ecd8;
+    --muted: #5f5955; --warn: #6b4f0e; --warn-bg: #FBF3DC;
+    --ok: #1e5e32; --ok-bg: #e6f2e9; --no: #8c1d18; --no-bg: #fbe9e7;
+    --border-strong: #8a7f6c;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .progress-fill { transition: none !important; } }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; line-height: 1.55; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+  .skip-link { position: absolute; left: 1rem; top: -3rem; background: #fff; color: var(--wcu-purple-dark); font-weight: 700; padding: 0.5rem 0.9rem; border: 2px solid var(--wcu-purple); border-radius: 5px; z-index: 10; }
+  .skip-link:focus { top: 1rem; }
+  a { color: var(--wcu-purple); }
+  header { background: linear-gradient(135deg, var(--wcu-purple) 0%, var(--wcu-purple-dark) 100%); color: #fff; padding: 2.2rem 1.5rem 1.8rem; border-bottom: 6px solid var(--wcu-gold); }
+  header .inner { max-width: 780px; margin: 0 auto; }
+  header .eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: #e3c77f; margin: 0 0 0.4rem; }
+  header h1 { font-family: 'Source Serif 4', serif; font-weight: 700; font-size: 1.9rem; margin: 0 0 0.3rem; }
+  header p.sub { margin: 0; color: #ece6f5; font-size: 0.98rem; }
+  .progress-bar { margin: 0 0 0.4rem; padding: 0; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .progress-track { flex: 1; height: 8px; background: var(--rule); border-radius: 4px; overflow: hidden; border: 1px solid var(--border-strong); }
+  .progress-fill { height: 100%; width: 0%; background: var(--wcu-purple); transition: width 0.3s ease; }
+  .progress-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--muted); white-space: nowrap; }
+  main { max-width: 780px; margin: 0 auto; padding: 1.2rem 1.5rem 4rem; }
+  main:focus { outline: none; }
+  .lo-block { margin-bottom: 2.8rem; }
+  h2 { font-family: 'Source Serif 4', serif; font-size: 1.5rem; margin: 0 0 0.8rem; color: var(--wcu-purple-dark); border-bottom: 2px solid var(--rule); padding-bottom: 0.4rem; }
+  p { margin: 0.6rem 0; }
+  ul, ol { padding-left: 1.4rem; }
+  li { margin-bottom: 0.4rem; }
+  .key-idea { background: var(--panel); border-left: 4px solid var(--wcu-gold); padding: 0.9rem 1.1rem; border-radius: 0 6px 6px 0; margin: 0.9rem 0; }
+  .key-idea strong { color: var(--wcu-purple-dark); }
+  .facts { background: #fff; border: 1px solid var(--rule); border-radius: 8px; padding: 1rem 1.2rem; margin: 1rem 0 1.6rem; }
+  .ex-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--wcu-purple); margin: 0 0 0.4rem; line-height: 1.4; }
+  .facts ul { margin: 0.4rem 0 0; }
+  .example { background: #fff; border: 1px solid var(--rule); border-radius: 8px; padding: 1rem 1.2rem 1.2rem; margin: 1.1rem 0; }
+  .table-wrap { overflow-x: auto; }
+  .table-wrap:focus-visible { outline: 3px solid var(--wcu-purple); outline-offset: 2px; }
+  table.data { border-collapse: collapse; width: 100%; margin: 0.7rem 0; font-size: 0.88rem; }
+  table.data caption { text-align: left; font-weight: 600; font-size: 0.85rem; color: var(--wcu-purple-dark); padding: 0 0 0.3rem; }
+  table.data th, table.data td { border: 1px solid var(--rule); padding: 0.4rem 0.55rem; text-align: left; vertical-align: top; }
+  table.data thead th { background: var(--panel); color: var(--wcu-purple-dark); font-family: 'IBM Plex Mono', monospace; font-size: 0.74rem; text-transform: uppercase; }
+  table.data tbody th { font-weight: 500; min-width: 9rem; }
+  table.data thead th.num { white-space: normal; }
+  table.data td.num, table.data th.num { text-align: right; font-family: 'IBM Plex Mono', monospace; white-space: nowrap; }
+  table.data tr.total-row th, table.data tr.total-row td { background: var(--panel); font-weight: 700; }
+  table.data tr.sub-head th { font-style: italic; font-weight: 600; color: var(--wcu-purple-dark); }
+  table.data th.indent { padding-left: 1.5rem; }
+  .result-ok { color: var(--ok); background: var(--ok-bg); font-weight: 700; }
+  .result-no { color: var(--no); background: var(--no-bg); font-weight: 700; }
+
+  .input-block { display: flex; flex-direction: column; gap: 0.6rem; margin: 0.9rem 0 0.6rem; padding: 0.9rem; background: var(--panel); border-radius: 6px; }
+  .input-item { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+  .input-item label { flex: 1 1 280px; font-size: 0.9rem; font-weight: 600; color: var(--wcu-purple-dark); }
+  .input-item .unit { font-family: 'IBM Plex Mono', monospace; color: var(--muted); }
+  .input-item input[type="number"], .input-item select { font-family: 'IBM Plex Mono', monospace; font-size: 0.92rem; padding: 0.45rem 0.6rem; border: 1px solid var(--border-strong); border-radius: 5px; background: #fff; color: var(--ink); min-height: 2.4rem; }
+  .input-item input[type="number"] { width: 150px; }
+  .input-item select { min-width: 190px; font-family: 'Inter', sans-serif; }
+  .input-item input:focus-visible, .input-item select:focus-visible { outline: 3px solid var(--wcu-purple); outline-offset: 2px; border-color: var(--wcu-purple); }
+  .input-item [aria-invalid="true"] { border: 2px solid var(--no); }
+  .reveal-btn { align-self: flex-start; font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #fff; background: var(--wcu-purple); border: none; padding: 0.6rem 1.1rem; border-radius: 5px; cursor: pointer; margin-top: 0.2rem; min-height: 2.75rem; }
+  .reveal-btn:hover { background: var(--wcu-purple-dark); }
+  .reveal-btn:focus-visible { outline: 3px solid var(--wcu-purple-dark); outline-offset: 3px; box-shadow: 0 0 0 3px #fff inset; }
+
+  .feedback:empty { display: none; }
+  .feedback { font-weight: 600; padding: 0.6rem 0.9rem; border-radius: 6px; margin: 0.4rem 0 0.2rem; font-size: 0.92rem; color: var(--warn); background: var(--warn-bg); border: 1px solid #d9c58f; }
+
+  .solution { margin-top: 0.9rem; padding-top: 0.9rem; border-top: 1px dashed var(--border-strong); }
+  .solution[hidden] { display: none; }
+  .solution-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--wcu-purple); margin: 1rem 0 0.4rem; }
+  .solution-label:first-child { margin-top: 0; }
+  .solution-label:focus { outline: 3px solid var(--wcu-purple); outline-offset: 3px; }
+  .final-answer { font-size: 1rem; margin-top: 0.6rem; }
+  .final-answer strong { color: var(--wcu-purple-dark); }
+
+  table.je-table { border-collapse: collapse; width: 100%; margin: 0.4rem 0 0.2rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.83rem; }
+  table.je-table caption { text-align: left; }
+  table.je-table th { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; color: var(--muted); text-align: left; padding: 0.2rem 0.3rem; border-bottom: 1px solid var(--rule); }
+  table.je-table th.amt { text-align: right; }
+  table.je-table td { padding: 0.26rem 0.3rem; vertical-align: top; }
+  table.je-table td.je-debit-amt, table.je-table td.je-credit-amt { text-align: right; width: 105px; white-space: nowrap; }
+  table.je-table td.indent, table.je-table th.indent { padding-left: 1.8rem; }
+  table.je-table tbody th { font-family: 'IBM Plex Mono', monospace; font-size: 0.83rem; font-weight: 400; text-transform: none; color: var(--ink); border-bottom: 0; padding: 0.26rem 0.3rem; vertical-align: top; }
+  .je-desc { font-size: 0.85rem; color: var(--muted); font-style: italic; margin: 0.2rem 0 0.9rem; }
+  .date-tag { display: inline-block; font-family: 'IBM Plex Mono', monospace; font-weight: 700; font-size: 0.75rem; color: #fff; background: var(--wcu-purple-dark); padding: 0.12rem 0.5rem; border-radius: 4px; margin-top: 0.4rem; }
+
+  .steps-grid { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 1rem; align-items: start; margin: 0.6rem 0; }
+  @media (max-width: 620px) { .steps-grid { grid-template-columns: 1fr; } }
+  ol.four-step { list-style: none; padding: 0.7rem 0.9rem; margin: 0; background: var(--gold-light); border-radius: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 0.84rem; }
+  ol.four-step li { margin: 0.2rem 0; }
+  ol.four-step li strong { color: var(--wcu-purple-dark); }
+  table.t-acct { border-collapse: collapse; width: 100%; font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem; }
+  table.t-acct caption { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--wcu-purple-dark); font-size: 0.86rem; padding-bottom: 0.2rem; border-bottom: 2px solid var(--ink); }
+  table.t-acct th, table.t-acct td { padding: 0.25rem 0.4rem; }
+  table.t-acct thead th { font-size: 0.7rem; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  table.t-acct tbody th { text-align: left; font-weight: 400; font-family: 'Inter', sans-serif; font-size: 0.8rem; color: var(--muted); }
+  table.t-acct td { text-align: right; width: 28%; }
+  table.t-acct td.dr { border-right: 2px solid var(--ink); }
+  table.t-acct tr.bal td, table.t-acct tr.bal th { border-top: 1px solid var(--ink); font-weight: 700; color: var(--ink); }
+
+  .je-input { margin: 0.2rem 0 0.1rem; }
+  .je-input + .je-input { margin-top: 0.8rem; }
+  .je-head { font-size: 0.9rem; font-weight: 700; color: var(--wcu-purple-dark); margin: 0.2rem 0 0.3rem; }
+  table.je-entry { border-collapse: collapse; width: 100%; min-width: 560px; background: #fff; border: 1px solid var(--border-strong); font-size: 0.88rem; }
+  table.je-entry thead th { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; color: var(--muted); text-align: left; padding: 0.35rem 0.45rem; border-bottom: 1px solid var(--rule); background: #fff; }
+  table.je-entry thead th.amt { text-align: right; }
+  table.je-entry tbody th.ln { font-family: 'IBM Plex Mono', monospace; font-weight: 500; color: var(--muted); width: 2.6rem; text-align: center; padding: 0.3rem; border-top: 1px solid var(--rule); }
+  table.je-entry td { padding: 0.3rem 0.45rem; vertical-align: middle; border-top: 1px solid var(--rule); }
+  table.je-entry select { width: 100%; min-width: 210px; font-family: 'Inter', sans-serif; font-size: 0.9rem; padding: 0.4rem 0.5rem; border: 1px solid var(--border-strong); border-radius: 5px; background: #fff; color: var(--ink); min-height: 2.4rem; }
+  table.je-entry input { width: 100%; min-width: 100px; font-family: 'IBM Plex Mono', monospace; font-size: 0.9rem; padding: 0.4rem 0.5rem; border: 1px solid var(--border-strong); border-radius: 5px; background: #fff; color: var(--ink); text-align: right; min-height: 2.4rem; }
+  table.je-entry td.amt-cell { width: 118px; }
+  table.je-entry td.row-status { width: 5.9rem; font-weight: 700; font-size: 0.8rem; white-space: nowrap; }
+  table.je-entry select:focus-visible, table.je-entry input:focus-visible { outline: 3px solid var(--wcu-purple); outline-offset: 2px; border-color: var(--wcu-purple); }
+  table.je-entry [aria-invalid="true"] { border: 2px solid var(--no); }
+  table.data td.je-cell { font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; }
+  code { font-family: 'IBM Plex Mono', monospace; background: var(--panel); padding: 0 0.25rem; border-radius: 3px; }
+  footer { text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--muted); padding: 1.5rem; }
+</style>
+<style id="a11y-fixes">
+  /* Accessibility fixes added Oct 2026: visible keyboard focus, scrollable wide tables, and text colors adjusted to meet WCAG AA contrast. */
+  :focus-visible { outline: 3px solid #341f5c !important; outline-offset: 2px !important; box-shadow: 0 0 0 5px #ffffff !important; }
+  .a11y-scroll { overflow-x: auto; max-width: 100%; }
+  .table-scroll, .a11y-scroll { position: relative; }
+  .a11y-sr { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to the walkthrough</a>
+
+<header>
+  <div class="inner">
+    <p class="eyebrow">Guided Walkthrough · Not Graded</p>
+    <h1>Share-Based Compensation</h1>
+    <p class="sub">Measure and record restricted stock units, stock options, forfeitures, graded vesting, performance conditions, and an employee share purchase plan.</p>
+  </div>
+</header>
+
+
+<main id="main" tabindex="-1">
+<div class="progress-bar">
+  <div class="progress-track" id="progressBar" role="progressbar" aria-label="Walkthrough progress" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-label" id="progressLabel" aria-hidden="true">0 revealed</div>
+</div>
+
+  <div class="key-idea">
+    <p style="margin:0"><strong>How this works:</strong> Work each problem on your own first and enter your answer in every box. For journal entries, choose an account and enter its amount in either the Debit or the Credit column, one account per line; use only the lines you need and leave the rest blank. Then select <strong>Reveal Answer</strong> to see the correct answer next to yours, along with a detailed explanation and the journal entries. Enter all amounts as positive numbers. Answers within $1 of the solution count as a match (rounding). This page isn't graded and doesn't get submitted anywhere; it's just for practice.</p>
+  </div>
+
+  <div class="key-idea">
+    <p style="margin:0"><strong>The pattern used throughout:</strong> measure the award at its <strong>grant-date fair value</strong>, then record <strong>compensation expense over the service period</strong> with a credit to paid-in capital. When an estimate changes, record the <strong>cumulative catch-up</strong> in the year of the change: (new total × fraction of service period completed) − amount already recorded.</p>
+  </div>
+
+  <section class="facts" aria-labelledby="facts-h">
+    <h2 class="ex-label" id="facts-h" style="border:0;padding:0;font-size:0.78rem">The company used in Problems 1–9</h2>
+    <p><strong>Forsyth Hall Robotics, Inc.</strong> builds warehouse robots in Cullowhee and pays its leaders partly in shares. All shares have a <strong>$1 par value</strong>. Ignore income taxes.</p>
+    <ul>
+      <li><strong>RSUs:</strong> On January 1, <span class="yr0">2026</span>, Forsyth Hall grants RSUs for <strong>300,000 shares</strong> when the market price is <strong>$20</strong>. The units vest at the end of <span class="yr2">2028</span> (three years) and will be settled in shares. Forsyth Hall accounts for RSU forfeitures when they occur.</li>
+      <li><strong>Stock options:</strong> On January 1, <span class="yr0">2026</span>, it grants <strong>500,000 options</strong> with an exercise price of <strong>$20</strong> (the market price) and a grant-date fair value of <strong>$6</strong> per option. They cliff-vest at the end of <span class="yr3">2029</span> (four years). Forsyth Hall estimates forfeitures and initially expects <strong>4%</strong>.</li>
+      <li>Problems 7–9 add a graded-vesting grant, a performance-based grant, and an employee share purchase plan.</li>
+    </ul>
+  </section>
+
+  <section class="lo-block" aria-labelledby="s-rsu">
+    <h2 id="s-rsu">Restricted Stock Units</h2>
+
+    <article class="example" id="p1" aria-labelledby="p1-h">
+      <h3 class="ex-label" id="p1-h">Problem 1 — Measuring the RSUs</h3>
+      <p>Measure the total compensation for the RSUs and record the entry, if any, on the grant date and at the end of <span class="yr0">2026</span>.</p>
+      <div class="input-block" role="group" aria-labelledby="p1-h">
+        <div class="input-item"><label for="p1-a">Total compensation for the RSUs:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p1-a" class="ans" data-label="Total RSU compensation" data-answer="6000000" data-unit="$"></div>
+        <div class="input-item"><label for="p1-b">Compensation expense for <span class="yr0">2026</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p1-b" class="ans" data-label="RSU expense, {yr0}" data-answer="2000000" data-unit="$"></div>
+        <div class="input-item"><label for="p1-c">What is recorded on January 1, <span class="yr0">2026</span>?</label>
+          <select id="p1-c" class="ans" data-label="Grant-date entry" data-answer="No entry"><option value="">Select…</option><option>No entry</option><option>Debit compensation expense for the full value</option><option>Debit deferred compensation, credit common stock at par</option></select></div>
+        <div class="je-input" data-title="Dec. 31, {yr0}" data-rows="3" data-key='[{"a": "Compensation expense", "dr": 2000000}, {"a": "Paid-in capital\u2014restricted stock", "cr": 2000000}]'></div>
+        <button type="button" class="reveal-btn" data-problem="p1" aria-expanded="false" aria-controls="p1-sol">Reveal Answer<span class="sr-only"> for Problem 1</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p1-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 1</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+        <h4 class="solution-label">Explanation</h4>
+        <p>Total compensation is the market price of an unrestricted share on the grant date times the shares: <strong>300,000 × $20 = $6,000,000</strong>. It is earned over the three-year vesting period, so each year&rsquo;s expense is <strong>$6,000,000 ÷ 3 = $2,000,000</strong>.</p>
+        <p>Nothing is recorded on the grant date, because no service has been performed yet.</p>
+        <div class="date-tag" aria-hidden="true">Dec. 31, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Dec. 31, <span class="yr0">2026</span></caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><th scope="row">Compensation expense ($6,000,000 ÷ 3)</th><td class="je-debit-amt">2,000,000</td><td class="je-credit-amt"></td></tr><tr><th scope="row" class="indent">Paid-in capital—restricted stock</th><td class="je-debit-amt"></td><td class="je-credit-amt">2,000,000</td></tr></tbody>
+        </table></div><p class="je-desc">The credit builds the equity the executives are earning. Later changes in the share price will not change the $6,000,000.</p>
+      </div>
+    </article>
+    <article class="example" id="p2" aria-labelledby="p2-h">
+      <h3 class="ex-label" id="p2-h">Problem 2 — An Executive Leaves</h3>
+      <p>During <span class="yr1">2027</span>, an executive holding <strong>15%</strong> of the RSUs (45,000 units) leaves the company. Record the forfeiture, then compute and record compensation expense for <span class="yr1">2027</span>.</p>
+      <div class="input-block" role="group" aria-labelledby="p2-h">
+        <div class="input-item"><label for="p2-a">Amount of the reversal for the forfeited units:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p2-a" class="ans" data-label="Forfeiture reversal" data-answer="300000" data-unit="$"></div>
+        <div class="input-item"><label for="p2-b">Compensation expense for <span class="yr1">2027</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p2-b" class="ans" data-label="RSU expense, {yr1}" data-answer="1700000" data-unit="$"></div>
+        <div class="je-input" data-title="Forfeiture, {yr1}" data-rows="3" data-key='[{"a": "Paid-in capital\u2014restricted stock", "dr": 300000}, {"a": "Compensation expense", "cr": 300000}]'></div>
+        <div class="je-input" data-title="Dec. 31, {yr1}" data-rows="3" data-key='[{"a": "Compensation expense", "dr": 1700000}, {"a": "Paid-in capital\u2014restricted stock", "cr": 1700000}]'></div>
+        <button type="button" class="reveal-btn" data-problem="p2" aria-expanded="false" aria-controls="p2-sol">Reveal Answer<span class="sr-only"> for Problem 2</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p2-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 2</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+        <h4 class="solution-label">Explanation</h4>
+        <p>The entry already recorded for the departing executive is reversed: <strong>15% × $2,000,000 = $300,000</strong>.</p>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="RSU compensation remaining after the forfeiture"><table class="data">
+          <caption>RSU compensation remaining after the forfeiture</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col" class="num">Amount</th></tr></thead>
+          <tbody><tr><th scope="row">Total compensation for the units still expected to vest ($6,000,000 × 85%)</th><td class="num">$5,100,000</td></tr><tr><th scope="row">Less: recorded so far, net ($2,000,000 − $300,000)</th><td class="num">(1,700,000)</td></tr><tr><th scope="row">Remaining compensation</th><td class="num">$3,400,000</td></tr><tr class="total-row"><th scope="row">Expense for <span class="yr1">2027</span> and <span class="yr2">2028</span> (÷ 2 years)</th><td class="num">$1,700,000</td></tr></tbody></table></div>
+        <div class="date-tag" aria-hidden="true">Forfeiture, <span class="yr1">2027</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Forfeiture, <span class="yr1">2027</span></caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><th scope="row">Paid-in capital—restricted stock</th><td class="je-debit-amt">300,000</td><td class="je-credit-amt"></td></tr><tr><th scope="row" class="indent">Compensation expense</th><td class="je-debit-amt"></td><td class="je-credit-amt">300,000</td></tr></tbody>
+        </table></div>
+        <div class="date-tag" aria-hidden="true">Dec. 31, <span class="yr1">2027</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Dec. 31, <span class="yr1">2027</span></caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><th scope="row">Compensation expense</th><td class="je-debit-amt">1,700,000</td><td class="je-credit-amt"></td></tr><tr><th scope="row" class="indent">Paid-in capital—restricted stock</th><td class="je-debit-amt"></td><td class="je-credit-amt">1,700,000</td></tr></tbody>
+        </table></div><p class="je-desc">The reversal lowers the year&rsquo;s net expense to $1,400,000. Over the three years Forsyth Hall recognizes $5,100,000, the grant-date value of the 255,000 units that vest.</p>
+      </div>
+    </article>
+    <article class="example" id="p3" aria-labelledby="p3-h">
+      <h3 class="ex-label" id="p3-h">Problem 3 — The RSUs Vest</h3>
+      <p>Forsyth Hall records <span class="yr2">2028</span> expense of $1,700,000, and the remaining 255,000 units vest at the end of <span class="yr2">2028</span>. Record the delivery of the shares.</p>
+      <div class="input-block" role="group" aria-labelledby="p3-h">
+        <div class="input-item"><label for="p3-a">Balance of paid-in capital—restricted stock just before vesting:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p3-a" class="ans" data-label="PIC—restricted stock balance" data-answer="5100000" data-unit="$"></div>
+        <div class="input-item"><label for="p3-b">Number of shares issued:</label>
+          <input type="number" step="any" inputmode="decimal" id="p3-b" class="ans" data-label="Shares issued" data-answer="255000"></div>
+        <div class="je-input" data-title="Vesting, Dec. 31, {yr2}" data-rows="4" data-key='[{"a": "Paid-in capital\u2014restricted stock", "dr": 5100000}, {"a": "Common stock", "cr": 255000}, {"a": "Paid-in capital\u2014excess of par", "cr": 4845000}]'></div>
+        <button type="button" class="reveal-btn" data-problem="p3" aria-expanded="false" aria-controls="p3-sol">Reveal Answer<span class="sr-only"> for Problem 3</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p3-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 3</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+        <h4 class="solution-label">Explanation</h4>
+        <p>Paid-in capital—restricted stock holds $2,000,000 − $300,000 + $1,700,000 + $1,700,000 = <strong>$5,100,000</strong>. At vesting it is replaced by common stock at par and paid-in capital—excess of par.</p>
+        <div class="date-tag" aria-hidden="true">Dec. 31, <span class="yr2">2028</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Dec. 31, <span class="yr2">2028</span></caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><th scope="row">Paid-in capital—restricted stock (255,000 × $20)</th><td class="je-debit-amt">5,100,000</td><td class="je-credit-amt"></td></tr><tr><th scope="row" class="indent">Common stock (255,000 × $1)</th><td class="je-debit-amt"></td><td class="je-credit-amt">255,000</td></tr><tr><th scope="row" class="indent">Paid-in capital—excess of par (the rest)</th><td class="je-debit-amt"></td><td class="je-credit-amt">4,845,000</td></tr></tbody>
+        </table></div><p class="je-desc">This entry only moves amounts among paid-in capital accounts. Total equity does not change.</p>
+      </div>
+    </article>
+  </section>
+  <section class="lo-block" aria-labelledby="s-opt">
+    <h2 id="s-opt">Stock Options</h2>
+
+    <article class="example" id="p4" aria-labelledby="p4-h">
+      <h3 class="ex-label" id="p4-h">Problem 4 — Measuring the Options</h3>
+      <p>Compute total compensation for the options using the initial 4% forfeiture estimate, and record compensation expense for <span class="yr0">2026</span>.</p>
+      <div class="input-block" role="group" aria-labelledby="p4-h">
+        <div class="input-item"><label for="p4-a">Estimated total compensation:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p4-a" class="ans" data-label="Total option compensation" data-answer="2880000" data-unit="$"></div>
+        <div class="input-item"><label for="p4-b">Compensation expense for <span class="yr0">2026</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p4-b" class="ans" data-label="Option expense, {yr0}" data-answer="720000" data-unit="$"></div>
+        <div class="je-input" data-title="Dec. 31, {yr0}" data-rows="3" data-key='[{"a": "Compensation expense", "dr": 720000}, {"a": "Paid-in capital\u2014stock options", "cr": 720000}]'></div>
+        <button type="button" class="reveal-btn" data-problem="p4" aria-expanded="false" aria-controls="p4-sol">Reveal Answer<span class="sr-only"> for Problem 4</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p4-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 4</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+        <h4 class="solution-label">Explanation</h4>
+        <p>Total compensation = options expected to vest × fair value per option: <strong>500,000 × 96% × $6 = $2,880,000</strong>. Spread over the four-year vesting period: <strong>$720,000</strong> a year.</p>
+        <div class="date-tag" aria-hidden="true">Dec. 31, <span class="yr0">2026</span> (and <span class="yr1">2027</span>)</div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Dec. 31, <span class="yr0">2026</span> (and <span class="yr1">2027</span>)</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><th scope="row">Compensation expense ($2,880,000 ÷ 4)</th><td class="je-debit-amt">720,000</td><td class="je-credit-amt"></td></tr><tr><th scope="row" class="indent">Paid-in capital—stock options</th><td class="je-debit-amt"></td><td class="je-credit-amt">720,000</td></tr></tbody>
+        </table></div><p class="je-desc">The $6 fair value comes from an option-pricing model at the grant date and is not updated later.</p>
+      </div>
+    </article>
+    <article class="example" id="p5" aria-labelledby="p5-h">
+      <h3 class="ex-label" id="p5-h">Problem 5 — Revising the Forfeiture Estimate</h3>
+      <p>Forsyth Hall records $720,000 again in <span class="yr1">2027</span>. During <span class="yr2">2028</span>, it revises its forfeiture estimate to <strong>8%</strong>. Compute compensation expense for <span class="yr2">2028</span> and <span class="yr3">2029</span>, and record the <span class="yr2">2028</span> entry.</p>
+      <div class="input-block" role="group" aria-labelledby="p5-h">
+        <div class="input-item"><label for="p5-a">Revised total compensation:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p5-a" class="ans" data-label="Revised total compensation" data-answer="2760000" data-unit="$"></div>
+        <div class="input-item"><label for="p5-b">Cumulative compensation that should be recognized by the end of <span class="yr2">2028</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p5-b" class="ans" data-label="Cumulative through {yr2}" data-answer="2070000" data-unit="$"></div>
+        <div class="input-item"><label for="p5-c">Compensation expense for <span class="yr2">2028</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p5-c" class="ans" data-label="Option expense, {yr2}" data-answer="630000" data-unit="$"></div>
+        <div class="input-item"><label for="p5-d">Compensation expense for <span class="yr3">2029</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p5-d" class="ans" data-label="Option expense, {yr3}" data-answer="690000" data-unit="$"></div>
+        <div class="je-input" data-title="Dec. 31, {yr2}" data-rows="3" data-key='[{"a": "Compensation expense", "dr": 630000}, {"a": "Paid-in capital\u2014stock options", "cr": 630000}]'></div>
+        <button type="button" class="reveal-btn" data-problem="p5" aria-expanded="false" aria-controls="p5-sol">Reveal Answer<span class="sr-only"> for Problem 5</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p5-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 5</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+        <h4 class="solution-label">Explanation</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Cumulative catch-up for a change in the forfeiture estimate"><table class="data">
+          <caption>Cumulative catch-up for a change in the forfeiture estimate</caption>
+          <thead><tr><th scope="col">Step</th><th scope="col" class="num">Amount</th></tr></thead>
+          <tbody><tr><th scope="row">Revised total: 500,000 × 92% × $6</th><td class="num">$2,760,000</td></tr><tr><th scope="row">× Fraction of the service period completed (3 of 4 years)</th><td class="num">× ¾</td></tr><tr><th scope="row">Cumulative compensation through <span class="yr2">2028</span></th><td class="num">$2,070,000</td></tr><tr><th scope="row">Less: recorded in <span class="yr0">2026</span> and <span class="yr1">2027</span> ($720,000 × 2)</th><td class="num">(1,440,000)</td></tr><tr class="total-row"><th scope="row">Expense for <span class="yr2">2028</span></th><td class="num">$630,000</td></tr></tbody></table></div>
+        <p><span class="yr3">2029</span>: $2,760,000 − $2,070,000 = <strong>$690,000</strong>, which is what every year would have been with an 8% estimate from the start.</p>
+        <div class="date-tag" aria-hidden="true">Dec. 31, <span class="yr2">2028</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Dec. 31, <span class="yr2">2028</span></caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><th scope="row">Compensation expense</th><td class="je-debit-amt">630,000</td><td class="je-credit-amt"></td></tr><tr><th scope="row" class="indent">Paid-in capital—stock options</th><td class="je-debit-amt"></td><td class="je-credit-amt">630,000</td></tr></tbody>
+        </table></div><p class="je-desc">Share-based compensation catches up the whole effect of a revised estimate in the year of the change.</p>
+      </div>
+    </article>
+    <article class="example" id="p6" aria-labelledby="p6-h">
+      <h3 class="ex-label" id="p6-h">Problem 6 — Exercise and Expiration</h3>
+      <p>Assume 460,000 options vest as expected. In <span class="yr4">2030</span>, when the market price is <strong>$34</strong>, executives exercise <strong>300,000</strong> options. The remaining 160,000 options later expire unexercised. Record both events.</p>
+      <div class="input-block" role="group" aria-labelledby="p6-h">
+        <div class="input-item"><label for="p6-a">Paid-in capital—excess of par credited on the exercise:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p6-a" class="ans" data-label="PIC—excess of par on exercise" data-answer="7500000" data-unit="$"></div>
+        <div class="input-item"><label for="p6-b">How does the $34 market price on the exercise date affect the exercise entry?</label>
+          <select id="p6-b" class="ans" data-label="Effect of the $34 market price" data-answer="It has no effect"><option value="">Select…</option><option>It has no effect</option><option>It sets the amount credited to common stock</option><option>It creates a gain of $14 per share</option></select></div>
+        <div class="je-input" data-title="Exercise, {yr4}" data-rows="5" data-key='[{"a": "Cash", "dr": 6000000}, {"a": "Paid-in capital\u2014stock options", "dr": 1800000}, {"a": "Common stock", "cr": 300000}, {"a": "Paid-in capital\u2014excess of par", "cr": 7500000}]'></div>
+        <div class="je-input" data-title="Expiration of 160,000 options" data-rows="3" data-key='[{"a": "Paid-in capital\u2014stock options", "dr": 960000}, {"a": "Paid-in capital\u2014expiration of stock options", "cr": 960000}]'></div>
+        <button type="button" class="reveal-btn" data-problem="p6" aria-expanded="false" aria-controls="p6-sol">Reveal Answer<span class="sr-only"> for Problem 6</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p6-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 6</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+        <h4 class="solution-label">Explanation</h4>
+        <p>On exercise, Forsyth Hall receives the exercise price and removes the paid-in capital—stock options recorded for those options (300,000 × $6 = $1,800,000). The balancing amount goes to paid-in capital—excess of par.</p>
+        <div class="date-tag" aria-hidden="true">Exercise, <span class="yr4">2030</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Exercise, <span class="yr4">2030</span></caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><th scope="row">Cash (300,000 × $20)</th><td class="je-debit-amt">6,000,000</td><td class="je-credit-amt"></td></tr><tr><th scope="row">Paid-in capital—stock options (300,000 × $6)</th><td class="je-debit-amt">1,800,000</td><td class="je-credit-amt"></td></tr><tr><th scope="row" class="indent">Common stock (300,000 × $1)</th><td class="je-debit-amt"></td><td class="je-credit-amt">300,000</td></tr><tr><th scope="row" class="indent">Paid-in capital—excess of par (to balance)</th><td class="je-debit-amt"></td><td class="je-credit-amt">7,500,000</td></tr></tbody>
+        </table></div>
+        <div class="date-tag" aria-hidden="true">Expiration</div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Expiration</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><th scope="row">Paid-in capital—stock options (160,000 × $6)</th><td class="je-debit-amt">960,000</td><td class="je-credit-amt"></td></tr><tr><th scope="row" class="indent">Paid-in capital—expiration of stock options</th><td class="je-debit-amt"></td><td class="je-credit-amt">960,000</td></tr></tbody>
+        </table></div><p class="je-desc">Expiration does not reverse compensation expense; the services were received. The paid-in capital is simply renamed. The total in paid-in capital—stock options ($2,760,000) is now zero.</p>
+      </div>
+    </article>
+  </section>
+  <section class="lo-block" aria-labelledby="s-graded">
+    <h2 id="s-graded">Graded Vesting</h2>
+
+    <article class="example" id="p7" aria-labelledby="p7-h">
+      <h3 class="ex-label" id="p7-h">Problem 7 — Graded Vesting</h3>
+      <p>On January 1, <span class="yr0">2026</span>, Forsyth Hall also grants <strong>240,000</strong> options to engineers. <strong>25%</strong> vest at the end of <span class="yr0">2026</span>, <strong>25%</strong> at the end of <span class="yr1">2027</span>, and <strong>50%</strong> at the end of <span class="yr2">2028</span>. Fair values are <strong>$3</strong>, <strong>$4</strong>, and <strong>$5</strong> per option for the three tranches. Compute the expense under the separate-tranche approach and under straight-line.</p>
+      <div class="input-block" role="group" aria-labelledby="p7-h">
+        <div class="input-item"><label for="p7-a">Total compensation for the award:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p7-a" class="ans" data-label="Graded award total" data-answer="1020000" data-unit="$"></div>
+        <div class="input-item"><label for="p7-b">Separate tranches: compensation expense for <span class="yr0">2026</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p7-b" class="ans" data-label="Separate tranches, {yr0}" data-answer="500000" data-unit="$"></div>
+        <div class="input-item"><label for="p7-c">Separate tranches: compensation expense for <span class="yr1">2027</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p7-c" class="ans" data-label="Separate tranches, {yr1}" data-answer="320000" data-unit="$"></div>
+        <div class="input-item"><label for="p7-d">Straight-line: compensation expense each year:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p7-d" class="ans" data-label="Straight-line each year" data-answer="340000" data-unit="$"></div>
+        <div class="input-item"><label for="p7-e">Under straight-line, is the amount recognized by the end of <span class="yr0">2026</span> at least the value that has vested?</label>
+          <select id="p7-e" class="ans" data-label="Minimum vested test" data-answer="Yes"><option value="">Select…</option><option>Yes</option><option>No</option></select></div>
+        <button type="button" class="reveal-btn" data-problem="p7" aria-expanded="false" aria-controls="p7-sol">Reveal Answer<span class="sr-only"> for Problem 7</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p7-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 7</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+        <h4 class="solution-label">Explanation</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Separate-tranche approach"><table class="data">
+          <caption>Separate-tranche approach</caption>
+          <thead><tr><th scope="col">Tranche</th><th scope="col" class="num">Value</th><th scope="col" class="num"><span class="yr0">2026</span></th><th scope="col" class="num"><span class="yr1">2027</span></th><th scope="col" class="num"><span class="yr2">2028</span></th></tr></thead>
+          <tbody><tr><th scope="row">Vests <span class="yr0">2026</span> (60,000 × $3)</th><td class="num">$180,000</td><td class="num">$180,000</td><td class="num"></td><td class="num"></td></tr><tr><th scope="row">Vests <span class="yr1">2027</span> (60,000 × $4)</th><td class="num">$240,000</td><td class="num">$120,000</td><td class="num">$120,000</td><td class="num"></td></tr><tr><th scope="row">Vests <span class="yr2">2028</span> (120,000 × $5)</th><td class="num">$600,000</td><td class="num">$200,000</td><td class="num">$200,000</td><td class="num">$200,000</td></tr><tr class="total-row"><th scope="row">Compensation expense</th><td class="num">$1,020,000</td><td class="num">$500,000</td><td class="num">$320,000</td><td class="num">$200,000</td></tr></tbody></table></div>
+        <p>Each tranche is treated as a separate award and spread evenly over its own vesting period, which front-loads the expense. Straight-line spreads the $1,020,000 evenly: <strong>$340,000</strong> a year. By the end of <span class="yr0">2026</span>, $180,000 has vested and $340,000 has been recognized, so the minimum test is met (and by the end of <span class="yr1">2027</span>, $420,000 has vested against $680,000 recognized).</p>
+      </div>
+    </article>
+  </section>
+  <section class="lo-block" aria-labelledby="s-cond">
+    <h2 id="s-cond">Performance Conditions and Purchase Plans</h2>
+
+    <article class="example" id="p8" aria-labelledby="p8-h">
+      <h3 class="ex-label" id="p8-h">Problem 8 — A Performance Condition</h3>
+      <p>On January 1, <span class="yr0">2026</span>, Forsyth Hall grants <strong>100,000</strong> options with a fair value of <strong>$8</strong> that vest at the end of <span class="yr3">2029</span> only if cumulative earnings growth reaches 20%. At first the target is <strong>not probable</strong>, so nothing is recorded in <span class="yr0">2026</span> or <span class="yr1">2027</span>. During <span class="yr2">2028</span>, the target becomes probable. Record <span class="yr2">2028</span> compensation.</p>
+      <div class="input-block" role="group" aria-labelledby="p8-h">
+        <div class="input-item"><label for="p8-a">Compensation expense for <span class="yr2">2028</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p8-a" class="ans" data-label="Performance award, {yr2}" data-answer="600000" data-unit="$"></div>
+        <div class="input-item"><label for="p8-b">Compensation expense for <span class="yr3">2029</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p8-b" class="ans" data-label="Performance award, {yr3}" data-answer="200000" data-unit="$"></div>
+        <div class="input-item"><label for="p8-c">If the target had instead been a share price of $40 (a market condition), when would expense be recorded?</label>
+          <select id="p8-c" class="ans" data-label="Market condition" data-answer="Every year of the service period"><option value="">Select…</option><option>Every year of the service period</option><option>Only once the price reaches $40</option><option>Never, unless the price reaches $40</option></select></div>
+        <div class="je-input" data-title="Dec. 31, {yr2}" data-rows="3" data-key='[{"a": "Compensation expense", "dr": 600000}, {"a": "Paid-in capital\u2014stock options", "cr": 600000}]'></div>
+        <button type="button" class="reveal-btn" data-problem="p8" aria-expanded="false" aria-controls="p8-sol">Reveal Answer<span class="sr-only"> for Problem 8</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p8-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 8</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+        <h4 class="solution-label">Explanation</h4>
+        <p>Total compensation is 100,000 × $8 = $800,000. Once the target becomes probable, Forsyth Hall records the cumulative amount that should have been recognized by now: <strong>$800,000 × ¾ − $0 = $600,000</strong>. <span class="yr3">2029</span> gets the remaining <strong>$200,000</strong>.</p>
+        <div class="date-tag" aria-hidden="true">Dec. 31, <span class="yr2">2028</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Dec. 31, <span class="yr2">2028</span></caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><th scope="row">Compensation expense</th><td class="je-debit-amt">600,000</td><td class="je-credit-amt"></td></tr><tr><th scope="row" class="indent">Paid-in capital—stock options</th><td class="je-debit-amt"></td><td class="je-credit-amt">600,000</td></tr></tbody>
+        </table></div>
+        <p>A share-price target is a <strong>market condition</strong>. It is already built into the grant-date fair value, so $200,000 would be expensed each year for employees who stay, whether or not the price ever reaches $40.</p>
+      </div>
+    </article>
+    <article class="example" id="p9" aria-labelledby="p9-h">
+      <h3 class="ex-label" id="p9-h">Problem 9 — Employee Share Purchase Plan</h3>
+      <p>Forsyth Hall lets all employees buy its shares at <strong>15%</strong> below market price. During <span class="yr0">2026</span>, employees buy <strong>2,000 shares</strong> when the market price is <strong>$25</strong>. Classify the plan and record the purchase.</p>
+      <div class="input-block" role="group" aria-labelledby="p9-h">
+        <div class="input-item"><label for="p9-a">Is the plan compensatory?</label>
+          <select id="p9-a" class="ans" data-label="Compensatory?" data-answer="Yes, because the discount exceeds 5%"><option value="">Select…</option><option>Yes, because the discount exceeds 5%</option><option>No, because all employees can participate</option><option>No, because employees pay cash for the shares</option></select></div>
+        <div class="input-item"><label for="p9-b">Compensation expense:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p9-b" class="ans" data-label="ESPP compensation expense" data-answer="7500" data-unit="$"></div>
+        <div class="je-input" data-title="ESPP purchase, {yr0}" data-rows="5" data-key='[{"a": "Cash", "dr": 42500}, {"a": "Compensation expense", "dr": 7500}, {"a": "Common stock", "cr": 2000}, {"a": "Paid-in capital\u2014excess of par", "cr": 48000}]'></div>
+        <button type="button" class="reveal-btn" data-problem="p9" aria-expanded="false" aria-controls="p9-sol">Reveal Answer<span class="sr-only"> for Problem 9</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p9-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 9</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+        <h4 class="solution-label">Explanation</h4>
+        <p>A plan is noncompensatory only if substantially all employees can participate, they have no more than a month to decide, <em>and</em> the discount is no more than 5%. A 15% discount fails the third test, so the discount is compensation: 2,000 × $25 × 15% = <strong>$7,500</strong>.</p>
+        <div class="date-tag" aria-hidden="true">ESPP purchase, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, ESPP purchase, <span class="yr0">2026</span></caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><th scope="row">Cash (2,000 × $25 × 85%)</th><td class="je-debit-amt">42,500</td><td class="je-credit-amt"></td></tr><tr><th scope="row">Compensation expense (2,000 × $25 × 15%)</th><td class="je-debit-amt">7,500</td><td class="je-credit-amt"></td></tr><tr><th scope="row" class="indent">Common stock (2,000 × $1)</th><td class="je-debit-amt"></td><td class="je-credit-amt">2,000</td></tr><tr><th scope="row" class="indent">Paid-in capital—excess of par (to balance)</th><td class="je-debit-amt"></td><td class="je-credit-amt">48,000</td></tr></tbody>
+        </table></div><p class="je-desc">The shares are recorded at their full $50,000 market value; the employees paid $42,500 and the company provided the other $7,500 as pay.</p>
+      </div>
+    </article>
+  </section>
+</main>
+
+<footer>Share-Based Compensation · Guided Walkthrough (Ungraded)</footer>
+
+<script>window.JE_ACCOUNTS = ["Cash", "Common stock", "Compensation expense", "Paid-in capital—excess of par", "Paid-in capital—expiration of stock options", "Paid-in capital—restricted stock", "Paid-in capital—stock options", "No entry required"];</script>
+<script>
+  // ===== Guided walkthrough engine: enter answers (and journal entries), then reveal =====
+
+  // Keeps the dates current automatically, with no recoding needed each year.
+  // yr0 is always the current calendar year; yr1..yr4 follow and yrm1/yrPrev, yrm2 precede.
+  var YEARS = (function () {
+    var yr0 = new Date().getFullYear();
+    var years = { yrm2: yr0 - 2, yrm1: yr0 - 1, yrPrev: yr0 - 1, yr0: yr0, yr1: yr0 + 1, yr2: yr0 + 2, yr3: yr0 + 3, yr4: yr0 + 4 };
+    Object.keys(years).forEach(function (cls) {
+      document.querySelectorAll('.' + cls).forEach(function (el) { el.textContent = years[cls]; });
+    });
+    return years;
+  })();
+
+  function tok(s) {
+    return String(s).replace(/\{(yr[A-Za-z0-9]+)\}/g, function (m, k) { return YEARS.hasOwnProperty(k) ? YEARS[k] : m; });
+  }
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function fmt(val, unit) {
+    var n = Number(val);
+    var abs = Math.abs(n).toLocaleString('en-US', { maximumFractionDigits: 2 });
+    if (unit === '$') { return (n < 0 ? '−$' : '$') + abs; }
+    if (unit === '%') { return (n < 0 ? '−' : '') + abs + '%'; }
+    return (n < 0 ? '−' : '') + abs;
+  }
+
+  // Year tokens inside option text and aria-labels
+  document.querySelectorAll('option').forEach(function (o) {
+    if (/\{yr/.test(o.textContent)) { if (!o.hasAttribute('value')) { o.value = o.textContent; } o.textContent = tok(o.textContent); }
+  });
+  document.querySelectorAll('[aria-label*="{yr"]').forEach(function (el) { el.setAttribute('aria-label', tok(el.getAttribute('aria-label'))); });
+
+  // ----- Journal-entry input grids -----
+  var NO_ENTRY = 'No entry required';
+  var ACCTS = (window.JE_ACCOUNTS || []).slice();
+  (function buildJE() {
+    var opts = '<option value="">Select account…</option>' + ACCTS.map(function (a) { return '<option>' + esc(a) + '</option>'; }).join('');
+    var n = 0;
+    document.querySelectorAll('.je-input').forEach(function (box) {
+      n++;
+      var title = tok(box.getAttribute('data-title'));
+      var rows = Number(box.getAttribute('data-rows') || 3);
+      var id = 'je' + n;
+      var h = '<p class="je-head" id="' + id + '-h">Journal entry: ' + esc(title) + '</p>' +
+        '<div class="table-wrap"><table class="je-entry" aria-labelledby="' + id + '-h"><thead><tr>' +
+        '<th scope="col">Line</th><th scope="col">Account</th><th scope="col" class="amt">Debit ($)</th><th scope="col" class="amt">Credit ($)</th><th scope="col">Check</th>' +
+        '</tr></thead><tbody>';
+      for (var i = 1; i <= rows; i++) {
+        var nm = esc(title) + ' entry, line ' + i;
+        h += '<tr><th scope="row" class="ln">' + i + '</th>' +
+          '<td><select class="je-acct" aria-label="' + nm + ', account">' + opts + '</select></td>' +
+          '<td class="amt-cell"><input type="number" step="any" inputmode="decimal" class="je-dr" aria-label="' + nm + ', debit amount in dollars"></td>' +
+          '<td class="amt-cell"><input type="number" step="any" inputmode="decimal" class="je-cr" aria-label="' + nm + ', credit amount in dollars"></td>' +
+          '<td class="row-status"></td></tr>';
+      }
+      h += '</tbody></table></div>';
+      box.innerHTML = h;
+    });
+  })();
+
+  function jeKey(box) { return JSON.parse(box.getAttribute('data-key')); }
+  function lineText(acct, side, amt) {
+    if (acct === NO_ENTRY) { return NO_ENTRY; }
+    return (side === 'dr' ? 'Dr ' : 'Cr ') + acct + ' ' + Number(amt).toLocaleString('en-US', { maximumFractionDigits: 2 });
+  }
+  function jeRows(box) {
+    var out = [];
+    box.querySelectorAll('tbody tr').forEach(function (tr) {
+      var s = tr.querySelector('.je-acct'), d = tr.querySelector('.je-dr'), c = tr.querySelector('.je-cr');
+      out.push({ tr: tr, sel: s, dr: d, cr: c, acct: s.value, drv: d.value, crv: c.value,
+        blank: !s.value && d.value === '' && c.value === '' });
+    });
+    return out;
+  }
+  // Returns the first incomplete control (and flags it), or null if the entry is complete.
+  function jeValidate(box) {
+    var first = null, used = 0;
+    function bad(el) { el.setAttribute('aria-invalid', 'true'); if (!first) { first = el; } }
+    jeRows(box).forEach(function (r) {
+      [r.sel, r.dr, r.cr].forEach(function (el) { el.removeAttribute('aria-invalid'); });
+      if (r.blank) { return; }
+      used++;
+      if (!r.acct) { bad(r.sel); return; }
+      if (r.acct === NO_ENTRY) { if (r.drv !== '') { bad(r.dr); } if (r.crv !== '') { bad(r.cr); } return; }
+      if (r.drv === '' && r.crv === '') { bad(r.dr); }
+      else if (r.drv !== '' && r.crv !== '') { bad(r.cr); }
+    });
+    if (!used) { bad(jeRows(box)[0].sel); }
+    return first;
+  }
+  // Order doesn't matter: each line must match one answer line (account, side, amount within $1).
+  function jeGrade(box) {
+    var key = jeKey(box), taken = key.map(function () { return false; }), allOk = true, yours = [];
+    jeRows(box).forEach(function (r) {
+      var cell = r.tr.querySelector('.row-status');
+      cell.className = 'row-status'; cell.innerHTML = '';
+      if (r.blank) { return; }
+      var side = r.acct === NO_ENTRY ? '' : (r.drv !== '' ? 'dr' : 'cr');
+      var amt = side === 'dr' ? Number(r.drv) : (side === 'cr' ? Number(r.crv) : 0);
+      yours.push(lineText(r.acct, side, amt));
+      var hit = -1;
+      key.forEach(function (k, i) {
+        if (hit > -1 || taken[i] || k.a !== r.acct) { return; }
+        if (r.acct === NO_ENTRY) { hit = i; return; }
+        var kside = k.hasOwnProperty('dr') ? 'dr' : 'cr';
+        if (kside === side && Math.abs(Number(k[kside]) - amt) <= 1) { hit = i; }
+      });
+      if (hit > -1) { taken[hit] = true; } else { allOk = false; }
+      cell.className = 'row-status ' + (hit > -1 ? 'result-ok' : 'result-no');
+      cell.innerHTML = hit > -1 ? '<span aria-hidden="true">✓ </span>Correct' : '<span aria-hidden="true">✗ </span>Review';
+    });
+    if (taken.indexOf(false) > -1) { allOk = false; }
+    var answer = key.map(function (k) {
+      var side = k.hasOwnProperty('dr') ? 'dr' : (k.hasOwnProperty('cr') ? 'cr' : '');
+      return lineText(k.a, side, k[side]);
+    });
+    return { ok: allOk, yours: yours, answer: answer, label: 'Journal entry: ' + tok(box.getAttribute('data-title')) };
+  }
+
+  // ----- Reveal -----
+  var REVEALED = {};
+  var TOTAL = document.querySelectorAll('.example').length;
+  function updateProgress() {
+    var count = Object.keys(REVEALED).length;
+    var bar = document.getElementById('progressBar');
+    bar.setAttribute('aria-valuemax', TOTAL);
+    bar.setAttribute('aria-valuenow', count);
+    bar.setAttribute('aria-valuetext', count + ' of ' + TOTAL + ' problems revealed');
+    document.getElementById('progressLabel').textContent = count + ' of ' + TOTAL + ' revealed';
+    document.getElementById('progressFill').style.width = (count / TOTAL * 100) + '%';
+  }
+  function isMatch(el) {
+    var ans = el.getAttribute('data-answer');
+    if (el.tagName === 'SELECT') { return el.value === ans; }
+    var unit = el.getAttribute('data-unit') || '';
+    var tol = el.hasAttribute('data-tol') ? Number(el.getAttribute('data-tol')) : (unit === '%' ? 0.05 : 1);
+    return Math.abs(Number(el.value) - Number(ans)) <= tol;
+  }
+  function resultCell(ok) {
+    return '<td class="' + (ok ? 'result-ok' : 'result-no') + '">' + (ok ? '<span aria-hidden="true">✓ </span>Matches' : '<span aria-hidden="true">✗ </span>Review') + '</td>';
+  }
+  function reveal(id) {
+    var box = document.getElementById(id);
+    var inputs = box.querySelectorAll('.ans');
+    var jes = box.querySelectorAll('.je-input');
+    var fb = box.querySelector('.feedback');
+    var firstMissing = null;
+    inputs.forEach(function (el) {
+      var empty = (el.value === '' || el.value === null);
+      if (empty) { el.setAttribute('aria-invalid', 'true'); if (!firstMissing) { firstMissing = el; } }
+      else { el.removeAttribute('aria-invalid'); }
+    });
+    jes.forEach(function (j) { var b = jeValidate(j); if (b && !firstMissing) { firstMissing = b; } });
+    if (firstMissing) {
+      fb.textContent = jes.length
+        ? 'Finish every answer first. In each journal entry, every line you use needs an account and one amount (a debit or a credit); leave extra lines blank. Then select Reveal Answer.'
+        : 'Enter an answer in every box first, then select Reveal Answer.';
+      firstMissing.focus();
+      return;
+    }
+    fb.textContent = '';
+
+    var rows = '';
+    inputs.forEach(function (el) {
+      var label = tok(el.getAttribute('data-label'));
+      var unit = el.getAttribute('data-unit') || '';
+      var yours, answer;
+      if (el.tagName === 'SELECT') {
+        yours = el.options[el.selectedIndex].text;
+        var a = el.querySelector('option[value="' + el.getAttribute('data-answer').replace(/"/g, '\\"') + '"]') ||
+          Array.prototype.filter.call(el.options, function (o) { return o.value === el.getAttribute('data-answer'); })[0];
+        answer = a ? a.text : el.getAttribute('data-answer');
+      } else {
+        yours = fmt(el.value, unit);
+        answer = fmt(el.getAttribute('data-answer'), unit);
+      }
+      rows += '<tr><th scope="row">' + esc(label) + '</th><td>' + esc(yours) + '</td><td><strong>' + esc(answer) + '</strong></td>' + resultCell(isMatch(el)) + '</tr>';
+    });
+    jes.forEach(function (j) {
+      var g = jeGrade(j);
+      rows += '<tr><th scope="row">' + esc(g.label) + '</th><td class="je-cell">' + g.yours.map(esc).join('<br>') +
+        '</td><td class="je-cell"><strong>' + g.answer.map(esc).join('<br>') + '</strong></td>' + resultCell(g.ok) + '</tr>';
+    });
+    box.querySelector('.compare-body').innerHTML = rows;
+    var sol = box.querySelector('.solution');
+    sol.hidden = false;
+    box.querySelector('.reveal-btn').setAttribute('aria-expanded', 'true');
+    var head = sol.querySelector('.solution-label');
+    if (head) { head.focus(); }
+    REVEALED[id] = true;
+    updateProgress();
+  }
+
+  document.querySelectorAll('.reveal-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () { reveal(btn.getAttribute('data-problem')); });
+  });
+  ['input', 'change'].forEach(function (ev) {
+    document.addEventListener(ev, function (e) {
+      if (e.target.getAttribute && e.target.getAttribute('aria-invalid') === 'true' && e.target.value !== '') { e.target.removeAttribute('aria-invalid'); }
+    });
+  });
+  updateProgress();
+</script>
+
+<script id="a11y-fixes-js">
+/* Accessibility support added Oct 2026: names for unlabeled form fields, scrollable wide tables, and screen-reader announcements of results. */
+(function () {
+  var LIVE = !document.querySelector('[aria-live],[role="status"],[role="alert"]');
+  function txt(el) { return el ? (el.textContent || '').replace(/\s+/g, ' ').trim() : ''; }
+  function hasName(el) {
+    if (el.getAttribute('aria-label') || el.getAttribute('aria-labelledby') || el.getAttribute('title')) return true;
+    if (el.id) { try { if (document.querySelector('label[for="' + CSS.escape(el.id) + '"]')) return true; } catch (e) {} }
+    return !!el.closest('label');
+  }
+  function heading(el) {
+    var box = el.closest('fieldset,[class*="block"],[class*="part"],[class*="card"],section,article,.example,.problem');
+    while (box) {
+      var h = box.querySelector('legend,caption,h2,h3,h4,h5,[class*="title"],[class*="label"],[class*="recap"]');
+      if (h && txt(h)) return txt(h).slice(0, 80);
+      box = box.parentElement ? box.parentElement.closest('fieldset,section,article,[class*="block"],[class*="part"]') : null;
+    }
+    return '';
+  }
+  function nameFor(el) {
+    var bits = [], tr = el.closest('tr'), table = el.closest('table');
+    var cap = table && table.querySelector('caption');
+    var h = heading(el); if (h) bits.push(h); else if (cap && txt(cap)) bits.push(txt(cap).slice(0, 80));
+    if (tr && table) {
+      var cell = el.closest('td,th'), rows = Array.prototype.slice.call(table.rows), ri = rows.indexOf(tr);
+      var rowHead = tr.querySelector('th[scope="row"]') || (tr.cells[0] && tr.cells[0] !== cell && !tr.cells[0].querySelector('input,select,textarea') ? tr.cells[0] : null);
+      var head = table.tHead && table.tHead.rows.length ? table.tHead.rows[table.tHead.rows.length - 1] : (rows[0] && rows[0] !== tr && !rows[0].querySelector('input,select') ? rows[0] : null);
+      var colHead = head && cell ? head.cells[cell.cellIndex] : null;
+      var bodyIdx = table.tHead ? ri - table.tHead.rows.length + 1 : ri + (head ? 0 : 1);
+      if (rowHead && txt(rowHead)) bits.push(txt(rowHead).slice(0, 80)); else bits.push('line ' + bodyIdx);
+      if (colHead && txt(colHead)) bits.push(txt(colHead).slice(0, 40));
+      else if (el.tagName === 'SELECT') bits.push('account');
+    } else {
+      var prev = el.previousElementSibling; if (prev && txt(prev)) bits.push(txt(prev).slice(0, 80));
+      if (el.placeholder) bits.push(el.placeholder);
+    }
+    if (!bits.length) bits.push(el.tagName === 'SELECT' ? 'Choose an option' : 'Answer');
+    return bits.join(', ');
+  }
+  function labelAll(root) {
+    (root || document).querySelectorAll('input:not([type="hidden"]):not([type="button"]):not([type="submit"]),select,textarea').forEach(function (el) {
+      if (!hasName(el)) el.setAttribute('aria-label', nameFor(el));
+    });
+  }
+  function wrapTables() {
+    document.querySelectorAll('table').forEach(function (t) {
+      if (t.closest('.a11y-scroll')) return;
+      var p = t.parentElement, s = p ? getComputedStyle(p) : null;
+      if (s && /auto|scroll/.test(s.overflowX)) return;
+      var avail = p ? p.clientWidth : 0;
+      if (!avail || t.scrollWidth <= avail + 1) return;
+      var w = document.createElement('div'); w.className = 'a11y-scroll';
+      if (!t.querySelector('input,select,textarea,button,a[href]')) {
+        w.setAttribute('role', 'region'); w.tabIndex = 0;
+        var c = t.querySelector('caption'); w.setAttribute('aria-label', (c && txt(c)) || 'Table (scrolls sideways)');
+      }
+      p.insertBefore(w, t); w.appendChild(t);
+    });
+  }
+  var live = null;
+  if (LIVE) {
+    live = document.createElement('div'); live.className = 'a11y-sr'; live.setAttribute('aria-live', 'polite'); live.setAttribute('role', 'status');
+    document.body.appendChild(live);
+  }
+  var RESULT = /(score|result|feedback|status|summary|message|msg|grade|total|verdict|outcome)/i;
+  var collecting = false, found = [];
+  function say(msg) { if (!live || !msg) return; live.textContent = ''; setTimeout(function () { live.textContent = msg; }, 60); }
+  var pending;
+  var mo = new MutationObserver(function (muts) {
+    clearTimeout(pending);
+    pending = setTimeout(function () { labelAll(); wrapTables(); }, 50);
+    if (!collecting) return;
+    muts.forEach(function (m) {
+      var n = m.target.nodeType === 1 ? m.target : m.target.parentElement;
+      while (n && n !== document.body) {
+        if (n === live) return;
+        if (RESULT.test((n.id || '') + ' ' + (typeof n.className === 'string' ? n.className : ''))) { if (found.indexOf(n) < 0) found.push(n); return; }
+        n = n.parentElement;
+      }
+    });
+  });
+  function start() {
+    labelAll(); wrapTables();
+    mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+    document.addEventListener('click', function (e) {
+      if (!live || !e.target.closest('button')) return;
+      collecting = true; found = [];
+      setTimeout(function () {
+        collecting = false;
+        var msg = found.map(txt).filter(Boolean).join(' ').slice(0, 300);
+        say(msg);
+      }, 400);
+    }, true);
+    var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(wrapTables, 150); });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
+})();
+</script>
+</body>
+</html>
