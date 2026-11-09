@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shareholders’ Equity Tutor</title>
+<meta name="description" content="ACCT 352 practice on shareholders’ equity: work each schedule, then record the journal entry, with new numbers every time.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --purple:#592C88; --purple-dk:#3E1E61; --purple-lt:#F3EEF8;
+  --gold:#C1A875; --gold-lt:#FAF5E9; --gold-dk:#6B5A2E;
+  --ink:#1F1B24; --muted:#4A4453; --line:#D9D2E3; --paper:#FFFFFF; --bg:#EEEAF2;
+  --red:#9B1C1C; --red-lt:#FDECEC; --green:#1D5E3A; --green-lt:#E9F5EE;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Source Serif 4",Georgia,serif;line-height:1.55;font-size:1.02rem}
+.skip{position:absolute;left:-9999px;top:0;background:var(--purple-dk);color:#fff;padding:.5rem 1rem;z-index:10}
+.skip:focus{left:1rem}
+a{color:var(--purple)}
+:focus-visible{outline:3px solid var(--gold-dk);outline-offset:2px}
+.shell{max-width:76rem;margin:1.5rem auto;background:var(--paper);box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.banner{background:var(--purple);color:#fff;padding:1.4rem 2rem 1.2rem;border-bottom:6px solid var(--gold)}
+.banner .kicker{font-family:Inter,Arial,sans-serif;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;margin:0 0 .35rem}
+.banner h1{font-size:1.9rem;line-height:1.2;margin:0 0 .3rem}
+.banner .sub{margin:0;font-family:Inter,Arial,sans-serif;font-size:.95rem}
+.content{padding:1rem 2rem 2rem}
+h2{font-family:Inter,Arial,sans-serif;color:var(--purple-dk);font-size:1.3rem;margin:1.6rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--gold)}
+h3{font-family:Inter,Arial,sans-serif;color:var(--purple);font-size:1.08rem;margin:1.2rem 0 .45rem}
+p{margin:.45rem 0 .7rem}
+.card{border:1px solid var(--line);border-left:6px solid var(--purple);background:var(--purple-lt);padding:.8rem 1.1rem;margin:1rem 0;border-radius:4px}
+.card h2,.card h3{margin-top:.2rem;border:none;padding:0}
+.important{border:2px solid var(--gold-dk);background:var(--gold-lt);padding:.8rem 1.1rem;margin:1rem 0;border-radius:4px}
+.important h3{color:var(--gold-dk);margin-top:.1rem}
+.card ul,.important ul{margin:.3rem 0 .2rem;padding-left:1.3rem}
+.small{font-size:.9rem;color:var(--muted)}
+.math{font-family:"IBM Plex Mono",Consolas,monospace;font-size:.9rem}
+
+/* picker */
+.picker{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));margin:.6rem 0 0}
+.pgroup h3{font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin:.2rem 0 .5rem}
+.pgroup ul{list-style:none;margin:0;padding:0;display:grid;gap:.45rem}
+.type-btn{width:100%;text-align:left;font:inherit;font-family:Inter,Arial,sans-serif;font-size:.93rem;background:#fff;color:var(--ink);border:1px solid var(--line);border-left:5px solid var(--purple);border-radius:4px;padding:.5rem .7rem;cursor:pointer}
+.type-btn strong{display:block;color:var(--purple-dk)}
+.type-btn span{color:var(--muted);font-size:.85rem}
+.type-btn:hover{background:var(--purple-lt)}
+.type-btn[aria-pressed="true"]{border-left-color:var(--gold-dk);background:var(--gold-lt);box-shadow:inset 0 0 0 2px var(--gold)}
+
+/* workspace */
+.work{display:grid;gap:1.5rem;grid-template-columns:minmax(0,1fr);margin-top:1.4rem}
+@media (min-width:64rem){.work{grid-template-columns:minmax(0,1fr) 18.5rem;align-items:start}}
+.prob-head{display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:flex-end;justify-content:space-between;border-bottom:3px solid var(--gold);padding-bottom:.6rem}
+.prob-head h2{border:none;margin:0;padding:0;font-size:1.45rem}
+.eyebrow{font-family:Inter,Arial,sans-serif;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 .15rem;font-weight:700}
+.btns{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+.btn{font-family:Inter,Arial,sans-serif;font-weight:700;font-size:.92rem;padding:.5rem .95rem;border-radius:4px;cursor:pointer;border:2px solid var(--purple);background:var(--purple);color:#fff}
+.btn:hover{background:var(--purple-dk);border-color:var(--purple-dk)}
+.btn.ghost{background:#fff;color:var(--purple)}
+.btn.ghost:hover{background:var(--purple-lt)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+
+table{border-collapse:collapse;width:100%;margin:.5rem 0 .8rem;font-size:.95rem}
+caption{caption-side:top;text-align:left;font-family:Inter,Arial,sans-serif;font-weight:700;color:var(--purple-dk);padding:.2rem 0 .4rem}
+th,td{border:1px solid var(--line);padding:.4rem .55rem;vertical-align:middle}
+thead th{background:var(--purple);color:#fff;font-family:Inter,Arial,sans-serif;font-size:.84rem;text-align:left}
+tbody th{background:#F7F5FA;text-align:left;font-weight:600}
+.n{text-align:right;font-family:"IBM Plex Mono",Consolas,monospace;font-size:.9rem;white-space:nowrap}
+.scroll{overflow-x:auto;position:relative}
+
+.part{border:1px solid var(--line);border-radius:6px;padding:.4rem 1rem 1rem;margin:1.2rem 0;background:#fff}
+.part > h3{display:flex;gap:.6rem;align-items:center}
+.part > h3 .pnum{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;background:var(--purple);color:#fff;border-radius:999px;padding:.12rem .6rem;white-space:nowrap}
+.part.complete{border-color:var(--green);box-shadow:inset 4px 0 0 var(--green)}
+.status{font-family:Inter,Arial,sans-serif;font-size:.85rem;font-weight:700;color:var(--green);margin-left:auto}
+
+/* schedule */
+.sched td.ln{width:2.6rem;text-align:center;font-family:Inter,Arial,sans-serif;font-weight:700;color:var(--purple-dk);background:#F7F5FA}
+.sched td.bo{width:7.5rem;font-family:Inter,Arial,sans-serif;font-size:.8rem;color:var(--muted)}
+.sched td.amt{width:12.5rem}
+.sched tr.given td{background:#FBFAFD}
+.sched label{font-weight:600}
+.inwrap{display:flex;align-items:center;gap:.25rem}
+.inwrap .u{font-family:"IBM Plex Mono",Consolas,monospace;color:var(--muted)}
+input.ans,select.ans{font:inherit;font-family:"IBM Plex Mono",Consolas,monospace;font-size:.95rem;padding:.4rem .5rem;border:2px solid #6E6680;border-radius:4px;width:100%;min-width:0;background:#fff;color:var(--ink)}
+select.ans{font-family:Inter,Arial,sans-serif;font-size:.88rem}
+input.ans.n{text-align:right}
+.ok-f{border-color:var(--green)!important;background:var(--green-lt)!important}
+.bad-f{border-color:var(--red)!important;background:var(--red-lt)!important}
+.fb{font-family:Inter,Arial,sans-serif;font-size:.84rem;margin-top:.3rem}
+.fb:empty{display:none}
+.fb.ok{color:var(--green)}
+.fb.bad{color:var(--red)}
+.fb.sol{color:var(--purple-dk)}
+.fb .math{font-size:.82rem}
+.tag{font-weight:700}
+
+/* journal entry */
+.je td{padding:.3rem .4rem}
+.je td.src{width:7rem;font-family:Inter,Arial,sans-serif;font-size:.8rem;color:var(--muted);text-align:center}
+.je td.d,.je td.c{width:10rem}
+.je td.ac{min-width:14rem}
+.chip{display:inline-block;background:var(--gold-lt);border:1px solid var(--gold-dk);color:var(--gold-dk);border-radius:999px;padding:0 .5rem;font-weight:700}
+.partfb{font-family:Inter,Arial,sans-serif;font-size:.9rem;border-radius:4px;padding:.5rem .8rem;margin:.5rem 0}
+.partfb:empty{display:none}
+.partfb.ok{background:var(--green-lt);border-left:4px solid var(--green)}
+.partfb.bad{background:var(--red-lt);border-left:4px solid var(--red)}
+.partfb.hint{background:var(--gold-lt);border-left:4px solid var(--gold-dk)}
+
+.say{display:flex;gap:.75rem;align-items:flex-start;margin:.8rem 0}
+.avatar{flex:0 0 2.9rem;height:2.9rem;border-radius:50%;background:var(--purple);color:#fff;border:3px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:Inter,Arial,sans-serif;font-weight:700;font-size:1.2rem}
+.say.sm .avatar{flex-basis:2.2rem;height:2.2rem;font-size:.95rem;border-width:2px}
+.bubble{position:relative;background:#fff;border:1px solid var(--line);border-radius:10px;padding:.55rem .95rem;flex:1;min-width:0;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.bubble::before{content:"";position:absolute;left:-8px;top:1rem;border:8px solid transparent;border-left:0;border-right-color:var(--line)}
+.bubble::after{content:"";position:absolute;left:-6px;top:1rem;border:8px solid transparent;border-left:0;border-right-color:#fff}
+.bubble .who{font-family:Inter,Arial,sans-serif;font-weight:700;font-size:.82rem;color:var(--purple-dk);margin:0 0 .15rem;letter-spacing:.02em}
+.bubble p{margin:.3rem 0}
+.bubble ul{margin:.3rem 0 .4rem;padding-left:1.2rem}
+.say.key .bubble{background:var(--gold-lt);border-color:var(--gold-dk)}
+.say.key .bubble::after{border-right-color:var(--gold-lt)}
+.say.key .bubble::before{border-right-color:var(--gold-dk)}
+.partfb .who{font-weight:700}
+.know{margin:.4rem 0 .6rem;font-size:.92rem;min-width:34rem}
+.know td.ln{width:2.6rem;text-align:center;font-family:Inter,Arial,sans-serif;font-weight:700;color:var(--purple-dk);background:#F7F5FA}
+.know tbody th{font-weight:600;background:#fff}
+.know td.why{font-size:.86rem;color:var(--muted);font-family:Inter,Arial,sans-serif}
+.summary{border-top:3px solid var(--gold);margin-top:1.5rem;padding-top:.6rem}
+.score{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:.4rem 0 1rem;padding:0}
+.score li{background:var(--purple-lt);border:1px solid var(--line);border-radius:999px;padding:.2rem .8rem;font-family:Inter,Arial,sans-serif;font-weight:600;font-size:.9rem}
+
+/* sidebar */
+aside.ref{border:1px solid var(--line);border-radius:6px;padding:.4rem 1rem 1rem;background:#FBFAFD}
+@media (min-width:64rem){aside.ref{position:sticky;top:1rem}}
+aside.ref h2{font-size:1.1rem;margin-top:.6rem}
+aside.ref ol{padding-left:1.2rem;margin:.3rem 0}
+aside.ref li{margin:.35rem 0;font-size:.95rem}
+.flow{list-style:none;padding:0;margin:.4rem 0;font-family:Inter,Arial,sans-serif;font-size:.84rem}
+.flow li{border:1px solid var(--line);background:#fff;border-radius:4px;padding:.4rem .55rem;margin:0}
+.flow li.arrow{border:none;background:none;text-align:center;color:var(--purple);padding:.05rem;font-weight:700}
+aside.ref dl{margin:.3rem 0 0;font-size:.92rem}
+aside.ref dt{font-weight:700;font-family:Inter,Arial,sans-serif;font-size:.88rem;margin-top:.5rem}
+aside.ref dd{margin:0;color:var(--muted)}
+footer{padding:1rem 2rem 1.5rem;font-family:Inter,Arial,sans-serif;font-size:.8rem;color:var(--muted);border-top:1px solid var(--line)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media (max-width:640px){
+  .shell{margin:0}
+  .banner,.content{padding-left:1rem;padding-right:1rem}
+  .sched td.bo{display:none}
+  .sched th.bo{display:none}
+  .sched td.amt{width:8.5rem}
+  table.je{min-width:34rem}
+  .sched td.ln{width:2rem}
+  .prob-head .btns{width:100%}
+  .picker{grid-template-columns:1fr}
+  table{font-size:.88rem}
+}
+@media print{
+  body{background:#fff}
+  .shell{box-shadow:none;margin:0}
+  #picker-sec,.btns,.skip,aside.ref{display:none!important}
+  .banner,thead th,.part > h3 .pnum{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .part{break-inside:avoid}
+}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+</head>
+<body>
+<a class="skip" href="#work-title">Skip to the problem</a>
+<div class="shell">
+<header class="banner">
+  <p class="kicker">ACCT 352 · Intermediate Accounting II · Practice Tutor</p>
+  <h1>Shareholders’ Equity Tutor</h1>
+  <p class="sub" id="sub">Work each schedule, then record the journal entry. New company and new numbers every time.</p>
+</header>
+
+<main class="content" id="main">
+  <section aria-labelledby="how-title">
+    <h2 id="how-title" class="sr-only">Meet your tutor</h2>
+    <div id="intro"></div>
+  </section>
+
+  <section id="picker-sec" aria-labelledby="pick-title">
+    <h2 id="pick-title">Choose a problem type</h2>
+    <div class="picker" id="picker"></div>
+  </section>
+
+  <div class="work">
+    <section aria-labelledby="work-title" id="worksheet">
+      <div class="prob-head">
+        <div>
+          <p class="eyebrow" id="ptype"></p>
+          <h2 id="work-title" tabindex="-1"></h2>
+        </div>
+        <div class="btns">
+          <button type="button" class="btn" id="new-btn">New numbers</button>
+          <button type="button" class="btn ghost" id="print-btn">Print this problem</button>
+        </div>
+      </div>
+      <div id="scenario-say"></div>
+      <div class="scroll" id="given"></div>
+      <div id="key-say"></div>
+      <div id="parts"></div>
+      <div class="summary" id="summary" hidden tabindex="-1"></div>
+    </section>
+
+    <aside class="ref" aria-labelledby="ref-title">
+      <h2 id="ref-title">The one question to ask</h2>
+      <ul class="flow" aria-label="How equity transactions flow">
+        <li><strong>How did net assets change?</strong><br>Assets − liabilities = shareholders’ equity</li>
+        <li class="arrow" aria-hidden="true">↓</li>
+        <li><strong>Owners invest</strong> → paid-in capital<br><strong>Company earns</strong> → retained earnings<br><strong>OCI</strong> → AOCI</li>
+        <li class="arrow" aria-hidden="true">↓</li>
+        <li><strong>Owners are paid</strong> (dividends, buybacks) → equity <em>falls</em></li>
+      </ul>
+      <h2>Rules that never bend</h2>
+      <ol>
+        <li><strong>No gains or losses</strong> on transactions in a company’s own shares.</li>
+        <li><strong>Retained earnings</strong> can be debited in a buyback, never credited.</li>
+        <li><strong>Par value</strong> only splits the credit; record what was received.</li>
+        <li><strong>No liability</strong> for a dividend until it is declared.</li>
+        <li><strong>Small stock dividend:</strong> fair value. <strong>Split as a dividend:</strong> par. <strong>True split:</strong> no entry.</li>
+      </ol>
+      <dl>
+        <dt>Paid-in capital—share repurchase</dt><dd>Created when shares are retired below their original price or treasury shares are resold above cost. Never below zero.</dd>
+        <dt>Treasury stock</dt><dd>Issued but not outstanding; recorded at cost and subtracted from equity.</dd>
+        <dt>Dividends in arrears</dt><dd>Skipped cumulative preferred dividends; disclosed, not recorded.</dd>
+        <dt>AOCI</dt><dd>The running total of other comprehensive income.</dd>
+      </dl>
+    </aside>
+  </div>
+</main>
+<footer>
+  <p>All company names and numbers are fictional and randomly generated. The current year updates automatically. Practice covers shareholders’ equity topics in intermediate accounting under U.S. GAAP.</p>
+</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+var Y=new Date().getFullYear();
+
+/* ---------- helpers ---------- */
+function rnd(min,max,step){step=step||1;var n=Math.floor((max-min)/step);return min+step*Math.floor(Math.random()*(n+1));}
+function pick(a){return a[Math.floor(Math.random()*a.length)];}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function R(n){return Math.round(n);}
+function fmt(n){return Math.abs(R(n)).toLocaleString("en-US");}
+function $(n){return (R(n)<0?"−$":"$")+fmt(n);}
+function pc(r){return (Math.round(r*1000)/10)+"%";}
+function K(n){return n*1000;}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];});}
+function dispU(v,u){return u==="%"?pc(v):u==="sh"?fmt(v):u==="$c"?c2(v):$(v);}
+function m(s){return '<span class="math">'+s+'</span>';}
+
+/* ---------- the tutor ---------- */
+var TUTORS=[
+ {name:"Jordan",bio:"a senior accounting major who works in the Forsyth tutoring lab",style:"Let's take it one line at a time."},
+ {name:"Riley",bio:"a MAcc student who interned on a financial reporting team in Asheville",style:"Equity accounting comes down to one question: how did this transaction change net assets?"},
+ {name:"Avery",bio:"a graduate assistant who never met a journal entry that didn't balance",style:"If it doesn't balance, something's hiding. We'll find it."},
+ {name:"Quinn",bio:"a senior studying for the CPA exam",style:"This exact topic shows up on the CPA exam, so it's worth getting comfortable."},
+ {name:"Casey",bio:"a Catamount tutor who loves turning messy numbers into clean financial statements",style:"Buybacks and dividends look tricky at first, but they follow a pattern. Once you see it, you'll see it everywhere."}
+];
+var T=(function(){var last=-1;try{last=parseInt(localStorage.getItem("ch18tutor")||"-1",10);}catch(e){}
+  var i;do{i=Math.floor(Math.random()*TUTORS.length);}while(i===last&&TUTORS.length>1);
+  try{localStorage.setItem("ch18tutor",String(i));}catch(e){}return TUTORS[i];})();
+function say(html,opt){opt=opt||{};return '<div class="say'+(opt.sm?' sm':'')+(opt.key?' key':'')+'"><span class="avatar" aria-hidden="true">'+T.name.charAt(0)+'</span><div class="bubble"><p class="who">'+(opt.label||T.name)+'</p>'+html+'</div></div>';}
+function any(a){return a[Math.floor(Math.random()*a.length)];}
+var PRAISE=["Nice, that's it.","Exactly right.","You've got it.","Yes! Right on.","Perfect.","That's the one."];
+var NUDGE=["Close. Here's a nudge:","Not quite yet. Try this:","Almost. Think about it this way:","Hmm, let's rethink that one:"];
+var NAMES=["Blue Ridge Brewing Co.","Tuckasegee Timber Works","Cullowhee Creek Canoe Co.","Balsam Gap Bakery","Whiteside Mountain Outfitters","Pisgah Pine Furniture","Fontana Lake Marine","Cashiers Valley Cabinetry","Dillsboro Depot Mercantile","Mount Mitchell Mills","Looking Glass Falls Lodge","Hiwassee River Rafting","Black Balsam Bicycles","Waterrock Knob Woodworks","Sylva Summit Coffee Roasters","Nantahala Gorge Gear Co.","Cherohala Skyway Cycles","Highlands Plateau Provisions","Franklin Gem Mine Supply","Brevard Waterfall Works","Bryson City Rail & Trail","Maggie Valley Mountain Crafts","Linville Gorge Logistics","Lake Glenville Marina","Shining Rock Solar","Panthertown Valley Paper Co.","Jackson County Apple Orchards","Catamount Peak Construction","Smoky Mountain Sawmill","Little Tennessee Trout Farms","Wayah Bald Wind Energy","Scaly Mountain Ski Supply","Cowee Valley Ceramics","Chimney Rock Climbing Co."];
+var lastName="";
+function company(){var n;do{n=pick(NAMES);}while(n===lastName);lastName=n;return n;}
+
+/* ---------- worksheet builders ---------- */
+/* given line */
+function G(id,label,val,unit,why){return {kind:"given",id:id,label:label,val:val,unit:unit||"$",why:why||""};}
+/* numeric input line */
+function N(id,label,ans,builds,hint,sol,opt){opt=opt||{};return {kind:"num",id:id,label:label,ans:ans,builds:builds||"",hint:hint,sol:sol,unit:opt.unit||"$",tol:opt.tol==null?1:opt.tol};}
+/* choice input line */
+function C(id,label,options,ans,hint,sol,builds){return {kind:"choice",id:id,label:label,options:options,ans:ans,builds:builds||"",hint:hint,sol:sol};}
+function sched(title,rows,intro){return {type:"sched",title:title,rows:rows,intro:intro||""};}
+/* journal entry: lines [account, debit, credit, sourceLine] ; zero lines dropped */
+function JE(title,lines,intro){
+  var L=[];lines.forEach(function(l){var d=R(l[1]||0),c=R(l[2]||0);if(!d&&!c)return;L.push({acct:l[0],dr:d,cr:c,src:l[3]||""});});
+  return {type:"je",title:title,lines:L,intro:intro||""};
+}
+/* turn a signed change in a deferred account into a JE line */
+function defLine(acct,change,isAsset,src){if(!R(change))return [acct,0,0];var debit=(isAsset&&change>0)||(!isAsset&&change<0);return debit?[acct,Math.abs(change),0,src]:[acct,0,Math.abs(change),src];}
+function expLine(exp,src){return exp>=0?["Income tax expense",exp,0,src]:["Income tax expense",0,-exp,src];}
+
+function givenTable(cap,rows){var h='<table><caption>'+esc(cap)+'</caption><thead><tr><th scope="col">Item</th><th scope="col" class="n">Amount</th></tr></thead><tbody>';rows.forEach(function(r){h+='<tr><th scope="row">'+r[0]+'</th><td class="n">'+r[1]+'</td></tr>';});return h+'</tbody></table>';}
+
+var ACCTS=["Cash","Land","Equipment","Legal expense","Common stock","Preferred stock","Paid-in capital—excess of par","Paid-in capital—excess of stated value","Paid-in capital—share repurchase","Retained earnings","Treasury stock","Cash dividends payable","Property dividends payable","Investment in equity securities","Gain on investments","Loss on investments","Dividend expense","Gain on sale of treasury stock","Loss on sale of treasury stock"];
+var PKG_ACCTS=["Cash","Common stock","Preferred stock","Paid-in capital—excess of par, common","Paid-in capital—excess of par, preferred","Retained earnings","Gain on issuance of shares","Loss on issuance of shares"];
+function c2(n){return (n<0?"−$":"$")+Math.abs(n).toFixed(2);}
+function sh(n){return fmt(n)+" shares";}
+function r2(x){return Math.round(x*100)/100;}
+
+/* ---------- problem generators ---------- */
+var GEN={};
+
+/* ===== Equity basics ===== */
+var COMP_OPTS=["Paid-in capital","Retained earnings","Accumulated other comprehensive income","Treasury stock (deducted from equity)","Not part of shareholders’ equity"];
+GEN.comp={group:"Equity basics",name:"Components of equity",blurb:"Sort the accounts, then total shareholders’ equity.",make:function(){
+  var co=company(),pr=pick([5,6,7]);
+  var cs=K(rnd(500,1500,100)),apc=K(rnd(6000,14000,200)),ps=K(rnd(1000,3000,500)),app=K(rnd(100,400,50)),sr=K(rnd(20,150,10));
+  var re=K(rnd(9000,30000,100)),ts=K(rnd(200,1200,20)),aoci=K(rnd(40,600,10))*(Math.random()<.6?-1:1);
+  var dp=K(rnd(100,400,25)),bp=K(rnd(2000,8000,500)),arr=R(ps*pr/100);
+  var pic=cs+apc+ps+app+sr,se=pic+re+aoci-ts;
+  var bank=shuffle([
+    ["Common stock, $1 par, "+$(cs),0,"The stock account holds the par value of shares sold: invested capital."],
+    ["Paid-in capital—excess of par, common, "+$(apc),0,"Amounts shareholders paid above par: invested capital."],
+    ["Preferred stock, "+pr+"%, $100 par, cumulative, "+$(ps),0,"Preferred shares are invested capital too (they are not mandatorily redeemable)."],
+    ["Paid-in capital—share repurchase, "+$(sr),0,"Created by earlier buybacks at less than the original price; part of paid-in capital."],
+    ["Retained earnings, "+$(re),1,"Cumulative net income less dividends: earned capital."],
+    ["Treasury stock, at cost, "+$(ts),3,"The cost of shares bought back and held; a contra-equity account."],
+    ["Accumulated net unrealized "+(aoci<0?"loss":"gain")+" on available-for-sale debt investments, "+$(Math.abs(aoci)),2,"OCI items build up in AOCI, never in retained earnings."],
+    ["Cash dividends payable, "+$(dp),4,"A declared dividend is owed to shareholders: a current liability."],
+    ["Bonds payable, "+$(bp),4,"A liability, not an ownership interest."],
+    ["Preferred dividends in arrears, "+$(arr),4,"Arrears are only disclosed in the notes. Nothing is owed until a dividend is declared."]
+  ]).slice(0,6);
+  return {title:co,
+  scenario:'<p>The controller at '+esc(co)+' is preparing the December 31, '+Y+' balance sheet and wants to be sure every account lands in the right place. The company has '+pr+'%, $100 par cumulative preferred stock and $1 par common stock outstanding.</p>',
+  key:'<p>Shareholders’ equity is a <strong>residual</strong>: assets minus liabilities, also called net assets. It has four parts: <strong>paid-in capital</strong> (invested), <strong>retained earnings</strong> (earned), <strong>accumulated other comprehensive income</strong>, and <strong>treasury stock</strong>, which is subtracted.</p>',
+  parts:[
+   sched("Classify each item",bank.map(function(b,i){return C("ABCDEF".charAt(i),b[0],COMP_OPTS,b[1],"Is it owed to someone, invested by owners, earned and kept, a gain or loss that bypassed net income, or the cost of shares bought back?",COMP_OPTS[b[1]]+". "+b[2]);})),
+   sched("Shareholders’ equity, December 31, "+Y,[
+     G("G","Common stock",cs,null,"Par value of the common shares issued."),
+     G("H","Paid-in capital—excess of par, common",apc,null,"Amounts received above par on the common shares."),
+     G("I","Preferred stock",ps,null,"Par value of the preferred shares issued."),
+     G("J","Paid-in capital—excess of par, preferred",app,null,"Amounts received above par on the preferred shares."),
+     G("K","Paid-in capital—share repurchase",sr,null,"Left over from buybacks at less than the original price."),
+     N("L","Total paid-in capital",pic,"G through K","Add every paid-in capital account.",m($(cs)+" + "+$(apc)+" + "+$(ps)+" + "+$(app)+" + "+$(sr)+" = "+$(pic))),
+     G("M","Retained earnings",re,null,"Earned capital kept in the business."),
+     G("N","Accumulated other comprehensive income"+(aoci<0?" (loss)":""),aoci,null,aoci<0?"A debit balance: net unrealized losses. It reduces equity.":"A credit balance: net unrealized gains. It adds to equity."),
+     G("O","Treasury stock, at cost",ts,null,"Subtracted from equity."),
+     N("P","Total shareholders’ equity",se,"L, M, N, O","Paid-in capital + retained earnings "+(aoci<0?"− the AOCI loss":"+ AOCI")+" − treasury stock.",m($(pic)+" + "+$(re)+(aoci<0?" − "+$(-aoci):" + "+$(aoci))+" − "+$(ts)+" = "+$(se)))
+   ])
+  ],
+  take:"<p>Total equity of "+$(se)+" is not cash and not market value. It is simply what is left of the assets after creditors’ claims. Dividends payable and bonds are owed to someone, so they belong with liabilities, and arrears appear only in the notes.</p>"};
+}};
+
+var OWN_OPTS=["Part of net income","Part of other comprehensive income","Excluded: a transaction with owners"];
+GEN.oci={group:"Equity basics",name:"Comprehensive income and AOCI",blurb:"Net income, OCI, and the two running totals.",make:function(){
+  var co=company();
+  var NI=K(rnd(400,1800,10)),A=K(rnd(10,90,5))*(Math.random()<.5?-1:1),Pn=K(rnd(5,60,5))*(Math.random()<.5?-1:1),Fx=K(rnd(5,40,5))*(Math.random()<.5?-1:1);
+  var D=K(rnd(100,400,10)),S=K(rnd(200,800,50)),REb=K(rnd(3000,9000,100)),AOb=K(rnd(20,150,10))*(Math.random()<.5?-1:1);
+  var OCI=A+Pn+Fx,CI=NI+OCI,REe=REb+NI-D,AOe=AOb+OCI;
+  function gl(v){return v<0?"loss":"gain";}
+  return {title:co,
+  scenario:'<p>For '+Y+', '+esc(co)+' reports net income of '+$(NI)+'. After tax, it also has an unrealized '+gl(A)+' of '+$(Math.abs(A))+' on available-for-sale debt investments, a pension '+gl(Pn)+' of '+$(Math.abs(Pn))+', and a foreign currency translation '+gl(Fx)+' of '+$(Math.abs(Fx))+'. During the year it declared cash dividends of '+$(D)+' and issued common shares for '+$(S)+'.</p>',
+  key:'<p><strong>Comprehensive income</strong> is every change in equity except transactions with owners: net income plus <strong>other comprehensive income (OCI)</strong>. Net income flows into retained earnings; OCI flows into <strong>accumulated other comprehensive income (AOCI)</strong>. Two parallel tracks.</p>',
+  parts:[
+   sched("Comprehensive income for "+Y,[
+     G("A","Net income",NI,null,"From the income statement."),
+     G("B","Unrealized "+gl(A)+" on available-for-sale debt investments, net of tax"+(A<0?" (negative)":""),A,null,"An OCI item. Losses are shown as negatives."),
+     G("C","Pension "+gl(Pn)+", net of tax"+(Pn<0?" (negative)":""),Pn,null,"Pension gains and losses bypass net income."),
+     G("D","Foreign currency translation "+gl(Fx)+", net of tax"+(Fx<0?" (negative)":""),Fx,null,"Translation adjustments are OCI too."),
+     N("E","Other comprehensive income (enter a net loss as negative)",OCI,"B + C + D","Add the three OCI items, keeping their signs.",m($(A)+" + "+$(Pn)+" + "+$(Fx)+" = "+$(OCI))),
+     N("F","Comprehensive income",CI,"A + E","Net income plus OCI.",m($(NI)+(OCI<0?" − "+$(-OCI):" + "+$(OCI))+" = "+$(CI))),
+     C("G","Cash dividends declared, "+$(D),OWN_OPTS,2,"Who received this? Is it an owner transaction?","Excluded: dividends are a distribution to owners. They reduce retained earnings but are not part of comprehensive income."),
+     C("H","Common shares issued for "+$(S),OWN_OPTS,2,"Did the change in equity come from owners or from operations?","Excluded: selling shares is an investment by owners, recorded in paid-in capital.")
+   ]),
+   sched("The running totals in equity",[
+     G("I","Retained earnings, January 1, "+Y,REb,null,"Last year’s ending balance."),
+     N("J","Retained earnings, December 31, "+Y,REe,"I, A, G","Beginning + net income − dividends. OCI does not go here.",m($(REb)+" + "+$(NI)+" − "+$(D)+" = "+$(REe))),
+     G("K","Accumulated other comprehensive income, January 1, "+Y+(AOb<0?" (negative = loss)":""),AOb,null,AOb<0?"A debit balance carried over from last year.":"A credit balance carried over from last year."),
+     N("L","Accumulated other comprehensive income, December 31, "+Y+" (negative if a loss)",AOe,"K + E","Beginning AOCI + this year’s OCI.",m($(AOb)+(OCI<0?" − "+$(-OCI):" + "+$(OCI))+" = "+$(AOe)))
+   ])
+  ],
+  take:"<p>Equity rose by the "+$(CI)+" of comprehensive income, plus the "+$(S)+" share issue, minus the "+$(D)+" of dividends. Only the first came from nonowner sources. Net income lands in retained earnings; OCI lands in AOCI.</p>"};
+}};
+
+/* ===== Issuing shares ===== */
+GEN.issue={group:"Issuing shares",name:"Shares issued for cash",blurb:"Par, no-par, or stated value; issued vs. outstanding.",make:function(){
+  var co=company(),v=pick(["par","par","nopar","stated"]),par=pick([1,2,5]),sv=pick([1,2,5]);
+  var n=K(rnd(50,300,10)),p=rnd(12,45),iss0=K(rnd(1000,4000,100)),tr=K(rnd(20,200,10)),auth=K(rnd(8000,15000,1000));
+  var cash=n*p,csCr=v==="par"?n*par:v==="stated"?n*sv:cash,ap=cash-csCr,issE=iss0+n,out=issE-tr;
+  var desc=v==="par"?"$"+par+" par value":v==="stated"?"no-par value with a $"+sv+" stated value":"no-par value and no stated value";
+  var apAcct=v==="stated"?"Paid-in capital—excess of stated value":"Paid-in capital—excess of par";
+  var rows=[
+     G("A","Shares sold",n,"sh","From the board’s approval of the sale."),
+     G("B","Price per share",p,null,"What investors paid for each share."),
+     N("C","Cash received",cash,"A × B","Shares sold times the price.",m(fmt(n)+" × $"+p+" = "+$(cash))),
+     N("D","Credit to common stock",csCr,"A × "+(v==="par"?"par":v==="stated"?"stated value":"price"),v==="nopar"?"With no par and no stated value, all of the proceeds go to the stock account.":"Only "+(v==="par"?"par":"stated value")+" goes to the stock account: shares × $"+(v==="par"?par:sv)+".",v==="nopar"?"All of the "+$(cash)+" goes to common stock.":m(fmt(n)+" × $"+(v==="par"?par:sv)+" = "+$(csCr)))
+  ];
+  if(v!=="nopar")rows.push(N("E","Credit to "+apAcct.toLowerCase(),ap,"C − D","The rest of the cash.",m($(cash)+" − "+$(csCr)+" = "+$(ap))));
+  rows=rows.concat([
+     G("F","Shares issued before the sale",iss0,"sh","From the stock records."),
+     G("G","Shares held as treasury stock",tr,"sh","Bought back earlier and still held."),
+     N("H","Shares issued after the sale",issE,"F + A","Add the new shares to the shares already issued.",m(fmt(iss0)+" + "+fmt(n)+" = "+fmt(issE)),{unit:"sh"}),
+     N("I","Shares outstanding after the sale",out,"H − G","Treasury shares are issued but not outstanding.",m(fmt(issE)+" − "+fmt(tr)+" = "+fmt(out)),{unit:"sh"})
+  ]);
+  return {title:co,facts:[["Shares authorized by the charter",sh(auth),"The maximum the company may issue. Not used in the entry."]],
+  scenario:'<p>'+esc(co)+'’s common stock has '+desc+'. On March 1, '+Y+', it sells '+fmt(n)+' new shares to investors for $'+p+' a share in cash. Before the sale, '+fmt(iss0)+' shares had been issued, of which '+fmt(tr)+' are held as treasury stock.</p>',
+  key:'<p>Shares are recorded at <strong>what was received</strong>. Par (or stated) value only decides how the credit is split: shares × par goes to the stock account and the rest to additional paid-in capital. With no par and no stated value, everything goes to the stock account.</p>',
+  parts:[
+   sched("The sale on March 1, "+Y,rows),
+   JE("Journal entry, March 1, "+Y,[["Cash",cash,0,"C"],["Common stock",0,csCr,"D"],[apAcct,0,ap,"E"]])
+  ],
+  take:"<p>Total equity rose by the "+$(cash)+" received. "+(v==="nopar"?"With no par value the whole amount sits in common stock":"The "+$(csCr)+" in common stock is a legal label, not a value")+". Dividends, votes, and earnings per share use the "+fmt(out)+" outstanding shares.</p>"};
+}};
+
+var MEAS_OPTS=["Fair value of the shares issued","Fair value of what was received","Par value of the shares issued"];
+GEN.noncash={group:"Issuing shares",name:"Shares for noncash assets or services",blurb:"Measure at the more clearly evident fair value.",make:function(){
+  var co=company(),kind=pick(["Land","Equipment","Legal expense"]),appr=kind!=="Legal expense"&&Math.random()<.4;
+  var n=K(rnd(5,60,1)),par=pick([1,2,5]),mp=rnd(18,50),av=R(n*mp*(rnd(90,110)/100)/1000)*1000;
+  var val=appr?av:n*mp,cs=n*par,ap=val-cs;
+  var what=kind==="Land"?"a parcel of land for a new facility":kind==="Equipment"?"specialized production equipment":"legal work on a supplier contract by its law firm";
+  var rows=[G("A","Shares issued",n,"sh","From the agreement."),G("B","Par value per share",par,null,"From the charter.")];
+  if(appr)rows.push(G("C","Independent appraisal of the "+kind.toLowerCase(),av,null,"A reliable, recent appraisal. The shares are thinly traded, so their price is not reliable."));
+  else rows.push(G("C","Market price per share on the exchange date",mp,null,"The shares trade actively, so this price is good evidence of fair value."));
+  rows=rows.concat([
+    C("D","Which amount measures the transaction?",MEAS_OPTS,appr?1:0,"Use whichever fair value is more clearly evident. Is it the shares or the "+kind.toLowerCase()+"?",appr?"Fair value of what was received: the appraisal is reliable and the share price is not.":"Fair value of the shares: they trade actively, and "+(kind==="Legal expense"?"the service has no separate price.":"there is no reliable value for the "+kind.toLowerCase()+".")),
+    N("E",(kind==="Legal expense"?"Legal expense":kind)+" recorded",val,appr?"C":"A × C",appr?"Use the appraisal.":"Shares × market price.",appr?"The appraisal: "+$(val)+".":m(fmt(n)+" × $"+mp+" = "+$(val))),
+    N("F","Credit to common stock",cs,"A × B","Shares × par.",m(fmt(n)+" × $"+par+" = "+$(cs))),
+    N("G","Credit to paid-in capital—excess of par",ap,"E − F","The rest of the fair value.",m($(val)+" − "+$(cs)+" = "+$(ap)))
+  ]);
+  return {title:co,
+  scenario:'<p>On June 1, '+Y+', '+esc(co)+' issues '+fmt(n)+' shares of its $'+par+' par common stock in exchange for '+what+'. '+(appr?'An independent appraisal values the '+kind.toLowerCase()+' at '+$(av)+'. The company’s shares are thinly traded and have not changed hands in months.':'No reliable price is available for '+(kind==="Legal expense"?"the legal work":"the "+kind.toLowerCase())+', but the shares trade actively at $'+mp+'.')+'</p>',
+  key:'<p>Shares issued for a noncash asset or service are recorded at <strong>fair value</strong>: the fair value of the shares or of what was received, <strong>whichever is more clearly evident</strong>. Par value never sets the cost of an asset.</p>',
+  parts:[sched("Measuring the transaction",rows),
+   JE("Journal entry, June 1, "+Y,[[kind,val,0,"E"],["Common stock",0,cs,"F"],["Paid-in capital—excess of par",0,ap,"G"]])],
+  take:"<p>"+(kind==="Legal expense"?"Shares given for services are recorded as an expense (or an asset if the service creates one) at fair value.":"The "+kind.toLowerCase()+" goes on the books at "+$(val)+", not at the "+$(cs)+" of par value.")+" Total equity rose by "+$(val)+".</p>"};
+}};
+
+var COST_OPTS=["A reduction of paid-in capital—excess of par","An operating expense on the income statement","An intangible asset amortized over time"];
+GEN.costs={group:"Issuing shares",name:"Share issue costs",blurb:"Underwriting and legal fees reduce the proceeds.",make:function(){
+  var co=company(),n=K(rnd(100,600,10)),p=rnd(12,40),par=pick([1,2]),f=pick([.05,.06,.07]),o=K(rnd(20,120,5));
+  var gross=n*p,fee=R(gross*f),net=gross-fee-o,cs=n*par,ap=net-cs;
+  return {title:co,facts:[["Underwriting fee",pc(f)+" of gross proceeds","From the underwriting agreement."]],
+  scenario:'<p>On September 15, '+Y+', '+esc(co)+' sells '+fmt(n)+' shares of $'+par+' par common stock to the public at $'+p+' a share. The underwriter keeps a fee of '+pc(f)+' of the gross proceeds, and the company pays '+$(o)+' of legal, accounting, and printing costs for the offering.</p>',
+  key:'<p><strong>Share issue costs are not expenses.</strong> They reduce the net proceeds of the sale, so they reduce the credit to paid-in capital—excess of par. The stock account is still credited for shares × par.</p>',
+  parts:[
+   sched("The public offering",[
+     G("A","Shares sold",n,"sh","From the offering documents."),
+     G("B","Offering price per share",p,null,"The price the public paid."),
+     N("C","Gross proceeds",gross,"A × B","Shares × price.",m(fmt(n)+" × $"+p+" = "+$(gross))),
+     N("D","Underwriting fee",fee,"C × "+pc(f),"Gross proceeds × the fee rate.",m($(gross)+" × "+pc(f)+" = "+$(fee))),
+     G("E","Legal, accounting, and printing costs",o,null,"Paid by the company for the offering."),
+     N("F","Net cash received",net,"C − D − E","Gross proceeds less all issue costs.",m($(gross)+" − "+$(fee)+" − "+$(o)+" = "+$(net))),
+     N("G","Credit to common stock",cs,"A × par","Shares × $"+par+" par.",m(fmt(n)+" × $"+par+" = "+$(cs))),
+     N("H","Credit to paid-in capital—excess of par",ap,"F − G","Net cash minus par.",m($(net)+" − "+$(cs)+" = "+$(ap))),
+     C("I","The "+$(fee+o)+" of issue costs is reported as:",COST_OPTS,0,"Is selling shares part of operations, or a transaction with owners?","A reduction of paid-in capital: the costs reduce what the company received from its owners.")
+   ]),
+   JE("Journal entry, September 15, "+Y,[["Cash",net,0,"F"],["Common stock",0,cs,"G"],["Paid-in capital—excess of par",0,ap,"H"]])
+  ],
+  take:"<p>Nothing about the offering touches the income statement. Equity rose by the "+$(net)+" the company actually kept.</p>"};
+}};
+
+GEN.pkg={group:"Issuing shares",name:"Package sale of two securities",blurb:"Proportional or incremental allocation of one price.",make:function(){
+  var co=company(),inc=Math.random()<.45;
+  var cN=K(rnd(10,40,5)),cP=rnd(20,45),pN=K(rnd(5,20,5)),pPar=pick([10,20,25]),pP=rnd(10,18)*5,f=pick([.9,.92,.95]);
+  var fc=cN*cP,fp=pN*pP,tv=fc+fp,price=R(tv*f/1000)*1000,pct=Math.round(fc/tv*1000)/10;
+  var ac=inc?fc:R(price*fc/tv),ap=price-ac,csP=cN,psP=pN*pPar,apc=ac-csP,app=ap-psP;
+  var rows=[G("A","Common shares in the package",cN,"sh","$1 par common stock."),G("B","Market price per common share",cP,null,"The common shares trade actively.")];
+  if(!inc)rows.push(G("C","Market price per preferred share",pP,null,"The preferred shares trade too, so both values are known."));
+  rows.push(G("D","Preferred shares in the package",pN,"sh","$"+pPar+" par preferred stock."),G("E","Package price",price,null,"The single price paid for everything."));
+  rows.push(N("F","Fair value of the common shares",fc,"A × B","Shares × price.",m(fmt(cN)+" × $"+cP+" = "+$(fc))));
+  if(!inc)rows=rows.concat([
+    N("G","Fair value of the preferred shares",fp,"D × C","Shares × price.",m(fmt(pN)+" × $"+pP+" = "+$(fp))),
+    N("H","Common share of total fair value (percent, one decimal)",pct,"F ÷ (F + G)","Common fair value divided by total fair value.",m($(fc)+" ÷ "+$(tv)+" = "+pct+"%"),{unit:"%",tol:.1}),
+    N("I","Price allocated to the common shares",ac,"E × F ÷ (F + G)","Package price × the common share of fair value.",m($(price)+" × "+$(fc)+" ÷ "+$(tv)+" = "+$(ac))),
+    N("J","Price allocated to the preferred shares",ap,"E − I","The rest of the package price.",m($(price)+" − "+$(ac)+" = "+$(ap)))]);
+  else rows=rows.concat([
+    N("I","Price allocated to the common shares",ac,"F","The known security gets its full fair value.","The common shares get their fair value: "+$(fc)+"."),
+    N("J","Price allocated to the preferred shares",ap,"E − I","The preferred shares get whatever is left.",m($(price)+" − "+$(ac)+" = "+$(ap)))]);
+  rows=rows.concat([
+    N("K","Credit to paid-in capital—excess of par, common",apc,"I − A × $1","Allocated price minus the par of the common shares.",m($(ac)+" − "+$(csP)+" = "+$(apc))),
+    N("L","Credit to paid-in capital—excess of par, preferred",app,"J − D × $"+pPar,"Allocated price minus the par of the preferred shares.",m($(ap)+" − "+$(psP)+" = "+$(app)))]);
+  return {title:co,accts:PKG_ACCTS,
+  scenario:'<p>On May 1, '+Y+', '+esc(co)+' sells a package of '+fmt(cN)+' shares of $1 par common stock and '+fmt(pN)+' shares of $'+pPar+' par preferred stock to an investor group for a single price of '+$(price)+'. The common shares trade at $'+cP+'. '+(inc?'The preferred shares are a new issue with <strong>no market price</strong>.':'The preferred shares trade at $'+pP+'.')+'</p>',
+  key:'<p>One price, two securities: allocate by fair value. When <strong>both</strong> fair values are known, use the <strong>proportional method</strong> (relative fair values). When only <strong>one</strong> is known, use the <strong>incremental method</strong>: the known security gets its fair value and the other gets the rest.</p>',
+  parts:[sched("Allocating the package price ("+(inc?"incremental":"proportional")+" method)",rows),
+   JE("Journal entry, May 1, "+Y,[["Cash",price,0,"E"],["Common stock",0,csP,"A × $1"],["Paid-in capital—excess of par, common",0,apc,"K"],["Preferred stock",0,psP,"D × $"+pPar],["Paid-in capital—excess of par, preferred",0,app,"L"]])],
+  take:"<p>The same allocation logic shows up with lump-sum purchases of assets, bonds issued with detachable warrants, and contracts with several performance obligations.</p>"};
+}};
+
+/* ===== Buybacks ===== */
+GEN.retire={group:"Share buybacks",name:"Retiring shares",blurb:"Reverse the original sale; assign the difference.",make:function(){
+  var co=company(),above=Math.random()<.5;
+  var Nn=K(rnd(1000,4000,500)),par=pick([1,2]),e=rnd(10,16),s=K(rnd(20,120,10)),Rr=K(rnd(50,200,10)),d,q;
+  if(above){d=rnd(2,5);while(Rr*d<=s+K(10))d++;q=par+e+d;}else{d=rnd(1,4);q=par+e-d;}
+  var B=Nn*e,orig=par+e,dCS=Rr*par,dAP=Rr*e,cash=Rr*q,x=cash-dCS-dAP;
+  var rows=[
+    G("A","Common shares outstanding before the buyback",Nn,"sh","From the stock records."),
+    G("B","Paid-in capital—excess of par",B,null,"Everything ever received above par on those shares."),
+    G("C","Par value per share",par,null,"From the charter."),
+    N("D","Average excess of par per share",e,"B ÷ A","Spread the excess evenly over the shares.",m($(B)+" ÷ "+fmt(Nn)+" = $"+e)),
+    N("E","Average original issue price per share",orig,"C + D","Par plus the average excess.",m("$"+par+" + $"+e+" = $"+orig)),
+    G("F","Shares bought back and retired",Rr,"sh","The buyback approved by the board."),
+    G("G","Price paid per share",q,null,"Compare this with line E."),
+    N("H","Debit to common stock",dCS,"F × C","Remove the par of the retired shares.",m(fmt(Rr)+" × $"+par+" = "+$(dCS))),
+    N("I","Debit to paid-in capital—excess of par",dAP,"F × D","Remove the average excess originally received.",m(fmt(Rr)+" × $"+e+" = "+$(dAP))),
+    N("J","Cash paid",cash,"F × G","Shares × price paid.",m(fmt(Rr)+" × $"+q+" = "+$(cash)))
+  ];
+  var je;
+  if(!above){
+    rows.push(N("K","Credit to paid-in capital—share repurchase",-x,"H + I − J","The company paid less than the original investment, so the difference stays in paid-in capital.",m($(dCS)+" + "+$(dAP)+" − "+$(cash)+" = "+$(-x))));
+    je=[["Common stock",dCS,0,"H"],["Paid-in capital—excess of par",dAP,0,"I"],["Cash",0,cash,"J"],["Paid-in capital—share repurchase",0,-x,"K"]];
+  }else{
+    rows=rows.concat([
+      N("K","Amount paid above the original investment",x,"J − H − I","Cash paid minus the investment removed.",m($(cash)+" − "+$(dCS)+" − "+$(dAP)+" = "+$(x))),
+      G("L","Paid-in capital—share repurchase, credit balance",s,null,"Left over from earlier buybacks below the original price."),
+      N("M","Debit to paid-in capital—share repurchase",s,"smaller of K and L","Use up the share repurchase balance first, but never take it below zero.","Smaller of "+$(x)+" and "+$(s)+" = "+$(s)+"."),
+      N("N","Debit to retained earnings",x-s,"K − M","Any rest comes out of retained earnings, like a dividend.",m($(x)+" − "+$(s)+" = "+$(x-s)))]);
+    je=[["Common stock",dCS,0,"H"],["Paid-in capital—excess of par",dAP,0,"I"],["Paid-in capital—share repurchase",s,0,"M"],["Retained earnings",x-s,0,"N"],["Cash",0,cash,"J"]];
+  }
+  return {title:co,
+  scenario:'<p>'+esc(co)+' has '+fmt(Nn)+' shares of $'+par+' par common stock outstanding, paid-in capital—excess of par of '+$(B)+', and paid-in capital—share repurchase of '+$(s)+'. On August 1, '+Y+', it buys back '+fmt(Rr)+' shares at $'+q+' a share and <strong>retires</strong> them.</p>',
+  key:'<p>Retiring shares <strong>reverses the original sale</strong>: debit the stock account at par and paid-in capital—excess of par at the average excess per share. Paid <strong>less</strong> than that original price? Credit paid-in capital—share repurchase. Paid <strong>more</strong>? Debit share repurchase up to its balance, then retained earnings. Never a gain or loss.</p>',
+  parts:[sched("Retiring the shares",rows),JE("Journal entry, August 1, "+Y,je)],
+  take:"<p>"+(above?"Paying "+$(x)+" more than shareholders originally invested is a distribution of earned capital, like a dividend: "+$(x-s)+" of it comes out of retained earnings.":"Buying shares back for "+$(-x)+" less than shareholders originally invested leaves that amount in paid-in capital.")+" The income statement is untouched: this is a transaction with owners.</p>"};
+}};
+
+GEN.treasury={group:"Share buybacks",name:"Treasury stock: buy and resell",blurb:"Cost method, from purchase through two resales.",make:function(){
+  var co=company(),s,T,k,T1,up,T2,down,g;
+  do{s=pick([0,0,K(rnd(10,60,10))]);T=K(rnd(40,100,10));k=rnd(15,35);T1=K(rnd(10,20,5));up=rnd(2,6);T2=K(rnd(10,25,5));g=T1*up;down=Math.ceil((s+g)/T2)+rnd(1,3);}while(T1+T2>=T||k-down<4);
+  var cost=T*k,p1=k+up,c1=T1*p1,ts1=T1*k,p2=k-down,c2c=T2*p2,ts2=T2*k,short=ts2-c2c,avail=s+g,re=short-avail,rem=(T-T1-T2)*k;
+  return {title:co,
+  scenario:'<p>'+esc(co)+' uses the <strong>cost method</strong> for treasury stock. At the start of '+Y+', paid-in capital—share repurchase has a balance of '+$(s)+'. During '+Y+' the company buys '+fmt(T)+' of its own shares at $'+k+' (February 1), resells '+fmt(T1)+' of them at $'+p1+' (June 1), and resells '+fmt(T2)+' more at $'+p2+' (October 1).</p>',
+  key:'<p>Under the cost method, the purchase and resale are <strong>one transaction with owners</strong>. Debit treasury stock at cost; assign any difference only when the shares are resold. Above cost: credit paid-in capital—share repurchase. Below cost: debit share repurchase up to its balance, then retained earnings. <strong>No gains or losses, and retained earnings is never credited.</strong></p>',
+  parts:[
+   sched("February 1: the purchase",[G("A","Shares bought",T,"sh","Approved by the board."),G("B","Cost per share",k,null,"The price paid."),
+     N("C","Treasury stock recorded",cost,"A × B","Record the shares at cost.",m(fmt(T)+" × $"+k+" = "+$(cost)))]),
+   JE("Journal entry, February 1, "+Y,[["Treasury stock",cost,0,"C"],["Cash",0,cost,"C"]]),
+   sched("June 1: resale above cost",[G("D","Shares resold",T1,"sh","The first resale."),G("E","Resale price per share",p1,null,"Compare it with the $"+k+" cost."),
+     N("F","Cash received",c1,"D × E","Shares × price.",m(fmt(T1)+" × $"+p1+" = "+$(c1))),
+     N("G","Treasury stock removed (at cost)",ts1,"D × B","Treasury stock comes off at what it cost.",m(fmt(T1)+" × $"+k+" = "+$(ts1))),
+     N("H","Credit to paid-in capital—share repurchase",g,"F − G","The excess over cost. Not a gain!",m($(c1)+" − "+$(ts1)+" = "+$(g)))]),
+   JE("Journal entry, June 1, "+Y,[["Cash",c1,0,"F"],["Treasury stock",0,ts1,"G"],["Paid-in capital—share repurchase",0,g,"H"]]),
+   sched("October 1: resale below cost",[G("I","Shares resold",T2,"sh","The second resale."),G("J","Resale price per share",p2,null,"Below the $"+k+" cost this time."),
+     N("K","Cash received",c2c,"I × J","Shares × price.",m(fmt(T2)+" × $"+p2+" = "+$(c2c))),
+     N("L","Treasury stock removed (at cost)",ts2,"I × B","Shares × cost.",m(fmt(T2)+" × $"+k+" = "+$(ts2))),
+     N("M","Shortfall below cost",short,"L − K","Cost minus cash.",m($(ts2)+" − "+$(c2c)+" = "+$(short))),
+     N("N","Debit to paid-in capital—share repurchase",avail,"beginning balance + H","Use up the whole share repurchase balance: the "+$(s)+" from before plus line H.",m($(s)+" + "+$(g)+" = "+$(avail))),
+     N("O","Debit to retained earnings",re,"M − N","The rest of the shortfall.",m($(short)+" − "+$(avail)+" = "+$(re))),
+     N("P","Treasury stock balance, December 31, "+Y,rem,"(A − D − I) × B","Shares still held × cost.",m("("+fmt(T)+" − "+fmt(T1)+" − "+fmt(T2)+") × $"+k+" = "+$(rem)))]),
+   JE("Journal entry, October 1, "+Y,[["Cash",c2c,0,"K"],["Paid-in capital—share repurchase",avail,0,"N"],["Retained earnings",re,0,"O"],["Treasury stock",0,ts2,"L"]])
+  ],
+  take:"<p>The "+$(rem)+" of treasury stock left at year-end is reported as a deduction from total shareholders’ equity. Over the year, retained earnings fell by "+$(re)+" and nothing reached the income statement.</p>"};
+}};
+
+/* ===== Dividends ===== */
+var YN=["A journal entry is required","No journal entry"];
+GEN.cashdiv={group:"Dividends",name:"Cash and preferred dividends",blurb:"Arrears, cumulative vs. noncumulative, and the entries.",make:function(){
+  var co=company(),cum=Math.random()<.7,ps=K(rnd(10,50,5)),par=pick([50,100]),rate=pick([.05,.06,.07,.08]),yrs=pick([1,1,2]);
+  var ci=K(rnd(300,900,10)),ct=K(rnd(10,60,10)),per=pick([.2,.25,.3,.4,.5]);
+  var ann=R(ps*par*rate),arr=cum?ann*yrs:0,toP=ann+arr,out=ci-ct,toC=R(per*out),D=toP+toC,dps=r2(toC/out);
+  return {title:co,facts:[["Preferred dividend rate",pc(rate)+" of par","From the preferred stock contract."],["Preferred feature",cum?"Cumulative, nonparticipating":"Noncumulative, nonparticipating","Decides whether skipped dividends carry forward."]],
+  scenario:'<p>'+esc(co)+' has '+fmt(ps)+' shares of '+pc(rate)+', $'+par+' par, <strong>'+(cum?'cumulative':'noncumulative')+'</strong>, nonparticipating preferred stock outstanding. It has issued '+fmt(ci)+' common shares and holds '+fmt(ct)+' of them as treasury stock. No dividends were declared in the last '+(yrs===1?'year':yrs+' years')+'. On December 1, '+Y+', the board declares cash dividends totaling '+$(D)+', payable January 10, '+(Y+1)+', to shareholders of record on December 15.</p>',
+  key:'<p>Preferred first, arrears before current, and only then common. With <strong>cumulative</strong> preferred, skipped dividends become <strong>dividends in arrears</strong>: disclosed, never recorded as a liability. With noncumulative preferred, a skipped year is lost for good. A liability exists only after the board <strong>declares</strong>.</p>',
+  parts:[
+   sched("Allocating the dividend",[
+     G("A","Preferred shares outstanding",ps,"sh","From the stock records."),
+     G("B","Par value per preferred share",par,null,"From the charter."),
+     N("C","Annual preferred dividend",ann,"A × B × "+pc(rate),"Total par × the dividend rate.",m(fmt(ps)+" × $"+par+" × "+pc(rate)+" = "+$(ann))),
+     N("D","Dividends in arrears at January 1, "+Y,arr,"C × years skipped",cum?"Cumulative preferred: every skipped year carries forward.":"Noncumulative preferred: skipped dividends are lost, so there are no arrears.",cum?m($(ann)+" × "+yrs+" = "+$(arr)):"Noncumulative, so arrears are $0."),
+     N("E","Total to preferred shareholders",toP,"C + D","Arrears first, then the current year.",m($(arr)+" + "+$(ann)+" = "+$(toP))),
+     G("F","Total dividends declared",D,null,"Declared by the board on December 1."),
+     N("G","Total to common shareholders",toC,"F − E","Common gets whatever is left.",m($(D)+" − "+$(toP)+" = "+$(toC))),
+     N("H","Common shares that receive the dividend",out,"issued − treasury","Treasury shares get no dividends.",m(fmt(ci)+" − "+fmt(ct)+" = "+fmt(out)),{unit:"sh"}),
+     N("I","Dividend per common share (to the cent)",dps,"G ÷ H","Common total ÷ outstanding shares.",m($(toC)+" ÷ "+fmt(out)+" = "+c2(dps)),{unit:"$c",tol:.01}),
+     C("J","Date of record, December 15, "+Y,YN,1,"Does anything change in the accounts on that date?","No journal entry: the date of record only fixes who gets paid. Entries are made on the declaration and payment dates.")
+   ]),
+   JE("Journal entry, December 1, "+Y+" (declaration)",[["Retained earnings",D,0,"F"],["Cash dividends payable",0,D,"F"]]),
+   JE("Journal entry, January 10, "+(Y+1)+" (payment)",[["Cash dividends payable",D,0,"F"],["Cash",0,D,"F"]])
+  ],
+  take:"<p>"+(cum?"Before December 1, the "+$(arr)+" of arrears was only disclosed in the notes. If the preferred were noncumulative, preferred would get just "+$(ann)+" and common "+$(D-ann)+".":"Because the preferred is noncumulative, the skipped dividends are lost. If it were cumulative, preferred would get "+$(ann*(yrs+1))+" and common only "+$(D-ann*(yrs+1))+".")+"</p>"};
+}};
+
+var GL=["Gain","Loss"];
+GEN.prop={group:"Dividends",name:"Property dividends",blurb:"Adjust the asset to fair value, then declare.",make:function(){
+  var co=company(),n=K(rnd(10,60,5)),cps=rnd(10,25),dd=rnd(2,6)*(Math.random()<.55?1:-1),fv=cps+dd;
+  var carry=n*cps,fair=n*fv,diff=Math.abs(fair-carry),gain=fair>carry;
+  return {title:co,
+  scenario:'<p>On November 1, '+Y+', '+esc(co)+'’s board declares a <strong>property dividend</strong>: '+fmt(n)+' shares of another company’s stock that it holds as an investment, to be distributed on December 20. The investment is carried at '+$(carry)+'. On the declaration date, the shares are worth $'+fv+' each.</p>',
+  key:'<p>A property dividend is a cash dividend in disguise. It is recorded at the asset’s <strong>fair value on the declaration date</strong>. First adjust the asset to fair value and recognize the gain or loss in income; then debit retained earnings for the fair value.</p>',
+  parts:[
+   sched("Measuring the dividend",[
+     G("A","Shares to be distributed",n,"sh","The investment the board chose to distribute."),
+     G("B","Carrying amount of the investment",carry,null,"What the books show before any adjustment."),
+     G("C","Fair value per share, declaration date",fv,null,"The market price on November 1."),
+     N("D","Fair value of the dividend",fair,"A × C","Shares × fair value per share.",m(fmt(n)+" × $"+fv+" = "+$(fair))),
+     C("E","Adjusting the investment to fair value creates a",GL,gain?0:1,"Is the fair value above or below the carrying amount?",(gain?"Gain":"Loss")+": fair value is "+(gain?"above":"below")+" the carrying amount."),
+     N("F","Amount of the "+"gain or loss",diff,"D vs. B","The difference between fair value and carrying amount.",m("|"+$(fair)+" − "+$(carry)+"| = "+$(diff))),
+     N("G","Debit to retained earnings",fair,"D","The dividend is recorded at fair value.","Fair value: "+$(fair)+".")
+   ]),
+   JE("Journal entry, November 1, "+Y+" (adjust to fair value)",gain?[["Investment in equity securities",diff,0,"F"],["Gain on investments",0,diff,"F"]]:[["Loss on investments",diff,0,"F"],["Investment in equity securities",0,diff,"F"]]),
+   JE("Journal entry, November 1, "+Y+" (declaration)",[["Retained earnings",fair,0,"G"],["Property dividends payable",0,fair,"D"]]),
+   JE("Journal entry, December 20, "+Y+" (distribution)",[["Property dividends payable",fair,0,"D"],["Investment in equity securities",0,fair,"D"]])
+  ],
+  take:"<p>The "+(gain?"gain":"loss")+" of "+$(diff)+" belongs in net income because the company effectively sold the investment at fair value and paid out the proceeds. Retained earnings falls by the full "+$(fair)+".</p>"};
+}};
+
+var YN2=["Journal entry required","No journal entry (memo only)"];
+GEN.stockdiv={group:"Dividends",name:"Stock dividends and splits",blurb:"Fair value, par value, or no entry at all.",make:function(){
+  var co=company(),small=Math.random()<.6,Nn=K(rnd(400,1200,20)),par=pick([1,2,5]),p=rnd(20,60),pct=pick([.05,.1,.15]),ratio=pick([2,2,3]);
+  var h=pick([115,125,135,145,155]);
+  if(small){
+    var nw=R(Nn*pct),re=nw*p,cs=nw*par,ap=re-cs,after=Nn+nw,pa=r2(p/(1+pct)),earn=h*pct,whole=Math.floor(earn),lieu=r2((earn-whole)*p);
+    return {title:co,
+    scenario:'<p>'+esc(co)+' has '+fmt(Nn)+' shares of $'+par+' par common stock outstanding, trading at $'+p+'. On April 1, '+Y+', it declares and distributes a <strong>'+pc(pct)+' stock dividend</strong>. One shareholder owns '+h+' shares; the company pays cash in lieu of fractional shares.</p>',
+    key:'<p>A stock dividend moves amounts <strong>within</strong> equity; total equity does not change. A <strong>small</strong> stock dividend (under about 20% to 25%) moves the <strong>fair value</strong> of the new shares out of retained earnings: par to the stock account, the rest to paid-in capital.</p>',
+    parts:[
+     sched("The "+pc(pct)+" stock dividend",[
+       G("A","Shares outstanding",Nn,"sh","Before the dividend."),G("B","Par value per share",par,null,"From the charter."),G("C","Market price per share",p,null,"On the declaration date."),
+       N("D","New shares distributed",nw,"A × "+pc(pct),"Shares outstanding × the dividend rate.",m(fmt(Nn)+" × "+pc(pct)+" = "+fmt(nw)),{unit:"sh"}),
+       N("E","Debit to retained earnings (fair value)",re,"D × C","New shares × market price.",m(fmt(nw)+" × $"+p+" = "+$(re))),
+       N("F","Credit to common stock",cs,"D × B","New shares × par.",m(fmt(nw)+" × $"+par+" = "+$(cs))),
+       N("G","Credit to paid-in capital—excess of par",ap,"E − F","Fair value minus par.",m($(re)+" − "+$(cs)+" = "+$(ap))),
+       N("H","Shares outstanding after the dividend",after,"A + D","Old shares plus new.",m(fmt(Nn)+" + "+fmt(nw)+" = "+fmt(after)),{unit:"sh"}),
+       N("I","Expected price per share after the dividend (to the cent)",pa,"C ÷ (1 + "+pc(pct)+")","Same company, more slices.",m("$"+p+" ÷ "+(1+pct).toFixed(2)+" = "+c2(pa)),{unit:"$c",tol:.01}),
+       N("J","Whole new shares for the "+h+"-share holder",whole,"Holder × "+pc(pct)+", whole shares only","Multiply, then drop the fraction.",m(h+" × "+pc(pct)+" = "+earn.toFixed(2)+" → "+whole),{unit:"sh"}),
+       N("K","Cash paid in lieu of the fraction (to the cent)",lieu,"fraction × C","The leftover fraction × market price.",m((earn-whole).toFixed(2)+" × $"+p+" = "+c2(lieu)),{unit:"$c",tol:.01})
+     ]),
+     JE("Journal entry, April 1, "+Y,[["Retained earnings",re,0,"E"],["Common stock",0,cs,"F"],["Paid-in capital—excess of par",0,ap,"G"]])
+    ],
+    take:"<p>Retained earnings fell by "+$(re)+" and paid-in capital rose by the same amount, so total equity is unchanged. Each shareholder owns the same percentage of the company as before.</p>"};
+  }
+  var big=(ratio-1)*100,nw2=Nn*(ratio-1),cs2=nw2*par,after2=Nn*ratio,parS=r2(par/ratio),pS=r2(p/ratio);
+  return {title:co,
+  scenario:'<p>'+esc(co)+' has '+fmt(Nn)+' shares of $'+par+' par common stock outstanding, trading at $'+p+'. On April 1, '+Y+', it declares a <strong>'+ratio+'-for-1 stock split effected in the form of a '+big+'% stock dividend</strong>. The board elects to debit paid-in capital—excess of par for the par value of the new shares.</p>',
+  key:'<p>A large distribution (25% or more) is treated as a split. If it is <strong>effected in the form of a stock dividend</strong>, only the <strong>par value</strong> of the new shares moves into the stock account and par per share stays the same. A <strong>true stock split</strong> needs no entry at all: par per share falls instead.</p>',
+  parts:[
+   sched("The "+ratio+"-for-1 split effected as a "+big+"% stock dividend",[
+     G("A","Shares outstanding",Nn,"sh","Before the distribution."),G("B","Par value per share",par,null,"From the charter."),
+     N("C","New shares distributed",nw2,"A × "+big+"%","Shares outstanding × the dividend percentage.",m(fmt(Nn)+" × "+big+"% = "+fmt(nw2)),{unit:"sh"}),
+     N("D","Credit to common stock (par of the new shares)",cs2,"C × B","Only par is moved.",m(fmt(nw2)+" × $"+par+" = "+$(cs2))),
+     N("E","Shares outstanding afterward",after2,"A × "+ratio,"Every share becomes "+ratio+".",m(fmt(Nn)+" × "+ratio+" = "+fmt(after2)),{unit:"sh"}),
+     N("F","Expected price per share afterward (to the cent)",pS,"$"+p+" ÷ "+ratio,"Same company, "+ratio+" times the shares.",m("$"+p+" ÷ "+ratio+" = "+c2(pS)),{unit:"$c",tol:.01}),
+     C("G","If this were a true "+ratio+"-for-1 stock split instead, the accounting would be:",YN2,1,"Do any account balances change in a true split?","No journal entry: a memo notes the new share count and the lower par value."),
+     N("H","Par value per share after a true "+ratio+"-for-1 split (to the cent)",parS,"B ÷ "+ratio,"Par falls in proportion to the new shares.",m("$"+par+" ÷ "+ratio+" = "+c2(parS)),{unit:"$c",tol:.01})
+   ]),
+   JE("Journal entry, April 1, "+Y,[["Paid-in capital—excess of par",cs2,0,"D"],["Common stock",0,cs2,"D"]])
+  ],
+  take:"<p>The common stock account grows by "+$(cs2)+" but par per share stays at $"+par+". A true split would leave every account alone and cut par to "+c2(parS)+". Either way, total equity does not change.</p>"};
+}};
+
+/* ===== Analysis ===== */
+var EFF=["Increases","Decreases","No effect"];
+var EFF_BANK=[
+ ["Issue common shares for cash",0,2,"Cash comes in from owners; paid-in capital rises.","Retained earnings is not involved."],
+ ["Buy shares back to hold as treasury stock",1,2,"Cash goes out; treasury stock is subtracted from equity.","Nothing is assigned until the shares are resold."],
+ ["Declare a cash dividend",1,1,"A liability is created, so net assets fall.","Retained earnings is debited at declaration."],
+ ["Pay a cash dividend declared last month",2,2,"Cash and the liability fall together; equity already dropped at declaration.","The entry is to the payable, not retained earnings."],
+ ["Distribute a 10% stock dividend",2,1,"No assets leave and no liability is created.","Fair value moves from retained earnings to paid-in capital."],
+ ["Declare a 2-for-1 stock split (not effected as a dividend)",2,2,"Only the share count and par per share change.","A true split needs only a memo entry."],
+ ["Distribute a split effected as a 100% stock dividend, debiting paid-in capital",2,2,"Amounts move within paid-in capital only.","Paid-in capital, not retained earnings, is debited here."],
+ ["Resell treasury shares above their cost",0,2,"Cash comes in, so equity rises.","The excess goes to paid-in capital—share repurchase, never retained earnings."],
+ ["Resell treasury shares below cost (no share repurchase balance)",0,1,"Cash still comes in, so equity rises by the cash received.","With no share repurchase balance, the shortfall is debited to retained earnings."],
+ ["Retire shares by paying more than their original issue price",1,1,"Cash goes out to owners.","The excess over the original price (after any share repurchase balance) is debited to retained earnings."],
+ ["Record net income for the year",0,0,"Earnings increase net assets.","Net income is closed to retained earnings."],
+ ["Record an unrealized loss on available-for-sale debt investments",1,2,"The investment’s value falls, so equity falls through AOCI.","OCI goes to AOCI, not retained earnings."]
+];
+GEN.effects={group:"Analysis",name:"Effects at a glance",blurb:"Which transactions change total equity and retained earnings?",make:function(){
+  var co=company(),items=shuffle(EFF_BANK).slice(0,6),L1="ABCDEF",L2="GHIJKL";
+  return {title:co,
+  scenario:'<p>The CFO of '+esc(co)+' is preparing to explain this year’s equity transactions to the board. For each transaction, decide its effect on <strong>total shareholders’ equity</strong> and on <strong>retained earnings</strong>.</p>',
+  key:'<p>Ask one question first: <strong>how did net assets change?</strong> If assets and liabilities are unchanged, total equity is unchanged, even if amounts move between equity accounts. Then ask which equity account absorbed the change.</p>',
+  parts:[
+   sched("Effect on total shareholders’ equity",items.map(function(it,i){return C(L1.charAt(i),it[0],EFF,it[1],"Did assets or liabilities change? If not, total equity didn’t either.",EFF[it[1]]+". "+it[3]);})),
+   sched("Effect on retained earnings",items.map(function(it,i){return C(L2.charAt(i),it[0],EFF,it[2],"Which equity account takes the debit or credit?",EFF[it[2]]+". "+it[4]);}))
+  ],
+  take:"<p>Stock dividends and splits are the classic trap: lots of activity, no change in total equity. Dividends reduce equity when <em>declared</em>, not when paid.</p>"};
+}};
+
+GEN.roe={group:"Analysis",name:"Reading the numbers",blurb:"Return on equity, EPS, and the earnings-price ratio.",make:function(){
+  var co=company(),NI=K(rnd(800,2400,50)),PD=K(rnd(100,300,25)),Eb=K(rnd(7000,12000,250)),Ee=Eb+K(rnd(-250,1500,250)),Pf=K(rnd(1000,2500,500));
+  var Sh=K(rnd(400,900,50)),Px=rnd(20,60);
+  var avg=(Eb+Ee)/2,roe=Math.round(NI/avg*1000)/10,toC=NI-PD,avgC=avg-Pf,roce=Math.round(toC/avgC*1000)/10,eps=r2(toC/Sh),ep=Math.round(eps/Px*1000)/10;
+  return {title:co,facts:[["Preferred stock (par, unchanged all year)",$(Pf),"Preferred equity, subtracted to get common equity."]],
+  scenario:'<p>An analyst is reviewing '+esc(co)+' for '+Y+'. Net income was '+$(NI)+' and preferred dividends were '+$(PD)+'. Total shareholders’ equity was '+$(Eb)+' at the start of the year and '+$(Ee)+' at the end; '+$(Pf)+' of it is preferred stock both years. There are '+fmt(Sh)+' common shares outstanding all year, trading at $'+Px+'.</p>',
+  key:'<p><strong>Return on shareholders’ equity</strong> = net income ÷ average equity. For <strong>common</strong> shareholders, subtract preferred dividends from net income and preferred equity from average equity. Compare book returns with market returns: the earnings-price ratio uses the share price.</p>',
+  parts:[
+   sched("Return measures for "+Y,[
+     G("A","Net income",NI,null,"From the income statement."),G("B","Preferred dividends",PD,null,"Declared this year."),
+     G("C","Total shareholders’ equity, beginning",Eb,null,"From last year’s balance sheet."),G("D","Total shareholders’ equity, end",Ee,null,"From this year’s balance sheet."),
+     N("E","Average total shareholders’ equity",avg,"(C + D) ÷ 2","Average the beginning and ending balances.",m("("+$(Eb)+" + "+$(Ee)+") ÷ 2 = "+$(avg))),
+     N("F","Return on shareholders’ equity (percent, one decimal)",roe,"A ÷ E","Net income ÷ average equity.",m($(NI)+" ÷ "+$(avg)+" = "+roe+"%"),{unit:"%",tol:.1}),
+     N("G","Income available to common shareholders",toC,"A − B","Preferred dividends come off first.",m($(NI)+" − "+$(PD)+" = "+$(toC))),
+     N("H","Average common shareholders’ equity",avgC,"E − preferred","Subtract the preferred equity.",m($(avg)+" − "+$(Pf)+" = "+$(avgC))),
+     N("I","Return on common shareholders’ equity (percent, one decimal)",roce,"G ÷ H","Income to common ÷ average common equity.",m($(toC)+" ÷ "+$(avgC)+" = "+roce+"%"),{unit:"%",tol:.1}),
+     N("J","Earnings per share (to the cent)",eps,"G ÷ shares","Income to common ÷ common shares outstanding.",m($(toC)+" ÷ "+fmt(Sh)+" = "+c2(eps)),{unit:"$c",tol:.01}),
+     N("K","Earnings-price ratio (percent, one decimal)",ep,"J ÷ price","EPS ÷ share price: the inverse of the P/E ratio.",m(c2(eps)+" ÷ $"+Px+" = "+ep+"%"),{unit:"%",tol:.1})
+   ])
+  ],
+  take:"<p>A "+roce+"% return on book equity can look very different from the "+ep+"% investors earn on the $"+Px+" market price. Buybacks raise ROE and EPS mechanically by shrinking equity and shares, so read them with care.</p>"};
+}};
+
+var ORDER=["comp","oci","issue","noncash","costs","pkg","retire","treasury","cashdiv","prop","stockdiv","effects","roe"];
+
+
+/* ---------- UI ---------- */
+var el=function(id){return document.getElementById(id);};
+var picker=el("picker"),partsEl=el("parts"),sumEl=el("summary");
+var state=null,typeBtns={};
+
+(function buildPicker(){
+  var groups={},gi=0;
+  ORDER.forEach(function(k){var g=GEN[k].group;(groups[g]=groups[g]||[]).push(k);});
+  Object.keys(groups).forEach(function(g){
+    var div=document.createElement("div");div.className="pgroup";
+    var hid="pg-"+(gi++);
+    div.innerHTML='<h3 id="'+hid+'">'+esc(g)+'</h3>';
+    var ul=document.createElement("ul");ul.setAttribute("aria-labelledby",hid);
+    groups[g].forEach(function(k){
+      var li=document.createElement("li"),b=document.createElement("button");
+      b.type="button";b.className="type-btn";b.setAttribute("aria-pressed","false");
+      b.innerHTML='<strong>'+esc(GEN[k].name)+'</strong><span>'+esc(GEN[k].blurb)+'</span>';
+      b.addEventListener("click",function(){start(k,true);});
+      typeBtns[k]=b;li.appendChild(b);ul.appendChild(li);
+    });
+    div.appendChild(ul);picker.appendChild(div);
+  });
+})();
+
+function parseNum(s){
+  s=String(s).trim().replace(/−/g,"-");
+  if(!s)return null;
+  var neg=false;
+  if(/^\(.*\)$/.test(s)){neg=true;s=s.slice(1,-1).trim();}
+  s=s.replace(/[$,%\s]/g,"");
+  if(s.charAt(0)==="-"){neg=!neg;s=s.slice(1);}
+  if(!/^(\d+\.?\d*|\.\d+)$/.test(s))return NaN;
+  var v=parseFloat(s);return neg?-v:v;
+}
+function numOK(v,ans,tol,unit){if(v===null||isNaN(v))return false;if(Math.abs(v-ans)<=tol+1e-9)return true;if(unit==="%"&&Math.abs(v*100-ans)<=tol+1e-9)return true;return false;}
+function showVal(v,unit){return unit==="%"?v+"%":unit==="$c"?v.toFixed(2):(v<0?"-":"")+fmt(v);}
+
+function start(k,focus){
+  ORDER.forEach(function(x){typeBtns[x].setAttribute("aria-pressed",x===k?"true":"false");});
+  var p=GEN[k].make();
+  state={k:k,p:p,parts:[]};
+  el("ptype").textContent=GEN[k].name;
+  el("work-title").textContent=p.title;
+  var know=[];
+  p.parts.forEach(function(pt){if(pt.type==="sched")pt.rows.forEach(function(r){if(r.kind==="given")know.push([r.id,r.label,dispU(r.val,r.unit),r.why]);});});
+  (p.facts||[]).forEach(function(f){know.push(["",f[0],f[1],f[2]||""]);});
+  var kh="";
+  if(know.length){
+    kh='<p><strong>Here\'s what we know.</strong> '+any(["Before you calculate anything, read down this list and ask yourself whether each one makes sense.","Some of these come from the story above and some from the company\'s records. I noted where each one comes from.","Make sure you can explain where every one of these comes from before you start."])+' The lettered ones are already filled in as the gray lines in your schedule.</p>'+
+      '<div class="scroll"><table class="know"><caption class="sr-only">What we know</caption><thead><tr><th scope="col">Line</th><th scope="col">What we know</th><th scope="col" class="n">Amount</th><th scope="col">Where it comes from</th></tr></thead><tbody>'+
+      know.map(function(k){return '<tr><td class="ln">'+(k[0]||'<span class="sr-only">not in schedule</span>')+'</td><th scope="row">'+k[1]+'</th><td class="n">'+k[2]+'</td><td class="why">'+(k[3]||'')+'</td></tr>';}).join("")+'</tbody></table></div>';
+  }
+  if(p.given)kh+='<p>'+any(["I also have this table for you:","Here\'s one more piece of information:"])+'</p><div class="scroll">'+p.given+'</div>';
+  el("scenario-say").innerHTML=say(any(["<p>Here's the situation we're working with today.</p>","<p>Let's meet today's company.</p>","<p>Okay, here's our company for this one.</p>"])+p.scenario+kh);
+  el("given").innerHTML="";el("given").hidden=true;
+  el("key-say").innerHTML=say(p.key,{key:true,label:"Before you start, the key idea"});
+  sumEl.hidden=true;sumEl.innerHTML="";
+  partsEl.innerHTML="";
+  var n=0;
+  p.parts.forEach(function(pt,pi){
+    if(pt.type==="note"){var d=document.createElement("div");d.className="part";d.innerHTML=pt.html;partsEl.appendChild(d);state.parts.push({done:true,note:true});return;}
+    n++;
+    var ps={pt:pt,checks:0,done:false,firstRight:0,items:0,idx:pi};
+    state.parts.push(ps);
+    partsEl.appendChild(pt.type==="sched"?buildSched(ps,n,pi):buildJE(ps,n,pi,p.accts||ACCTS));
+  });
+  if(focus){el("work-title").focus({preventScroll:true});el("worksheet").scrollIntoView({block:"start"});}
+}
+
+/* ----- schedule part ----- */
+function buildSched(ps,n,pi){
+  var pt=ps.pt,sec=document.createElement("section");sec.className="part";sec.id="part-"+pi;
+  var hid="ph-"+pi;
+  var hasBuilds=pt.rows.some(function(r){return r.builds;});
+  var h='<h3 id="'+hid+'"><span class="pnum">Part '+n+'</span> '+esc(pt.title)+'<span class="status" id="st-'+pi+'"></span></h3>'+say('<p>'+(n===1?any(["Start here. Fill in the white boxes; the given amounts are already in place.","Let's build the schedule. Use the Builds on column if you get stuck.","First, the numbers. Work top to bottom and each line sets up the next."]):any(["Next up. Keep going, using what you found above.","On to this part. The lines from earlier will help here."]))+(pt.intro?' '+pt.intro:'')+'</p>',{sm:true});
+  h+='<div class="scroll"><table class="sched"><caption class="sr-only">'+esc(pt.title)+'</caption><thead><tr><th scope="col">Line</th><th scope="col">Item</th>'+(hasBuilds?'<th scope="col" class="bo">Builds on</th>':'')+'<th scope="col" class="n">Amount</th></tr></thead><tbody>';
+  pt.rows.forEach(function(r,ri){
+    var rid="r"+pi+"-"+ri;
+    if(r.kind==="given"){
+      h+='<tr class="given"><td class="ln">'+r.id+'</td><td>'+r.label+' <span class="small">(given)</span></td>'+(hasBuilds?'<td class="bo"></td>':'')+'<td class="n">'+dispU(r.val,r.unit)+'</td></tr>';
+      return;
+    }
+    ps.items++;
+    var field;
+    if(r.kind==="choice"){
+      field='<select class="ans" id="'+rid+'" aria-describedby="fb-'+rid+'"><option value="">Select…</option>'+r.options.map(function(o,j){return '<option value="'+j+'">'+esc(o)+'</option>';}).join("")+'</select>';
+    }else{
+      field='<span class="inwrap">'+(r.unit==="$"||r.unit==="$c"?'<span class="u" aria-hidden="true">$</span>':'')+'<input class="ans n" id="'+rid+'" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-describedby="fb-'+rid+'">'+(r.unit==="%"?'<span class="u" aria-hidden="true">%</span>':'')+'</span>';
+    }
+    var wide=r.kind==="choice"&&r.options[0].length>20;
+    h+='<tr><td class="ln">'+r.id+'</td><td><label for="'+rid+'">'+r.label+(r.kind==="num"?(r.unit==="%"?' <span class="sr-only">(percent)</span>':r.unit==="sh"?' <span class="sr-only">(shares)</span>':' <span class="sr-only">(dollars)</span>'):'')+'</label><div class="fb" id="fb-'+rid+'" role="status"></div>'+(wide?'<div style="margin-top:.35rem">'+field+'</div>':'')+'</td>'+(hasBuilds?'<td class="bo">'+esc(r.builds)+'</td>':'')+'<td class="amt">'+(wide?'<span class="sr-only">Answer is below the item text</span>':field)+'</td></tr>';
+  });
+  h+='</tbody></table></div><div class="partfb" id="pf-'+pi+'" role="status" aria-live="polite"></div><div class="btns"><button type="button" class="btn" id="chk-'+pi+'">Check this part</button><button type="button" class="btn ghost" id="sol-'+pi+'" hidden>Show solution</button></div>';
+  sec.setAttribute("aria-labelledby",hid);
+  sec.innerHTML=h;
+  sec.querySelector("#chk-"+pi).addEventListener("click",function(){checkSched(ps,pi,false);});
+  sec.querySelector("#sol-"+pi).addEventListener("click",function(){checkSched(ps,pi,true);});
+  sec.querySelectorAll("input.ans").forEach(function(inp){inp.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();checkSched(ps,pi,false);}});});
+  return sec;
+}
+
+function checkSched(ps,pi,reveal){
+  if(ps.done)return;
+  var pt=ps.pt,right=0,total=0,blank=0,firstBad=null;
+  pt.rows.forEach(function(r,ri){
+    if(r.kind==="given")return;
+    total++;
+    var rid="r"+pi+"-"+ri,inp=el(rid),fb=el("fb-"+rid);
+    if(inp.disabled){right++;return;}
+    var ok;
+    if(r.kind==="choice")ok=inp.value!==""&&Number(inp.value)===r.ans;
+    else{var v=parseNum(inp.value);if(v===null&&!reveal){blank++;}ok=numOK(v,r.ans,r.tol,r.unit);}
+    if(ok){
+      right++;if(ps.checks===0)ps.firstRight++;
+      inp.classList.remove("bad-f");inp.classList.add("ok-f");inp.removeAttribute("aria-invalid");inp.disabled=true;
+      fb.className="fb ok";fb.innerHTML='<span class="tag">'+any(PRAISE)+'</span> '+r.sol;
+    }else if(reveal){
+      inp.value=r.kind==="choice"?String(r.ans):showVal(r.ans,r.unit);
+      inp.classList.remove("bad-f");inp.disabled=true;inp.removeAttribute("aria-invalid");
+      fb.className="fb sol";fb.innerHTML='<span class="tag">Here\'s how I\'d work it:</span> '+r.sol;
+    }else{
+      inp.classList.remove("ok-f");inp.classList.add("bad-f");inp.setAttribute("aria-invalid","true");
+      fb.className="fb bad";fb.innerHTML='<span class="tag">'+(inp.value===""?"Give this one a try.":any(NUDGE))+'</span> '+r.hint;
+      if(!firstBad)firstBad=inp;
+    }
+  });
+  ps.checks++;
+  var pf=el("pf-"+pi);
+  if(right===total||reveal){completePart(ps,pi,reveal);pf.className="partfb "+(reveal?"hint":"ok");pf.innerHTML='<span class="who">'+T.name+':</span> '+(reveal?"No problem. I filled in the solution with my work under each line. Compare it with yours, then let's keep going.":any(["All "+total+" lines are right. Nicely done!","Every line checks out. On to the next part!","That's all "+total+". You're getting the hang of this."]));}
+  else{pf.className="partfb bad";pf.innerHTML='<span class="who">'+T.name+':</span> '+(right?"You have "+right+" of "+total+" right. ":"Let's look at this together. ")+"I marked the lines to revisit in red and left a hint under each one"+(blank?" ("+blank+" still blank)":"")+". Fix those and check again"+(ps.checks>=1?", or ask me to show the solution.":".");el("sol-"+pi).hidden=false;if(firstBad)firstBad.focus();}
+}
+
+/* ----- journal entry part ----- */
+function buildJE(ps,n,pi,accts){
+  var pt=ps.pt,sec=document.createElement("section");sec.className="part";sec.id="part-"+pi;
+  var hid="ph-"+pi,nl=pt.lines.length;
+  ps.items=nl;
+  var h='<h3 id="'+hid+'"><span class="pnum">Part '+n+'</span> '+esc(pt.title)+'<span class="status" id="st-'+pi+'"></span></h3>';
+  h+=say('<p>'+any(["Now let's turn your schedule into a journal entry.","Time to record it. Every number you need is already in your schedule.","Here's where it comes together: the entry."])+' This one has <strong>'+nl+' lines</strong>; leave the unused amount box empty on each line.'+(pt.intro?' '+pt.intro:'')+'</p>',{sm:true});
+  h+='<div class="scroll"><table class="je"><caption class="sr-only">'+esc(pt.title)+'</caption><thead><tr><th scope="col">Account</th><th scope="col" class="n">Debit</th><th scope="col" class="n">Credit</th><th scope="col">Comes from</th></tr></thead><tbody>';
+  for(var i=0;i<nl;i++){
+    var b="j"+pi+"-"+i;
+    h+='<tr id="row-'+b+'"><td class="ac"><label class="sr-only" for="'+b+'a">Line '+(i+1)+' account</label><select class="ans" id="'+b+'a"><option value="">Select account…</option>'+accts.map(function(a){return '<option>'+esc(a)+'</option>';}).join("")+'</select></td>'+
+       '<td class="d"><label class="sr-only" for="'+b+'d">Line '+(i+1)+' debit (dollars)</label><input class="ans n" id="'+b+'d" type="text" inputmode="decimal" autocomplete="off"></td>'+
+       '<td class="c"><label class="sr-only" for="'+b+'c">Line '+(i+1)+' credit (dollars)</label><input class="ans n" id="'+b+'c" type="text" inputmode="decimal" autocomplete="off"></td>'+
+       '<td class="src" id="'+b+'s"><span class="sr-only">Shown after the entry is correct</span><span aria-hidden="true">—</span></td></tr>';
+  }
+  h+='</tbody></table></div><div class="partfb" id="pf-'+pi+'" role="status" aria-live="polite"></div><div class="btns"><button type="button" class="btn" id="chk-'+pi+'">Check this entry</button><button type="button" class="btn ghost" id="sol-'+pi+'" hidden>Show solution</button></div>';
+  sec.setAttribute("aria-labelledby",hid);
+  sec.innerHTML=h;
+  sec.querySelector("#chk-"+pi).addEventListener("click",function(){checkJE(ps,pi,false);});
+  sec.querySelector("#sol-"+pi).addEventListener("click",function(){checkJE(ps,pi,true);});
+  return sec;
+}
+
+function checkJE(ps,pi,reveal){
+  if(ps.done)return;
+  var pt=ps.pt,nl=pt.lines.length,rows=[],used={},right=0,tD=0,tC=0,blank=0;
+  for(var i=0;i<nl;i++){
+    var b="j"+pi+"-"+i,a=el(b+"a").value,d=parseNum(el(b+"d").value),c=parseNum(el(b+"c").value);
+    if(!a&&d===null&&c===null)blank++;
+    tD+=(d>0?d:0);tC+=(c>0?c:0);
+    rows.push({b:b,a:a,d:d===null?0:d,c:c===null?0:c,bad:isNaN(d)||isNaN(c)});
+  }
+  if(reveal){
+    pt.lines.forEach(function(l,i){var b="j"+pi+"-"+i;el(b+"a").value=l.acct;el(b+"d").value=l.dr?fmt(l.dr):"";el(b+"c").value=l.cr?fmt(l.cr):"";});
+    pt.lines.forEach(function(l,i){markRow("j"+pi+"-"+i,null,l);});
+    completePart(ps,pi,true);
+    var pf=el("pf-"+pi);pf.className="partfb hint";pf.innerHTML='<span class="who">'+T.name+':</span> Here\'s the entry. Look at the <strong>Comes from</strong> column: every amount is a line you already worked in the schedule.';
+    return;
+  }
+  /* match each student row to an unused expected line */
+  var hit=[];
+  rows.forEach(function(r){
+    var m=-1;
+    pt.lines.forEach(function(l,li){if(m<0&&!used[li]&&l.acct===r.a&&!r.bad&&Math.abs(r.d-l.dr)<=1&&Math.abs(r.c-l.cr)<=1)m=li;});
+    if(m>=0){used[m]=1;right++;if(ps.checks===0)ps.firstRight++;}
+    hit.push(m);
+  });
+  ps.checks++;
+  rows.forEach(function(r,i){markRow(r.b,hit[i]>=0,hit[i]>=0?pt.lines[hit[i]]:null);});
+  var pf=el("pf-"+pi);
+  if(right===nl){completePart(ps,pi,false);pf.className="partfb ok";pf.innerHTML='<span class="who">'+T.name+':</span> '+any(["That entry is right and it balances!","Debits equal credits and every account is right. Great work!"])+' Check the <strong>Comes from</strong> column to see how each amount flows straight from your schedule.';return;}
+  var msgs=[right?"You have "+right+" of "+nl+" lines right.":"Not there yet, but that's what practice is for."];
+  if(Math.abs(tD-tC)>1)msgs.push("Your debits ("+$(tD)+") don't equal your credits ("+$(tC)+"), so something's off.");
+  var missing=pt.lines.filter(function(l,li){return !used[li];}).map(function(l){return l.acct;});
+  if(ps.checks===1)msgs.push("Here's a hint: this entry uses "+uniq(pt.lines.map(function(l){return l.acct;})).join(", ")+". Each amount is one of the lettered lines in your schedule.");
+  else msgs.push("Still missing: "+uniq(missing).join(", ")+". Ask yourself whether each one is increasing or decreasing, and which side that means. Or I can show you the solution.");
+  pf.className="partfb bad";pf.innerHTML='<span class="who">'+T.name+':</span> '+esc(msgs.join(" "));
+  el("sol-"+pi).hidden=false;
+  var firstBadRow=rows.filter(function(r,i){return hit[i]<0;})[0];if(firstBadRow)el(firstBadRow.b+"a").focus();
+}
+function uniq(a){return a.filter(function(x,i){return a.indexOf(x)===i;});}
+function markRow(b,ok,line){
+  ["a","d","c"].forEach(function(s){var f=el(b+s);f.classList.remove("ok-f","bad-f");f.removeAttribute("aria-invalid");
+    if(ok===true){f.classList.add("ok-f");f.disabled=true;}
+    else if(ok===false){f.classList.add("bad-f");f.setAttribute("aria-invalid","true");}
+    else{f.disabled=true;}});
+  var s=el(b+"s");
+  if(line&&ok!==false)s.innerHTML='<span class="chip">Line '+esc(line.src)+'</span>';
+}
+
+function completePart(ps,pi,revealed){
+  ps.done=true;ps.revealed=revealed;
+  var sec=el("part-"+pi);sec.classList.add("complete");
+  el("st-"+pi).textContent=revealed?"Solution shown":"Complete";
+  el("chk-"+pi).disabled=true;el("sol-"+pi).hidden=true;
+  sec.querySelectorAll("input,select").forEach(function(f){f.disabled=true;});
+  if(state.parts.every(function(p){return p.done;}))summary();
+}
+
+function summary(){
+  var p=state.p,tot=0,first=0,rev=0;
+  state.parts.forEach(function(ps){if(ps.note)return;tot+=ps.items;first+=ps.firstRight;if(ps.revealed)rev++;});
+  var cheer=first===tot?"Every answer right on the first try. Impressive!":(first>=tot*.7?"Strong work. You're close to mastering this.":"Good effort. Try another set of numbers and watch how much easier it gets.");
+  sumEl.innerHTML='<h3>Problem complete</h3><ul class="score" aria-label="Your results"><li>Right on the first check: '+first+' of '+tot+'</li><li>Parts with solution shown: '+rev+'</li></ul>'+say('<p>'+cheer+' One last thing I want you to remember:</p>'+p.take)+'<div class="btns"><button type="button" class="btn" id="again-btn">Try another with new numbers</button><button type="button" class="btn ghost" id="pick-btn">Choose a different problem type</button></div>';
+  sumEl.hidden=false;
+  el("again-btn").addEventListener("click",function(){start(state.k,true);});
+  el("pick-btn").addEventListener("click",function(){el("pick-title").scrollIntoView({block:"start"});typeBtns[state.k].focus();});
+  sumEl.focus();
+}
+
+el("intro").innerHTML=say('<p>Hi, I\'m <strong>'+T.name+'</strong>, '+T.bio+'. I\'ll be your tutor for shareholders\u2019 equity today. '+T.style+'</p>'+
+  '<ul><li>Pick a topic below. Each one is a <strong>worksheet</strong> with lettered lines (A, B, C …). The <strong>Builds on</strong> column tells you which earlier lines feed each answer.</li>'+
+  '<li>Fill in a part, then press <strong>Check this part</strong>. I\'ll mark answers green or red and give you a hint on the red ones. After your first check, you can ask me to <strong>Show solution</strong>.</li>'+
+  '<li>Most problems end with a <strong>journal entry</strong>. Once it\'s right, the <strong>Comes from</strong> column shows where each amount came from.</li></ul>'+
+  '<p class="small">Quick tips: whole dollars, commas optional. Per-share amounts go to the cent, like <span class="math">0.25</span>. Enter a loss or decrease as <span class="math">-12,000</span> or <span class="math">(12,000)</span>, and rates as percents like <span class="math">12.5</span>.</p>',{label:T.name+", your tutor"});
+el("sub").textContent="Your tutor today is "+T.name+". Work each schedule, then record the journal entry.";
+el("new-btn").addEventListener("click",function(){if(state)start(state.k,true);});
+el("print-btn").addEventListener("click",function(){window.print();});
+start("comp",false);
+
+/* expose for self-checks */
+window.__tutor={GEN:GEN,ORDER:ORDER,start:start,state:function(){return state;}};
+})();
+</script>
+</body>
+</html>
