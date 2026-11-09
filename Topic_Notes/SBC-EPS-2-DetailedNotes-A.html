@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Share-Based Compensation: Detailed Notes A</title>
+<meta name="description" content="Detailed notes on share-based compensation: restricted stock and RSUs, stock options, forfeitures, tax effects, graded vesting, performance and market conditions, employee share purchase plans, and stock appreciation rights.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple: #4B2E83; --purple-dark: #341f5c; --gold: #C8A24A; --gold-light: #E8CF86;
+    --ink: #232023; --paper: #fdfcfb; --panel: #f7f3ec; --rule: #e2d9c8; --grid: #8a8076;
+    --muted: #5f5a56;
+    --key-bg: #f3eef9; --watch: #9C4221; --watch-title: #7a3418; --watch-bg: #FBEAE2;
+    --ex-bg: #fbf5e4; --good: #2E6B45; --good-bg: #E7F3EB; --link: #4B2E83; --visited: #5b3a9a;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-padding-top: 1rem; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif; font-size: 1.0625rem; line-height: 1.7; }
+  .sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+  .skip-link { position: absolute; left: 0.75rem; top: -4rem; z-index: 100; background: #fff; color: var(--purple-dark); font-family: 'Inter', system-ui, sans-serif; font-weight: 700; padding: 0.7rem 1.1rem; border: 3px solid var(--purple-dark); border-radius: 6px; text-decoration: none; }
+  .skip-link:focus { top: 0.75rem; }
+  :focus-visible { outline: 3px solid var(--purple-dark); outline-offset: 2px; box-shadow: 0 0 0 2px #fff; }
+  main:focus { outline: none; }
+  a { color: var(--link); text-decoration: underline; text-underline-offset: 0.18em; text-decoration-thickness: 0.08em; }
+  a:visited { color: var(--visited); }
+  a:hover { text-decoration-thickness: 0.16em; }
+
+  .site-header { background: linear-gradient(135deg, var(--purple) 0%, var(--purple-dark) 100%); color: #fff; border-bottom: 6px solid var(--gold); }
+  .header-inner { max-width: 70rem; margin: 0 auto; padding: 2.3rem 1.5rem 2rem; }
+  .eyebrow { font-family: 'Inter', system-ui, sans-serif; font-size: 0.95rem; font-weight: 600; letter-spacing: 0.02em; color: var(--gold-light); margin: 0 0 0.5rem; }
+  .site-header h1 { font-family: 'Source Serif 4', Georgia, serif; font-weight: 700; font-size: clamp(1.75rem, 4vw, 2.5rem); line-height: 1.2; margin: 0 0 0.6rem; max-width: 52rem; }
+  .header-sub { margin: 0; color: #ece6f6; font-family: 'Inter', system-ui, sans-serif; font-size: 1.05rem; line-height: 1.5; max-width: 42rem; }
+
+  .layout { display: grid; grid-template-columns: 15rem minmax(0, 46rem); gap: 3rem; max-width: 70rem; margin: 0 auto; padding: 2rem 1.5rem 3rem; }
+  .toc { align-self: start; position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow-y: auto; font-family: 'Inter', system-ui, sans-serif; font-size: 0.92rem; line-height: 1.4; background: var(--panel); border: 1px solid var(--rule); border-top: 5px solid var(--gold); border-radius: 8px; padding: 0.9rem 1rem 1rem; }
+  .toc-title { margin: 0 0 0.5rem; font-weight: 700; color: var(--purple-dark); }
+  .toc ol { margin: 0; padding-left: 1.2rem; }
+  .toc li { margin: 0.35rem 0; }
+  main { min-width: 0; }
+
+  h2, h3, h4 { font-family: 'Source Serif 4', Georgia, serif; color: var(--purple-dark); line-height: 1.3; }
+  h2 { font-size: 1.65rem; margin: 3rem 0 0.9rem; padding-bottom: 0.4rem; border-bottom: 3px solid var(--gold); }
+  main > section:first-child > h2:first-child { margin-top: 0; }
+  h3 { font-size: 1.3rem; margin: 2.2rem 0 0.6rem; }
+  h4 { font-size: 1.1rem; margin: 1.6rem 0 0.4rem; }
+  p { margin: 0.8rem 0; }
+  ul, ol { margin: 0.8rem 0; padding-left: 1.5rem; }
+  li { margin: 0.35rem 0; }
+  strong { color: var(--purple-dark); }
+  code, .mono { font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-size: 0.92em; }
+
+  .lede { font-size: 1.2rem; line-height: 1.6; }
+  .note-small { font-family: 'Inter', system-ui, sans-serif; font-size: 0.9rem; color: var(--muted); }
+
+  .callout { font-family: 'Inter', system-ui, sans-serif; font-size: 0.98rem; line-height: 1.6; border-radius: 8px; border: 1px solid var(--rule); border-left-width: 7px; padding: 0.8rem 1.1rem 0.9rem; margin: 1.5rem 0; }
+  .callout p { margin: 0.5rem 0; }
+  .callout ul, .callout ol { margin: 0.5rem 0; }
+  .callout-title { margin: 0 0 0.25rem !important; font-weight: 700; font-size: 1rem; }
+  .callout.key { background: var(--key-bg); border-color: #d6c9ec; border-left-color: var(--purple); }
+  .callout.key .callout-title { color: var(--purple-dark); }
+  .callout.watch { background: var(--watch-bg); border-color: #efc7b6; border-left-color: var(--watch); }
+  .callout.watch .callout-title { color: var(--watch-title); }
+  .callout.example { background: var(--ex-bg); border-color: #ecdca8; border-left-color: var(--gold); }
+  .callout.example .callout-title { color: #4a3a0c; }
+  .callout.codif { background: #fff; border-color: var(--purple); border-left-color: var(--purple-dark); }
+  .callout.codif .callout-title { color: var(--purple-dark); }
+  .callout.codif ul { padding-left: 1.2rem; }
+  .asc { font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-size: 0.86em; font-weight: 600; color: var(--purple-dark); background: var(--panel); border: 1px solid var(--rule); border-radius: 4px; padding: 0.05em 0.35em; white-space: nowrap; }
+  .callout.global { background: #fff; border-color: var(--grid); border-left-color: var(--grid); }
+  .callout.global .callout-title { color: var(--purple-dark); }
+
+  .example-box { border: 1px solid var(--rule); border-top: 5px solid var(--purple); border-radius: 8px; background: #fff; padding: 0.4rem 1.2rem 1rem; margin: 1.8rem 0; }
+  .example-box > h3, .example-box > h4 { margin-top: 1rem; }
+  .example-box > h3:first-child { margin-top: 0.9rem; border: 0; }
+  .facts { font-family: 'Inter', system-ui, sans-serif; font-size: 0.97rem; background: var(--panel); border-radius: 6px; padding: 0.7rem 1rem; margin: 0.8rem 0; }
+  .facts p { margin: 0.35rem 0; }
+
+  .table-scroll { overflow-x: auto; margin: 1rem 0; }
+  table { border-collapse: separate; border-spacing: 0; width: 100%; min-width: 26rem; border-top: 1px solid var(--grid); border-left: 1px solid var(--grid); font-family: 'Inter', system-ui, sans-serif; font-size: 0.92rem; line-height: 1.45; font-variant-numeric: tabular-nums; }
+  caption { text-align: left; font-weight: 700; color: var(--purple-dark); padding: 0 0 0.5rem; font-size: 0.98rem; }
+  th, td { border: 0; border-right: 1px solid var(--grid); border-bottom: 1px solid var(--grid); padding: 0.45rem 0.65rem; vertical-align: top; text-align: left; }
+  thead th { background: var(--panel); color: var(--purple-dark); }
+  tbody th[scope="row"] { background: #fff; font-weight: 600; color: var(--ink); position: sticky; left: 0; z-index: 1; min-width: 9.5rem; }
+  thead th:first-child { position: sticky; left: 0; z-index: 2; min-width: 9.5rem; }
+  td.num, th.num { text-align: right; }
+  td.num { white-space: nowrap; }
+  tr.sub th, tr.sub td { background: var(--panel); font-weight: 700; }
+  tr.plug th, tr.plug td { background: var(--ex-bg); font-weight: 700; box-shadow: inset 0 3px 0 var(--gold); }
+  tr.step th { border-left: 6px solid var(--purple); }
+  tr.plug th { border-left: 6px solid var(--gold); }
+  table.compact { font-size: 0.88rem; min-width: 24rem; }
+  table.je { min-width: 22rem; }
+  table.je td.num { font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; }
+  table.je td.cr-acct { padding-left: 2.2rem; }
+  table.je th.acct-col { width: 62%; }
+  .je-wrap { margin: 1.1rem 0; }
+  .je-date { font-family: 'Inter', system-ui, sans-serif; font-weight: 700; margin: 0 0 0.3rem; color: var(--purple-dark); }
+
+  ol.steps { list-style: none; counter-reset: step; padding: 0; margin: 1.2rem 0; display: grid; gap: 0.7rem; }
+  ol.steps > li { counter-increment: step; font-family: 'Inter', system-ui, sans-serif; font-size: 0.98rem; line-height: 1.55; margin: 0; padding: 0.7rem 1rem 0.8rem 3.5rem; background: #fff; border: 1px solid var(--rule); border-left: 6px solid var(--purple); border-radius: 8px; position: relative; }
+  ol.steps > li::before { content: counter(step); position: absolute; left: 0.9rem; top: 0.6rem; width: 1.9rem; height: 1.9rem; border-radius: 50%; background: var(--purple); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  ol.steps > li:last-child { border-left-color: var(--gold); }
+  ol.steps > li:last-child::before { background: var(--gold); color: var(--ink); }
+  ol.steps strong { display: block; font-size: 1.02rem; }
+
+  dl.glossary { font-family: 'Inter', system-ui, sans-serif; font-size: 0.96rem; line-height: 1.55; }
+  dl.glossary dt { font-weight: 700; color: var(--purple-dark); margin-top: 0.9rem; }
+  dl.glossary dd { margin: 0.1rem 0 0 0; }
+
+  details { font-family: 'Inter', system-ui, sans-serif; font-size: 0.97rem; line-height: 1.6; border: 1px solid var(--grid); border-radius: 8px; background: #fff; margin: 0.9rem 0; }
+  details > summary { cursor: pointer; font-weight: 700; color: var(--purple-dark); padding: 0.7rem 1rem; min-height: 2.75rem; }
+  details[open] > summary { border-bottom: 1px solid var(--rule); }
+  details > .answer { padding: 0.2rem 1rem 0.9rem; }
+  .practice { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 0.2rem 1.2rem 0.9rem; margin: 1.2rem 0; }
+  .practice h3, .practice h4 { margin-top: 1rem; }
+
+  figure { margin: 1.5rem 0; }
+  figcaption { font-family: 'Inter', system-ui, sans-serif; font-size: 0.9rem; color: var(--muted); margin-top: 0.4rem; }
+  svg text { font-family: 'Inter', system-ui, sans-serif; }
+
+  .pill-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.8rem 0; padding: 0; list-style: none; }
+  .pill-row li { margin: 0; font-family: 'Inter', system-ui, sans-serif; font-size: 0.9rem; font-weight: 600; background: var(--panel); border: 1px solid var(--grid); border-radius: 999px; padding: 0.2rem 0.8rem; }
+
+  .next-box { font-family: 'Inter', system-ui, sans-serif; background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 0.9rem 1.2rem; margin-top: 2.5rem; }
+  footer { font-family: 'Inter', system-ui, sans-serif; text-align: center; font-size: 0.88rem; color: var(--muted); padding: 1.5rem 1rem 2.5rem; border-top: 1px solid var(--rule); }
+
+  @media (max-width: 62rem) {
+    .layout { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; padding-top: 1.5rem; }
+    .toc { position: static; max-height: none; }
+  }
+  @media (max-width: 30rem) {
+    body { font-size: 1rem; }
+    .header-inner { padding: 1.6rem 1rem 1.4rem; }
+    .layout { padding-left: 1rem; padding-right: 1rem; }
+    ol.steps > li { padding-left: 3.1rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+  @media print {
+    body { font-size: 11pt; }
+    .skip-link, .toc { display: none; }
+    .layout { display: block; padding: 0; }
+    .site-header { background: #fff; color: #000; border-bottom: 3px solid #000; }
+    .site-header h1, .header-sub, .eyebrow { color: #000; }
+    .table-scroll { overflow: visible; }
+    a { color: #000; }
+    details > summary { list-style: none; }
+  }
+</style>
+<style id="a11y-fixes">
+  /* Accessibility fixes added Oct 2026: visible keyboard focus, scrollable wide tables, and text colors adjusted to meet WCAG AA contrast. */
+  :focus-visible { outline: 3px solid #341f5c !important; outline-offset: 2px !important; box-shadow: 0 0 0 5px #ffffff !important; }
+  .a11y-scroll { overflow-x: auto; max-width: 100%; }
+  .table-scroll, .a11y-scroll { position: relative; }
+  .a11y-sr { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+</style>
+<style id="print-pdf">
+  .print-btn { font-family: 'Inter', system-ui, sans-serif; font-size: 0.98rem; font-weight: 700; color: #232023; background: #C8A24A; border: 2px solid #C8A24A; border-radius: 6px; padding: 0.55rem 1.1rem; min-height: 2.75rem; margin-top: 1.1rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; }
+  .print-btn:hover { background: #E8CF86; border-color: #E8CF86; }
+  .print-btn:focus-visible { outline: 3px solid #fff !important; outline-offset: 2px !important; box-shadow: 0 0 0 6px #341f5c !important; }
+  .print-only { display: none; }
+  @page { size: letter; margin: 0.5in 0.55in 0.55in; }
+  @media print {
+    /* Plain, compact layout for printing: black text, no shaded boxes, tight spacing. */
+    *, *::before, *::after { background: transparent !important; box-shadow: none !important; color: #000 !important; }
+    html, body { background: #fff !important; }
+    body, p, li, dd, dt, td, th, caption, .callout, .facts, details, table, .eyebrow, .header-sub, .note-small, .lede, ol.steps > li, dl.glossary { font-family: Georgia, 'Times New Roman', serif !important; }
+    body { font-size: 10pt; line-height: 1.32; }
+    .callout, .callout p, .callout li, .facts, .facts p, details, .answer, .answer p, .answer li, ol.steps > li, dl.glossary, dl.glossary dd, .note-small, .lede { font-size: 10pt !important; line-height: 1.32 !important; }
+    .print-btn, .skip-link, .toc, .next-box, figure { display: none !important; }
+    .site-header { border-bottom: 1.5pt solid #000; margin-bottom: 0.15in; }
+    .header-inner { padding: 0 0 0.08in; max-width: none; }
+    .eyebrow { font-size: 8.5pt; margin: 0 0 0.03in; font-weight: 400; }
+    .site-header h1 { font-size: 16pt; margin: 0 0 0.03in; }
+    .header-sub { font-size: 9.5pt; font-style: italic; }
+    .layout { display: block; max-width: none; padding: 0; gap: 0; }
+    main { max-width: none; }
+    p { margin: 0.07in 0; }
+    ul, ol { margin: 0.05in 0; padding-left: 0.25in; }
+    li { margin: 0.02in 0; }
+    h2 { font-size: 12.5pt; margin: 0.18in 0 0.05in; padding-bottom: 0.02in; border-bottom: 0.75pt solid #000; }
+    main > section:first-child > h2:first-child { margin-top: 0; }
+    h3 { font-size: 11pt; margin: 0.12in 0 0.04in; }
+    h4 { font-size: 10pt; margin: 0.08in 0 0.03in; }
+    h2, h3, h4, .callout-title, .je-date, caption, dt { break-after: avoid; page-break-after: avoid; }
+    p, li, dd { orphans: 2; widows: 2; }
+    strong { color: #000 !important; }
+    .lede { font-size: 10pt; }
+    .callout, .example-box, .facts, .practice, details { border: 0 !important; border-radius: 0; padding: 0 !important; margin: 0.07in 0 !important; }
+    .callout { border-left: 2pt solid #000 !important; padding-left: 0.1in !important; }
+    .callout-title { font-size: 10pt; margin: 0 !important; }
+    .example-box > h3:first-child { margin-top: 0.1in; }
+    .facts p { margin: 0.03in 0; font-style: italic; }
+    ol.steps { gap: 0; margin: 0.05in 0; list-style: decimal; padding-left: 0.25in; }
+    ol.steps > li { border: 0 !important; padding: 0 !important; margin: 0.03in 0; font-size: 10pt; }
+    ol.steps > li::before { content: none !important; display: none !important; }
+    ol.steps strong { display: inline; font-size: 10pt; }
+    .asc { border: 0; padding: 0; font-size: 9pt; font-weight: 400; }
+    .table-scroll { overflow: visible !important; margin: 0.05in 0 0.08in; }
+    table { min-width: 0 !important; width: 100%; font-size: 8.5pt; line-height: 1.2; border-top: 0.5pt solid #000; border-left: 0; }
+    caption { font-size: 9pt; padding: 0 0 0.03in; }
+    th, td { padding: 0.025in 0.05in !important; border-right: 0 !important; border-bottom: 0.5pt solid #999 !important; }
+    thead th { border-bottom: 0.75pt solid #000 !important; font-weight: 700; }
+    tbody th[scope="row"] { font-weight: 400; min-width: 0; }
+    thead th:first-child { min-width: 0; }
+    tr.sub th, tr.sub td, tr.plug th, tr.plug td { font-weight: 700; border-top: 0.75pt solid #000 !important; }
+    tr.step th, tr.plug th { border-left: 0 !important; }
+    thead { display: table-header-group; }
+    tr { break-inside: avoid; page-break-inside: avoid; }
+    tbody th[scope="row"], thead th:first-child { position: static !important; }
+    .je-wrap { margin: 0.04in 0 0.06in; break-inside: avoid; page-break-inside: avoid; }
+    .je-date { font-size: 9pt; margin: 0 0 0.02in; }
+    table.je { width: 70%; }
+    table.je td.cr-acct { padding-left: 0.3in !important; }
+    footer { font-family: Georgia, 'Times New Roman', serif !important; }
+    a { text-decoration: none; }
+    a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 8pt; }
+    details > summary { list-style: none; padding: 0 !important; min-height: 0; font-size: 0; }
+    details > summary::-webkit-details-marker { display: none; }
+    details > summary::before { content: "Answer: "; font-size: 10pt; font-weight: 700; }
+    details > .answer { padding: 0 !important; }
+    .practice > h3 { font-size: 10pt; }
+    dl.glossary dt { margin-top: 0.05in; }
+    footer { border-top: 0.5pt solid #000; padding: 0.06in 0 0; margin-top: 0.1in; font-size: 8pt; }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header">
+  <div class="header-inner">
+    <p class="eyebrow">ACCT 352 · Intermediate Accounting II · Detailed Notes A</p>
+    <h1>Share-Based Compensation</h1>
+    <p class="header-sub">How to measure and record pay that comes in the form of shares, units, options, and share-price-based rights.</p>
+    <button type="button" class="print-btn" onclick="window.print()">Print or save as PDF</button>
+  </div>
+</header>
+<div class="layout">
+  <nav class="toc" aria-label="On this page">
+    <p class="toc-title">On this page</p>
+    <ol><li><a href="#s-puzzle">A puzzle to start</a></li><li><a href="#s-codif">Where these rules live</a></li><li><a href="#s-goal">The accounting objective</a></li><li><a href="#s-restricted">Restricted stock and RSUs</a></li><li><a href="#s-options">Stock options</a></li><li><a href="#s-tax">Income tax effects</a></li><li><a href="#s-graded">Graded vesting</a></li><li><a href="#s-conditions">Performance and market conditions</a></li><li><a href="#s-espp">Employee share purchase plans</a></li><li><a href="#s-sar">Stock appreciation rights</a></li><li><a href="#s-ifrs">U.S. GAAP and IFRS</a></li><li><a href="#s-analyst">Reading the numbers like an analyst</a></li><li><a href="#s-mistakes">Common mistakes</a></li><li><a href="#s-practice">Practice with answers</a></li><li><a href="#s-map">Codification map</a></li><li><a href="#s-terms">Key terms</a></li></ol>
+  </nav>
+  <main id="main" tabindex="-1">
+
+<section>
+  <h2 id="s-puzzle">A puzzle to start</h2>
+
+  <p class="lede">Hunter Ridge Robotics hires a new chief executive. Her offer letter promises a modest salary, 50,000 shares of stock she cannot sell for four years, and options to buy another 200,000 shares at today&rsquo;s price. On the day she signs, the company pays her nothing for the shares or the options. Has Hunter Ridge incurred an expense? If so, how much, and when should it show up in the income statement?</p>
+  <div class="table-scroll"><table class="compact"><caption>What the new CEO receives (Hunter Ridge Robotics)</caption><thead><tr><th scope="col">Element</th><th scope="col">Cash paid by the company today?</th><th scope="col">Value to the CEO?</th></tr></thead><tbody><tr><th scope="row">Salary</th><td>Yes, as earned</td><td>Yes</td></tr><tr><th scope="row">Restricted shares</th><td>No</td><td>Yes: the shares are worth their market price</td></tr><tr><th scope="row">Stock options</th><td>No</td><td>Yes: the right to buy shares later at a fixed price has value now</td></tr></tbody></table></div>
+  <p>Shares and options are valuable, and the CEO earns them by working for the company. They are compensation just as surely as salary is, even though no cash changes hands. The accounting answers two questions: <em>what is the compensation worth</em>, and <em>over which periods is it earned</em>?</p>
+  <div class="callout example"><p class="callout-title">About the examples</p><p>Every company in these notes is fictional. Amounts are kept round so the accounting, not the arithmetic, is the focus. Unless stated otherwise, ignore income taxes, and assume shares have a $1 par value.</p></div>
+
+</section>
+
+<section>
+  <h2 id="s-codif">Where these rules live: the FASB Codification</h2>
+
+  <p>The rules for paying employees with shares, options, and other equity-linked awards are in <strong>Topic 718, Compensation—Stock Compensation</strong>, of the FASB Accounting Standards Codification (ASC). Boxes labeled &ldquo;In the FASB Codification&rdquo; point you to the guidance. They <em>paraphrase</em> it, so read the paragraph itself when you need the exact wording.</p>
+  <div class="table-scroll"><table class="compact"><caption>The parts of Topic 718 used in these notes</caption><thead><tr><th scope="col">Subtopic</th><th scope="col">What it covers</th></tr></thead><tbody><tr><th scope="row">718-10, Overall</th><td>Measuring awards at grant-date fair value, recognizing cost over the service period, forfeitures, graded vesting, and performance and market conditions.</td></tr><tr><th scope="row">718-20, Awards Classified as Equity</th><td>Restricted stock, restricted stock units, and stock options settled in shares.</td></tr><tr><th scope="row">718-30, Awards Classified as Liabilities</th><td>Awards that can be settled in cash, such as cash-settled stock appreciation rights.</td></tr><tr><th scope="row">718-50, Employee Share Purchase Plans</th><td>When a plan that lets employees buy shares is compensatory.</td></tr><tr><th scope="row">718-740, Income Taxes</th><td>Deferred taxes and the tax effects of share-based pay.</td></tr></tbody></table></div>
+  <p class="note-small">FASB offers free access to a read-only version of the Codification after you register at <a href="https://asc.fasb.org" rel="noopener">the FASB Accounting Standards Codification website</a>, and your library may provide the full professional edition.</p>
+
+</section>
+
+<section>
+  <h2 id="s-goal">The accounting objective</h2>
+
+  <p>Share-based plans come in many forms: outright awards of shares, restricted stock units, stock options, stock appreciation rights, and employee share purchase plans. The accounting objective is the same for every one of them:</p>
+  <ol class="steps" role="list"><li><strong>Measure</strong> the fair value of the compensation at the <strong>grant date</strong>, the date the company and the employee agree to the award&rsquo;s terms.</li><li><strong>Recognize</strong> that amount as compensation expense over the <strong>service period</strong>, the periods in which the employee performs the services the award pays for. The service period is usually the <strong>vesting period</strong>, from the grant date until the employee is entitled to the award.</li></ol>
+  <div class="callout key"><p class="callout-title">The pattern behind every entry</p><p>Each year of the service period: <strong>debit Compensation expense, credit a paid-in capital account</strong> (for awards settled in shares) or <strong>a liability</strong> (for awards that can be settled in cash). Nothing is recorded on the grant date itself, because no service has been performed yet.</p></div>
+  <p>Why paid-in capital? When an award will be settled in shares, the employee is effectively contributing services in exchange for an equity interest. The credit builds up the equity the employee is earning, just as cash paid for shares builds paid-in capital.</p>
+  <div class="callout codif"><p class="callout-title">In the FASB Codification</p><ul><li><span class="asc">ASC 718-10-30</span> measures an equity-classified award at its fair value on the grant date.</li><li><span class="asc">ASC 718-10-35</span> recognizes the compensation cost over the requisite service period, which is usually the vesting period.</li></ul></div>
+
+</section>
+
+<section>
+  <h2 id="s-restricted">Restricted stock awards and restricted stock units</h2>
+
+  <p>A <strong>restricted stock award</strong> gives the employee actual shares, registered in the employee&rsquo;s name, that cannot be sold during a restriction period and are forfeited if the employee leaves before the shares vest. A <strong>restricted stock unit (RSU)</strong> is a promise to deliver a specified number of shares <em>when</em> the vesting requirement is met; no shares are issued until then. RSUs are now far more common than restricted stock awards, and both have largely replaced stock options as the main form of executive pay.</p>
+  <p>The accounting for the two is essentially the same when they will be settled in shares:</p>
+  <ul><li><strong>Measure</strong> the compensation as the market price of an unrestricted share on the grant date times the number of shares.</li><li><strong>Expense</strong> it straight-line over the vesting period, crediting <strong>Paid-in capital—restricted stock</strong>.</li><li><strong>At vesting</strong>, replace paid-in capital—restricted stock with Common stock (par) and Paid-in capital—excess of par.</li><li>Market price changes after the grant date <strong>do not change</strong> total compensation.</li></ul>
+  <div class="example-box">
+    <h3>Catamount Analytics: RSUs settled in shares</h3>
+    <div class="facts"><p>On January 1 of Year 1, Catamount Analytics grants key executives RSUs for 400,000 shares of its $1 par common stock. The units vest at the end of Year 4 if the executives are still employed. The market price of the shares on the grant date is $30.</p></div>
+    <div class="table-scroll"><table class="compact"><caption>Measuring the compensation</caption><thead><tr><th scope="col">Item</th><th scope="col" class="num">Amount</th></tr></thead><tbody><tr><th scope="row">Market price of a share on the grant date</th><td class="num">$30</td></tr><tr><th scope="row">× Shares represented by the RSUs</th><td class="num">400,000</td></tr><tr class="plug"><th scope="row">Total compensation</th><td class="num">12,000,000</td></tr><tr><th scope="row">Expense per year (÷ 4 years)</th><td class="num">3,000,000</td></tr></tbody></table></div>
+    <p><strong>January 1, Year 1:</strong> no entry. The award has been promised, but no service has been performed.</p>
+    <div class="je-wrap"><p class="je-date">December 31 of Years 1, 2, 3, and 4</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: December 31 of Years 1, 2, 3, and 4</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Compensation expense ($12,000,000 ÷ 4)</td><td class="num">3,000,000</td><td class="num"></td></tr><tr><td class="cr-acct">Paid-in capital—restricted stock</td><td class="num"></td><td class="num">3,000,000</td></tr></tbody></table></div></div>
+    <div class="je-wrap"><p class="je-date">December 31, Year 4: shares delivered at vesting</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: December 31, Year 4: shares delivered at vesting</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Paid-in capital—restricted stock (400,000 × $30)</td><td class="num">12,000,000</td><td class="num"></td></tr><tr><td class="cr-acct">Common stock (400,000 × $1)</td><td class="num"></td><td class="num">400,000</td></tr><tr><td class="cr-acct">Paid-in capital—excess of par (the rest)</td><td class="num"></td><td class="num">11,600,000</td></tr></tbody></table></div></div>
+    <p>Total equity rises by $3,000,000 a year as the expense is recorded (the expense lowers retained earnings; paid-in capital rises by the same amount), so the award has no net effect on total equity. The vesting entry only moves amounts between paid-in capital accounts.</p>
+  </div>
+  <h3>Forfeitures of restricted stock</h3>
+  <p>If an employee leaves before vesting, the shares or units are forfeited. The entries previously recorded for that employee are <strong>reversed</strong>, lowering compensation expense in the year of the forfeiture. The remaining compensation, adjusted for the forfeiture, is then spread over the rest of the service period.</p>
+  <div class="example-box">
+    <h3>Catamount Analytics: an executive leaves</h3>
+    <div class="facts"><p>Continue the example. During Year 2, an executive holding 10% of the RSUs (40,000 units) leaves the company to join a competitor.</p></div>
+    <div class="je-wrap"><p class="je-date">Year 2: reverse the Year 1 expense for the forfeited units</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: Year 2: reverse the Year 1 expense for the forfeited units</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Paid-in capital—restricted stock (10% × $3,000,000)</td><td class="num">300,000</td><td class="num"></td></tr><tr><td class="cr-acct">Compensation expense</td><td class="num"></td><td class="num">300,000</td></tr></tbody></table></div></div>
+    <div class="table-scroll"><table class="compact"><caption>Compensation for the rest of the service period</caption><thead><tr><th scope="col">Item</th><th scope="col" class="num">Amount</th></tr></thead><tbody><tr><th scope="row">Total compensation originally measured</th><td class="num">12,000,000</td></tr><tr><th scope="row">Less: forfeited units (10% × $12,000,000)</th><td class="num">(1,200,000)</td></tr><tr class="sub"><th scope="row">Total compensation for the units still expected to vest</th><td class="num">10,800,000</td></tr><tr><th scope="row">Less: recorded so far, net ($3,000,000 − $300,000)</th><td class="num">(2,700,000)</td></tr><tr><th scope="row">Remaining compensation</th><td class="num">8,100,000</td></tr><tr class="plug"><th scope="row">Expense in each of Years 2, 3, and 4 (÷ 3 years)</th><td class="num">2,700,000</td></tr></tbody></table></div>
+    <div class="je-wrap"><p class="je-date">December 31 of Years 2, 3, and 4</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: December 31 of Years 2, 3, and 4</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Compensation expense</td><td class="num">2,700,000</td><td class="num"></td></tr><tr><td class="cr-acct">Paid-in capital—restricted stock</td><td class="num"></td><td class="num">2,700,000</td></tr></tbody></table></div></div>
+    <p>Over the four years Catamount recognizes $10,800,000 in total, which is the grant-date value of the 360,000 units that actually vest. At vesting it issues 360,000 shares.</p>
+  </div>
+  <h3>Two variations</h3>
+  <ul><li><strong>Deferred compensation.</strong> Some companies record the full grant-date value at the grant date: debit <em>Deferred compensation</em> (a contra-equity account) and credit the stock accounts. Deferred compensation is then credited as compensation expense is recorded. The income statement and total equity end up exactly the same as the approach above.</li><li><strong>Cash-settled RSUs are liabilities.</strong> If the employee will receive cash, or can choose cash, the award is a <em>liability</em>. The credit each year goes to <em>Liability—restricted stock</em>, and the liability (and compensation) is adjusted each period to the shares&rsquo; current fair value until it is paid. The same idea applies to cash-settled stock appreciation rights, covered later in these notes.</li></ul>
+  <div class="callout codif"><p class="callout-title">In the FASB Codification</p><ul><li><span class="asc">ASC 718-20</span> covers awards classified as equity, including restricted shares and restricted stock units settled in shares.</li><li>Awards that the employee can require the company to settle in cash are classified as liabilities under <span class="asc">ASC 718-30</span> and remeasured at fair value each reporting date until settled.</li></ul></div>
+
+</section>
+
+<section>
+  <h2 id="s-options">Stock options</h2>
+
+  <p>A <strong>stock option</strong> gives an employee the right to buy a specified number of shares at a fixed <strong>exercise price</strong> during a specified period. Options usually cannot be exercised until they vest, which encourages the employee to stay. The exercise price is usually set equal to the market price on the grant date, so the option has no <em>intrinsic value</em> when it is granted. It still has value, though: the employee can wait and buy later at today&rsquo;s price if the share price rises.</p>
+  <h3>Measuring the fair value of an option</h3>
+  <p>Employee stock options do not trade, so their fair value is estimated with an <strong>option-pricing model</strong> (for example, Black-Scholes-Merton or a binomial lattice model). The model must consider six inputs:</p>
+  <div class="table-scroll"><table class="compact"><caption>The inputs to an option-pricing model, and how each affects an option’s value</caption><thead><tr><th scope="col">If this input is higher…</th><th scope="col">…the option’s fair value is</th></tr></thead><tbody><tr><th scope="row">Exercise price</th><td>Lower</td></tr><tr><th scope="row">Expected term of the option</th><td>Higher</td></tr><tr><th scope="row">Current market price of the stock</th><td>Higher</td></tr><tr><th scope="row">Expected dividends</th><td>Lower</td></tr><tr><th scope="row">Risk-free interest rate</th><td>Higher</td></tr><tr><th scope="row">Expected volatility of the stock price</th><td>Higher</td></tr></tbody></table></div>
+  <p>An option&rsquo;s fair value has two parts: <strong>intrinsic value</strong> (market price minus exercise price, if positive) and <strong>time value</strong> (the benefit of delaying payment of the exercise price, plus the chance the share price will rise while the holder&rsquo;s loss is limited to the option&rsquo;s value).</p>
+  <div class="example-box">
+    <h3>Blue Ridge Biologics: options with cliff vesting</h3>
+    <div class="facts"><p>On January 1 of Year 1, Blue Ridge Biologics grants executives 1,000,000 options to buy $1 par common shares at an exercise price of $40, the market price that day. The options vest at the end of Year 4 (cliff vesting) and expire at the end of Year 10. An option-pricing model estimates the fair value at $9 per option. For now, assume no forfeitures are expected.</p></div>
+    <div class="table-scroll"><table class="compact"><caption>Measuring the compensation</caption><thead><tr><th scope="col">Item</th><th scope="col" class="num">Amount</th></tr></thead><tbody><tr><th scope="row">Fair value per option on the grant date</th><td class="num">$9</td></tr><tr><th scope="row">× Options granted</th><td class="num">1,000,000</td></tr><tr class="plug"><th scope="row">Total compensation</th><td class="num">9,000,000</td></tr><tr><th scope="row">Expense per year (÷ 4-year vesting period)</th><td class="num">2,250,000</td></tr></tbody></table></div>
+    <div class="je-wrap"><p class="je-date">December 31 of Years 1, 2, 3, and 4</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: December 31 of Years 1, 2, 3, and 4</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Compensation expense ($9,000,000 ÷ 4)</td><td class="num">2,250,000</td><td class="num"></td></tr><tr><td class="cr-acct">Paid-in capital—stock options</td><td class="num"></td><td class="num">2,250,000</td></tr></tbody></table></div></div>
+    <p>The fair value is <strong>fixed at the grant date</strong>. If the share price later doubles or falls by half, total compensation stays at $9,000,000.</p>
+  </div>
+  <h3>Forfeitures: two acceptable policies</h3>
+  <p>Some options will be forfeited when employees leave before vesting. A company chooses, and discloses, one of two policies:</p>
+  <ul><li><strong>Estimate forfeitures</strong> (the default). Reduce total compensation for the options expected to be forfeited. When the estimate changes, adjust the <em>cumulative</em> expense in the year of the change: expense = (new total × fraction of service period completed) − amount already recorded.</li><li><strong>Record forfeitures as they occur</strong> (a practical expedient for forfeitures caused by employee turnover). Start with all options granted, and reduce compensation only when a forfeiture actually happens, again with a cumulative catch-up.</li></ul>
+  <div class="example-box">
+    <h3>Blue Ridge Biologics: estimating forfeitures</h3>
+    <div class="facts"><p>Now suppose Blue Ridge initially expects 4% of the options to be forfeited. During Year 3, it revises its estimate to 10%.</p></div>
+    <div class="table-scroll"><table class="compact"><caption>Compensation expense with a revised forfeiture estimate</caption><thead><tr><th scope="col">Year</th><th scope="col">Calculation</th><th scope="col" class="num">Expense</th></tr></thead><tbody><tr><th scope="row">Year 1</th><td>$9,000,000 × 96% × ¼</td><td class="num">2,160,000</td></tr><tr><th scope="row">Year 2</th><td>$9,000,000 × 96% × 2/4 − $2,160,000</td><td class="num">2,160,000</td></tr><tr><th scope="row">Year 3</th><td>$9,000,000 × 90% × ¾ − $4,320,000</td><td class="num">1,755,000</td></tr><tr><th scope="row">Year 4</th><td>$9,000,000 × 90% × 4/4 − $6,075,000</td><td class="num">2,025,000</td></tr><tr class="plug"><th scope="row">Total</th><td>Grant-date value of the 900,000 options expected to vest</td><td class="num">8,100,000</td></tr></tbody></table></div>
+    <div class="je-wrap"><p class="je-date">December 31, Year 3</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: December 31, Year 3</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Compensation expense</td><td class="num">1,755,000</td><td class="num"></td></tr><tr><td class="cr-acct">Paid-in capital—stock options</td><td class="num"></td><td class="num">1,755,000</td></tr></tbody></table></div></div>
+    <p>The whole effect of the change is caught up in Year 3, the year of the revision. That is different from most changes in estimate, such as a change in an asset&rsquo;s useful life, which are spread over the remaining periods. Year 4&rsquo;s $2,025,000 is what each year would have been if 10% had been expected from the start ($8,100,000 ÷ 4).</p>
+    <p><strong>If Blue Ridge instead records forfeitures as they occur</strong>, it records $2,250,000 in Years 1 and 2. If options with a grant-date value of $900,000 (100,000 options) are forfeited in Year 3, Year 3 expense is $8,100,000 × ¾ − $4,500,000 = $1,575,000, and Year 4 expense is $8,100,000 − $6,075,000 = $2,025,000.</p>
+  </div>
+  <h3>When options are exercised or expire</h3>
+  <div class="example-box">
+    <h3>Blue Ridge Biologics: exercise and expiration</h3>
+    <div class="facts"><p>Assume 900,000 options vest. In Year 6, when the market price is $65, executives exercise 600,000 options. The remaining 300,000 options expire unexercised at the end of Year 10.</p></div>
+    <div class="je-wrap"><p class="je-date">Year 6: exercise of 600,000 options</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: Year 6: exercise of 600,000 options</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Cash (600,000 × $40 exercise price)</td><td class="num">24,000,000</td><td class="num"></td></tr><tr><td>Paid-in capital—stock options (600,000 × $9)</td><td class="num">5,400,000</td><td class="num"></td></tr><tr><td class="cr-acct">Common stock (600,000 × $1)</td><td class="num"></td><td class="num">600,000</td></tr><tr><td class="cr-acct">Paid-in capital—excess of par (to balance)</td><td class="num"></td><td class="num">28,800,000</td></tr></tbody></table></div></div>
+    <div class="je-wrap"><p class="je-date">End of Year 10: 300,000 options expire</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: End of Year 10: 300,000 options expire</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Paid-in capital—stock options (300,000 × $9)</td><td class="num">2,700,000</td><td class="num"></td></tr><tr><td class="cr-acct">Paid-in capital—expiration of stock options</td><td class="num"></td><td class="num">2,700,000</td></tr></tbody></table></div></div>
+    <p>The $65 market price on the exercise date does not appear anywhere in the entry. When options expire, compensation already recorded is <strong>not</strong> reversed; the services were received. The paid-in capital is simply renamed.</p>
+  </div>
+  <div class="callout codif"><p class="callout-title">In the FASB Codification</p><ul><li><span class="asc">ASC 718-10-55</span> describes the factors an option-pricing model must consider: the exercise price, expected term, current share price, expected volatility, expected dividends, and the risk-free rate.</li><li><span class="asc">ASC 718-10-35-3</span> lets a company make an entity-wide policy election to estimate forfeitures or to account for them when they occur, and requires the policy to be disclosed.</li></ul></div>
+
+</section>
+
+<section>
+  <h2 id="s-tax">Income tax effects (connecting to Accounting for Income Taxes)</h2>
+
+  <p>The tax law treats two kinds of option plans differently, and that drives the deferred tax accounting you learned in the income tax unit:</p>
+  <ul><li><strong>Incentive (qualified) stock options.</strong> The employee pays no tax until the shares are later sold, and the company gets <em>no tax deduction</em> at all. With no future deduction there is no temporary difference, so there are <strong>no deferred taxes</strong>. The expense is effectively a permanent difference.</li><li><strong>Nonqualified stock options.</strong> The company deducts the intrinsic value on the exercise date (market price − exercise price) on its tax return. Book expense comes first and the deduction comes later, so each year&rsquo;s compensation expense creates a <strong>deferred tax asset</strong> equal to the expense × the tax rate. Restricted stock awards are handled the same way.</li></ul>
+  <div class="example-box">
+    <h3>Blue Ridge Biologics: nonqualified options, 25% tax rate</h3>
+    <div class="facts"><p>Return to the original example (1,000,000 options, $9,000,000 of compensation, no forfeitures). Suppose the plan is nonqualified and the tax rate is 25%. All the options are exercised in Year 6 when the market price is $65.</p></div>
+    <div class="je-wrap"><p class="je-date">December 31 of Years 1–4: deferred tax effect of the year’s expense</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: December 31 of Years 1–4: deferred tax effect of the year’s expense</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Deferred tax asset (25% × $2,250,000)</td><td class="num">562,500</td><td class="num"></td></tr><tr><td class="cr-acct">Income tax expense</td><td class="num"></td><td class="num">562,500</td></tr></tbody></table></div></div>
+    <p>The after-tax cost each year is $2,250,000 − $562,500 = $1,687,500. After four years the deferred tax asset is $2,250,000.</p>
+    <div class="je-wrap"><p class="je-date">Year 6: exercise of all 1,000,000 options</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: Year 6: exercise of all 1,000,000 options</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Cash (1,000,000 × $40)</td><td class="num">40,000,000</td><td class="num"></td></tr><tr><td>Paid-in capital—stock options</td><td class="num">9,000,000</td><td class="num"></td></tr><tr><td class="cr-acct">Common stock (1,000,000 × $1)</td><td class="num"></td><td class="num">1,000,000</td></tr><tr><td class="cr-acct">Paid-in capital—excess of par (to balance)</td><td class="num"></td><td class="num">48,000,000</td></tr></tbody></table></div></div>
+    <div class="je-wrap"><p class="je-date">Year 6: tax effect of the exercise</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: Year 6: tax effect of the exercise</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Income tax payable [($65 − $40) × 1,000,000 × 25%]</td><td class="num">6,250,000</td><td class="num"></td></tr><tr><td class="cr-acct">Deferred tax asset (balance)</td><td class="num"></td><td class="num">2,250,000</td></tr><tr><td class="cr-acct">Income tax expense (the rest)</td><td class="num"></td><td class="num">4,000,000</td></tr></tbody></table></div></div>
+    <p>The actual tax savings ($6,250,000) exceed the deferred tax asset ($2,250,000) because the deduction is based on the $25 intrinsic value at exercise, not the $9 grant-date fair value. The difference reduces income tax expense in the year of exercise. (A shortfall would increase income tax expense.)</p>
+  </div>
+  <div class="callout codif"><p class="callout-title">In the FASB Codification</p><ul><li><span class="asc">ASC 718-740</span> requires a deferred tax asset for the cumulative compensation cost of awards that will produce a future tax deduction, and recognizes differences between the deduction and the recorded cost in income tax expense when the deduction occurs.</li></ul></div>
+
+</section>
+
+<section>
+  <h2 id="s-graded">Plans with graded vesting</h2>
+
+  <p>The options above all vest on one date (<strong>cliff vesting</strong>). More often, awards vest in pieces over several years, called <strong>graded vesting</strong>; for example, 25% after the first year, 25% after the second, and 50% after the third. A company with graded vesting can account for the award in either of two ways:</p>
+  <ul><li><strong>Separate tranches.</strong> Treat each vesting group (tranche) as its own award. Value each tranche separately, because each has a different expected life, and spread each tranche&rsquo;s cost evenly over its own vesting period. Most companies choose this method because it usually produces a lower total fair value.</li><li><strong>Straight-line.</strong> Spread the total cost of the whole award evenly over the entire vesting period.</li></ul>
+  <p>Either way, the cumulative expense at any date must be <strong>at least the value of the options that have vested</strong> by that date.</p>
+  <div class="example-box">
+    <h3>Pinnacle Park Software: graded vesting</h3>
+    <div class="facts"><p>On January 1 of Year 1, Pinnacle Park Software grants 600,000 options. 25% vest at the end of Year 1, 25% at the end of Year 2, and 50% at the end of Year 3. The estimated fair values are $4 per option for the Year 1 tranche, $5 for the Year 2 tranche, and $6 for the Year 3 tranche.</p></div>
+    <div class="table-scroll"><table class="compact"><caption>Separate-tranche approach: each tranche expensed over its own vesting period</caption><thead><tr><th scope="col">Tranche (options × fair value)</th><th scope="col" class="num">Value</th><th scope="col" class="num">Year 1</th><th scope="col" class="num">Year 2</th><th scope="col" class="num">Year 3</th></tr></thead><tbody><tr><th scope="row">Vests end of Year 1 (150,000 × $4)</th><td class="num">600,000</td><td class="num">600,000</td><td class="num"></td><td class="num"></td></tr><tr><th scope="row">Vests end of Year 2 (150,000 × $5)</th><td class="num">750,000</td><td class="num">375,000</td><td class="num">375,000</td><td class="num"></td></tr><tr><th scope="row">Vests end of Year 3 (300,000 × $6)</th><td class="num">1,800,000</td><td class="num">600,000</td><td class="num">600,000</td><td class="num">600,000</td></tr><tr class="plug"><th scope="row">Compensation expense</th><td class="num">3,150,000</td><td class="num">1,575,000</td><td class="num">975,000</td><td class="num">600,000</td></tr></tbody></table></div>
+    <div class="je-wrap"><p class="je-date">December 31, Year 1 (separate tranches)</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: December 31, Year 1 (separate tranches)</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Compensation expense</td><td class="num">1,575,000</td><td class="num"></td></tr><tr><td class="cr-acct">Paid-in capital—stock options</td><td class="num"></td><td class="num">1,575,000</td></tr></tbody></table></div></div>
+    <p><strong>Straight-line alternative:</strong> $3,150,000 ÷ 3 = $1,050,000 each year. Check the minimum: by the end of Year 1, $600,000 has vested and $1,050,000 has been recognized; by the end of Year 2, $1,350,000 has vested and $2,100,000 has been recognized. Both tests are met.</p>
+  </div>
+  <div class="callout codif"><p class="callout-title">In the FASB Codification</p><ul><li><span class="asc">ASC 718-10-35-8</span> allows awards with graded vesting and only service conditions to be recognized either straight-line over the total period or separately for each tranche, provided the cumulative cost recognized at any date is at least the portion of the award that has vested.</li></ul></div>
+
+</section>
+
+<section>
+  <h2 id="s-conditions">Plans with performance or market conditions</h2>
+
+  <p>Many awards vest only if a target is reached. How the target is handled depends on its type.</p>
+  <div class="table-scroll"><table class="compact"><caption>Performance conditions versus market conditions</caption><thead><tr><th scope="col">Feature</th><th scope="col">Performance condition</th><th scope="col">Market condition</th></tr></thead><tbody><tr><th scope="row">Example targets</th><td>Revenue growth, earnings per share, return on assets, a product launch</td><td>A target share price, or share-price growth beating an index</td></tr><tr><th scope="row">How the target affects the accounting</th><td>Record compensation only if it is <strong>probable</strong> the target will be met; revise when the assessment changes</td><td>Already reflected in the grant-date fair value from the option-pricing model; <strong>no special accounting</strong></td></tr><tr><th scope="row">If the target is never met</th><td>No compensation is recognized in the end; amounts recorded are reversed</td><td>Compensation is still recognized for employees who complete the service period</td></tr></tbody></table></div>
+  <div class="example-box">
+    <h3>Little Tennessee Labs: a performance target</h3>
+    <div class="facts"><p>On January 1 of Year 1, Little Tennessee Labs grants 200,000 options with a fair value of $10 each. The options vest at the end of Year 4 only if revenue grows by 15% over the four years. “Probable” means the same thing it does for loss contingencies: likely to occur.</p></div>
+    <div class="table-scroll"><table class="compact"><caption>Two ways the assessment might change</caption><thead><tr><th scope="col">Situation</th><th scope="col" class="num">Year 1</th><th scope="col" class="num">Year 2</th><th scope="col">Year 3</th><th scope="col" class="num">Year 4</th></tr></thead><tbody><tr><th scope="row">A. Probable at first; in Year 3 the target becomes not probable</th><td class="num">500,000</td><td class="num">500,000</td><td>(1,000,000) reversal</td><td class="num">0</td></tr><tr><th scope="row">B. Not probable at first; in Year 3 the target becomes probable</th><td class="num">0</td><td class="num">0</td><td>1,500,000 catch-up</td><td class="num">500,000</td></tr></tbody></table></div>
+    <p>In Situation B, Year 3 expense is the cumulative amount that should have been recorded, $2,000,000 × ¾ = $1,500,000, less the $0 already recorded.</p>
+    <div class="je-wrap"><p class="je-date">December 31, Year 3 (Situation B)</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: December 31, Year 3 (Situation B)</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Compensation expense</td><td class="num">1,500,000</td><td class="num"></td></tr><tr><td class="cr-acct">Paid-in capital—stock options</td><td class="num"></td><td class="num">1,500,000</td></tr></tbody></table></div></div>
+    <p>If the target had been a <strong>share price</strong> of $60 instead (a market condition), Little Tennessee would record $500,000 every year for employees who stay, whether or not the share price ever reaches $60.</p>
+  </div>
+  <div class="callout codif"><p class="callout-title">In the FASB Codification</p><ul><li><span class="asc">ASC 718-10-25-20</span> and related paragraphs recognize compensation for an award with a performance condition only if it is probable the condition will be achieved, revising the estimate as the assessment changes.</li><li>A market condition is reflected in the grant-date fair value estimate, so compensation is recognized for employees who render the service even if the market condition is never satisfied (<span class="asc">ASC 718-10-30</span>).</li></ul></div>
+
+</section>
+
+<section>
+  <h2 id="s-espp">Employee share purchase plans</h2>
+
+  <p>An <strong>employee share purchase plan (ESPP)</strong> lets employees buy the company&rsquo;s shares directly, usually through payroll deductions, often at a discount. The question is whether the plan is <strong>compensatory</strong>. A plan is <em>noncompensatory</em> (no expense) only if all three conditions are met:</p>
+  <ol><li>Substantially all employees can participate on an equitable basis.</li><li>Employees have no more than one month after the price is fixed to decide whether to participate.</li><li>The discount is no more than 5% (or can be justified as no greater than the cost of a public offering).</li></ol>
+  <p>If any condition is not met, the discount is compensation expense.</p>
+  <div class="example-box">
+    <h3>Mountain Heritage Foods: a 15% discount</h3>
+    <div class="facts"><p>Mountain Heritage Foods lets all employees buy its $1 par common stock at 15% below market price. During the year, employees buy 1,000 shares when the market price is $50.</p></div>
+    <div class="je-wrap"><p class="je-date">Shares sold under a compensatory ESPP</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: Shares sold under a compensatory ESPP</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Cash (1,000 × $50 × 85%)</td><td class="num">42,500</td><td class="num"></td></tr><tr><td>Compensation expense (1,000 × $50 × 15%)</td><td class="num">7,500</td><td class="num"></td></tr><tr><td class="cr-acct">Common stock (1,000 × $1)</td><td class="num"></td><td class="num">1,000</td></tr><tr><td class="cr-acct">Paid-in capital—excess of par (to balance)</td><td class="num"></td><td class="num">49,000</td></tr></tbody></table></div></div>
+    <p>If the discount had been 5% and the other two conditions were met, the plan would be noncompensatory: Mountain Heritage would simply record the sale of shares for the $47,500 of cash received, with no expense.</p>
+  </div>
+  <div class="callout codif"><p class="callout-title">In the FASB Codification</p><ul><li><span class="asc">ASC 718-50-25-1</span> and <span class="asc">25-2</span> set out the conditions under which an employee share purchase plan is not compensatory.</li></ul></div>
+
+</section>
+
+<section>
+  <h2 id="s-sar">Stock appreciation rights (going further)</h2>
+
+  <p>A <strong>stock appreciation right (SAR)</strong> pays the employee the increase in the share price above a set price, without the employee having to buy any shares. Who chooses the form of payment decides the accounting:</p>
+  <ul><li><strong>The company can choose to settle in shares → equity.</strong> Measure fair value at the grant date and expense it over the service period, crediting <em>Paid-in capital—SAR plan</em>, exactly like stock options. The amount is not remeasured.</li><li><strong>The employee will receive cash, or can choose cash → liability.</strong> Remeasure the SARs at fair value at every reporting date. Each period, expense = current fair value × fraction of the service period completed − amount already recognized. The adjustments continue after vesting until the SARs are exercised or expire.</li></ul>
+  <div class="example-box">
+    <h3>Nantahala Gorge Tech: cash-settled SARs</h3>
+    <div class="facts"><p>On January 1 of Year 1, Nantahala Gorge Tech grants 100,000 SARs that executives can settle in cash. They vest at the end of Year 3. The fair value of a SAR is $6.00 at the end of Year 1, $4.50 at the end of Year 2, $7.00 at the end of Year 3, and $8.00 at the end of Year 4, when all the SARs are exercised for $8.00 of appreciation each.</p></div>
+    <div class="table-scroll"><table class="compact"><caption>Cash-settled SARs: remeasured every year</caption><thead><tr><th scope="col">Year</th><th scope="col">Liability that should exist</th><th scope="col" class="num">Expense (change in liability)</th></tr></thead><tbody><tr><th scope="row">Year 1</th><td>$6.00 × 100,000 × ⅓ = $200,000</td><td class="num">200,000</td></tr><tr><th scope="row">Year 2</th><td>$4.50 × 100,000 × ⅔ = $300,000</td><td class="num">100,000</td></tr><tr><th scope="row">Year 3</th><td>$7.00 × 100,000 × 3/3 = $700,000</td><td class="num">400,000</td></tr><tr><th scope="row">Year 4</th><td>$8.00 × 100,000 = $800,000</td><td class="num">100,000</td></tr></tbody></table></div>
+    <div class="je-wrap"><p class="je-date">December 31, Year 2</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: December 31, Year 2</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Compensation expense ($300,000 − $200,000)</td><td class="num">100,000</td><td class="num"></td></tr><tr><td class="cr-acct">Liability—SAR plan</td><td class="num"></td><td class="num">100,000</td></tr></tbody></table></div></div>
+    <div class="je-wrap"><p class="je-date">End of Year 4: SARs exercised</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: End of Year 4: SARs exercised</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Liability—SAR plan</td><td class="num">800,000</td><td class="num"></td></tr><tr><td class="cr-acct">Cash</td><td class="num"></td><td class="num">800,000</td></tr></tbody></table></div></div>
+    <p>If the fair value falls below the amount already recognized, both the liability and compensation expense are reduced. Total compensation ends up equal to the cash actually paid.</p>
+  </div>
+  <div class="callout codif"><p class="callout-title">In the FASB Codification</p><ul><li><span class="asc">ASC 718-30-35</span> remeasures liability-classified awards at fair value at each reporting date until settlement, with changes recognized as compensation cost.</li></ul></div>
+
+</section>
+
+<section>
+  <h2 id="s-ifrs">U.S. GAAP and IFRS</h2>
+
+  <p>IFRS 2, <em>Share-based Payment</em>, follows the same grant-date fair value approach. A few differences remain:</p>
+  <div class="table-scroll"><table class="compact"><caption>Share-based compensation: where U.S. GAAP and IFRS differ</caption><thead><tr><th scope="col">Issue</th><th scope="col">U.S. GAAP</th><th scope="col">IFRS</th></tr></thead><tbody><tr><th scope="row">Graded vesting</th><td>Separate tranches or straight-line; cumulative expense must at least equal the vested portion</td><td>Separate tranches only; no minimum vested-portion test</td></tr><tr><th scope="row">Deferred tax asset for options</th><td>Recorded each year for the cumulative compensation expense × tax rate</td><td>Recorded only when the award is “in the money,” based on intrinsic value earned to date</td></tr><tr><th scope="row">Performance target that can be met after the service period (for example, by a retirement-eligible employee)</th><td>Treated as a performance condition; expense when the target becomes probable</td><td>Treated as a non-vesting condition reflected in grant-date fair value</td></tr></tbody></table></div>
+
+</section>
+
+<section>
+  <h2 id="s-analyst">Reading the numbers like an analyst</h2>
+
+  <ul><li><strong>Incentives cut both ways.</strong> Managers paid in shares and options gain when the share price rises, which aligns their interests with shareholders but also creates pressure to meet earnings expectations. The risk of earnings management is probably higher at companies with generous share-based pay.</li><li><strong>Watch the model inputs.</strong> Option fair values depend on subjective inputs such as expected volatility and expected term. Lower assumptions mean lower expense, so compare the assumptions in the disclosure note from year to year.</li><li><strong>Non-GAAP measures often exclude it.</strong> Many companies report “adjusted” earnings that add back share-based compensation. It is a real cost to shareholders, paid in shares instead of cash, and it dilutes their ownership.</li><li><strong>The shift to RSUs.</strong> Restricted stock is a more certain, though potentially less lucrative, form of pay than options, and many believe it ties pay to performance more sensibly.</li></ul>
+
+</section>
+
+<section>
+  <h2 id="s-mistakes">Common mistakes</h2>
+
+  <ul><li><strong>Recording an entry on the grant date.</strong> No service has been performed yet; the expense begins at the end of the first period.</li><li><strong>Remeasuring equity awards.</strong> Restricted stock and options settled in shares are fixed at grant-date fair value. Only liability awards (cash-settled) are remeasured.</li><li><strong>Using the market price at exercise.</strong> The exercise entry uses the cash received and the paid-in capital—stock options balance; the market price that day is irrelevant (except for the tax deduction on nonqualified options).</li><li><strong>Spreading a change in forfeiture estimate over future years.</strong> Share-based compensation uses a cumulative catch-up in the year of the change.</li><li><strong>Reversing expense when vested options expire.</strong> Expiration only renames paid-in capital; services were already received.</li><li><strong>Treating a market condition like a performance condition.</strong> A share-price target does not affect whether compensation is recognized.</li><li><strong>Calling every ESPP noncompensatory.</strong> A discount larger than 5% makes the discount compensation expense.</li></ul>
+
+</section>
+
+<section>
+  <h2 id="s-practice">Practice with answers</h2>
+
+  <p>Try each problem on paper, then open the answer to check your work.</p>
+  <div class="practice">
+    <h3>Problem 1: Restricted stock units</h3>
+    <p>On January 1 of Year 1, Balsam Gap Bank grants RSUs for 120,000 shares of its $1 par common stock when the market price is $25. The RSUs vest at the end of Year 3. Prepare the entries for December 31, Year 1 and for the vesting date.</p>
+    <details><summary>Show the answer</summary><div class="answer"><div class="je-wrap"><p class="je-date">December 31 of Years 1–3</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: December 31 of Years 1–3</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Compensation expense (120,000 × $25 ÷ 3)</td><td class="num">1,000,000</td><td class="num"></td></tr><tr><td class="cr-acct">Paid-in capital—restricted stock</td><td class="num"></td><td class="num">1,000,000</td></tr></tbody></table></div></div><div class="je-wrap"><p class="je-date">Vesting, end of Year 3</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: Vesting, end of Year 3</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Paid-in capital—restricted stock</td><td class="num">3,000,000</td><td class="num"></td></tr><tr><td class="cr-acct">Common stock (120,000 × $1)</td><td class="num"></td><td class="num">120,000</td></tr><tr><td class="cr-acct">Paid-in capital—excess of par</td><td class="num"></td><td class="num">2,880,000</td></tr></tbody></table></div></div></div></details>
+    <h3>Problem 2: A change in the forfeiture estimate</h3>
+    <p>Tuckaseigee Data grants 500,000 options with a fair value of $6 each that vest in four years. It estimates 5% forfeitures at first, then revises the estimate to 8% in Year 2. Compute compensation expense for Years 1 and 2.</p>
+    <details><summary>Show the answer</summary><div class="answer"><p>Year 1: $3,000,000 × 95% × ¼ = <strong>$712,500</strong>. Year 2: $3,000,000 × 92% × 2/4 − $712,500 = $1,380,000 − $712,500 = <strong>$667,500</strong>. Years 3 and 4 will each be $3,000,000 × 92% × ¼ = $690,000 if the estimate does not change again.</p></div></details>
+    <h3>Problem 3: Exercise of options</h3>
+    <p>Executives exercise 50,000 options with an exercise price of $20 and a grant-date fair value of $5 when the market price is $34. The shares have a $1 par value. Prepare the entry.</p>
+    <details><summary>Show the answer</summary><div class="answer"><div class="je-wrap"><p class="je-date">Exercise of 50,000 options</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: Exercise of 50,000 options</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Cash (50,000 × $20)</td><td class="num">1,000,000</td><td class="num"></td></tr><tr><td>Paid-in capital—stock options (50,000 × $5)</td><td class="num">250,000</td><td class="num"></td></tr><tr><td class="cr-acct">Common stock (50,000 × $1)</td><td class="num"></td><td class="num">50,000</td></tr><tr><td class="cr-acct">Paid-in capital—excess of par</td><td class="num"></td><td class="num">1,200,000</td></tr></tbody></table></div></div><p>The $34 market price does not affect the entry.</p></div></details>
+    <h3>Problem 4: Graded vesting</h3>
+    <p>Options for 300,000 shares vest one-third each year for three years. Fair values are $3, $4, and $5 per option for the three tranches. Compute Year 1 compensation expense under the separate-tranche approach and under straight-line.</p>
+    <details><summary>Show the answer</summary><div class="answer"><p>Tranche values: 100,000 × $3 = $300,000; 100,000 × $4 = $400,000; 100,000 × $5 = $500,000; total $1,200,000. Separate tranches, Year 1: $300,000 + $400,000 ÷ 2 + $500,000 ÷ 3 = <strong>$666,667</strong>. Straight-line: $1,200,000 ÷ 3 = <strong>$400,000</strong>, which is at least the $300,000 vested by the end of Year 1.</p></div></details>
+  </div>
+
+</section>
+
+<section>
+  <h2 id="s-map">Codification map</h2>
+
+  <p>Use this table to find the guidance behind each idea in these notes.</p>
+  <div class="table-scroll"><table class="compact"><caption>Where each idea appears in the Codification</caption><thead><tr><th scope="col">Idea in these notes</th><th scope="col">Where to read it</th><th scope="col">In plain words</th></tr></thead><tbody><tr><th scope="row">Grant-date fair value</th><td><span class="asc">ASC 718-10-30</span></td><td>Measure equity awards at fair value on the grant date.</td></tr><tr><th scope="row">Recognition over the service period</th><td><span class="asc">ASC 718-10-35</span></td><td>Expense the cost over the requisite service period.</td></tr><tr><th scope="row">Forfeiture policy election</th><td><span class="asc">ASC 718-10-35-3</span></td><td>Estimate forfeitures or record them as they occur, and disclose the choice.</td></tr><tr><th scope="row">Graded vesting</th><td><span class="asc">ASC 718-10-35-8</span></td><td>Tranche-by-tranche or straight-line, with a minimum of the vested portion.</td></tr><tr><th scope="row">Option-pricing inputs</th><td><span class="asc">ASC 718-10-55</span></td><td>Exercise price, expected term, share price, volatility, dividends, risk-free rate.</td></tr><tr><th scope="row">Equity-classified awards</th><td><span class="asc">ASC 718-20</span></td><td>Restricted stock, RSUs, and options settled in shares.</td></tr><tr><th scope="row">Liability-classified awards</th><td><span class="asc">ASC 718-30</span></td><td>Cash-settled awards are remeasured each period.</td></tr><tr><th scope="row">Employee share purchase plans</th><td><span class="asc">ASC 718-50-25</span></td><td>When a purchase plan is noncompensatory.</td></tr><tr><th scope="row">Income tax effects</th><td><span class="asc">ASC 718-740</span></td><td>Deferred tax assets for awards that produce future deductions.</td></tr></tbody></table></div>
+
+</section>
+
+<section>
+  <h2 id="s-terms">Key terms</h2>
+
+  <dl class="glossary"><dt>Share-based compensation</dt><dd>Pay whose value depends on the value of the company’s shares: shares, units, options, or cash tied to the share price.</dd><dt>Grant date</dt><dd>The date the company and employee reach a shared understanding of the award’s terms; fair value is measured on this date.</dd><dt>Service period</dt><dd>The periods over which the employee performs the services the award pays for; usually the vesting period.</dd><dt>Vesting</dt><dd>The point at which the employee becomes entitled to the award and it is no longer subject to forfeiture.</dd><dt>Restricted stock award</dt><dd>Shares issued to an employee that cannot be sold and are forfeited if the employee leaves before vesting.</dd><dt>Restricted stock unit (RSU)</dt><dd>A right to receive a specified number of shares once vesting requirements are met; no shares are issued until then.</dd><dt>Stock option</dt><dd>The right to buy a specified number of shares at a fixed exercise price during a specified period.</dd><dt>Exercise price</dt><dd>The price an option holder pays for each share when exercising the option.</dd><dt>Intrinsic value</dt><dd>Market price minus exercise price, if positive.</dd><dt>Option-pricing model</dt><dd>A mathematical model, such as Black-Scholes-Merton or a binomial lattice, used to estimate an option’s fair value.</dd><dt>Cliff vesting</dt><dd>An entire award vests on a single date.</dd><dt>Graded vesting</dt><dd>An award vests in portions (tranches) over several dates.</dd><dt>Performance condition</dt><dd>A vesting target based on the company’s own operations, such as revenue or EPS; compensation is recorded only if achievement is probable.</dd><dt>Market condition</dt><dd>A vesting target based on the share price; reflected in fair value, with no special accounting.</dd><dt>Employee share purchase plan (ESPP)</dt><dd>A plan that lets employees buy company shares, often at a discount.</dd><dt>Stock appreciation right (SAR)</dt><dd>A right to receive the increase in share price above a set price, paid in cash or shares.</dd><dt>Incentive (qualified) stock option</dt><dd>An option plan that gives the employer no tax deduction, so it creates no deferred taxes.</dd><dt>Nonqualified stock option</dt><dd>An option plan in which the employer deducts the intrinsic value at exercise, creating a deferred tax asset as expense is recorded.</dd></dl>
+  <div class="next-box"><p><strong>Where to go next.</strong> Detailed Notes B turns to earnings per share: weighted-average shares, stock dividends and splits, reacquired shares, and preferred dividends. The options and restricted stock in these notes return in Detailed Notes C as potential common shares in diluted EPS.</p></div>
+
+</section>
+
+  </main>
+</div>
+<footer>Detailed Notes A: Share-Based Compensation &middot; ACCT 352 &middot; Western Carolina University<br>All companies in these notes are fictional.</footer>
+<script>
+/* Progressive enhancements (the page works without them):
+   1. Expand the answer boxes when printing, then restore them.
+   2. Make a table wrapper keyboard-focusable only when the table is wider than the screen. */
+(function () {
+  var opened = [];
+  window.addEventListener('beforeprint', function () {
+    opened = [];
+    document.querySelectorAll('details:not([open])').forEach(function (d) { d.setAttribute('open', ''); opened.push(d); });
+  });
+  window.addEventListener('afterprint', function () {
+    opened.forEach(function (d) { d.removeAttribute('open'); });
+    opened = [];
+  });
+  var n = 0;
+  function sizeScrollers() {
+    document.querySelectorAll('.table-scroll').forEach(function (w) {
+      var cap = w.querySelector('caption');
+      if (w.scrollWidth > w.clientWidth + 1) {
+        if (cap && !cap.id) { cap.id = 'tcap-' + (++n); }
+        w.setAttribute('tabindex', '0');
+        w.setAttribute('role', 'group');
+        if (cap) { w.setAttribute('aria-labelledby', cap.id); }
+      } else {
+        w.removeAttribute('tabindex'); w.removeAttribute('role'); w.removeAttribute('aria-labelledby');
+      }
+    });
+  }
+  var t;
+  window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(sizeScrollers, 150); });
+  window.addEventListener('load', sizeScrollers);
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(sizeScrollers); }
+})();
+</script>
+<script id="a11y-fixes-js">
+/* Accessibility support added Oct 2026: names for unlabeled form fields, scrollable wide tables, and screen-reader announcements of results. */
+(function () {
+  var LIVE = !document.querySelector('[aria-live],[role="status"],[role="alert"]');
+  function txt(el) { return el ? (el.textContent || '').replace(/\s+/g, ' ').trim() : ''; }
+  function hasName(el) {
+    if (el.getAttribute('aria-label') || el.getAttribute('aria-labelledby') || el.getAttribute('title')) return true;
+    if (el.id) { try { if (document.querySelector('label[for="' + CSS.escape(el.id) + '"]')) return true; } catch (e) {} }
+    return !!el.closest('label');
+  }
+  function heading(el) {
+    var box = el.closest('fieldset,[class*="block"],[class*="part"],[class*="card"],section,article,.example,.problem');
+    while (box) {
+      var h = box.querySelector('legend,caption,h2,h3,h4,h5,[class*="title"],[class*="label"],[class*="recap"]');
+      if (h && txt(h)) return txt(h).slice(0, 80);
+      box = box.parentElement ? box.parentElement.closest('fieldset,section,article,[class*="block"],[class*="part"]') : null;
+    }
+    return '';
+  }
+  function nameFor(el) {
+    var bits = [], tr = el.closest('tr'), table = el.closest('table');
+    var cap = table && table.querySelector('caption');
+    var h = heading(el); if (h) bits.push(h); else if (cap && txt(cap)) bits.push(txt(cap).slice(0, 80));
+    if (tr && table) {
+      var cell = el.closest('td,th'), rows = Array.prototype.slice.call(table.rows), ri = rows.indexOf(tr);
+      var rowHead = tr.querySelector('th[scope="row"]') || (tr.cells[0] && tr.cells[0] !== cell && !tr.cells[0].querySelector('input,select,textarea') ? tr.cells[0] : null);
+      var head = table.tHead && table.tHead.rows.length ? table.tHead.rows[table.tHead.rows.length - 1] : (rows[0] && rows[0] !== tr && !rows[0].querySelector('input,select') ? rows[0] : null);
+      var colHead = head && cell ? head.cells[cell.cellIndex] : null;
+      var bodyIdx = table.tHead ? ri - table.tHead.rows.length + 1 : ri + (head ? 0 : 1);
+      if (rowHead && txt(rowHead)) bits.push(txt(rowHead).slice(0, 80)); else bits.push('line ' + bodyIdx);
+      if (colHead && txt(colHead)) bits.push(txt(colHead).slice(0, 40));
+      else if (el.tagName === 'SELECT') bits.push('account');
+    } else {
+      var prev = el.previousElementSibling; if (prev && txt(prev)) bits.push(txt(prev).slice(0, 80));
+      if (el.placeholder) bits.push(el.placeholder);
+    }
+    if (!bits.length) bits.push(el.tagName === 'SELECT' ? 'Choose an option' : 'Answer');
+    return bits.join(', ');
+  }
+  function labelAll(root) {
+    (root || document).querySelectorAll('input:not([type="hidden"]):not([type="button"]):not([type="submit"]),select,textarea').forEach(function (el) {
+      if (!hasName(el)) el.setAttribute('aria-label', nameFor(el));
+    });
+  }
+  function wrapTables() {
+    document.querySelectorAll('table').forEach(function (t) {
+      if (t.closest('.a11y-scroll')) return;
+      var p = t.parentElement, s = p ? getComputedStyle(p) : null;
+      if (s && /auto|scroll/.test(s.overflowX)) return;
+      var avail = p ? p.clientWidth : 0;
+      if (!avail || t.scrollWidth <= avail + 1) return;
+      var w = document.createElement('div'); w.className = 'a11y-scroll';
+      if (!t.querySelector('input,select,textarea,button,a[href]')) {
+        w.setAttribute('role', 'region'); w.tabIndex = 0;
+        var c = t.querySelector('caption'); w.setAttribute('aria-label', (c && txt(c)) || 'Table (scrolls sideways)');
+      }
+      p.insertBefore(w, t); w.appendChild(t);
+    });
+  }
+  var live = null;
+  if (LIVE) {
+    live = document.createElement('div'); live.className = 'a11y-sr'; live.setAttribute('aria-live', 'polite'); live.setAttribute('role', 'status');
+    document.body.appendChild(live);
+  }
+  var RESULT = /(score|result|feedback|status|summary|message|msg|grade|total|verdict|outcome)/i;
+  var collecting = false, found = [];
+  function say(msg) { if (!live || !msg) return; live.textContent = ''; setTimeout(function () { live.textContent = msg; }, 60); }
+  var pending;
+  var mo = new MutationObserver(function (muts) {
+    clearTimeout(pending);
+    pending = setTimeout(function () { labelAll(); wrapTables(); }, 50);
+    if (!collecting) return;
+    muts.forEach(function (m) {
+      var n = m.target.nodeType === 1 ? m.target : m.target.parentElement;
+      while (n && n !== document.body) {
+        if (n === live) return;
+        if (RESULT.test((n.id || '') + ' ' + (typeof n.className === 'string' ? n.className : ''))) { if (found.indexOf(n) < 0) found.push(n); return; }
+        n = n.parentElement;
+      }
+    });
+  });
+  function start() {
+    labelAll(); wrapTables();
+    mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+    document.addEventListener('click', function (e) {
+      if (!live || !e.target.closest('button')) return;
+      collecting = true; found = [];
+      setTimeout(function () {
+        collecting = false;
+        var msg = found.map(txt).filter(Boolean).join(' ').slice(0, 300);
+        say(msg);
+      }, 400);
+    }, true);
+    var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(wrapTables, 150); });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
+})();
+</script>
+</body>
+</html>
