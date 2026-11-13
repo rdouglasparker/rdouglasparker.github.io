@@ -263,6 +263,7 @@
                     "homework"     -> Homework packets
                     "tutor"        -> Practice tutors
                     "quiz"         -> Practice quizzes
+                    "review"       -> Exam study guides
      chapter      Optional. e.g. "Ch. 4". Used for sorting and shown
                   as a small tag.
      description  Optional. One or two sentences (shows up to two lines).
@@ -307,6 +308,7 @@ function W(chapter, title, description, link, image){ return { type:"walkthrough
 function H(chapter, title, description, link, image){ return { type:"homework", chapter, title, description, link, image: image || null }; }
 function T(chapter, title, description, link, image){ return { type:"tutor", chapter, title, description, link, image: image || null }; }
 function Q(chapter, title, description, link, image){ return { type:"quiz", chapter, title, description, link, image: image || null }; }
+function R(chapter, title, description, link, image){ return { type:"review", chapter, title, description, link, image: image || null }; }
 
 const ASSIGNMENTS = [
 
@@ -575,6 +577,10 @@ const ASSIGNMENTS = [
   Q("Ch. 9", "Inventory Measurement Part C Notes Practice Quiz",
      "Ten self-check questions on dollar-value LIFO retail, changes in inventory method, and inventory errors.",
      "Quizzes/Ch9-PartC-PracticeQuiz.html", "images/ch9-quiz-part-c.svg"),
+  // ---- Exam study guides (R) ----
+  R("Ch. 8–9", "Inventories Exam Study Guide",
+     "Concept notes and fifteen practice problems with step-by-step solutions: periodic and perpetual entries, cost flow methods, LIFO liquidations, LCNRV and LCM, and estimating inventory.",
+     "examguide/Ch8-9-Inventory-ExamStudyGuide.html", null),
 ];
 
 
@@ -588,7 +594,8 @@ const ASSIGNMENTS = [
     { key:'walkthrough', name:'Guided walkthroughs' },
     { key:'homework',    name:'Homework packets' },
     { key:'tutor',       name:'Practice tutors' },
-    { key:'quiz',        name:'Practice quizzes' }
+    { key:'quiz',        name:'Practice quizzes' },
+    { key:'review',      name:'Exam study guides' }
   ];
   var list = document.getElementById('resources');
   var search = document.getElementById('searchInput');
