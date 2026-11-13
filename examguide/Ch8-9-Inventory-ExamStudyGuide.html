@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inventories — Exam Study Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+  :root {
+    --wcu-purple: #4B2E83; --wcu-purple-dark: #341f5c; --wcu-gold: #C8A24A;
+    --ink: #232023; --paper: #fdfcfb; --panel: #f7f3ec; --rule: #e2d9c8; --gold-light: #f4ecd8;
+    --muted: #5f5955; --warn: #6b4f0e; --warn-bg: #FBF3DC;
+    --ok: #1e5e32; --ok-bg: #e6f2e9; --no: #8c1d18; --no-bg: #fbe9e7;
+    --border-strong: #8a7f6c;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .progress-fill { transition: none !important; } }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; line-height: 1.55; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+  .skip-link { position: absolute; left: 1rem; top: -3rem; background: #fff; color: var(--wcu-purple-dark); font-weight: 700; padding: 0.5rem 0.9rem; border: 2px solid var(--wcu-purple); border-radius: 5px; z-index: 10; }
+  .skip-link:focus { top: 1rem; }
+  a { color: var(--wcu-purple); }
+  header { background: linear-gradient(135deg, var(--wcu-purple) 0%, var(--wcu-purple-dark) 100%); color: #fff; padding: 2.2rem 1.5rem 1.8rem; border-bottom: 6px solid var(--wcu-gold); }
+  header .inner { max-width: 780px; margin: 0 auto; }
+  header .eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: #e3c77f; margin: 0 0 0.4rem; }
+  header h1 { font-family: 'Source Serif 4', serif; font-weight: 700; font-size: 1.9rem; margin: 0 0 0.3rem; }
+  header p.sub { margin: 0; color: #ece6f5; font-size: 0.98rem; }
+  .progress-bar { margin: 0 0 0.4rem; padding: 0; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .progress-track { flex: 1; height: 8px; background: var(--rule); border-radius: 4px; overflow: hidden; border: 1px solid var(--border-strong); }
+  .progress-fill { height: 100%; width: 0%; background: var(--wcu-purple); transition: width 0.3s ease; }
+  .progress-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--muted); white-space: nowrap; }
+  main { max-width: 780px; margin: 0 auto; padding: 1.2rem 1.5rem 4rem; }
+  main:focus { outline: none; }
+  .lo-block { margin-bottom: 2.8rem; }
+  h2 { font-family: 'Source Serif 4', serif; font-size: 1.5rem; margin: 0 0 0.8rem; color: var(--wcu-purple-dark); border-bottom: 2px solid var(--rule); padding-bottom: 0.4rem; }
+  p { margin: 0.6rem 0; }
+  ul, ol { padding-left: 1.4rem; }
+  li { margin-bottom: 0.4rem; }
+  .key-idea { background: var(--panel); border-left: 4px solid var(--wcu-gold); padding: 0.9rem 1.1rem; border-radius: 0 6px 6px 0; margin: 0.9rem 0; }
+  .key-idea strong { color: var(--wcu-purple-dark); }
+  .facts { background: #fff; border: 1px solid var(--rule); border-radius: 8px; padding: 1rem 1.2rem; margin: 1rem 0 1.6rem; }
+  .ex-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--wcu-purple); margin: 0 0 0.4rem; line-height: 1.4; }
+  .facts ul { margin: 0.4rem 0 0; }
+  .example { background: #fff; border: 1px solid var(--rule); border-radius: 8px; padding: 1rem 1.2rem 1.2rem; margin: 1.1rem 0; }
+  .table-wrap { overflow-x: auto; }
+  .table-wrap:focus-visible { outline: 3px solid var(--wcu-purple); outline-offset: 2px; }
+  table.data { border-collapse: collapse; width: 100%; margin: 0.7rem 0; font-size: 0.88rem; }
+  table.data caption { text-align: left; font-weight: 600; font-size: 0.85rem; color: var(--wcu-purple-dark); padding: 0 0 0.3rem; }
+  table.data th, table.data td { border: 1px solid var(--rule); padding: 0.4rem 0.55rem; text-align: left; vertical-align: top; }
+  table.data thead th { background: var(--panel); color: var(--wcu-purple-dark); font-family: 'IBM Plex Mono', monospace; font-size: 0.74rem; text-transform: uppercase; }
+  table.data tbody th { font-weight: 500; min-width: 9rem; }
+  table.data thead th.num { white-space: normal; }
+  table.data td.num, table.data th.num { text-align: right; font-family: 'IBM Plex Mono', monospace; white-space: nowrap; }
+  table.data tr.total-row th, table.data tr.total-row td { background: var(--panel); font-weight: 700; }
+  table.data tr.sub-head th { font-style: italic; font-weight: 600; color: var(--wcu-purple-dark); }
+  table.data th.indent { padding-left: 1.5rem; }
+  .result-ok { color: var(--ok); background: var(--ok-bg); font-weight: 700; }
+  .result-no { color: var(--no); background: var(--no-bg); font-weight: 700; }
+
+  .input-block { display: flex; flex-direction: column; gap: 0.6rem; margin: 0.9rem 0 0.6rem; padding: 0.9rem; background: var(--panel); border-radius: 6px; }
+  .input-item { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+  .input-item label { flex: 1 1 280px; font-size: 0.9rem; font-weight: 600; color: var(--wcu-purple-dark); }
+  .input-item .unit { font-family: 'IBM Plex Mono', monospace; color: var(--muted); }
+  .input-item input[type="number"], .input-item select { font-family: 'IBM Plex Mono', monospace; font-size: 0.92rem; padding: 0.45rem 0.6rem; border: 1px solid var(--border-strong); border-radius: 5px; background: #fff; color: var(--ink); min-height: 2.4rem; }
+  .input-item input[type="number"] { width: 150px; }
+  .input-item select { min-width: 190px; font-family: 'Inter', sans-serif; }
+  .input-item input:focus-visible, .input-item select:focus-visible { outline: 3px solid var(--wcu-purple); outline-offset: 2px; border-color: var(--wcu-purple); }
+  .input-item [aria-invalid="true"] { border: 2px solid var(--no); }
+  .reveal-btn { align-self: flex-start; font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; color: #fff; background: var(--wcu-purple); border: none; padding: 0.6rem 1.1rem; border-radius: 5px; cursor: pointer; margin-top: 0.2rem; min-height: 2.75rem; }
+  .reveal-btn:hover { background: var(--wcu-purple-dark); }
+  .reveal-btn:focus-visible { outline: 3px solid var(--wcu-purple-dark); outline-offset: 3px; box-shadow: 0 0 0 3px #fff inset; }
+
+  .feedback:empty { display: none; }
+  .feedback { font-weight: 600; padding: 0.6rem 0.9rem; border-radius: 6px; margin: 0.4rem 0 0.2rem; font-size: 0.92rem; color: var(--warn); background: var(--warn-bg); border: 1px solid #d9c58f; }
+
+  .solution { margin-top: 0.9rem; padding-top: 0.9rem; border-top: 1px dashed var(--border-strong); }
+  .solution[hidden] { display: none; }
+  .solution-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--wcu-purple); margin: 1rem 0 0.4rem; }
+  .solution-label:first-child { margin-top: 0; }
+  .solution-label:focus { outline: 3px solid var(--wcu-purple); outline-offset: 3px; }
+  .final-answer { font-size: 1rem; margin-top: 0.6rem; }
+  .final-answer strong { color: var(--wcu-purple-dark); }
+
+  table.je-table { border-collapse: collapse; width: 100%; margin: 0.4rem 0 0.2rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.83rem; }
+  table.je-table caption { text-align: left; }
+  table.je-table th { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; color: var(--muted); text-align: left; padding: 0.2rem 0.3rem; border-bottom: 1px solid var(--rule); }
+  table.je-table th.amt { text-align: right; }
+  table.je-table td { padding: 0.26rem 0.3rem; vertical-align: top; }
+  table.je-table td.je-debit-amt, table.je-table td.je-credit-amt { text-align: right; width: 105px; white-space: nowrap; }
+  table.je-table td.indent { padding-left: 1.8rem; }
+  .je-desc { font-size: 0.85rem; color: var(--muted); font-style: italic; margin: 0.2rem 0 0.9rem; }
+  .date-tag { display: inline-block; font-family: 'IBM Plex Mono', monospace; font-weight: 700; font-size: 0.75rem; color: #fff; background: var(--wcu-purple-dark); padding: 0.12rem 0.5rem; border-radius: 4px; margin-top: 0.4rem; }
+
+  .steps-grid { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(0,1fr); gap: 1rem; align-items: start; margin: 0.6rem 0; }
+  @media (max-width: 620px) { .steps-grid { grid-template-columns: 1fr; } }
+  ol.four-step { list-style: none; padding: 0.7rem 0.9rem; margin: 0; background: var(--gold-light); border-radius: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 0.84rem; }
+  ol.four-step li { margin: 0.2rem 0; }
+  ol.four-step li strong { color: var(--wcu-purple-dark); }
+  table.t-acct { border-collapse: collapse; width: 100%; font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem; }
+  table.t-acct caption { font-family: 'Inter', sans-serif; font-weight: 700; color: var(--wcu-purple-dark); font-size: 0.86rem; padding-bottom: 0.2rem; border-bottom: 2px solid var(--ink); }
+  table.t-acct th, table.t-acct td { padding: 0.25rem 0.4rem; }
+  table.t-acct thead th { font-size: 0.7rem; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  table.t-acct tbody th { text-align: left; font-weight: 400; font-family: 'Inter', sans-serif; font-size: 0.8rem; color: var(--muted); }
+  table.t-acct td { text-align: right; width: 28%; }
+  table.t-acct td.dr { border-right: 2px solid var(--ink); }
+  table.t-acct tr.bal td, table.t-acct tr.bal th { border-top: 1px solid var(--ink); font-weight: 700; color: var(--ink); }
+
+  code { font-family: 'IBM Plex Mono', monospace; background: var(--panel); padding: 0 0.25rem; border-radius: 3px; }
+  footer { text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--muted); padding: 1.5rem; }
+</style>
+<style>
+  .focus-list { list-style: none; padding: 0; margin: 0.6rem 0 0; }
+  .focus-list li { display: flex; gap: 0.6rem; align-items: baseline; padding: 0.35rem 0; border-bottom: 1px solid var(--rule); }
+  .focus-list li:last-child { border-bottom: 0; }
+  .focus-list a { font-weight: 600; }
+  .pri { flex: 0 0 auto; font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; padding: 0.1rem 0.45rem; border-radius: 4px; border: 1px solid var(--border-strong); }
+  .pri-high { background: var(--wcu-purple); color: #fff; border-color: var(--wcu-purple); }
+  .pri-know { background: var(--gold-light); color: var(--warn); }
+  .toc { columns: 2 16rem; margin: 0.4rem 0 0; }
+  .toc li { break-inside: avoid; }
+</style>
+<style>
+  .notes { background: #fff; border: 1px solid var(--rule); border-top: 4px solid var(--wcu-purple); border-radius: 8px; padding: 1rem 1.2rem 0.6rem; margin: 1rem 0 1.6rem; }
+  .notes > h3 { font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--wcu-purple); margin: 0 0 0.6rem; }
+  .notes h4 { font-family: 'Source Serif 4', serif; font-size: 1.08rem; color: var(--wcu-purple-dark); margin: 1.1rem 0 0.3rem; }
+  .notes h4:first-of-type { margin-top: 0.2rem; }
+  .notes .asc { font-family: 'IBM Plex Mono', monospace; font-size: 0.74rem; color: var(--muted); }
+  .notes .tip { background: var(--gold-light); border-radius: 6px; padding: 0.55rem 0.8rem; margin: 0.6rem 0; font-size: 0.93rem; }
+  .notes .tip strong { color: var(--warn); }
+</style>
+<style>
+  table.je-in, table.grid-in { border-collapse: collapse; width: 100%; margin: 0.2rem 0 0.4rem; font-size: 0.86rem; background: #fff; }
+  table.je-in caption, table.grid-in caption { text-align: left; font-weight: 600; font-size: 0.85rem; color: var(--wcu-purple-dark); padding: 0.2rem 0 0.3rem; }
+  table.je-in th, table.grid-in th { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; text-transform: uppercase; color: var(--wcu-purple-dark); background: var(--panel); border: 1px solid var(--rule); padding: 0.35rem 0.45rem; text-align: left; }
+  table.je-in th.amt, table.grid-in th.num { text-align: right; }
+  table.grid-in tbody th { text-transform: none; font-family: 'Inter', sans-serif; font-size: 0.86rem; font-weight: 600; background: #fff; }
+  table.je-in td, table.grid-in td { border: 1px solid var(--rule); padding: 0.25rem; }
+  table.grid-in td.given { text-align: right; font-family: 'IBM Plex Mono', monospace; padding-right: 0.5rem; background: var(--panel); }
+  table.je-in select, table.je-in input, table.grid-in input { width: 100%; min-height: 2.3rem; font-size: 0.88rem; padding: 0.35rem 0.45rem; border: 1px solid var(--border-strong); border-radius: 4px; background: #fff; color: var(--ink); }
+  table.je-in select { font-family: 'Inter', sans-serif; min-width: 13rem; }
+  table.je-in input, table.grid-in input { font-family: 'IBM Plex Mono', monospace; text-align: right; min-width: 6.5rem; }
+  table.je-in td.amt-cell { width: 8.5rem; }
+  table.grid-in input { min-width: 4.2rem; padding: 0.35rem 0.35rem; }
+  table.grid-in th { white-space: normal; }
+  table.je-in select:focus-visible, table.je-in input:focus-visible, table.grid-in input:focus-visible { outline: 3px solid var(--wcu-purple); outline-offset: 1px; }
+  table.je-in [aria-invalid="true"], table.grid-in [aria-invalid="true"] { border: 2px solid var(--no); }
+  .je-in-head { display: flex; align-items: center; gap: 0.6rem; margin: 0.5rem 0 0; font-size: 0.88rem; font-weight: 600; color: var(--wcu-purple-dark); }
+  .je-in-head .date-tag { margin-top: 0; }
+  .input-block .table-wrap { width: 100%; }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to the study guide</a>
+
+<header>
+  <div class="inner">
+    <p class="eyebrow">ACCT 351 · Exam Study Guide · Not Graded</p>
+    <h1>Inventories</h1>
+    <p class="sub">Concept notes and fifteen practice problems with step-by-step solutions to help you focus your exam preparation.</p>
+  </div>
+</header>
+
+
+<main id="main" tabindex="-1">
+<div class="progress-bar">
+  <div class="progress-track" id="progressBar" role="progressbar" aria-label="Study guide progress" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-label" id="progressLabel" aria-hidden="true">0 revealed</div>
+</div>
+
+  <div class="key-idea">
+    <p style="margin:0"><strong>How this works:</strong> Each section starts with <strong>concept notes</strong> covering the rules, definitions, and journal entries you need for both the multiple-choice questions and the problems. Read the notes, then work each problem on your own first and enter your answer in every box. Then select <strong>Reveal Answer</strong> to see the correct answer next to yours, along with a detailed explanation and the journal entries. Enter all amounts as positive numbers (enter 0 if there is no amount). For <strong>journal entries</strong>, choose an account on each line you need and enter its amount in the Debit or Credit column; lines can go in any order, and leave extra lines blank. For <strong>tables</strong>, fill in every cell, just as you would on the exam. Answers within $1 of the solution count as a match (rounding). This page isn't graded and doesn't get submitted anywhere; it's just for practice. Have a calculator handy.</p>
+  </div>
+
+  <section class="facts" aria-labelledby="focus-h">
+    <h2 class="ex-label" id="focus-h" style="border:0;padding:0;font-size:0.78rem">Where to focus your study time</h2>
+    <p>Spend most of your time on the <strong>High priority</strong> skills: they take the most practice to do quickly and accurately. Make sure you can explain the <strong>Know it</strong> items in a sentence or two and handle a quick calculation. Several problems ask you to work the same facts two ways (periodic and perpetual, gross and net); know which accounts each one uses.</p>
+    <ul class="focus-list"><li><span class="pri pri-high">High priority</span><span><a href="#p3">Periodic journal entries with the net method, including the sale and the year-end adjusting entry</a></span></li><li><span class="pri pri-high">High priority</span><span><a href="#p4">Perpetual journal entries, including the cost of goods sold entry and shrinkage</a></span></li><li><span class="pri pri-high">High priority</span><span><a href="#p7">Periodic FIFO, LIFO, and weighted average: ending inventory, cost of goods sold, and gross profit</a></span></li><li><span class="pri pri-high">High priority</span><span><a href="#p8">Perpetual FIFO, LIFO, and moving average</a></span></li><li><span class="pri pri-high">High priority</span><span><a href="#p11">Lower of cost or NRV item by item, and the write-down entry</a></span></li><li><span class="pri pri-high">High priority</span><span><a href="#p12">Lower of cost or market: ceiling, floor, designated market, then cost</a></span></li><li><span class="pri pri-high">High priority</span><span><a href="#p10">LIFO liquidation profit and how it is reported</a></span></li><li><span class="pri pri-high">High priority</span><span><a href="#p1">Which goods belong in inventory: f.o.b. terms and consignments</a></span></li><li><span class="pri pri-know">Know it</span><span><a href="#p5">Cost of goods sold schedule</a></span></li><li><span class="pri pri-know">Know it</span><span><a href="#p6">Trade discounts and the gross method</a></span></li><li><span class="pri pri-know">Know it</span><span><a href="#p2">Inventory cost, work in process, shrinkage, right of return</a></span></li><li><span class="pri pri-know">Know it</span><span><a href="#p9">LIFO conformity, IFRS, and choosing a method</a></span></li><li><span class="pri pri-know">Know it</span><span><a href="#p13">Write-down reversals and purchase commitments</a></span></li><li><span class="pri pri-know">Know it</span><span><a href="#p14">The gross profit method and markup on cost</a></span></li><li><span class="pri pri-know">Know it</span><span><a href="#p15">Retail method: conventional percentage, spoilage, LIFO retail</a></span></li></ul>
+  </section>
+
+  <nav class="facts" aria-labelledby="toc-h">
+    <h2 class="ex-label" id="toc-h" style="border:0;padding:0;font-size:0.78rem">Contents</h2>
+    <ol class="toc">
+      <li><a href="#s-own">What belongs in inventory</a></li>
+      <li><a href="#s-sys">Periodic and perpetual systems</a></li>
+      <li><a href="#s-flow">Cost flow methods</a></li>
+      <li><a href="#s-liq">LIFO liquidations</a></li>
+      <li><a href="#s-lcm">LCNRV, LCM, and purchase commitments</a></li>
+      <li><a href="#s-est">Estimating inventory</a></li>
+    </ol>
+  </nav>
+
+  <section class="facts" aria-labelledby="exam-h">
+    <h2 class="ex-label" id="exam-h" style="border:0;padding:0;font-size:0.78rem">Before exam day</h2>
+    <ul>
+      <li>Practice journal entries on paper. You'll write them by hand on the exam, and you need to know which accounts a periodic system uses.</li>
+      <li>Watch your time. Cost flow tables and lower of cost or market take the longest, so practice those until they feel routine.</li>
+      <li>Check your work: ending inventory + cost of goods sold must equal goods available, and every journal entry must balance.</li>
+    </ul>
+  </section>
+
+  <section class="lo-block" aria-labelledby="s-own">
+    <h2 id="s-own">What Belongs in Inventory</h2>
+    <div class="key-idea"><p style="margin:0"><strong>Key idea:</strong> Inventory is what the company <strong>owns</strong>, not just what is in its building, and its cost includes everything needed to get the goods ready for sale.</p></div>
+    <section class="notes" aria-labelledby="n-s-own">
+      <h3 id="n-s-own">Concept notes: ownership and inventory cost</h3>
+      
+      <p class="asc">FASB ASC 330, Inventory</p>
+      <h4>What inventory is</h4>
+      <p>Inventory is the goods a company (1) holds for sale in the normal course of business, (2) is producing for future sale, or (3) will use in producing goods for sale. The primary basis for measuring it is <strong>cost</strong>.</p>
+      <div class="table-wrap" role="region" tabindex="0" aria-label="Types of inventory"><table class="data">
+          <caption>Types of inventory</caption>
+          <thead><tr><th scope="col">Type of company</th><th scope="col">Account</th><th scope="col">What the cost includes</th></tr></thead>
+          <tbody><tr><th scope="row">Merchandiser</th><td>Merchandise inventory</td><td>Purchase price plus costs to get the goods ready for sale</td></tr><tr><th scope="row">Manufacturer</th><td>Raw materials</td><td>Purchase price of parts and materials, plus freight</td></tr><tr><th scope="row">Manufacturer</th><td>Work in process</td><td>Direct materials used + direct labor + allocated manufacturing overhead</td></tr><tr><th scope="row">Manufacturer</th><td>Finished goods</td><td>All costs accumulated in work in process for completed products</td></tr></tbody></table></div>
+      <h4>Which goods belong in inventory</h4>
+      <p>The test is not &ldquo;what is in the building&rdquo; but who holds <strong>title</strong> (and the risks of ownership).</p>
+      <div class="table-wrap" role="region" tabindex="0" aria-label="Ownership rules at year-end"><table class="data">
+          <caption>Ownership rules at year-end</caption>
+          <thead><tr><th scope="col">Situation</th><th scope="col">Whose inventory?</th></tr></thead>
+          <tbody><tr><th scope="row">Goods in transit, f.o.b. shipping point</th><td>The <strong>buyer</strong>: title passed when the goods were shipped</td></tr><tr><th scope="row">Goods in transit, f.o.b. destination</th><td>The <strong>seller</strong>: title passes when the goods arrive</td></tr><tr><th scope="row">Goods out on consignment</th><td>The <strong>consignor</strong> (owner), even though the consignee holds them</td></tr><tr><th scope="row">Goods held on consignment for another company</th><td>Not yours: exclude them from your count</td></tr></tbody></table></div>
+      <h4>Right of return</h4>
+      <p>When customers can return goods, the seller records a <strong>refund liability</strong> at the <strong>sales price</strong> of expected returns and an asset (inventory — estimated returns) for the goods expected back at their <strong>cost</strong>.</p>
+      <h4>Which costs belong in inventory</h4>
+      <ul>
+        <li><strong>Product costs</strong> (inventory, expensed when the goods are sold): purchase price net of trade discounts, freight-in, insurance in transit on goods bought f.o.b. shipping point, and other costs of getting goods ready for sale.</li>
+        <li><strong>Period costs</strong> (expensed when incurred): freight-out on goods shipped to customers, sales commissions, advertising, abnormal spoilage, and idle-facility costs.</li>
+      </ul>
+      <p class="tip"><strong>Study tip:</strong> Work every ownership question from the point of view of the company doing the count. Ask: who has title right now? Then add what you own but did not count, and remove what you counted but do not own.</p>
+    </section>
+    
+    <article class="example" id="p1" aria-labelledby="p1-h">
+      <h3 class="ex-label" id="p1-h">Problem 1 — Which Goods Belong in Inventory?</h3>
+      <p><strong>Catamount Camping Supply</strong> counts the goods in its warehouse on December 31, <span class="yr0">2026</span>, and gets <strong>$310,000</strong>. None of the items below were handled correctly in that count. For each item, decide whether the correct inventory requires adding the amount, subtracting it, or no change.</p><ol type="a"><li>$18,000 of goods purchased f.o.b. shipping point, still in transit (not counted).</li><li>$9,000 of goods purchased f.o.b. destination, still in transit (not counted).</li><li>$14,000 of goods held on consignment for Tuckasegee Tents (counted).</li><li>$11,000 of Catamount goods out on consignment at Cashiers Trail Shop (not counted).</li><li>$6,500 of goods sold f.o.b. destination, shipped December 30, arriving January 3 (not counted).</li><li>$4,000 of goods sold f.o.b. shipping point, shipped December 29 (not counted).</li></ol>
+      <div class="input-block" role="group" aria-labelledby="p1-h">
+        <div class="input-item"><label for="p1-a">Item (a):</label>
+          <select id="p1-a" class="ans" data-label="Item (a)" data-answer="Add"><option value="">Select…</option><option>Add</option><option>Subtract</option><option>No change</option></select></div><div class="input-item"><label for="p1-b">Item (b):</label>
+          <select id="p1-b" class="ans" data-label="Item (b)" data-answer="No change"><option value="">Select…</option><option>Add</option><option>Subtract</option><option>No change</option></select></div><div class="input-item"><label for="p1-c">Item (c):</label>
+          <select id="p1-c" class="ans" data-label="Item (c)" data-answer="Subtract"><option value="">Select…</option><option>Add</option><option>Subtract</option><option>No change</option></select></div><div class="input-item"><label for="p1-d">Item (d):</label>
+          <select id="p1-d" class="ans" data-label="Item (d)" data-answer="Add"><option value="">Select…</option><option>Add</option><option>Subtract</option><option>No change</option></select></div><div class="input-item"><label for="p1-e">Item (e):</label>
+          <select id="p1-e" class="ans" data-label="Item (e)" data-answer="Add"><option value="">Select…</option><option>Add</option><option>Subtract</option><option>No change</option></select></div><div class="input-item"><label for="p1-f">Item (f):</label>
+          <select id="p1-f" class="ans" data-label="Item (f)" data-answer="No change"><option value="">Select…</option><option>Add</option><option>Subtract</option><option>No change</option></select></div><div class="input-item"><label for="p1-g">Correct inventory at Dec. 31, <span class="yr0">2026</span>:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p1-g" class="ans" data-label="Correct inventory at Dec. 31, {yr0}" data-answer="331500" data-unit="$"></div>
+        <button type="button" class="reveal-btn" data-problem="p1" aria-expanded="false" aria-controls="p1-sol">Reveal Answer<span class="sr-only"> for Problem 1</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p1-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 1"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 1</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+
+        <h4 class="solution-label">Explanation</h4>
+        <ul>
+ <li><strong>(a) Add $18,000.</strong> F.o.b. shipping point: title passed to Catamount when the goods left the supplier.</li>
+ <li><strong>(b) No change.</strong> F.o.b. destination: the supplier still owns the goods until they arrive.</li>
+ <li><strong>(c) Subtract $14,000.</strong> Consigned goods belong to the consignor, Tuckasegee Tents.</li>
+ <li><strong>(d) Add $11,000.</strong> Catamount is the consignor and keeps title until the consignee sells the goods.</li>
+ <li><strong>(e) Add $6,500.</strong> Sold f.o.b. destination: Catamount owns them until they reach the customer.</li>
+ <li><strong>(f) No change.</strong> Sold f.o.b. shipping point: title passed to the customer at shipment.</li></ul>
+ <p class="final-answer">$310,000 + $18,000 − $14,000 + $11,000 + $6,500 = <strong>$331,500</strong></p>
+      </div>
+    </article>
+    <article class="example" id="p2" aria-labelledby="p2-h">
+      <h3 class="ex-label" id="p2-h">Problem 2 — Inventory Ground Rules</h3>
+      <p>Settle these rules before you work the numbers.</p>
+      <div class="input-block" role="group" aria-labelledby="p2-h">
+        <div class="input-item"><label for="p2-a">1. Which cost is <strong>not</strong> part of the cost of inventory?</label>
+          <select id="p2-a" class="ans" data-label="Cost not included in inventory" data-answer="Freight-out on goods shipped to customers"><option value="">Select…</option><option>Freight-in on goods purchased</option><option>Insurance in transit on goods bought f.o.b. shipping point</option><option>Freight-out on goods shipped to customers</option><option>Purchase price net of a trade discount</option></select></div><div class="input-item"><label for="p2-b">2. A manufacturer&rsquo;s work in process inventory includes:</label>
+          <select id="p2-b" class="ans" data-label="Work in process cost" data-answer="Direct materials, direct labor, and allocated manufacturing overhead"><option value="">Select…</option><option>Direct materials only</option><option>Direct materials, direct labor, and allocated manufacturing overhead</option><option>Direct materials, direct labor, and selling costs</option><option>Only the cost of finished products</option></select></div><div class="input-item"><label for="p2-c">3. Inventory shrinkage (theft, breakage, errors):</label>
+          <select id="p2-c" class="ans" data-label="Shrinkage" data-answer="Is revealed by a perpetual system when the records are compared with a count; a periodic system buries it in cost of goods sold"><option value="">Select…</option><option>Is revealed by a perpetual system when the records are compared with a count; a periodic system buries it in cost of goods sold</option><option>Is revealed by a periodic system; a perpetual system buries it in cost of goods sold</option><option>Is a period cost that never affects cost of goods sold</option><option>Cannot be detected by either system</option></select></div><div class="input-item"><label for="p2-d">4. With a right of return, the refund liability is measured at:</label>
+          <select id="p2-d" class="ans" data-label="Refund liability measured at" data-answer="The sales price of expected returns"><option value="">Select…</option><option>The sales price of expected returns</option><option>The cost of expected returns</option><option>The net realizable value of expected returns</option><option>Zero until goods are actually returned</option></select></div>
+        <button type="button" class="reveal-btn" data-problem="p2" aria-expanded="false" aria-controls="p2-sol">Reveal Answer<span class="sr-only"> for Problem 2</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p2-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 2"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 2</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+
+        <h4 class="solution-label">Explanation</h4>
+        <ol>
+ <li><strong>Freight-out</strong> is a selling cost, expensed when incurred. The other three are needed to get the goods ready for sale.</li>
+ <li><strong>Materials, labor, and overhead</strong> accumulate in work in process until the goods are finished.</li>
+ <li>Only a <strong>perpetual</strong> system has a book balance to compare with the count. In a periodic system, anything missing simply ends up in cost of goods sold.</li>
+ <li><strong>Sales price.</strong> The asset for goods expected back (inventory — estimated returns) is measured at <strong>cost</strong>.</li></ol>
+      </div>
+    </article>
+  </section>
+  <section class="lo-block" aria-labelledby="s-sys">
+    <h2 id="s-sys">Periodic and Perpetual Systems and Purchase Discounts</h2>
+    <div class="key-idea"><p style="margin:0"><strong>Key idea:</strong> A periodic system records purchases in temporary accounts and finds cost of goods sold at year-end; a perpetual system updates Inventory and cost of goods sold with every transaction.</p></div>
+    <section class="notes" aria-labelledby="n-s-sys">
+      <h3 id="n-s-sys">Concept notes: periodic and perpetual entries</h3>
+      
+      <h4>Periodic vs. perpetual</h4>
+      <p>A <strong>perpetual</strong> system updates Inventory and records cost of goods sold with every transaction. A <strong>periodic</strong> system uses temporary accounts during the year and updates Inventory only at year-end, based on a physical count.</p>
+      <div class="table-wrap" role="region" tabindex="0" aria-label="Which account is debited or credited?"><table class="data">
+          <caption>Which account is debited or credited?</caption>
+          <thead><tr><th scope="col">Event</th><th scope="col">Perpetual system</th><th scope="col">Periodic system</th></tr></thead>
+          <tbody><tr><th scope="row">Buy inventory on account</th><td>Debit Inventory</td><td>Debit Purchases</td></tr><tr><th scope="row">Pay freight on purchases</th><td>Debit Inventory</td><td>Debit Freight-in</td></tr><tr><th scope="row">Return goods to supplier</th><td>Credit Inventory</td><td>Credit Purchase returns</td></tr><tr><th scope="row">Take a discount (gross method)</th><td>Credit Inventory</td><td>Credit Purchase discounts</td></tr><tr><th scope="row">Sell goods</th><td>Record the revenue <em>and</em> debit Cost of goods sold, credit Inventory</td><td>Record the revenue <strong>only</strong>: no cost entry at the time of sale</td></tr><tr><th scope="row">End of period</th><td>Adjust for shrinkage if the count differs from the records</td><td>Adjusting entry: record ending inventory and cost of goods sold, remove beginning inventory, and close the temporary purchase accounts</td></tr></tbody></table></div>
+      <h4>The cost of goods sold equation (periodic)</h4>
+      <p><code>Beginning inventory + net purchases − ending inventory = cost of goods sold</code></p>
+      <p>Net purchases = purchases + freight-in − purchase returns − purchase discounts.</p>
+      <h4>The periodic year-end adjusting entry</h4>
+      <div class="date-tag" aria-hidden="true">Dec. 31</div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Dec. 31</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Inventory (ending, from the count)</td><td class="je-debit-amt">xxx</td><td class="je-credit-amt"></td></tr><tr><td>Cost of goods sold (the plug)</td><td class="je-debit-amt">xxx</td><td class="je-credit-amt"></td></tr><tr><td>Purchase returns</td><td class="je-debit-amt">xxx</td><td class="je-credit-amt"></td></tr><tr><td>Purchase discounts (gross method only)</td><td class="je-debit-amt">xxx</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Inventory (beginning)</td><td class="je-debit-amt"></td><td class="je-credit-amt">xxx</td></tr><tr><td class="indent">Purchases</td><td class="je-debit-amt"></td><td class="je-credit-amt">xxx</td></tr><tr><td class="indent">Freight-in</td><td class="je-debit-amt"></td><td class="je-credit-amt">xxx</td></tr></tbody>
+        </table></div><p class="je-desc">Every temporary purchase account goes to zero; cost of goods sold is the amount that balances the entry.</p>
+      <h4>Purchase discounts: gross vs. net</h4>
+      <p>Terms of 2/10, n/30 mean a 2% discount if paid within 10 days; otherwise the full amount is due in 30 days.</p>
+      <div class="table-wrap" role="region" tabindex="0" aria-label="Gross vs. net method"><table class="data">
+          <caption>Gross vs. net method</caption>
+          <thead><tr><th scope="col"></th><th scope="col">Gross method</th><th scope="col">Net method</th></tr></thead>
+          <tbody><tr><th scope="row">Purchase recorded at</th><td>Full invoice price</td><td>Invoice price less the discount</td></tr><tr><th scope="row">Pay within the discount period</th><td>Credit Purchase discounts (periodic) or Inventory (perpetual)</td><td>Pay the recorded amount: no discount account</td></tr><tr><th scope="row">Pay after the discount period</th><td>Pay the recorded amount</td><td>Debit Interest expense (purchase discounts lost) for the extra</td></tr></tbody></table></div>
+      <p>A <strong>trade discount</strong> (for example, 25% off list price) is never recorded separately: the purchase is simply recorded at the discounted invoice price, and any cash discount is figured on that invoice price.</p>
+      <p class="tip"><strong>Study tip:</strong> Under the net method a missed discount is a financing cost, so it is interest expense, never part of Purchases, Inventory, or cost of goods sold. Leave it out of the year-end adjusting entry.</p>
+    </section>
+    
+    <article class="example" id="p3" aria-labelledby="p3-h">
+      <h3 class="ex-label" id="p3-h">Problem 3 — Journal Entries Under a Periodic System (Net Method)</h3>
+      <p><strong>Tuckasegee River Outfitters</strong> uses a <strong>periodic</strong> system, records purchases with the <strong>net method</strong>, and reports purchase discounts lost as interest expense. Inventory on January 1, <span class="yr0">2026</span>, was <strong>$15,000</strong>, and the October purchases below were its only purchases during <span class="yr0">2026</span>.</p><ul><li>Oct. 3: Purchased canoes on account, invoice price $30,000, terms 2/10, n/30, f.o.b. shipping point.</li><li>Oct. 4: Paid $600 cash to a freight company to ship the October 3 purchase.</li><li>Oct. 6: Returned canoes with an invoice price of $4,000 for credit on account.</li><li>Oct. 9: Purchased life jackets on account, invoice price $12,000, terms 1/10, n/30.</li><li>Oct. 12: Paid the balance owed for the October 3 purchase.</li><li>Nov. 15: Paid for the October 9 purchase.</li><li>Dec. 1: Sold merchandise costing $33,000 to customers for $50,000 on account.</li><li>Dec. 31: A physical count shows ending inventory of $19,960. Record the year-end adjusting entry.</li></ul><p>Prepare each journal entry.</p>
+      <div class="input-block" role="group" aria-labelledby="p3-h">
+        <div class="je-in-head"><span class="date-tag">Oct. 3</span></div><div class="je-mount" data-id="p3-e0" data-name="Oct. 3" data-rows="4" data-key="[[&quot;Purchases&quot;, 29400, 0], [&quot;Accounts payable&quot;, 0, 29400]]" data-accts="[&quot;Accounts payable&quot;, &quot;Accounts receivable&quot;, &quot;Cash&quot;, &quot;Cost of goods sold&quot;, &quot;Freight-in&quot;, &quot;Freight-out expense&quot;, &quot;Interest expense (purchase discounts lost)&quot;, &quot;Inventory&quot;, &quot;Inventory (beginning)&quot;, &quot;Inventory (ending)&quot;, &quot;Purchase discounts&quot;, &quot;Purchase returns&quot;, &quot;Purchases&quot;, &quot;Sales revenue&quot;]"></div><div class="je-in-head"><span class="date-tag">Oct. 4</span></div><div class="je-mount" data-id="p3-e1" data-name="Oct. 4" data-rows="4" data-key="[[&quot;Freight-in&quot;, 600, 0], [&quot;Cash&quot;, 0, 600]]" data-accts="[&quot;Accounts payable&quot;, &quot;Accounts receivable&quot;, &quot;Cash&quot;, &quot;Cost of goods sold&quot;, &quot;Freight-in&quot;, &quot;Freight-out expense&quot;, &quot;Interest expense (purchase discounts lost)&quot;, &quot;Inventory&quot;, &quot;Inventory (beginning)&quot;, &quot;Inventory (ending)&quot;, &quot;Purchase discounts&quot;, &quot;Purchase returns&quot;, &quot;Purchases&quot;, &quot;Sales revenue&quot;]"></div><div class="je-in-head"><span class="date-tag">Oct. 6</span></div><div class="je-mount" data-id="p3-e2" data-name="Oct. 6" data-rows="4" data-key="[[&quot;Accounts payable&quot;, 3920, 0], [&quot;Purchase returns&quot;, 0, 3920]]" data-accts="[&quot;Accounts payable&quot;, &quot;Accounts receivable&quot;, &quot;Cash&quot;, &quot;Cost of goods sold&quot;, &quot;Freight-in&quot;, &quot;Freight-out expense&quot;, &quot;Interest expense (purchase discounts lost)&quot;, &quot;Inventory&quot;, &quot;Inventory (beginning)&quot;, &quot;Inventory (ending)&quot;, &quot;Purchase discounts&quot;, &quot;Purchase returns&quot;, &quot;Purchases&quot;, &quot;Sales revenue&quot;]"></div><div class="je-in-head"><span class="date-tag">Oct. 9</span></div><div class="je-mount" data-id="p3-e3" data-name="Oct. 9" data-rows="4" data-key="[[&quot;Purchases&quot;, 11880, 0], [&quot;Accounts payable&quot;, 0, 11880]]" data-accts="[&quot;Accounts payable&quot;, &quot;Accounts receivable&quot;, &quot;Cash&quot;, &quot;Cost of goods sold&quot;, &quot;Freight-in&quot;, &quot;Freight-out expense&quot;, &quot;Interest expense (purchase discounts lost)&quot;, &quot;Inventory&quot;, &quot;Inventory (beginning)&quot;, &quot;Inventory (ending)&quot;, &quot;Purchase discounts&quot;, &quot;Purchase returns&quot;, &quot;Purchases&quot;, &quot;Sales revenue&quot;]"></div><div class="je-in-head"><span class="date-tag">Oct. 12</span></div><div class="je-mount" data-id="p3-e4" data-name="Oct. 12" data-rows="4" data-key="[[&quot;Accounts payable&quot;, 25480, 0], [&quot;Cash&quot;, 0, 25480]]" data-accts="[&quot;Accounts payable&quot;, &quot;Accounts receivable&quot;, &quot;Cash&quot;, &quot;Cost of goods sold&quot;, &quot;Freight-in&quot;, &quot;Freight-out expense&quot;, &quot;Interest expense (purchase discounts lost)&quot;, &quot;Inventory&quot;, &quot;Inventory (beginning)&quot;, &quot;Inventory (ending)&quot;, &quot;Purchase discounts&quot;, &quot;Purchase returns&quot;, &quot;Purchases&quot;, &quot;Sales revenue&quot;]"></div><div class="je-in-head"><span class="date-tag">Nov. 15</span></div><div class="je-mount" data-id="p3-e5" data-name="Nov. 15" data-rows="4" data-key="[[&quot;Accounts payable&quot;, 11880, 0], [&quot;Interest expense (purchase discounts lost)&quot;, 120, 0], [&quot;Cash&quot;, 0, 12000]]" data-accts="[&quot;Accounts payable&quot;, &quot;Accounts receivable&quot;, &quot;Cash&quot;, &quot;Cost of goods sold&quot;, &quot;Freight-in&quot;, &quot;Freight-out expense&quot;, &quot;Interest expense (purchase discounts lost)&quot;, &quot;Inventory&quot;, &quot;Inventory (beginning)&quot;, &quot;Inventory (ending)&quot;, &quot;Purchase discounts&quot;, &quot;Purchase returns&quot;, &quot;Purchases&quot;, &quot;Sales revenue&quot;]"></div><div class="je-in-head"><span class="date-tag">Dec. 1</span></div><div class="je-mount" data-id="p3-e6" data-name="Dec. 1" data-rows="4" data-key="[[&quot;Accounts receivable&quot;, 50000, 0], [&quot;Sales revenue&quot;, 0, 50000]]" data-accts="[&quot;Accounts payable&quot;, &quot;Accounts receivable&quot;, &quot;Cash&quot;, &quot;Cost of goods sold&quot;, &quot;Freight-in&quot;, &quot;Freight-out expense&quot;, &quot;Interest expense (purchase discounts lost)&quot;, &quot;Inventory&quot;, &quot;Inventory (beginning)&quot;, &quot;Inventory (ending)&quot;, &quot;Purchase discounts&quot;, &quot;Purchase returns&quot;, &quot;Purchases&quot;, &quot;Sales revenue&quot;]"></div><div class="je-in-head"><span class="date-tag">Dec. 31</span></div><div class="je-mount" data-id="p3-e7" data-name="Dec. 31" data-rows="7" data-key="[[&quot;Inventory (ending)&quot;, 19960, 0], [&quot;Cost of goods sold&quot;, 33000, 0], [&quot;Purchase returns&quot;, 3920, 0], [&quot;Inventory (beginning)&quot;, 0, 15000], [&quot;Purchases&quot;, 0, 41280], [&quot;Freight-in&quot;, 0, 600]]" data-accts="[&quot;Accounts payable&quot;, &quot;Accounts receivable&quot;, &quot;Cash&quot;, &quot;Cost of goods sold&quot;, &quot;Freight-in&quot;, &quot;Freight-out expense&quot;, &quot;Interest expense (purchase discounts lost)&quot;, &quot;Inventory&quot;, &quot;Inventory (beginning)&quot;, &quot;Inventory (ending)&quot;, &quot;Purchase discounts&quot;, &quot;Purchase returns&quot;, &quot;Purchases&quot;, &quot;Sales revenue&quot;]"></div>
+        <button type="button" class="reveal-btn" data-problem="p3" aria-expanded="false" aria-controls="p3-sol">Reveal Answer<span class="sr-only"> for Problem 3</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p3-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 3"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 3</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+
+        <h4 class="solution-label">Explanation</h4>
+        <ul>
+ <li>Net amounts: $30,000 × 98% = $29,400; $4,000 × 98% = $3,920; $12,000 × 99% = $11,880.</li>
+ <li>Oct. 12 is within 10 days of Oct. 3: pay $29,400 − $3,920 = $25,480.</li>
+ <li>Nov. 15 is past the discount period for the Oct. 9 purchase: pay the full $12,000; the extra $120 is interest expense.</li>
+ <li>Purchases = $29,400 + $11,880 = $41,280. Goods available = $15,000 + $41,280 + $600 − $3,920 = $52,960. Cost of goods sold = $52,960 − $19,960 = $33,000.</li></ul>
+ <div class="date-tag" aria-hidden="true">Oct. 3, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Oct. 3, 2026</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Purchases</td><td class="je-debit-amt">29,400</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Accounts payable</td><td class="je-debit-amt"></td><td class="je-credit-amt">29,400</td></tr></tbody>
+        </table></div><div class="date-tag" aria-hidden="true">Oct. 4, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Oct. 4, 2026</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Freight-in</td><td class="je-debit-amt">600</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Cash</td><td class="je-debit-amt"></td><td class="je-credit-amt">600</td></tr></tbody>
+        </table></div><div class="date-tag" aria-hidden="true">Oct. 6, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Oct. 6, 2026</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Accounts payable</td><td class="je-debit-amt">3,920</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Purchase returns</td><td class="je-debit-amt"></td><td class="je-credit-amt">3,920</td></tr></tbody>
+        </table></div><div class="date-tag" aria-hidden="true">Oct. 9, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Oct. 9, 2026</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Purchases</td><td class="je-debit-amt">11,880</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Accounts payable</td><td class="je-debit-amt"></td><td class="je-credit-amt">11,880</td></tr></tbody>
+        </table></div><div class="date-tag" aria-hidden="true">Oct. 12, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Oct. 12, 2026</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Accounts payable</td><td class="je-debit-amt">25,480</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Cash</td><td class="je-debit-amt"></td><td class="je-credit-amt">25,480</td></tr></tbody>
+        </table></div><div class="date-tag" aria-hidden="true">Nov. 15, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Nov. 15, 2026</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Accounts payable</td><td class="je-debit-amt">11,880</td><td class="je-credit-amt"></td></tr><tr><td>Interest expense (purchase discounts lost)</td><td class="je-debit-amt">120</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Cash</td><td class="je-debit-amt"></td><td class="je-credit-amt">12,000</td></tr></tbody>
+        </table></div><div class="date-tag" aria-hidden="true">Dec. 1, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Dec. 1, 2026</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Accounts receivable</td><td class="je-debit-amt">50,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Sales revenue</td><td class="je-debit-amt"></td><td class="je-credit-amt">50,000</td></tr></tbody>
+        </table></div><p class="je-desc">Periodic: no cost of goods sold entry at the time of sale.</p><div class="date-tag" aria-hidden="true">Dec. 31, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Dec. 31, 2026</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Inventory (ending)</td><td class="je-debit-amt">19,960</td><td class="je-credit-amt"></td></tr><tr><td>Cost of goods sold</td><td class="je-debit-amt">33,000</td><td class="je-credit-amt"></td></tr><tr><td>Purchase returns</td><td class="je-debit-amt">3,920</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Inventory (beginning)</td><td class="je-debit-amt"></td><td class="je-credit-amt">15,000</td></tr><tr><td class="indent">Purchases</td><td class="je-debit-amt"></td><td class="je-credit-amt">41,280</td></tr><tr><td class="indent">Freight-in</td><td class="je-debit-amt"></td><td class="je-credit-amt">600</td></tr></tbody>
+        </table></div><p class="je-desc">Debits $56,880 = credits $56,880. Interest expense stays out of the entry.</p>
+      </div>
+    </article>
+    <article class="example" id="p4" aria-labelledby="p4-h">
+      <h3 class="ex-label" id="p4-h">Problem 4 — The Same Transactions Under a Perpetual System</h3>
+      <p>Use the <strong>Tuckasegee River Outfitters</strong> transactions from Problem 3, but assume the company uses a <strong>perpetual</strong> system (still the net method). Also assume the December 31 count shows ending inventory of <strong>$19,200</strong> instead of $19,960. Prepare each journal entry, including the December 1 sale and any December 31 adjustment.</p>
+      <div class="input-block" role="group" aria-labelledby="p4-h">
+        <div class="je-in-head"><span class="date-tag">Oct. 3</span></div><div class="je-mount" data-id="p4-e0" data-name="Oct. 3" data-rows="4" data-key="[[&quot;Inventory&quot;, 29400, 0], [&quot;Accounts payable&quot;, 0, 29400]]" data-accts="[&quot;Accounts payable&quot;, &quot;Accounts receivable&quot;, &quot;Cash&quot;, &quot;Cost of goods sold&quot;, &quot;Freight-in&quot;, &quot;Freight-out expense&quot;, &quot;Interest expense (purchase discounts lost)&quot;, &quot;Inventory&quot;, &quot;Inventory (beginning)&quot;, &quot;Inventory (ending)&quot;, &quot;Purchase discounts&quot;, &quot;Purchase returns&quot;, &quot;Purchases&quot;, &quot;Sales revenue&quot;]"></div><div class="je-in-head"><span class="date-tag">Oct. 4</span></div><div class="je-mount" data-id="p4-e1" data-name="Oct. 4" data-rows="4" data-key="[[&quot;Inventory&quot;, 600, 0], [&quot;Cash&quot;, 0, 600]]" data-accts="[&quot;Accounts payable&quot;, &quot;Accounts receivable&quot;, &quot;Cash&quot;, &quot;Cost of goods sold&quot;, &quot;Freight-in&quot;, &quot;Freight-out expense&quot;, &quot;Interest expense (purchase discounts lost)&quot;, &quot;Inventory&quot;, &quot;Inventory (beginning)&quot;, &quot;Inventory (ending)&quot;, &quot;Purchase discounts&quot;, &quot;Purchase returns&quot;, &quot;Purchases&quot;, &quot;Sales revenue&quot;]"></div><div class="je-in-head"><span class="date-tag">Oct. 6</span></div><div class="je-mount" data-id="p4-e2" data-name="Oct. 6" data-rows="4" data-key="[[&quot;Accounts payable&quot;, 3920, 0], [&quot;Inventory&quot;, 0, 3920]]" data-accts="[&quot;Accounts payable&quot;, &quot;Accounts receivable&quot;, &quot;Cash&quot;, &quot;Cost of goods sold&quot;, &quot;Freight-in&quot;, &quot;Freight-out expense&quot;, &quot;Interest expense (purchase discounts lost)&quot;, &quot;Inventory&quot;, &quot;Inventory (beginning)&quot;, &quot;Inventory (ending)&quot;, &quot;Purchase discounts&quot;, &quot;Purchase returns&quot;, &quot;Purchases&quot;, &quot;Sales revenue&quot;]"></div><div class="je-in-head"><span class="date-tag">Oct. 9</span></div><div class="je-mount" data-id="p4-e3" data-name="Oct. 9" data-rows="4" data-key="[[&quot;Inventory&quot;, 11880, 0], [&quot;Accounts payable&quot;, 0, 11880]]" data-accts="[&quot;Accounts payable&quot;, &quot;Accounts receivable&quot;, &quot;Cash&quot;, &quot;Cost of goods sold&quot;, &quot;Freight-in&quot;, &quot;Freight-out expense&quot;, &quot;Interest expense (purchase discounts lost)&quot;, &quot;Inventory&quot;, &quot;Inventory (beginning)&quot;, &quot;Inventory (ending)&quot;, &quot;Purchase discounts&quot;, &quot;Purchase returns&quot;, &quot;Purchases&quot;, &quot;Sales revenue&quot;]"></div><div class="je-in-head"><span class="date-tag">Oct. 12</span></div><div class="je-mount" data-id="p4-e4" data-name="Oct. 12" data-rows="4" data-key="[[&quot;Accounts payable&quot;, 25480, 0], [&quot;Cash&quot;, 0, 25480]]" data-accts="[&quot;Accounts payable&quot;, &quot;Accounts receivable&quot;, &quot;Cash&quot;, &quot;Cost of goods sold&quot;, &quot;Freight-in&quot;, &quot;Freight-out expense&quot;, &quot;Interest expense (purchase discounts lost)&quot;, &quot;Inventory&quot;, &quot;Inventory (beginning)&quot;, &quot;Inventory (ending)&quot;, &quot;Purchase discounts&quot;, &quot;Purchase returns&quot;, &quot;Purchases&quot;, &quot;Sales revenue&quot;]"></div><div class="je-in-head"><span class="date-tag">Nov. 15</span></div><div class="je-mount" data-id="p4-e5" data-name="Nov. 15" data-rows="4" data-key="[[&quot;Accounts payable&quot;, 11880, 0], [&quot;Interest expense (purchase discounts lost)&quot;, 120, 0], [&quot;Cash&quot;, 0, 12000]]" data-accts="[&quot;Accounts payable&quot;, &quot;Accounts receivable&quot;, &quot;Cash&quot;, &quot;Cost of goods sold&quot;, &quot;Freight-in&quot;, &quot;Freight-out expense&quot;, &quot;Interest expense (purchase discounts lost)&quot;, &quot;Inventory&quot;, &quot;Inventory (beginning)&quot;, &quot;Inventory (ending)&quot;, &quot;Purchase discounts&quot;, &quot;Purchase returns&quot;, &quot;Purchases&quot;, &quot;Sales revenue&quot;]"></div><div class="je-in-head"><span class="date-tag">Dec. 1</span></div><div class="je-mount" data-id="p4-e6" data-name="Dec. 1" data-rows="5" data-key="[[&quot;Accounts receivable&quot;, 50000, 0], [&quot;Sales revenue&quot;, 0, 50000], [&quot;Cost of goods sold&quot;, 33000, 0], [&quot;Inventory&quot;, 0, 33000]]" data-accts="[&quot;Accounts payable&quot;, &quot;Accounts receivable&quot;, &quot;Cash&quot;, &quot;Cost of goods sold&quot;, &quot;Freight-in&quot;, &quot;Freight-out expense&quot;, &quot;Interest expense (purchase discounts lost)&quot;, &quot;Inventory&quot;, &quot;Inventory (beginning)&quot;, &quot;Inventory (ending)&quot;, &quot;Purchase discounts&quot;, &quot;Purchase returns&quot;, &quot;Purchases&quot;, &quot;Sales revenue&quot;]"></div><div class="je-in-head"><span class="date-tag">Dec. 31</span></div><div class="je-mount" data-id="p4-e7" data-name="Dec. 31" data-rows="4" data-key="[[&quot;Cost of goods sold&quot;, 760, 0], [&quot;Inventory&quot;, 0, 760]]" data-accts="[&quot;Accounts payable&quot;, &quot;Accounts receivable&quot;, &quot;Cash&quot;, &quot;Cost of goods sold&quot;, &quot;Freight-in&quot;, &quot;Freight-out expense&quot;, &quot;Interest expense (purchase discounts lost)&quot;, &quot;Inventory&quot;, &quot;Inventory (beginning)&quot;, &quot;Inventory (ending)&quot;, &quot;Purchase discounts&quot;, &quot;Purchase returns&quot;, &quot;Purchases&quot;, &quot;Sales revenue&quot;]"></div><div class="input-item"><label for="p4-x">Inventory balance per the records before the count:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p4-x" class="ans" data-label="Inventory balance per the records before the count" data-answer="19960" data-unit="$"></div>
+        <button type="button" class="reveal-btn" data-problem="p4" aria-expanded="false" aria-controls="p4-sol">Reveal Answer<span class="sr-only"> for Problem 4</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p4-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 4"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 4</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+
+        <h4 class="solution-label">Explanation</h4>
+        <p>In a perpetual system every purchase-related cost goes straight into <strong>Inventory</strong>, and each sale records cost of goods sold right away. The year-end entry only fixes shrinkage.</p>
+ <p>Inventory per records: $15,000 + $29,400 + $600 − $3,920 + $11,880 − $33,000 = <strong>$19,960</strong>. The count shows $19,200, so $760 is missing.</p>
+ <div class="date-tag" aria-hidden="true">Oct. 3, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Oct. 3, 2026</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Inventory</td><td class="je-debit-amt">29,400</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Accounts payable</td><td class="je-debit-amt"></td><td class="je-credit-amt">29,400</td></tr></tbody>
+        </table></div><div class="date-tag" aria-hidden="true">Oct. 4, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Oct. 4, 2026</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Inventory</td><td class="je-debit-amt">600</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Cash</td><td class="je-debit-amt"></td><td class="je-credit-amt">600</td></tr></tbody>
+        </table></div><div class="date-tag" aria-hidden="true">Oct. 6, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Oct. 6, 2026</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Accounts payable</td><td class="je-debit-amt">3,920</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Inventory</td><td class="je-debit-amt"></td><td class="je-credit-amt">3,920</td></tr></tbody>
+        </table></div><div class="date-tag" aria-hidden="true">Oct. 9, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Oct. 9, 2026</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Inventory</td><td class="je-debit-amt">11,880</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Accounts payable</td><td class="je-debit-amt"></td><td class="je-credit-amt">11,880</td></tr></tbody>
+        </table></div><p>Oct. 12 and Nov. 15 payments are the same as in Problem 3.</p><div class="date-tag" aria-hidden="true">Dec. 1, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Dec. 1, 2026</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Accounts receivable</td><td class="je-debit-amt">50,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Sales revenue</td><td class="je-debit-amt"></td><td class="je-credit-amt">50,000</td></tr></tbody>
+        </table></div><div class="date-tag" aria-hidden="true">Dec. 1, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Dec. 1, 2026</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Cost of goods sold</td><td class="je-debit-amt">33,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Inventory</td><td class="je-debit-amt"></td><td class="je-credit-amt">33,000</td></tr></tbody>
+        </table></div><p class="je-desc">Perpetual: the cost side of the sale is recorded at the time of sale.</p><div class="date-tag" aria-hidden="true">Dec. 31, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Dec. 31, 2026</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Cost of goods sold (shrinkage)</td><td class="je-debit-amt">760</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Inventory</td><td class="je-debit-amt"></td><td class="je-credit-amt">760</td></tr></tbody>
+        </table></div><div class="key-idea"><p style="margin:0"><strong>Compare:</strong> under the periodic system in Problem 3, the same $760 shortage would have disappeared into cost of goods sold through the plug in the adjusting entry; no one would see it as shrinkage.</p></div>
+      </div>
+    </article>
+    <article class="example" id="p5" aria-labelledby="p5-h">
+      <h3 class="ex-label" id="p5-h">Problem 5 — A Periodic Cost of Goods Sold Schedule (Gross Method)</h3>
+      <p><strong>Sylva Paddle Works</strong> uses a periodic system and the <strong>gross</strong> method. Its <span class="yr0">2026</span> records show: beginning inventory $42,000; purchases $260,000; freight-in $7,500; purchase returns $5,000; purchase discounts $4,200. The year-end count is $47,800.</p>
+      <div class="input-block" role="group" aria-labelledby="p5-h">
+        <div class="input-item"><label for="p5-a">Net purchases:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p5-a" class="ans" data-label="Net purchases" data-answer="258300" data-unit="$"></div><div class="input-item"><label for="p5-b">Cost of goods available for sale:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p5-b" class="ans" data-label="Cost of goods available for sale" data-answer="300300" data-unit="$"></div><div class="input-item"><label for="p5-c">Cost of goods sold:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p5-c" class="ans" data-label="Cost of goods sold" data-answer="252500" data-unit="$"></div>
+        <button type="button" class="reveal-btn" data-problem="p5" aria-expanded="false" aria-controls="p5-sol">Reveal Answer<span class="sr-only"> for Problem 5</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p5-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 5"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 5</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+
+        <h4 class="solution-label">Explanation</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Cost of goods sold schedule"><table class="data">
+          <caption>Cost of goods sold schedule</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col" class="num">Amount</th><th scope="col" class="num">Amount</th></tr></thead>
+          <tbody><tr><th scope="row">Beginning inventory</th><td class="num"></td><td class="num">$42,000</td></tr><tr><th scope="row">Purchases</th><td class="num">$260,000</td><td class="num"></td></tr><tr><th scope="row">Plus: freight-in</th><td class="num">7,500</td><td class="num"></td></tr><tr><th scope="row">Less: purchase returns</th><td class="num">(5,000)</td><td class="num"></td></tr><tr><th scope="row">Less: purchase discounts</th><td class="num">(4,200)</td><td class="num"></td></tr><tr><th scope="row">Net purchases</th><td class="num"></td><td class="num">258,300</td></tr><tr><th scope="row">Cost of goods available for sale</th><td class="num"></td><td class="num">300,300</td></tr><tr><th scope="row">Less: ending inventory</th><td class="num"></td><td class="num">(47,800)</td></tr><tr class="total-row"><th scope="row">Cost of goods sold</th><td class="num"></td><td class="num">$252,500</td></tr></tbody></table></div>
+      </div>
+    </article>
+    <article class="example" id="p6" aria-labelledby="p6-h">
+      <h3 class="ex-label" id="p6-h">Problem 6 — Purchase Discounts and Trade Discounts: Gross vs. Net</h3>
+      <p>On November 4, <span class="yr0">2026</span>, <strong>Webster Bike Co.</strong> buys bicycles with a list price of <strong>$40,000</strong>. The supplier gives a <strong>20% trade discount</strong> and terms of <strong>2/10, n/30</strong>. Webster uses a periodic system. Prepare the entries for the purchase and a November 12 payment under the <strong>gross</strong> method, then the purchase and a December 2 payment (after the discount period) under the <strong>net</strong> method.</p>
+      <div class="input-block" role="group" aria-labelledby="p6-h">
+        <div class="je-in-head"><span class="date-tag">Nov. 4: gross method</span></div><div class="je-mount" data-id="p6-e0" data-name="Nov. 4: gross method" data-rows="4" data-key="[[&quot;Purchases&quot;, 32000, 0], [&quot;Accounts payable&quot;, 0, 32000]]" data-accts="[&quot;Accounts payable&quot;, &quot;Cash&quot;, &quot;Interest expense (purchase discounts lost)&quot;, &quot;Inventory&quot;, &quot;Purchase discounts&quot;, &quot;Purchases&quot;, &quot;Trade discounts&quot;]"></div><div class="je-in-head"><span class="date-tag">Nov. 12: gross method</span></div><div class="je-mount" data-id="p6-e1" data-name="Nov. 12: gross method" data-rows="4" data-key="[[&quot;Accounts payable&quot;, 32000, 0], [&quot;Purchase discounts&quot;, 0, 640], [&quot;Cash&quot;, 0, 31360]]" data-accts="[&quot;Accounts payable&quot;, &quot;Cash&quot;, &quot;Interest expense (purchase discounts lost)&quot;, &quot;Inventory&quot;, &quot;Purchase discounts&quot;, &quot;Purchases&quot;, &quot;Trade discounts&quot;]"></div><div class="je-in-head"><span class="date-tag">Nov. 4: net method</span></div><div class="je-mount" data-id="p6-e2" data-name="Nov. 4: net method" data-rows="4" data-key="[[&quot;Purchases&quot;, 31360, 0], [&quot;Accounts payable&quot;, 0, 31360]]" data-accts="[&quot;Accounts payable&quot;, &quot;Cash&quot;, &quot;Interest expense (purchase discounts lost)&quot;, &quot;Inventory&quot;, &quot;Purchase discounts&quot;, &quot;Purchases&quot;, &quot;Trade discounts&quot;]"></div><div class="je-in-head"><span class="date-tag">Dec. 2: net method</span></div><div class="je-mount" data-id="p6-e3" data-name="Dec. 2: net method" data-rows="4" data-key="[[&quot;Accounts payable&quot;, 31360, 0], [&quot;Interest expense (purchase discounts lost)&quot;, 640, 0], [&quot;Cash&quot;, 0, 32000]]" data-accts="[&quot;Accounts payable&quot;, &quot;Cash&quot;, &quot;Interest expense (purchase discounts lost)&quot;, &quot;Inventory&quot;, &quot;Purchase discounts&quot;, &quot;Purchases&quot;, &quot;Trade discounts&quot;]"></div>
+        <button type="button" class="reveal-btn" data-problem="p6" aria-expanded="false" aria-controls="p6-sol">Reveal Answer<span class="sr-only"> for Problem 6</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p6-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 6"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 6</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+
+        <h4 class="solution-label">Explanation</h4>
+        <p>Trade discount first: $40,000 × 80% = $32,000 invoice price (the trade discount is never recorded). Cash discount: $32,000 × 2% = $640, so the net amount is $31,360.</p>
+ <div class="date-tag" aria-hidden="true">Nov. 4, <span class="yr0">2026</span> (gross)</div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Nov. 4, 2026 (gross)</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Purchases</td><td class="je-debit-amt">32,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Accounts payable</td><td class="je-debit-amt"></td><td class="je-credit-amt">32,000</td></tr></tbody>
+        </table></div><div class="date-tag" aria-hidden="true">Nov. 12, <span class="yr0">2026</span> (gross)</div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Nov. 12, 2026 (gross)</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Accounts payable</td><td class="je-debit-amt">32,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Purchase discounts</td><td class="je-debit-amt"></td><td class="je-credit-amt">640</td></tr><tr><td class="indent">Cash</td><td class="je-debit-amt"></td><td class="je-credit-amt">31,360</td></tr></tbody>
+        </table></div><div class="date-tag" aria-hidden="true">Nov. 4, <span class="yr0">2026</span> (net)</div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Nov. 4, 2026 (net)</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Purchases</td><td class="je-debit-amt">31,360</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Accounts payable</td><td class="je-debit-amt"></td><td class="je-credit-amt">31,360</td></tr></tbody>
+        </table></div><div class="date-tag" aria-hidden="true">Dec. 2, <span class="yr0">2026</span> (net, paid late)</div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Dec. 2, 2026 (net, paid late)</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Accounts payable</td><td class="je-debit-amt">31,360</td><td class="je-credit-amt"></td></tr><tr><td>Interest expense (purchase discounts lost)</td><td class="je-debit-amt">640</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Cash</td><td class="je-debit-amt"></td><td class="je-credit-amt">32,000</td></tr></tbody>
+        </table></div>
+      </div>
+    </article>
+  </section>
+  <section class="lo-block" aria-labelledby="s-flow">
+    <h2 id="s-flow">Cost Flow Methods</h2>
+    <div class="key-idea"><p style="margin:0"><strong>Key idea:</strong> FIFO, LIFO, and average cost split the same goods available between ending inventory and cost of goods sold; they differ only in which costs go where.</p></div>
+    <section class="notes" aria-labelledby="n-s-flow">
+      <h3 id="n-s-flow">Concept notes: FIFO, LIFO, and average cost</h3>
+      
+      <h4>The allocation problem</h4>
+      <p>Every cost flow method divides the same <strong>cost of goods available for sale</strong> between ending inventory and cost of goods sold. FIFO, LIFO, and average cost are assumptions about the flow of <strong>costs</strong>; they do not have to match the physical flow of the goods.</p>
+      <div class="table-wrap" role="region" tabindex="0" aria-label="The four methods"><table class="data">
+          <caption>The four methods</caption>
+          <thead><tr><th scope="col">Method</th><th scope="col">Cost of goods sold carries…</th><th scope="col">Ending inventory carries…</th></tr></thead>
+          <tbody><tr><th scope="row">Specific identification</th><td>The actual cost of the units sold</td><td>The actual cost of the units on hand</td></tr><tr><th scope="row">Weighted average (periodic)</th><td>Total cost available ÷ total units available</td><td>The same average cost</td></tr><tr><th scope="row">FIFO</th><td>The oldest costs</td><td>The newest costs</td></tr><tr><th scope="row">LIFO</th><td>The newest costs</td><td>The oldest costs</td></tr></tbody></table></div>
+      <p>Specific identification works best for unique, high-cost items sold in low volume (boats, cars, jewelry).</p>
+      <h4>Periodic vs. perpetual results</h4>
+      <ul>
+        <li><strong>FIFO</strong> always gives the same answer either way: the oldest units are the first out no matter when you compute.</li>
+        <li><strong>LIFO</strong> differs: perpetual LIFO takes the newest units <em>on hand at the date of each sale</em>.</li>
+        <li><strong>Average cost</strong> differs: perpetual uses a <strong>moving average</strong> recomputed after each purchase.</li>
+      </ul>
+      <div class="table-wrap" role="region" tabindex="0" aria-label="When unit costs are rising"><table class="data">
+          <caption>When unit costs are rising</caption>
+          <thead><tr><th scope="col"></th><th scope="col">FIFO</th><th scope="col">LIFO</th></tr></thead>
+          <tbody><tr><th scope="row">Cost of goods sold</th><td>Lower</td><td>Higher</td></tr><tr><th scope="row">Ending inventory</th><td>Higher (closer to current cost)</td><td>Lower</td></tr><tr><th scope="row">Net income and income taxes</th><td>Higher</td><td>Lower</td></tr></tbody></table></div>
+      <p>When costs fall, the results reverse. When costs are stable, all methods give the same results. Average cost usually falls between FIFO and LIFO.</p>
+      <h4>Rules about choosing a method</h4>
+      <ul>
+        <li><strong>LIFO conformity rule:</strong> a company that uses LIFO on its tax return must also use LIFO in its financial statements.</li>
+        <li><strong>IFRS</strong> (IAS 2) permits specific identification, FIFO, and weighted average, but <strong>prohibits LIFO</strong>.</li>
+        <li>A company must disclose its method, and a voluntary change must be to a <strong>preferable</strong> method.</li>
+      </ul>
+      <p class="tip"><strong>Study tip:</strong> Before you compute anything, write down the goods available in units and dollars. Every method must split that same total, so ending inventory + cost of goods sold must equal it.</p>
+    </section>
+    
+    <article class="example" id="p7" aria-labelledby="p7-h">
+      <h3 class="ex-label" id="p7-h">Problem 7 — Periodic FIFO, LIFO, and Weighted Average</h3>
+      <p><strong>Cullowhee Coffee Roasters</strong> uses a <strong>periodic</strong> system. During <span class="yr0">2026</span> it sold <strong>15,000</strong> units at <strong>$14</strong> each, leaving 5,000 units on hand.</p><div class="table-wrap" role="region" tabindex="0" aria-label="Inventory activity, 2026"><table class="data">
+          <caption>Inventory activity, <span class="yr0">2026</span></caption>
+          <thead><tr><th scope="col">Date</th><th scope="col" class="num">Units</th><th scope="col" class="num">Unit cost</th><th scope="col" class="num">Total cost</th></tr></thead>
+          <tbody><tr><th scope="row">Jan. 1 beginning inventory</th><td class="num">3,000</td><td class="num">$8.00</td><td class="num">$24,000</td></tr><tr><th scope="row">Mar. 15 purchase</th><td class="num">5,000</td><td class="num">8.40</td><td class="num">42,000</td></tr><tr><th scope="row">Jun. 20 purchase</th><td class="num">7,000</td><td class="num">9.00</td><td class="num">63,000</td></tr><tr><th scope="row">Sep. 10 purchase</th><td class="num">4,000</td><td class="num">9.70</td><td class="num">38,800</td></tr><tr><th scope="row">Dec. 5 purchase</th><td class="num">1,000</td><td class="num">10.00</td><td class="num">10,000</td></tr><tr class="total-row"><th scope="row">Goods available for sale</th><td class="num">20,000</td><td class="num"></td><td class="num">$177,800</td></tr></tbody></table></div>
+      <div class="input-block" role="group" aria-labelledby="p7-h">
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Complete the table"><table class="grid-in"><caption>Complete the table</caption><thead><tr><th scope="col">Method</th><th scope="col" class="num">Ending inventory</th><th scope="col" class="num">Cost of goods sold</th><th scope="col" class="num">Gross profit</th></tr></thead><tbody><tr><th scope="row">FIFO</th><td><input type="number" step="any" inputmode="decimal" id="p7-g1" class="ans" aria-label="FIFO: Ending inventory" data-label="FIFO: Ending inventory" data-answer="48800" data-unit="$"></td><td><input type="number" step="any" inputmode="decimal" id="p7-g2" class="ans" aria-label="FIFO: Cost of goods sold" data-label="FIFO: Cost of goods sold" data-answer="129000" data-unit="$"></td><td><input type="number" step="any" inputmode="decimal" id="p7-g3" class="ans" aria-label="FIFO: Gross profit" data-label="FIFO: Gross profit" data-answer="81000" data-unit="$"></td></tr><tr><th scope="row">LIFO</th><td><input type="number" step="any" inputmode="decimal" id="p7-g4" class="ans" aria-label="LIFO: Ending inventory" data-label="LIFO: Ending inventory" data-answer="40800" data-unit="$"></td><td><input type="number" step="any" inputmode="decimal" id="p7-g5" class="ans" aria-label="LIFO: Cost of goods sold" data-label="LIFO: Cost of goods sold" data-answer="137000" data-unit="$"></td><td><input type="number" step="any" inputmode="decimal" id="p7-g6" class="ans" aria-label="LIFO: Gross profit" data-label="LIFO: Gross profit" data-answer="73000" data-unit="$"></td></tr><tr><th scope="row">Weighted average</th><td><input type="number" step="any" inputmode="decimal" id="p7-g7" class="ans" aria-label="Weighted average: Ending inventory" data-label="Weighted average: Ending inventory" data-answer="44450" data-unit="$"></td><td><input type="number" step="any" inputmode="decimal" id="p7-g8" class="ans" aria-label="Weighted average: Cost of goods sold" data-label="Weighted average: Cost of goods sold" data-answer="133350" data-unit="$"></td><td><input type="number" step="any" inputmode="decimal" id="p7-g9" class="ans" aria-label="Weighted average: Gross profit" data-label="Weighted average: Gross profit" data-answer="76650" data-unit="$"></td></tr></tbody></table></div><div class="input-item"><label for="p7-j">Which method gives the lowest taxable income this year?</label>
+          <select id="p7-j" class="ans" data-label="Lowest taxable income" data-answer="LIFO"><option value="">Select…</option><option>FIFO</option><option>LIFO</option><option>Weighted average</option><option>All the same</option></select></div>
+        <button type="button" class="reveal-btn" data-problem="p7" aria-expanded="false" aria-controls="p7-sol">Reveal Answer<span class="sr-only"> for Problem 7</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p7-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 7"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 7</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+
+        <h4 class="solution-label">Explanation</h4>
+        <p>Sales revenue = 15,000 × $14 = $210,000.</p>
+ <div class="table-wrap" role="region" tabindex="0" aria-label="Results"><table class="data">
+          <caption>Results</caption>
+          <thead><tr><th scope="col">Method</th><th scope="col" class="num">Ending inventory (5,000 units)</th><th scope="col" class="num">Cost of goods sold</th><th scope="col" class="num">Gross profit</th></tr></thead>
+          <tbody><tr><th scope="row">FIFO</th><td class="num">1,000 × $10.00 + 4,000 × $9.70 = $48,800</td><td class="num">$129,000</td><td class="num">$81,000</td></tr><tr><th scope="row">LIFO</th><td class="num">3,000 × $8.00 + 2,000 × $8.40 = $40,800</td><td class="num">$137,000</td><td class="num">$73,000</td></tr><tr><th scope="row">Weighted average</th><td class="num">$177,800 ÷ 20,000 = $8.89; 5,000 × $8.89 = $44,450</td><td class="num">$133,350</td><td class="num">$76,650</td></tr></tbody></table></div>
+ <p>Costs rose all year, so LIFO matches the newest, highest costs against sales: highest cost of goods sold, lowest gross profit, lowest taxable income. FIFO leaves the newest costs in ending inventory, so its balance sheet amount is closest to current cost.</p>
+      </div>
+    </article>
+    <article class="example" id="p8" aria-labelledby="p8-h">
+      <h3 class="ex-label" id="p8-h">Problem 8 — The Same Data Under a Perpetual System</h3>
+      <p>Use the <strong>Cullowhee Coffee Roasters</strong> data from Problem 7, now with a <strong>perpetual</strong> system. The 15,000 units were sold on two dates: <strong>6,000 units on April 30</strong> and <strong>9,000 units on October 15</strong>.</p>
+      <div class="input-block" role="group" aria-labelledby="p8-h">
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Complete the table (perpetual system)"><table class="grid-in"><caption>Complete the table (perpetual system)</caption><thead><tr><th scope="col">Method</th><th scope="col" class="num">Cost of goods sold</th><th scope="col" class="num">Ending inventory</th></tr></thead><tbody><tr><th scope="row">FIFO</th><td><input type="number" step="any" inputmode="decimal" id="p8-g1" class="ans" aria-label="FIFO: Cost of goods sold" data-label="FIFO: Cost of goods sold" data-answer="129000" data-unit="$"></td><td><input type="number" step="any" inputmode="decimal" id="p8-g2" class="ans" aria-label="FIFO: Ending inventory" data-label="FIFO: Ending inventory" data-answer="48800" data-unit="$"></td></tr><tr><th scope="row">LIFO</th><td><input type="number" step="any" inputmode="decimal" id="p8-g3" class="ans" aria-label="LIFO: Cost of goods sold" data-label="LIFO: Cost of goods sold" data-answer="133800" data-unit="$"></td><td><input type="number" step="any" inputmode="decimal" id="p8-g4" class="ans" aria-label="LIFO: Ending inventory" data-label="LIFO: Ending inventory" data-answer="44000" data-unit="$"></td></tr><tr><th scope="row">Moving average</th><td><input type="number" step="any" inputmode="decimal" id="p8-g5" class="ans" aria-label="Moving average: Cost of goods sold" data-label="Moving average: Cost of goods sold" data-answer="131400" data-unit="$"></td><td><input type="number" step="any" inputmode="decimal" id="p8-g6" class="ans" aria-label="Moving average: Ending inventory" data-label="Moving average: Ending inventory" data-answer="46400" data-unit="$"></td></tr></tbody></table></div><div class="input-item"><label for="p8-f">Which method gives the same result under periodic and perpetual?</label>
+          <select id="p8-f" class="ans" data-label="Same under both systems" data-answer="FIFO"><option value="">Select…</option><option>FIFO</option><option>LIFO</option><option>Average cost</option><option>None of them</option></select></div>
+        <button type="button" class="reveal-btn" data-problem="p8" aria-expanded="false" aria-controls="p8-sol">Reveal Answer<span class="sr-only"> for Problem 8</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p8-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 8"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 8</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+
+        <h4 class="solution-label">Explanation</h4>
+        <p><strong>FIFO:</strong> same as periodic, $129,000.</p>
+ <p><strong>Perpetual LIFO</strong> (newest units on hand at each sale date):</p>
+ <ul><li>Apr. 30 (8,000 on hand): 5,000 × $8.40 + 1,000 × $8.00 = $50,000. Left: 2,000 × $8.00.</li>
+ <li>Oct. 15 (13,000 on hand): 4,000 × $9.70 + 5,000 × $9.00 = $83,800. Left: 2,000 × $8.00 + 2,000 × $9.00.</li>
+ <li>Dec. 5 purchase adds 1,000 × $10.00. Ending inventory = $16,000 + $18,000 + $10,000 = $44,000. Cost of goods sold = $50,000 + $83,800 = $133,800.</li></ul>
+ <p><strong>Moving average</strong> (recompute after each purchase):</p>
+ <div class="table-wrap" role="region" tabindex="0" aria-label="Perpetual moving average"><table class="data">
+          <caption>Perpetual moving average</caption>
+          <thead><tr><th scope="col">Date</th><th scope="col" class="num">Units on hand</th><th scope="col" class="num">Total cost</th><th scope="col" class="num">Average</th></tr></thead>
+          <tbody><tr><th scope="row">Mar. 15 (after purchase)</th><td class="num">8,000</td><td class="num">$66,000</td><td class="num">$8.25</td></tr><tr><th scope="row">Apr. 30 sale: 6,000 × $8.25 = $49,500</th><td class="num">2,000</td><td class="num">16,500</td><td class="num">8.25</td></tr><tr><th scope="row">Jun. 20 and Sep. 10 purchases</th><td class="num">13,000</td><td class="num">118,300</td><td class="num">9.10</td></tr><tr><th scope="row">Oct. 15 sale: 9,000 × $9.10 = $81,900</th><td class="num">4,000</td><td class="num">36,400</td><td class="num">9.10</td></tr><tr class="total-row"><th scope="row">Dec. 5 purchase</th><td class="num">5,000</td><td class="num">$46,400</td><td class="num">9.28</td></tr></tbody></table></div>
+ <p>Moving-average cost of goods sold = $49,500 + $81,900 = <strong>$131,400</strong>. Check every method: ending inventory + cost of goods sold = $177,800.</p>
+      </div>
+    </article>
+    <article class="example" id="p9" aria-labelledby="p9-h">
+      <h3 class="ex-label" id="p9-h">Problem 9 — Choosing a Method</h3>
+      <p>Answer each question about inventory methods.</p>
+      <div class="input-block" role="group" aria-labelledby="p9-h">
+        <div class="input-item"><label for="p9-a">1. Specific identification is best suited to:</label>
+          <select id="p9-a" class="ans" data-label="Specific identification fits" data-answer="Unique, high-cost items sold in low volume"><option value="">Select…</option><option>Large volumes of identical, low-cost items</option><option>Unique, high-cost items sold in low volume</option><option>Perishable goods sold oldest first</option><option>Commodities stored in bulk</option></select></div><div class="input-item"><label for="p9-b">2. A company that uses LIFO for income taxes:</label>
+          <select id="p9-b" class="ans" data-label="LIFO conformity rule" data-answer="Must also use LIFO in its financial statements"><option value="">Select…</option><option>May use any method in its financial statements</option><option>Must also use LIFO in its financial statements</option><option>Must use FIFO in its financial statements</option><option>Must switch to FIFO under IFRS for taxes</option></select></div><div class="input-item"><label for="p9-c">3. Under IFRS, LIFO is:</label>
+          <select id="p9-c" class="ans" data-label="LIFO under IFRS" data-answer="Prohibited"><option value="">Select…</option><option>Required</option><option>Permitted if disclosed</option><option>Prohibited</option><option>Permitted only for manufacturers</option></select></div><div class="input-item"><label for="p9-d">4. A voluntary change in inventory method must be:</label>
+          <select id="p9-d" class="ans" data-label="Change in method" data-answer="To a preferable method"><option value="">Select…</option><option>Approved by the SEC</option><option>To a preferable method</option><option>Made only at the start of a decade</option><option>Applied only to new purchases</option></select></div>
+        <button type="button" class="reveal-btn" data-problem="p9" aria-expanded="false" aria-controls="p9-sol">Reveal Answer<span class="sr-only"> for Problem 9</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p9-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 9"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 9</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+
+        <h4 class="solution-label">Explanation</h4>
+        <ol><li>Each unit must be tracked individually, which is practical only for distinctive, high-value items.</li>
+ <li>This is the <strong>LIFO conformity rule</strong>. A LIFO company may show non-LIFO amounts only in the notes.</li>
+ <li>IAS 2 allows specific identification, FIFO, and weighted average, but not LIFO.</li>
+ <li>The company must justify the change as preferable and disclose it.</li></ol>
+      </div>
+    </article>
+  </section>
+  <section class="lo-block" aria-labelledby="s-liq">
+    <h2 id="s-liq">LIFO Liquidations</h2>
+    <div class="key-idea"><p style="margin:0"><strong>Key idea:</strong> When sales outpace purchases, LIFO dips into old, low-cost layers; the gap between current and old cost raises income and taxes, and the company discloses it.</p></div>
+    <section class="notes" aria-labelledby="n-s-liq">
+      <h3 id="n-s-liq">Concept notes: LIFO liquidations</h3>
+      
+      <h4>What a LIFO liquidation is</h4>
+      <p>Under LIFO, each year&rsquo;s increase in inventory adds a new <strong>layer</strong> at that year&rsquo;s cost. When units sold exceed units purchased, the company dips into old layers, and their old, low costs flow into cost of goods sold.</p>
+      <p><code>LIFO liquidation profit = units liquidated × (current cost − old layer cost)</code></p>
+      <p>Layers are liquidated newest first: use up the most recent layer before touching an older one. The older the layer, the bigger the profit per unit.</p>
+      <h4>How it is reported</h4>
+      <ul>
+        <li><strong>No separate journal entry</strong>: the effect is already inside cost of goods sold.</li>
+        <li>Because the profit is nonrecurring and does not reflect current margins, the company <strong>discloses</strong> the effect on income in the notes to the financial statements.</li>
+        <li>Liquidation profit is taxable. Buying enough inventory before year-end avoids the liquidation and lowers income tax currently payable.</li>
+      </ul>
+      <p class="tip"><strong>Study tip:</strong> After-tax effect on net income = pre-tax liquidation profit × (1 − tax rate). Tax saved by avoiding the liquidation = pre-tax profit × tax rate.</p>
+    </section>
+    
+    <article class="example" id="p10" aria-labelledby="p10-h">
+      <h3 class="ex-label" id="p10-h">Problem 10 — LIFO Liquidation Profit</h3>
+      <p><strong>Balsam Mountain Supply</strong> uses periodic LIFO. Inventory layers at the beginning of <span class="yr0">2026</span> (oldest first): <strong>6,000 units at $12</strong> and <strong>4,000 units at $15</strong>. During <span class="yr0">2026</span> it bought <strong>30,000 units at $24</strong> and sold <strong>36,000 units</strong>. The income tax rate is 25%.</p>
+      <div class="input-block" role="group" aria-labelledby="p10-h">
+        <div class="input-item"><label for="p10-a">Units liquidated from beginning layers:<span class="sr-only"></span></label>
+          <input type="number" step="any" inputmode="decimal" id="p10-a" class="ans" data-label="Units liquidated from beginning layers" data-answer="6000" data-unit=""></div><div class="input-item"><label for="p10-b">Cost of goods sold:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p10-b" class="ans" data-label="Cost of goods sold" data-answer="804000" data-unit="$"></div><div class="input-item"><label for="p10-c">Pre-tax LIFO liquidation profit:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p10-c" class="ans" data-label="Pre-tax LIFO liquidation profit" data-answer="60000" data-unit="$"></div><div class="input-item"><label for="p10-d">Effect on net income (after tax):<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p10-d" class="ans" data-label="Effect on net income (after tax)" data-answer="45000" data-unit="$"></div><div class="input-item"><label for="p10-e">Income tax saved if Balsam had bought 6,000 more units at $24 before year-end:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p10-e" class="ans" data-label="Income tax saved if Balsam had bought 6,000 more units at $24 before year-end" data-answer="15000" data-unit="$"></div><div class="input-item"><label for="p10-f">How does Balsam report the liquidation?</label>
+          <select id="p10-f" class="ans" data-label="Reporting the liquidation" data-answer="The effect on income is disclosed in the notes; no separate entry is made"><option value="">Select…</option><option>A journal entry debits Inventory and credits Gain on LIFO liquidation</option><option>The effect on income is disclosed in the notes; no separate entry is made</option><option>It is reported below income from continuing operations</option><option>Prior-year cost of goods sold is restated</option></select></div>
+        <button type="button" class="reveal-btn" data-problem="p10" aria-expanded="false" aria-controls="p10-sol">Reveal Answer<span class="sr-only"> for Problem 10</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p10-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 10"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 10</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+
+        <h4 class="solution-label">Explanation</h4>
+        <ul><li>Units liquidated = 36,000 sold − 30,000 bought = 6,000. Ending inventory is 4,000 units, all from the oldest $12 layer.</li>
+ <li>Liquidated: all 4,000 units at $15 (newer layer) and 2,000 units at $12.</li>
+ <li>Cost of goods sold = 30,000 × $24 + 4,000 × $15 + 2,000 × $12 = $720,000 + $60,000 + $24,000 = <strong>$804,000</strong>.</li>
+ <li>Liquidation profit = 4,000 × ($24 − $15) + 2,000 × ($24 − $12) = $36,000 + $24,000 = <strong>$60,000</strong>.</li>
+ <li>After tax: $60,000 × 75% = $45,000. Tax saved: $60,000 × 25% = $15,000.</li></ul>
+      </div>
+    </article>
+  </section>
+  <section class="lo-block" aria-labelledby="s-lcm">
+    <h2 id="s-lcm">Subsequent Measurement: LCNRV, LCM, and Purchase Commitments</h2>
+    <div class="key-idea"><p style="margin:0"><strong>Key idea:</strong> Inventory is written down when its value falls below cost: FIFO and average-cost companies compare cost with NRV; LIFO and retail-method companies compare cost with designated market.</p></div>
+    <section class="notes" aria-labelledby="n-s-lcm">
+      <h3 id="n-s-lcm">Concept notes: lower of cost rules</h3>
+      
+      <p class="asc">FASB ASC 330-10-35, Subsequent measurement</p>
+      <h4>Which rule applies?</h4>
+      <div class="table-wrap" role="region" tabindex="0" aria-label="LCNRV vs. LCM"><table class="data">
+          <caption>LCNRV vs. LCM</caption>
+          <thead><tr><th scope="col">Inventory method</th><th scope="col">Rule</th><th scope="col">Compare cost with</th></tr></thead>
+          <tbody><tr><th scope="row">FIFO, average cost, specific identification</th><td>Lower of cost or net realizable value (LCNRV)</td><td>NRV = estimated selling price − costs to sell</td></tr><tr><th scope="row">LIFO or the retail inventory method</th><td>Lower of cost or market (LCM)</td><td>Designated market (below)</td></tr></tbody></table></div>
+      <h4>Designated market (LCM only)</h4>
+      <ul>
+        <li><strong>Ceiling</strong> = NRV.</li>
+        <li><strong>Floor</strong> = NRV − normal profit.</li>
+        <li><strong>Designated market</strong> = the <strong>middle</strong> value of replacement cost, the ceiling, and the floor.</li>
+        <li>Then compare designated market with <strong>cost</strong> and use the lower amount.</li>
+      </ul>
+      <h4>Applying the rule and recording the write-down</h4>
+      <p>The rule can be applied to individual items, categories, or the entire inventory; the broader the grouping, the smaller the write-down usually is, because gains on some items offset losses on others. A routine write-down is usually included in cost of goods sold; a material one may be reported as a separate loss.</p>
+      <div class="date-tag" aria-hidden="true">Dec. 31</div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Dec. 31</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Cost of goods sold (or Loss on write-down)</td><td class="je-debit-amt">xxx</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Inventory</td><td class="je-debit-amt"></td><td class="je-credit-amt">xxx</td></tr></tbody>
+        </table></div>
+      <h4>Recoveries: U.S. GAAP vs. IFRS</h4>
+      <p>Under U.S. GAAP the written-down amount becomes the new cost and is <strong>never reversed</strong>. IFRS reverses a write-down when value recovers, but not above original cost.</p>
+      <h4>Purchase commitments</h4>
+      <ul>
+        <li>Record a loss in the period the <strong>market price falls</strong> below a noncancelable contract price, not when the goods are sold.</li>
+        <li>Goods received during the year: record inventory at market; the difference is a loss.</li>
+        <li>Contract still open at year-end: debit a loss and credit an <strong>estimated liability on purchase commitment</strong>.</li>
+        <li>Material commitments are disclosed even when no loss is recorded.</li>
+      </ul>
+      <p class="tip"><strong>Study tip:</strong> For LCM, write the three numbers (replacement cost, ceiling, floor) in order from low to high and circle the middle one. Only then compare it with cost.</p>
+    </section>
+    
+    <article class="example" id="p11" aria-labelledby="p11-h">
+      <h3 class="ex-label" id="p11-h">Problem 11 — Lower of Cost or Net Realizable Value (FIFO)</h3>
+      <p><strong>Sylva Summit Sports</strong> uses FIFO and applies the rule item by item. Write-downs of this size are routine for the company. At December 31, <span class="yr0">2026</span>:</p><div class="table-wrap" role="region" tabindex="0" aria-label="Year-end data"><table class="data">
+          <caption>Year-end data</caption>
+          <thead><tr><th scope="col">Product</th><th scope="col" class="num">Cost</th><th scope="col" class="num">Selling price</th><th scope="col" class="num">Costs to sell</th></tr></thead>
+          <tbody><tr><th scope="row">Skis</th><td class="num">$36,000</td><td class="num">$42,000</td><td class="num">$4,000</td></tr><tr><th scope="row">Snowboards</th><td class="num">22,000</td><td class="num">24,000</td><td class="num">3,500</td></tr><tr><th scope="row">Helmets</th><td class="num">8,000</td><td class="num">9,000</td><td class="num">1,600</td></tr><tr><th scope="row">Goggles</th><td class="num">5,000</td><td class="num">7,000</td><td class="num">800</td></tr></tbody></table></div>
+      <div class="input-block" role="group" aria-labelledby="p11-h">
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Complete the table (item by item)"><table class="grid-in"><caption>Complete the table (item by item)</caption><thead><tr><th scope="col">Product</th><th scope="col" class="num">Cost</th><th scope="col" class="num">NRV</th><th scope="col" class="num">Lower of cost or NRV</th></tr></thead><tbody><tr><th scope="row">Skis</th><td class="given">$36,000</td><td><input type="number" step="any" inputmode="decimal" id="p11-g1" class="ans" aria-label="Skis: NRV" data-label="Skis: NRV" data-answer="38000" data-unit="$"></td><td><input type="number" step="any" inputmode="decimal" id="p11-g2" class="ans" aria-label="Skis: Lower of cost or NRV" data-label="Skis: Lower of cost or NRV" data-answer="36000" data-unit="$"></td></tr><tr><th scope="row">Snowboards</th><td class="given">22,000</td><td><input type="number" step="any" inputmode="decimal" id="p11-g3" class="ans" aria-label="Snowboards: NRV" data-label="Snowboards: NRV" data-answer="20500" data-unit="$"></td><td><input type="number" step="any" inputmode="decimal" id="p11-g4" class="ans" aria-label="Snowboards: Lower of cost or NRV" data-label="Snowboards: Lower of cost or NRV" data-answer="20500" data-unit="$"></td></tr><tr><th scope="row">Helmets</th><td class="given">8,000</td><td><input type="number" step="any" inputmode="decimal" id="p11-g5" class="ans" aria-label="Helmets: NRV" data-label="Helmets: NRV" data-answer="7400" data-unit="$"></td><td><input type="number" step="any" inputmode="decimal" id="p11-g6" class="ans" aria-label="Helmets: Lower of cost or NRV" data-label="Helmets: Lower of cost or NRV" data-answer="7400" data-unit="$"></td></tr><tr><th scope="row">Goggles</th><td class="given">5,000</td><td><input type="number" step="any" inputmode="decimal" id="p11-g7" class="ans" aria-label="Goggles: NRV" data-label="Goggles: NRV" data-answer="6200" data-unit="$"></td><td><input type="number" step="any" inputmode="decimal" id="p11-g8" class="ans" aria-label="Goggles: Lower of cost or NRV" data-label="Goggles: Lower of cost or NRV" data-answer="5000" data-unit="$"></td></tr><tr><th scope="row">Total</th><td class="given">$71,000</td><td><input type="number" step="any" inputmode="decimal" id="p11-g9" class="ans" aria-label="Total: NRV" data-label="Total: NRV" data-answer="72100" data-unit="$"></td><td><input type="number" step="any" inputmode="decimal" id="p11-g10" class="ans" aria-label="Total: Lower of cost or NRV" data-label="Total: Lower of cost or NRV" data-answer="68900" data-unit="$"></td></tr><tr><th scope="row">Write-down</th><td></td><td></td><td><input type="number" step="any" inputmode="decimal" id="p11-g11" class="ans" aria-label="Write-down: Lower of cost or NRV" data-label="Write-down: Lower of cost or NRV" data-answer="2100" data-unit="$"></td></tr></tbody></table></div><div class="input-item"><label for="p11-e">Write-down if the rule were applied to the entire inventory:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p11-e" class="ans" data-label="Write-down if the rule were applied to the entire inventory" data-answer="0" data-unit="$"></div><div class="je-in-head"><span class="date-tag">Dec. 31: write-down (routine)</span></div><div class="je-mount" data-id="p11-e1" data-name="Dec. 31: write-down (routine)" data-rows="4" data-key="[[&quot;Cost of goods sold&quot;, 2100, 0], [&quot;Inventory&quot;, 0, 2100]]" data-accts="[&quot;Allowance for uncollectible accounts&quot;, &quot;Cost of goods sold&quot;, &quot;Inventory&quot;, &quot;Loss on write-down of inventory&quot;, &quot;Sales revenue&quot;]"></div>
+        <button type="button" class="reveal-btn" data-problem="p11" aria-expanded="false" aria-controls="p11-sol">Reveal Answer<span class="sr-only"> for Problem 11</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p11-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 11"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 11</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+
+        <h4 class="solution-label">Explanation</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Item by item"><table class="data">
+          <caption>Item by item</caption>
+          <thead><tr><th scope="col">Product</th><th scope="col" class="num">Cost</th><th scope="col" class="num">NRV</th><th scope="col" class="num">Lower of cost or NRV</th></tr></thead>
+          <tbody><tr><th scope="row">Skis</th><td class="num">$36,000</td><td class="num">$38,000</td><td class="num">$36,000</td></tr><tr><th scope="row">Snowboards</th><td class="num">22,000</td><td class="num">20,500</td><td class="num">20,500</td></tr><tr><th scope="row">Helmets</th><td class="num">8,000</td><td class="num">7,400</td><td class="num">7,400</td></tr><tr><th scope="row">Goggles</th><td class="num">5,000</td><td class="num">6,200</td><td class="num">5,000</td></tr><tr class="total-row"><th scope="row">Total</th><td class="num">$71,000</td><td class="num">$72,100</td><td class="num">$68,900</td></tr></tbody></table></div>
+ <p>Item by item: $71,000 − $68,900 = <strong>$2,100</strong>. Entire inventory: total NRV $72,100 is above total cost $71,000, so there is <strong>no</strong> write-down: gains on skis and goggles offset losses on snowboards and helmets.</p>
+ <div class="date-tag" aria-hidden="true">Dec. 31, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Dec. 31, 2026</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Cost of goods sold</td><td class="je-debit-amt">2,100</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Inventory</td><td class="je-debit-amt"></td><td class="je-credit-amt">2,100</td></tr></tbody>
+        </table></div>
+      </div>
+    </article>
+    <article class="example" id="p12" aria-labelledby="p12-h">
+      <h3 class="ex-label" id="p12-h">Problem 12 — Lower of Cost or Market (LIFO)</h3>
+      <p><strong>Bear Lake Outfitters</strong> uses LIFO and applies lower of cost or market item by item; write-downs are routine. Per-unit data at December 31, <span class="yr0">2026</span>:</p><div class="table-wrap" role="region" tabindex="0" aria-label="Per-unit data"><table class="data">
+          <caption>Per-unit data</caption>
+          <thead><tr><th scope="col">Product (units)</th><th scope="col" class="num">Cost</th><th scope="col" class="num">Replacement cost</th><th scope="col" class="num">NRV</th><th scope="col" class="num">Normal profit</th></tr></thead>
+          <tbody><tr><th scope="row">Waders (120)</th><td class="num">$80</td><td class="num">$70</td><td class="num">$86</td><td class="num">$10</td></tr><tr><th scope="row">Fly reels (90)</th><td class="num">50</td><td class="num">56</td><td class="num">48</td><td class="num">8</td></tr><tr><th scope="row">Canopies (60)</th><td class="num">120</td><td class="num">110</td><td class="num">150</td><td class="num">25</td></tr><tr><th scope="row">Fish finders (40)</th><td class="num">200</td><td class="num">195</td><td class="num">230</td><td class="num">40</td></tr></tbody></table></div>
+      <div class="input-block" role="group" aria-labelledby="p12-h">
+        <div class="input-item"><label for="p12-a">Why does Bear Lake use LCM instead of LCNRV?</label>
+          <select id="p12-a" class="ans" data-label="Reason for LCM" data-answer="It uses LIFO"><option value="">Select…</option><option>It uses LIFO</option><option>Its inventory is material</option><option>It reports under IFRS</option><option>Its costs are rising</option></select></div><div class="table-wrap" role="region" tabindex="0" aria-label="Complete the per-unit table"><table class="grid-in"><caption>Complete the per-unit table</caption><thead><tr><th scope="col">Product</th><th scope="col" class="num">Replacement cost</th><th scope="col" class="num">Ceiling</th><th scope="col" class="num">Floor</th><th scope="col" class="num">Designated market</th><th scope="col" class="num">Cost</th><th scope="col" class="num">LCM per unit</th></tr></thead><tbody><tr><th scope="row">Waders</th><td><input type="number" step="any" inputmode="decimal" id="p12-g1" class="ans" aria-label="Waders: Replacement cost" data-label="Waders: Replacement cost" data-answer="70" data-unit="$"></td><td><input type="number" step="any" inputmode="decimal" id="p12-g2" class="ans" aria-label="Waders: Ceiling" data-label="Waders: Ceiling" data-answer="86" data-unit="$"></td><td><input type="number" step="any" inputmode="decimal" id="p12-g3" class="ans" aria-label="Waders: Floor" data-label="Waders: Floor" data-answer="76" data-unit="$"></td><td><input type="number" step="any" inputmode="decimal" id="p12-g4" class="ans" aria-label="Waders: Designated market" data-label="Waders: Designated market" data-answer="76" data-unit="$"></td><td><input type="number" step="any" inputmode="decimal" id="p12-g5" class="ans" aria-label="Waders: Cost" data-label="Waders: Cost" data-answer="80" data-unit="$"></td><td><input type="number" step="any" inputmode="decimal" id="p12-g6" class="ans" aria-label="Waders: LCM per unit" data-label="Waders: LCM per unit" data-answer="76" data-unit="$"></td></tr><tr><th scope="row">Fly reels</th><td><input type="number" step="any" inputmode="decimal" id="p12-g7" class="ans" aria-label="Fly reels: Replacement cost" data-label="Fly reels: Replacement cost" data-answer="56" data-unit="$"></td><td><input type="number" step="any" inputmode="decimal" id="p12-g8" class="ans" aria-label="Fly reels: Ceiling" data-label="Fly reels: Ceiling" data-answer="48" data-unit="$"></td><td><input type="number" step="any" inputmode="decimal" id="p12-g9" class="ans" aria-label="Fly reels: Floor" data-label="Fly reels: Floor" data-answer="40" data-unit="$"></td><td><input type="number" step="any" inputmode="decimal" id="p12-g10" class="ans" aria-label="Fly reels: Designated market" data-label="Fly reels: Designated market" data-answer="48" data-unit="$"></td><td><input type="number" step="any" inputmode="decimal" id="p12-g11" class="ans" aria-label="Fly reels: Cost" data-label="Fly reels: Cost" data-answer="50" data-unit="$"></td><td><input type="number" step="any" inputmode="decimal" id="p12-g12" class="ans" aria-label="Fly reels: LCM per unit" data-label="Fly reels: LCM per unit" data-answer="48" data-unit="$"></td></tr><tr><th scope="row">Canopies</th><td><input type="number" step="any" inputmode="decimal" id="p12-g13" class="ans" aria-label="Canopies: Replacement cost" data-label="Canopies: Replacement cost" data-answer="110" data-unit="$"></td><td><input type="number" step="any" inputmode="decimal" id="p12-g14" class="ans" aria-label="Canopies: Ceiling" data-label="Canopies: Ceiling" data-answer="150" data-unit="$"></td><td><input type="number" step="any" inputmode="decimal" id="p12-g15" class="ans" aria-label="Canopies: Floor" data-label="Canopies: Floor" data-answer="125" data-unit="$"></td><td><input type="number" step="any" inputmode="decimal" id="p12-g16" class="ans" aria-label="Canopies: Designated market" data-label="Canopies: Designated market" data-answer="125" data-unit="$"></td><td><input type="number" step="any" inputmode="decimal" id="p12-g17" class="ans" aria-label="Canopies: Cost" data-label="Canopies: Cost" data-answer="120" data-unit="$"></td><td><input type="number" step="any" inputmode="decimal" id="p12-g18" class="ans" aria-label="Canopies: LCM per unit" data-label="Canopies: LCM per unit" data-answer="120" data-unit="$"></td></tr><tr><th scope="row">Fish finders</th><td><input type="number" step="any" inputmode="decimal" id="p12-g19" class="ans" aria-label="Fish finders: Replacement cost" data-label="Fish finders: Replacement cost" data-answer="195" data-unit="$"></td><td><input type="number" step="any" inputmode="decimal" id="p12-g20" class="ans" aria-label="Fish finders: Ceiling" data-label="Fish finders: Ceiling" data-answer="230" data-unit="$"></td><td><input type="number" step="any" inputmode="decimal" id="p12-g21" class="ans" aria-label="Fish finders: Floor" data-label="Fish finders: Floor" data-answer="190" data-unit="$"></td><td><input type="number" step="any" inputmode="decimal" id="p12-g22" class="ans" aria-label="Fish finders: Designated market" data-label="Fish finders: Designated market" data-answer="195" data-unit="$"></td><td><input type="number" step="any" inputmode="decimal" id="p12-g23" class="ans" aria-label="Fish finders: Cost" data-label="Fish finders: Cost" data-answer="200" data-unit="$"></td><td><input type="number" step="any" inputmode="decimal" id="p12-g24" class="ans" aria-label="Fish finders: LCM per unit" data-label="Fish finders: LCM per unit" data-answer="195" data-unit="$"></td></tr></tbody></table></div><div class="table-wrap" role="region" tabindex="0" aria-label="Totals"><table class="grid-in"><caption>Totals</caption><thead><tr><th scope="col">Item</th><th scope="col" class="num">Amount</th></tr></thead><tbody><tr><th scope="row">Total LIFO cost</th><td><input type="number" step="any" inputmode="decimal" id="p12-g1" class="ans" aria-label="Total LIFO cost: Amount" data-label="Total LIFO cost: Amount" data-answer="29300" data-unit="$"></td></tr><tr><th scope="row">Total lower of cost or market</th><td><input type="number" step="any" inputmode="decimal" id="p12-g2" class="ans" aria-label="Total lower of cost or market: Amount" data-label="Total lower of cost or market: Amount" data-answer="28440" data-unit="$"></td></tr><tr><th scope="row">Write-down</th><td><input type="number" step="any" inputmode="decimal" id="p12-g3" class="ans" aria-label="Write-down: Amount" data-label="Write-down: Amount" data-answer="860" data-unit="$"></td></tr></tbody></table></div><div class="je-in-head"><span class="date-tag">Dec. 31: write-down (routine)</span></div><div class="je-mount" data-id="p12-e1" data-name="Dec. 31: write-down (routine)" data-rows="4" data-key="[[&quot;Cost of goods sold&quot;, 860, 0], [&quot;Inventory&quot;, 0, 860]]" data-accts="[&quot;Allowance for uncollectible accounts&quot;, &quot;Cost of goods sold&quot;, &quot;Inventory&quot;, &quot;Loss on write-down of inventory&quot;, &quot;Sales revenue&quot;]"></div>
+        <button type="button" class="reveal-btn" data-problem="p12" aria-expanded="false" aria-controls="p12-sol">Reveal Answer<span class="sr-only"> for Problem 12</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p12-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 12"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 12</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+
+        <h4 class="solution-label">Explanation</h4>
+        <p>LCM applies to companies using <strong>LIFO</strong> or the retail method.</p><div class="table-wrap" role="region" tabindex="0" aria-label="Designated market"><table class="data">
+          <caption>Designated market</caption>
+          <thead><tr><th scope="col">Product</th><th scope="col" class="num">Replacement cost</th><th scope="col" class="num">Ceiling (NRV)</th><th scope="col" class="num">Floor (NRV − NP)</th><th scope="col" class="num">Designated market</th><th scope="col" class="num">Cost</th><th scope="col" class="num">LCM</th></tr></thead>
+          <tbody><tr><th scope="row">Waders</th><td class="num">$70</td><td class="num">$86</td><td class="num">$76</td><td class="num">$76 (floor)</td><td class="num">$80</td><td class="num">$76</td></tr><tr><th scope="row">Fly reels</th><td class="num">56</td><td class="num">48</td><td class="num">40</td><td class="num">48 (ceiling)</td><td class="num">50</td><td class="num">48</td></tr><tr><th scope="row">Canopies</th><td class="num">110</td><td class="num">150</td><td class="num">125</td><td class="num">125 (floor)</td><td class="num">120</td><td class="num">120 (cost)</td></tr><tr><th scope="row">Fish finders</th><td class="num">195</td><td class="num">230</td><td class="num">190</td><td class="num">195 (replacement cost)</td><td class="num">200</td><td class="num">195</td></tr></tbody></table></div>
+ <p>Total cost: 120 × $80 + 90 × $50 + 60 × $120 + 40 × $200 = $29,300. Total LCM: 120 × $76 + 90 × $48 + 60 × $120 + 40 × $195 = $9,120 + $4,320 + $7,200 + $7,800 = <strong>$28,440</strong>. Write-down = <strong>$860</strong>.</p>
+ <div class="date-tag" aria-hidden="true">Dec. 31, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Dec. 31, 2026</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Cost of goods sold</td><td class="je-debit-amt">860</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Inventory</td><td class="je-debit-amt"></td><td class="je-credit-amt">860</td></tr></tbody>
+        </table></div>
+      </div>
+    </article>
+    <article class="example" id="p13" aria-labelledby="p13-h">
+      <h3 class="ex-label" id="p13-h">Problem 13 — Recoveries and Purchase Commitments</h3>
+      <p>(1) The snowboards that <strong>Sylva Summit Sports</strong> wrote down to $20,500 in Problem 11 recover to an NRV of <strong>$23,000</strong> in <span class="yr1">2027</span>. (2) <strong>Cullowhee Creek Textiles</strong> signs a noncancelable contract to buy fabric for <strong>$240,000</strong> next March. Cullowhee Creek uses a perpetual system and pays cash at delivery. At December 31, <span class="yr0">2026</span>, the market price is <strong>$215,000</strong>; at delivery in March it is <strong>$205,000</strong>.</p>
+      <div class="input-block" role="group" aria-labelledby="p13-h">
+        <div class="input-item"><label for="p13-a">Snowboard write-down reversed under U.S. GAAP:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p13-a" class="ans" data-label="Snowboard write-down reversed under U.S. GAAP" data-answer="0" data-unit="$"></div><div class="input-item"><label for="p13-b">Snowboard write-down reversed under IFRS:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p13-b" class="ans" data-label="Snowboard write-down reversed under IFRS" data-answer="1500" data-unit="$"></div><div class="je-in-head"><span class="date-tag">Dec. 31, <span class="yr0">2026</span>: purchase commitment</span></div><div class="je-mount" data-id="p13-e1" data-name="Dec. 31, {Y}: purchase commitment" data-rows="4" data-key="[[&quot;Loss on purchase commitment&quot;, 25000, 0], [&quot;Estimated liability on purchase commitment&quot;, 0, 25000]]" data-accts="[&quot;Accounts payable&quot;, &quot;Cash&quot;, &quot;Estimated liability on purchase commitment&quot;, &quot;Gain on purchase commitment&quot;, &quot;Inventory&quot;, &quot;Loss on purchase commitment&quot;, &quot;Purchases&quot;]"></div><div class="je-in-head"><span class="date-tag">March, <span class="yr1">2027</span>: delivery</span></div><div class="je-mount" data-id="p13-e2" data-name="March, {Y1}: delivery" data-rows="5" data-key="[[&quot;Inventory&quot;, 205000, 0], [&quot;Estimated liability on purchase commitment&quot;, 25000, 0], [&quot;Loss on purchase commitment&quot;, 10000, 0], [&quot;Cash&quot;, 0, 240000]]" data-accts="[&quot;Accounts payable&quot;, &quot;Cash&quot;, &quot;Estimated liability on purchase commitment&quot;, &quot;Gain on purchase commitment&quot;, &quot;Inventory&quot;, &quot;Loss on purchase commitment&quot;, &quot;Purchases&quot;]"></div>
+        <button type="button" class="reveal-btn" data-problem="p13" aria-expanded="false" aria-controls="p13-sol">Reveal Answer<span class="sr-only"> for Problem 13</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p13-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 13"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 13</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+
+        <h4 class="solution-label">Explanation</h4>
+        <ul><li>U.S. GAAP never reverses a write-down: <strong>$0</strong>. IFRS reverses, but not above original cost of $22,000: $22,000 − $20,500 = <strong>$1,500</strong>.</li>
+ <li>The contract is open at year-end and the price has fallen $25,000, so record the loss now.</li></ul>
+ <div class="date-tag" aria-hidden="true">Dec. 31, <span class="yr0">2026</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, Dec. 31, 2026</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Loss on purchase commitment</td><td class="je-debit-amt">25,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Estimated liability on purchase commitment</td><td class="je-debit-amt"></td><td class="je-credit-amt">25,000</td></tr></tbody>
+        </table></div><div class="date-tag" aria-hidden="true">March, <span class="yr1">2027</span></div>
+        <div><table class="je-table">
+          <caption class="sr-only">Journal entry, March, 2027</caption>
+          <thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead>
+          <tbody><tr><td>Inventory (market price)</td><td class="je-debit-amt">205,000</td><td class="je-credit-amt"></td></tr><tr><td>Estimated liability on purchase commitment</td><td class="je-debit-amt">25,000</td><td class="je-credit-amt"></td></tr><tr><td>Loss on purchase commitment</td><td class="je-debit-amt">10,000</td><td class="je-credit-amt"></td></tr><tr><td class="indent">Cash</td><td class="je-debit-amt"></td><td class="je-credit-amt">240,000</td></tr></tbody>
+        </table></div><p class="je-desc">If the price had instead recovered, the earlier loss would be reversed (a gain), but only up to the $25,000 already recorded.</p>
+      </div>
+    </article>
+  </section>
+  <section class="lo-block" aria-labelledby="s-est">
+    <h2 id="s-est">Estimating Inventory</h2>
+    <div class="key-idea"><p style="margin:0"><strong>Key idea:</strong> When a count isn&rsquo;t practical, estimate ending inventory from sales and a stable cost relationship: the gross profit ratio or a cost-to-retail percentage.</p></div>
+    <section class="notes" aria-labelledby="n-s-est">
+      <h3 id="n-s-est">Concept notes: gross profit and retail methods</h3>
+      
+      <h4>The gross profit method</h4>
+      <p>Used for interim reports and to estimate losses from theft or fire; it is not acceptable for annual financial statements.</p>
+      <ul>
+        <li>Estimated cost of goods sold = net sales × (1 − gross profit ratio).</li>
+        <li>Estimated ending inventory = goods available − estimated cost of goods sold.</li>
+        <li>A <strong>markup on cost</strong> converts to a gross profit ratio: markup ÷ (1 + markup). A 25% markup on cost = 25% ÷ 125% = 20% of sales.</li>
+      </ul>
+      <h4>The retail inventory method</h4>
+      <p>Ending inventory at retail = goods available at retail − net sales (and other deductions). Convert to cost with a cost-to-retail percentage.</p>
+      <div class="table-wrap" role="region" tabindex="0" aria-label="Retail method versions"><table class="data">
+          <caption>Retail method versions</caption>
+          <thead><tr><th scope="col">Version</th><th scope="col">Cost-to-retail percentage includes</th><th scope="col">Result</th></tr></thead>
+          <tbody><tr><th scope="row">Average cost</th><td>Beginning inventory, purchases, net markups, and net markdowns</td><td>Approximates average cost</td></tr><tr><th scope="row">Conventional</th><td>Net markups but <strong>not</strong> net markdowns</td><td>Lower percentage; approximates lower of cost or market</td></tr><tr><th scope="row">LIFO retail</th><td>Current-year activity only; beginning inventory is a separate layer at its own percentage</td><td>An increase becomes a new layer at the current-year percentage</td></tr></tbody></table></div>
+      <div class="table-wrap" role="region" tabindex="0" aria-label="Special items in the retail method"><table class="data">
+          <caption>Special items in the retail method</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Treatment</th></tr></thead>
+          <tbody><tr><th scope="row">Freight-in</th><td>Add to cost only</td></tr><tr><th scope="row">Purchase returns</th><td>Subtract from both cost and retail</td></tr><tr><th scope="row">Purchase discounts</th><td>Subtract from cost</td></tr><tr><th scope="row">Normal spoilage, employee discounts</th><td>Subtract from retail <strong>after</strong> computing the percentage (like sales)</td></tr><tr><th scope="row">Abnormal shortages</th><td>Subtract from both cost and retail <strong>before</strong> computing the percentage</td></tr></tbody></table></div>
+      <p class="tip"><strong>Study tip:</strong> Net markups = additional markups − markup cancellations. Net markdowns = markdowns − markdown cancellations. Never let a cancellation drive a balance below zero.</p>
+    </section>
+    
+    <article class="example" id="p14" aria-labelledby="p14-h">
+      <h3 class="ex-label" id="p14-h">Problem 14 — The Gross Profit Method</h3>
+      <p>A fire on June 30, <span class="yr0">2026</span>, destroys most of the inventory at <strong>Webster Book Exchange</strong>. Since January 1: beginning inventory $40,000; net purchases $180,000; net sales $250,000. Webster prices books at a <strong>25% markup on cost</strong>. Undamaged books costing $8,000 remain.</p>
+      <div class="input-block" role="group" aria-labelledby="p14-h">
+        <div class="input-item"><label for="p14-a">Gross profit ratio equivalent to a 25% markup on cost:<span class="sr-only"> (percent)</span></label>
+          <input type="number" step="any" inputmode="decimal" id="p14-a" class="ans" data-label="Gross profit ratio equivalent to a 25% markup on cost" data-answer="20" data-unit="%"><span class="unit" aria-hidden="true">%</span></div><div class="input-item"><label for="p14-b">Estimated inventory before the fire:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p14-b" class="ans" data-label="Estimated inventory before the fire" data-answer="20000" data-unit="$"></div><div class="input-item"><label for="p14-c">Estimated fire loss:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p14-c" class="ans" data-label="Estimated fire loss" data-answer="12000" data-unit="$"></div><div class="input-item"><label for="p14-d">Estimated inventory before the fire if 25% were the gross profit ratio instead:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p14-d" class="ans" data-label="Estimated inventory before the fire if 25% were the gross profit ratio instead" data-answer="32500" data-unit="$"></div>
+        <button type="button" class="reveal-btn" data-problem="p14" aria-expanded="false" aria-controls="p14-sol">Reveal Answer<span class="sr-only"> for Problem 14</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p14-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 14"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 14</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+
+        <h4 class="solution-label">Explanation</h4>
+        <ul><li>Gross profit ratio = 25% ÷ 125% = <strong>20%</strong>.</li>
+ <li>Goods available = $40,000 + $180,000 = $220,000. Cost of goods sold = $250,000 ÷ 1.25 = $200,000 (same as $250,000 × 80%). Inventory = $220,000 − $200,000 = <strong>$20,000</strong>.</li>
+ <li>Fire loss = $20,000 − $8,000 = <strong>$12,000</strong>.</li>
+ <li>If 25% were the gross profit ratio: cost of goods sold = $250,000 × 75% = $187,500; inventory = <strong>$32,500</strong>. Confusing markup with gross profit ratio is the most common error.</li></ul>
+      </div>
+    </article>
+    <article class="example" id="p15" aria-labelledby="p15-h">
+      <h3 class="ex-label" id="p15-h">Problem 15 — Retail Method: Conventional Percentage and Special Items</h3>
+      <p><strong>Bryson City Variety</strong> uses the conventional retail method. Goods available: cost <strong>$150,000</strong>; retail <strong>$250,000</strong> (including net markups). Net markdowns were <strong>$25,000</strong>, net sales were <strong>$180,000</strong>, and normal spoilage at retail was <strong>$5,000</strong>.</p>
+      <div class="input-block" role="group" aria-labelledby="p15-h">
+        <div class="input-item"><label for="p15-a">Conventional cost-to-retail percentage:<span class="sr-only"> (percent)</span></label>
+          <input type="number" step="any" inputmode="decimal" id="p15-a" class="ans" data-label="Conventional cost-to-retail percentage" data-answer="60" data-unit="%"><span class="unit" aria-hidden="true">%</span></div><div class="input-item"><label for="p15-b">Ending inventory at retail:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p15-b" class="ans" data-label="Ending inventory at retail" data-answer="40000" data-unit="$"></div><div class="input-item"><label for="p15-c">Estimated ending inventory at cost:<span class="sr-only"> (in dollars)</span></label><span class="unit" aria-hidden="true">$</span>
+          <input type="number" step="any" inputmode="decimal" id="p15-c" class="ans" data-label="Estimated ending inventory at cost" data-answer="24000" data-unit="$"></div><div class="input-item"><label for="p15-d">Normal spoilage is deducted from retail:</label>
+          <select id="p15-d" class="ans" data-label="Normal spoilage" data-answer="After the percentage is computed"><option value="">Select…</option><option>Before the percentage is computed, from both cost and retail</option><option>After the percentage is computed</option><option>Only under the average cost method</option><option>Never; it is ignored</option></select></div><div class="input-item"><label for="p15-e">Under LIFO retail, beginning inventory:</label>
+          <select id="p15-e" class="ans" data-label="LIFO retail beginning inventory" data-answer="Is kept as a separate layer at its own percentage"><option value="">Select…</option><option>Is combined with purchases in one percentage</option><option>Is kept as a separate layer at its own percentage</option><option>Is excluded from ending inventory</option><option>Is restated at the current-year percentage</option></select></div>
+        <button type="button" class="reveal-btn" data-problem="p15" aria-expanded="false" aria-controls="p15-sol">Reveal Answer<span class="sr-only"> for Problem 15</span></button>
+      </div>
+      <div class="feedback" role="alert"></div>
+      <div class="solution" id="p15-sol" hidden>
+        <h4 class="solution-label" tabindex="-1">Your answers vs. the answers</h4>
+        <div class="table-wrap" role="region" tabindex="0" aria-label="Your answers compared with the answers, Problem 15"><table class="data">
+          <caption class="sr-only">Comparison of your answers with the correct answers for Problem 15</caption>
+          <thead><tr><th scope="col">Item</th><th scope="col">Your answer</th><th scope="col">Answer</th><th scope="col">Result</th></tr></thead>
+          <tbody class="compare-body"></tbody>
+        </table></div>
+
+        <h4 class="solution-label">Explanation</h4>
+        <ul><li>Conventional percentage leaves markdowns out: $150,000 ÷ $250,000 = <strong>60%</strong>.</li>
+ <li>Ending retail = $250,000 − $25,000 − $180,000 − $5,000 = <strong>$40,000</strong>.</li>
+ <li>Ending inventory at cost = $40,000 × 60% = <strong>$24,000</strong>.</li>
+ <li>Normal spoilage is treated like sales. Abnormal shortages come out of both cost and retail before the percentage.</li>
+ <li>LIFO retail keeps beginning inventory as the base layer; only an increase is costed at the current-year percentage.</li></ul>
+      </div>
+    </article>
+  </section>
+</main>
+
+<footer>Inventories · Exam Study Guide (Ungraded) · All company names are fictional</footer>
+
+<script>
+  // Build the journal entry input tables.
+  (function () {
+    function escH(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+    document.querySelectorAll('.je-mount').forEach(function (m) {
+      var name = m.getAttribute('data-name'), n = Number(m.getAttribute('data-rows'));
+      var opts = JSON.parse(m.getAttribute('data-accts')).map(function (a) { return '<option>' + escH(a) + '</option>'; }).join('');
+      var rows = '';
+      for (var i = 1; i <= n; i++) {
+        var l = escH(name) + ', line ' + i;
+        rows += '<tr><td><select aria-label="' + l + ', account"><option value="">Select account…</option>' + opts + '</select></td>' +
+          '<td class="amt-cell"><input type="number" step="any" inputmode="decimal" aria-label="' + l + ', debit"></td>' +
+          '<td class="amt-cell"><input type="number" step="any" inputmode="decimal" aria-label="' + l + ', credit"></td></tr>';
+      }
+      m.outerHTML = '<div class="table-wrap" role="region" tabindex="0" aria-label="Journal entry input, ' + escH(name) + '"><table class="je-in" id="' + m.getAttribute('data-id') + '" data-name="' + escH(name) + '" data-key="' + escH(m.getAttribute('data-key')) + '">' +
+        '<caption class="sr-only">Enter the journal entry for ' + escH(name) + '</caption>' +
+        '<thead><tr><th scope="col">Account</th><th scope="col" class="amt">Debit</th><th scope="col" class="amt">Credit</th></tr></thead><tbody>' + rows + '</tbody></table></div>';
+    });
+  })();
+  // Journal entry grading: lines may be entered in any order; blank lines are ignored.
+  (function () {
+    function money(n) { return '$' + Math.abs(n).toLocaleString('en-US', { maximumFractionDigits: 2 }); }
+    function desc(a, d, c) {
+      if (!a) { return '(no line)'; }
+      if (d && !c) { return a + ': debit ' + money(d); }
+      if (c && !d) { return a + ': credit ' + money(c); }
+      if (!d && !c) { return a + ': no amount'; }
+      return a + ': debit ' + money(d) + ', credit ' + money(c);
+    }
+    function escH(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+    function row(label, yours, ans, ok) {
+      return '<tr class="je-row"><th scope="row">' + escH(label) + '</th><td>' + escH(yours) + '</td><td><strong>' + escH(ans) + '</strong></td>' +
+        '<td class="' + (ok ? 'result-ok' : 'result-no') + '">' + (ok ? '<span aria-hidden="true">✓ </span>Matches' : '<span aria-hidden="true">✗ </span>Review') + '</td></tr>';
+    }
+    function lines(t) {
+      return Array.prototype.map.call(t.querySelectorAll('tbody tr'), function (tr) {
+        var s = tr.querySelector('select'), ins = tr.querySelectorAll('input');
+        return { a: s.value, d: Number(ins[0].value || 0), c: Number(ins[1].value || 0), blank: !s.value && !ins[0].value && !ins[1].value };
+      });
+    }
+    function grade(box) {
+      var out = '';
+      box.querySelectorAll('table.je-in').forEach(function (t) {
+        var key = JSON.parse(t.getAttribute('data-key')), name = t.getAttribute('data-name');
+        var stu = lines(t).filter(function (l) { return !l.blank; });
+        var used = stu.map(function () { return false; }), match = key.map(function () { return -1; });
+        key.forEach(function (k, i) {
+          for (var j = 0; j < stu.length; j++) {
+            if (!used[j] && stu[j].a === k[0] && Math.abs(stu[j].d - k[1]) <= 1 && Math.abs(stu[j].c - k[2]) <= 1) { used[j] = true; match[i] = j; break; }
+          }
+        });
+        key.forEach(function (k, i) {
+          var ok = match[i] >= 0, j = match[i];
+          if (!ok) { j = -1; for (var x = 0; x < stu.length; x++) { if (!used[x] && stu[x].a === k[0]) { j = x; break; } } }
+          if (!ok && j < 0) { for (var y = 0; y < stu.length; y++) { if (!used[y]) { j = y; break; } } }
+          if (!ok && j >= 0) { used[j] = true; }
+          var s = j >= 0 ? stu[j] : null;
+          out += row(name + ', line ' + (i + 1), s ? desc(s.a, s.d, s.c) : '(no line)', desc(k[0], k[1], k[2]), ok);
+        });
+        stu.forEach(function (s, j) { if (!used[j]) { out += row(name + ', extra line', desc(s.a, s.d, s.c), '(no line needed)', false); } });
+      });
+      return out;
+    }
+    document.querySelectorAll('.reveal-btn').forEach(function (btn) {
+      btn.addEventListener('click', function (ev) {
+        var box = document.getElementById(btn.getAttribute('data-problem'));
+        var tables = box.querySelectorAll('table.je-in');
+        if (!tables.length) { return; }
+        var missing = null;
+        tables.forEach(function (t) {
+          var sel = t.querySelectorAll('select'), any = false;
+          sel.forEach(function (s) { if (s.value) { any = true; } });
+          sel.forEach(function (s, i) { if (!any && i === 0) { s.setAttribute('aria-invalid', 'true'); if (!missing) { missing = s; } } else { s.removeAttribute('aria-invalid'); } });
+        });
+        if (missing) {
+          ev.stopImmediatePropagation();
+          box.querySelector('.feedback').textContent = 'Enter at least one line in every journal entry first, then select Reveal Answer.';
+          missing.focus();
+          return;
+        }
+        setTimeout(function () {
+          var sol = box.querySelector('.solution');
+          if (sol.hidden) { return; }
+          var cb = box.querySelector('.compare-body');
+          cb.querySelectorAll('tr.je-row').forEach(function (r) { r.remove(); });
+          cb.insertAdjacentHTML('beforeend', grade(box));
+        }, 0);
+      });
+    });
+  })();
+</script>
+<script>
+  var REVEALED = {};
+  var TOTAL = document.querySelectorAll('.example').length;
+
+  function updateProgress() {
+    var count = Object.keys(REVEALED).length;
+    var bar = document.getElementById('progressBar');
+    bar.setAttribute('aria-valuenow', count);
+    bar.setAttribute('aria-valuetext', count + ' of ' + TOTAL + ' problems revealed');
+    document.getElementById('progressLabel').textContent = count + ' of ' + TOTAL + ' revealed';
+    document.getElementById('progressFill').style.width = (count / TOTAL * 100) + '%';
+  }
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function fmt(val, unit) {
+    var n = Number(val);
+    var abs = Math.abs(n).toLocaleString('en-US', { maximumFractionDigits: 2 });
+    if (unit === '$') { return (n < 0 ? '−$' : '$') + abs; }
+    if (unit === '%') { return (n < 0 ? '−' : '') + abs + '%'; }
+    return (n < 0 ? '−' : '') + abs;
+  }
+
+  function isMatch(el) {
+    var ans = el.getAttribute('data-answer');
+    if (el.tagName === 'SELECT') { return el.value === ans; }
+    var unit = el.getAttribute('data-unit') || '';
+    var tol = el.hasAttribute('data-tol') ? Number(el.getAttribute('data-tol')) : (unit === '%' ? 0.05 : 1);
+    return Math.abs(Number(el.value) - Number(ans)) <= tol;
+  }
+
+  function reveal(id) {
+    var box = document.getElementById(id);
+    var inputs = box.querySelectorAll('.ans');
+    var fb = box.querySelector('.feedback');
+    var firstMissing = null;
+    inputs.forEach(function (el) {
+      var empty = (el.value === '' || el.value === null);
+      if (empty) { el.setAttribute('aria-invalid', 'true'); if (!firstMissing) { firstMissing = el; } }
+      else { el.removeAttribute('aria-invalid'); }
+    });
+    if (firstMissing) {
+      fb.textContent = 'Enter an answer in every box first, then select Reveal Answer.';
+      firstMissing.focus();
+      return;
+    }
+    fb.textContent = '';
+
+    var rows = '';
+    inputs.forEach(function (el) {
+      var label = el.getAttribute('data-label').replace(/\{(yrm?\d)\}/g, function (m, k) { return YEARS[k]; });
+      var unit = el.getAttribute('data-unit') || '';
+      var yours, answer;
+      if (el.tagName === 'SELECT') {
+        yours = el.value;
+        answer = el.getAttribute('data-answer');
+      } else {
+        yours = fmt(el.value, unit);
+        answer = fmt(el.getAttribute('data-answer'), unit);
+      }
+      var ok = isMatch(el);
+      rows += '<tr><th scope="row">' + esc(label) + '</th><td>' + esc(yours) + '</td><td><strong>' + esc(answer) + '</strong></td>' +
+        '<td class="' + (ok ? 'result-ok' : 'result-no') + '">' + (ok ? '<span aria-hidden="true">✓ </span>Matches' : '<span aria-hidden="true">✗ </span>Review') + '</td></tr>';
+    });
+    box.querySelector('.compare-body').innerHTML = rows;
+    var sol = box.querySelector('.solution');
+    sol.hidden = false;
+    box.querySelector('.reveal-btn').setAttribute('aria-expanded', 'true');
+    var head = sol.querySelector('.solution-label');
+    if (head) { head.focus(); }
+    REVEALED[id] = true;
+    updateProgress();
+  }
+
+  document.querySelectorAll('.reveal-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () { reveal(btn.getAttribute('data-problem')); });
+  });
+
+  // Keeps the dates current automatically, with no recoding needed each year.
+  // yr0 is always the current calendar year; yr1..yr4 follow and yrm1, yrm2 precede.
+  var YEARS = (function () {
+    var yr0 = new Date().getFullYear();
+    var years = { yrm2: yr0 - 2, yrm1: yr0 - 1, yr0: yr0, yr1: yr0 + 1, yr2: yr0 + 2, yr3: yr0 + 3, yr4: yr0 + 4 };
+    Object.keys(years).forEach(function (cls) {
+      document.querySelectorAll('.' + cls).forEach(function (el) { el.textContent = years[cls]; });
+    });
+    return years;
+  })();
+
+  TOTAL = document.querySelectorAll('.example').length;
+  updateProgress();
+</script>
+
+<script>document.getElementById('progressBar').setAttribute('aria-valuemax', document.querySelectorAll('.example').length);</script>
+</body>
+</html>
