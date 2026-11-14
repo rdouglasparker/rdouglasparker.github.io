@@ -149,6 +149,91 @@
   .je-in-head .date-tag { margin-top: 0; }
   .input-block .table-wrap { width: 100%; }
 </style>
+<style>
+  /* ---------- Print / Save as PDF (screen styles) ---------- */
+  .print-card { display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem 1.4rem; background: #fff; border: 1px solid var(--rule); border-left: 6px solid var(--wcu-gold); border-radius: 8px; padding: 1rem 1.2rem; margin: 0 0 1.3rem; }
+  .print-card .print-text { flex: 1 1 320px; }
+  .print-card h2 { font-family: 'Source Serif 4', serif; font-size: 1.15rem; margin: 0 0 0.25rem; padding: 0; border: 0; color: var(--wcu-purple-dark); }
+  .print-card p { margin: 0; font-size: 0.92rem; color: var(--muted); }
+  .print-btn { font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 700; color: #fff; background: var(--wcu-purple); border: 2px solid var(--wcu-purple); padding: 0.65rem 1.3rem; border-radius: 6px; cursor: pointer; min-height: 2.75rem; }
+  .print-btn:hover { background: var(--wcu-purple-dark); border-color: var(--wcu-purple-dark); }
+  .print-btn:focus-visible { outline: 3px solid var(--wcu-purple-dark); outline-offset: 3px; box-shadow: 0 0 0 3px #fff inset; }
+  .print-only, .print-choices, .print-work { display: none; }
+</style>
+<style>
+  /* ---------- Print / Save as PDF (paper layout) ---------- */
+  @page {
+    size: letter portrait;
+    margin: 0.6in 0.65in 0.75in;
+    @bottom-center { content: "Inventories Exam Study Guide  \00B7  Page " counter(page) " of " counter(pages); font-family: 'Inter', Arial, sans-serif; font-size: 8.5pt; color: #5f5955; }
+  }
+  @media print {
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    html { font-size: 10.5pt; scroll-behavior: auto; }
+    body { background: #fff; color: #000; line-height: 1.4; }
+    a { color: inherit; text-decoration: none; }
+
+    /* Things that only make sense on screen */
+    .skip-link, .print-card, .progress-bar, .screen-only, .reveal-btn, .feedback,
+    .solution, .solution[hidden] { display: none !important; }
+
+    /* Front matter */
+    header { background: #fff !important; color: var(--wcu-purple-dark); padding: 0 0 0.6rem; border-bottom: 5px solid var(--wcu-gold); }
+    header .inner { max-width: none; }
+    header .eyebrow { color: var(--wcu-purple); }
+    header h1 { color: var(--wcu-purple-dark); font-size: 1.9rem; }
+    header p.sub { color: var(--ink); }
+    main { max-width: none; padding: 0.8rem 0 0; }
+    .print-only { display: block; }
+    .print-name { margin: 0.2rem 0 0.8rem; font-weight: 600; }
+    .print-name .line { display: inline-block; width: 3.2in; border-bottom: 1px solid #000; margin: 0 1.2rem 0 0.4rem; height: 1em; vertical-align: bottom; }
+    .print-name .line.short { width: 1.6in; margin-right: 0; }
+    footer { padding: 0.8rem 0 0; }
+
+    /* Page breaks: each section starts a page; problems start after the notes */
+    .lo-block { margin-bottom: 0; break-before: page; }
+    .notes + .example { break-before: page; }
+    h2, h3, h4, .ex-label, .solution-label, .je-in-head, table caption { break-after: avoid; }
+    .key-idea, .notes .tip, .table-wrap, .input-item, table.je-table, tr { break-inside: avoid; }
+    .notes, .facts { break-inside: auto; box-shadow: none; }
+    /* Keep each problem on one page when it fits; very long ones (Problem 3) still flow across pages */
+    .example { break-inside: avoid; box-shadow: none; border: 1px solid #8a7f6c; margin: 0.9rem 0; padding: 0.8rem 1rem 1rem; }
+    .focus-list li { padding: 0.2rem 0; }
+    .table-wrap { overflow: visible; }
+    p, li { orphans: 3; widows: 3; }
+
+    /* Dates tags print as outlines so they do not depend on background graphics */
+    .date-tag { background: none !important; color: var(--wcu-purple-dark) !important; border: 1px solid var(--wcu-purple-dark); }
+
+    /* Answer areas become blank lines and cells */
+    .input-block { background: transparent; padding: 0.3rem 0; margin: 0.6rem 0 0; }
+    .input-item { break-inside: avoid; margin-bottom: 0.35rem; }
+    .input-item label { flex: 1 1 260px; }
+    input, input[type="number"] {
+      -moz-appearance: textfield; -webkit-appearance: none; appearance: none;
+      background: transparent !important; color: transparent !important; -webkit-text-fill-color: transparent;
+      border: 0 !important; border-bottom: 1px solid #000 !important; border-radius: 0 !important; box-shadow: none !important;
+    }
+    input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; display: none; }
+    .input-item input[type="number"] { width: 140px; min-height: 1.8rem; }
+    .input-item select, table.je-in select { display: none !important; }
+    .print-choices { display: flex; flex: 1 0 100%; flex-wrap: wrap; gap: 0.25rem 1.6rem; margin: 0.15rem 0 0.2rem 0.3rem; font-size: 0.95rem; }
+    .print-choices.stacked { flex-direction: column; gap: 0.3rem; }
+    .print-choices span::before { content: "\25CB\00A0\00A0"; }
+
+    /* Tables to fill in */
+    table.grid-in input, table.je-in input { width: 100%; min-width: 0; min-height: 1.7rem; border: 0 !important; }
+    table.grid-in td, table.je-in td { border: 1px solid #555; height: 1.75rem; }
+    table.je-in { table-layout: fixed; }
+    table.je-in th, table.grid-in th { border-color: #555; background: var(--panel); }
+    table.je-in td.amt-cell { width: 1.5in; }
+    table.grid-in td.given { background: var(--panel); }
+    table.data th, table.data td { border-color: #8a7f6c; }
+
+    /* Work space for calculations */
+    .print-work { display: block; margin-top: 0.6rem; min-height: 1.1in; border: 1px dashed #777; border-radius: 4px; padding: 0.25rem 0.5rem; font-family: 'IBM Plex Mono', monospace; font-size: 8pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #5f5955; }
+  }
+</style>
 </head>
 <body>
 
@@ -164,12 +249,25 @@
 
 
 <main id="main" tabindex="-1">
+<section class="print-card" aria-labelledby="print-h">
+  <div class="print-text">
+    <h2 id="print-h">Print this study guide</h2>
+    <p>Print the concept notes and all fifteen problems as a paper practice packet, or save it as a PDF. The printed version leaves out the answers and gives you blank lines, tables, and work space to write in. In the print window, choose <strong>Save as PDF</strong> as the destination to get a PDF file.</p>
+  </div>
+  <button type="button" class="print-btn" id="printBtn">Print or save as PDF</button>
+</section>
+
+<section class="print-only" aria-label="Practice packet instructions">
+  <p class="print-name">Name: <span class="line"></span> Date: <span class="line short"></span></p>
+  <div class="key-idea"><p style="margin:0"><strong>How to use this packet:</strong> Read the concept notes in each section, then work each problem on your own. Write journal entries in the blank tables and show your calculations in the work space. Check your work: ending inventory + cost of goods sold must equal goods available, and every journal entry must balance. For step-by-step solutions, use the online version of this study guide. This packet isn't graded; it's just for practice.</p></div>
+</section>
+
 <div class="progress-bar">
   <div class="progress-track" id="progressBar" role="progressbar" aria-label="Study guide progress" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0"><div class="progress-fill" id="progressFill"></div></div>
   <div class="progress-label" id="progressLabel" aria-hidden="true">0 revealed</div>
 </div>
 
-  <div class="key-idea">
+  <div class="key-idea screen-only">
     <p style="margin:0"><strong>How this works:</strong> Each section starts with <strong>concept notes</strong> covering the rules, definitions, and journal entries you need for both the multiple-choice questions and the problems. Read the notes, then work each problem on your own first and enter your answer in every box. Then select <strong>Reveal Answer</strong> to see the correct answer next to yours, along with a detailed explanation and the journal entries. Enter all amounts as positive numbers (enter 0 if there is no amount). For <strong>journal entries</strong>, choose an account on each line you need and enter its amount in the Debit or Credit column; lines can go in any order, and leave extra lines blank. For <strong>tables</strong>, fill in every cell, just as you would on the exam. Answers within $1 of the solution count as a match (rounding). This page isn't graded and doesn't get submitted anywhere; it's just for practice. Have a calculator handy.</p>
   </div>
 
@@ -179,7 +277,7 @@
     <ul class="focus-list"><li><span class="pri pri-high">High priority</span><span><a href="#p3">Periodic journal entries with the net method, including the sale and the year-end adjusting entry</a></span></li><li><span class="pri pri-high">High priority</span><span><a href="#p4">Perpetual journal entries, including the cost of goods sold entry and shrinkage</a></span></li><li><span class="pri pri-high">High priority</span><span><a href="#p7">Periodic FIFO, LIFO, and weighted average: ending inventory, cost of goods sold, and gross profit</a></span></li><li><span class="pri pri-high">High priority</span><span><a href="#p8">Perpetual FIFO, LIFO, and moving average</a></span></li><li><span class="pri pri-high">High priority</span><span><a href="#p11">Lower of cost or NRV item by item, and the write-down entry</a></span></li><li><span class="pri pri-high">High priority</span><span><a href="#p12">Lower of cost or market: ceiling, floor, designated market, then cost</a></span></li><li><span class="pri pri-high">High priority</span><span><a href="#p10">LIFO liquidation profit and how it is reported</a></span></li><li><span class="pri pri-high">High priority</span><span><a href="#p1">Which goods belong in inventory: f.o.b. terms and consignments</a></span></li><li><span class="pri pri-know">Know it</span><span><a href="#p5">Cost of goods sold schedule</a></span></li><li><span class="pri pri-know">Know it</span><span><a href="#p6">Trade discounts and the gross method</a></span></li><li><span class="pri pri-know">Know it</span><span><a href="#p2">Inventory cost, work in process, shrinkage, right of return</a></span></li><li><span class="pri pri-know">Know it</span><span><a href="#p9">LIFO conformity, IFRS, and choosing a method</a></span></li><li><span class="pri pri-know">Know it</span><span><a href="#p13">Write-down reversals and purchase commitments</a></span></li><li><span class="pri pri-know">Know it</span><span><a href="#p14">The gross profit method and markup on cost</a></span></li><li><span class="pri pri-know">Know it</span><span><a href="#p15">Retail method: conventional percentage, spoilage, LIFO retail</a></span></li></ul>
   </section>
 
-  <nav class="facts" aria-labelledby="toc-h">
+  <nav class="facts screen-only" aria-labelledby="toc-h">
     <h2 class="ex-label" id="toc-h" style="border:0;padding:0;font-size:0.78rem">Contents</h2>
     <ol class="toc">
       <li><a href="#s-own">What belongs in inventory</a></li>
@@ -1104,5 +1202,32 @@
 </script>
 
 <script>document.getElementById('progressBar').setAttribute('aria-valuemax', document.querySelectorAll('.example').length);</script>
+<script>
+  // Print / Save as PDF: button, printable answer choices, and work space (all hidden on screen).
+  (function () {
+    var btn = document.getElementById('printBtn');
+    if (btn) { btn.addEventListener('click', function () { window.print(); }); }
+
+    // Drop-down questions print as a list of choices to circle.
+    document.querySelectorAll('select.ans').forEach(function (sel) {
+      var opts = Array.prototype.filter.call(sel.options, function (o) { return o.value !== ''; })
+        .map(function (o) { return o.textContent; });
+      var wrap = document.createElement('div');
+      wrap.className = 'print-choices' + (opts.some(function (t) { return t.length > 28; }) ? ' stacked' : '');
+      opts.forEach(function (t) { var s = document.createElement('span'); s.textContent = t; wrap.appendChild(s); });
+      sel.insertAdjacentElement('afterend', wrap);
+    });
+
+    // Problems that need calculations get a blank work space below the answer area.
+    document.querySelectorAll('.example').forEach(function (ex) {
+      var block = ex.querySelector('.input-block');
+      if (!block || !ex.querySelector('input[type="number"], table.je-in')) { return; }
+      var w = document.createElement('div');
+      w.className = 'print-work';
+      w.textContent = 'Work space';
+      block.insertAdjacentElement('afterend', w);
+    });
+  })();
+</script>
 </body>
 </html>
