@@ -158,19 +158,32 @@
   .print-btn { font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 700; color: #fff; background: var(--wcu-purple); border: 2px solid var(--wcu-purple); padding: 0.65rem 1.3rem; border-radius: 6px; cursor: pointer; min-height: 2.75rem; }
   .print-btn:hover { background: var(--wcu-purple-dark); border-color: var(--wcu-purple-dark); }
   .print-btn:focus-visible { outline: 3px solid var(--wcu-purple-dark); outline-offset: 3px; box-shadow: 0 0 0 3px #fff inset; }
+  .print-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; }
   .print-only, .print-choices, .print-work { display: none; }
 </style>
 <style>
   /* ---------- Print / Save as PDF (paper layout) ---------- */
   @page {
     size: letter portrait;
-    margin: 0.6in 0.65in 0.75in;
+    margin: 0.5in 0.55in 0.65in;
     @bottom-center { content: "Inventories Exam Study Guide  \00B7  Page " counter(page) " of " counter(pages); font-family: 'Inter', Arial, sans-serif; font-size: 8.5pt; color: #5f5955; }
   }
   @media print {
     * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    html { font-size: 10.5pt; scroll-behavior: auto; }
-    body { background: #fff; color: #000; line-height: 1.4; }
+    html { font-size: 10pt; scroll-behavior: auto; }
+    body { background: #fff; color: #000; line-height: 1.3; }
+    p { margin: 0.35rem 0; }
+    li { margin-bottom: 0.2rem; }
+    h2 { font-size: 1.3rem; margin: 0 0 0.5rem; padding-bottom: 0.25rem; }
+    .key-idea { padding: 0.5rem 0.8rem; margin: 0.5rem 0; }
+    .facts { padding: 0.6rem 0.9rem; margin: 0.6rem 0; }
+    .notes { padding: 0.7rem 0.9rem 0.3rem; margin: 0.6rem 0 0.9rem; }
+    .notes h4 { margin: 0.7rem 0 0.2rem; }
+    header { padding-top: 0 !important; }
+
+    /* Print options: html.pm-notes / pm-problems are set by the buttons; default (Ctrl+P) prints both */
+    html.pm-notes .example, html.pm-notes .print-only, html.pm-notes main > section.facts { display: none !important; }
+    html.pm-problems .notes, html.pm-problems .lo-block > .key-idea { display: none !important; }
     a { color: inherit; text-decoration: none; }
 
     /* Things that only make sense on screen */
@@ -191,14 +204,14 @@
     footer { padding: 0.8rem 0 0; }
 
     /* Page breaks: each section starts a page; problems start after the notes */
-    .lo-block { margin-bottom: 0; break-before: page; }
-    .notes + .example { break-before: page; }
+    .lo-block { margin-bottom: 0.5rem; }
     h2, h3, h4, .ex-label, .solution-label, .je-in-head, table caption { break-after: avoid; }
     .key-idea, .notes .tip, .table-wrap, .input-item, table.je-table, tr { break-inside: avoid; }
     .notes, .facts { break-inside: auto; box-shadow: none; }
-    /* Keep each problem on one page when it fits; very long ones (Problem 3) still flow across pages */
-    .example { break-inside: avoid; box-shadow: none; border: 1px solid #8a7f6c; margin: 0.9rem 0; padding: 0.8rem 1rem 1rem; }
-    .focus-list li { padding: 0.2rem 0; }
+    /* Problems flow continuously; tables and the problem intro stay together with what follows */
+    .example { break-inside: auto; box-shadow: none; border: 1px solid #8a7f6c; margin: 0.6rem 0; padding: 0.6rem 0.8rem 0.7rem; }
+    .example > p { break-after: avoid; }
+    .focus-list li { padding: 0.12rem 0; }
     .table-wrap { overflow: visible; }
     p, li { orphans: 3; widows: 3; }
 
@@ -222,8 +235,8 @@
     .print-choices span::before { content: "\25CB\00A0\00A0"; }
 
     /* Tables to fill in */
-    table.grid-in input, table.je-in input { width: 100%; min-width: 0; min-height: 1.7rem; border: 0 !important; }
-    table.grid-in td, table.je-in td { border: 1px solid #555; height: 1.75rem; }
+    table.grid-in input, table.je-in input { width: 100%; min-width: 0; min-height: 1.3rem; border: 0 !important; }
+    table.grid-in td, table.je-in td { border: 1px solid #555; height: 1.5rem; padding: 0.1rem 0.25rem; }
     table.je-in { table-layout: fixed; }
     table.je-in th, table.grid-in th { border-color: #555; background: var(--panel); }
     table.je-in td.amt-cell { width: 1.5in; }
@@ -231,7 +244,7 @@
     table.data th, table.data td { border-color: #8a7f6c; }
 
     /* Work space for calculations */
-    .print-work { display: block; margin-top: 0.6rem; min-height: 1.1in; border: 1px dashed #777; border-radius: 4px; padding: 0.25rem 0.5rem; font-family: 'IBM Plex Mono', monospace; font-size: 8pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #5f5955; }
+    .print-work { display: block; break-before: avoid; margin-top: 0.4rem; min-height: 0.8in; border: 1px dashed #777; border-radius: 4px; padding: 0.25rem 0.5rem; font-family: 'IBM Plex Mono', monospace; font-size: 8pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #5f5955; }
   }
 </style>
 </head>
@@ -252,9 +265,13 @@
 <section class="print-card" aria-labelledby="print-h">
   <div class="print-text">
     <h2 id="print-h">Print this study guide</h2>
-    <p>Print the concept notes and all fifteen problems as a paper practice packet, or save it as a PDF. The printed version leaves out the answers and gives you blank lines, tables, and work space to write in. In the print window, choose <strong>Save as PDF</strong> as the destination to get a PDF file.</p>
+    <p>Print the concept notes, the fifteen practice problems, or both as a paper packet. The printed problems leave out the answers and give you blank lines, tables, and work space to write in. In the print window, choose <strong>Save as PDF</strong> as the destination to get a PDF file.</p>
   </div>
-  <button type="button" class="print-btn" id="printBtn">Print or save as PDF</button>
+  <div class="print-actions" role="group" aria-label="Print options">
+    <button type="button" class="print-btn" data-print="notes">Notes only</button>
+    <button type="button" class="print-btn" data-print="problems">Problems only</button>
+    <button type="button" class="print-btn" data-print="both">Notes and problems</button>
+  </div>
 </section>
 
 <section class="print-only" aria-label="Practice packet instructions">
@@ -1205,8 +1222,17 @@
 <script>
   // Print / Save as PDF: button, printable answer choices, and work space (all hidden on screen).
   (function () {
-    var btn = document.getElementById('printBtn');
-    if (btn) { btn.addEventListener('click', function () { window.print(); }); }
+    // Each button sets a print mode (notes, problems, or both), then opens the print window.
+    var root = document.documentElement;
+    document.querySelectorAll('[data-print]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        root.classList.remove('pm-notes', 'pm-problems');
+        var mode = b.getAttribute('data-print');
+        if (mode !== 'both') { root.classList.add('pm-' + mode); }
+        window.print();
+      });
+    });
+    window.addEventListener('afterprint', function () { root.classList.remove('pm-notes', 'pm-problems'); });
 
     // Drop-down questions print as a list of choices to circle.
     document.querySelectorAll('select.ans').forEach(function (sel) {
