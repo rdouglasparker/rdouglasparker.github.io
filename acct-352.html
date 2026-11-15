@@ -310,6 +310,7 @@ function H(chapter, title, description, link, image){ return { type:"homework", 
 function Q(chapter, title, description, link, image){ return { type:"quiz", chapter, title, description, link, image: image || null }; }
 function L(chapter, title, description, link, image){ return { type:"link", chapter, title, description, link, image: image || null }; }
 function C(chapter, title, description, link, image){ return { type:"case", chapter, title, description, link, image: image || null }; }
+function R(chapter, title, description, link, image){ return { type:"review", chapter, title, description, link, image: image || null }; }
 
 const ASSIGNMENTS = [
   // ---- Group Case Studies (C) ----
@@ -636,6 +637,11 @@ const ASSIGNMENTS = [
   Q("Ch. 19", "Share-Based Comp and EPS Part C Notes Practice Quiz", "Short practice quiz on diluted earnings per share",
     "Quizzes/Ch19-PartC-PracticeQuiz.html", "images/ch19-quiz-part-c.svg"),
   
+  // ---- Exam study guides (R) ----
+  R("Ch. 18–19", "Shareholders’ Equity, Share-Based Compensation, and EPS Exam Study Guide",
+     "Concept notes and seven practice problems with step-by-step solutions: multiple choice theory, journal entries for shares, treasury stock and dividends, stock options and RSUs, and basic and diluted earnings per share.",
+     "examguide/ACCT352-Equity-SBC-EPS-ExamStudyGuide.html", null),
+  
   // ---- Additional links (L) ----
   // Use these for anything else: a textbook site, a video, a calculator, a reference.
   L("Ch. 16", "Income Taxes Slides",
@@ -664,6 +670,7 @@ const ASSIGNMENTS = [
     { key:'homework',    name:'Homework packets' },
     { key:'case',        name:'Group case studies' },
     { key:'quiz',        name:'Practice quizzes' },
+    { key:'review',      name:'Exam study guides' },
     { key:'link',        name:'Additional links' }
   ];
   var GLYPH = { quiz:'?', link:'\u2197' };   // thumbnail placeholder symbol; everything else shows the section sign
