@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PP&amp;E and Intangibles: Acquisition Tutor</title>
+<meta name="description" content="ACCT 351 practice on acquiring property, plant, and equipment and intangible assets: work each schedule, then record the journal entry, with new numbers every time.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --purple:#592C88; --purple-dk:#3E1E61; --purple-lt:#F3EEF8;
+  --gold:#C1A875; --gold-lt:#FAF5E9; --gold-dk:#6B5A2E;
+  --ink:#1F1B24; --muted:#4A4453; --line:#D9D2E3; --paper:#FFFFFF; --bg:#EEEAF2;
+  --red:#9B1C1C; --red-lt:#FDECEC; --green:#1D5E3A; --green-lt:#E9F5EE;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Source Serif 4",Georgia,serif;line-height:1.55;font-size:1.02rem}
+.skip{position:absolute;left:-9999px;top:0;background:var(--purple-dk);color:#fff;padding:.5rem 1rem;z-index:10}
+.skip:focus{left:1rem}
+a{color:var(--purple)}
+:focus-visible{outline:3px solid var(--gold-dk);outline-offset:2px}
+.shell{max-width:76rem;margin:1.5rem auto;background:var(--paper);box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.banner{background:var(--purple);color:#fff;padding:1.4rem 2rem 1.2rem;border-bottom:6px solid var(--gold)}
+.banner .kicker{font-family:Inter,Arial,sans-serif;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;margin:0 0 .35rem}
+.banner h1{font-size:1.9rem;line-height:1.2;margin:0 0 .3rem}
+.banner .sub{margin:0;font-family:Inter,Arial,sans-serif;font-size:.95rem}
+.content{padding:1rem 2rem 2rem}
+h2{font-family:Inter,Arial,sans-serif;color:var(--purple-dk);font-size:1.3rem;margin:1.6rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--gold)}
+h3{font-family:Inter,Arial,sans-serif;color:var(--purple);font-size:1.08rem;margin:1.2rem 0 .45rem}
+p{margin:.45rem 0 .7rem}
+.card{border:1px solid var(--line);border-left:6px solid var(--purple);background:var(--purple-lt);padding:.8rem 1.1rem;margin:1rem 0;border-radius:4px}
+.card h2,.card h3{margin-top:.2rem;border:none;padding:0}
+.important{border:2px solid var(--gold-dk);background:var(--gold-lt);padding:.8rem 1.1rem;margin:1rem 0;border-radius:4px}
+.important h3{color:var(--gold-dk);margin-top:.1rem}
+.card ul,.important ul{margin:.3rem 0 .2rem;padding-left:1.3rem}
+.small{font-size:.9rem;color:var(--muted)}
+.math{font-family:"IBM Plex Mono",Consolas,monospace;font-size:.9rem}
+
+/* picker */
+.picker{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));margin:.6rem 0 0}
+.pgroup h3{font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin:.2rem 0 .5rem}
+.pgroup ul{list-style:none;margin:0;padding:0;display:grid;gap:.45rem}
+.type-btn{width:100%;text-align:left;font:inherit;font-family:Inter,Arial,sans-serif;font-size:.93rem;background:#fff;color:var(--ink);border:1px solid var(--line);border-left:5px solid var(--purple);border-radius:4px;padding:.5rem .7rem;cursor:pointer}
+.type-btn strong{display:block;color:var(--purple-dk)}
+.type-btn span{color:var(--muted);font-size:.85rem}
+.type-btn:hover{background:var(--purple-lt)}
+.type-btn[aria-pressed="true"]{border-left-color:var(--gold-dk);background:var(--gold-lt);box-shadow:inset 0 0 0 2px var(--gold)}
+
+/* workspace */
+.work{display:grid;gap:1.5rem;grid-template-columns:minmax(0,1fr);margin-top:1.4rem}
+@media (min-width:64rem){.work{grid-template-columns:minmax(0,1fr) 18.5rem;align-items:start}}
+.prob-head{display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:flex-end;justify-content:space-between;border-bottom:3px solid var(--gold);padding-bottom:.6rem}
+.prob-head h2{border:none;margin:0;padding:0;font-size:1.45rem}
+.eyebrow{font-family:Inter,Arial,sans-serif;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 .15rem;font-weight:700}
+.btns{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+.btn{font-family:Inter,Arial,sans-serif;font-weight:700;font-size:.92rem;padding:.5rem .95rem;border-radius:4px;cursor:pointer;border:2px solid var(--purple);background:var(--purple);color:#fff}
+.btn:hover{background:var(--purple-dk);border-color:var(--purple-dk)}
+.btn.ghost{background:#fff;color:var(--purple)}
+.btn.ghost:hover{background:var(--purple-lt)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+
+table{border-collapse:collapse;width:100%;margin:.5rem 0 .8rem;font-size:.95rem}
+caption{caption-side:top;text-align:left;font-family:Inter,Arial,sans-serif;font-weight:700;color:var(--purple-dk);padding:.2rem 0 .4rem}
+th,td{border:1px solid var(--line);padding:.4rem .55rem;vertical-align:middle}
+thead th{background:var(--purple);color:#fff;font-family:Inter,Arial,sans-serif;font-size:.84rem;text-align:left}
+tbody th{background:#F7F5FA;text-align:left;font-weight:600}
+.n{text-align:right;font-family:"IBM Plex Mono",Consolas,monospace;font-size:.9rem;white-space:nowrap}
+.scroll{overflow-x:auto;position:relative}
+
+.part{border:1px solid var(--line);border-radius:6px;padding:.4rem 1rem 1rem;margin:1.2rem 0;background:#fff}
+.part > h3{display:flex;gap:.6rem;align-items:center}
+.part > h3 .pnum{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;background:var(--purple);color:#fff;border-radius:999px;padding:.12rem .6rem;white-space:nowrap}
+.part.complete{border-color:var(--green);box-shadow:inset 4px 0 0 var(--green)}
+.status{font-family:Inter,Arial,sans-serif;font-size:.85rem;font-weight:700;color:var(--green);margin-left:auto}
+
+/* schedule */
+.sched td.ln{width:2.6rem;text-align:center;font-family:Inter,Arial,sans-serif;font-weight:700;color:var(--purple-dk);background:#F7F5FA}
+.sched td.bo{width:7.5rem;font-family:Inter,Arial,sans-serif;font-size:.8rem;color:var(--muted)}
+.sched td.amt{width:12.5rem}
+.sched tr.given td{background:#FBFAFD}
+.sched label{font-weight:600}
+.inwrap{display:flex;align-items:center;gap:.25rem}
+.inwrap .u{font-family:"IBM Plex Mono",Consolas,monospace;color:var(--muted)}
+input.ans,select.ans{font:inherit;font-family:"IBM Plex Mono",Consolas,monospace;font-size:.95rem;padding:.4rem .5rem;border:2px solid #6E6680;border-radius:4px;width:100%;min-width:0;background:#fff;color:var(--ink)}
+select.ans{font-family:Inter,Arial,sans-serif;font-size:.88rem}
+input.ans.n{text-align:right}
+.ok-f{border-color:var(--green)!important;background:var(--green-lt)!important}
+.bad-f{border-color:var(--red)!important;background:var(--red-lt)!important}
+.fb{font-family:Inter,Arial,sans-serif;font-size:.84rem;margin-top:.3rem}
+.fb:empty{display:none}
+.fb.ok{color:var(--green)}
+.fb.bad{color:var(--red)}
+.fb.sol{color:var(--purple-dk)}
+.fb .math{font-size:.82rem}
+.tag{font-weight:700}
+
+/* journal entry */
+.je td{padding:.3rem .4rem}
+.je td.src{width:7rem;font-family:Inter,Arial,sans-serif;font-size:.8rem;color:var(--muted);text-align:center}
+.je td.d,.je td.c{width:10rem}
+.je td.ac{min-width:14rem}
+.chip{display:inline-block;background:var(--gold-lt);border:1px solid var(--gold-dk);color:var(--gold-dk);border-radius:999px;padding:0 .5rem;font-weight:700}
+.partfb{font-family:Inter,Arial,sans-serif;font-size:.9rem;border-radius:4px;padding:.5rem .8rem;margin:.5rem 0}
+.partfb:empty{display:none}
+.partfb.ok{background:var(--green-lt);border-left:4px solid var(--green)}
+.partfb.bad{background:var(--red-lt);border-left:4px solid var(--red)}
+.partfb.hint{background:var(--gold-lt);border-left:4px solid var(--gold-dk)}
+
+.say{display:flex;gap:.75rem;align-items:flex-start;margin:.8rem 0}
+.avatar{flex:0 0 2.9rem;height:2.9rem;border-radius:50%;background:var(--purple);color:#fff;border:3px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:Inter,Arial,sans-serif;font-weight:700;font-size:1.2rem}
+.say.sm .avatar{flex-basis:2.2rem;height:2.2rem;font-size:.95rem;border-width:2px}
+.bubble{position:relative;background:#fff;border:1px solid var(--line);border-radius:10px;padding:.55rem .95rem;flex:1;min-width:0;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.bubble::before{content:"";position:absolute;left:-8px;top:1rem;border:8px solid transparent;border-left:0;border-right-color:var(--line)}
+.bubble::after{content:"";position:absolute;left:-6px;top:1rem;border:8px solid transparent;border-left:0;border-right-color:#fff}
+.bubble .who{font-family:Inter,Arial,sans-serif;font-weight:700;font-size:.82rem;color:var(--purple-dk);margin:0 0 .15rem;letter-spacing:.02em}
+.bubble p{margin:.3rem 0}
+.bubble ul{margin:.3rem 0 .4rem;padding-left:1.2rem}
+.say.key .bubble{background:var(--gold-lt);border-color:var(--gold-dk)}
+.say.key .bubble::after{border-right-color:var(--gold-lt)}
+.say.key .bubble::before{border-right-color:var(--gold-dk)}
+.partfb .who{font-weight:700}
+.know{margin:.4rem 0 .6rem;font-size:.92rem;min-width:34rem}
+.know td.ln{width:2.6rem;text-align:center;font-family:Inter,Arial,sans-serif;font-weight:700;color:var(--purple-dk);background:#F7F5FA}
+.know tbody th{font-weight:600;background:#fff}
+.know td.why{font-size:.86rem;color:var(--muted);font-family:Inter,Arial,sans-serif}
+.summary{border-top:3px solid var(--gold);margin-top:1.5rem;padding-top:.6rem}
+.score{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:.4rem 0 1rem;padding:0}
+.score li{background:var(--purple-lt);border:1px solid var(--line);border-radius:999px;padding:.2rem .8rem;font-family:Inter,Arial,sans-serif;font-weight:600;font-size:.9rem}
+
+/* sidebar */
+aside.ref{border:1px solid var(--line);border-radius:6px;padding:.4rem 1rem 1rem;background:#FBFAFD}
+@media (min-width:64rem){aside.ref{position:sticky;top:1rem}}
+aside.ref h2{font-size:1.1rem;margin-top:.6rem}
+aside.ref ol{padding-left:1.2rem;margin:.3rem 0}
+aside.ref li{margin:.35rem 0;font-size:.95rem}
+.flow{list-style:none;padding:0;margin:.4rem 0;font-family:Inter,Arial,sans-serif;font-size:.84rem}
+.flow li{border:1px solid var(--line);background:#fff;border-radius:4px;padding:.4rem .55rem;margin:0}
+.flow li.arrow{border:none;background:none;text-align:center;color:var(--purple);padding:.05rem;font-weight:700}
+aside.ref dl{margin:.3rem 0 0;font-size:.92rem}
+aside.ref dt{font-weight:700;font-family:Inter,Arial,sans-serif;font-size:.88rem;margin-top:.5rem}
+aside.ref dd{margin:0;color:var(--muted)}
+footer{padding:1rem 2rem 1.5rem;font-family:Inter,Arial,sans-serif;font-size:.8rem;color:var(--muted);border-top:1px solid var(--line)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media (max-width:640px){
+  .shell{margin:0}
+  .banner,.content{padding-left:1rem;padding-right:1rem}
+  .sched td.bo{display:none}
+  .sched th.bo{display:none}
+  .sched td.amt{width:8.5rem}
+  table.je{min-width:34rem}
+  .sched td.ln{width:2rem}
+  .prob-head .btns{width:100%}
+  .picker{grid-template-columns:1fr}
+  table{font-size:.88rem}
+}
+@media print{
+  body{background:#fff}
+  .shell{box-shadow:none;margin:0}
+  #picker-sec,.btns,.skip,aside.ref{display:none!important}
+  .banner,thead th,.part > h3 .pnum{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .part{break-inside:avoid}
+}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+</head>
+<body>
+<a class="skip" href="#work-title">Skip to the problem</a>
+<div class="shell">
+<header class="banner">
+  <p class="kicker">ACCT 351 · Intermediate Accounting I · Practice Tutor</p>
+  <h1>PP&amp;E and Intangibles: Acquisition Tutor</h1>
+  <p class="sub" id="sub">Work each schedule, then record the journal entry. New company and new numbers every time.</p>
+</header>
+
+<main class="content" id="main">
+  <section aria-labelledby="how-title">
+    <h2 id="how-title" class="sr-only">Meet your tutor</h2>
+    <div id="intro"></div>
+  </section>
+
+  <section id="picker-sec" aria-labelledby="pick-title">
+    <h2 id="pick-title">Choose a problem type</h2>
+    <div class="picker" id="picker"></div>
+  </section>
+
+  <div class="work">
+    <section aria-labelledby="work-title" id="worksheet">
+      <div class="prob-head">
+        <div>
+          <p class="eyebrow" id="ptype"></p>
+          <h2 id="work-title" tabindex="-1"></h2>
+        </div>
+        <div class="btns">
+          <button type="button" class="btn" id="new-btn">New numbers</button>
+          <button type="button" class="btn ghost" id="print-btn">Print this problem</button>
+        </div>
+      </div>
+      <div id="scenario-say"></div>
+      <div class="scroll" id="given"></div>
+      <div id="key-say"></div>
+      <div id="parts"></div>
+      <div class="summary" id="summary" hidden tabindex="-1"></div>
+    </section>
+
+    <aside class="ref" aria-labelledby="ref-title">
+      <h2 id="ref-title">The one question to ask</h2>
+<ul class="flow" aria-label="How to find the cost of an asset">
+<li><strong>What did we give up?</strong><br>Cash, a note, shares, or another asset, at fair value</li>
+<li class="arrow" aria-hidden="true">↓</li>
+<li><strong>Add every cost</strong> necessary to get the asset ready for its intended use</li>
+<li class="arrow" aria-hidden="true">↓</li>
+<li><strong>Costs of using it</strong> afterwards (training, insurance, taxes) are expensed</li>
+</ul>
+<h2>Rules that never bend</h2>
+<ol>
+<li><strong>Capitalize</strong> all costs to acquire and prepare the asset.</li>
+<li><strong>Land is never depreciated</strong>; improvements are.</li>
+<li><strong>Lump sum:</strong> allocate by relative fair values.</li>
+<li><strong>Noninterest note:</strong> record the present value, not the face.</li>
+<li><strong>Exchange:</strong> fair value, unless no commercial substance (no gain).</li>
+<li><strong>R&amp;D</strong> is expensed; patent legal costs are capitalized.</li>
+</ol>
+<dl>
+<dt>Commercial substance</dt><dd>Future cash flows change because of the exchange.</dd>
+<dt>Avoidable interest</dt><dd>Interest that could have been avoided without the construction. Capitalize the lower of this and actual interest.</dd>
+<dt>Asset retirement obligation</dt><dd>A legal duty to retire an asset; recorded at present value and added to the asset’s cost.</dd>
+<dt>Goodwill</dt><dd>Price paid minus fair value of net identifiable assets.</dd>
+</dl>
+</aside>
+  </div>
+</main>
+<footer>
+  <p>All company names and numbers are fictional and randomly generated. The current year updates automatically. Practice covers acquiring PP&amp;E and intangible assets in intermediate accounting under U.S. GAAP, with IFRS differences noted.</p>
+</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+var Y=new Date().getFullYear();
+
+/* ---------- helpers ---------- */
+function rnd(min,max,step){step=step||1;var n=Math.floor((max-min)/step);return min+step*Math.floor(Math.random()*(n+1));}
+function pick(a){return a[Math.floor(Math.random()*a.length)];}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function R(n){return Math.round(n);}
+function fmt(n){return Math.abs(R(n)).toLocaleString("en-US");}
+function $(n){return (R(n)<0?"−$":"$")+fmt(n);}
+function pc(r){return (Math.round(r*1000)/10)+"%";}
+function K(n){return n*1000;}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];});}
+function dispU(v,u){return u==="f"?v.toFixed(5).replace(/0+$/,"").replace(/\.$/,""):u==="x"?v.toFixed(1)+" times":u==="%"?pc(v):u==="sh"?fmt(v):u==="$c"?c2(v):$(v);}
+function m(s){return '<span class="math">'+s+'</span>';}
+
+/* ---------- the tutor ---------- */
+var TUTORS=[
+ {name:"Jordan",bio:"a senior accounting major who works in the Forsyth tutoring lab",style:"Let's take it one line at a time."},
+ {name:"Riley",bio:"a MAcc student who interned on a financial reporting team in Asheville",style:"Acquisition accounting comes down to one question: what did it cost to get this asset ready for use?"},
+ {name:"Avery",bio:"a graduate assistant who never met a journal entry that didn't balance",style:"If it doesn't balance, something's hiding. We'll find it."},
+ {name:"Quinn",bio:"a senior studying for the CPA exam",style:"Asset acquisition costs show up on the CPA exam, so it's worth getting comfortable."},
+ {name:"Casey",bio:"a Catamount tutor who loves turning messy numbers into clean financial statements",style:"Exchanges and interest capitalization look tricky at first, but they follow a pattern. Once you see it, you'll see it everywhere."}
+];
+var T=(function(){var last=-1;try{last=parseInt(localStorage.getItem("ch10tutor")||"-1",10);}catch(e){}
+  var i;do{i=Math.floor(Math.random()*TUTORS.length);}while(i===last&&TUTORS.length>1);
+  try{localStorage.setItem("ch10tutor",String(i));}catch(e){}return TUTORS[i];})();
+function say(html,opt){opt=opt||{};return '<div class="say'+(opt.sm?' sm':'')+(opt.key?' key':'')+'"><span class="avatar" aria-hidden="true">'+T.name.charAt(0)+'</span><div class="bubble"><p class="who">'+(opt.label||T.name)+'</p>'+html+'</div></div>';}
+function any(a){return a[Math.floor(Math.random()*a.length)];}
+var PRAISE=["Nice, that's it.","Exactly right.","You've got it.","Yes! Right on.","Perfect.","That's the one."];
+var NUDGE=["Close. Here's a nudge:","Not quite yet. Try this:","Almost. Think about it this way:","Hmm, let's rethink that one:"];
+var NAMES=["Blue Ridge Brewing Co.","Tuckasegee Timber Works","Cullowhee Creek Canoe Co.","Balsam Gap Bakery","Whiteside Mountain Outfitters","Pisgah Pine Furniture","Fontana Lake Marine","Cashiers Valley Cabinetry","Dillsboro Depot Mercantile","Mount Mitchell Mills","Looking Glass Falls Lodge","Hiwassee River Rafting","Black Balsam Bicycles","Waterrock Knob Woodworks","Sylva Summit Coffee Roasters","Nantahala Gorge Gear Co.","Cherohala Skyway Cycles","Highlands Plateau Provisions","Franklin Gem Mine Supply","Brevard Waterfall Works","Bryson City Rail & Trail","Maggie Valley Mountain Crafts","Linville Gorge Logistics","Lake Glenville Marina","Shining Rock Solar","Panthertown Valley Paper Co.","Jackson County Apple Orchards","Catamount Peak Construction","Smoky Mountain Sawmill","Little Tennessee Trout Farms","Wayah Bald Wind Energy","Scaly Mountain Ski Supply","Cowee Valley Ceramics","Chimney Rock Climbing Co."];
+var lastName="";
+function company(){var n;do{n=pick(NAMES);}while(n===lastName);lastName=n;return n;}
+
+/* ---------- worksheet builders ---------- */
+/* given line */
+function G(id,label,val,unit,why){return {kind:"given",id:id,label:label,val:val,unit:unit||"$",why:why||""};}
+/* numeric input line */
+function N(id,label,ans,builds,hint,sol,opt){opt=opt||{};return {kind:"num",id:id,label:label,ans:ans,builds:builds||"",hint:hint,sol:sol,unit:opt.unit||"$",tol:opt.tol==null?1:opt.tol};}
+/* choice input line */
+function C(id,label,options,ans,hint,sol,builds){return {kind:"choice",id:id,label:label,options:options,ans:ans,builds:builds||"",hint:hint,sol:sol};}
+function sched(title,rows,intro){return {type:"sched",title:title,rows:rows,intro:intro||""};}
+/* journal entry: lines [account, debit, credit, sourceLine] ; zero lines dropped */
+function JE(title,lines,intro){
+  var L=[];lines.forEach(function(l){var d=R(l[1]||0),c=R(l[2]||0);if(!d&&!c)return;L.push({acct:l[0],dr:d,cr:c,src:l[3]||""});});
+  return {type:"je",title:title,lines:L,intro:intro||""};
+}
+/* turn a signed change in a deferred account into a JE line */
+function defLine(acct,change,isAsset,src){if(!R(change))return [acct,0,0];var debit=(isAsset&&change>0)||(!isAsset&&change<0);return debit?[acct,Math.abs(change),0,src]:[acct,0,Math.abs(change),src];}
+function expLine(exp,src){return exp>=0?["Income tax expense",exp,0,src]:["Income tax expense",0,-exp,src];}
+
+function givenTable(cap,rows){var h='<table><caption>'+esc(cap)+'</caption><thead><tr><th scope="col">Item</th><th scope="col" class="n">Amount</th></tr></thead><tbody>';rows.forEach(function(r){h+='<tr><th scope="row">'+r[0]+'</th><td class="n">'+r[1]+'</td></tr>';});return h+'</tbody></table>';}
+
+var ACCTS=["Cash","Equipment","Land","Land improvements","Buildings","Building","Building (lodge) under construction","Mineral deposit","Delivery vehicles","Receivables","Inventories","Patents","Patent","Goodwill","Software development costs","Raw materials inventory","Wages expense—construction","Manufacturing overhead","Accumulated depreciation","Equipment (new)","Equipment (old)","Land (new)","Land (old)","Discount on note payable","Note payable","Asset retirement obligation","Liabilities assumed","Common stock","Paid-in capital—excess of par","Legal expense","Training expense","Insurance expense","Property tax expense","Interest expense","Accretion expense","Research and development expense","Other operating expense","Revenue—donation of asset","Gain on exchange of assets","Loss on exchange of assets","Gain on bargain purchase"];
+
+function c2(n){return (n<0?"−$":"$")+Math.abs(n).toFixed(2);}
+function sh(n){return fmt(n)+" shares";}
+function r2(x){return Math.round(x*100)/100;}
+
+/* ---------- problem generators ---------- */
+var GEN={};
+/* ===== Chapter 10 generators ===== */
+var YNO=["Capitalize to the asset","Expense now"];
+function frac(r){return Math.round(r*1e5)/1e5;}
+function pvf(r,n){return frac(1/Math.pow(1+r,n));}
+
+/* ----- Cost of assets ----- */
+GEN.equip={group:"Cost of assets",name:"Equipment: what to capitalize",blurb:"Sort the costs, then find the machine’s cost.",make:function(){
+var co=company(),P=K(rnd(40,140,5)),tr=pick([.06,.07]),fr=rnd(10,40)*100,ins=rnd(2,8)*100,plat=rnd(10,35)*100,inst=rnd(15,45)*100,test=rnd(4,12)*100,train=rnd(15,40)*100,ins1=rnd(8,20)*100,ptx=rnd(4,10)*100;
+var tax=R(P*tr),cap=P+tax+fr+ins+plat+inst+test,exp=train+ins1+ptx,tot=cap+exp;
+var items=[["Sales tax on the machine",0,"Sales tax is part of the price paid to acquire the asset."],["Freight to the plant",0,"Transportation is necessary to get the asset to its location."],["Insurance while the machine is in transit",0,"Protects the asset until it arrives, so it is a cost of acquiring it."],["Concrete platform built for the machine",0,"A special foundation is necessary to make the machine ready for use."],["Installation and calibration",0,"Necessary to make the asset ready for its intended use."],["Trial runs before production begins",0,"Testing is part of getting the asset ready to operate."],["Training the machine’s operators",1,"Training benefits employees, is hard to tie to the machine, and is expensed."],["First year of insurance on the machine",1,"A cost of using the asset after it is ready."],["First year of property tax on the machine",1,"A cost of owning the asset during operations."]];
+var lab=function(i){return items[i][0]+" ("+$([tax,fr,ins,plat,inst,test,train,ins1,ptx][i])+")";};
+var cls=items.map(function(it,i){return C(String(i+1),lab(i),YNO,it[1],"Is this cost necessary to get the machine acquired and ready for use, or is it a cost of using or owning it afterwards?",YNO[it[1]]+". "+it[2]);});
+return {title:co,
+scenario:'<p>'+esc(co)+' buys a computer-controlled machine on April 1, '+Y+'. The invoice price is '+$(P)+' and the company pays '+pc(tr)+' sales tax. It pays all other costs in cash.</p>',
+key:'<p>Capitalize every cost <strong>necessary to acquire the asset and make it ready for its intended use</strong>: price, taxes, freight, transit insurance, installation, special foundations, and testing. Costs of <em>using</em> or <em>owning</em> the asset, or that benefit people rather than the asset (training), are expensed.</p>',
+parts:[
+sched("Capitalize or expense?",cls),
+sched("Cost of the machine",[
+G("A","Invoice price",P,null,"From the vendor’s invoice."),G("B","Sales tax rate",tr,"%","Set by the state."),
+N("C","Sales tax",tax,"A × B","Price × tax rate.",m($(P)+" × "+pc(tr)+" = "+$(tax))),
+G("D","Freight to the plant",fr,null,"Paid to the carrier."),G("E","Transit insurance",ins,null,"Paid to the insurer."),G("F","Concrete platform",plat,null,"Paid to the contractor."),G("G","Installation and calibration",inst,null,"Paid to the installers."),G("H","Trial runs",test,null,"Cost of the test production."),
+N("I","Capitalized cost of the machine",cap,"A + C through H","Add the price and every cost necessary to get it ready.",m($(P)+" + "+$(tax)+" + "+$(fr)+" + "+$(ins)+" + "+$(plat)+" + "+$(inst)+" + "+$(test)+" = "+$(cap))),
+G("J","Operator training",train,null,"Paid to the trainer."),G("K","First year of insurance",ins1,null,"Paid to the insurer."),G("L","First year of property tax",ptx,null,"Paid to the county."),
+N("M","Costs expensed",exp,"J + K + L","Add the costs of using and owning the machine.",m($(train)+" + "+$(ins1)+" + "+$(ptx)+" = "+$(exp))),
+N("N","Total cash paid",tot,"I + M","Capitalized plus expensed.",m($(cap)+" + "+$(exp)+" = "+$(tot)))]),
+JE("Journal entry, April 1, "+Y,[["Equipment",cap,0,"I"],["Training expense",train,0,"J"],["Insurance expense",ins1,0,"K"],["Property tax expense",ptx,0,"L"],["Cash",0,tot,"N"]])
+],take:"<p>Of the "+$(tot)+" paid, "+$(cap)+" becomes the machine’s cost and will be depreciated. The other "+$(exp)+" hits this year’s income statement.</p>"};
+}};
+
+GEN.land={group:"Cost of assets",name:"Land and land improvements",blurb:"Site costs, back taxes, razing, salvage, and improvements.",make:function(){
+var co=company(),P=K(rnd(300,900,10)),tt=rnd(20,45)*100,cm=R(P*pick([.03,.04])),dq=rnd(40,90)*100,dm=K(rnd(8,25)),sv=rnd(20,60)*100,gr=rnd(60,140)*100,lot=K(rnd(20,60)),sc=K(rnd(5,15)),ct=rnd(25,50)*100;
+var land=P+tt+cm+dq+dm-sv+gr,imp=lot+sc,tot=land+imp+ct;
+return {title:co,
+scenario:'<p>On July 1, '+Y+', '+esc(co)+' buys six acres with an old warehouse for '+$(P)+', planning to tear the building down and build a distribution center. It pays '+$(tt)+' for a title search and insurance, a '+$(cm)+' broker’s commission, and '+$(dq)+' of delinquent property taxes the seller owed. Demolishing the warehouse costs '+$(dm)+', and the company sells the salvaged materials for '+$(sv)+'. Grading and clearing cost '+$(gr)+'. Later in the year it pays '+$(lot)+' to pave a parking lot and '+$(sc)+' for landscaping and sprinklers, and '+$(ct)+' of property taxes for the period after closing.</p>',
+key:'<p>Land cost includes the price, closing costs, <strong>back taxes assumed</strong>, and the cost of preparing the site (<strong>razing an old building</strong> less salvage, grading). Land is never depreciated, so <strong>land improvements</strong> go in a separate depreciable account. Taxes after closing are an operating cost.</p>',
+parts:[
+sched("Costs of the site",[
+G("A","Purchase price",P,null,"Land and old warehouse."),G("B","Title search and insurance",tt,null,"Closing cost."),G("C","Broker’s commission",cm,null,"Closing cost."),G("D","Delinquent taxes paid for the seller",dq,null,"An obligation assumed to obtain the land."),G("E","Demolition of the warehouse",dm,null,"Site preparation."),G("F","Proceeds from selling salvage",sv,null,"Reduces the cost of the land."),G("G","Grading and clearing",gr,null,"Site preparation."),
+N("H","Cost of the land",land,"A through G","Add the costs, subtract the salvage proceeds.",m($(P)+" + "+$(tt)+" + "+$(cm)+" + "+$(dq)+" + "+$(dm)+" − "+$(sv)+" + "+$(gr)+" = "+$(land))),
+G("I","Parking lot",lot,null,"Paved lot."),G("J","Landscaping and sprinklers",sc,null,"Improvements."),
+C("K","The parking lot is recorded in",["Land","Land improvements","Property tax expense"],1,"Does it have a limited life? Land never wears out.","Land improvements: they wear out and are depreciated, unlike land."),
+N("L","Land improvements",imp,"I + J","Add the improvements.",m($(lot)+" + "+$(sc)+" = "+$(imp))),
+G("M","Property taxes after closing",ct,null,"A cost of owning the land during operations."),
+N("N","Total cash paid",tot,"H + L + M","Land plus improvements plus taxes expensed.",m($(land)+" + "+$(imp)+" + "+$(ct)+" = "+$(tot)))]),
+JE("Journal entry",[["Land",land,0,"H"],["Land improvements",imp,0,"L"],["Property tax expense",ct,0,"M"],["Cash",0,tot,"N"]])
+],take:"<p>The "+$(dq)+" of the seller’s back taxes is part of the land’s cost, but the "+$(ct)+" of taxes after closing is expense. Salvage proceeds of "+$(sv)+" reduced the land’s cost.</p>"};
+}};
+
+GEN.lump={group:"Cost of assets",name:"Lump-sum purchase",blurb:"Allocate one price using relative fair values.",make:function(){
+var co=company(),fl=K(rnd(200,600,10)),fb=K(rnd(500,1200,10)),fe=K(rnd(200,700,10)),tf=fl+fb+fe,price=R(tf*pick([.85,.9,.92,.95])/1000)*1000;
+var al=R(price*fl/tf),ab=R(price*fb/tf),ae=price-al-ab;
+return {title:co,
+scenario:'<p>On October 1, '+Y+', '+esc(co)+' buys a plant for one price of '+$(price)+'. An appraiser estimates what each part would cost if bought separately.</p>',
+key:'<p>When different assets are bought for one price, allocate the price in proportion to <strong>relative fair values</strong>: each asset’s fair value ÷ total fair value × price. This matters because land is not depreciated and the other assets have different lives.</p>',
+parts:[sched("Allocating the price",[
+G("A","Fair value of land",fl,null,"Appraisal."),G("B","Fair value of building",fb,null,"Appraisal."),G("C","Fair value of equipment",fe,null,"Appraisal."),G("D","Price paid",price,null,"The single price."),
+N("E","Total fair value",tf,"A + B + C","Add the fair values.",m($(fl)+" + "+$(fb)+" + "+$(fe)+" = "+$(tf))),
+N("F","Cost allocated to land",al,"D × A ÷ E","Price × land’s share of total fair value.",m($(price)+" × "+$(fl)+" ÷ "+$(tf)+" = "+$(al))),
+N("G","Cost allocated to building",ab,"D × B ÷ E","Price × building’s share.",m($(price)+" × "+$(fb)+" ÷ "+$(tf)+" = "+$(ab))),
+N("H","Cost allocated to equipment",ae,"D − F − G","Price × equipment’s share (or the remainder).",m($(price)+" − "+$(al)+" − "+$(ab)+" = "+$(ae)))]),
+JE("Journal entry, October 1, "+Y,[["Land",al,0,"F"],["Building",ab,0,"G"],["Equipment",ae,0,"H"],["Cash",0,price,"D"]])],
+take:"<p>The assets were bought for less than their "+$(tf)+" total fair value, so each is recorded at "+pc(price/tf)+" of its fair value. Land gets "+$(al)+" and is never depreciated.</p>"};
+}};
+
+GEN.aro={group:"Cost of assets",name:"Natural resource with an ARO",blurb:"Expected cash flows, present value, and accretion.",make:function(){
+var co=company(),rights=K(rnd(300,900,50)),devl=K(rnd(100,500,25)),n=pick([3,4,5]),rate=pick([.05,.06,.07,.08]);
+var o=[K(rnd(20,40,5)),K(rnd(40,60,5)),K(rnd(60,90,5))],pr=pick([[.3,.5,.2],[.2,.5,.3],[.25,.5,.25]]);
+var ex=R(o[0]*pr[0]+o[1]*pr[1]+o[2]*pr[2]),f=pvf(rate,n),aro=R(ex*f),cost=rights+devl+aro,acc=R(aro*rate),cashp=rights+devl;
+var pcs=function(x){return Math.round(x*100)+"%";};
+return {title:co,
+scenario:'<p>On January 2, '+Y+', '+esc(co)+' pays '+$(rights)+' for mineral rights and '+$(devl)+' to develop the site. The law requires it to restore the land in '+n+' years. Management estimates the restoration cost as '+$(o[0])+' (probability '+pcs(pr[0])+'), '+$(o[1])+' ('+pcs(pr[1])+'), or '+$(o[2])+' ('+pcs(pr[2])+'). The credit-adjusted risk-free rate is '+pc(rate)+'.</p>',
+key:'<p>A legal obligation to retire an asset is recorded at <strong>fair value</strong> (the present value of the expected outflow) and <strong>added to the cost of the asset</strong>. Use <strong>probability-weighted cash flows</strong> and the <strong>credit-adjusted risk-free rate</strong>. The liability then grows by <strong>accretion expense</strong> each year.</p>',
+parts:[sched("Recording the obligation",[
+G("A","Mineral rights",rights,null,"Acquisition cost."),G("B","Development costs",devl,null,"Cost to make the site ready."),
+G("C","Present value of $1 at "+pc(rate)+" for "+n+" years",f,"f","From the present value table."),
+N("D","Expected restoration cost",ex,"Σ outflow × probability","Weight each outflow by its probability.",m($(o[0])+" × "+pcs(pr[0])+" + "+$(o[1])+" × "+pcs(pr[1])+" + "+$(o[2])+" × "+pcs(pr[2])+" = "+$(ex))),
+N("E","Asset retirement obligation",aro,"D × C","Discount the expected cost.",m($(ex)+" × "+f+" = "+$(aro))),
+N("F","Cost of the mineral deposit",cost,"A + B + E","The obligation is added to the cost.",m($(rights)+" + "+$(devl)+" + "+$(aro)+" = "+$(cost))),
+N("G","Cash paid",cashp,"A + B","The obligation is not paid yet.",m($(rights)+" + "+$(devl)+" = "+$(cashp)))]),
+JE("Journal entry, January 2, "+Y,[["Mineral deposit",cost,0,"F"],["Cash",0,cashp,"G"],["Asset retirement obligation",0,aro,"E"]]),
+sched("Accretion in the first year",[G("H","Asset retirement obligation, beginning",aro,null,"From the entry above."),G("I","Credit-adjusted risk-free rate",rate,"%","Used to discount."),
+N("J","Accretion expense, year 1",acc,"H × I","Beginning liability × rate.",m($(aro)+" × "+pc(rate)+" = "+$(acc))),
+N("K","Asset retirement obligation, end of year 1",aro+acc,"H + J","Accretion increases the liability.",m($(aro)+" + "+$(acc)+" = "+$(aro+acc)))]),
+JE("Journal entry, December 31, "+Y,[["Accretion expense",acc,0,"J"],["Asset retirement obligation",0,acc,"J"]])],
+take:"<p>The "+$(aro)+" liability grows toward the "+$(ex)+" expected cost. Accretion is an operating expense that is <em>not</em> added to the asset. The deposit itself is later expensed through depletion.</p>"};
+}};
+
+/* ----- Noncash acquisitions ----- */
+GEN.note={group:"Noncash acquisitions",name:"Noninterest-bearing note",blurb:"Present value, discount, and interest (gross method).",make:function(){
+var co=company(),F=K(rnd(40,150,5)),n=pick([2,3,4]),r=pick([.06,.08,.10,.12]),f=pvf(r,n),pv=R(F*f),d=F-pv,i1=R(pv*r);
+return {title:co,
+scenario:'<p>On January 2, '+Y+', '+esc(co)+' buys equipment by signing a '+$(F)+' noninterest-bearing note due in '+n+' years. Similar borrowing costs '+pc(r)+'. The company uses the gross method.</p>',
+key:'<p>A note with no stated interest still has interest in it. Record the asset at the <strong>present value</strong> of the payments. The difference between face amount and present value is a <strong>discount</strong>, which becomes interest expense using the effective interest method.</p>',
+parts:[sched("Measuring the purchase",[G("A","Face amount of the note",F,null,"Due in "+n+" years."),G("B","Present value of $1 at "+pc(r)+" for "+n+" years",f,"f","From the present value table."),
+N("C","Cost of the equipment (present value)",pv,"A × B","Discount the face amount.",m($(F)+" × "+f+" = "+$(pv))),
+N("D","Discount on note payable",d,"A − C","Face minus present value.",m($(F)+" − "+$(pv)+" = "+$(d)))]),
+JE("Journal entry, January 2, "+Y,[["Equipment",pv,0,"C"],["Discount on note payable",d,0,"D"],["Note payable",0,F,"A"]]),
+sched("Interest at the end of year 1",[G("E","Carrying amount of the note, beginning",pv,null,"Face minus discount."),G("F","Effective interest rate",r,"%","Rate for similar borrowing."),
+N("G","Interest expense, year 1",i1,"E × F","Carrying amount × rate.",m($(pv)+" × "+pc(r)+" = "+$(i1))),
+N("H","Carrying amount of the note, end of year 1",pv+i1,"E + G","Interest accrues on the carrying amount.",m($(pv)+" + "+$(i1)+" = "+$(pv+i1)))]),
+JE("Journal entry, December 31, "+Y,[["Interest expense",i1,0,"G"],["Discount on note payable",0,i1,"G"]])],
+take:"<p>Recording the equipment at "+$(F)+" would overstate the asset by "+$(d)+" and understate interest. Interest is always computed on the <em>carrying amount</em>, not on the face amount.</p>"};
+}};
+
+GEN.implicit={group:"Noncash acquisitions",name:"Finding the implicit rate",blurb:"Cash price versus a noninterest-bearing note.",make:function(){
+var co=company(),F=K(rnd(50,200,10)),n=pick([3,4,5]),rs=[.06,.08,.10,.12],ri=Math.floor(Math.random()*4),r=rs[ri],cash=R(F/Math.pow(1+r,n)),fac=Math.round(cash/F*1e4)/1e4,d=F-cash;
+var rows=rs.map(function(x){return [pc(x),pvf(x,n).toFixed(5)];});
+return {title:co,given:givenTable("Present value of $1, "+n+" periods",rows),
+scenario:'<p>On February 1, '+Y+', '+esc(co)+' buys a delivery truck. The seller will take '+$(cash)+' cash today, or a '+$(F)+' noninterest-bearing note due in '+n+' years. The company chooses the note.</p>',
+key:'<p>The <strong>implicit rate</strong> is the rate that makes the present value of the note equal the cash price. Divide the cash price by the face amount to get a present value factor, then find the rate in the table.</p>',
+parts:[sched("Finding the rate",[G("A","Cash price",cash,null,"What the truck sells for today."),G("B","Face amount of the note",F,null,"Due in "+n+" years."),
+N("C","Present value factor (four decimals)",fac,"A ÷ B","Cash price ÷ face amount.",m($(cash)+" ÷ "+$(F)+" = "+fac.toFixed(4)),{unit:"f",tol:.0006}),
+C("D","Implicit interest rate",rs.map(pc),ri,"Look in the table for the row of "+n+" periods that gives a factor near line C.","The factor "+fac.toFixed(4)+" matches "+pc(r)+" for "+n+" periods."),
+N("E","Cost of the truck",cash,"A","Record the asset at the cash-equivalent price.","The cash price: "+$(cash)+"."),
+N("F","Discount on note payable",d,"B − E","Face minus cash price.",m($(F)+" − "+$(cash)+" = "+$(d)))]),
+JE("Journal entry, February 1, "+Y,[["Delivery vehicles",cash,0,"E"],["Discount on note payable",d,0,"F"],["Note payable",0,F,"B"]])],
+take:"<p>The "+$(d)+" difference is interest the company will recognize over "+n+" years. The truck’s cost never includes the financing charge.</p>"};
+}};
+
+/* shares for noncash assets: reuse of the share-for-assets engine */
+var MEAS_OPTS=["Fair value of the shares issued","Fair value of what was received","Par value of the shares issued"];
+GEN.noncash={group:"Issuing shares",name:"Shares for noncash assets or services",blurb:"Measure at the more clearly evident fair value.",make:function(){
+  var co=company(),kind=pick(["Land","Equipment","Legal expense"]),appr=kind!=="Legal expense"&&Math.random()<.4;
+  var n=K(rnd(5,60,1)),par=pick([1,2,5]),mp=rnd(18,50),av=R(n*mp*(rnd(90,110)/100)/1000)*1000;
+  var val=appr?av:n*mp,cs=n*par,ap=val-cs;
+  var what=kind==="Land"?"a parcel of land for a new facility":kind==="Equipment"?"specialized production equipment":"legal work on a supplier contract by its law firm";
+  var rows=[G("A","Shares issued",n,"sh","From the agreement."),G("B","Par value per share",par,null,"From the charter.")];
+  if(appr)rows.push(G("C","Independent appraisal of the "+kind.toLowerCase(),av,null,"A reliable, recent appraisal. The shares are thinly traded, so their price is not reliable."));
+  else rows.push(G("C","Market price per share on the exchange date",mp,null,"The shares trade actively, so this price is good evidence of fair value."));
+  rows=rows.concat([
+    C("D","Which amount measures the transaction?",MEAS_OPTS,appr?1:0,"Use whichever fair value is more clearly evident. Is it the shares or the "+kind.toLowerCase()+"?",appr?"Fair value of what was received: the appraisal is reliable and the share price is not.":"Fair value of the shares: they trade actively, and "+(kind==="Legal expense"?"the service has no separate price.":"there is no reliable value for the "+kind.toLowerCase()+".")),
+    N("E",(kind==="Legal expense"?"Legal expense":kind)+" recorded",val,appr?"C":"A × C",appr?"Use the appraisal.":"Shares × market price.",appr?"The appraisal: "+$(val)+".":m(fmt(n)+" × $"+mp+" = "+$(val))),
+    N("F","Credit to common stock",cs,"A × B","Shares × par.",m(fmt(n)+" × $"+par+" = "+$(cs))),
+    N("G","Credit to paid-in capital—excess of par",ap,"E − F","The rest of the fair value.",m($(val)+" − "+$(cs)+" = "+$(ap)))
+  ]);
+  return {title:co,
+  scenario:'<p>On June 1, '+Y+', '+esc(co)+' issues '+fmt(n)+' shares of its $'+par+' par common stock in exchange for '+what+'. '+(appr?'An independent appraisal values the '+kind.toLowerCase()+' at '+$(av)+'. The company’s shares are thinly traded and have not changed hands in months.':'No reliable price is available for '+(kind==="Legal expense"?"the legal work":"the "+kind.toLowerCase())+', but the shares trade actively at $'+mp+'.')+'</p>',
+  key:'<p>Shares issued for a noncash asset or service are recorded at <strong>fair value</strong>: the fair value of the shares or of what was received, <strong>whichever is more clearly evident</strong>. Par value never sets the cost of an asset.</p>',
+  parts:[sched("Measuring the transaction",rows),
+   JE("Journal entry, June 1, "+Y,[[kind,val,0,"E"],["Common stock",0,cs,"F"],["Paid-in capital—excess of par",0,ap,"G"]])],
+  take:"<p>"+(kind==="Legal expense"?"Shares given for services are recorded as an expense (or an asset if the service creates one) at fair value.":"The "+kind.toLowerCase()+" goes on the books at "+$(val)+", not at the "+$(cs)+" of par value.")+" Total equity rose by "+$(val)+".</p>"};
+}};
+GEN.noncash.group="Noncash acquisitions";GEN.noncash.name="Shares issued for assets or services";
+
+GEN.gift={group:"Noncash acquisitions",name:"Donated assets and government grants",blurb:"Revenue at fair value; IFRS grant methods.",make:function(){
+var co=company(),fv=K(rnd(200,900,25)),eq=K(rnd(300,900,50)),g=R(eq*pick([.1,.15,.2])/1000)*1000,life=pick([5,8,10]);
+var net=eq-g,dep=R(net/life),def=R(g/life),depGross=R(eq/life);
+return {title:co,
+scenario:'<p>On May 1, '+Y+', the county donates land with a fair value of '+$(fv)+' to '+esc(co)+', which agrees to build a plant there. Separately, the company buys equipment for '+$(eq)+' and receives a '+$(g)+' government grant for it. The equipment has a '+life+'-year life. Under IFRS the company may deduct the grant from the asset’s cost or record it as deferred income.</p>',
+key:'<p>Under U.S. GAAP a donated asset is recorded at <strong>fair value</strong> and the company recognizes <strong>revenue</strong>. Under IFRS (IAS 20) a grant related to an asset is either <strong>deducted from the asset’s cost</strong> or recorded as <strong>deferred income</strong> recognized over the asset’s life.</p>',
+parts:[sched("The donated land (U.S. GAAP)",[G("A","Fair value of the land",fv,null,"Appraisal."),
+C("B","The land is recorded at",["Fair value of the land","The donor’s cost","Zero (no entry)"],0,"Is there a cost? What did the company receive?","Fair value. The company received something valuable in return for building there, so it recognizes revenue."),
+N("C","Revenue recognized",fv,"A","Revenue equals the fair value received.","Revenue equals the land’s fair value: "+$(fv)+".")]),
+JE("Journal entry, May 1, "+Y,[["Land",fv,0,"A"],["Revenue—donation of asset",0,fv,"C"]]),
+sched("The equipment grant (IFRS)",[G("D","Equipment price",eq,null,"Paid in cash."),G("E","Government grant",g,null,"Received in cash."),G("F","Useful life (years)",life,"sh","Straight-line."),
+N("G","Equipment cost if the grant is deducted",net,"D − E","Reduce cost by the grant.",m($(eq)+" − "+$(g)+" = "+$(net))),
+N("H","Annual depreciation if the grant is deducted",dep,"G ÷ F","Depreciate the net cost.",m($(net)+" ÷ "+life+" = "+$(dep))),
+N("I","Annual deferred income recognized if the grant is recorded as deferred income",def,"E ÷ F","Spread the grant over the life.",m($(g)+" ÷ "+life+" = "+$(def))),
+N("J","Annual depreciation if the grant is recorded as deferred income",depGross,"D ÷ F","Equipment stays at full cost.",m($(eq)+" ÷ "+life+" = "+$(depGross)))])],
+take:"<p>Both IFRS methods give the same net income effect each year ("+$(depGross)+" depreciation − "+$(def)+" deferred income = "+$(dep)+"), but the balance sheet looks different: one nets the grant against the asset, the other shows a liability.</p>"};
+}};
+
+GEN.exchange={group:"Noncash acquisitions",name:"Trade-in with commercial substance",blurb:"Fair value, book value, cash, and the gain or loss.",make:function(){
+var co=company(),gain=Math.random()<.55,OC=K(rnd(150,500,10)),AD=R(OC*pick([.6,.7,.75,.8])/1000)*1000,BV=OC-AD,cash=K(rnd(50,200,10));
+var FV=gain?BV+K(rnd(10,40,5)):BV-Math.min(K(rnd(5,20,5)),BV-K(5)),nw=FV+cash,gl=FV-BV;
+return {title:co,
+scenario:'<p>On August 1, '+Y+', '+esc(co)+' trades an old machine (cost '+$(OC)+', accumulated depreciation '+$(AD)+') and pays '+$(cash)+' cash for a newer, faster model. The old machine’s fair value is '+$(FV)+'. The exchange will change the company’s future cash flows, so it has commercial substance.</p>',
+key:'<p>Record the new asset at <strong>fair value</strong> (fair value of the asset given plus cash paid), remove the old asset at its <strong>book value</strong>, record the cash, and recognize the <strong>gain or loss</strong>: fair value of the old asset minus its book value.</p>',
+parts:[sched("The trade-in",[G("A","Cost of the old machine",OC,null,"Recorded cost."),G("B","Accumulated depreciation",AD,null,"Through the date of the trade."),G("C","Fair value of the old machine",FV,null,"What it is worth today."),G("D","Cash paid",cash,null,"To even out the values."),
+C("E","How is the new machine measured?",["Fair value of old asset plus cash paid","Book value of old asset plus cash paid"],0,"The exchange has commercial substance.","At fair value, because the exchange has commercial substance."),
+N("F","Book value of the old machine",BV,"A − B","Cost minus accumulated depreciation.",m($(OC)+" − "+$(AD)+" = "+$(BV))),
+N("G","Cost of the new machine",nw,"C + D","Fair value given plus cash.",m($(FV)+" + "+$(cash)+" = "+$(nw))),
+N("H","Gain (positive) or loss (negative) on the exchange",gl,"C − F","Fair value minus book value of the old asset.",m($(FV)+" − "+$(BV)+" = "+$(gl)))]),
+JE("Journal entry, August 1, "+Y,[["Equipment (new)",nw,0,"G"],["Accumulated depreciation",AD,0,"B"],["Loss on exchange of assets",gl<0?-gl:0,0,"H"],["Equipment (old)",0,OC,"A"],["Cash",0,cash,"D"],["Gain on exchange of assets",0,gl>0?gl:0,"H"]])],
+take:"<p>"+(gl>0?"The "+$(gl)+" gain is recognized because the company gave up an asset worth more than its book value.":"The "+$(-gl)+" loss is recognized because the old machine is worth less than its book value.")+" The change in total assets confirms it: "+$(nw)+" received minus "+$(BV+cash)+" given up.</p>"};
+}};
+
+GEN.nocs={group:"Noncash acquisitions",name:"Exchange without commercial substance",blurb:"Book value, cash paid or received, and partial gains.",make:function(){
+var co=company(),pay=Math.random()<.5,BV=K(rnd(600,1500,50)),FV=BV+K(rnd(300,900,50)),pct=pick([.04,.05,.08,.1]),cash=pay?K(rnd(50,200,10)):R(FV*pct),tg=FV-BV;
+if(pay){var nw=BV+cash;
+return {title:co,
+scenario:'<p>On September 1, '+Y+', '+esc(co)+' trades a tract of land (book value '+$(BV)+', fair value '+$(FV)+') for a nearly identical tract and pays '+$(cash)+' cash. Future cash flows will not change, so the exchange <strong>lacks commercial substance</strong>.</p>',
+key:'<p>Without commercial substance, <strong>a gain is not recognized</strong>. The new asset is recorded at the <strong>book value of the asset given plus cash paid</strong>. (A loss would still be recognized.)</p>',
+parts:[sched("The exchange",[G("A","Book value of land given",BV,null,"Recorded amount."),G("B","Fair value of land given",FV,null,"Not used in the entry."),G("C","Cash paid",cash,null,"Added to cost."),
+C("D","How is the new land measured?",["Fair value of old land plus cash","Book value of old land plus cash"],1,"Does the exchange change future cash flows?","Book value plus cash, because there is no commercial substance."),
+N("E","Gain recognized (enter 0 if none)",0,"—","A gain is not recognized without commercial substance.","None. The "+$(tg)+" gain is deferred in the lower cost of the new land."),
+N("F","Cost of the new land",nw,"A + C","Book value plus cash.",m($(BV)+" + "+$(cash)+" = "+$(nw)))]),
+JE("Journal entry, September 1, "+Y,[["Land (new)",nw,0,"F"],["Land (old)",0,BV,"A"],["Cash",0,cash,"C"]])],
+take:"<p>The "+$(tg)+" of unrecognized gain is not lost. It is built into a new land cost "+$(tg)+" lower than fair value, so it will be recognized when the land is sold.</p>"};}
+var fr=FV-cash,gr=R(tg*cash/FV),nw2=BV+gr-cash,pctv=Math.round(cash/FV*1000)/10;
+return {title:co,
+scenario:'<p>On September 1, '+Y+', '+esc(co)+' trades a tract of land (book value '+$(BV)+', fair value '+$(FV)+') for a nearly identical tract and <strong>receives</strong> '+$(cash)+' cash. The exchange lacks commercial substance.</p>',
+key:'<p>When cash is <strong>received</strong>, part of the exchange is a sale and that part of the gain is recognized: <strong>total gain × cash ÷ (cash + fair value of asset received)</strong>. If cash is 25% or more of the exchange, the whole gain is recognized. Here it is under 25%.</p>',
+parts:[sched("The exchange",[G("A","Book value of land given",BV,null,"Recorded amount."),G("B","Fair value of land given",FV,null,"Appraisal."),G("C","Cash received",cash,null,"To even out the values."),
+N("D","Fair value of the land received",fr,"B − C","Total fair value given less cash.",m($(FV)+" − "+$(cash)+" = "+$(fr))),
+N("E","Cash as a percent of the total received (one decimal)",pctv,"C ÷ (C + D)","Cash divided by cash plus land received.",m($(cash)+" ÷ ("+$(cash)+" + "+$(fr)+") = "+pctv+"%"),{unit:"%",tol:.1}),
+C("F","Is the exchange treated as monetary (25% or more cash)?",["Yes: recognize the whole gain","No: recognize only a portion"],1,"Compare line E with 25%.","No. Cash is under 25%, so only that portion of the gain is recognized."),
+N("G","Total gain",tg,"B − A","Fair value minus book value of the land given.",m($(FV)+" − "+$(BV)+" = "+$(tg))),
+N("H","Gain recognized",gr,"G × E","Total gain × the cash percent.",m($(tg)+" × "+pctv+"% = "+$(gr))),
+N("I","Cost of the new land",nw2,"A + H − C","Book value plus gain recognized less cash received.",m($(BV)+" + "+$(gr)+" − "+$(cash)+" = "+$(nw2)))]),
+JE("Journal entry, September 1, "+Y,[["Land (new)",nw2,0,"I"],["Cash",cash,0,"C"],["Land (old)",0,BV,"A"],["Gain on exchange of assets",0,gr,"H"]])],
+take:"<p>Only "+pctv+"% of the "+$(tg)+" gain, "+$(gr)+", is recognized. The rest reduces the new land’s recorded cost.</p>"};
+}};
+
+GEN.turn={group:"Noncash acquisitions",name:"Fixed-asset turnover",blurb:"How efficiently PP&E generates sales.",make:function(){
+var co=company(),comp=company(),S=K(rnd(3000,9000,100)),p0=K(rnd(800,2000,50)),p1=p0+K(rnd(-100,200,50)),avg=(p0+p1)/2,t=Math.round(S/avg*10)/10,ct,better;
+do{ct=Math.round((t+(Math.random()<.5?-1:1)*(0.4+Math.random()*1.2))*10)/10;}while(ct<=0.5||Math.abs(ct-t)<0.4);
+better=t>ct;
+return {title:co,
+scenario:'<p>For '+Y+', '+esc(co)+' reports net sales of '+$(S)+'. Net property, plant, and equipment was '+$(p0)+' at the start of the year and '+$(p1)+' at the end. A competitor in the same industry has a fixed-asset turnover of '+ct.toFixed(1)+' times.</p>',
+key:'<p><strong>Fixed-asset turnover = net sales ÷ average net property, plant, and equipment.</strong> It shows how many dollars of sales each dollar of PP&amp;E produces. Higher usually means more efficient use of the asset base.</p>',
+parts:[sched("The ratio",[G("A","Net sales",S,null,"Income statement."),G("B","Net PP&E, beginning",p0,null,"Prior balance sheet."),G("C","Net PP&E, ending",p1,null,"Current balance sheet."),
+N("D","Average net PP&E",avg,"(B + C) ÷ 2","Average the two balances.",m("("+$(p0)+" + "+$(p1)+") ÷ 2 = "+$(avg))),
+N("E","Fixed-asset turnover (one decimal)",t,"A ÷ D","Net sales ÷ average net PP&E.",m($(S)+" ÷ "+$(avg)+" = "+t.toFixed(1)+" times"),{unit:"x",tol:.05}),
+G("F","Competitor’s fixed-asset turnover",ct,"x","From industry data."),
+C("G","Compared with the competitor, the company uses its PP&E",["More efficiently","Less efficiently"],better?0:1,"Higher turnover means more sales per dollar of PP&E.",better?"More efficiently: "+t.toFixed(1)+" is above "+ct.toFixed(1)+".":"Less efficiently: "+t.toFixed(1)+" is below "+ct.toFixed(1)+".")])],
+take:"<p>Turnover should be compared with prior years and with companies in the same industry, because capital-intensive industries naturally have lower turnover than retailers.</p>"};
+}};
+
+/* ----- Construction and interest ----- */
+GEN.overhead={group:"Construction and interest",name:"Self-constructed asset and overhead",blurb:"Incremental versus full-cost overhead.",make:function(){
+var co=company(),inc=Math.random()<.5,dm=K(rnd(100,500,10)),dl=K(rnd(80,300,10)),vo=K(rnd(10,70,5)),fo=K(rnd(20,100,5)),cost=dm+dl+vo+(inc?0:fo);
+return {title:co,
+scenario:'<p>During '+Y+', '+esc(co)+' builds a storage facility with its own crews. It uses '+$(dm)+' of materials, '+$(dl)+' of labor, and '+$(vo)+' of variable overhead caused by the project. It also allocates '+$(fo)+' of fixed overhead that would exist anyway. The company uses the <strong>'+(inc?'incremental':'full-cost')+'</strong> overhead method.</p>',
+key:'<p>Materials and labor are always capitalized. Under the <strong>incremental method</strong> only overhead caused by the project is capitalized. Under the <strong>full-cost method</strong> a share of all overhead, fixed and variable, is included.</p>',
+parts:[sched("Cost of the facility",[G("A","Direct materials",dm,null,"Traceable to the project."),G("B","Direct labor",dl,null,"Traceable to the project."),G("C","Variable overhead",vo,null,"Caused by the project."),G("D","Allocated fixed overhead",fo,null,"Would exist anyway."),
+C("E","Which overhead is capitalized?",["Variable overhead only","Variable and fixed overhead"],inc?0:1,"Which method does the company use?",inc?"Variable only, under the incremental method.":"Both, under the full-cost method."),
+N("F","Cost of the facility",cost,inc?"A + B + C":"A + B + C + D",inc?"Materials, labor, and variable overhead.":"Everything, including allocated fixed overhead.",m($(dm)+" + "+$(dl)+" + "+$(vo)+(inc?"":" + "+$(fo))+" = "+$(cost)))]),
+JE("Journal entry",[["Buildings",cost,0,"F"],["Raw materials inventory",0,dm,"A"],["Wages expense—construction",0,dl,"B"],["Manufacturing overhead",0,vo+(inc?0:fo),inc?"C":"C + D"]])],
+take:"<p>The method changes the cost by "+$(fo)+". If the asset would cost less to buy than to build, the excess is not capitalized.</p>"};
+}};
+
+var CIDEBT=[[3000,.05,2000,.09,6.6],[4000,.06,1000,.09,6.6],[2000,.05,2000,.07,6],[3000,.06,1000,.10,7],[1500,.04,1500,.08,6]];
+GEN.capint={group:"Construction and interest",name:"Interest capitalization",blurb:"Weighted-average expenditures, avoidable interest, and the limit.",make:function(){
+var co=company(),lim=Math.random()<.3,tries=0,ex,L,rs,d,sc,wae,avoid,actual,wr,n1,r1,n2,r2;
+do{tries++;
+var allD=[["Jan 1",12],["Apr 1",9],["Jul 1",6],["Oct 1",3]],drop=Math.random()<.5?1+Math.floor(Math.random()*3):-1;
+ex=allD.filter(function(x,i){return i!==drop;}).map(function(x){return [x[0],x[1],K(rnd(5,20,1))*100];});
+wae=0;ex.forEach(function(e){e[3]=e[2]*e[1]/12;wae+=e[3];});
+L=K(rnd(500,1500,100));rs=pick([.06,.07,.08]);d=pick(CIDEBT);var scl=lim?.2:1;
+n1=d[0]*1000*scl;r1=d[1];n2=d[2]*1000*scl;r2=d[3];wr=d[4];
+var si=R(L*rs),exc=wae-L;avoid=si+R(exc*wr/100);actual=si+R(n1*r1)+R(n2*r2);
+}while(tries<400&&!(exc>K(300)&&(lim?avoid>actual:avoid<actual)));
+var si2=R(L*rs),exc2=wae-L,oi=R(exc2*wr/100),cap=Math.min(avoid,actual),expn=actual-cap,tE=ex.reduce(function(a,e){return a+e[2];},0);
+var rows1=[];ex.forEach(function(e,i){var id=String.fromCharCode(65+2*i),id2=String.fromCharCode(66+2*i);rows1.push(G(id,"Expenditure on "+e[0]+" ("+e[1]+" months outstanding)",e[2],null,"Paid for construction."));rows1.push(N(id2,"Weighted amount for "+e[0],e[3],id+" × "+e[1]+"/12","Expenditure × months outstanding ÷ 12.",m($(e[2])+" × "+e[1]+"/12 = "+$(e[3]))));});
+var lastId=String.fromCharCode(65+2*ex.length);
+rows1.push(N(lastId,"Weighted-average accumulated expenditures",wae,"sum of the weighted amounts","Add the weighted amounts.",m(ex.map(function(e){return $(e[3]);}).join(" + ")+" = "+$(wae))));
+var b=function(k){return String.fromCharCode(65+k);};
+return {title:co,
+scenario:'<p>'+esc(co)+' builds a lodge for its own use during '+Y+'. It has a '+$(L)+' construction loan at '+pc(rs)+' and two other notes outstanding all year: '+$(n1)+' at '+pc(r1)+' and '+$(n2)+' at '+pc(r2)+'. Construction expenditures are listed below.</p>',
+key:'<p>Capitalize the <strong>lower of avoidable and actual interest</strong>. Avoidable interest applies the <strong>specific loan rate</strong> to expenditures up to the loan, and the <strong>weighted-average rate on other debt</strong> to the excess. Weight each expenditure by the fraction of the year it was outstanding.</p>',
+parts:[sched("Weighted-average accumulated expenditures",rows1),
+sched("Avoidable and actual interest",[G("A","Weighted-average accumulated expenditures",wae,null,"From the first schedule."),G("B","Construction loan",L,null,"Specific borrowing."),G("C","Construction loan rate",rs,"%","Specific loan."),G("D","Note payable 1",n1,null,"All year."),G("E","Rate on note 1",r1,"%","Stated rate."),G("F","Note payable 2",n2,null,"All year."),G("G","Rate on note 2",r2,"%","Stated rate."),
+N("H","Weighted-average rate on the other debt (percent, one decimal)",wr,"(D × E + F × G) ÷ (D + F)","Total interest on the notes ÷ total notes.",m("("+$(n1)+" × "+pc(r1)+" + "+$(n2)+" × "+pc(r2)+") ÷ "+$(n1+n2)+" = "+wr+"%"),{unit:"%",tol:.1}),
+N("I","Interest on the specific loan",si2,"B × C","Loan × its rate.",m($(L)+" × "+pc(rs)+" = "+$(si2))),
+N("J","Expenditures in excess of the loan",exc2,"A − B","Remaining weighted expenditures.",m($(wae)+" − "+$(L)+" = "+$(exc2))),
+N("K","Interest on the excess",oi,"J × H","Excess × weighted-average rate.",m($(exc2)+" × "+wr+"% = "+$(oi))),
+N("L","Avoidable interest",avoid,"I + K","Add the two pieces.",m($(si2)+" + "+$(oi)+" = "+$(avoid))),
+N("M","Actual interest incurred",actual,"B × C + D × E + F × G","All interest the company incurred.",m($(si2)+" + "+$(R(n1*r1))+" + "+$(R(n2*r2))+" = "+$(actual))),
+N("N","Interest capitalized",cap,"lower of L and M","Use the smaller amount.",m("Lower of "+$(avoid)+" and "+$(actual)+" = "+$(cap))),
+N("O","Interest expensed",expn,"M − N","The rest is expense.",m($(actual)+" − "+$(cap)+" = "+$(expn)))]),
+JE("Journal entry for interest, December 31, "+Y,[["Building (lodge) under construction",cap,0,"N"],["Interest expense",expn,0,"O"],["Cash",0,actual,"M"]])],
+take:"<p>"+(lim?"Avoidable interest ("+$(avoid)+") exceeded the interest actually incurred ("+$(actual)+"), so the limit applied and everything was capitalized.":"The company capitalized "+$(cap)+" of its "+$(actual)+" of interest. The "+$(expn)+" left over is ordinary interest expense.")+"</p>"};
+}};
+
+/* ----- Intangibles and R&D ----- */
+GEN.goodwill={group:"Intangibles and R&D",name:"Goodwill and bargain purchase",blurb:"Price versus net identifiable assets.",make:function(){
+var co=company(),a1=K(rnd(100,500,10)),a2=K(rnd(1000,3000,50)),a3=K(rnd(300,1500,50)),a4=K(rnd(200,900,50)),L=K(rnd(400,1500,50)),sum=a1+a2+a3+a4,net=sum-L,barg=Math.random()<.25,price=barg?net-K(rnd(100,400,50)):net+K(rnd(200,900,50)),gw=barg?0:price-net,gain=barg?net-price:0;
+return {title:co,
+scenario:'<p>On November 1, '+Y+', '+esc(co)+' pays '+$(price)+' cash to buy all of the net assets of another business. Fair values: receivables '+$(a1)+', equipment '+$(a2)+', patents '+$(a3)+', inventories '+$(a4)+'. The company assumes liabilities of '+$(L)+'.</p>',
+key:'<p><strong>Goodwill = price paid − fair value of net identifiable assets.</strong> If the price is <em>less</em>, there is no goodwill: after rechecking the valuations, the difference is recognized as a <strong>gain on a bargain purchase</strong>.</p>',
+parts:[sched("Goodwill or gain",[G("A","Receivables (fair value)",a1,null,"Appraisal."),G("B","Equipment (fair value)",a2,null,"Appraisal."),G("C","Patents (fair value)",a3,null,"Appraisal."),G("D","Inventories (fair value)",a4,null,"Appraisal."),G("E","Liabilities assumed",L,null,"Fair value."),G("F","Price paid",price,null,"Cash."),
+N("G","Fair value of identifiable assets",sum,"A + B + C + D","Add the assets.",m($(a1)+" + "+$(a2)+" + "+$(a3)+" + "+$(a4)+" = "+$(sum))),
+N("H","Fair value of net identifiable assets",net,"G − E","Assets minus liabilities.",m($(sum)+" − "+$(L)+" = "+$(net))),
+N("I","Goodwill (enter 0 if none)",gw,"F − H","Price minus net identifiable assets, if positive.",barg?"None: the price is below net identifiable assets.":m($(price)+" − "+$(net)+" = "+$(gw))),
+N("J","Gain on bargain purchase (enter 0 if none)",gain,"H − F","Net assets minus price, if positive.",barg?m($(net)+" − "+$(price)+" = "+$(gain)):"None: the price exceeds net identifiable assets.")]),
+JE("Journal entry, November 1, "+Y,[["Receivables",a1,0,"A"],["Equipment",a2,0,"B"],["Patents",a3,0,"C"],["Inventories",a4,0,"D"],["Goodwill",gw,0,"I"],["Liabilities assumed",0,L,"E"],["Cash",0,price,"F"],["Gain on bargain purchase",0,gain,"J"]])],
+take:"<p>"+(barg?"A price below net identifiable assets creates a "+$(gain)+" gain, not negative goodwill.":"Goodwill of "+$(gw)+" is the amount paid for things that cannot be separated and sold, such as reputation and customer loyalty. A company records only <em>purchased</em> goodwill.")+"</p>"};
+}};
+
+var RDO=["Research and development expense","Capitalize as an asset","Other expense (not R&D)"];
+var RDBANK=[["Salaries of engineers designing a prototype",0,"Research and development expense","R&D salaries are expensed as incurred."],["Materials consumed in laboratory experiments",0,"Research and development expense","Materials used in R&D are expensed."],["Test equipment usable only on this project",0,"Research and development expense","Equipment with no alternative future use is expensed immediately."],["Lab equipment usable on many future projects (purchase price)",1,"Equipment","Equipment with alternative uses is capitalized; its depreciation becomes R&D expense."],["Legal fees to register the resulting patent",1,"Patent","The legal cost of registering a patent is capitalized."],["Programming costs after technological feasibility of software to be sold",1,"Software development costs","Costs after technological feasibility are capitalized."],["Market research on customer demand",2,"Other operating expense","Market research is not R&D."],["Routine quality-control testing in production",2,"Other operating expense","Routine testing is not R&D."],["Costs of opening a new sales office",2,"Other operating expense","Start-up costs are expensed."]];
+GEN.rd={group:"Intangibles and R&D",name:"R&D and intangible costs",blurb:"Expense, capitalize, or not R&D?",make:function(){
+var co=company(),sel,ok=false;
+do{sel=shuffle(RDBANK).slice(0,6);ok=[0,1,2].every(function(c){return sel.some(function(s){return s[1]===c;});});}while(!ok);
+var amts=sel.map(function(){return K(rnd(20,150,5));});
+var cls=sel.map(function(s,i){return C(String(i+1),s[0]+" ("+$(amts[i])+")",RDO,s[1],"Is it research or development, a cost that creates an asset, or an ordinary expense?",RDO[s[1]]+". "+s[3]);});
+var tR=0,tC=0,tO=0,capBy={},rows=[];
+sel.forEach(function(s,i){var id=String.fromCharCode(65+i);rows.push(G(id,s[0],amts[i],null,"Paid in cash."));if(s[1]===0)tR+=amts[i];else if(s[1]===1){tC+=amts[i];capBy[s[2]]=(capBy[s[2]]||0)+amts[i];}else tO+=amts[i];});
+var ids=function(c){return sel.map(function(s,i){return s[1]===c?String.fromCharCode(65+i):null;}).filter(Boolean);};
+var tot=tR+tC+tO,x=sel.length;
+var L1=String.fromCharCode(65+x),L2=String.fromCharCode(66+x),L3=String.fromCharCode(67+x),L4=String.fromCharCode(68+x);
+rows.push(N(L1,"Total research and development expense",tR,ids(0).join(" + ")||"—","Add the items classified as R&D.",m(tR===0?"None":sel.filter(function(s){return s[1]===0;}).map(function(s,i){return $(amts[sel.indexOf(s)]);}).join(" + ")+" = "+$(tR))));
+rows.push(N(L2,"Total capitalized",tC,ids(1).join(" + ")||"—","Add the items that create an asset.",m(sel.filter(function(s){return s[1]===1;}).map(function(s){return $(amts[sel.indexOf(s)]);}).join(" + ")+" = "+$(tC))));
+rows.push(N(L3,"Total other expense",tO,ids(2).join(" + ")||"—","Add the items that are not R&D.",m(sel.filter(function(s){return s[1]===2;}).map(function(s){return $(amts[sel.indexOf(s)]);}).join(" + ")+" = "+$(tO))));
+rows.push(N(L4,"Total cash paid",tot,L1+" + "+L2+" + "+L3,"All three groups.",m($(tR)+" + "+$(tC)+" + "+$(tO)+" = "+$(tot))));
+var lines=[["Research and development expense",tR,0,L1]];Object.keys(capBy).forEach(function(k){lines.push([k,capBy[k],0,L2]);});lines.push(["Other operating expense",tO,0,L3]);lines.push(["Cash",0,tot,L4]);
+return {title:co,
+scenario:'<p>During '+Y+', '+esc(co)+' develops a new product and pays the costs listed below in cash. Classify each, then record them.</p>',
+key:'<p>Under U.S. GAAP <strong>research and development costs are expensed as incurred</strong>. Equipment with alternative future uses is capitalized (its depreciation is R&amp;D expense). Legal costs of registering a patent, and software costs after technological feasibility, are capitalized. Marketing, routine testing, and start-up costs are not R&amp;D.</p>',
+parts:[sched("Classify each cost",cls),sched("Totals",rows),JE("Journal entry",lines)],
+take:"<p>Only "+$(tC)+" of the "+$(tot)+" spent reaches the balance sheet. The rest hits this year’s income statement, which is why internally developed intangibles are often missing from the balance sheet.</p>"};
+}};
+
+GEN.software={group:"Intangibles and R&D",name:"Software development costs",blurb:"Technological feasibility is the dividing line.",make:function(){
+var co=company(),p=K(rnd(100,400,10)),c1=K(rnd(300,900,25)),c2=K(rnd(40,150,5)),s=K(rnd(30,120,5)),R_=p,Cp=c1+c2,O=s,tot=R_+Cp+O;
+return {title:co,
+scenario:'<p>'+esc(co)+' develops accounting software to sell to customers. Technological feasibility is established after the detailed program design is complete. During '+Y+' it pays '+$(p)+' for planning and detailed program design, '+$(c1)+' for coding and testing, '+$(c2)+' to produce the product masters, and '+$(s)+' for customer support after release.</p>',
+key:'<p>Costs of software to be sold are <strong>R&amp;D expense until technological feasibility</strong> is established. After that, production costs (coding, testing, masters) are <strong>capitalized</strong> until the product is available. Support after release is expensed.</p>',
+parts:[sched("Classify and total",[
+C("A","Planning and detailed program design ("+$(p)+")",RDO,0,"Was technological feasibility established yet?","Research and development expense: before technological feasibility."),
+C("B","Coding and testing ("+$(c1)+")",RDO,1,"After feasibility, the costs create an asset.","Capitalize: after technological feasibility."),
+C("C","Product masters ("+$(c2)+")",RDO,1,"Production costs to get the product ready for sale.","Capitalize."),
+C("D","Customer support after release ("+$(s)+")",RDO,2,"The product is already available for sale.","Other expense: an ongoing operating cost."),
+N("E","Expensed as research and development",R_,"A","Costs before feasibility.","The "+$(p)+" before technological feasibility."),
+N("F","Capitalized as software development costs",Cp,"B + C","Costs after feasibility until release.",m($(c1)+" + "+$(c2)+" = "+$(Cp))),
+N("G","Total cash paid",tot,"A + B + C + D","All four costs.",m($(p)+" + "+$(c1)+" + "+$(c2)+" + "+$(s)+" = "+$(tot)))]),
+JE("Journal entry, December 31, "+Y,[["Research and development expense",R_,0,"E"],["Software development costs",Cp,0,"F"],["Other operating expense",O,0,"D"],["Cash",0,tot,"G"]])],
+take:"<p>Only "+$(Cp)+" is capitalized; the "+$(p)+" spent before feasibility is expensed even though the project eventually succeeded. Under IFRS, development costs can be capitalized sooner if specific criteria are met.</p>"};
+}};
+
+var ORDER=["equip","land","lump","aro","note","implicit","noncash","gift","exchange","nocs","turn","overhead","capint","goodwill","rd","software"];
+
+
+
+/* ---------- UI ---------- */
+var el=function(id){return document.getElementById(id);};
+var picker=el("picker"),partsEl=el("parts"),sumEl=el("summary");
+var state=null,typeBtns={};
+
+(function buildPicker(){
+  var groups={},gi=0;
+  ORDER.forEach(function(k){var g=GEN[k].group;(groups[g]=groups[g]||[]).push(k);});
+  Object.keys(groups).forEach(function(g){
+    var div=document.createElement("div");div.className="pgroup";
+    var hid="pg-"+(gi++);
+    div.innerHTML='<h3 id="'+hid+'">'+esc(g)+'</h3>';
+    var ul=document.createElement("ul");ul.setAttribute("aria-labelledby",hid);
+    groups[g].forEach(function(k){
+      var li=document.createElement("li"),b=document.createElement("button");
+      b.type="button";b.className="type-btn";b.setAttribute("aria-pressed","false");
+      b.innerHTML='<strong>'+esc(GEN[k].name)+'</strong><span>'+esc(GEN[k].blurb)+'</span>';
+      b.addEventListener("click",function(){start(k,true);});
+      typeBtns[k]=b;li.appendChild(b);ul.appendChild(li);
+    });
+    div.appendChild(ul);picker.appendChild(div);
+  });
+})();
+
+function parseNum(s){
+  s=String(s).trim().replace(/−/g,"-");
+  if(!s)return null;
+  var neg=false;
+  if(/^\(.*\)$/.test(s)){neg=true;s=s.slice(1,-1).trim();}
+  s=s.replace(/[$,%\s]/g,"");
+  if(s.charAt(0)==="-"){neg=!neg;s=s.slice(1);}
+  if(!/^(\d+\.?\d*|\.\d+)$/.test(s))return NaN;
+  var v=parseFloat(s);return neg?-v:v;
+}
+function numOK(v,ans,tol,unit){if(v===null||isNaN(v))return false;if(Math.abs(v-ans)<=tol+1e-9)return true;if(unit==="%"&&Math.abs(v*100-ans)<=tol+1e-9)return true;return false;}
+function showVal(v,unit){return unit==="f"?v.toFixed(4):unit==="x"?v.toFixed(1):unit==="%"?v+"%":unit==="$c"?v.toFixed(2):(v<0?"-":"")+fmt(v);}
+
+function start(k,focus){
+  ORDER.forEach(function(x){typeBtns[x].setAttribute("aria-pressed",x===k?"true":"false");});
+  var p=GEN[k].make();
+  state={k:k,p:p,parts:[]};
+  el("ptype").textContent=GEN[k].name;
+  el("work-title").textContent=p.title;
+  var know=[];
+  p.parts.forEach(function(pt){if(pt.type==="sched")pt.rows.forEach(function(r){if(r.kind==="given")know.push([r.id,r.label,dispU(r.val,r.unit),r.why]);});});
+  (p.facts||[]).forEach(function(f){know.push(["",f[0],f[1],f[2]||""]);});
+  var kh="";
+  if(know.length){
+    kh='<p><strong>Here\'s what we know.</strong> '+any(["Before you calculate anything, read down this list and ask yourself whether each one makes sense.","Some of these come from the story above and some from the company\'s records. I noted where each one comes from.","Make sure you can explain where every one of these comes from before you start."])+' The lettered ones are already filled in as the gray lines in your schedule.</p>'+
+      '<div class="scroll"><table class="know"><caption class="sr-only">What we know</caption><thead><tr><th scope="col">Line</th><th scope="col">What we know</th><th scope="col" class="n">Amount</th><th scope="col">Where it comes from</th></tr></thead><tbody>'+
+      know.map(function(k){return '<tr><td class="ln">'+(k[0]||'<span class="sr-only">not in schedule</span>')+'</td><th scope="row">'+k[1]+'</th><td class="n">'+k[2]+'</td><td class="why">'+(k[3]||'')+'</td></tr>';}).join("")+'</tbody></table></div>';
+  }
+  if(p.given)kh+='<p>'+any(["I also have this table for you:","Here\'s one more piece of information:"])+'</p><div class="scroll">'+p.given+'</div>';
+  el("scenario-say").innerHTML=say(any(["<p>Here's the situation we're working with today.</p>","<p>Let's meet today's company.</p>","<p>Okay, here's our company for this one.</p>"])+p.scenario+kh);
+  el("given").innerHTML="";el("given").hidden=true;
+  el("key-say").innerHTML=say(p.key,{key:true,label:"Before you start, the key idea"});
+  sumEl.hidden=true;sumEl.innerHTML="";
+  partsEl.innerHTML="";
+  var n=0;
+  p.parts.forEach(function(pt,pi){
+    if(pt.type==="note"){var d=document.createElement("div");d.className="part";d.innerHTML=pt.html;partsEl.appendChild(d);state.parts.push({done:true,note:true});return;}
+    n++;
+    var ps={pt:pt,checks:0,done:false,firstRight:0,items:0,idx:pi};
+    state.parts.push(ps);
+    partsEl.appendChild(pt.type==="sched"?buildSched(ps,n,pi):buildJE(ps,n,pi,p.accts||ACCTS));
+  });
+  if(focus){el("work-title").focus({preventScroll:true});el("worksheet").scrollIntoView({block:"start"});}
+}
+
+/* ----- schedule part ----- */
+function buildSched(ps,n,pi){
+  var pt=ps.pt,sec=document.createElement("section");sec.className="part";sec.id="part-"+pi;
+  var hid="ph-"+pi;
+  var hasBuilds=pt.rows.some(function(r){return r.builds;});
+  var h='<h3 id="'+hid+'"><span class="pnum">Part '+n+'</span> '+esc(pt.title)+'<span class="status" id="st-'+pi+'"></span></h3>'+say('<p>'+(n===1?any(["Start here. Fill in the white boxes; the given amounts are already in place.","Let's build the schedule. Use the Builds on column if you get stuck.","First, the numbers. Work top to bottom and each line sets up the next."]):any(["Next up. Keep going, using what you found above.","On to this part. The lines from earlier will help here."]))+(pt.intro?' '+pt.intro:'')+'</p>',{sm:true});
+  h+='<div class="scroll"><table class="sched"><caption class="sr-only">'+esc(pt.title)+'</caption><thead><tr><th scope="col">Line</th><th scope="col">Item</th>'+(hasBuilds?'<th scope="col" class="bo">Builds on</th>':'')+'<th scope="col" class="n">Amount</th></tr></thead><tbody>';
+  pt.rows.forEach(function(r,ri){
+    var rid="r"+pi+"-"+ri;
+    if(r.kind==="given"){
+      h+='<tr class="given"><td class="ln">'+r.id+'</td><td>'+r.label+' <span class="small">(given)</span></td>'+(hasBuilds?'<td class="bo"></td>':'')+'<td class="n">'+dispU(r.val,r.unit)+'</td></tr>';
+      return;
+    }
+    ps.items++;
+    var field;
+    if(r.kind==="choice"){
+      field='<select class="ans" id="'+rid+'" aria-describedby="fb-'+rid+'"><option value="">Select…</option>'+r.options.map(function(o,j){return '<option value="'+j+'">'+esc(o)+'</option>';}).join("")+'</select>';
+    }else{
+      field='<span class="inwrap">'+(r.unit==="$"||r.unit==="$c"?'<span class="u" aria-hidden="true">$</span>':'')+'<input class="ans n" id="'+rid+'" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-describedby="fb-'+rid+'">'+(r.unit==="%"?'<span class="u" aria-hidden="true">%</span>':'')+'</span>';
+    }
+    var wide=r.kind==="choice"&&r.options[0].length>20;
+    h+='<tr><td class="ln">'+r.id+'</td><td><label for="'+rid+'">'+r.label+(r.kind==="num"?(r.unit==="%"?' <span class="sr-only">(percent)</span>':r.unit==="sh"?' <span class="sr-only">(shares)</span>':' <span class="sr-only">(dollars)</span>'):'')+'</label><div class="fb" id="fb-'+rid+'" role="status"></div>'+(wide?'<div style="margin-top:.35rem">'+field+'</div>':'')+'</td>'+(hasBuilds?'<td class="bo">'+esc(r.builds)+'</td>':'')+'<td class="amt">'+(wide?'<span class="sr-only">Answer is below the item text</span>':field)+'</td></tr>';
+  });
+  h+='</tbody></table></div><div class="partfb" id="pf-'+pi+'" role="status" aria-live="polite"></div><div class="btns"><button type="button" class="btn" id="chk-'+pi+'">Check this part</button><button type="button" class="btn ghost" id="sol-'+pi+'" hidden>Show solution</button></div>';
+  sec.setAttribute("aria-labelledby",hid);
+  sec.innerHTML=h;
+  sec.querySelector("#chk-"+pi).addEventListener("click",function(){checkSched(ps,pi,false);});
+  sec.querySelector("#sol-"+pi).addEventListener("click",function(){checkSched(ps,pi,true);});
+  sec.querySelectorAll("input.ans").forEach(function(inp){inp.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();checkSched(ps,pi,false);}});});
+  return sec;
+}
+
+function checkSched(ps,pi,reveal){
+  if(ps.done)return;
+  var pt=ps.pt,right=0,total=0,blank=0,firstBad=null;
+  pt.rows.forEach(function(r,ri){
+    if(r.kind==="given")return;
+    total++;
+    var rid="r"+pi+"-"+ri,inp=el(rid),fb=el("fb-"+rid);
+    if(inp.disabled){right++;return;}
+    var ok;
+    if(r.kind==="choice")ok=inp.value!==""&&Number(inp.value)===r.ans;
+    else{var v=parseNum(inp.value);if(v===null&&!reveal){blank++;}ok=numOK(v,r.ans,r.tol,r.unit);}
+    if(ok){
+      right++;if(ps.checks===0)ps.firstRight++;
+      inp.classList.remove("bad-f");inp.classList.add("ok-f");inp.removeAttribute("aria-invalid");inp.disabled=true;
+      fb.className="fb ok";fb.innerHTML='<span class="tag">'+any(PRAISE)+'</span> '+r.sol;
+    }else if(reveal){
+      inp.value=r.kind==="choice"?String(r.ans):showVal(r.ans,r.unit);
+      inp.classList.remove("bad-f");inp.disabled=true;inp.removeAttribute("aria-invalid");
+      fb.className="fb sol";fb.innerHTML='<span class="tag">Here\'s how I\'d work it:</span> '+r.sol;
+    }else{
+      inp.classList.remove("ok-f");inp.classList.add("bad-f");inp.setAttribute("aria-invalid","true");
+      fb.className="fb bad";fb.innerHTML='<span class="tag">'+(inp.value===""?"Give this one a try.":any(NUDGE))+'</span> '+r.hint;
+      if(!firstBad)firstBad=inp;
+    }
+  });
+  ps.checks++;
+  var pf=el("pf-"+pi);
+  if(right===total||reveal){completePart(ps,pi,reveal);pf.className="partfb "+(reveal?"hint":"ok");pf.innerHTML='<span class="who">'+T.name+':</span> '+(reveal?"No problem. I filled in the solution with my work under each line. Compare it with yours, then let's keep going.":any(["All "+total+" lines are right. Nicely done!","Every line checks out. On to the next part!","That's all "+total+". You're getting the hang of this."]));}
+  else{pf.className="partfb bad";pf.innerHTML='<span class="who">'+T.name+':</span> '+(right?"You have "+right+" of "+total+" right. ":"Let's look at this together. ")+"I marked the lines to revisit in red and left a hint under each one"+(blank?" ("+blank+" still blank)":"")+". Fix those and check again"+(ps.checks>=1?", or ask me to show the solution.":".");el("sol-"+pi).hidden=false;if(firstBad)firstBad.focus();}
+}
+
+/* ----- journal entry part ----- */
+function buildJE(ps,n,pi,accts){
+  var pt=ps.pt,sec=document.createElement("section");sec.className="part";sec.id="part-"+pi;
+  var hid="ph-"+pi,nl=pt.lines.length;
+  ps.items=nl;
+  var h='<h3 id="'+hid+'"><span class="pnum">Part '+n+'</span> '+esc(pt.title)+'<span class="status" id="st-'+pi+'"></span></h3>';
+  h+=say('<p>'+any(["Now let's turn your schedule into a journal entry.","Time to record it. Every number you need is already in your schedule.","Here's where it comes together: the entry."])+' This one has <strong>'+nl+' lines</strong>; leave the unused amount box empty on each line.'+(pt.intro?' '+pt.intro:'')+'</p>',{sm:true});
+  h+='<div class="scroll"><table class="je"><caption class="sr-only">'+esc(pt.title)+'</caption><thead><tr><th scope="col">Account</th><th scope="col" class="n">Debit</th><th scope="col" class="n">Credit</th><th scope="col">Comes from</th></tr></thead><tbody>';
+  for(var i=0;i<nl;i++){
+    var b="j"+pi+"-"+i;
+    h+='<tr id="row-'+b+'"><td class="ac"><label class="sr-only" for="'+b+'a">Line '+(i+1)+' account</label><select class="ans" id="'+b+'a"><option value="">Select account…</option>'+accts.map(function(a){return '<option>'+esc(a)+'</option>';}).join("")+'</select></td>'+
+       '<td class="d"><label class="sr-only" for="'+b+'d">Line '+(i+1)+' debit (dollars)</label><input class="ans n" id="'+b+'d" type="text" inputmode="decimal" autocomplete="off"></td>'+
+       '<td class="c"><label class="sr-only" for="'+b+'c">Line '+(i+1)+' credit (dollars)</label><input class="ans n" id="'+b+'c" type="text" inputmode="decimal" autocomplete="off"></td>'+
+       '<td class="src" id="'+b+'s"><span class="sr-only">Shown after the entry is correct</span><span aria-hidden="true">—</span></td></tr>';
+  }
+  h+='</tbody></table></div><div class="partfb" id="pf-'+pi+'" role="status" aria-live="polite"></div><div class="btns"><button type="button" class="btn" id="chk-'+pi+'">Check this entry</button><button type="button" class="btn ghost" id="sol-'+pi+'" hidden>Show solution</button></div>';
+  sec.setAttribute("aria-labelledby",hid);
+  sec.innerHTML=h;
+  sec.querySelector("#chk-"+pi).addEventListener("click",function(){checkJE(ps,pi,false);});
+  sec.querySelector("#sol-"+pi).addEventListener("click",function(){checkJE(ps,pi,true);});
+  return sec;
+}
+
+function checkJE(ps,pi,reveal){
+  if(ps.done)return;
+  var pt=ps.pt,nl=pt.lines.length,rows=[],used={},right=0,tD=0,tC=0,blank=0;
+  for(var i=0;i<nl;i++){
+    var b="j"+pi+"-"+i,a=el(b+"a").value,d=parseNum(el(b+"d").value),c=parseNum(el(b+"c").value);
+    if(!a&&d===null&&c===null)blank++;
+    tD+=(d>0?d:0);tC+=(c>0?c:0);
+    rows.push({b:b,a:a,d:d===null?0:d,c:c===null?0:c,bad:isNaN(d)||isNaN(c)});
+  }
+  if(reveal){
+    pt.lines.forEach(function(l,i){var b="j"+pi+"-"+i;el(b+"a").value=l.acct;el(b+"d").value=l.dr?fmt(l.dr):"";el(b+"c").value=l.cr?fmt(l.cr):"";});
+    pt.lines.forEach(function(l,i){markRow("j"+pi+"-"+i,null,l);});
+    completePart(ps,pi,true);
+    var pf=el("pf-"+pi);pf.className="partfb hint";pf.innerHTML='<span class="who">'+T.name+':</span> Here\'s the entry. Look at the <strong>Comes from</strong> column: every amount is a line you already worked in the schedule.';
+    return;
+  }
+  /* match each student row to an unused expected line */
+  var hit=[];
+  rows.forEach(function(r){
+    var m=-1;
+    pt.lines.forEach(function(l,li){if(m<0&&!used[li]&&l.acct===r.a&&!r.bad&&Math.abs(r.d-l.dr)<=1&&Math.abs(r.c-l.cr)<=1)m=li;});
+    if(m>=0){used[m]=1;right++;if(ps.checks===0)ps.firstRight++;}
+    hit.push(m);
+  });
+  ps.checks++;
+  rows.forEach(function(r,i){markRow(r.b,hit[i]>=0,hit[i]>=0?pt.lines[hit[i]]:null);});
+  var pf=el("pf-"+pi);
+  if(right===nl){completePart(ps,pi,false);pf.className="partfb ok";pf.innerHTML='<span class="who">'+T.name+':</span> '+any(["That entry is right and it balances!","Debits equal credits and every account is right. Great work!"])+' Check the <strong>Comes from</strong> column to see how each amount flows straight from your schedule.';return;}
+  var msgs=[right?"You have "+right+" of "+nl+" lines right.":"Not there yet, but that's what practice is for."];
+  if(Math.abs(tD-tC)>1)msgs.push("Your debits ("+$(tD)+") don't equal your credits ("+$(tC)+"), so something's off.");
+  var missing=pt.lines.filter(function(l,li){return !used[li];}).map(function(l){return l.acct;});
+  if(ps.checks===1)msgs.push("Here's a hint: this entry uses "+uniq(pt.lines.map(function(l){return l.acct;})).join(", ")+". Each amount is one of the lettered lines in your schedule.");
+  else msgs.push("Still missing: "+uniq(missing).join(", ")+". Ask yourself whether each one is increasing or decreasing, and which side that means. Or I can show you the solution.");
+  pf.className="partfb bad";pf.innerHTML='<span class="who">'+T.name+':</span> '+esc(msgs.join(" "));
+  el("sol-"+pi).hidden=false;
+  var firstBadRow=rows.filter(function(r,i){return hit[i]<0;})[0];if(firstBadRow)el(firstBadRow.b+"a").focus();
+}
+function uniq(a){return a.filter(function(x,i){return a.indexOf(x)===i;});}
+function markRow(b,ok,line){
+  ["a","d","c"].forEach(function(s){var f=el(b+s);f.classList.remove("ok-f","bad-f");f.removeAttribute("aria-invalid");
+    if(ok===true){f.classList.add("ok-f");f.disabled=true;}
+    else if(ok===false){f.classList.add("bad-f");f.setAttribute("aria-invalid","true");}
+    else{f.disabled=true;}});
+  var s=el(b+"s");
+  if(line&&ok!==false)s.innerHTML='<span class="chip">Line '+esc(line.src)+'</span>';
+}
+
+function completePart(ps,pi,revealed){
+  ps.done=true;ps.revealed=revealed;
+  var sec=el("part-"+pi);sec.classList.add("complete");
+  el("st-"+pi).textContent=revealed?"Solution shown":"Complete";
+  el("chk-"+pi).disabled=true;el("sol-"+pi).hidden=true;
+  sec.querySelectorAll("input,select").forEach(function(f){f.disabled=true;});
+  if(state.parts.every(function(p){return p.done;}))summary();
+}
+
+function summary(){
+  var p=state.p,tot=0,first=0,rev=0;
+  state.parts.forEach(function(ps){if(ps.note)return;tot+=ps.items;first+=ps.firstRight;if(ps.revealed)rev++;});
+  var cheer=first===tot?"Every answer right on the first try. Impressive!":(first>=tot*.7?"Strong work. You're close to mastering this.":"Good effort. Try another set of numbers and watch how much easier it gets.");
+  sumEl.innerHTML='<h3>Problem complete</h3><ul class="score" aria-label="Your results"><li>Right on the first check: '+first+' of '+tot+'</li><li>Parts with solution shown: '+rev+'</li></ul>'+say('<p>'+cheer+' One last thing I want you to remember:</p>'+p.take)+'<div class="btns"><button type="button" class="btn" id="again-btn">Try another with new numbers</button><button type="button" class="btn ghost" id="pick-btn">Choose a different problem type</button></div>';
+  sumEl.hidden=false;
+  el("again-btn").addEventListener("click",function(){start(state.k,true);});
+  el("pick-btn").addEventListener("click",function(){el("pick-title").scrollIntoView({block:"start"});typeBtns[state.k].focus();});
+  sumEl.focus();
+}
+
+el("intro").innerHTML=say('<p>Hi, I\'m <strong>'+T.name+'</strong>, '+T.bio+'. I\'ll be your tutor for asset acquisitions today. '+T.style+'</p>'+
+  '<ul><li>Pick a topic below. Each one is a <strong>worksheet</strong> with lettered lines (A, B, C …). The <strong>Builds on</strong> column tells you which earlier lines feed each answer.</li>'+
+  '<li>Fill in a part, then press <strong>Check this part</strong>. I\'ll mark answers green or red and give you a hint on the red ones. After your first check, you can ask me to <strong>Show solution</strong>.</li>'+
+  '<li>Most problems end with a <strong>journal entry</strong>. Once it\'s right, the <strong>Comes from</strong> column shows where each amount came from.</li></ul>'+
+  '<p class="small">Quick tips: whole dollars, commas optional. Per-share amounts go to the cent, like <span class="math">0.25</span>. Enter a loss or decrease as <span class="math">-12,000</span> or <span class="math">(12,000)</span>, and rates as percents like <span class="math">12.5</span>.</p>',{label:T.name+", your tutor"});
+el("sub").textContent="Your tutor today is "+T.name+". Work each schedule, then record the journal entry.";
+el("new-btn").addEventListener("click",function(){if(state)start(state.k,true);});
+el("print-btn").addEventListener("click",function(){window.print();});
+start("equip",false);
+
+/* expose for self-checks */
+window.__tutor={GEN:GEN,ORDER:ORDER,start:start,state:function(){return state;}};
+})();
+</script>
+</body>
+</html>
