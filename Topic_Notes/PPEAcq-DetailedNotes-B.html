@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Noncash Acquisitions and Asset Exchanges: Detailed Notes B</title>
+<meta name="description" content="Detailed notes on noninterest-bearing notes, shares, donations, government grants, nonmonetary exchanges, and fixed-asset turnover.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+--purple: #4B2E83; --purple-dark: #341f5c; --gold: #C8A24A; --gold-light: #E8CF86;
+--ink: #232023; --paper: #fdfcfb; --panel: #f7f3ec; --rule: #e2d9c8; --grid: #8a8076;
+--muted: #5f5a56;
+--key-bg: #f3eef9; --watch: #9C4221; --watch-title: #7a3418; --watch-bg: #FBEAE2;
+--ex-bg: #fbf5e4; --good: #2E6B45; --good-bg: #E7F3EB; --link: #4B2E83; --visited: #5b3a9a;
+}
+* { box-sizing: border-box; }
+html { scroll-padding-top: 1rem; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif; font-size: 1.0625rem; line-height: 1.7; }
+.sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+.skip-link { position: absolute; left: 0.75rem; top: -4rem; z-index: 100; background: #fff; color: var(--purple-dark); font-family: 'Inter', system-ui, sans-serif; font-weight: 700; padding: 0.7rem 1.1rem; border: 3px solid var(--purple-dark); border-radius: 6px; text-decoration: none; }
+.skip-link:focus { top: 0.75rem; }
+:focus-visible { outline: 3px solid var(--purple-dark); outline-offset: 2px; box-shadow: 0 0 0 2px #fff; }
+main:focus { outline: none; }
+a { color: var(--link); text-decoration: underline; text-underline-offset: 0.18em; text-decoration-thickness: 0.08em; }
+a:visited { color: var(--visited); }
+a:hover { text-decoration-thickness: 0.16em; }
+
+.site-header { background: linear-gradient(135deg, var(--purple) 0%, var(--purple-dark) 100%); color: #fff; border-bottom: 6px solid var(--gold); }
+.header-inner { max-width: 70rem; margin: 0 auto; padding: 2.3rem 1.5rem 2rem; }
+.eyebrow { font-family: 'Inter', system-ui, sans-serif; font-size: 0.95rem; font-weight: 600; letter-spacing: 0.02em; color: var(--gold-light); margin: 0 0 0.5rem; }
+.site-header h1 { font-family: 'Source Serif 4', Georgia, serif; font-weight: 700; font-size: clamp(1.75rem, 4vw, 2.5rem); line-height: 1.2; margin: 0 0 0.6rem; max-width: 52rem; }
+.header-sub { margin: 0; color: #ece6f6; font-family: 'Inter', system-ui, sans-serif; font-size: 1.05rem; line-height: 1.5; max-width: 42rem; }
+
+.layout { display: grid; grid-template-columns: 15rem minmax(0, 46rem); gap: 3rem; max-width: 70rem; margin: 0 auto; padding: 2rem 1.5rem 3rem; }
+.toc { align-self: start; position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow-y: auto; font-family: 'Inter', system-ui, sans-serif; font-size: 0.92rem; line-height: 1.4; background: var(--panel); border: 1px solid var(--rule); border-top: 5px solid var(--gold); border-radius: 8px; padding: 0.9rem 1rem 1rem; }
+.toc-title { margin: 0 0 0.5rem; font-weight: 700; color: var(--purple-dark); }
+.toc ol { margin: 0; padding-left: 1.2rem; }
+.toc li { margin: 0.35rem 0; }
+main { min-width: 0; }
+
+h2, h3, h4 { font-family: 'Source Serif 4', Georgia, serif; color: var(--purple-dark); line-height: 1.3; }
+h2 { font-size: 1.65rem; margin: 3rem 0 0.9rem; padding-bottom: 0.4rem; border-bottom: 3px solid var(--gold); }
+main > section:first-child > h2:first-child { margin-top: 0; }
+h3 { font-size: 1.3rem; margin: 2.2rem 0 0.6rem; }
+h4 { font-size: 1.1rem; margin: 1.6rem 0 0.4rem; }
+p { margin: 0.8rem 0; }
+ul, ol { margin: 0.8rem 0; padding-left: 1.5rem; }
+li { margin: 0.35rem 0; }
+strong { color: var(--purple-dark); }
+code, .mono { font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-size: 0.92em; }
+
+.lede { font-size: 1.2rem; line-height: 1.6; }
+.note-small { font-family: 'Inter', system-ui, sans-serif; font-size: 0.9rem; color: var(--muted); }
+
+.callout { font-family: 'Inter', system-ui, sans-serif; font-size: 0.98rem; line-height: 1.6; border-radius: 8px; border: 1px solid var(--rule); border-left-width: 7px; padding: 0.8rem 1.1rem 0.9rem; margin: 1.5rem 0; }
+.callout p { margin: 0.5rem 0; }
+.callout ul, .callout ol { margin: 0.5rem 0; }
+.callout-title { margin: 0 0 0.25rem !important; font-weight: 700; font-size: 1rem; }
+.callout.key { background: var(--key-bg); border-color: #d6c9ec; border-left-color: var(--purple); }
+.callout.key .callout-title { color: var(--purple-dark); }
+.callout.watch { background: var(--watch-bg); border-color: #efc7b6; border-left-color: var(--watch); }
+.callout.watch .callout-title { color: var(--watch-title); }
+.callout.example { background: var(--ex-bg); border-color: #ecdca8; border-left-color: var(--gold); }
+.callout.example .callout-title { color: #4a3a0c; }
+.callout.codif { background: #fff; border-color: var(--purple); border-left-color: var(--purple-dark); }
+.callout.codif .callout-title { color: var(--purple-dark); }
+.callout.codif ul { padding-left: 1.2rem; }
+.asc { font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-size: 0.86em; font-weight: 600; color: var(--purple-dark); background: var(--panel); border: 1px solid var(--rule); border-radius: 4px; padding: 0.05em 0.35em; white-space: nowrap; }
+.callout.global { background: #fff; border-color: var(--grid); border-left-color: var(--grid); }
+.callout.global .callout-title { color: var(--purple-dark); }
+
+.example-box { border: 1px solid var(--rule); border-top: 5px solid var(--purple); border-radius: 8px; background: #fff; padding: 0.4rem 1.2rem 1rem; margin: 1.8rem 0; }
+.example-box > h3, .example-box > h4 { margin-top: 1rem; }
+.example-box > h3:first-child { margin-top: 0.9rem; border: 0; }
+.facts { font-family: 'Inter', system-ui, sans-serif; font-size: 0.97rem; background: var(--panel); border-radius: 6px; padding: 0.7rem 1rem; margin: 0.8rem 0; }
+.facts p { margin: 0.35rem 0; }
+
+.table-scroll { overflow-x: auto; margin: 1rem 0; }
+table { border-collapse: separate; border-spacing: 0; width: 100%; min-width: 26rem; border-top: 1px solid var(--grid); border-left: 1px solid var(--grid); font-family: 'Inter', system-ui, sans-serif; font-size: 0.92rem; line-height: 1.45; font-variant-numeric: tabular-nums; }
+caption { text-align: left; font-weight: 700; color: var(--purple-dark); padding: 0 0 0.5rem; font-size: 0.98rem; }
+th, td { border: 0; border-right: 1px solid var(--grid); border-bottom: 1px solid var(--grid); padding: 0.45rem 0.65rem; vertical-align: top; text-align: left; }
+thead th { background: var(--panel); color: var(--purple-dark); }
+tbody th[scope="row"] { background: #fff; font-weight: 600; color: var(--ink); position: sticky; left: 0; z-index: 1; min-width: 9.5rem; }
+thead th:first-child { position: sticky; left: 0; z-index: 2; min-width: 9.5rem; }
+td.num, th.num { text-align: right; }
+td.num { white-space: nowrap; }
+tr.sub th, tr.sub td { background: var(--panel); font-weight: 700; }
+tr.plug th, tr.plug td { background: var(--ex-bg); font-weight: 700; box-shadow: inset 0 3px 0 var(--gold); }
+tr.step th { border-left: 6px solid var(--purple); }
+tr.plug th { border-left: 6px solid var(--gold); }
+table.compact { font-size: 0.88rem; min-width: 24rem; }
+table.je { min-width: 22rem; }
+table.je td.num { font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; }
+table.je td.cr-acct { padding-left: 2.2rem; }
+table.je th.acct-col { width: 62%; }
+.je-wrap { margin: 1.1rem 0; }
+.je-date { font-family: 'Inter', system-ui, sans-serif; font-weight: 700; margin: 0 0 0.3rem; color: var(--purple-dark); }
+
+ol.steps { list-style: none; counter-reset: step; padding: 0; margin: 1.2rem 0; display: grid; gap: 0.7rem; }
+ol.steps > li { counter-increment: step; font-family: 'Inter', system-ui, sans-serif; font-size: 0.98rem; line-height: 1.55; margin: 0; padding: 0.7rem 1rem 0.8rem 3.5rem; background: #fff; border: 1px solid var(--rule); border-left: 6px solid var(--purple); border-radius: 8px; position: relative; }
+ol.steps > li::before { content: counter(step); position: absolute; left: 0.9rem; top: 0.6rem; width: 1.9rem; height: 1.9rem; border-radius: 50%; background: var(--purple); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+ol.steps > li:last-child { border-left-color: var(--gold); }
+ol.steps > li:last-child::before { background: var(--gold); color: var(--ink); }
+ol.steps strong { display: block; font-size: 1.02rem; }
+
+dl.glossary { font-family: 'Inter', system-ui, sans-serif; font-size: 0.96rem; line-height: 1.55; }
+dl.glossary dt { font-weight: 700; color: var(--purple-dark); margin-top: 0.9rem; }
+dl.glossary dd { margin: 0.1rem 0 0 0; }
+
+details { font-family: 'Inter', system-ui, sans-serif; font-size: 0.97rem; line-height: 1.6; border: 1px solid var(--grid); border-radius: 8px; background: #fff; margin: 0.9rem 0; }
+details > summary { cursor: pointer; font-weight: 700; color: var(--purple-dark); padding: 0.7rem 1rem; min-height: 2.75rem; }
+details[open] > summary { border-bottom: 1px solid var(--rule); }
+details > .answer { padding: 0.2rem 1rem 0.9rem; }
+.practice { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 0.2rem 1.2rem 0.9rem; margin: 1.2rem 0; }
+.practice h3, .practice h4 { margin-top: 1rem; }
+
+figure { margin: 1.5rem 0; }
+figcaption { font-family: 'Inter', system-ui, sans-serif; font-size: 0.9rem; color: var(--muted); margin-top: 0.4rem; }
+svg text { font-family: 'Inter', system-ui, sans-serif; }
+
+.pill-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.8rem 0; padding: 0; list-style: none; }
+.pill-row li { margin: 0; font-family: 'Inter', system-ui, sans-serif; font-size: 0.9rem; font-weight: 600; background: var(--panel); border: 1px solid var(--grid); border-radius: 999px; padding: 0.2rem 0.8rem; }
+
+.next-box { font-family: 'Inter', system-ui, sans-serif; background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 0.9rem 1.2rem; margin-top: 2.5rem; }
+footer { font-family: 'Inter', system-ui, sans-serif; text-align: center; font-size: 0.88rem; color: var(--muted); padding: 1.5rem 1rem 2.5rem; border-top: 1px solid var(--rule); }
+
+@media (max-width: 62rem) {
+.layout { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; padding-top: 1.5rem; }
+.toc { position: static; max-height: none; }
+}
+@media (max-width: 30rem) {
+body { font-size: 1rem; }
+.header-inner { padding: 1.6rem 1rem 1.4rem; }
+.layout { padding-left: 1rem; padding-right: 1rem; }
+ol.steps > li { padding-left: 3.1rem; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+@media print {
+body { font-size: 11pt; }
+.skip-link, .toc { display: none; }
+.layout { display: block; padding: 0; }
+.site-header { background: #fff; color: #000; border-bottom: 3px solid #000; }
+.site-header h1, .header-sub, .eyebrow { color: #000; }
+.table-scroll { overflow: visible; }
+a { color: #000; }
+details > summary { list-style: none; }
+}
+</style>
+<style id="a11y-fixes">
+/* Accessibility fixes: visible keyboard focus, scrollable wide tables, and text colors adjusted to meet WCAG AA contrast. */
+:focus-visible { outline: 3px solid #341f5c !important; outline-offset: 2px !important; box-shadow: 0 0 0 5px #ffffff !important; }
+.a11y-scroll { overflow-x: auto; max-width: 100%; }
+.table-scroll, .a11y-scroll { position: relative; }
+.a11y-sr { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+</style>
+<style id="print-pdf">
+.print-btn { font-family: 'Inter', system-ui, sans-serif; font-size: 0.98rem; font-weight: 700; color: #232023; background: #C8A24A; border: 2px solid #C8A24A; border-radius: 6px; padding: 0.55rem 1.1rem; min-height: 2.75rem; margin-top: 1.1rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; }
+.print-btn:hover { background: #E8CF86; border-color: #E8CF86; }
+.print-btn:focus-visible { outline: 3px solid #fff !important; outline-offset: 2px !important; box-shadow: 0 0 0 6px #341f5c !important; }
+.print-only { display: none; }
+@page { size: letter; margin: 0.5in 0.55in 0.55in; }
+@media print {
+*, *::before, *::after { background: transparent !important; box-shadow: none !important; color: #000 !important; }
+html, body { background: #fff !important; }
+body, p, li, dd, dt, td, th, caption, .callout, .facts, details, table, .eyebrow, .header-sub, .note-small, .lede, ol.steps > li, dl.glossary { font-family: Georgia, 'Times New Roman', serif !important; }
+body { font-size: 10pt; line-height: 1.32; }
+.callout, .callout p, .callout li, .facts, .facts p, details, .answer, .answer p, .answer li, ol.steps > li, dl.glossary, dl.glossary dd, .note-small, .lede { font-size: 10pt !important; line-height: 1.32 !important; }
+.print-btn, .skip-link, .toc, .next-box, figure { display: none !important; }
+.site-header { border-bottom: 1.5pt solid #000; margin-bottom: 0.15in; }
+.header-inner { padding: 0 0 0.08in; max-width: none; }
+.eyebrow { font-size: 8.5pt; margin: 0 0 0.03in; font-weight: 400; }
+.site-header h1 { font-size: 16pt; margin: 0 0 0.03in; }
+.header-sub { font-size: 9.5pt; font-style: italic; }
+.layout { display: block; max-width: none; padding: 0; gap: 0; }
+main { max-width: none; }
+p { margin: 0.07in 0; }
+ul, ol { margin: 0.05in 0; padding-left: 0.25in; }
+li { margin: 0.02in 0; }
+h2 { font-size: 12.5pt; margin: 0.18in 0 0.05in; padding-bottom: 0.02in; border-bottom: 0.75pt solid #000; }
+main > section:first-child > h2:first-child { margin-top: 0; }
+h3 { font-size: 11pt; margin: 0.12in 0 0.04in; }
+h4 { font-size: 10pt; margin: 0.08in 0 0.03in; }
+h2, h3, h4, .callout-title, .je-date, caption, dt { break-after: avoid; page-break-after: avoid; }
+p, li, dd { orphans: 2; widows: 2; }
+strong { color: #000 !important; }
+.lede { font-size: 10pt; }
+.callout, .example-box, .facts, .practice, details { border: 0 !important; border-radius: 0; padding: 0 !important; margin: 0.07in 0 !important; }
+.callout { border-left: 2pt solid #000 !important; padding-left: 0.1in !important; }
+.callout-title { font-size: 10pt; margin: 0 !important; }
+.example-box > h3:first-child { margin-top: 0.1in; }
+.facts p { margin: 0.03in 0; font-style: italic; }
+ol.steps { gap: 0; margin: 0.05in 0; list-style: decimal; padding-left: 0.25in; }
+ol.steps > li { border: 0 !important; padding: 0 !important; margin: 0.03in 0; font-size: 10pt; }
+ol.steps > li::before { content: none !important; display: none !important; }
+ol.steps strong { display: inline; font-size: 10pt; }
+.asc { border: 0; padding: 0; font-size: 9pt; font-weight: 400; }
+.table-scroll { overflow: visible !important; margin: 0.05in 0 0.08in; }
+table { min-width: 0 !important; width: 100%; font-size: 8.5pt; line-height: 1.2; border-top: 0.5pt solid #000; border-left: 0; }
+caption { font-size: 9pt; padding: 0 0 0.03in; }
+th, td { padding: 0.025in 0.05in !important; border-right: 0 !important; border-bottom: 0.5pt solid #999 !important; }
+thead th { border-bottom: 0.75pt solid #000 !important; font-weight: 700; }
+tbody th[scope="row"] { font-weight: 400; min-width: 0; }
+thead th:first-child { min-width: 0; }
+tr.sub th, tr.sub td, tr.plug th, tr.plug td { font-weight: 700; border-top: 0.75pt solid #000 !important; }
+tr.step th, tr.plug th { border-left: 0 !important; }
+thead { display: table-header-group; }
+tr { break-inside: avoid; page-break-inside: avoid; }
+tbody th[scope="row"], thead th:first-child { position: static !important; }
+.je-wrap { margin: 0.04in 0 0.06in; break-inside: avoid; page-break-inside: avoid; }
+.je-date { font-size: 9pt; margin: 0 0 0.02in; }
+table.je { width: 70%; }
+table.je td.cr-acct { padding-left: 0.3in !important; }
+footer { font-family: Georgia, 'Times New Roman', serif !important; }
+a { text-decoration: none; }
+a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 8pt; }
+details > summary { list-style: none; padding: 0 !important; min-height: 0; font-size: 0; }
+details > summary::-webkit-details-marker { display: none; }
+details > summary::before { content: "Answer: "; font-size: 10pt; font-weight: 700; }
+details > .answer { padding: 0 !important; }
+.practice > h3 { font-size: 10pt; }
+dl.glossary dt { margin-top: 0.05in; }
+footer { border-top: 0.5pt solid #000; padding: 0.06in 0 0; margin-top: 0.1in; font-size: 8pt; }
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header">
+<div class="header-inner">
+<p class="eyebrow">ACCT 351 · Intermediate Accounting I · Detailed Notes B</p>
+<h1>Noncash Acquisitions and Asset Exchanges</h1>
+<p class="header-sub">Notes, shares, gifts, grants, and trade-ins: how to find the cost of an asset when cash is not what changed hands.</p>
+<button type="button" class="print-btn" onclick="window.print()">Print or save as PDF</button>
+</div>
+</header>
+<div class="layout">
+<nav class="toc" aria-label="On this page">
+<p class="toc-title">On this page</p>
+<ol><li><a href="#s-intro">A puzzle to start</a></li><li><a href="#s-codif">Where these rules live: the FASB Codification</a></li><li><a href="#s-note">Noninterest-bearing notes</a></li><li><a href="#s-equity">Assets acquired with shares</a></li><li><a href="#s-donation">Donated assets and government grants</a></li><li><a href="#s-exchange">Nonmonetary exchanges: the four steps</a></li><li><a href="#s-special">Two exceptions: no fair value, and no commercial substance</a></li><li><a href="#s-turn">Fixed-asset turnover</a></li><li><a href="#s-mistakes">Common mistakes</a></li><li><a href="#s-practice">Practice with answers</a></li><li><a href="#s-map">Codification map</a></li><li><a href="#s-terms">Key terms</a></li></ol>
+</nav>
+<main id="main" tabindex="-1">
+
+<section>
+<h2 id="s-intro">A puzzle to start</h2>
+
+
+<p class="lede">Great Smokies Fabrication needs a new press brake but is short on cash. The seller offers a deal: take the machine today and pay $60,000 in two years, with no interest charged. Is the machine worth $60,000? Of course not: money due in two years is worth less than money in hand. The machine&rsquo;s cost is the <em>cash-equivalent price</em>, and the difference is interest.</p>
+<p>Part A assumed the company paid cash. Often it does not. Assets are acquired by signing notes, issuing shares, receiving gifts, or trading in an old asset. In every case the question is the same: <strong>what is the fair value of what was given up (or of the asset received), measured as if cash had changed hands?</strong></p>
+
+</section>
+
+<section>
+<h2 id="s-codif">Where these rules live: the FASB Codification</h2>
+
+<p>Initial measurement of PP&amp;E is in <strong>Topic 360-10-30</strong>. Interest on receivables and payables is in <strong>Topic 835-30</strong>. Exchanges are in <strong>Topic 845</strong>, <em>Nonmonetary Transactions</em>. Gifts and donations are in <strong>Topic 958-605</strong>. Under IFRS, government grants are in <strong>IAS 20</strong>.</p><div class="callout codif"><p class="callout-title">In the FASB Codification</p><ul><li><span class="asc">ASC 835-30</span>: a note exchanged for property is recorded at the present value of its payments when the stated rate is absent or unreasonable; the difference is interest.</li><li><span class="asc">ASC 845-10-30</span>: an exchange of nonmonetary assets is generally measured at fair value, with exceptions when fair value is not determinable or the exchange lacks commercial substance.</li><li><span class="asc">ASC 845-10-25-6</span>: if the monetary consideration in an exchange is significant (25% or more of the exchange&rsquo;s fair value), the exchange is treated as monetary and the whole gain is recognized.</li><li><span class="asc">ASC 958-605</span>: a donated asset is recorded at fair value, and the donee recognizes revenue.</li></ul></div>
+
+</section>
+
+<section>
+<h2 id="s-note">Noninterest-bearing notes</h2>
+
+
+<p>When a note carries no stated interest (or an unreasonably low rate), the interest is still there; it is hidden in the price. Accounting makes it visible by recording the asset at the <strong>present value</strong> of the note&rsquo;s payments, using the interest rate the company would pay to borrow for a similar term. The difference between the face amount and the present value is a <strong>discount</strong> that becomes interest expense over the life of the note using the effective interest method.</p><div class="callout key"><p class="callout-title">Two ways to write the entry</p><p>The <strong>gross method</strong> records the note at face value and the discount in a contra-liability account, <em>Discount on note payable</em>. The <strong>net method</strong> records the note directly at its present value. Both give the same net liability and the same interest expense; the notes below use the gross method.</p></div><div class="example-box"><h3>Great Smokies Fabrication: the press brake</h3><div class="facts"><p>The company buys a press brake for a $60,000 note due in two years with no stated interest. Similar borrowing costs 8%.</p></div><div class="table-scroll"><table class="compact"><caption>Great Smokies Fabrication: the discount on the note</caption><thead><tr><th scope="col">Item</th><th scope="col" class="num">Amount</th></tr></thead><tbody><tr><th scope="row">Face amount, due in two years</th><td class="num">$60,000</td></tr><tr><th scope="row">Present value at 8% ($60,000 &times; 0.85734)</th><td class="num">$51,440</td></tr><tr class="plug"><th scope="row">Discount on note payable</th><td class="num">$8,560</td></tr></tbody></table></div><div class="je-wrap"><p class="je-date">Purchase of the press brake</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: Purchase of the press brake</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Equipment</td><td class="num">51,440</td><td class="num"></td></tr><tr><td>Discount on note payable</td><td class="num">8,560</td><td class="num"></td></tr><tr><td class="cr-acct">Note payable</td><td class="num"></td><td class="num">60,000</td></tr></tbody></table></div></div><div class="table-scroll"><table class="compact"><caption>Great Smokies Fabrication: interest over two years</caption><thead><tr><th scope="col">Year</th><th scope="col" class="num">Beginning carrying amount</th><th scope="col" class="num">Interest expense (8%)</th><th scope="col" class="num">Ending carrying amount</th></tr></thead><tbody><tr><th scope="row">Year 1</th><td class="num">$51,440</td><td class="num">$4,115</td><td class="num">$55,555</td></tr><tr><th scope="row">Year 2</th><td class="num">$55,555</td><td class="num">$4,445</td><td class="num">$60,000</td></tr></tbody></table></div><div class="je-wrap"><p class="je-date">Year 1 interest</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: Year 1 interest</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Interest expense</td><td class="num">4,115</td><td class="num"></td></tr><tr><td class="cr-acct">Discount on note payable</td><td class="num"></td><td class="num">4,115</td></tr></tbody></table></div></div><p>At the end of year 2 the discount is used up, the note&rsquo;s carrying amount equals its face value, and the final payment is $60,000.</p></div>
+<h3>When the rate is not given: the implicit rate</h3>
+<p>Sometimes the cash price is known but the rate is not. Then the rate is the one that makes the present value of the note equal the cash price. This is the <strong>implicit rate</strong>.</p><div class="example-box"><h3>Nantahala Outfitters: finding the implicit rate</h3><div class="facts"><p>Nantahala Outfitters buys a delivery van with a $100,000 note due in four years. The same van sells for $68,301 cash. What rate is built into the note?</p></div><p>Present value factor = $68,301 &divide; $100,000 = <strong>0.6830</strong>. In the present value of $1 table for 4 periods, that factor is 10%, so the implicit rate is <strong>10%</strong>. The van is recorded at $68,301 and the $31,699 difference is interest to be recognized over four years.</p><div class="je-wrap"><p class="je-date">Purchase of the van</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: Purchase of the van</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Vehicles</td><td class="num">68,301</td><td class="num"></td></tr><tr><td>Discount on note payable</td><td class="num">31,699</td><td class="num"></td></tr><tr><td class="cr-acct">Note payable</td><td class="num"></td><td class="num">100,000</td></tr></tbody></table></div></div></div><div class="callout watch"><p class="callout-title">Do not record the face amount as the cost</p><p>Recording the van at $100,000 overstates the asset and understates interest expense. The asset&rsquo;s cost never includes the financing charge.</p></div>
+
+</section>
+
+<section>
+<h2 id="s-equity">Assets acquired with shares</h2>
+
+
+<p>A company may pay for an asset by issuing its own shares. Cost is the fair value of what was given up or of the asset received, <strong>whichever is more clearly evident</strong>. If the shares trade actively, the market price is usually the best evidence. If the shares are newly issued and thinly traded, an appraisal of the asset is better.</p><div class="example-box"><h3>Cullowhee Biotech: shares for equipment</h3><div class="facts"><p>Cullowhee Biotech issues 6,000 shares of $1 par common stock for lab equipment. The shares trade at $22.</p></div><p>Fair value of shares = 6,000 &times; $22 = <strong>$132,000</strong>.</p><div class="je-wrap"><p class="je-date">Issuance of shares for equipment</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: Issuance of shares for equipment</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Equipment</td><td class="num">132,000</td><td class="num"></td></tr><tr><td class="cr-acct">Common stock</td><td class="num"></td><td class="num">6,000</td></tr><tr><td class="cr-acct">Paid-in capital in excess of par</td><td class="num"></td><td class="num">126,000</td></tr></tbody></table></div></div></div>
+
+</section>
+
+<section>
+<h2 id="s-donation">Donated assets and government grants</h2>
+
+
+<p>Sometimes a city or county gives a company land, or a building, to persuade it to locate there. The company has not paid anything, but it has received something valuable, and it has agreed (explicitly or not) to bring jobs and activity. U.S. GAAP treats the asset as <strong>revenue received at fair value</strong>.</p><div class="example-box"><h3>Sylva Biotech Park: a donated site</h3><div class="facts"><p>The county donates land with a fair value of $400,000 to a company that agrees to build a plant there.</p></div><div class="je-wrap"><p class="je-date">Receipt of donated land</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: Receipt of donated land</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Land</td><td class="num">400,000</td><td class="num"></td></tr><tr><td class="cr-acct">Revenue: donation of asset</td><td class="num"></td><td class="num">400,000</td></tr></tbody></table></div></div></div>
+<h3>IFRS: government grants</h3>
+<p>Under IFRS (IAS 20), a grant related to an asset is not simply recorded as revenue when received. A company may choose one of two approaches:</p><ul><li><strong>Deduct the grant from the asset&rsquo;s cost.</strong> Depreciation is then lower each year.</li><li><strong>Record the grant as deferred income</strong> (a liability) and recognize it in income over the asset&rsquo;s life, matching it to the depreciation.</li></ul><p>For example, a $90,000 grant toward a $450,000 machine gives a cost of $360,000 under the first approach, or a $450,000 machine with $90,000 of deferred income under the second.</p>
+
+</section>
+
+<section>
+<h2 id="s-exchange">Nonmonetary exchanges: the four steps</h2>
+
+
+<p>A <strong>nonmonetary asset exchange</strong> swaps one productive asset for another, often with cash to even things out. The usual case is a trade-in. The general rule is to measure the new asset at <strong>fair value</strong>, remove the old asset at book value, record any cash, and recognize the resulting gain or loss.</p><ol class="steps" role="list"><li><strong>Record the new asset at fair value</strong> Use the fair value of what was given up, or of what was received, whichever is more clearly evident.</li><li><strong>Remove the book value of the old asset</strong> Credit the old asset&rsquo;s cost and debit its accumulated depreciation.</li><li><strong>Record cash paid or received</strong> Cash makes up the difference in fair values.</li><li><strong>Record the gain or loss</strong> Gain or loss = fair value of the old asset &minus; its book value.</li></ol><div class="example-box"><h3>Tuckasegee Printing: a trade-in at a gain</h3><div class="facts"><p>Tuckasegee Printing trades an old press (cost $300,000, accumulated depreciation $220,000, so book value $80,000) and pays $150,000 cash for a new one. The old press has a fair value of $95,000.</p></div><div class="table-scroll"><table class="compact"><caption>Tuckasegee Printing: assets given</caption><thead><tr><th scope="col">Item</th><th scope="col" class="num">Fair value</th><th scope="col" class="num">Book value</th></tr></thead><tbody><tr><th scope="row">Old press</th><td class="num">$95,000</td><td class="num">$80,000</td></tr><tr><th scope="row">Cash paid</th><td class="num">$150,000</td><td class="num">$150,000</td></tr><tr class="plug"><th scope="row">Total</th><td class="num">$245,000</td><td class="num">$230,000</td></tr></tbody></table></div><p>The new press is recorded at $245,000. The gain is $95,000 &minus; $80,000 = <strong>$15,000</strong>.</p><div class="je-wrap"><p class="je-date">Trade-in at a gain</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: Trade-in at a gain</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Equipment (new)</td><td class="num">245,000</td><td class="num"></td></tr><tr><td>Accumulated depreciation (old)</td><td class="num">220,000</td><td class="num"></td></tr><tr><td class="cr-acct">Equipment (old)</td><td class="num"></td><td class="num">300,000</td></tr><tr><td class="cr-acct">Cash</td><td class="num"></td><td class="num">150,000</td></tr><tr><td class="cr-acct">Gain on exchange of assets</td><td class="num"></td><td class="num">15,000</td></tr></tbody></table></div></div></div><div class="example-box"><h3>Tuckasegee Printing: the same trade at a loss</h3><div class="facts"><p>Now suppose the old press has a fair value of only $60,000.</p></div><p>New press = $60,000 + $150,000 = <strong>$210,000</strong>. Loss = $80,000 &minus; $60,000 = <strong>$20,000</strong>.</p><div class="je-wrap"><p class="je-date">Trade-in at a loss</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: Trade-in at a loss</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Equipment (new)</td><td class="num">210,000</td><td class="num"></td></tr><tr><td>Accumulated depreciation (old)</td><td class="num">220,000</td><td class="num"></td></tr><tr><td>Loss on exchange of assets</td><td class="num">20,000</td><td class="num"></td></tr><tr><td class="cr-acct">Equipment (old)</td><td class="num"></td><td class="num">300,000</td></tr><tr><td class="cr-acct">Cash</td><td class="num"></td><td class="num">150,000</td></tr></tbody></table></div></div></div><div class="callout key"><p class="callout-title">A shortcut check</p><p>Gain or loss also equals the recorded amount of the asset received minus the book value of everything given. Here: $245,000 &minus; ($80,000 + $150,000) = $15,000 gain.</p></div>
+
+</section>
+
+<section>
+<h2 id="s-special">Two exceptions: no fair value, and no commercial substance</h2>
+
+
+<p>Fair value is the rule, but two situations move the new asset to <strong>book value</strong> and prevent a gain.</p>
+<h3>Fair value cannot be determined</h3>
+<p>If neither asset&rsquo;s fair value can be reasonably determined (rare), the new asset is recorded at the book value of the old asset plus cash paid. No gain or loss is recognized.</p><div class="example-box"><h3>Tuckasegee Printing: no fair value available</h3><div class="je-wrap"><p class="je-date">Trade-in with no determinable fair value</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: Trade-in with no determinable fair value</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Equipment (new)</td><td class="num">230,000</td><td class="num"></td></tr><tr><td>Accumulated depreciation (old)</td><td class="num">220,000</td><td class="num"></td></tr><tr><td class="cr-acct">Equipment (old)</td><td class="num"></td><td class="num">300,000</td></tr><tr><td class="cr-acct">Cash</td><td class="num"></td><td class="num">150,000</td></tr></tbody></table></div></div><p>New press = book value $80,000 + cash $150,000 = $230,000.</p></div>
+<h3>The exchange lacks commercial substance</h3>
+<p>An exchange has <strong>commercial substance</strong> when future cash flows will change as a result of it. Trading old equipment for faster equipment changes cash flows. Trading a tract of land for an identical tract does not. If there is no commercial substance, a <em>gain</em> is not recognized, because the company has not changed its economic position; it is simply swapping like for like. Otherwise a company could create income by trading assets back and forth.</p><div class="example-box"><h3>Pisgah Land Company: swapping similar tracts</h3><div class="facts"><p>Pisgah Land trades a tract with a book value of $1,200,000 and a fair value of $2,000,000 for a nearly identical tract, and pays $100,000 cash. The exchange lacks commercial substance.</p></div><div class="je-wrap"><p class="je-date">Exchange without commercial substance</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: Exchange without commercial substance</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Land (new)</td><td class="num">1,300,000</td><td class="num"></td></tr><tr><td class="cr-acct">Land (old)</td><td class="num"></td><td class="num">1,200,000</td></tr><tr><td class="cr-acct">Cash</td><td class="num"></td><td class="num">100,000</td></tr></tbody></table></div></div><p>The new land is recorded at $1,200,000 + $100,000 = $1,300,000. The unrecognized $800,000 gain is embedded in a lower book value for the new land.</p></div>
+<h3>Cash received without commercial substance</h3>
+<p>When cash is <em>received</em>, part of the transaction is a sale, and that part of the gain is recognized. The recognized gain is the total gain times <strong>cash received &divide; (cash received + fair value of the asset received)</strong>, which equals cash divided by the fair value of the asset given.</p><div class="example-box"><h3>Pisgah Land Company: cash received</h3><div class="facts"><p>Pisgah Land trades the same tract (book value $1,200,000, fair value $2,000,000) and receives $90,000 cash. The fair value of the land received is $1,910,000.</p></div><p>Share = $90,000 &divide; ($90,000 + $1,910,000) = <strong>4.5%</strong>. Gain recognized = ($2,000,000 &minus; $1,200,000) &times; 4.5% = <strong>$36,000</strong>. New land = $1,200,000 + $36,000 &minus; $90,000 = <strong>$1,146,000</strong>.</p><div class="je-wrap"><p class="je-date">Exchange, cash received</p><div class="table-scroll"><table class="je compact"><caption class="sr-only">Journal entry: Exchange, cash received</caption><thead><tr><th scope="col" class="acct-col">Account</th><th scope="col" class="num">Debit</th><th scope="col" class="num">Credit</th></tr></thead><tbody><tr><td>Land (new)</td><td class="num">1,146,000</td><td class="num"></td></tr><tr><td>Cash</td><td class="num">90,000</td><td class="num"></td></tr><tr><td class="cr-acct">Land (old)</td><td class="num"></td><td class="num">1,200,000</td></tr><tr><td class="cr-acct">Gain on exchange of assets</td><td class="num"></td><td class="num">36,000</td></tr></tbody></table></div></div></div><div class="callout watch"><p class="callout-title">Two special cases</p><p><strong>Losses are always recognized</strong>, even without commercial substance, because conservatism does not allow carrying an asset above its fair value. And if the cash is <strong>25% or more</strong> of the exchange&rsquo;s fair value, the exchange is treated as monetary and the entire gain is recognized as if it had commercial substance.</p></div>
+
+</section>
+
+<section>
+<h2 id="s-turn">Fixed-asset turnover</h2>
+
+
+<p>Analysts want to know how effectively a company uses its property, plant, and equipment to produce sales. The <strong>fixed-asset turnover ratio</strong> divides net sales by average net property, plant, and equipment. A higher ratio means each dollar of PP&amp;E generates more sales, so the company is using its assets efficiently.</p><div class="example-box"><h3>Highlands Bike Works</h3><div class="facts"><p>Net sales are $4,800,000. Net PP&amp;E was $1,150,000 at the beginning of the year and $1,250,000 at the end.</p></div><p>Average net PP&amp;E = ($1,150,000 + $1,250,000) &divide; 2 = $1,200,000. Turnover = $4,800,000 &divide; $1,200,000 = <strong>4.0 times</strong>.</p></div><p>Compare the ratio with prior years and with competitors in the same industry. Capital-intensive industries naturally have lower turnover than retailers.</p>
+
+</section>
+
+<section>
+<h2 id="s-mistakes">Common mistakes</h2>
+
+<ul><li><strong>Recording an asset bought with a zero-interest note at its face amount.</strong> Use the present value.</li><li><strong>Computing interest on the face amount.</strong> Interest is the carrying amount (face minus discount) times the effective rate.</li><li><strong>Forgetting that cash is part of what was given up</strong> when finding the cost of the new asset in a trade-in.</li><li><strong>Recognizing a gain on an exchange that lacks commercial substance.</strong> Use book value plus cash paid.</li><li><strong>Treating a loss like a gain.</strong> Losses are recognized even without commercial substance.</li><li><strong>Using the wrong gain fraction when cash is received.</strong> The numerator is cash received; the denominator is the total consideration received (cash plus asset).</li></ul>
+
+</section>
+
+<section>
+<h2 id="s-practice">Practice with answers</h2>
+
+<p>Try each problem on paper, then open the answer to check your work.</p><div class="practice"><h3>Problem 1: Noninterest-bearing note</h3><p>Balsam Mountain Foods buys a freezer by signing a $90,000 noninterest-bearing note due in three years. Borrowing costs 10%. At what amount is the freezer recorded?</p><details><summary>Show the answer</summary><div class="answer"><p>PV = $90,000 &times; 0.75131 = <strong>$67,618</strong>. The discount is $22,382. Year 1 interest = 10% &times; $67,618 = $6,762.</p></div></details><h3>Problem 2: Implicit rate</h3><p>A truck costs $41,500 cash or a $60,000 note due in 5 years with no interest. What is the implicit rate?</p><details><summary>Show the answer</summary><div class="answer"><p>Factor = 41,500 &divide; 60,000 = 0.6917. In the PV table (n = 5) this is 8%. The truck is recorded at $41,500.</p></div></details><h3>Problem 3: Trade-in with a gain</h3><p>Old equipment: cost $250,000, accumulated depreciation $180,000, fair value $85,000. The company pays $40,000 cash for new equipment. Record the exchange.</p><details><summary>Show the answer</summary><div class="answer"><p>New equipment = $85,000 + $40,000 = <strong>$125,000</strong>. Book value = $70,000, so gain = $85,000 &minus; $70,000 = <strong>$15,000</strong>. Debit Equipment (new) $125,000, Accumulated depreciation $180,000; credit Equipment (old) $250,000, Cash $40,000, Gain $15,000.</p></div></details><h3>Problem 4: No commercial substance</h3><p>Land with a book value of $600,000 and fair value of $900,000 is traded for similar land, and $50,000 cash is received (fair value of land received: $850,000). The exchange lacks commercial substance. What gain is recognized and at what amount is the new land recorded?</p><details><summary>Show the answer</summary><div class="answer"><p>Cash is $50,000 of $900,000 (5.6%, under 25%). Gain = $300,000 &times; $50,000 &divide; ($50,000 + $850,000) = <strong>$16,667</strong>. New land = $600,000 + $16,667 &minus; $50,000 = <strong>$566,667</strong>.</p></div></details></div>
+
+</section>
+
+<section>
+<h2 id="s-map">Codification map</h2>
+
+<div class="table-scroll"><table class="compact"><caption>Where to find the rules for noncash acquisitions</caption><thead><tr><th scope="col">Topic</th><th scope="col">Where to read it</th><th scope="col">In plain words</th></tr></thead><tbody><tr><th scope="row">Notes issued for assets</th><td><span class="asc">ASC 835-30</span></td><td>Record at present value; the discount is interest.</td></tr><tr><th scope="row">Nonmonetary exchanges</th><td><span class="asc">ASC 845-10-30</span></td><td>Fair value, with exceptions for no fair value and no commercial substance.</td></tr><tr><th scope="row">Significant cash in an exchange</th><td><span class="asc">ASC 845-10-25-6</span></td><td>25% or more of fair value makes the exchange monetary.</td></tr><tr><th scope="row">Donated assets</th><td><span class="asc">ASC 958-605</span></td><td>Record at fair value; recognize revenue.</td></tr><tr><th scope="row">Government grants (IFRS)</th><td>IAS 20</td><td>Deduct from asset cost or record as deferred income.</td></tr></tbody></table></div>
+
+</section>
+
+<section>
+<h2 id="s-terms">Key terms</h2>
+
+<dl class="glossary"><dt>Cash-equivalent price</dt><dd>The price the asset would have sold for in an immediate cash sale.</dd><dt>Discount on note payable</dt><dd>A contra-liability equal to the face amount minus the present value; becomes interest expense.</dd><dt>Implicit interest rate</dt><dd>The rate that equates the present value of a note&rsquo;s payments to the asset&rsquo;s cash price.</dd><dt>Gross method</dt><dd>Records a note at its face amount with a separate discount account.</dd><dt>Net method</dt><dd>Records a note directly at its present value.</dd><dt>Nonmonetary exchange</dt><dd>A swap of productive assets, often with some cash.</dd><dt>Commercial substance</dt><dd>Exists when an exchange is expected to change the company&rsquo;s future cash flows.</dd><dt>Fixed-asset turnover</dt><dd>Net sales divided by average net property, plant, and equipment.</dd></dl>
+
+</section>
+
+<div class="next-box"><p><strong>Where to go next.</strong> Detailed Notes C covers assets a company builds for itself, including overhead and the capitalization of interest during construction.</p></div>
+
+</main>
+</div>
+<footer>Detailed Notes B: Noncash Acquisitions and Exchanges &middot; ACCT 351 &middot; Western Carolina University<br>All companies in these notes are fictional.</footer>
+<script>
+/* Progressive enhancements (the page works without them):
+1. Expand the answer boxes when printing, then restore them.
+2. Make a table wrapper keyboard-focusable only when the table is wider than the screen. */
+(function () {
+var opened = [];
+window.addEventListener('beforeprint', function () {
+opened = [];
+document.querySelectorAll('details:not([open])').forEach(function (d) { d.setAttribute('open', ''); opened.push(d); });
+});
+window.addEventListener('afterprint', function () {
+opened.forEach(function (d) { d.removeAttribute('open'); });
+opened = [];
+});
+var n = 0;
+function sizeScrollers() {
+document.querySelectorAll('.table-scroll').forEach(function (w) {
+var cap = w.querySelector('caption');
+if (w.scrollWidth > w.clientWidth + 1) {
+if (cap && !cap.id) { cap.id = 'tcap-' + (++n); }
+w.setAttribute('tabindex', '0');
+w.setAttribute('role', 'group');
+if (cap) { w.setAttribute('aria-labelledby', cap.id); }
+} else {
+w.removeAttribute('tabindex'); w.removeAttribute('role'); w.removeAttribute('aria-labelledby');
+}
+});
+}
+var t;
+window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(sizeScrollers, 150); });
+window.addEventListener('load', sizeScrollers);
+if (document.fonts && document.fonts.ready) { document.fonts.ready.then(sizeScrollers); }
+})();
+</script>
+<script id="a11y-fixes-js">
+/* Accessibility support: names for unlabeled form fields, scrollable wide tables, and screen-reader announcements of results. */
+(function () {
+var LIVE = !document.querySelector('[aria-live],[role="status"],[role="alert"]');
+function txt(el) { return el ? (el.textContent || '').replace(/\s+/g, ' ').trim() : ''; }
+function hasName(el) {
+if (el.getAttribute('aria-label') || el.getAttribute('aria-labelledby') || el.getAttribute('title')) return true;
+if (el.id) { try { if (document.querySelector('label[for="' + CSS.escape(el.id) + '"]')) return true; } catch (e) {} }
+return !!el.closest('label');
+}
+function heading(el) {
+var box = el.closest('fieldset,[class*="block"],[class*="part"],[class*="card"],section,article,.example,.problem');
+while (box) {
+var h = box.querySelector('legend,caption,h2,h3,h4,h5,[class*="title"],[class*="label"],[class*="recap"]');
+if (h && txt(h)) return txt(h).slice(0, 80);
+box = box.parentElement ? box.parentElement.closest('fieldset,section,article,[class*="block"],[class*="part"]') : null;
+}
+return '';
+}
+function nameFor(el) {
+var bits = [], tr = el.closest('tr'), table = el.closest('table');
+var cap = table && table.querySelector('caption');
+var h = heading(el); if (h) bits.push(h); else if (cap && txt(cap)) bits.push(txt(cap).slice(0, 80));
+if (tr && table) {
+var cell = el.closest('td,th'), rows = Array.prototype.slice.call(table.rows), ri = rows.indexOf(tr);
+var rowHead = tr.querySelector('th[scope="row"]') || (tr.cells[0] && tr.cells[0] !== cell && !tr.cells[0].querySelector('input,select,textarea') ? tr.cells[0] : null);
+var head = table.tHead && table.tHead.rows.length ? table.tHead.rows[table.tHead.rows.length - 1] : (rows[0] && rows[0] !== tr && !rows[0].querySelector('input,select') ? rows[0] : null);
+var colHead = head && cell ? head.cells[cell.cellIndex] : null;
+var bodyIdx = table.tHead ? ri - table.tHead.rows.length + 1 : ri + (head ? 0 : 1);
+if (rowHead && txt(rowHead)) bits.push(txt(rowHead).slice(0, 80)); else bits.push('line ' + bodyIdx);
+if (colHead && txt(colHead)) bits.push(txt(colHead).slice(0, 40));
+else if (el.tagName === 'SELECT') bits.push('account');
+} else {
+var prev = el.previousElementSibling; if (prev && txt(prev)) bits.push(txt(prev).slice(0, 80));
+if (el.placeholder) bits.push(el.placeholder);
+}
+if (!bits.length) bits.push(el.tagName === 'SELECT' ? 'Choose an option' : 'Answer');
+return bits.join(', ');
+}
+function labelAll(root) {
+(root || document).querySelectorAll('input:not([type="hidden"]):not([type="button"]):not([type="submit"]),select,textarea').forEach(function (el) {
+if (!hasName(el)) el.setAttribute('aria-label', nameFor(el));
+});
+}
+function wrapTables() {
+document.querySelectorAll('table').forEach(function (t) {
+if (t.closest('.a11y-scroll')) return;
+var p = t.parentElement, s = p ? getComputedStyle(p) : null;
+if (s && /auto|scroll/.test(s.overflowX)) return;
+var avail = p ? p.clientWidth : 0;
+if (!avail || t.scrollWidth <= avail + 1) return;
+var w = document.createElement('div'); w.className = 'a11y-scroll';
+if (!t.querySelector('input,select,textarea,button,a[href]')) {
+w.setAttribute('role', 'region'); w.tabIndex = 0;
+var c = t.querySelector('caption'); w.setAttribute('aria-label', (c && txt(c)) || 'Table (scrolls sideways)');
+}
+p.insertBefore(w, t); w.appendChild(t);
+});
+}
+var live = null;
+if (LIVE) {
+live = document.createElement('div'); live.className = 'a11y-sr'; live.setAttribute('aria-live', 'polite'); live.setAttribute('role', 'status');
+document.body.appendChild(live);
+}
+var RESULT = /(score|result|feedback|status|summary|message|msg|grade|total|verdict|outcome)/i;
+var collecting = false, found = [];
+function say(msg) { if (!live || !msg) return; live.textContent = ''; setTimeout(function () { live.textContent = msg; }, 60); }
+var pending;
+var mo = new MutationObserver(function (muts) {
+clearTimeout(pending);
+pending = setTimeout(function () { labelAll(); wrapTables(); }, 50);
+if (!collecting) return;
+muts.forEach(function (m) {
+var n = m.target.nodeType === 1 ? m.target : m.target.parentElement;
+while (n && n !== document.body) {
+if (n === live) return;
+if (RESULT.test((n.id || '') + ' ' + (typeof n.className === 'string' ? n.className : ''))) { if (found.indexOf(n) < 0) found.push(n); return; }
+n = n.parentElement;
+}
+});
+});
+function start() {
+labelAll(); wrapTables();
+mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+document.addEventListener('click', function (e) {
+if (!live || !e.target.closest('button')) return;
+collecting = true; found = [];
+setTimeout(function () {
+collecting = false;
+var msg = found.map(txt).filter(Boolean).join(' ').slice(0, 300);
+say(msg);
+}, 400);
+}, true);
+var rt; window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(wrapTables, 150); });
+}
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
+})();
+</script>
+</body>
+</html>
