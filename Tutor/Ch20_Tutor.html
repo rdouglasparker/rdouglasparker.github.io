@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Accounting Changes and Error Corrections Tutor</title>
+<meta name="description" content="ACCT 352 practice on accounting changes and error corrections: work each schedule, then record the journal entry, with new numbers every time.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --purple:#592C88; --purple-dk:#3E1E61; --purple-lt:#F3EEF8;
+  --gold:#C1A875; --gold-lt:#FAF5E9; --gold-dk:#6B5A2E;
+  --ink:#1F1B24; --muted:#4A4453; --line:#D9D2E3; --paper:#FFFFFF; --bg:#EEEAF2;
+  --red:#9B1C1C; --red-lt:#FDECEC; --green:#1D5E3A; --green-lt:#E9F5EE;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Source Serif 4",Georgia,serif;line-height:1.55;font-size:1.02rem}
+.skip{position:absolute;left:-9999px;top:0;background:var(--purple-dk);color:#fff;padding:.5rem 1rem;z-index:10}
+.skip:focus{left:1rem}
+a{color:var(--purple)}
+:focus-visible{outline:3px solid var(--gold-dk);outline-offset:2px}
+.shell{max-width:76rem;margin:1.5rem auto;background:var(--paper);box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.banner{background:var(--purple);color:#fff;padding:1.4rem 2rem 1.2rem;border-bottom:6px solid var(--gold)}
+.banner .kicker{font-family:Inter,Arial,sans-serif;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;margin:0 0 .35rem}
+.banner h1{font-size:1.9rem;line-height:1.2;margin:0 0 .3rem}
+.banner .sub{margin:0;font-family:Inter,Arial,sans-serif;font-size:.95rem}
+.content{padding:1rem 2rem 2rem}
+h2{font-family:Inter,Arial,sans-serif;color:var(--purple-dk);font-size:1.3rem;margin:1.6rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--gold)}
+h3{font-family:Inter,Arial,sans-serif;color:var(--purple);font-size:1.08rem;margin:1.2rem 0 .45rem}
+p{margin:.45rem 0 .7rem}
+.card{border:1px solid var(--line);border-left:6px solid var(--purple);background:var(--purple-lt);padding:.8rem 1.1rem;margin:1rem 0;border-radius:4px}
+.card h2,.card h3{margin-top:.2rem;border:none;padding:0}
+.important{border:2px solid var(--gold-dk);background:var(--gold-lt);padding:.8rem 1.1rem;margin:1rem 0;border-radius:4px}
+.important h3{color:var(--gold-dk);margin-top:.1rem}
+.card ul,.important ul{margin:.3rem 0 .2rem;padding-left:1.3rem}
+.small{font-size:.9rem;color:var(--muted)}
+.math{font-family:"IBM Plex Mono",Consolas,monospace;font-size:.9rem}
+
+/* picker */
+.picker{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));margin:.6rem 0 0}
+.pgroup h3{font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin:.2rem 0 .5rem}
+.pgroup ul{list-style:none;margin:0;padding:0;display:grid;gap:.45rem}
+.type-btn{width:100%;text-align:left;font:inherit;font-family:Inter,Arial,sans-serif;font-size:.93rem;background:#fff;color:var(--ink);border:1px solid var(--line);border-left:5px solid var(--purple);border-radius:4px;padding:.5rem .7rem;cursor:pointer}
+.type-btn strong{display:block;color:var(--purple-dk)}
+.type-btn span{color:var(--muted);font-size:.85rem}
+.type-btn:hover{background:var(--purple-lt)}
+.type-btn[aria-pressed="true"]{border-left-color:var(--gold-dk);background:var(--gold-lt);box-shadow:inset 0 0 0 2px var(--gold)}
+
+/* workspace */
+.work{display:grid;gap:1.5rem;grid-template-columns:minmax(0,1fr);margin-top:1.4rem}
+@media (min-width:64rem){.work{grid-template-columns:minmax(0,1fr) 18.5rem;align-items:start}}
+.prob-head{display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:flex-end;justify-content:space-between;border-bottom:3px solid var(--gold);padding-bottom:.6rem}
+.prob-head h2{border:none;margin:0;padding:0;font-size:1.45rem}
+.eyebrow{font-family:Inter,Arial,sans-serif;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 .15rem;font-weight:700}
+.btns{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+.btn{font-family:Inter,Arial,sans-serif;font-weight:700;font-size:.92rem;padding:.5rem .95rem;border-radius:4px;cursor:pointer;border:2px solid var(--purple);background:var(--purple);color:#fff}
+.btn:hover{background:var(--purple-dk);border-color:var(--purple-dk)}
+.btn.ghost{background:#fff;color:var(--purple)}
+.btn.ghost:hover{background:var(--purple-lt)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+
+table{border-collapse:collapse;width:100%;margin:.5rem 0 .8rem;font-size:.95rem}
+caption{caption-side:top;text-align:left;font-family:Inter,Arial,sans-serif;font-weight:700;color:var(--purple-dk);padding:.2rem 0 .4rem}
+th,td{border:1px solid var(--line);padding:.4rem .55rem;vertical-align:middle}
+thead th{background:var(--purple);color:#fff;font-family:Inter,Arial,sans-serif;font-size:.84rem;text-align:left}
+tbody th{background:#F7F5FA;text-align:left;font-weight:600}
+.n{text-align:right;font-family:"IBM Plex Mono",Consolas,monospace;font-size:.9rem;white-space:nowrap}
+.scroll{overflow-x:auto;position:relative}
+
+.part{border:1px solid var(--line);border-radius:6px;padding:.4rem 1rem 1rem;margin:1.2rem 0;background:#fff}
+.part > h3{display:flex;gap:.6rem;align-items:center}
+.part > h3 .pnum{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;background:var(--purple);color:#fff;border-radius:999px;padding:.12rem .6rem;white-space:nowrap}
+.part.complete{border-color:var(--green);box-shadow:inset 4px 0 0 var(--green)}
+.status{font-family:Inter,Arial,sans-serif;font-size:.85rem;font-weight:700;color:var(--green);margin-left:auto}
+
+/* schedule */
+.sched td.ln{width:2.6rem;text-align:center;font-family:Inter,Arial,sans-serif;font-weight:700;color:var(--purple-dk);background:#F7F5FA}
+.sched td.bo{width:7.5rem;font-family:Inter,Arial,sans-serif;font-size:.8rem;color:var(--muted)}
+.sched td.amt{width:12.5rem}
+.sched tr.given td{background:#FBFAFD}
+.sched label{font-weight:600}
+.inwrap{display:flex;align-items:center;gap:.25rem}
+.inwrap .u{font-family:"IBM Plex Mono",Consolas,monospace;color:var(--muted)}
+input.ans,select.ans{font:inherit;font-family:"IBM Plex Mono",Consolas,monospace;font-size:.95rem;padding:.4rem .5rem;border:2px solid #6E6680;border-radius:4px;width:100%;min-width:0;background:#fff;color:var(--ink)}
+select.ans{font-family:Inter,Arial,sans-serif;font-size:.88rem}
+input.ans.n{text-align:right}
+.ok-f{border-color:var(--green)!important;background:var(--green-lt)!important}
+.bad-f{border-color:var(--red)!important;background:var(--red-lt)!important}
+.fb{font-family:Inter,Arial,sans-serif;font-size:.84rem;margin-top:.3rem}
+.fb:empty{display:none}
+.fb.ok{color:var(--green)}
+.fb.bad{color:var(--red)}
+.fb.sol{color:var(--purple-dk)}
+.fb .math{font-size:.82rem}
+.tag{font-weight:700}
+
+/* journal entry */
+.je td{padding:.3rem .4rem}
+.je td.src{width:7rem;font-family:Inter,Arial,sans-serif;font-size:.8rem;color:var(--muted);text-align:center}
+.je td.d,.je td.c{width:10rem}
+.je td.ac{min-width:14rem}
+.chip{display:inline-block;background:var(--gold-lt);border:1px solid var(--gold-dk);color:var(--gold-dk);border-radius:999px;padding:0 .5rem;font-weight:700}
+.partfb{font-family:Inter,Arial,sans-serif;font-size:.9rem;border-radius:4px;padding:.5rem .8rem;margin:.5rem 0}
+.partfb:empty{display:none}
+.partfb.ok{background:var(--green-lt);border-left:4px solid var(--green)}
+.partfb.bad{background:var(--red-lt);border-left:4px solid var(--red)}
+.partfb.hint{background:var(--gold-lt);border-left:4px solid var(--gold-dk)}
+
+.say{display:flex;gap:.75rem;align-items:flex-start;margin:.8rem 0}
+.avatar{flex:0 0 2.9rem;height:2.9rem;border-radius:50%;background:var(--purple);color:#fff;border:3px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:Inter,Arial,sans-serif;font-weight:700;font-size:1.2rem}
+.say.sm .avatar{flex-basis:2.2rem;height:2.2rem;font-size:.95rem;border-width:2px}
+.bubble{position:relative;background:#fff;border:1px solid var(--line);border-radius:10px;padding:.55rem .95rem;flex:1;min-width:0;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.bubble::before{content:"";position:absolute;left:-8px;top:1rem;border:8px solid transparent;border-left:0;border-right-color:var(--line)}
+.bubble::after{content:"";position:absolute;left:-6px;top:1rem;border:8px solid transparent;border-left:0;border-right-color:#fff}
+.bubble .who{font-family:Inter,Arial,sans-serif;font-weight:700;font-size:.82rem;color:var(--purple-dk);margin:0 0 .15rem;letter-spacing:.02em}
+.bubble p{margin:.3rem 0}
+.bubble ul{margin:.3rem 0 .4rem;padding-left:1.2rem}
+.say.key .bubble{background:var(--gold-lt);border-color:var(--gold-dk)}
+.say.key .bubble::after{border-right-color:var(--gold-lt)}
+.say.key .bubble::before{border-right-color:var(--gold-dk)}
+.partfb .who{font-weight:700}
+.know{margin:.4rem 0 .6rem;font-size:.92rem;min-width:34rem}
+.know td.ln{width:2.6rem;text-align:center;font-family:Inter,Arial,sans-serif;font-weight:700;color:var(--purple-dk);background:#F7F5FA}
+.know tbody th{font-weight:600;background:#fff}
+.know td.why{font-size:.86rem;color:var(--muted);font-family:Inter,Arial,sans-serif}
+.summary{border-top:3px solid var(--gold);margin-top:1.5rem;padding-top:.6rem}
+.score{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:.4rem 0 1rem;padding:0}
+.score li{background:var(--purple-lt);border:1px solid var(--line);border-radius:999px;padding:.2rem .8rem;font-family:Inter,Arial,sans-serif;font-weight:600;font-size:.9rem}
+
+/* sidebar */
+aside.ref{border:1px solid var(--line);border-radius:6px;padding:.4rem 1rem 1rem;background:#FBFAFD}
+@media (min-width:64rem){aside.ref{position:sticky;top:1rem}}
+aside.ref h2{font-size:1.1rem;margin-top:.6rem}
+aside.ref ol{padding-left:1.2rem;margin:.3rem 0}
+aside.ref li{margin:.35rem 0;font-size:.95rem}
+.flow{list-style:none;padding:0;margin:.4rem 0;font-family:Inter,Arial,sans-serif;font-size:.84rem}
+.flow li{border:1px solid var(--line);background:#fff;border-radius:4px;padding:.4rem .55rem;margin:0}
+.flow li.arrow{border:none;background:none;text-align:center;color:var(--purple);padding:.05rem;font-weight:700}
+aside.ref dl{margin:.3rem 0 0;font-size:.92rem}
+aside.ref dt{font-weight:700;font-family:Inter,Arial,sans-serif;font-size:.88rem;margin-top:.5rem}
+aside.ref dd{margin:0;color:var(--muted)}
+footer{padding:1rem 2rem 1.5rem;font-family:Inter,Arial,sans-serif;font-size:.8rem;color:var(--muted);border-top:1px solid var(--line)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media (max-width:640px){
+  .shell{margin:0}
+  .banner,.content{padding-left:1rem;padding-right:1rem}
+  .sched td.bo{display:none}
+  .sched th.bo{display:none}
+  .sched td.amt{width:8.5rem}
+  table.je{min-width:34rem}
+  .sched td.ln{width:2rem}
+  .prob-head .btns{width:100%}
+  .picker{grid-template-columns:1fr}
+  table{font-size:.88rem}
+}
+@media print{
+  body{background:#fff}
+  .shell{box-shadow:none;margin:0}
+  #picker-sec,.btns,.skip,aside.ref{display:none!important}
+  .banner,thead th,.part > h3 .pnum{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .part{break-inside:avoid}
+}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+</head>
+<body>
+<a class="skip" href="#work-title">Skip to the problem</a>
+<div class="shell">
+<header class="banner">
+  <p class="kicker">ACCT 352 · Intermediate Accounting II · Practice Tutor</p>
+  <h1>Accounting Changes and Error Corrections Tutor</h1>
+  <p class="sub" id="sub">Work each schedule, then record the journal entry. New company and new numbers every time.</p>
+</header>
+
+<main class="content" id="main">
+  <section aria-labelledby="how-title">
+    <h2 id="how-title" class="sr-only">Meet your tutor</h2>
+    <div id="intro"></div>
+  </section>
+
+  <section id="picker-sec" aria-labelledby="pick-title">
+    <h2 id="pick-title">Choose a problem type</h2>
+    <div class="picker" id="picker"></div>
+  </section>
+
+  <div class="work">
+    <section aria-labelledby="work-title" id="worksheet">
+      <div class="prob-head">
+        <div>
+          <p class="eyebrow" id="ptype"></p>
+          <h2 id="work-title" tabindex="-1"></h2>
+        </div>
+        <div class="btns">
+          <button type="button" class="btn" id="new-btn">New numbers</button>
+          <button type="button" class="btn ghost" id="print-btn">Print this problem</button>
+        </div>
+      </div>
+      <div id="scenario-say"></div>
+      <div class="scroll" id="given"></div>
+      <div id="key-say"></div>
+      <div id="parts"></div>
+      <div class="summary" id="summary" hidden tabindex="-1"></div>
+    </section>
+
+    <aside class="ref" aria-labelledby="ref-title">
+      <h2 id="ref-title">The one question to ask</h2>
+      <ul class="flow" aria-label="How to report a change or a correction">
+        <li><strong>What happened?</strong><br>New method, new estimate, new entity, or a mistake?</li>
+        <li class="arrow" aria-hidden="true">↓</li>
+        <li><strong>Principle or entity</strong> → retrospective<br><strong>Estimate</strong> → prospective<br><strong>Error</strong> → restate</li>
+        <li class="arrow" aria-hidden="true">↓</li>
+        <li><strong>Retrospective:</strong> revise prior statements and adjust beginning retained earnings for the cumulative effect</li>
+      </ul>
+      <h2>Rules that never bend</h2>
+      <ol>
+        <li><strong>Estimates</strong> change prospectively. Never restate.</li>
+        <li><strong>Depreciation method</strong> changes are changes in estimate: prospective.</li>
+        <li><strong>Prior years’ effects</strong> go to retained earnings, never current income.</li>
+        <li><strong>LIFO to FIFO</strong>: the tax goes to income tax payable. A lower-income change gives a deferred tax asset.</li>
+        <li><strong>Inventory errors</strong> offset after two years. No entry once both years are closed.</li>
+      </ol>
+      <dl>
+        <dt>Retrospective</dt><dd>Recast prior statements as if the new method had always been used.</dd>
+        <dt>Prospective</dt><dd>Apply the change to the current and future periods only.</dd>
+        <dt>Prior period adjustment</dt><dd>The after-tax effect of an error correction, added to beginning retained earnings.</dd>
+        <dt>Impracticable</dt><dd>The information needed to recast the past is not available.</dd>
+      </dl>
+    </aside>
+  </div>
+</main>
+<footer>
+  <p>All company names and numbers are fictional and randomly generated. The current year updates automatically. Practice covers accounting changes and error corrections in intermediate accounting under U.S. GAAP.</p>
+</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+var Y=new Date().getFullYear();
+
+/* ---------- helpers ---------- */
+function rnd(min,max,step){step=step||1;var n=Math.floor((max-min)/step);return min+step*Math.floor(Math.random()*(n+1));}
+function pick(a){return a[Math.floor(Math.random()*a.length)];}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function R(n){return Math.round(n);}
+function fmt(n){return Math.abs(R(n)).toLocaleString("en-US");}
+function $(n){return (R(n)<0?"−$":"$")+fmt(n);}
+function pc(r){return (Math.round(r*1000)/10)+"%";}
+function K(n){return n*1000;}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];});}
+function dispU(v,u){return u==="yrs"?v+" years":u==="%"?pc(v):u==="sh"?fmt(v):u==="$c"?c2(v):$(v);}
+function m(s){return '<span class="math">'+s+'</span>';}
+
+/* ---------- the tutor ---------- */
+var TUTORS=[
+ {name:"Jordan",bio:"a senior accounting major who works in the Forsyth tutoring lab",style:"Let's take it one line at a time."},
+ {name:"Riley",bio:"a MAcc student who interned on a financial reporting team in Asheville",style:"Changes and corrections come down to one question: do we go back and fix the past, or move forward?"},
+ {name:"Avery",bio:"a graduate assistant who never met a journal entry that didn't balance",style:"If it doesn't balance, something's hiding. We'll find it."},
+ {name:"Quinn",bio:"a senior studying for the CPA exam",style:"Restatements show up on the CPA exam all the time, so it's worth getting comfortable."},
+ {name:"Casey",bio:"a Catamount tutor who loves turning messy numbers into clean financial statements",style:"Retrospective adjustments look tricky at first, but they follow a pattern. Once you see it, you'll see it everywhere."}
+];
+var T=(function(){var last=-1;try{last=parseInt(localStorage.getItem("ch20tutor")||"-1",10);}catch(e){}
+  var i;do{i=Math.floor(Math.random()*TUTORS.length);}while(i===last&&TUTORS.length>1);
+  try{localStorage.setItem("ch20tutor",String(i));}catch(e){}return TUTORS[i];})();
+function say(html,opt){opt=opt||{};return '<div class="say'+(opt.sm?' sm':'')+(opt.key?' key':'')+'"><span class="avatar" aria-hidden="true">'+T.name.charAt(0)+'</span><div class="bubble"><p class="who">'+(opt.label||T.name)+'</p>'+html+'</div></div>';}
+function any(a){return a[Math.floor(Math.random()*a.length)];}
+var PRAISE=["Nice, that's it.","Exactly right.","You've got it.","Yes! Right on.","Perfect.","That's the one."];
+var NUDGE=["Close. Here's a nudge:","Not quite yet. Try this:","Almost. Think about it this way:","Hmm, let's rethink that one:"];
+var NAMES=["Blue Ridge Brewing Co.","Tuckasegee Timber Works","Cullowhee Creek Canoe Co.","Balsam Gap Bakery","Whiteside Mountain Outfitters","Pisgah Pine Furniture","Fontana Lake Marine","Cashiers Valley Cabinetry","Dillsboro Depot Mercantile","Mount Mitchell Mills","Looking Glass Falls Lodge","Hiwassee River Rafting","Black Balsam Bicycles","Waterrock Knob Woodworks","Sylva Summit Coffee Roasters","Nantahala Gorge Gear Co.","Cherohala Skyway Cycles","Highlands Plateau Provisions","Franklin Gem Mine Supply","Brevard Waterfall Works","Bryson City Rail & Trail","Maggie Valley Mountain Crafts","Linville Gorge Logistics","Lake Glenville Marina","Shining Rock Solar","Panthertown Valley Paper Co.","Jackson County Apple Orchards","Catamount Peak Construction","Smoky Mountain Sawmill","Little Tennessee Trout Farms","Wayah Bald Wind Energy","Scaly Mountain Ski Supply","Cowee Valley Ceramics","Chimney Rock Climbing Co."];
+var lastName="";
+function company(){var n;do{n=pick(NAMES);}while(n===lastName);lastName=n;return n;}
+
+/* ---------- worksheet builders ---------- */
+/* given line */
+function G(id,label,val,unit,why){return {kind:"given",id:id,label:label,val:val,unit:unit||"$",why:why||""};}
+/* numeric input line */
+function N(id,label,ans,builds,hint,sol,opt){opt=opt||{};return {kind:"num",id:id,label:label,ans:ans,builds:builds||"",hint:hint,sol:sol,unit:opt.unit||"$",tol:opt.tol==null?1:opt.tol};}
+/* choice input line */
+function C(id,label,options,ans,hint,sol,builds){return {kind:"choice",id:id,label:label,options:options,ans:ans,builds:builds||"",hint:hint,sol:sol};}
+function sched(title,rows,intro){return {type:"sched",title:title,rows:rows,intro:intro||""};}
+/* journal entry: lines [account, debit, credit, sourceLine] ; zero lines dropped */
+function JE(title,lines,intro){
+  var L=[];lines.forEach(function(l){var d=R(l[1]||0),c=R(l[2]||0);if(!d&&!c)return;L.push({acct:l[0],dr:d,cr:c,src:l[3]||""});});
+  return {type:"je",title:title,lines:L,intro:intro||""};
+}
+/* turn a signed change in a deferred account into a JE line */
+function defLine(acct,change,isAsset,src){if(!R(change))return [acct,0,0];var debit=(isAsset&&change>0)||(!isAsset&&change<0);return debit?[acct,Math.abs(change),0,src]:[acct,0,Math.abs(change),src];}
+function expLine(exp,src){return exp>=0?["Income tax expense",exp,0,src]:["Income tax expense",0,-exp,src];}
+
+function givenTable(cap,rows){var h='<table><caption>'+esc(cap)+'</caption><thead><tr><th scope="col">Item</th><th scope="col" class="n">Amount</th></tr></thead><tbody>';rows.forEach(function(r){h+='<tr><th scope="row">'+r[0]+'</th><td class="n">'+r[1]+'</td></tr>';});return h+'</tbody></table>';}
+
+var ACCTS=["Cash","Inventory","Equipment","Accumulated depreciation","Deferred tax asset","Deferred tax liability","Income tax payable","Retained earnings","Depreciation expense","Warranty expense","Estimated warranty liability","Salaries expense","Salaries payable","Sales revenue","Accounts receivable","Cost of goods sold","Litigation loss","Litigation liability"];
+function c2(n){return (n<0?"−$":"$")+Math.abs(n).toFixed(2);}
+function r2(x){return Math.round(x*100)/100;}
+function yr(k){return Y+k;}
+
+/* ---------- problem generators ---------- */
+var GEN={};
+
+/* ===== Accounting changes ===== */
+var CL_OPTS=["Change in principle: retrospective","Change in principle: prospective","Change in estimate: prospective","Change in reporting entity: retrospective","Error correction: restate prior statements","Not a change or an error"];
+var CL_BANK=[
+ ["Switches from FIFO to average cost for inventory, for both books and tax.",0,"A switch between acceptable principles is applied retrospectively."],
+ ["Revises the useful life of its delivery trucks after reviewing how long they have actually lasted.",2,"New information about an estimate. Change the current and future depreciation only."],
+ ["Switches from sum-of-the-years’-digits to straight-line because benefits are now expected to arrive evenly.",2,"A depreciation method change is a change in estimate effected by a change in principle: prospective."],
+ ["Begins issuing consolidated statements for itself and a subsidiary in place of separate statements.",3,"A change in the reporting entity is applied retrospectively."],
+ ["Discovers that equipment bought last year was expensed instead of capitalized.",4,"A mistake in prior statements. Correct it, restate, and adjust beginning retained earnings."],
+ ["Switches from FIFO to LIFO but has no records that would support LIFO layers for earlier years.",1,"Retrospective application is impracticable, so the new method is applied prospectively."],
+ ["Raises its warranty cost estimate from 2% of sales to 3% after reviewing claims.",2,"A revised estimate. No restatement."],
+ ["Begins selling a new line of products unlike anything it has sold before, and accounts for the new inventory at cost.",5,"A new type of transaction is not a change in method."],
+ ["Stops using the equity method after its ownership falls below the level of significant influence.",1,"Required by the guidance to be applied prospectively."],
+ ["Discovers that last year’s ending inventory was counted too low.",4,"A mistake. Correct it as a prior period error."],
+ ["Switches from LIFO to FIFO when records for every earlier year are available.",0,"Records exist, so the change is applied retrospectively."],
+ ["Reduces the percentage it expects to collect on its accounts receivable after a customer files for bankruptcy.",2,"A revised estimate based on new information."]
+];
+GEN.classify={group:"Accounting changes",name:"Classify the change",blurb:"Principle, estimate, entity, or error, and how it is reported.",make:function(){
+  var co=company(),items=shuffle(CL_BANK).slice(0,6);
+  return {title:co,
+  scenario:'<p>The controller at '+esc(co)+' is reviewing several situations that came up when preparing the '+Y+' financial statements. For each one, decide how it is classified and how it is reported.</p>',
+  key:'<p>First decide <strong>what happened</strong>. A different acceptable method is a change in principle. New information about an estimate is a change in estimate. A new group of entities is a change in reporting entity. A mistake is an error. Then match the approach: <strong>retrospective</strong> for principle, entity, and errors; <strong>prospective</strong> for estimates and when recasting is impracticable.</p>',
+  parts:[sched("Classify each situation",items.map(function(b,i){return C("ABCDEF".charAt(i),b[0],CL_OPTS,b[1],"Is it a new method, a revised estimate, a new entity, a mistake, or something else? Then ask whether the past is revised.",CL_OPTS[b[1]]+". "+b[2]);}))],
+  take:"<p>The classification drives everything: retrospective changes revise the comparative statements and beginning retained earnings, while prospective changes leave the past alone.</p>"};
+}};
+
+GEN.retro={group:"Accounting changes",name:"Retrospective change: LIFO to FIFO",blurb:"Cumulative effect, income tax payable, and the journal entry.",make:function(){
+  var co=company(),t=pick([20,25,30]),d1=K(rnd(100,240,10)),d2=K(rnd(100,260,10)),d3=K(rnd(100,280,10));
+  var NI1=K(rnd(300,700,10)),RE0=K(rnd(150,400,10)),tr=t/100;
+  var D=d1+d2,tax=R(D*tr),aft=D-tax,A1=R(d1*(1-tr)),ni1r=NI1+R(d2*(1-tr)),re0r=RE0+A1;
+  var rows=[
+   G("A","Lower cost of goods sold under FIFO, "+yr(-2),d1,null,"FIFO charges older, cheaper costs to expense, so cost of goods sold is lower."),
+   G("B","Lower cost of goods sold under FIFO, "+yr(-1),d2,null,"Same direction: income is higher under FIFO."),
+   G("C","Tax rate",tr,"%","Applies to every year."),
+   N("D","Cumulative increase in inventory at the start of "+yr(0),D,"A + B","Differences through the end of "+yr(-1)+" added together.",m($(d1)+" + "+$(d2)+" = "+$(D))),
+   N("E","Income tax payable",tax,"D × C","The tax method changes with the book method, so the tax owed goes to income tax payable, not a deferred tax.",m($(D)+" × "+t+"% = "+$(tax))),
+   N("F","Increase in retained earnings (after tax)",aft,"D − E","The after-tax cumulative effect.",m($(D)+" − "+$(tax)+" = "+$(aft))),
+   G("G","Retained earnings, January 1, "+yr(-1)+", as previously reported",RE0,null,"The balance at the start of the earliest year presented."),
+   N("H","Adjustment to that balance (after tax)",A1,"A × (1 − C)","Only "+yr(-2)+" comes before the earliest year shown.",m($(d1)+" × "+(100-t)+"% = "+$(A1))),
+   N("I","Retained earnings, January 1, "+yr(-1)+", as adjusted",re0r,"G + H","Previously reported plus the adjustment.",m($(RE0)+" + "+$(A1)+" = "+$(re0r))),
+   G("J","Net income, "+yr(-1)+", as originally reported (LIFO)",NI1,null,"From last year’s statements."),
+   N("K","Net income, "+yr(-1)+", revised to FIFO",ni1r,"J + B × (1 − C)","Add the after-tax difference for "+yr(-1)+".",m($(NI1)+" + "+$(R(d2*(1-tr)))+" = "+$(ni1r)))
+  ];
+  return {title:co,
+  scenario:'<p>At the beginning of '+yr(0)+', '+esc(co)+' switches from LIFO to FIFO for both financial reporting and tax. The company began operations in '+yr(-2)+' and will present comparative statements for '+yr(0)+' and '+yr(-1)+'. Cost of goods sold is lower under FIFO by '+$(d1)+' in '+yr(-2)+', '+$(d2)+' in '+yr(-1)+', and '+$(d3)+' in '+yr(0)+'. The tax rate is '+t+'%.</p>',
+  key:'<p>A retrospective change needs two cumulative amounts. The <strong>journal entry</strong> uses the effect through the end of <em>last year</em>. The <strong>equity statement</strong> adjusts the beginning retained earnings of the <em>earliest year presented</em> for the years before that.</p>',
+  parts:[sched("Worksheet",rows),JE("Journal entry, January 1, "+yr(0),[["Inventory",D,0,"D"],["Income tax payable",0,tax,"E"],["Retained earnings",0,aft,"F"]])],
+  take:"<p>The company must repay "+$(tax)+" of tax saved under LIFO. It is a payable, not a deferred tax, because the tax code requires the same method for books and tax. Year "+yr(-1)+" comparative statements show FIFO amounts, and a note explains why FIFO is preferable.</p>"};
+}};
+
+GEN.avg={group:"Accounting changes",name:"Retrospective change: FIFO to average cost",blurb:"When income falls, the entry uses a deferred tax asset.",make:function(){
+  var co=company(),t=pick([20,25,30]),tr=t/100,fifo=K(rnd(400,900,10)),dec=K(rnd(40,120,10));
+  var avg=fifo-dec,dta=R(dec*tr),re=dec-dta;
+  var rows=[
+   G("A","Inventory at the end of "+yr(-1)+" under FIFO",fifo,null,"As reported."),
+   G("B","Inventory at the end of "+yr(-1)+" under average cost",avg,null,"What it would have been if average cost had always been used."),
+   G("C","Tax rate",tr,"%","Applies to the temporary difference."),
+   N("D","Decrease in inventory",dec,"A − B","Cumulative effect on inventory through the end of "+yr(-1)+".",m($(fifo)+" − "+$(avg)+" = "+$(dec))),
+   N("E","Deferred tax asset",dta,"D × C","Lower book income with unchanged taxable income gives a future deductible amount.",m($(dec)+" × "+t+"% = "+$(dta))),
+   N("F","Decrease in retained earnings (after tax)",re,"D − E","The after-tax cumulative effect.",m($(dec)+" − "+$(dta)+" = "+$(re)))
+  ];
+  return {title:co,
+  scenario:'<p>At the beginning of '+yr(0)+', '+esc(co)+' changes from FIFO to average cost for financial reporting. Income taxes are computed using the same inventory method as before, so taxable income does not change. The tax rate is '+t+'%.</p>',
+  key:'<p>When the new method <strong>lowers</strong> income but the tax return is unchanged, the temporary difference creates a <strong>deferred tax asset</strong>. When it <strong>raises</strong> income, the tax goes to payable (if the tax method also changes) or to a deferred tax liability.</p>',
+  parts:[sched("Worksheet",rows),JE("Journal entry, January 1, "+yr(0),[["Retained earnings",re,0,"F"],["Deferred tax asset",dta,0,"E"],["Inventory",0,dec,"D"]])],
+  take:"<p>Retained earnings falls by "+$(re)+", the after-tax effect. The comparative statements are also revised, and beginning retained earnings of the earliest year presented is adjusted for years before that.</p>"};
+}};
+
+GEN.impract={group:"Accounting changes",name:"Principle change that cannot be recast",blurb:"FIFO to LIFO with no layer records: prospective.",make:function(){
+  var co=company(),inv=K(rnd(300,900,10)),AO=["Retrospective","Prospective"],YN=["Yes","No"];
+  var rows=[
+   G("A","Inventory at the end of "+yr(-1)+" under FIFO",inv,null,"From the balance sheet."),
+   C("B","How is the change reported?",AO,1,"Can the company reconstruct LIFO layers for earlier years?","Prospective. Without records, retrospective application is impracticable."),
+   N("C","Base-year LIFO inventory at the beginning of "+yr(0),inv,"A","The old ending balance becomes the opening LIFO layer.",m("The base is simply "+$(inv))),
+   C("D","Is a cumulative-effect journal entry recorded?",YN,1,"With no restatement there is no cumulative effect.","No entry. Nothing is restated."),
+   C("E","Are the "+yr(-1)+" statements revised?",YN,1,"Prospective means the past is left alone.","No. They remain on the FIFO basis."),
+   C("F","Is a note describing the change required?",YN,0,"Any change in principle is disclosed, including why recasting was impracticable.","Yes. The nature of the change, why it is preferable, and why recasting was impracticable.")
+  ];
+  return {title:co,
+  scenario:'<p>At the beginning of '+yr(0)+', '+esc(co)+' adopts the LIFO inventory method. It used FIFO before, and its records are not detailed enough to determine what the LIFO layers would have been in earlier years.</p>',
+  key:'<p>A change to <strong>LIFO</strong> is the classic case where retrospective application is <strong>impracticable</strong>. The company applies LIFO prospectively from the beginning of the year of change, using the old ending inventory as the base layer, and explains why in a note.</p>',
+  parts:[sched("Worksheet",rows)],
+  take:"<p>No entry is needed because no balances change on the date of the switch. Only the way future purchases and sales are costed changes.</p>"};
+}};
+
+GEN.estimate={group:"Accounting changes",name:"Change in useful life and residual value",blurb:"Spread the remaining book value over the remaining life.",make:function(){
+  var co=company(),L=pick([5,8,10]),cost,res,e,N2,r,nr,tries=0,bv,den;
+  do{ res=K(rnd(10,60,5)); cost=K(rnd(200,800,20)); e=pick([2,3,4]); N2=L+pick([2,3,4,5]); r=N2-e; nr=K(rnd(5,30,5));
+      var ann=(cost-res)/L; bv=cost-ann*e; den=bv-nr; tries++;
+  }while(((cost-res)%L!==0||den<=0||den%r!==0||nr>=bv)&&tries<5000);
+  var ann2=(cost-res)/L,acc=ann2*e,newAnn=den/r;
+  var rows=[
+   G("A","Cost of the equipment",cost,null,"Purchased at the beginning of "+yr(-e)+"."),
+   G("B","Original residual value",res,null,"Original estimate."),
+   G("C","Original useful life",L,"yrs","Straight-line."),
+   N("D","Annual depreciation under the original estimates",ann2,"(A − B) ÷ C","Depreciable amount over the original life.",m("("+$(cost)+" − "+$(res)+") ÷ "+L+" = "+$(ann2))),
+   N("E","Accumulated depreciation at the beginning of "+yr(0),acc,"D × "+e,"Years already used times the annual amount.",m($(ann2)+" × "+e+" = "+$(acc))),
+   N("F","Book value at the beginning of "+yr(0),cost-acc,"A − E","Undepreciated cost.",m($(cost)+" − "+$(acc)+" = "+$(cost-acc))),
+   G("G","New residual value",nr,null,"Revised estimate."),
+   G("H","New total useful life",N2,"yrs","Revised estimate, counted from the date of purchase."),
+   N("I","Remaining life at the beginning of "+yr(0),r,"H − "+e,"Total life less years already used.",m(N2+" − "+e+" = "+r),{unit:"yrs"}),
+   N("J","Depreciation for "+yr(0),newAnn,"(F − G) ÷ I","Book value less the new residual, over the remaining life.",m("("+$(cost-acc)+" − "+$(nr)+") ÷ "+r+" = "+$(newAnn)))
+  ];
+  return {title:co,
+  scenario:'<p>'+esc(co)+' bought equipment at the beginning of '+yr(-e)+' and has depreciated it straight-line. At the beginning of '+yr(0)+', engineers conclude that the total useful life will be '+N2+' years and the residual value will be '+$(nr)+'.</p>',
+  key:'<p>A change in estimate is <strong>prospective</strong>. Take the book value today, subtract the <strong>new</strong> residual value, and divide by the <strong>remaining</strong> life. Nothing in prior years is restated.</p>',
+  parts:[sched("Worksheet",rows),JE("Depreciation entry, December 31, "+yr(0),[["Depreciation expense",newAnn,0,"J"],["Accumulated depreciation",0,newAnn,"J"]])],
+  take:"<p>Depreciation is "+$(newAnn)+" a year from now on, compared with "+$(ann2)+" before. The earlier years stand as reported, because they were the best estimates available at the time.</p>"};
+}};
+
+GEN.warranty={group:"Accounting changes",name:"Change in the warranty estimate",blurb:"New percentage, after-tax effect, and earnings per share.",make:function(){
+  var co=company(),S=K(rnd(3000,9000,500)),o=pick([1,1.5,2]),nw=o+pick([0.5,1]),t=pick([20,25,30]),tr=t/100,sh=K(rnd(200,800,50));
+  var en=S*nw/100,eo=S*o/100,inc=en-eo,at=inc*(1-tr),eps=r2(at/sh);
+  var rows=[
+   G("A","Sales for "+yr(0),S,null,"Credit and cash sales covered by warranty."),
+   G("B","Shares outstanding",sh,"sh","No change during the year."),
+   N("C","Warranty expense at the new rate ("+nw+"%)",en,"A × "+nw+"%","Use the new estimate for the current year.",m($(S)+" × "+nw+"% = "+$(en))),
+   N("D","Warranty expense at the old rate ("+o+"%)",eo,"A × "+o+"%","What it would have been.",m($(S)+" × "+o+"% = "+$(eo))),
+   N("E","Increase in expense before tax",inc,"C − D","The effect of the change in estimate.",m($(en)+" − "+$(eo)+" = "+$(inc))),
+   N("F","Decrease in net income (after "+t+"% tax)",at,"E × (1 − "+t+"%)","Disclosed in the note.",m($(inc)+" × "+(100-t)+"% = "+$(at))),
+   N("G","Decrease in earnings per share (to the cent)",eps,"F ÷ B","Per share effect for the note.",m($(at)+" ÷ "+fmt(sh)+" = "+c2(eps)),{unit:"$c",tol:.01})
+  ];
+  return {title:co,
+  scenario:'<p>'+esc(co)+' has estimated warranty cost at '+o+'% of sales. After studying its claims experience, management decides that '+nw+'% is more realistic, beginning in '+yr(0)+'. The tax rate is '+t+'%.</p>',
+  key:'<p>A change in estimate affects only the <strong>current and future</strong> periods. Use the new percentage for current sales, restate nothing, and disclose the effect on net income and per share amounts.</p>',
+  parts:[sched("Worksheet",rows),JE("Adjusting entry, December 31, "+yr(0),[["Warranty expense",en,0,"C"],["Estimated warranty liability",0,en,"C"]])],
+  take:"<p>The extra "+(nw-o)+"% lowers net income by "+$(at)+" ("+c2(eps)+" per share). Prior years are not revised.</p>"};
+}};
+
+GEN.depm={group:"Accounting changes",name:"Change in depreciation method",blurb:"SYD to straight-line: a change in estimate, prospective.",make:function(){
+  var co=company(),L=pick([4,5]),sum=L*(L+1)/2,res=K(rnd(20,80,5)),base=(L===5?15000:10000)*rnd(30,80),cost=base+res;
+  var d1=base*L/sum,d2=base*(L-1)/sum,acc=d1+d2,bv=cost-acc,rem=L-2,ann=(bv-res)/rem;
+  var rows=[
+   G("A","Cost of the equipment",cost,null,"Purchased at the beginning of "+yr(-2)+"."),
+   G("B","Residual value",res,null,"Unchanged."),
+   G("C","Useful life",L,"yrs","Unchanged."),
+   N("D","Depreciable amount",base,"A − B","Cost less residual value.",m($(cost)+" − "+$(res)+" = "+$(base))),
+   N("E","Sum-of-the-years’-digits depreciation, "+yr(-2),d1,"D × "+L+"/"+sum,"Largest fraction first.",m($(base)+" × "+L+"/"+sum+" = "+$(d1))),
+   N("F","Sum-of-the-years’-digits depreciation, "+yr(-1),d2,"D × "+(L-1)+"/"+sum,"Next fraction.",m($(base)+" × "+(L-1)+"/"+sum+" = "+$(d2))),
+   N("G","Undepreciated cost, January 1, "+yr(0),bv,"A − E − F","Book value at the date of change.",m($(cost)+" − "+$(d1)+" − "+$(d2)+" = "+$(bv))),
+   N("H","Remaining life",rem,"C − 2","Years left.",m(L+" − 2 = "+rem),{unit:"yrs"}),
+   N("I","Straight-line depreciation for "+yr(0),ann,"(G − B) ÷ H","Book value less residual over the remaining life.",m("("+$(bv)+" − "+$(res)+") ÷ "+rem+" = "+$(ann))),
+   C("J","Are the "+yr(-2)+" and "+yr(-1)+" statements revised?",["Yes","No"],1,"A depreciation method change is a change in estimate.","No. It is reported prospectively as a change in estimate effected by a change in principle.")
+  ];
+  return {title:co,
+  scenario:'<p>'+esc(co)+' bought equipment at the beginning of '+yr(-2)+' and depreciated it using the sum-of-the-years’-digits method. At the beginning of '+yr(0)+', management expects the benefits to arrive evenly and switches to straight-line. The useful life and residual value are unchanged.</p>',
+  key:'<p>A change in depreciation method is a <strong>change in estimate effected by a change in principle</strong>. It is reported <strong>prospectively</strong>, but the new method must still be justified as preferable.</p>',
+  parts:[sched("Worksheet",rows),JE("Depreciation entry, December 31, "+yr(0),[["Depreciation expense",ann,0,"I"],["Accumulated depreciation",0,ann,"I"]])],
+  take:"<p>Depreciation is "+$(ann)+" a year for the remaining "+rem+" years. Nothing is restated and no cumulative effect is reported.</p>"};
+}};
+
+/* ===== Error corrections ===== */
+GEN.asset={group:"Error corrections",name:"Asset charged to expense",blurb:"Capitalize it, record depreciation to date, and adjust retained earnings.",make:function(){
+  var co=company(),L=pick([4,5,8]),e=pick([1,2]),cost=K(rnd(100,400,10)*L/ (L===8?2:1)),t=pick([20,25,30]),tr=t/100;
+  cost=L*K(rnd(20,60,5));
+  var ann=cost/L,acc=ann*e,pre=cost-acc,tax=R(pre*tr),re=pre-tax,ni1=cost-ann;
+  var rows=[
+   G("A","Cost of the equipment, expensed in "+yr(-e),cost,null,"Should have been capitalized."),
+   G("B","Useful life, straight-line, no residual",L,"yrs","The depreciation policy."),
+   G("C","Tax rate",tr,"%","Applies to the correction."),
+   N("D","Annual depreciation that should have been recorded",ann,"A ÷ B","Cost over the life.",m($(cost)+" ÷ "+L+" = "+$(ann))),
+   N("E","Accumulated depreciation to the beginning of "+yr(0),acc,"D × "+e,"Depreciation for each year since the purchase.",m($(ann)+" × "+e+" = "+$(acc))),
+   N("F","Net income understated in "+yr(-e)+" (before tax)",ni1,"A − D","The full cost was expensed instead of one year’s depreciation.",m($(cost)+" − "+$(ann)+" = "+$(ni1))),
+   N("G","Retained earnings understated (before tax)",pre,"A − E","Cost not yet depreciated.",m($(cost)+" − "+$(acc)+" = "+$(pre))),
+   N("H","Income tax payable",tax,"G × C","Tax that should have been paid.",m($(pre)+" × "+t+"% = "+$(tax))),
+   N("I","Credit to retained earnings (after tax)",re,"G − H","Prior period adjustment.",m($(pre)+" − "+$(tax)+" = "+$(re)))
+  ];
+  return {title:co,
+  scenario:'<p>At the beginning of '+yr(0)+', the controller of '+esc(co)+' discovers that equipment purchased at the beginning of '+yr(-e)+' was debited to repairs expense. The equipment has a '+L+'-year life with no residual value, and the company uses straight-line depreciation. The tax rate is '+t+'%. Assume the amended returns are owed and nothing has yet been paid.</p>',
+  key:'<p>An error correction has four steps: <strong>correct</strong> the accounts, <strong>restate</strong> prior statements, adjust <strong>beginning retained earnings</strong> (a prior period adjustment, after tax), and <strong>disclose</strong>. The correction never runs through current income.</p>',
+  parts:[sched("Worksheet",rows),JE("Correcting entry, January 1, "+yr(0),[["Equipment",cost,0,"A"],["Accumulated depreciation",0,acc,"E"],["Income tax payable",0,tax,"H"],["Retained earnings",0,re,"I"]])],
+  take:"<p>Net income was understated by "+$(ni1)+" in "+yr(-e)+(e===2?" and overstated by "+$(ann)+" in "+yr(-1):"")+". The after-tax correction of "+$(re)+" goes to retained earnings as a prior period adjustment.</p>"};
+}};
+
+GEN.inverr={group:"Error corrections",name:"Inventory errors",blurb:"Self-correcting in two years. When is an entry needed?",make:function(){
+  var co=company(),under=Math.random()<.5,early=Math.random()<.6,X=K(rnd(30,160,5)),t=pick([20,25,30]),tr=t/100;
+  var tax=R(X*tr),at=X-tax,YN=["Yes","No"],OU=["Understated","Overstated"];
+  var rows=[
+   G("A","Error in ending inventory, December 31, "+yr(-1),X,null,"Ending inventory was "+(under?"too low":"too high")+" by this amount."),
+   C("B","Net income in "+yr(-1)+" was",OU,under?0:1,"Inventory too "+(under?"low":"high")+" means cost of goods sold too "+(under?"high":"low")+".",OU[under?0:1]+"."),
+   C("C","Net income in "+yr(0)+" (before correction) is",OU,under?1:0,"The same inventory is the next year’s beginning balance, so the effect reverses.",OU[under?1:0]+"."),
+   C("D","Is a correcting entry needed now?",YN,early?0:1,early?"The "+yr(0)+" books are not yet closed, so retained earnings is still wrong.":"Both years are closed. The error has offset itself.",early?"Yes. Retained earnings is still misstated.":"No entry. The error is self-correcting.")
+  ];
+  var parts;
+  if(early){
+    rows.push(G("E","Tax rate",tr,"%","Applies to the correction."));
+    rows.push(N("F","Tax effect",tax,"A × E","Pretax difference times the rate.",m($(X)+" × "+t+"% = "+$(tax))));
+    rows.push(N("G","Effect on retained earnings (after tax)",at,"A − F","Prior period adjustment.",m($(X)+" − "+$(tax)+" = "+$(at))));
+    var je=under?[["Inventory",X,0,"A"],["Income tax payable",0,tax,"F"],["Retained earnings",0,at,"G"]]:[["Retained earnings",at,0,"G"],["Income tax payable",tax,0,"F"],["Inventory",0,X,"A"]];
+    parts=[sched("Worksheet",rows),JE("Correcting entry, "+yr(0)+" (before the books close)",je)];
+  }else parts=[sched("Worksheet",rows)];
+  return {title:co,
+  scenario:'<p>'+esc(co)+' counted its inventory at December 31, '+yr(-1)+' and the count was '+(under?"too low":"too high")+' by '+$(X)+'. The error is discovered '+(early?'in '+yr(0)+', before the '+yr(0)+' books are closed':'in '+yr(1)+', after the '+yr(0)+' books are closed')+'. No other errors exist, and the tax rate is '+t+'%.</p>',
+  key:'<p>An inventory error shifts income between <strong>two</strong> years and then reverses. Once both years are closed, retained earnings is right again and <strong>no entry</strong> is needed. Found earlier, the entry fixes retained earnings.</p>',
+  parts:parts,
+  take:early?"<p>Because the "+yr(0)+" books are still open, retained earnings is "+(under?"understated":"overstated")+" by "+$(at)+" after tax. The prior statements shown for comparison are restated.</p>":"<p>The two years’ errors offset each other, so retained earnings is correct. The "+yr(-1)+" and "+yr(0)+" statements are still restated if presented, and the error is disclosed.</p>"};
+}};
+
+GEN.cutoff={group:"Error corrections",name:"Cutoff and accrual errors",blurb:"Unrecorded accruals and misdated sales found in a later year.",make:function(){
+  var co=company(),sal=K(rnd(10,70,2)),sale=K(rnd(20,90,5));
+  var rows=[
+   G("A","Salaries earned in late December "+yr(-1)+" but not accrued",sal,null,"Paid in January and expensed in "+yr(0)+"."),
+   G("B","Sale shipped and title passed in December "+yr(-1)+" but recorded in January "+yr(0),sale,null,"Revenue belongs to the earlier year."),
+   C("C","Net income in "+yr(-1)+" was affected by the salaries error as",["Understated","Overstated"],1,"Expense was left out, so income was too high.","Overstated."),
+   C("D","Net income in "+yr(-1)+" was affected by the sales error as",["Understated","Overstated"],0,"Revenue was left out, so income was too low.","Understated."),
+   N("E","Debit to retained earnings for the salaries error",sal,"A","Removes the overstatement of prior income.",m("Equal to "+$(sal))),
+   N("F","Credit to retained earnings for the sales error",sale,"B","Adds back the understatement of prior income.",m("Equal to "+$(sale)))
+  ];
+  return {title:co,
+  scenario:'<p>During '+yr(0)+', before the books are closed, '+esc(co)+' finds two errors in the '+yr(-1)+' statements. Ignore income taxes and any related cost of goods sold.</p>',
+  key:'<p>Ask which direction each error moved <strong>last year’s</strong> income, then correct retained earnings and reverse the wrong-period amounts in the <strong>current</strong> year’s accounts.</p>',
+  parts:[sched("Worksheet",rows),JE("Correct the salaries error, "+yr(0),[["Retained earnings",sal,0,"E"],["Salaries expense",0,sal,"A"]]),JE("Correct the sales error, "+yr(0),[["Sales revenue",sale,0,"B"],["Retained earnings",0,sale,"F"]])],
+  take:"<p>After both entries, "+yr(0)+" contains only "+yr(0)+" activity. The net effect on retained earnings is a credit of "+$(sale-sal)+".</p>"};
+}};
+
+var ORDER=["classify","retro","avg","impract","estimate","warranty","depm","asset","inverr","cutoff"];
+
+
+/* ---------- UI ---------- */
+var el=function(id){return document.getElementById(id);};
+var picker=el("picker"),partsEl=el("parts"),sumEl=el("summary");
+var state=null,typeBtns={};
+
+(function buildPicker(){
+  var groups={},gi=0;
+  ORDER.forEach(function(k){var g=GEN[k].group;(groups[g]=groups[g]||[]).push(k);});
+  Object.keys(groups).forEach(function(g){
+    var div=document.createElement("div");div.className="pgroup";
+    var hid="pg-"+(gi++);
+    div.innerHTML='<h3 id="'+hid+'">'+esc(g)+'</h3>';
+    var ul=document.createElement("ul");ul.setAttribute("aria-labelledby",hid);
+    groups[g].forEach(function(k){
+      var li=document.createElement("li"),b=document.createElement("button");
+      b.type="button";b.className="type-btn";b.setAttribute("aria-pressed","false");
+      b.innerHTML='<strong>'+esc(GEN[k].name)+'</strong><span>'+esc(GEN[k].blurb)+'</span>';
+      b.addEventListener("click",function(){start(k,true);});
+      typeBtns[k]=b;li.appendChild(b);ul.appendChild(li);
+    });
+    div.appendChild(ul);picker.appendChild(div);
+  });
+})();
+
+function parseNum(s){
+  s=String(s).trim().replace(/−/g,"-");
+  if(!s)return null;
+  var neg=false;
+  if(/^\(.*\)$/.test(s)){neg=true;s=s.slice(1,-1).trim();}
+  s=s.replace(/[$,%\s]/g,"");
+  if(s.charAt(0)==="-"){neg=!neg;s=s.slice(1);}
+  if(!/^(\d+\.?\d*|\.\d+)$/.test(s))return NaN;
+  var v=parseFloat(s);return neg?-v:v;
+}
+function numOK(v,ans,tol,unit){if(v===null||isNaN(v))return false;if(Math.abs(v-ans)<=tol+1e-9)return true;if(unit==="%"&&Math.abs(v*100-ans)<=tol+1e-9)return true;return false;}
+function showVal(v,unit){return unit==="%"?v+"%":unit==="$c"?v.toFixed(2):(v<0?"-":"")+fmt(v);}
+
+function start(k,focus){
+  ORDER.forEach(function(x){typeBtns[x].setAttribute("aria-pressed",x===k?"true":"false");});
+  var p=GEN[k].make();
+  state={k:k,p:p,parts:[]};
+  el("ptype").textContent=GEN[k].name;
+  el("work-title").textContent=p.title;
+  var know=[];
+  p.parts.forEach(function(pt){if(pt.type==="sched")pt.rows.forEach(function(r){if(r.kind==="given")know.push([r.id,r.label,dispU(r.val,r.unit),r.why]);});});
+  (p.facts||[]).forEach(function(f){know.push(["",f[0],f[1],f[2]||""]);});
+  var kh="";
+  if(know.length){
+    kh='<p><strong>Here\'s what we know.</strong> '+any(["Before you calculate anything, read down this list and ask yourself whether each one makes sense.","Some of these come from the story above and some from the company\'s records. I noted where each one comes from.","Make sure you can explain where every one of these comes from before you start."])+' The lettered ones are already filled in as the gray lines in your schedule.</p>'+
+      '<div class="scroll"><table class="know"><caption class="sr-only">What we know</caption><thead><tr><th scope="col">Line</th><th scope="col">What we know</th><th scope="col" class="n">Amount</th><th scope="col">Where it comes from</th></tr></thead><tbody>'+
+      know.map(function(k){return '<tr><td class="ln">'+(k[0]||'<span class="sr-only">not in schedule</span>')+'</td><th scope="row">'+k[1]+'</th><td class="n">'+k[2]+'</td><td class="why">'+(k[3]||'')+'</td></tr>';}).join("")+'</tbody></table></div>';
+  }
+  if(p.given)kh+='<p>'+any(["I also have this table for you:","Here\'s one more piece of information:"])+'</p><div class="scroll">'+p.given+'</div>';
+  el("scenario-say").innerHTML=say(any(["<p>Here's the situation we're working with today.</p>","<p>Let's meet today's company.</p>","<p>Okay, here's our company for this one.</p>"])+p.scenario+kh);
+  el("given").innerHTML="";el("given").hidden=true;
+  el("key-say").innerHTML=say(p.key,{key:true,label:"Before you start, the key idea"});
+  sumEl.hidden=true;sumEl.innerHTML="";
+  partsEl.innerHTML="";
+  var n=0;
+  p.parts.forEach(function(pt,pi){
+    if(pt.type==="note"){var d=document.createElement("div");d.className="part";d.innerHTML=pt.html;partsEl.appendChild(d);state.parts.push({done:true,note:true});return;}
+    n++;
+    var ps={pt:pt,checks:0,done:false,firstRight:0,items:0,idx:pi};
+    state.parts.push(ps);
+    partsEl.appendChild(pt.type==="sched"?buildSched(ps,n,pi):buildJE(ps,n,pi,p.accts||ACCTS));
+  });
+  if(focus){el("work-title").focus({preventScroll:true});el("worksheet").scrollIntoView({block:"start"});}
+}
+
+/* ----- schedule part ----- */
+function buildSched(ps,n,pi){
+  var pt=ps.pt,sec=document.createElement("section");sec.className="part";sec.id="part-"+pi;
+  var hid="ph-"+pi;
+  var hasBuilds=pt.rows.some(function(r){return r.builds;});
+  var h='<h3 id="'+hid+'"><span class="pnum">Part '+n+'</span> '+esc(pt.title)+'<span class="status" id="st-'+pi+'"></span></h3>'+say('<p>'+(n===1?any(["Start here. Fill in the white boxes; the given amounts are already in place.","Let's build the schedule. Use the Builds on column if you get stuck.","First, the numbers. Work top to bottom and each line sets up the next."]):any(["Next up. Keep going, using what you found above.","On to this part. The lines from earlier will help here."]))+(pt.intro?' '+pt.intro:'')+'</p>',{sm:true});
+  h+='<div class="scroll"><table class="sched"><caption class="sr-only">'+esc(pt.title)+'</caption><thead><tr><th scope="col">Line</th><th scope="col">Item</th>'+(hasBuilds?'<th scope="col" class="bo">Builds on</th>':'')+'<th scope="col" class="n">Amount</th></tr></thead><tbody>';
+  pt.rows.forEach(function(r,ri){
+    var rid="r"+pi+"-"+ri;
+    if(r.kind==="given"){
+      h+='<tr class="given"><td class="ln">'+r.id+'</td><td>'+r.label+' <span class="small">(given)</span></td>'+(hasBuilds?'<td class="bo"></td>':'')+'<td class="n">'+dispU(r.val,r.unit)+'</td></tr>';
+      return;
+    }
+    ps.items++;
+    var field;
+    if(r.kind==="choice"){
+      field='<select class="ans" id="'+rid+'" aria-describedby="fb-'+rid+'"><option value="">Select…</option>'+r.options.map(function(o,j){return '<option value="'+j+'">'+esc(o)+'</option>';}).join("")+'</select>';
+    }else{
+      field='<span class="inwrap">'+(r.unit==="$"||r.unit==="$c"?'<span class="u" aria-hidden="true">$</span>':'')+'<input class="ans n" id="'+rid+'" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-describedby="fb-'+rid+'">'+(r.unit==="%"?'<span class="u" aria-hidden="true">%</span>':'')+'</span>';
+    }
+    var wide=r.kind==="choice"&&r.options[0].length>20;
+    h+='<tr><td class="ln">'+r.id+'</td><td><label for="'+rid+'">'+r.label+(r.kind==="num"?(r.unit==="%"?' <span class="sr-only">(percent)</span>':r.unit==="sh"?' <span class="sr-only">(shares)</span>':r.unit==="yrs"?' <span class="sr-only">(years)</span>':' <span class="sr-only">(dollars)</span>'):'')+'</label><div class="fb" id="fb-'+rid+'" role="status"></div>'+(wide?'<div style="margin-top:.35rem">'+field+'</div>':'')+'</td>'+(hasBuilds?'<td class="bo">'+esc(r.builds)+'</td>':'')+'<td class="amt">'+(wide?'<span class="sr-only">Answer is below the item text</span>':field)+'</td></tr>';
+  });
+  h+='</tbody></table></div><div class="partfb" id="pf-'+pi+'" role="status" aria-live="polite"></div><div class="btns"><button type="button" class="btn" id="chk-'+pi+'">Check this part</button><button type="button" class="btn ghost" id="sol-'+pi+'" hidden>Show solution</button></div>';
+  sec.setAttribute("aria-labelledby",hid);
+  sec.innerHTML=h;
+  sec.querySelector("#chk-"+pi).addEventListener("click",function(){checkSched(ps,pi,false);});
+  sec.querySelector("#sol-"+pi).addEventListener("click",function(){checkSched(ps,pi,true);});
+  sec.querySelectorAll("input.ans").forEach(function(inp){inp.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();checkSched(ps,pi,false);}});});
+  return sec;
+}
+
+function checkSched(ps,pi,reveal){
+  if(ps.done)return;
+  var pt=ps.pt,right=0,total=0,blank=0,firstBad=null;
+  pt.rows.forEach(function(r,ri){
+    if(r.kind==="given")return;
+    total++;
+    var rid="r"+pi+"-"+ri,inp=el(rid),fb=el("fb-"+rid);
+    if(inp.disabled){right++;return;}
+    var ok;
+    if(r.kind==="choice")ok=inp.value!==""&&Number(inp.value)===r.ans;
+    else{var v=parseNum(inp.value);if(v===null&&!reveal){blank++;}ok=numOK(v,r.ans,r.tol,r.unit);}
+    if(ok){
+      right++;if(ps.checks===0)ps.firstRight++;
+      inp.classList.remove("bad-f");inp.classList.add("ok-f");inp.removeAttribute("aria-invalid");inp.disabled=true;
+      fb.className="fb ok";fb.innerHTML='<span class="tag">'+any(PRAISE)+'</span> '+r.sol;
+    }else if(reveal){
+      inp.value=r.kind==="choice"?String(r.ans):showVal(r.ans,r.unit);
+      inp.classList.remove("bad-f");inp.disabled=true;inp.removeAttribute("aria-invalid");
+      fb.className="fb sol";fb.innerHTML='<span class="tag">Here\'s how I\'d work it:</span> '+r.sol;
+    }else{
+      inp.classList.remove("ok-f");inp.classList.add("bad-f");inp.setAttribute("aria-invalid","true");
+      fb.className="fb bad";fb.innerHTML='<span class="tag">'+(inp.value===""?"Give this one a try.":any(NUDGE))+'</span> '+r.hint;
+      if(!firstBad)firstBad=inp;
+    }
+  });
+  ps.checks++;
+  var pf=el("pf-"+pi);
+  if(right===total||reveal){completePart(ps,pi,reveal);pf.className="partfb "+(reveal?"hint":"ok");pf.innerHTML='<span class="who">'+T.name+':</span> '+(reveal?"No problem. I filled in the solution with my work under each line. Compare it with yours, then let's keep going.":any(["All "+total+" lines are right. Nicely done!","Every line checks out. On to the next part!","That's all "+total+". You're getting the hang of this."]));}
+  else{pf.className="partfb bad";pf.innerHTML='<span class="who">'+T.name+':</span> '+(right?"You have "+right+" of "+total+" right. ":"Let's look at this together. ")+"I marked the lines to revisit in red and left a hint under each one"+(blank?" ("+blank+" still blank)":"")+". Fix those and check again"+(ps.checks>=1?", or ask me to show the solution.":".");el("sol-"+pi).hidden=false;if(firstBad)firstBad.focus();}
+}
+
+/* ----- journal entry part ----- */
+function buildJE(ps,n,pi,accts){
+  var pt=ps.pt,sec=document.createElement("section");sec.className="part";sec.id="part-"+pi;
+  var hid="ph-"+pi,nl=pt.lines.length;
+  ps.items=nl;
+  var h='<h3 id="'+hid+'"><span class="pnum">Part '+n+'</span> '+esc(pt.title)+'<span class="status" id="st-'+pi+'"></span></h3>';
+  h+=say('<p>'+any(["Now let's turn your schedule into a journal entry.","Time to record it. Every number you need is already in your schedule.","Here's where it comes together: the entry."])+' This one has <strong>'+nl+' lines</strong>; leave the unused amount box empty on each line.'+(pt.intro?' '+pt.intro:'')+'</p>',{sm:true});
+  h+='<div class="scroll"><table class="je"><caption class="sr-only">'+esc(pt.title)+'</caption><thead><tr><th scope="col">Account</th><th scope="col" class="n">Debit</th><th scope="col" class="n">Credit</th><th scope="col">Comes from</th></tr></thead><tbody>';
+  for(var i=0;i<nl;i++){
+    var b="j"+pi+"-"+i;
+    h+='<tr id="row-'+b+'"><td class="ac"><label class="sr-only" for="'+b+'a">Line '+(i+1)+' account</label><select class="ans" id="'+b+'a"><option value="">Select account…</option>'+accts.map(function(a){return '<option>'+esc(a)+'</option>';}).join("")+'</select></td>'+
+       '<td class="d"><label class="sr-only" for="'+b+'d">Line '+(i+1)+' debit (dollars)</label><input class="ans n" id="'+b+'d" type="text" inputmode="decimal" autocomplete="off"></td>'+
+       '<td class="c"><label class="sr-only" for="'+b+'c">Line '+(i+1)+' credit (dollars)</label><input class="ans n" id="'+b+'c" type="text" inputmode="decimal" autocomplete="off"></td>'+
+       '<td class="src" id="'+b+'s"><span class="sr-only">Shown after the entry is correct</span><span aria-hidden="true">—</span></td></tr>';
+  }
+  h+='</tbody></table></div><div class="partfb" id="pf-'+pi+'" role="status" aria-live="polite"></div><div class="btns"><button type="button" class="btn" id="chk-'+pi+'">Check this entry</button><button type="button" class="btn ghost" id="sol-'+pi+'" hidden>Show solution</button></div>';
+  sec.setAttribute("aria-labelledby",hid);
+  sec.innerHTML=h;
+  sec.querySelector("#chk-"+pi).addEventListener("click",function(){checkJE(ps,pi,false);});
+  sec.querySelector("#sol-"+pi).addEventListener("click",function(){checkJE(ps,pi,true);});
+  return sec;
+}
+
+function checkJE(ps,pi,reveal){
+  if(ps.done)return;
+  var pt=ps.pt,nl=pt.lines.length,rows=[],used={},right=0,tD=0,tC=0,blank=0;
+  for(var i=0;i<nl;i++){
+    var b="j"+pi+"-"+i,a=el(b+"a").value,d=parseNum(el(b+"d").value),c=parseNum(el(b+"c").value);
+    if(!a&&d===null&&c===null)blank++;
+    tD+=(d>0?d:0);tC+=(c>0?c:0);
+    rows.push({b:b,a:a,d:d===null?0:d,c:c===null?0:c,bad:isNaN(d)||isNaN(c)});
+  }
+  if(reveal){
+    pt.lines.forEach(function(l,i){var b="j"+pi+"-"+i;el(b+"a").value=l.acct;el(b+"d").value=l.dr?fmt(l.dr):"";el(b+"c").value=l.cr?fmt(l.cr):"";});
+    pt.lines.forEach(function(l,i){markRow("j"+pi+"-"+i,null,l);});
+    completePart(ps,pi,true);
+    var pf=el("pf-"+pi);pf.className="partfb hint";pf.innerHTML='<span class="who">'+T.name+':</span> Here\'s the entry. Look at the <strong>Comes from</strong> column: every amount is a line you already worked in the schedule.';
+    return;
+  }
+  /* match each student row to an unused expected line */
+  var hit=[];
+  rows.forEach(function(r){
+    var m=-1;
+    pt.lines.forEach(function(l,li){if(m<0&&!used[li]&&l.acct===r.a&&!r.bad&&Math.abs(r.d-l.dr)<=1&&Math.abs(r.c-l.cr)<=1)m=li;});
+    if(m>=0){used[m]=1;right++;if(ps.checks===0)ps.firstRight++;}
+    hit.push(m);
+  });
+  ps.checks++;
+  rows.forEach(function(r,i){markRow(r.b,hit[i]>=0,hit[i]>=0?pt.lines[hit[i]]:null);});
+  var pf=el("pf-"+pi);
+  if(right===nl){completePart(ps,pi,false);pf.className="partfb ok";pf.innerHTML='<span class="who">'+T.name+':</span> '+any(["That entry is right and it balances!","Debits equal credits and every account is right. Great work!"])+' Check the <strong>Comes from</strong> column to see how each amount flows straight from your schedule.';return;}
+  var msgs=[right?"You have "+right+" of "+nl+" lines right.":"Not there yet, but that's what practice is for."];
+  if(Math.abs(tD-tC)>1)msgs.push("Your debits ("+$(tD)+") don't equal your credits ("+$(tC)+"), so something's off.");
+  var missing=pt.lines.filter(function(l,li){return !used[li];}).map(function(l){return l.acct;});
+  if(ps.checks===1)msgs.push("Here's a hint: this entry uses "+uniq(pt.lines.map(function(l){return l.acct;})).join(", ")+". Each amount is one of the lettered lines in your schedule.");
+  else msgs.push("Still missing: "+uniq(missing).join(", ")+". Ask yourself whether each one is increasing or decreasing, and which side that means. Or I can show you the solution.");
+  pf.className="partfb bad";pf.innerHTML='<span class="who">'+T.name+':</span> '+esc(msgs.join(" "));
+  el("sol-"+pi).hidden=false;
+  var firstBadRow=rows.filter(function(r,i){return hit[i]<0;})[0];if(firstBadRow)el(firstBadRow.b+"a").focus();
+}
+function uniq(a){return a.filter(function(x,i){return a.indexOf(x)===i;});}
+function markRow(b,ok,line){
+  ["a","d","c"].forEach(function(s){var f=el(b+s);f.classList.remove("ok-f","bad-f");f.removeAttribute("aria-invalid");
+    if(ok===true){f.classList.add("ok-f");f.disabled=true;}
+    else if(ok===false){f.classList.add("bad-f");f.setAttribute("aria-invalid","true");}
+    else{f.disabled=true;}});
+  var s=el(b+"s");
+  if(line&&ok!==false)s.innerHTML='<span class="chip">Line '+esc(line.src)+'</span>';
+}
+
+function completePart(ps,pi,revealed){
+  ps.done=true;ps.revealed=revealed;
+  var sec=el("part-"+pi);sec.classList.add("complete");
+  el("st-"+pi).textContent=revealed?"Solution shown":"Complete";
+  el("chk-"+pi).disabled=true;el("sol-"+pi).hidden=true;
+  sec.querySelectorAll("input,select").forEach(function(f){f.disabled=true;});
+  if(state.parts.every(function(p){return p.done;}))summary();
+}
+
+function summary(){
+  var p=state.p,tot=0,first=0,rev=0;
+  state.parts.forEach(function(ps){if(ps.note)return;tot+=ps.items;first+=ps.firstRight;if(ps.revealed)rev++;});
+  var cheer=first===tot?"Every answer right on the first try. Impressive!":(first>=tot*.7?"Strong work. You're close to mastering this.":"Good effort. Try another set of numbers and watch how much easier it gets.");
+  sumEl.innerHTML='<h3>Problem complete</h3><ul class="score" aria-label="Your results"><li>Right on the first check: '+first+' of '+tot+'</li><li>Parts with solution shown: '+rev+'</li></ul>'+say('<p>'+cheer+' One last thing I want you to remember:</p>'+p.take)+'<div class="btns"><button type="button" class="btn" id="again-btn">Try another with new numbers</button><button type="button" class="btn ghost" id="pick-btn">Choose a different problem type</button></div>';
+  sumEl.hidden=false;
+  el("again-btn").addEventListener("click",function(){start(state.k,true);});
+  el("pick-btn").addEventListener("click",function(){el("pick-title").scrollIntoView({block:"start"});typeBtns[state.k].focus();});
+  sumEl.focus();
+}
+
+el("intro").innerHTML=say('<p>Hi, I\'m <strong>'+T.name+'</strong>, '+T.bio+'. I\'ll be your tutor for accounting changes and error corrections today. '+T.style+'</p>'+
+  '<ul><li>Pick a topic below. Each one is a <strong>worksheet</strong> with lettered lines (A, B, C …). The <strong>Builds on</strong> column tells you which earlier lines feed each answer.</li>'+
+  '<li>Fill in a part, then press <strong>Check this part</strong>. I\'ll mark answers green or red and give you a hint on the red ones. After your first check, you can ask me to <strong>Show solution</strong>.</li>'+
+  '<li>Most problems end with a <strong>journal entry</strong>. Once it\'s right, the <strong>Comes from</strong> column shows where each amount came from.</li></ul>'+
+  '<p class="small">Quick tips: whole dollars, commas optional. Per-share amounts go to the cent, like <span class="math">0.25</span>. Enter a loss or decrease as <span class="math">-12,000</span> or <span class="math">(12,000)</span>, and rates as percents like <span class="math">12.5</span>.</p>',{label:T.name+", your tutor"});
+el("sub").textContent="Your tutor today is "+T.name+". Work each schedule, then record the journal entry.";
+el("new-btn").addEventListener("click",function(){if(state)start(state.k,true);});
+el("print-btn").addEventListener("click",function(){window.print();});
+start("classify",false);
+
+/* expose for self-checks */
+window.__tutor={GEN:GEN,ORDER:ORDER,start:start,state:function(){return state;}};
+})();
+</script>
+</body>
+</html>
