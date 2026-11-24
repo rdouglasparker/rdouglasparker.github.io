@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Statement of Cash Flows Tutor</title>
+<meta name="description" content="ACCT 352 practice on the statement of cash flows: work each schedule, then record the journal entry, with new numbers every time.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --purple:#592C88; --purple-dk:#3E1E61; --purple-lt:#F3EEF8;
+  --gold:#C1A875; --gold-lt:#FAF5E9; --gold-dk:#6B5A2E;
+  --ink:#1F1B24; --muted:#4A4453; --line:#D9D2E3; --paper:#FFFFFF; --bg:#EEEAF2;
+  --red:#9B1C1C; --red-lt:#FDECEC; --green:#1D5E3A; --green-lt:#E9F5EE;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Source Serif 4",Georgia,serif;line-height:1.55;font-size:1.02rem}
+.skip{position:absolute;left:-9999px;top:0;background:var(--purple-dk);color:#fff;padding:.5rem 1rem;z-index:10}
+.skip:focus{left:1rem}
+a{color:var(--purple)}
+:focus-visible{outline:3px solid var(--gold-dk);outline-offset:2px}
+.shell{max-width:76rem;margin:1.5rem auto;background:var(--paper);box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.banner{background:var(--purple);color:#fff;padding:1.4rem 2rem 1.2rem;border-bottom:6px solid var(--gold)}
+.banner .kicker{font-family:Inter,Arial,sans-serif;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;margin:0 0 .35rem}
+.banner h1{font-size:1.9rem;line-height:1.2;margin:0 0 .3rem}
+.banner .sub{margin:0;font-family:Inter,Arial,sans-serif;font-size:.95rem}
+.content{padding:1rem 2rem 2rem}
+h2{font-family:Inter,Arial,sans-serif;color:var(--purple-dk);font-size:1.3rem;margin:1.6rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--gold)}
+h3{font-family:Inter,Arial,sans-serif;color:var(--purple);font-size:1.08rem;margin:1.2rem 0 .45rem}
+p{margin:.45rem 0 .7rem}
+.card{border:1px solid var(--line);border-left:6px solid var(--purple);background:var(--purple-lt);padding:.8rem 1.1rem;margin:1rem 0;border-radius:4px}
+.card h2,.card h3{margin-top:.2rem;border:none;padding:0}
+.important{border:2px solid var(--gold-dk);background:var(--gold-lt);padding:.8rem 1.1rem;margin:1rem 0;border-radius:4px}
+.important h3{color:var(--gold-dk);margin-top:.1rem}
+.card ul,.important ul{margin:.3rem 0 .2rem;padding-left:1.3rem}
+.small{font-size:.9rem;color:var(--muted)}
+.math{font-family:"IBM Plex Mono",Consolas,monospace;font-size:.9rem}
+
+/* picker */
+.picker{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));margin:.6rem 0 0}
+.pgroup h3{font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin:.2rem 0 .5rem}
+.pgroup ul{list-style:none;margin:0;padding:0;display:grid;gap:.45rem}
+.type-btn{width:100%;text-align:left;font:inherit;font-family:Inter,Arial,sans-serif;font-size:.93rem;background:#fff;color:var(--ink);border:1px solid var(--line);border-left:5px solid var(--purple);border-radius:4px;padding:.5rem .7rem;cursor:pointer}
+.type-btn strong{display:block;color:var(--purple-dk)}
+.type-btn span{color:var(--muted);font-size:.85rem}
+.type-btn:hover{background:var(--purple-lt)}
+.type-btn[aria-pressed="true"]{border-left-color:var(--gold-dk);background:var(--gold-lt);box-shadow:inset 0 0 0 2px var(--gold)}
+
+/* workspace */
+.work{display:grid;gap:1.5rem;grid-template-columns:minmax(0,1fr);margin-top:1.4rem}
+@media (min-width:64rem){.work{grid-template-columns:minmax(0,1fr) 18.5rem;align-items:start}}
+.prob-head{display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:flex-end;justify-content:space-between;border-bottom:3px solid var(--gold);padding-bottom:.6rem}
+.prob-head h2{border:none;margin:0;padding:0;font-size:1.45rem}
+.eyebrow{font-family:Inter,Arial,sans-serif;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 .15rem;font-weight:700}
+.btns{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+.btn{font-family:Inter,Arial,sans-serif;font-weight:700;font-size:.92rem;padding:.5rem .95rem;border-radius:4px;cursor:pointer;border:2px solid var(--purple);background:var(--purple);color:#fff}
+.btn:hover{background:var(--purple-dk);border-color:var(--purple-dk)}
+.btn.ghost{background:#fff;color:var(--purple)}
+.btn.ghost:hover{background:var(--purple-lt)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+
+table{border-collapse:collapse;width:100%;margin:.5rem 0 .8rem;font-size:.95rem}
+caption{caption-side:top;text-align:left;font-family:Inter,Arial,sans-serif;font-weight:700;color:var(--purple-dk);padding:.2rem 0 .4rem}
+th,td{border:1px solid var(--line);padding:.4rem .55rem;vertical-align:middle}
+thead th{background:var(--purple);color:#fff;font-family:Inter,Arial,sans-serif;font-size:.84rem;text-align:left}
+tbody th{background:#F7F5FA;text-align:left;font-weight:600}
+.n{text-align:right;font-family:"IBM Plex Mono",Consolas,monospace;font-size:.9rem;white-space:nowrap}
+.scroll{overflow-x:auto;position:relative}
+
+.part{border:1px solid var(--line);border-radius:6px;padding:.4rem 1rem 1rem;margin:1.2rem 0;background:#fff}
+.part > h3{display:flex;gap:.6rem;align-items:center}
+.part > h3 .pnum{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;background:var(--purple);color:#fff;border-radius:999px;padding:.12rem .6rem;white-space:nowrap}
+.part.complete{border-color:var(--green);box-shadow:inset 4px 0 0 var(--green)}
+.status{font-family:Inter,Arial,sans-serif;font-size:.85rem;font-weight:700;color:var(--green);margin-left:auto}
+
+/* schedule */
+.sched td.ln{width:2.6rem;text-align:center;font-family:Inter,Arial,sans-serif;font-weight:700;color:var(--purple-dk);background:#F7F5FA}
+.sched td.bo{width:7.5rem;font-family:Inter,Arial,sans-serif;font-size:.8rem;color:var(--muted)}
+.sched td.amt{width:12.5rem}
+.sched tr.given td{background:#FBFAFD}
+.sched label{font-weight:600}
+.inwrap{display:flex;align-items:center;gap:.25rem}
+.inwrap .u{font-family:"IBM Plex Mono",Consolas,monospace;color:var(--muted)}
+input.ans,select.ans{font:inherit;font-family:"IBM Plex Mono",Consolas,monospace;font-size:.95rem;padding:.4rem .5rem;border:2px solid #6E6680;border-radius:4px;width:100%;min-width:0;background:#fff;color:var(--ink)}
+select.ans{font-family:Inter,Arial,sans-serif;font-size:.88rem}
+input.ans.n{text-align:right}
+.ok-f{border-color:var(--green)!important;background:var(--green-lt)!important}
+.bad-f{border-color:var(--red)!important;background:var(--red-lt)!important}
+.fb{font-family:Inter,Arial,sans-serif;font-size:.84rem;margin-top:.3rem}
+.fb:empty{display:none}
+.fb.ok{color:var(--green)}
+.fb.bad{color:var(--red)}
+.fb.sol{color:var(--purple-dk)}
+.fb .math{font-size:.82rem}
+.tag{font-weight:700}
+
+/* journal entry */
+.je td{padding:.3rem .4rem}
+.je td.src{width:7rem;font-family:Inter,Arial,sans-serif;font-size:.8rem;color:var(--muted);text-align:center}
+.je td.d,.je td.c{width:10rem}
+.je td.ac{min-width:14rem}
+.chip{display:inline-block;background:var(--gold-lt);border:1px solid var(--gold-dk);color:var(--gold-dk);border-radius:999px;padding:0 .5rem;font-weight:700}
+.partfb{font-family:Inter,Arial,sans-serif;font-size:.9rem;border-radius:4px;padding:.5rem .8rem;margin:.5rem 0}
+.partfb:empty{display:none}
+.partfb.ok{background:var(--green-lt);border-left:4px solid var(--green)}
+.partfb.bad{background:var(--red-lt);border-left:4px solid var(--red)}
+.partfb.hint{background:var(--gold-lt);border-left:4px solid var(--gold-dk)}
+
+.say{display:flex;gap:.75rem;align-items:flex-start;margin:.8rem 0}
+.avatar{flex:0 0 2.9rem;height:2.9rem;border-radius:50%;background:var(--purple);color:#fff;border:3px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:Inter,Arial,sans-serif;font-weight:700;font-size:1.2rem}
+.say.sm .avatar{flex-basis:2.2rem;height:2.2rem;font-size:.95rem;border-width:2px}
+.bubble{position:relative;background:#fff;border:1px solid var(--line);border-radius:10px;padding:.55rem .95rem;flex:1;min-width:0;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.bubble::before{content:"";position:absolute;left:-8px;top:1rem;border:8px solid transparent;border-left:0;border-right-color:var(--line)}
+.bubble::after{content:"";position:absolute;left:-6px;top:1rem;border:8px solid transparent;border-left:0;border-right-color:#fff}
+.bubble .who{font-family:Inter,Arial,sans-serif;font-weight:700;font-size:.82rem;color:var(--purple-dk);margin:0 0 .15rem;letter-spacing:.02em}
+.bubble p{margin:.3rem 0}
+.bubble ul{margin:.3rem 0 .4rem;padding-left:1.2rem}
+.say.key .bubble{background:var(--gold-lt);border-color:var(--gold-dk)}
+.say.key .bubble::after{border-right-color:var(--gold-lt)}
+.say.key .bubble::before{border-right-color:var(--gold-dk)}
+.partfb .who{font-weight:700}
+.know{margin:.4rem 0 .6rem;font-size:.92rem;min-width:34rem}
+.know td.ln{width:2.6rem;text-align:center;font-family:Inter,Arial,sans-serif;font-weight:700;color:var(--purple-dk);background:#F7F5FA}
+.know tbody th{font-weight:600;background:#fff}
+.know td.why{font-size:.86rem;color:var(--muted);font-family:Inter,Arial,sans-serif}
+.summary{border-top:3px solid var(--gold);margin-top:1.5rem;padding-top:.6rem}
+.score{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:.4rem 0 1rem;padding:0}
+.score li{background:var(--purple-lt);border:1px solid var(--line);border-radius:999px;padding:.2rem .8rem;font-family:Inter,Arial,sans-serif;font-weight:600;font-size:.9rem}
+
+/* sidebar */
+aside.ref{border:1px solid var(--line);border-radius:6px;padding:.4rem 1rem 1rem;background:#FBFAFD}
+@media (min-width:64rem){aside.ref{position:sticky;top:1rem}}
+aside.ref h2{font-size:1.1rem;margin-top:.6rem}
+aside.ref ol{padding-left:1.2rem;margin:.3rem 0}
+aside.ref li{margin:.35rem 0;font-size:.95rem}
+.flow{list-style:none;padding:0;margin:.4rem 0;font-family:Inter,Arial,sans-serif;font-size:.84rem}
+.flow li{border:1px solid var(--line);background:#fff;border-radius:4px;padding:.4rem .55rem;margin:0}
+.flow li.arrow{border:none;background:none;text-align:center;color:var(--purple);padding:.05rem;font-weight:700}
+aside.ref dl{margin:.3rem 0 0;font-size:.92rem}
+aside.ref dt{font-weight:700;font-family:Inter,Arial,sans-serif;font-size:.88rem;margin-top:.5rem}
+aside.ref dd{margin:0;color:var(--muted)}
+footer{padding:1rem 2rem 1.5rem;font-family:Inter,Arial,sans-serif;font-size:.8rem;color:var(--muted);border-top:1px solid var(--line)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media (max-width:640px){
+  .shell{margin:0}
+  .banner,.content{padding-left:1rem;padding-right:1rem}
+  .sched td.bo{display:none}
+  .sched th.bo{display:none}
+  .sched td.amt{width:8.5rem}
+  table.je{min-width:34rem}
+  .sched td.ln{width:2rem}
+  .prob-head .btns{width:100%}
+  .picker{grid-template-columns:1fr}
+  table{font-size:.88rem}
+}
+@media print{
+  body{background:#fff}
+  .shell{box-shadow:none;margin:0}
+  #picker-sec,.btns,.skip,aside.ref{display:none!important}
+  .banner,thead th,.part > h3 .pnum{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .part{break-inside:avoid}
+}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+</head>
+<body>
+<a class="skip" href="#work-title">Skip to the problem</a>
+<div class="shell">
+<header class="banner">
+  <p class="kicker">ACCT 352 · Intermediate Accounting II · Practice Tutor</p>
+  <h1>Statement of Cash Flows Tutor</h1>
+  <p class="sub" id="sub">Turn accrual amounts into cash flows, then build the statement. New company and new numbers every time.</p>
+</header>
+
+<main class="content" id="main">
+  <section aria-labelledby="how-title">
+    <h2 id="how-title" class="sr-only">Meet your tutor</h2>
+    <div id="intro"></div>
+  </section>
+
+  <section id="picker-sec" aria-labelledby="pick-title">
+    <h2 id="pick-title">Choose a problem type</h2>
+    <div class="picker" id="picker"></div>
+  </section>
+
+  <div class="work">
+    <section aria-labelledby="work-title" id="worksheet">
+      <div class="prob-head">
+        <div>
+          <p class="eyebrow" id="ptype"></p>
+          <h2 id="work-title" tabindex="-1"></h2>
+        </div>
+        <div class="btns">
+          <button type="button" class="btn" id="new-btn">New numbers</button>
+          <button type="button" class="btn ghost" id="print-btn">Print this problem</button>
+        </div>
+      </div>
+      <div id="scenario-say"></div>
+      <div class="scroll" id="given"></div>
+      <div id="key-say"></div>
+      <div id="parts"></div>
+      <div class="summary" id="summary" hidden tabindex="-1"></div>
+    </section>
+
+    <aside class="ref" aria-labelledby="ref-title">
+      <h2 id="ref-title">The one question to ask</h2>
+      <ul class="flow" aria-label="How to classify and compute a cash flow">
+        <li><strong>Did cash change hands?</strong><br>If not, is it a noncash investing or financing event to disclose?</li>
+        <li class="arrow" aria-hidden="true">↓</li>
+        <li><strong>Selling goods or paying expenses</strong> → operating<br><strong>Buying or selling long-term assets</strong> → investing<br><strong>Raising or repaying capital</strong> → financing</li>
+        <li class="arrow" aria-hidden="true">↓</li>
+        <li><strong>Operating, direct method:</strong> start with the income statement item and adjust for the related balance sheet accounts</li>
+      </ul>
+      <h2>Rules that never bend</h2>
+      <ol>
+        <li><strong>Gains and losses</strong> are never cash flows. The sale proceeds are investing.</li>
+        <li><strong>Depreciation</strong> and amortization are noncash. Add them back in the reconciliation.</li>
+        <li><strong>Interest paid</strong> is operating. <strong>Dividends paid</strong> are financing.</li>
+        <li><strong>Operating assets up</strong> uses cash. <strong>Operating liabilities up</strong> keeps cash.</li>
+        <li>The <strong>direct and indirect</strong> methods always give the same operating total.</li>
+      </ol>
+      <dl>
+        <dt>Direct method</dt><dd>Reports each operating cash receipt and payment.</dd>
+        <dt>Indirect method</dt><dd>Starts with net income and adjusts it to operating cash flow.</dd>
+        <dt>Cash equivalent</dt><dd>A short-term, highly liquid investment, such as a Treasury bill, treated as cash.</dd>
+        <dt>Noncash activity</dt><dd>A significant investing or financing event with no cash, disclosed separately.</dd>
+      </dl>
+    </aside>
+  </div>
+</main>
+<footer>
+  <p>All company names and numbers are fictional and randomly generated. The current year updates automatically. Practice covers the statement of cash flows in intermediate accounting under U.S. GAAP, with IFRS differences noted.</p>
+</footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+var Y=new Date().getFullYear();
+
+/* ---------- helpers ---------- */
+function rnd(min,max,step){step=step||1;var n=Math.floor((max-min)/step);return min+step*Math.floor(Math.random()*(n+1));}
+function pick(a){return a[Math.floor(Math.random()*a.length)];}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function R(n){return Math.round(n);}
+function fmt(n){return Math.abs(R(n)).toLocaleString("en-US");}
+function $(n){return (R(n)<0?"−$":"$")+fmt(n);}
+function pc(r){return (Math.round(r*1000)/10)+"%";}
+function K(n){return n*1000;}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];});}
+function dispU(v,u){return u==="yrs"?v+" years":u==="%"?pc(v):u==="sh"?fmt(v):u==="$c"?c2(v):$(v);}
+function m(s){return '<span class="math">'+s+'</span>';}
+
+/* ---------- the tutor ---------- */
+var TUTORS=[
+ {name:"Jordan",bio:"a senior accounting major who works in the Forsyth tutoring lab",style:"Let's take it one line at a time."},
+ {name:"Riley",bio:"a MAcc student who interned on a financial reporting team in Asheville",style:"Every cash flow comes from one question: what happened to the cash, and which account explains it?"},
+ {name:"Avery",bio:"a graduate assistant who never met a journal entry that didn't balance",style:"If it doesn't balance, something's hiding. We'll find it."},
+ {name:"Quinn",bio:"a senior studying for the CPA exam",style:"Cash flow statements show up on the CPA exam all the time, so it's worth getting comfortable."},
+ {name:"Casey",bio:"a Catamount tutor who loves turning messy numbers into clean financial statements",style:"The adjustments look tricky at first, but they follow a pattern. Once you see it, you'll see it everywhere."}
+];
+var T=(function(){var last=-1;try{last=parseInt(localStorage.getItem("ch21tutor")||"-1",10);}catch(e){}
+  var i;do{i=Math.floor(Math.random()*TUTORS.length);}while(i===last&&TUTORS.length>1);
+  try{localStorage.setItem("ch21tutor",String(i));}catch(e){}return TUTORS[i];})();
+function say(html,opt){opt=opt||{};return '<div class="say'+(opt.sm?' sm':'')+(opt.key?' key':'')+'"><span class="avatar" aria-hidden="true">'+T.name.charAt(0)+'</span><div class="bubble"><p class="who">'+(opt.label||T.name)+'</p>'+html+'</div></div>';}
+function any(a){return a[Math.floor(Math.random()*a.length)];}
+var PRAISE=["Nice, that's it.","Exactly right.","You've got it.","Yes! Right on.","Perfect.","That's the one."];
+var NUDGE=["Close. Here's a nudge:","Not quite yet. Try this:","Almost. Think about it this way:","Hmm, let's rethink that one:"];
+var NAMES=["Blue Ridge Brewing Co.","Tuckasegee Timber Works","Cullowhee Creek Canoe Co.","Balsam Gap Bakery","Whiteside Mountain Outfitters","Pisgah Pine Furniture","Fontana Lake Marine","Cashiers Valley Cabinetry","Dillsboro Depot Mercantile","Mount Mitchell Mills","Looking Glass Falls Lodge","Hiwassee River Rafting","Black Balsam Bicycles","Waterrock Knob Woodworks","Sylva Summit Coffee Roasters","Nantahala Gorge Gear Co.","Cherohala Skyway Cycles","Highlands Plateau Provisions","Franklin Gem Mine Supply","Brevard Waterfall Works","Bryson City Rail & Trail","Maggie Valley Mountain Crafts","Linville Gorge Logistics","Lake Glenville Marina","Shining Rock Solar","Panthertown Valley Paper Co.","Jackson County Apple Orchards","Catamount Peak Construction","Smoky Mountain Sawmill","Little Tennessee Trout Farms","Wayah Bald Wind Energy","Scaly Mountain Ski Supply","Cowee Valley Ceramics","Chimney Rock Climbing Co."];
+var lastName="";
+function company(){var n;do{n=pick(NAMES);}while(n===lastName);lastName=n;return n;}
+
+/* ---------- worksheet builders ---------- */
+/* given line */
+function G(id,label,val,unit,why){return {kind:"given",id:id,label:label,val:val,unit:unit||"$",why:why||""};}
+/* numeric input line */
+function N(id,label,ans,builds,hint,sol,opt){opt=opt||{};return {kind:"num",id:id,label:label,ans:ans,builds:builds||"",hint:hint,sol:sol,unit:opt.unit||"$",tol:opt.tol==null?1:opt.tol};}
+/* choice input line */
+function C(id,label,options,ans,hint,sol,builds){return {kind:"choice",id:id,label:label,options:options,ans:ans,builds:builds||"",hint:hint,sol:sol};}
+function sched(title,rows,intro){return {type:"sched",title:title,rows:rows,intro:intro||""};}
+/* journal entry: lines [account, debit, credit, sourceLine] ; zero lines dropped */
+function JE(title,lines,intro){
+  var L=[];lines.forEach(function(l){var d=R(l[1]||0),c=R(l[2]||0);if(!d&&!c)return;L.push({acct:l[0],dr:d,cr:c,src:l[3]||""});});
+  return {type:"je",title:title,lines:L,intro:intro||""};
+}
+/* turn a signed change in a deferred account into a JE line */
+function defLine(acct,change,isAsset,src){if(!R(change))return [acct,0,0];var debit=(isAsset&&change>0)||(!isAsset&&change<0);return debit?[acct,Math.abs(change),0,src]:[acct,0,Math.abs(change),src];}
+function expLine(exp,src){return exp>=0?["Income tax expense",exp,0,src]:["Income tax expense",0,-exp,src];}
+
+function givenTable(cap,rows){var h='<table><caption>'+esc(cap)+'</caption><thead><tr><th scope="col">Item</th><th scope="col" class="n">Amount</th></tr></thead><tbody>';rows.forEach(function(r){h+='<tr><th scope="row">'+r[0]+'</th><td class="n">'+r[1]+'</td></tr>';});return h+'</tbody></table>';}
+
+var ACCTS=["Cash","Accounts receivable","Allowance for uncollectible accounts","Bad debt expense","Unearned revenue","Sales revenue","Inventory","Accounts payable","Cost of goods sold","Salaries expense","Salaries payable","Prepaid insurance","Insurance expense","Interest expense","Interest payable","Discount on bonds payable","Premium on bonds payable","Bonds payable","Loss on early retirement of bonds","Income tax expense","Income tax payable","Deferred tax liability","Long-term investments","Investment revenue","Land","Buildings and equipment","Accumulated depreciation","Gain on sale of land","Loss on sale of land","Gain on sale of equipment","Loss on sale of equipment","Common stock","Paid-in capital in excess of par","Retained earnings","Treasury stock","Dividends payable"];
+function c2(n){return (n<0?"−$":"$")+Math.abs(n).toFixed(2);}
+function r2(x){return Math.round(x*100)/100;}
+function yr(k){return Y+k;}
+
+/* ---------- problem generators ---------- */
+var GEN={};
+var CLS=["Operating activity","Investing activity","Financing activity","Noncash investing and financing disclosure","Not a cash flow (not reported as one)"];
+function sgn(v){return v<0?"decrease":"increase";}
+function ub(v){return Math.abs(v);}
+
+/* ===== Getting started ===== */
+var CL_BANK=[
+ ["Cash received from customers",0,"Cash from sales is the heart of operating activities."],
+ ["Cash paid to suppliers of inventory",0,"Inventory is bought to be sold, so paying for it is operating."],
+ ["Cash paid to bondholders for interest",0,"Interest expense is part of net income, so interest paid is operating."],
+ ["Cash received as interest or dividends on investments",0,"Investment revenue is part of net income, so it is operating."],
+ ["Cash paid for income taxes",0,"Income tax expense is part of net income."],
+ ["Cash paid to purchase a parking lot",1,"Land is a long-term asset: investing."],
+ ["Cash proceeds from selling equipment",1,"The full proceeds are investing. The gain or loss is not reported separately."],
+ ["Cash paid to buy stock of another company as a long-term investment",1,"Buying securities of other firms is investing."],
+ ["Cash received from collecting the principal of a loan made to an affiliate",1,"Collecting a nontrade note receivable is investing (the interest is operating)."],
+ ["Cash received from selling common stock",2,"Raising capital from owners is financing."],
+ ["Cash received from issuing bonds",2,"Borrowing from creditors is financing."],
+ ["Cash paid to repay a bank loan (principal)",2,"Repaying debt is financing."],
+ ["Cash dividends paid to shareholders",2,"A dividend is a distribution of income, not an expense: financing."],
+ ["Cash paid to buy treasury stock",2,"Returning capital to owners is financing."],
+ ["Acquiring equipment by issuing a note payable to the seller",3,"A significant investing and financing activity with no cash: disclose it."],
+ ["Converting bonds into common stock",3,"Debt becomes equity with no cash: disclose it."],
+ ["Distributing a 10% stock dividend",4,"Moves an amount within equity. No asset or liability changes and no disclosure."],
+ ["Depreciation expense",4,"A noncash expense. Cash left when the asset was bought."],
+ ["Buying a Treasury bill that matures in two months (a cash equivalent)",4,"Cash and cash equivalents are treated as one amount. A transfer between them is not reported."],
+ ["The gain on the sale of land (the gain itself)",4,"The gain is not a cash flow. The sale proceeds are investing."]
+];
+GEN.classify={group:"Getting started",name:"Classify the cash flow",blurb:"Operating, investing, financing, noncash, or not reported?",make:function(){
+  var co=company(),items=shuffle(CL_BANK).slice(0,7);
+  return {title:co,
+  scenario:'<p>The controller at '+esc(co)+' is building the '+Y+' statement of cash flows and needs help deciding where each item belongs.</p>',
+  key:'<p>Ask four questions in order. Is cash actually changing hands? If not, is it a significant noncash investing or financing event? If cash moves, does it come from <strong>selling goods or paying expenses</strong> (operating), <strong>buying or selling long-term assets</strong> (investing), or <strong>raising or repaying capital</strong> (financing)?</p>',
+  parts:[sched("Classify each item",items.map(function(b,i){return C("ABCDEFG".charAt(i),b[0],CLS,b[1],"Does it enter net income? Does it buy or sell long-term assets? Does it raise or repay capital? Does cash move at all?",CLS[b[1]]+". "+b[2]);}))],
+  take:"<p>Interest paid is operating but dividends paid are financing: interest is an expense and a dividend is a distribution. A gain or loss is never a cash flow by itself. The sale proceeds are.</p>"};
+}};
+
+/* ===== Operating activities ===== */
+GEN.cust={group:"Operating activities",name:"Cash received from customers",blurb:"Sales, receivables, write-offs, and unearned revenue.",make:function(){
+  var co=company(),v=pick(["plain","bad","unearned"]),S=K(rnd(600,1400,10)),ar0=K(rnd(80,220,5)),d=K(rnd(-30,50,5));
+  if(d===0)d=K(10);var ar1=ar0+d,rows,je,take;
+  if(v==="plain"){
+    var cash=S-d;
+    rows=[G("A","Sales revenue",S,null,"From the income statement."),G("B","Accounts receivable, beginning",ar0,null,"Prior year balance sheet."),G("C","Accounts receivable, ending",ar1,null,"Current year balance sheet."),
+      N("D","Change in accounts receivable (increase is positive)",d,"C − B","Ending minus beginning.",m($(ar1)+" − "+$(ar0)+" = "+$(d))),
+      N("E","Cash received from customers",cash,"A − D","If receivables grew, customers paid less than we sold.",m($(S)+" − ("+$(d)+") = "+$(cash)))];
+    je=JE("Summary entry for sales and collections",[["Cash",cash,0,"E"],defLine("Accounts receivable",d,true,"D"),["Sales revenue",0,S,"A"]]);
+    take="<p>Receivables "+sgn(d)+"d by "+$(ub(d))+", so customers paid "+(d>0?"less":"more")+" than the "+$(S)+" of sales. Cash received was "+$(cash)+".</p>";
+  }else if(v==="bad"){
+    var BD=K(rnd(8,24,1)),a0=K(rnd(10,30,1)),WO=K(rnd(6,26,1)),a1=a0+BD-WO,cash2;
+    if(a1<K(3)){WO=BD+a0-K(6);a1=a0+BD-WO;}
+    var dAR=d,wo=BD-(a1-a0);cash2=S-dAR-wo;
+    rows=[G("A","Sales revenue",S,null,"From the income statement."),G("B","Bad debt expense",BD,null,"From the income statement."),G("C","Allowance for uncollectible accounts, beginning",a0,null,"Prior balance sheet."),G("D","Allowance for uncollectible accounts, ending",a1,null,"Current balance sheet."),
+      G("E","Accounts receivable (gross), beginning",ar0,null,"Prior balance sheet."),G("F","Accounts receivable (gross), ending",ar1,null,"Current balance sheet."),
+      N("G","Accounts written off during the year",wo,"B − (D − C)","The allowance grows by the expense and shrinks by write-offs.",m($(BD)+" − ("+$(a1)+" − "+$(a0)+") = "+$(wo))),
+      N("H","Change in gross accounts receivable",dAR,"F − E","Ending minus beginning.",m($(ar1)+" − "+$(ar0)+" = "+$(dAR))),
+      N("I","Cash received from customers",cash2,"A − H − G","Write-offs reduce receivables without any cash coming in.",m($(S)+" − ("+$(dAR)+") − "+$(wo)+" = "+$(cash2)))];
+    je=JE("One entry for sales, bad debts, write-offs, and collections",[["Cash",cash2,0,"I"],defLine("Accounts receivable",dAR,true,"H"),["Bad debt expense",BD,0,"B"],defLine("Allowance for uncollectible accounts",a1-a0,false,"D − C"),["Sales revenue",0,S,"A"]]);
+    take="<p>Of the change in receivables, "+$(wo)+" was write-offs, not slow collections. Cash received was "+$(cash2)+", not the "+$(S-dAR)+" you would get by ignoring write-offs.</p>";
+    cash=cash2;
+  }else{
+    var u0=K(rnd(10,40,1)),du=K(rnd(-12,20,1));if(du===0)du=K(5);var u1=u0+du,cash3=S-d+du;
+    rows=[G("A","Sales revenue",S,null,"From the income statement."),G("B","Accounts receivable, beginning",ar0,null,"Prior balance sheet."),G("C","Accounts receivable, ending",ar1,null,"Current balance sheet."),G("D","Unearned revenue, beginning",u0,null,"Prior balance sheet."),G("E","Unearned revenue, ending",u1,null,"Current balance sheet."),
+      N("F","Change in accounts receivable (increase is positive)",d,"C − B","Ending minus beginning.",m($(ar1)+" − "+$(ar0)+" = "+$(d))),
+      N("G","Change in unearned revenue (increase is positive)",du,"E − D","Cash received before revenue is earned.",m($(u1)+" − "+$(u0)+" = "+$(du))),
+      N("H","Cash received from customers",cash3,"A − F + G","Receivables take away from cash; new unearned revenue adds to it.",m($(S)+" − ("+$(d)+") + ("+$(du)+") = "+$(cash3)))];
+    je=JE("Summary entry for sales and collections",[["Cash",cash3,0,"H"],defLine("Accounts receivable",d,true,"F"),defLine("Unearned revenue",du,false,"G"),["Sales revenue",0,S,"A"]]);
+    take="<p>Customers who prepay increase cash before revenue is recognized, so an increase in unearned revenue is added to sales. Cash received was "+$(cash3)+".</p>";
+  }
+  return {title:co,
+  scenario:'<p>'+esc(co)+' sells to customers on account'+(v==="unearned"?' and also collects some payments in advance':'')+(v==="bad"?'. It uses the allowance method for bad debts':'')+'. The statement of cash flows will use the direct method, so you need <strong>cash received from customers</strong> for '+Y+'.</p>',
+  key:'<p>Sales revenue is an accrual amount. Start with sales and <strong>adjust for the change in the related balance sheet accounts</strong>: receivables up means less cash; unearned revenue up means more cash. A write-off removes a receivable without any cash.</p>',
+  parts:[sched("Worksheet",rows),je],take:take};
+}};
+
+GEN.supp={group:"Operating activities",name:"Cash paid to suppliers and employees",blurb:"Cost of goods sold, inventory, payables, and salaries.",make:function(){
+  var co=company(),C0=K(rnd(300,700,10)),i0=K(rnd(60,200,5)),di=K(rnd(-30,40,5));if(di===0)di=K(10);var i1=i0+di,p0=K(rnd(40,120,5)),dp=K(rnd(-20,30,5));if(dp===0)dp=K(5);var p1=p0+dp;
+  var purch=C0+di,paid=purch-dp,SE=K(rnd(80,200,5)),s0=K(rnd(5,20,1)),ds=K(rnd(-6,10,1));if(ds===0)ds=K(2);var s1=s0+ds,paidE=SE-ds;
+  var rows=[G("A","Cost of goods sold",C0,null,"From the income statement."),G("B","Inventory, beginning",i0,null,"Prior balance sheet."),G("C","Inventory, ending",i1,null,"Current balance sheet."),G("D","Accounts payable, beginning",p0,null,"Prior balance sheet."),G("E","Accounts payable, ending",p1,null,"Current balance sheet."),
+    N("F","Cost of goods purchased",purch,"A + (C − B)","Cost of goods sold plus the growth in inventory.",m($(C0)+" + ("+$(di)+") = "+$(purch))),
+    N("G","Cash paid to suppliers",paid,"F − (E − D)","Purchases not yet paid sit in accounts payable.",m($(purch)+" − ("+$(dp)+") = "+$(paid))),
+    G("H","Salaries expense",SE,null,"From the income statement."),G("I","Salaries payable, beginning",s0,null,"Prior balance sheet."),G("J","Salaries payable, ending",s1,null,"Current balance sheet."),
+    N("K","Cash paid to employees",paidE,"H − (J − I)","Salaries earned but unpaid stay in salaries payable.",m($(SE)+" − ("+$(ds)+") = "+$(paidE)))];
+  return {title:co,
+  scenario:'<p>'+esc(co)+' buys inventory on account and pays its employees after the work is done. For the direct method, find the cash paid to <strong>suppliers of goods</strong> and the cash paid to <strong>employees</strong> for '+Y+'.</p>',
+  key:'<p>Two steps for suppliers: <strong>cost of goods sold</strong> becomes <strong>purchases</strong> (add the increase in inventory), and purchases become <strong>cash paid</strong> (subtract the increase in accounts payable). Expenses with a related payable follow the same pattern.</p>',
+  parts:[sched("Worksheet",rows),JE("Entry for purchases and cost of goods sold",[["Cost of goods sold",C0,0,"A"],defLine("Inventory",di,true,"C − B"),defLine("Accounts payable",dp,false,"E − D"),["Cash",0,paid,"G"]]),JE("Entry for salaries",[["Salaries expense",SE,0,"H"],defLine("Salaries payable",ds,false,"J − I"),["Cash",0,paidE,"K"]])],
+  take:"<p>Cash paid to suppliers was "+$(paid)+" and to employees "+$(paidE)+". Neither equals the expense, because inventory and payables changed.</p>"};
+}};
+
+GEN.exp={group:"Operating activities",name:"Cash paid for interest, insurance, and income taxes",blurb:"Bond discount or premium, prepaids, and deferred taxes.",make:function(){
+  var co=company(),prem=Math.random()<.4,IE=K(rnd(30,90,1)),b0=K(rnd(8,24,1)),am=K(rnd(1,5,1)),b1=b0-am,ip0=K(rnd(2,10,1)),dip=K(rnd(-2,5,1));if(dip===0)dip=K(1);var ip1=ip0+dip;
+  var cashI=prem?IE+am-dip:IE-am-dip,NAM=prem?"premium":"discount";
+  var r1=[G("A","Interest expense",IE,null,"From the income statement."),G("B","Bond "+NAM+", beginning",b0,null,"Prior balance sheet."),G("C","Bond "+NAM+", ending",b1,null,"Current balance sheet."),G("D","Interest payable, beginning",ip0,null,"Prior balance sheet."),G("E","Interest payable, ending",ip1,null,"Current balance sheet."),
+    N("F","Amortization of the "+NAM+" during the year",am,"B − C","The "+NAM+" balance shrinks by the amortization.",m($(b0)+" − "+$(b1)+" = "+$(am))),
+    N("G","Cash paid for interest",cashI,prem?"A + F − (E − D)":"A − F − (E − D)",prem?"Premium amortization lowers expense below the cash coupon, so cash is higher than the expense.":"Discount amortization raises expense above the cash coupon, so cash is lower than the expense.",m($(IE)+(prem?" + ":" − ")+$(am)+" − ("+$(dip)+") = "+$(cashI)))];
+  var INS=K(rnd(20,60,1)),pp0=K(rnd(4,20,1)),dpp=K(rnd(-5,8,1));if(dpp===0)dpp=K(2);var pp1=pp0+dpp,cashIns=INS+dpp;
+  var r2=[G("H","Insurance expense",INS,null,"From the income statement."),G("I","Prepaid insurance, beginning",pp0,null,"Prior balance sheet."),G("J","Prepaid insurance, ending",pp1,null,"Current balance sheet."),
+    N("K","Change in prepaid insurance (increase is positive)",dpp,"J − I","Ending minus beginning.",m($(pp1)+" − "+$(pp0)+" = "+$(dpp))),
+    N("L","Cash paid for insurance",cashIns,"H + K","Paying for more coverage than we used adds to prepaid.",m($(INS)+" + ("+$(dpp)+") = "+$(cashIns)))];
+  var TX=K(rnd(40,110,1)),dd=K(rnd(-4,10,1));if(dd===0)dd=K(3);var tp0=K(rnd(6,24,1)),dtp=K(rnd(-8,8,1));if(dtp===0)dtp=K(2);var tp1=tp0+dtp,cashT=TX-dd-dtp;
+  var r3=[G("M","Income tax expense",TX,null,"From the income statement."),G("N","Increase (decrease) in deferred tax liability",dd,null,"From the balance sheets."),G("O","Income tax payable, beginning",tp0,null,"Prior balance sheet."),G("P","Income tax payable, ending",tp1,null,"Current balance sheet."),
+    N("Q","Current income tax (expense less the deferred part)",TX-dd,"M − N","Deferred tax is expense that is not payable this year.",m($(TX)+" − ("+$(dd)+") = "+$(TX-dd))),
+    N("R","Cash paid for income taxes",cashT,"Q − (P − O)","Current tax owed, less the growth in the payable.",m($(TX-dd)+" − ("+$(dtp)+") = "+$(cashT)))];
+  return {title:co,
+  scenario:'<p>'+esc(co)+' has bonds issued at a '+NAM+', prepays its insurance, and records both current and deferred income taxes. For the direct method, find the cash paid for <strong>interest</strong>, <strong>insurance</strong>, and <strong>income taxes</strong> for '+Y+'.</p>',
+  key:'<p>Each expense has a related balance sheet account that explains the gap between expense and cash. <strong>Interest:</strong> the discount or premium and interest payable. <strong>Insurance:</strong> prepaid insurance. <strong>Taxes:</strong> the deferred portion and income tax payable.</p>',
+  parts:[sched("Part 1: Interest",r1,"Cash for interest."),sched("Part 2: Insurance",r2,"Cash for insurance."),sched("Part 3: Income taxes",r3,"Cash for taxes."),
+    JE("Entry for bond interest",[["Interest expense",IE,0,"A"],prem?["Premium on bonds payable",am,0,"F"]:["Discount on bonds payable",0,am,"F"],defLine("Interest payable",dip,false,"E − D"),["Cash",0,cashI,"G"]])],
+  take:"<p>Cash paid was "+$(cashI)+" for interest, "+$(cashIns)+" for insurance, and "+$(cashT)+" for income taxes. Each differs from its expense for a reason you can read from the balance sheet.</p>"};
+}};
+
+GEN.invest={group:"Operating activities",name:"Equity-method income and cash equivalents",blurb:"Investment revenue that was not received, and T-bill gains.",make:function(){
+  var co=company(),NI=K(rnd(120,400,10)),pct=pick([20,25,30,40]),dv=K(rnd(20,100,10)),tb=K(rnd(1,8,1)),tbuy=K(rnd(20,80,10));
+  var eq=R(NI*pct/100),dr=R(dv*pct/100),und=eq-dr,YN=["Yes","No"],CLS3=["Operating activity","Investing activity","Financing activity","No effect on the statement of cash flows"];
+  var rows=[G("A","Investee’s net income",NI,null,"Reported by the investee."),G("B","Ownership percentage",pct/100,"%","Gives the company significant influence, so the equity method applies."),G("C","Cash dividends paid by the investee to all shareholders",dv,null,"From the investee’s records."),
+    N("D","Investment revenue recognized (equity-method income)",eq,"A × B","The investor’s share of the income.",m($(NI)+" × "+pct+"% = "+$(eq))),
+    N("E","Cash dividends the company received",dr,"C × B","Only the company’s share of the dividends comes in.",m($(dv)+" × "+pct+"% = "+$(dr))),
+    N("F","Increase in the long-term investment account",und,"D − E","Income not paid out raises the investment balance.",m($(eq)+" − "+$(dr)+" = "+$(und))),
+    N("G","Cash received from investment revenue (operating inflow)",dr,"E","Only the dividends received are cash.",m("Only "+$(dr)+" came in as cash")),
+    N("H","Adjustment in the reconciliation for equity income not received",-und,"− F","Subtract income that never became cash.",m("−"+$(und))),
+    G("I","Gain on sale of a Treasury bill classified as a cash equivalent",tb,null,"The bill was sold for more than it cost."),
+    G("J","Cost of a different Treasury bill bought and held at year-end (a cash equivalent)",tbuy,null,"Purchased with idle cash."),
+    N("K","Cash flow from operating activities for the gain",tb,"I","The gain increases cash and cash equivalents, and there is no other line for it.",m("The gain of "+$(tb)+" is an operating inflow")),
+    C("L","How is the purchase of the Treasury bill reported?",CLS3,3,"Cash and cash equivalents are one total.","No effect. Cash is swapped for a cash equivalent.")];
+  return {title:co,
+  scenario:'<p>'+esc(co)+' owns '+pct+'% of an investee and uses the equity method. It also keeps idle cash in Treasury bills that it classifies as cash equivalents. Work out the cash effects for '+Y+'.</p>',
+  key:'<p>Equity-method income is revenue in net income, but only <strong>dividends actually received</strong> are cash. The rest increases the investment account and is subtracted in the reconciliation. Buying or selling a cash equivalent is not reported, except that a <strong>gain or loss</strong> changes total cash.</p>',
+  parts:[sched("Worksheet",rows),JE("Entry for equity-method income and dividends",[["Long-term investments",und,0,"F"],["Cash",dr,0,"E"],["Investment revenue",0,eq,"D"]])],
+  take:"<p>Investment revenue was "+$(eq)+" but only "+$(dr)+" was cash. The other "+$(und)+" stays in the investment account, so the reconciliation subtracts it.</p>"};
+}};
+
+/* ===== Investing and financing ===== */
+GEN.sale={group:"Investing and financing",name:"Sale of equipment or land",blurb:"Book value, gain or loss, investing inflow, and the reconciling item.",make:function(){
+  var co=company(),eq=Math.random()<.6,cost=K(rnd(60,200,10)),ad=eq?R(cost*rnd(35,75,5)/100):0,bv=cost-ad,gl=rnd(-18,18,1)*1000;if(gl===0)gl=K(5);var price=bv+gl,gain=gl>0,what=eq?"equipment":"land";
+  var OP=["Add the loss","Subtract the gain"];
+  var rows=[G("A","Original cost of the "+what,cost,null,"From the asset records."),eq?G("B","Accumulated depreciation on the "+what+" sold",ad,null,"From the asset records."):G("B","Accumulated depreciation (land is not depreciated)",0,null,"Land has none."),G("C","Cash received from the sale",price,null,"From the sale agreement."),
+    N("D","Book value of the "+what+" sold",bv,"A − B","Cost less accumulated depreciation.",m($(cost)+" − "+$(ad)+" = "+$(bv))),
+    N("E","Gain (positive) or loss (negative) on the sale",gl,"C − D","Cash received less book value.",m($(price)+" − "+$(bv)+" = "+$(gl))),
+    N("F","Cash inflow from investing activities",price,"C","The whole proceeds are investing, not just the gain.",m("All "+$(price)+" is investing")),
+    N("G","Adjustment in the reconciliation of net income to operating cash flow",-gl,"− E","Remove the noncash gain or add back the noncash loss.",m(gain?"Subtract the gain: −"+$(gl):"Add back the loss: +"+$(-gl)))];
+  var lines=[["Cash",price,0,"C"]];if(eq)lines.push(["Accumulated depreciation",ad,0,"B"]);
+  if(gain)lines.push([eq?"Gain on sale of equipment":"Gain on sale of land",0,gl,"E"]);else lines.push([eq?"Loss on sale of equipment":"Loss on sale of land",-gl,0,"E"]);
+  lines.push([eq?"Buildings and equipment":"Land",0,cost,"A"]);
+  return {title:co,
+  scenario:'<p>During '+Y+', '+esc(co)+' sold '+(eq?'equipment that cost '+$(cost)+' and had accumulated depreciation of '+$(ad):'land that cost '+$(cost))+' for '+$(price)+' cash. Find the gain or loss and decide how the sale appears on the statement of cash flows.</p>',
+  key:'<p>A gain or loss is only the difference between <strong>cash received</strong> and <strong>book value</strong>. The cash received is an <strong>investing inflow</strong>. In the indirect method, the gain or loss is removed from net income so it is not counted twice.</p>',
+  parts:[sched("Worksheet",rows),JE("Entry for the sale",lines)],
+  take:"<p>The statement reports "+$(price)+" as an investing inflow. The "+(gain?"gain":"loss")+" of "+$(ub(gl))+" is not a cash flow. "+(gain?"The reconciliation subtracts it.":"The reconciliation adds it back.")+"</p>"};
+}};
+
+GEN.fin={group:"Investing and financing",name:"Stock, dividends, and treasury stock",blurb:"Separate the stock dividend from the stock sale, and find dividends paid.",make:function(){
+  var co=company(),par=pick([5,10]),nd=rnd(1,5,1)*1000,mk=par+rnd(3,9,1),ns=rnd(2,12,1)*1000,pr=par+rnd(2,10,1),dv=K(rnd(30,90,1)),dp0=K(rnd(6,20,1)),ddp=K(rnd(-6,8,1));if(ddp===0)ddp=K(3);var dp1=dp0+ddp,tre=K(rnd(10,50,2));
+  var dCS=(nd+ns)*par,dAP=nd*(mk-par)+ns*(pr-par),sdv=nd*mk,cashS=ns*pr,cashD=dv-ddp;
+  var rows=[G("A","Increase in common stock",dCS,null,"From the balance sheets."),G("B","Increase in paid-in capital in excess of par",dAP,null,"From the balance sheets."),G("C","Shares distributed as a stock dividend",nd,"sh","From the equity records."),G("D","Market price per share on the dividend date",mk,"$","From the equity records."),
+    N("E","Value of the stock dividend",sdv,"C × D","Retained earnings is reduced by the market value of the shares.",m(fmt(nd)+" × $"+mk+" = "+$(sdv))),
+    N("F","Total increase in common stock and paid-in capital",dCS+dAP,"A + B","Both accounts together.",m($(dCS)+" + "+$(dAP)+" = "+$(dCS+dAP))),
+    N("G","Cash from the sale of common stock (financing inflow)",cashS,"F − E","What is left after the stock dividend is the cash sale.",m($(dCS+dAP)+" − "+$(sdv)+" = "+$(cashS))),
+    G("H","Cash dividends declared",dv,null,"From the equity records."),G("I","Dividends payable, beginning",dp0,null,"Prior balance sheet."),G("J","Dividends payable, ending",dp1,null,"Current balance sheet."),
+    N("K","Cash dividends paid (financing outflow)",cashD,"H − (J − I)","Dividends declared but not paid are in the payable.",m($(dv)+" − ("+$(ddp)+") = "+$(cashD))),
+    G("L","Treasury stock purchased for cash",tre,null,"From the equity records."),
+    N("M","Net cash flows from financing activities (these items only)",cashS-cashD-tre,"G − K − L","Inflows less outflows.",m($(cashS)+" − "+$(cashD)+" − "+$(tre)+" = "+$(cashS-cashD-tre)))];
+  var parC=nd*par;
+  return {title:co,
+  scenario:'<p>'+esc(co)+' has $'+par+' par common stock. During '+Y+' it distributed a stock dividend, sold additional shares, declared cash dividends (part of which remain unpaid), and bought treasury stock. Find the financing cash flows.</p>',
+  key:'<p>The stock accounts changed for <strong>two</strong> reasons: a stock dividend (no cash, no financing activity) and a stock sale (cash inflow). Remove the stock dividend before reporting the sale. Dividends <strong>paid</strong> may differ from dividends <strong>declared</strong>.</p>',
+  parts:[sched("Worksheet",rows),JE("Entry for the stock dividend",[["Retained earnings",sdv,0,"E"],["Common stock",0,parC,"C × par"],["Paid-in capital in excess of par",0,sdv-parC,"E − C × par"]]),JE("Entry for the sale of stock",[["Cash",cashS,0,"G"],["Common stock",0,dCS-parC,"A − C × par"],["Paid-in capital in excess of par",0,dAP-(sdv-parC),"B − (E − C × par)"]])],
+  take:"<p>Only "+$(cashS)+" of the stock increase was cash. The stock dividend of "+$(sdv)+" never touches the statement. Dividends paid were "+$(cashD)+", not the "+$(dv)+" declared.</p>"};
+}};
+
+GEN.debt={group:"Investing and financing",name:"Retiring and converting bonds",blurb:"Early retirement at a premium and a conversion into stock.",make:function(){
+  var co=company(),face=K(rnd(50,150,10)),pct=pick([102,103,104]),par=pick([5,10]),cv=K(rnd(20,60,10)),sh=rnd(1,Math.floor(cv/1000/par),1)*1000,ncash=R(face*pct/100),loss=ncash-face,parTot=sh*par;
+  var rows=[G("A","Face amount of bonds retired before maturity",face,null,"The bonds were issued at par, so carrying amount equals face."),G("B","Price paid as a percent of face",pct/100,"%","The call price."),
+    N("C","Cash paid to retire the bonds",ncash,"A × B","Face times the call price.",m($(face)+" × "+pct+"% = "+$(ncash))),
+    N("D","Loss on early retirement",loss,"C − A","Cash paid above the carrying amount.",m($(ncash)+" − "+$(face)+" = "+$(loss))),
+    N("E","Financing outflow (enter as a negative)",-ncash,"− C","The whole cash payment is financing, including the premium.",m("−"+$(ncash))),
+    N("F","Adjustment in the reconciliation for the loss",loss,"D","The loss reduced net income but is not an operating cash outflow.",m("Add back "+$(loss))),
+    G("G","Face amount of bonds converted into common stock",cv,null,"These bonds were also issued at par."),G("H","Shares of common stock issued in the conversion",sh,"sh","From the equity records."),G("I","Par value per share",par,"$","Given."),
+    N("J","Par value of the shares issued",parTot,"H × I","The amount credited to common stock.",m(fmt(sh)+" × $"+par+" = "+$(parTot))),
+    N("K","Credit to paid-in capital in excess of par",cv-parTot,"G − J","The rest of the bonds’ carrying amount.",m($(cv)+" − "+$(parTot)+" = "+$(cv-parTot))),
+    C("L","How is the conversion reported?",CLS,3,"No cash changed hands, but debt became equity.","Noncash investing and financing disclosure.")];
+  return {title:co,
+  scenario:'<p>During '+Y+', '+esc(co)+' retired bonds before maturity by paying '+pct+'% of face value in cash, and it separately converted other bonds into $'+par+' par common stock. All of these bonds were issued at par.</p>',
+  key:'<p>An <strong>early retirement</strong> uses cash, so the full amount paid is a financing outflow; the <strong>loss</strong> is only the premium, and it is added back in the reconciliation. A <strong>conversion</strong> uses no cash, so it is only a <strong>noncash disclosure</strong>.</p>',
+  parts:[sched("Worksheet",rows),JE("Entry for the early retirement",[["Bonds payable",face,0,"A"],["Loss on early retirement of bonds",loss,0,"D"],["Cash",0,ncash,"C"]]),JE("Entry for the conversion",[["Bonds payable",cv,0,"G"],["Common stock",0,parTot,"J"],["Paid-in capital in excess of par",0,cv-parTot,"K"]])],
+  take:"<p>The statement shows "+$(ncash)+" as a financing outflow, the "+$(loss)+" loss as an add-back in the reconciliation, and the "+$(cv)+" conversion in the noncash disclosure.</p>"};
+}};
+
+/* ===== Indirect method and full statements ===== */
+GEN.indirect={group:"Indirect method and full statements",name:"Indirect method: net income to operating cash flow",blurb:"Add back, subtract, and adjust for changes in operating accounts.",make:function(){
+  var co=company(),NI=K(rnd(100,320,10)),dep=K(rnd(30,90,1)),gl=rnd(-14,14,1)*1000;if(gl===0)gl=K(6);
+  var dAR=K(rnd(-30,40,1)),dInv=K(rnd(-25,35,1)),dPre=K(rnd(-4,6,1)),dAP=K(rnd(-20,30,1)),dSal=K(rnd(-6,8,1)),dTax=K(rnd(-8,8,1));
+  if(dAR===0)dAR=K(10);if(dInv===0)dInv=K(10);if(dPre===0)dPre=K(2);if(dAP===0)dAP=K(8);if(dSal===0)dSal=K(2);if(dTax===0)dTax=K(3);
+  var tot=NI+dep-gl-dAR-dInv-dPre+dAP+dSal+dTax;
+  var rows=[G("A","Net income",NI,null,"From the income statement."),G("B","Depreciation expense",dep,null,"From the income statement."),
+    G("C","Gain (positive) or loss (negative) on the sale of equipment",gl,null,"From the income statement."),
+    G("D","Change in accounts receivable (increase is positive)",dAR,null,"Ending minus beginning."),G("E","Change in inventory (increase is positive)",dInv,null,"Ending minus beginning."),
+    G("F","Change in prepaid insurance (increase is positive)",dPre,null,"Ending minus beginning."),G("G","Change in accounts payable (increase is positive)",dAP,null,"Ending minus beginning."),
+    G("H","Change in salaries payable (increase is positive)",dSal,null,"Ending minus beginning."),G("I","Change in income tax payable (increase is positive)",dTax,null,"Ending minus beginning."),
+    N("J","Adjustment for depreciation",dep,"B","A noncash expense is added back.",m("+"+$(dep))),
+    N("K","Adjustment for the gain or loss on the sale of equipment",-gl,"− C","Remove a gain; add back a loss.",m((gl>0?"−":"+")+$(ub(gl)))),
+    N("L","Adjustment for accounts receivable",-dAR,"− D","A rise in an operating asset uses cash.",m(dAR>0?"−"+$(dAR):"+"+$(-dAR))),
+    N("M","Adjustment for inventory",-dInv,"− E","A rise in an operating asset uses cash.",m(dInv>0?"−"+$(dInv):"+"+$(-dInv))),
+    N("N","Adjustment for prepaid insurance",-dPre,"− F","A rise in an operating asset uses cash.",m(dPre>0?"−"+$(dPre):"+"+$(-dPre))),
+    N("O","Adjustment for accounts payable",dAP,"G","A rise in an operating liability preserves cash.",m(dAP>0?"+"+$(dAP):"−"+$(-dAP))),
+    N("P","Adjustment for salaries payable",dSal,"H","A rise in an operating liability preserves cash.",m(dSal>0?"+"+$(dSal):"−"+$(-dSal))),
+    N("Q","Adjustment for income tax payable",dTax,"I","A rise in an operating liability preserves cash.",m(dTax>0?"+"+$(dTax):"−"+$(-dTax))),
+    N("R","Net cash flows from operating activities",tot,"A + J + … + Q","Net income plus every adjustment.",m($(NI)+" + "+$(dep)+" "+(gl>0?"− ":"+ ")+$(ub(gl))+" … = "+$(tot)))];
+  return {title:co,
+  scenario:'<p>For '+Y+', '+esc(co)+' wants its operating cash flow by the indirect method. The income statement and the balance sheets provide the items below. Enter each adjustment with its sign: positive if it adds to cash flow, negative if it subtracts.</p>',
+  key:'<p>The pattern never changes. <strong>Noncash expenses and losses:</strong> add. <strong>Noncash gains:</strong> subtract. <strong>Operating assets up:</strong> subtract (cash was used). <strong>Operating liabilities up:</strong> add (cash was kept).</p>',
+  parts:[sched("Worksheet",rows)],
+  take:"<p>Net income of "+$(NI)+" became operating cash flow of "+$(tot)+". The direct method would give the same total.</p>"};
+}};
+
+GEN.mini={group:"Indirect method and full statements",name:"A small statement of cash flows, start to finish",blurb:"Direct-method operating section, investing, financing, and the cash check.",make:function(){
+  var co=company(),S,dAR,CG,dInv,dAP,OX,DEP,NIc,tries=0;
+  do{S=K(rnd(400,900,10));dAR=K(rnd(-15,30,1));CG=R(S*rnd(50,60,1)/100);dInv=K(rnd(-15,25,1));dAP=K(rnd(-15,20,1));OX=K(rnd(50,110,1));DEP=K(rnd(20,50,1));
+     if(dAR===0)dAR=K(5);if(dInv===0)dInv=K(5);if(dAP===0)dAP=K(5);NIc=S-CG-OX-DEP;tries++;}while(NIc<K(30)&&tries<200);
+  var cashC=S-dAR,cashS=CG+dInv-dAP,opn=cashC-cashS-OX;
+  var eq=K(rnd(40,120,10)),nb=K(rnd(30,90,10)),st=K(rnd(30,100,10)),dv=K(rnd(10,40,1)),beg=K(rnd(30,90,1));
+  var inv=-eq,fin=nb+st-dv,net=opn+inv+fin;
+  if(beg+net<K(15))beg=K(15)-net+K(rnd(0,20,5));
+  var ind=NIc+DEP-dAR-dInv+dAP;
+  var rows=[G("A","Sales revenue",S,null,"Income statement."),G("B","Cost of goods sold",CG,null,"Income statement."),G("C","Other operating expenses (all paid in cash when incurred)",OX,null,"Income statement."),G("D","Depreciation expense",DEP,null,"Income statement."),
+    G("E","Change in accounts receivable (increase is positive)",dAR,null,"Balance sheets."),G("F","Change in inventory (increase is positive)",dInv,null,"Balance sheets."),G("G","Change in accounts payable (increase is positive)",dAP,null,"Balance sheets."),
+    G("H","Equipment purchased for cash",eq,null,"Asset records."),G("I","Cash borrowed on a note payable",nb,null,"Debt records."),G("J","Common stock sold for cash",st,null,"Equity records."),G("K","Cash dividends paid",dv,null,"Equity records."),G("L","Cash balance, beginning of year",beg,null,"Prior balance sheet."),
+    N("M","Cash received from customers",cashC,"A − E","Sales less the increase in receivables.",m($(S)+" − ("+$(dAR)+") = "+$(cashC))),
+    N("N","Cash paid to suppliers",cashS,"B + F − G","Purchases less the increase in payables.",m($(CG)+" + ("+$(dInv)+") − ("+$(dAP)+") = "+$(cashS))),
+    N("O","Net cash flows from operating activities (direct method)",opn,"M − N − C","Inflows less outflows. Depreciation is not a cash flow.",m($(cashC)+" − "+$(cashS)+" − "+$(OX)+" = "+$(opn))),
+    N("P","Net cash flows from operating activities (indirect check)",ind,"NI + D − E − F + G","Net income plus depreciation, adjusted for the working capital changes.",m($(NIc)+" + "+$(DEP)+" − ("+$(dAR)+") − ("+$(dInv)+") + ("+$(dAP)+") = "+$(ind))),
+    N("Q","Net cash flows from investing activities",inv,"− H","Only the equipment purchase.",m("−"+$(eq))),
+    N("R","Net cash flows from financing activities",fin,"I + J − K","Borrowing and stock sale less dividends.",m($(nb)+" + "+$(st)+" − "+$(dv)+" = "+$(fin))),
+    N("S","Net increase (decrease) in cash",net,"O + Q + R","The sum of the three sections.",m($(opn)+" + ("+$(inv)+") + "+$(fin)+" = "+$(net))),
+    N("T","Cash balance, end of year",beg+net,"L + S","Must match the balance sheet.",m($(beg)+" + ("+$(net)+") = "+$(beg+net)))];
+  return {title:co,
+  scenario:'<p>'+esc(co)+' is a small distributor. Net income for '+Y+' was '+$(NIc)+'. Use the information below to build the whole statement of cash flows, then check that the direct and indirect methods agree.</p>',
+  key:'<p>Work in this order: <strong>operating</strong> (convert each income statement item), <strong>investing</strong> (long-term asset purchases and sales), <strong>financing</strong> (debt and equity), then <strong>add the three</strong> to the beginning cash. Both methods must give the same operating total.</p>',
+  parts:[sched("Worksheet",rows)],
+  take:"<p>Both methods gave "+$(opn)+" for operating activities, and the net change of "+$(net)+" explains the cash balance of "+$(beg+net)+". If the two operating totals ever disagree, check the sign of each working capital change.</p>"};
+}};
+
+var ORDER=["classify","cust","supp","exp","invest","sale","fin","debt","indirect","mini"];
+
+
+/* ---------- UI ---------- */
+var el=function(id){return document.getElementById(id);};
+var picker=el("picker"),partsEl=el("parts"),sumEl=el("summary");
+var state=null,typeBtns={};
+
+(function buildPicker(){
+  var groups={},gi=0;
+  ORDER.forEach(function(k){var g=GEN[k].group;(groups[g]=groups[g]||[]).push(k);});
+  Object.keys(groups).forEach(function(g){
+    var div=document.createElement("div");div.className="pgroup";
+    var hid="pg-"+(gi++);
+    div.innerHTML='<h3 id="'+hid+'">'+esc(g)+'</h3>';
+    var ul=document.createElement("ul");ul.setAttribute("aria-labelledby",hid);
+    groups[g].forEach(function(k){
+      var li=document.createElement("li"),b=document.createElement("button");
+      b.type="button";b.className="type-btn";b.setAttribute("aria-pressed","false");
+      b.innerHTML='<strong>'+esc(GEN[k].name)+'</strong><span>'+esc(GEN[k].blurb)+'</span>';
+      b.addEventListener("click",function(){start(k,true);});
+      typeBtns[k]=b;li.appendChild(b);ul.appendChild(li);
+    });
+    div.appendChild(ul);picker.appendChild(div);
+  });
+})();
+
+function parseNum(s){
+  s=String(s).trim().replace(/−/g,"-");
+  if(!s)return null;
+  var neg=false;
+  if(/^\(.*\)$/.test(s)){neg=true;s=s.slice(1,-1).trim();}
+  s=s.replace(/[$,%\s]/g,"");
+  if(s.charAt(0)==="-"){neg=!neg;s=s.slice(1);}
+  if(!/^(\d+\.?\d*|\.\d+)$/.test(s))return NaN;
+  var v=parseFloat(s);return neg?-v:v;
+}
+function numOK(v,ans,tol,unit){if(v===null||isNaN(v))return false;if(Math.abs(v-ans)<=tol+1e-9)return true;if(unit==="%"&&Math.abs(v*100-ans)<=tol+1e-9)return true;return false;}
+function showVal(v,unit){return unit==="%"?v+"%":unit==="$c"?v.toFixed(2):(v<0?"-":"")+fmt(v);}
+
+function start(k,focus){
+  ORDER.forEach(function(x){typeBtns[x].setAttribute("aria-pressed",x===k?"true":"false");});
+  var p=GEN[k].make();
+  state={k:k,p:p,parts:[]};
+  el("ptype").textContent=GEN[k].name;
+  el("work-title").textContent=p.title;
+  var know=[];
+  p.parts.forEach(function(pt){if(pt.type==="sched")pt.rows.forEach(function(r){if(r.kind==="given")know.push([r.id,r.label,dispU(r.val,r.unit),r.why]);});});
+  (p.facts||[]).forEach(function(f){know.push(["",f[0],f[1],f[2]||""]);});
+  var kh="";
+  if(know.length){
+    kh='<p><strong>Here\'s what we know.</strong> '+any(["Before you calculate anything, read down this list and ask yourself whether each one makes sense.","Some of these come from the story above and some from the company\'s records. I noted where each one comes from.","Make sure you can explain where every one of these comes from before you start."])+' The lettered ones are already filled in as the gray lines in your schedule.</p>'+
+      '<div class="scroll"><table class="know"><caption class="sr-only">What we know</caption><thead><tr><th scope="col">Line</th><th scope="col">What we know</th><th scope="col" class="n">Amount</th><th scope="col">Where it comes from</th></tr></thead><tbody>'+
+      know.map(function(k){return '<tr><td class="ln">'+(k[0]||'<span class="sr-only">not in schedule</span>')+'</td><th scope="row">'+k[1]+'</th><td class="n">'+k[2]+'</td><td class="why">'+(k[3]||'')+'</td></tr>';}).join("")+'</tbody></table></div>';
+  }
+  if(p.given)kh+='<p>'+any(["I also have this table for you:","Here\'s one more piece of information:"])+'</p><div class="scroll">'+p.given+'</div>';
+  el("scenario-say").innerHTML=say(any(["<p>Here's the situation we're working with today.</p>","<p>Let's meet today's company.</p>","<p>Okay, here's our company for this one.</p>"])+p.scenario+kh);
+  el("given").innerHTML="";el("given").hidden=true;
+  el("key-say").innerHTML=say(p.key,{key:true,label:"Before you start, the key idea"});
+  sumEl.hidden=true;sumEl.innerHTML="";
+  partsEl.innerHTML="";
+  var n=0;
+  p.parts.forEach(function(pt,pi){
+    if(pt.type==="note"){var d=document.createElement("div");d.className="part";d.innerHTML=pt.html;partsEl.appendChild(d);state.parts.push({done:true,note:true});return;}
+    n++;
+    var ps={pt:pt,checks:0,done:false,firstRight:0,items:0,idx:pi};
+    state.parts.push(ps);
+    partsEl.appendChild(pt.type==="sched"?buildSched(ps,n,pi):buildJE(ps,n,pi,p.accts||ACCTS));
+  });
+  if(focus){el("work-title").focus({preventScroll:true});el("worksheet").scrollIntoView({block:"start"});}
+}
+
+/* ----- schedule part ----- */
+function buildSched(ps,n,pi){
+  var pt=ps.pt,sec=document.createElement("section");sec.className="part";sec.id="part-"+pi;
+  var hid="ph-"+pi;
+  var hasBuilds=pt.rows.some(function(r){return r.builds;});
+  var h='<h3 id="'+hid+'"><span class="pnum">Part '+n+'</span> '+esc(pt.title)+'<span class="status" id="st-'+pi+'"></span></h3>'+say('<p>'+(n===1?any(["Start here. Fill in the white boxes; the given amounts are already in place.","Let's build the schedule. Use the Builds on column if you get stuck.","First, the numbers. Work top to bottom and each line sets up the next."]):any(["Next up. Keep going, using what you found above.","On to this part. The lines from earlier will help here."]))+(pt.intro?' '+pt.intro:'')+'</p>',{sm:true});
+  h+='<div class="scroll"><table class="sched"><caption class="sr-only">'+esc(pt.title)+'</caption><thead><tr><th scope="col">Line</th><th scope="col">Item</th>'+(hasBuilds?'<th scope="col" class="bo">Builds on</th>':'')+'<th scope="col" class="n">Amount</th></tr></thead><tbody>';
+  pt.rows.forEach(function(r,ri){
+    var rid="r"+pi+"-"+ri;
+    if(r.kind==="given"){
+      h+='<tr class="given"><td class="ln">'+r.id+'</td><td>'+r.label+' <span class="small">(given)</span></td>'+(hasBuilds?'<td class="bo"></td>':'')+'<td class="n">'+dispU(r.val,r.unit)+'</td></tr>';
+      return;
+    }
+    ps.items++;
+    var field;
+    if(r.kind==="choice"){
+      field='<select class="ans" id="'+rid+'" aria-describedby="fb-'+rid+'"><option value="">Select…</option>'+r.options.map(function(o,j){return '<option value="'+j+'">'+esc(o)+'</option>';}).join("")+'</select>';
+    }else{
+      field='<span class="inwrap">'+(r.unit==="$"||r.unit==="$c"?'<span class="u" aria-hidden="true">$</span>':'')+'<input class="ans n" id="'+rid+'" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" aria-describedby="fb-'+rid+'">'+(r.unit==="%"?'<span class="u" aria-hidden="true">%</span>':'')+'</span>';
+    }
+    var wide=r.kind==="choice"&&r.options[0].length>20;
+    h+='<tr><td class="ln">'+r.id+'</td><td><label for="'+rid+'">'+r.label+(r.kind==="num"?(r.unit==="%"?' <span class="sr-only">(percent)</span>':r.unit==="sh"?' <span class="sr-only">(shares)</span>':r.unit==="yrs"?' <span class="sr-only">(years)</span>':' <span class="sr-only">(dollars)</span>'):'')+'</label><div class="fb" id="fb-'+rid+'" role="status"></div>'+(wide?'<div style="margin-top:.35rem">'+field+'</div>':'')+'</td>'+(hasBuilds?'<td class="bo">'+esc(r.builds)+'</td>':'')+'<td class="amt">'+(wide?'<span class="sr-only">Answer is below the item text</span>':field)+'</td></tr>';
+  });
+  h+='</tbody></table></div><div class="partfb" id="pf-'+pi+'" role="status" aria-live="polite"></div><div class="btns"><button type="button" class="btn" id="chk-'+pi+'">Check this part</button><button type="button" class="btn ghost" id="sol-'+pi+'" hidden>Show solution</button></div>';
+  sec.setAttribute("aria-labelledby",hid);
+  sec.innerHTML=h;
+  sec.querySelector("#chk-"+pi).addEventListener("click",function(){checkSched(ps,pi,false);});
+  sec.querySelector("#sol-"+pi).addEventListener("click",function(){checkSched(ps,pi,true);});
+  sec.querySelectorAll("input.ans").forEach(function(inp){inp.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();checkSched(ps,pi,false);}});});
+  return sec;
+}
+
+function checkSched(ps,pi,reveal){
+  if(ps.done)return;
+  var pt=ps.pt,right=0,total=0,blank=0,firstBad=null;
+  pt.rows.forEach(function(r,ri){
+    if(r.kind==="given")return;
+    total++;
+    var rid="r"+pi+"-"+ri,inp=el(rid),fb=el("fb-"+rid);
+    if(inp.disabled){right++;return;}
+    var ok;
+    if(r.kind==="choice")ok=inp.value!==""&&Number(inp.value)===r.ans;
+    else{var v=parseNum(inp.value);if(v===null&&!reveal){blank++;}ok=numOK(v,r.ans,r.tol,r.unit);}
+    if(ok){
+      right++;if(ps.checks===0)ps.firstRight++;
+      inp.classList.remove("bad-f");inp.classList.add("ok-f");inp.removeAttribute("aria-invalid");inp.disabled=true;
+      fb.className="fb ok";fb.innerHTML='<span class="tag">'+any(PRAISE)+'</span> '+r.sol;
+    }else if(reveal){
+      inp.value=r.kind==="choice"?String(r.ans):showVal(r.ans,r.unit);
+      inp.classList.remove("bad-f");inp.disabled=true;inp.removeAttribute("aria-invalid");
+      fb.className="fb sol";fb.innerHTML='<span class="tag">Here\'s how I\'d work it:</span> '+r.sol;
+    }else{
+      inp.classList.remove("ok-f");inp.classList.add("bad-f");inp.setAttribute("aria-invalid","true");
+      fb.className="fb bad";fb.innerHTML='<span class="tag">'+(inp.value===""?"Give this one a try.":any(NUDGE))+'</span> '+r.hint;
+      if(!firstBad)firstBad=inp;
+    }
+  });
+  ps.checks++;
+  var pf=el("pf-"+pi);
+  if(right===total||reveal){completePart(ps,pi,reveal);pf.className="partfb "+(reveal?"hint":"ok");pf.innerHTML='<span class="who">'+T.name+':</span> '+(reveal?"No problem. I filled in the solution with my work under each line. Compare it with yours, then let's keep going.":any(["All "+total+" lines are right. Nicely done!","Every line checks out. On to the next part!","That's all "+total+". You're getting the hang of this."]));}
+  else{pf.className="partfb bad";pf.innerHTML='<span class="who">'+T.name+':</span> '+(right?"You have "+right+" of "+total+" right. ":"Let's look at this together. ")+"I marked the lines to revisit in red and left a hint under each one"+(blank?" ("+blank+" still blank)":"")+". Fix those and check again"+(ps.checks>=1?", or ask me to show the solution.":".");el("sol-"+pi).hidden=false;if(firstBad)firstBad.focus();}
+}
+
+/* ----- journal entry part ----- */
+function buildJE(ps,n,pi,accts){
+  var pt=ps.pt,sec=document.createElement("section");sec.className="part";sec.id="part-"+pi;
+  var hid="ph-"+pi,nl=pt.lines.length;
+  ps.items=nl;
+  var h='<h3 id="'+hid+'"><span class="pnum">Part '+n+'</span> '+esc(pt.title)+'<span class="status" id="st-'+pi+'"></span></h3>';
+  h+=say('<p>'+any(["Now let's turn your schedule into a journal entry.","Time to record it. Every number you need is already in your schedule.","Here's where it comes together: the entry."])+' This one has <strong>'+nl+' lines</strong>; leave the unused amount box empty on each line.'+(pt.intro?' '+pt.intro:'')+'</p>',{sm:true});
+  h+='<div class="scroll"><table class="je"><caption class="sr-only">'+esc(pt.title)+'</caption><thead><tr><th scope="col">Account</th><th scope="col" class="n">Debit</th><th scope="col" class="n">Credit</th><th scope="col">Comes from</th></tr></thead><tbody>';
+  for(var i=0;i<nl;i++){
+    var b="j"+pi+"-"+i;
+    h+='<tr id="row-'+b+'"><td class="ac"><label class="sr-only" for="'+b+'a">Line '+(i+1)+' account</label><select class="ans" id="'+b+'a"><option value="">Select account…</option>'+accts.map(function(a){return '<option>'+esc(a)+'</option>';}).join("")+'</select></td>'+
+       '<td class="d"><label class="sr-only" for="'+b+'d">Line '+(i+1)+' debit (dollars)</label><input class="ans n" id="'+b+'d" type="text" inputmode="decimal" autocomplete="off"></td>'+
+       '<td class="c"><label class="sr-only" for="'+b+'c">Line '+(i+1)+' credit (dollars)</label><input class="ans n" id="'+b+'c" type="text" inputmode="decimal" autocomplete="off"></td>'+
+       '<td class="src" id="'+b+'s"><span class="sr-only">Shown after the entry is correct</span><span aria-hidden="true">—</span></td></tr>';
+  }
+  h+='</tbody></table></div><div class="partfb" id="pf-'+pi+'" role="status" aria-live="polite"></div><div class="btns"><button type="button" class="btn" id="chk-'+pi+'">Check this entry</button><button type="button" class="btn ghost" id="sol-'+pi+'" hidden>Show solution</button></div>';
+  sec.setAttribute("aria-labelledby",hid);
+  sec.innerHTML=h;
+  sec.querySelector("#chk-"+pi).addEventListener("click",function(){checkJE(ps,pi,false);});
+  sec.querySelector("#sol-"+pi).addEventListener("click",function(){checkJE(ps,pi,true);});
+  return sec;
+}
+
+function checkJE(ps,pi,reveal){
+  if(ps.done)return;
+  var pt=ps.pt,nl=pt.lines.length,rows=[],used={},right=0,tD=0,tC=0,blank=0;
+  for(var i=0;i<nl;i++){
+    var b="j"+pi+"-"+i,a=el(b+"a").value,d=parseNum(el(b+"d").value),c=parseNum(el(b+"c").value);
+    if(!a&&d===null&&c===null)blank++;
+    tD+=(d>0?d:0);tC+=(c>0?c:0);
+    rows.push({b:b,a:a,d:d===null?0:d,c:c===null?0:c,bad:isNaN(d)||isNaN(c)});
+  }
+  if(reveal){
+    pt.lines.forEach(function(l,i){var b="j"+pi+"-"+i;el(b+"a").value=l.acct;el(b+"d").value=l.dr?fmt(l.dr):"";el(b+"c").value=l.cr?fmt(l.cr):"";});
+    pt.lines.forEach(function(l,i){markRow("j"+pi+"-"+i,null,l);});
+    completePart(ps,pi,true);
+    var pf=el("pf-"+pi);pf.className="partfb hint";pf.innerHTML='<span class="who">'+T.name+':</span> Here\'s the entry. Look at the <strong>Comes from</strong> column: every amount is a line you already worked in the schedule.';
+    return;
+  }
+  /* match each student row to an unused expected line */
+  var hit=[];
+  rows.forEach(function(r){
+    var m=-1;
+    pt.lines.forEach(function(l,li){if(m<0&&!used[li]&&l.acct===r.a&&!r.bad&&Math.abs(r.d-l.dr)<=1&&Math.abs(r.c-l.cr)<=1)m=li;});
+    if(m>=0){used[m]=1;right++;if(ps.checks===0)ps.firstRight++;}
+    hit.push(m);
+  });
+  ps.checks++;
+  rows.forEach(function(r,i){markRow(r.b,hit[i]>=0,hit[i]>=0?pt.lines[hit[i]]:null);});
+  var pf=el("pf-"+pi);
+  if(right===nl){completePart(ps,pi,false);pf.className="partfb ok";pf.innerHTML='<span class="who">'+T.name+':</span> '+any(["That entry is right and it balances!","Debits equal credits and every account is right. Great work!"])+' Check the <strong>Comes from</strong> column to see how each amount flows straight from your schedule.';return;}
+  var msgs=[right?"You have "+right+" of "+nl+" lines right.":"Not there yet, but that's what practice is for."];
+  if(Math.abs(tD-tC)>1)msgs.push("Your debits ("+$(tD)+") don't equal your credits ("+$(tC)+"), so something's off.");
+  var missing=pt.lines.filter(function(l,li){return !used[li];}).map(function(l){return l.acct;});
+  if(ps.checks===1)msgs.push("Here's a hint: this entry uses "+uniq(pt.lines.map(function(l){return l.acct;})).join(", ")+". Each amount is one of the lettered lines in your schedule.");
+  else msgs.push("Still missing: "+uniq(missing).join(", ")+". Ask yourself whether each one is increasing or decreasing, and which side that means. Or I can show you the solution.");
+  pf.className="partfb bad";pf.innerHTML='<span class="who">'+T.name+':</span> '+esc(msgs.join(" "));
+  el("sol-"+pi).hidden=false;
+  var firstBadRow=rows.filter(function(r,i){return hit[i]<0;})[0];if(firstBadRow)el(firstBadRow.b+"a").focus();
+}
+function uniq(a){return a.filter(function(x,i){return a.indexOf(x)===i;});}
+function markRow(b,ok,line){
+  ["a","d","c"].forEach(function(s){var f=el(b+s);f.classList.remove("ok-f","bad-f");f.removeAttribute("aria-invalid");
+    if(ok===true){f.classList.add("ok-f");f.disabled=true;}
+    else if(ok===false){f.classList.add("bad-f");f.setAttribute("aria-invalid","true");}
+    else{f.disabled=true;}});
+  var s=el(b+"s");
+  if(line&&ok!==false)s.innerHTML='<span class="chip">Line '+esc(line.src)+'</span>';
+}
+
+function completePart(ps,pi,revealed){
+  ps.done=true;ps.revealed=revealed;
+  var sec=el("part-"+pi);sec.classList.add("complete");
+  el("st-"+pi).textContent=revealed?"Solution shown":"Complete";
+  el("chk-"+pi).disabled=true;el("sol-"+pi).hidden=true;
+  sec.querySelectorAll("input,select").forEach(function(f){f.disabled=true;});
+  if(state.parts.every(function(p){return p.done;}))summary();
+}
+
+function summary(){
+  var p=state.p,tot=0,first=0,rev=0;
+  state.parts.forEach(function(ps){if(ps.note)return;tot+=ps.items;first+=ps.firstRight;if(ps.revealed)rev++;});
+  var cheer=first===tot?"Every answer right on the first try. Impressive!":(first>=tot*.7?"Strong work. You're close to mastering this.":"Good effort. Try another set of numbers and watch how much easier it gets.");
+  sumEl.innerHTML='<h3>Problem complete</h3><ul class="score" aria-label="Your results"><li>Right on the first check: '+first+' of '+tot+'</li><li>Parts with solution shown: '+rev+'</li></ul>'+say('<p>'+cheer+' One last thing I want you to remember:</p>'+p.take)+'<div class="btns"><button type="button" class="btn" id="again-btn">Try another with new numbers</button><button type="button" class="btn ghost" id="pick-btn">Choose a different problem type</button></div>';
+  sumEl.hidden=false;
+  el("again-btn").addEventListener("click",function(){start(state.k,true);});
+  el("pick-btn").addEventListener("click",function(){el("pick-title").scrollIntoView({block:"start"});typeBtns[state.k].focus();});
+  sumEl.focus();
+}
+
+el("intro").innerHTML=say('<p>Hi, I\'m <strong>'+T.name+'</strong>, '+T.bio+'. I\'ll be your tutor for the statement of cash flows today. '+T.style+'</p>'+
+  '<ul><li>Pick a topic below. Each one is a <strong>worksheet</strong> with lettered lines (A, B, C …). The <strong>Builds on</strong> column tells you which earlier lines feed each answer.</li>'+
+  '<li>Fill in a part, then press <strong>Check this part</strong>. I\'ll mark answers green or red and give you a hint on the red ones. After your first check, you can ask me to <strong>Show solution</strong>.</li>'+
+  '<li>Many problems end with a <strong>summary journal entry</strong>. Once it\'s right, the <strong>Comes from</strong> column shows where each amount came from.</li></ul>'+
+  '<p class="small">Quick tips: whole dollars, commas optional. Enter a cash outflow, loss, or decrease as <span class="math">-12,000</span> or <span class="math">(12,000)</span>, and rates as percents like <span class="math">12.5</span>.</p>',{label:T.name+", your tutor"});
+el("sub").textContent="Your tutor today is "+T.name+". Turn accrual amounts into cash flows, then build the statement.";
+el("new-btn").addEventListener("click",function(){if(state)start(state.k,true);});
+el("print-btn").addEventListener("click",function(){window.print();});
+start("classify",false);
+
+/* expose for self-checks */
+window.__tutor={GEN:GEN,ORDER:ORDER,start:start,state:function(){return state;}};
+})();
+</script>
+</body>
+</html>
