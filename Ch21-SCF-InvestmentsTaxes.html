@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Statement of Cash Flows: Investments, Deferred Taxes, and Treasury Stock: Homework Packet</title>
+<meta name="description" content="Interactive homework packet: direct-method statement of cash flows with equity-method income, cash equivalents, deferred taxes, treasury stock, and the indirect reconciliation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --wcu-purple: #4B2E83; --wcu-purple-dark: #341f5c; --wcu-gold: #C8A24A; --wcu-gold-light: #E8CF86;
+    --ink: #232023; --paper: #fdfcfb; --panel: #f7f3ec; --rule: #e2d9c8;
+    --field-border: #7a7168;          /* 4.8:1 on white (WCAG 1.4.11 non-text contrast for form controls) */
+    --muted: #5f5a56;                 /* 6.6:1 on paper */
+    --good: #2E6B45; --good-bg: #E7F3EB; --bad: #9C4221; --bad-bg: #FBEAE2;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-padding-top: 1rem; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif; font-size: 1rem; line-height: 1.55; }
+
+  /* ---- accessibility helpers ---- */
+  .sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+  .skip-link { position: absolute; left: 0.75rem; top: -4rem; z-index: 100; background: #fff; color: var(--wcu-purple-dark); font-weight: 700; padding: 0.7rem 1.1rem; border: 3px solid var(--wcu-purple-dark); border-radius: 6px; text-decoration: none; }
+  .skip-link:focus { top: 0.75rem; }
+  :focus-visible { outline: 3px solid var(--wcu-purple-dark); outline-offset: 2px; box-shadow: 0 0 0 2px #fff; }
+  main:focus { outline: none; }
+
+  header { background: linear-gradient(135deg, var(--wcu-purple) 0%, var(--wcu-purple-dark) 100%); color: #fff; padding: 2.2rem 1.5rem 1.8rem; border-bottom: 6px solid var(--wcu-gold); }
+  header .eyebrow { font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-size: 0.875rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--wcu-gold-light); margin-bottom: 0.4rem; }
+  header h1 { font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif; font-weight: 700; font-size: 1.7rem; line-height: 1.25; margin: 0 0 0.3rem; }
+  header p.sub { margin: 0; color: #ece6f6; font-size: 1rem; }
+  main { max-width: 900px; margin: 0 auto; padding: 1.6rem 1.5rem 4rem; }
+
+  h2 { font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif; font-size: 1.4rem; line-height: 1.3; margin: 2.2rem 0 0.8rem; color: var(--wcu-purple-dark); border-bottom: 2px solid var(--rule); padding-bottom: 0.4rem; }
+  h2.problem-title { background: var(--panel); border: 1px solid var(--rule); border-left: 8px solid var(--wcu-purple); border-radius: 6px; padding: 0.7rem 1rem; margin-top: 3rem; }
+  h3 { font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif; font-size: 1.25rem; line-height: 1.3; margin: 1.8rem 0 0.6rem; color: var(--wcu-purple-dark); border-bottom: 2px solid var(--rule); padding-bottom: 0.3rem; }
+  p { margin: 0.6rem 0; }
+
+  .meta-bar { display: flex; flex-wrap: wrap; gap: 0.8rem; align-items: center; background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 0.9rem 1.1rem; margin-top: 1.2rem; }
+  .meta-bar label { font-size: 0.95rem; font-weight: 600; color: var(--wcu-purple-dark); }
+  .meta-bar .year-note { font-size: 0.875rem; color: var(--muted); flex-basis: 100%; }
+  input[type="text"], input[type="number"] { font-size: 1rem; color: var(--ink); min-height: 2.75rem; border: 1px solid var(--field-border); border-radius: 5px; background: #fff; }
+  input[type="text"] { font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; padding: 0.4rem 0.6rem; }
+  input::placeholder { color: var(--muted); opacity: 1; }
+  .meta-bar input[type="text"] { width: 11rem; max-width: 100%; }
+  button { font-family: 'Inter', system-ui, sans-serif; font-weight: 700; font-size: 1rem; min-height: 2.75rem; padding: 0.55rem 1.2rem; border-radius: 6px; cursor: pointer; }
+  .meta-bar button { color: #fff; background: var(--wcu-purple); border: 2px solid var(--wcu-purple); }
+  .meta-bar button:hover { background: var(--wcu-purple-dark); border-color: var(--wcu-purple-dark); }
+
+  .rounding-note { font-size: 0.95rem; background: #fff; border: 1px solid var(--field-border); border-radius: 6px; padding: 0.7rem 1rem; margin-top: 1rem; }
+  .check-note { font-size: 0.95rem; background: #fff; border: 1px solid var(--rule); border-left: 5px solid var(--wcu-gold); border-radius: 6px; padding: 0.7rem 1rem; margin-top: 0.8rem; }
+  .bad-mark { color: var(--bad); font-weight: 800; }
+
+  .background-box { background: #fff; border: 1px solid var(--rule); border-radius: 8px; padding: 1rem 1.2rem; margin-top: 1rem; }
+  .table-scroll { overflow-x: auto; }
+  .background-box table.lease-terms { border-collapse: collapse; width: 100%; margin: 0.8rem 0 0.4rem; font-size: 0.95rem; }
+  .background-box table.lease-terms th, .background-box table.lease-terms td { border: 1px solid var(--field-border); padding: 0.4rem 0.6rem; text-align: left; }
+  .background-box table.lease-terms th { background: var(--panel); color: var(--wcu-purple-dark); font-weight: 600; }
+  .background-box table.lease-terms th[scope="row"] { width: 55%; }
+  .background-box table.lease-terms td { font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; }
+  .background-box table.situation-terms { min-width: 34rem; }
+  .background-box table.situation-terms th[scope="row"] { width: 40%; }
+  .background-box table.situation-terms td { text-align: right; }
+  .background-box table.situation-terms th[scope="col"] { text-align: right; }
+  .background-box table.situation-terms th[scope="col"]:first-child { text-align: left; }
+  .terms-note { font-size: 0.95rem; color: #4a453f; }
+
+  .part-instructions { font-style: italic; color: #4a453f; margin-bottom: 1rem; }
+
+  .entry-block { background: #fff; border: 1px solid var(--rule); border-left: 5px solid var(--field-border); border-radius: 8px; padding: 0.9rem 1.1rem; margin-bottom: 1rem; transition: border-color 0.2s ease; }
+  .entry-block.entry-correct { border-left-color: var(--good); }
+  .entry-block.entry-incorrect { border-left-color: var(--bad); }
+
+  table.grid-table { border-collapse: collapse; width: 100%; font-size: 0.95rem; }
+  table.grid-table.cols-4 { min-width: 40rem; }
+  table.grid-table.cols-1 { min-width: 26rem; }
+  table.grid-table th, table.grid-table td { border: 1px solid var(--field-border); padding: 0.45rem 0.55rem; vertical-align: top; }
+  table.grid-table thead th { background: var(--panel); font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-size: 0.8rem; text-align: left; text-transform: uppercase; letter-spacing: 0.03em; color: var(--wcu-purple-dark); }
+  table.grid-table tbody th[scope="row"] { background: var(--panel); text-align: left; font-weight: 600; color: var(--wcu-purple-dark); width: 34%; }
+  table.grid-table.cols-1 tbody th[scope="row"] { width: 62%; }
+  table.grid-table input[type="number"] { width: 100%; min-width: 7rem; font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-size: 1rem; padding: 0.3rem 0.4rem; }
+  table.grid-table input[aria-invalid="true"] { border: 2px solid var(--bad); }
+  .cell-mark { display: block; margin-top: 0.25rem; font-size: 0.85rem; font-weight: 700; color: var(--bad); }
+  .cell-mark:empty { display: none; }
+
+  .entry-desc { font-size: 0.97rem; margin-bottom: 0.7rem; }
+  .tx-recap { font-size: 0.95rem; background: var(--panel); border-radius: 6px; padding: 0.6rem 0.8rem; margin-bottom: 0.6rem; color: #4a453f; }
+  .tx-recap .letter { font-weight: 700; color: var(--wcu-purple-dark); }
+  table.je-table { border-collapse: collapse; width: 100%; min-width: 36rem; font-size: 0.95rem; }
+  table.je-table th, table.je-table td { border: 1px solid var(--field-border); padding: 0.4rem 0.5rem; }
+  table.je-table th { background: var(--panel); font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-size: 0.8rem; text-align: left; text-transform: uppercase; letter-spacing: 0.03em; color: var(--wcu-purple-dark); }
+  table.je-table select { width: 100%; font-family: 'Inter', system-ui, sans-serif; font-size: 1rem; padding: 0.3rem; min-height: 2.75rem; color: var(--ink); background: #fff; border: 1px solid var(--field-border); border-radius: 5px; }
+  table.je-table input[type="number"] { width: 100%; font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-size: 1rem; padding: 0.3rem 0.4rem; }
+  .mark-text { font-family: 'Inter', system-ui, sans-serif; font-size: 0.85rem; font-weight: 700; }
+  td.mark-cell { width: 7rem; text-align: center; font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-weight: 800; font-size: 1.15rem; color: var(--bad); border: none !important; background: transparent; }
+  th.mark-th { width: 7rem; border: none !important; background: transparent !important; }
+  table.je-table input[aria-invalid="true"], table.je-table select[aria-invalid="true"] { border: 2px solid var(--bad); }
+
+  .entry-result { font-size: 0.9rem; font-weight: 600; margin-top: 0.7rem; }
+  .entry-result.ok { color: var(--good); }
+  .entry-result.no { color: var(--bad); }
+
+  .check-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1rem; margin: 1.2rem 0 2rem; }
+  .check-row button { color: var(--ink); background: var(--wcu-gold); border: 2px solid var(--wcu-gold); }
+  .check-row button:hover:not(:disabled) { background: #d6b45f; border-color: #d6b45f; }
+  .check-row button:disabled { color: #4a453f; background: #e9e4dc; border-color: #bdb5aa; cursor: not-allowed; }
+  .check-status { display: flex; flex-direction: column; gap: 0.1rem; }
+  .part-score { font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-weight: 700; font-size: 0.95rem; color: var(--wcu-purple-dark); }
+  .attempts { font-size: 0.9rem; color: var(--muted); }
+  .attempts.out { color: var(--bad); font-weight: 600; }
+
+  .overall-score { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 1.1rem 1.3rem; margin-top: 2rem; font-size: 1rem; }
+  .overall-score strong { color: var(--wcu-purple-dark); }
+  .submit-box { margin-top: 2rem; padding: 1.2rem; background: #fff; border: 1px solid var(--rule); border-radius: 8px; }
+  .submit-box label { font-weight: 600; }
+  .submit-box input[type="text"] { font-family: 'Inter', system-ui, sans-serif; width: 16.5rem; max-width: 100%; margin: 0 0.8rem 0.5rem 0.3rem; }
+  .submit-box button { color: var(--wcu-purple-dark); background: #fff; border: 2px solid var(--wcu-purple); }
+  .submit-box button:hover { background: var(--panel); }
+  footer { text-align: center; font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; font-size: 0.8rem; color: var(--muted); padding: 1.5rem; }
+  noscript .js-warning { max-width: 900px; margin: 1.5rem auto; padding: 1rem 1.2rem; background: var(--bad-bg); border: 2px solid var(--bad); border-radius: 6px; }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+  @media (max-width: 480px) { header { padding: 1.6rem 1rem 1.4rem; } main { padding: 1.2rem 1rem 3rem; } .entry-block { padding: 0.8rem; } }
+  @media print {
+    .skip-link, .meta-bar button, .check-row button, .submit-box button { display: none; }
+    .table-scroll { overflow: visible; }
+  }
+
+  /* Contain absolutely positioned screen-reader-only labels inside their scrolling table, so they cannot widen the page on small screens */
+  .table-scroll { position: relative; }
+  .background-box ul { margin: 0.6rem 0 0.6rem 1.3rem; padding: 0; }
+  .background-box li { margin: 0.55rem 0; }
+  .background-box table.data-table { border-collapse: collapse; width: 100%; margin: 0.6rem 0 0.4rem; font-size: 0.95rem; }
+  .background-box table.data-table caption { text-align: left; font-weight: 600; color: var(--wcu-purple-dark); padding: 0.2rem 0 0.4rem; }
+  .background-box table.data-table th, .background-box table.data-table td { border: 1px solid var(--field-border); padding: 0.4rem 0.6rem; text-align: left; vertical-align: top; }
+  .background-box table.data-table thead th { background: var(--panel); color: var(--wcu-purple-dark); }
+  .background-box table.data-table tbody th[scope="row"] { background: #fff; font-weight: 600; }
+  .background-box table.data-table .num { text-align: right; font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; white-space: nowrap; }
+  .background-box table.data-table thead th.num { font-family: 'Inter', system-ui, sans-serif; white-space: normal; }
+  .background-box table.data-table tr.total th, .background-box table.data-table tr.total td { background: var(--panel); font-weight: 700; }
+  .background-box table.data-table td.cr { padding-left: 1.6rem; }
+  table.grid-table.cols-5, table.grid-table.cols-6 { min-width: 46rem; }
+  table.grid-table.cols-5 input[type="number"], table.grid-table.cols-6 input[type="number"] { min-width: 5.5rem; }
+  .part-note { font-size: 0.95rem; color: #4a453f; }
+  table.grid-table select { width: 100%; min-width: 12rem; font-family: 'Inter', system-ui, sans-serif; font-size: 1rem; padding: 0.3rem; min-height: 2.75rem; color: var(--ink); background: #fff; border: 1px solid var(--field-border); border-radius: 5px; }
+  table.grid-table select[aria-invalid="true"] { border: 2px solid var(--bad); }
+  table.grid-table.cols-3 { min-width: 34rem; }
+  table.grid-table.cols-2 { min-width: 30rem; }
+
+  /* ---- 100-point score: card on screen, header block in print ---- */
+  .score-card { max-width: 900px; margin: 1rem auto; padding: 0.9rem 1.2rem; background: var(--panel); border: 2px solid var(--wcu-purple); border-radius: 8px; }
+  .score-card .big { font-size: 1.5rem; font-weight: 700; color: var(--wcu-purple-dark); }
+  .score-card table { border-collapse: collapse; width: 100%; margin-top: 0.6rem; font-size: 0.95rem; }
+  .score-card caption { text-align: left; font-weight: 600; padding-bottom: 0.3rem; }
+  .score-card th, .score-card td { border: 1px solid var(--field-border); padding: 0.35rem 0.6rem; text-align: left; background: #fff; }
+  .score-card td.num, .score-card th.num { text-align: right; font-family: 'IBM Plex Mono', ui-monospace, Consolas, monospace; }
+  .print-only { display: none; }
+  @media print {
+    .print-only { display: block; margin: 0 0 1rem; padding: 0.6rem 0.8rem; border: 3px solid #000; color: #000; background: #fff; page-break-inside: avoid; }
+    .print-only .ph-title { font-size: 1.1rem; font-weight: 700; margin: 0 0 0.3rem; }
+    .print-only .ph-ids { margin: 0 0 0.4rem; font-size: 1rem; }
+    .print-only .ph-total { font-size: 2rem; font-weight: 800; margin: 0.2rem 0 0.5rem; }
+    .print-only table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+    .print-only th, .print-only td { border: 1px solid #000; padding: 0.2rem 0.5rem; text-align: left; }
+    .print-only td.num, .print-only th.num { text-align: right; }
+    .score-card { display: none; }
+    header { background: #fff !important; color: #000 !important; }
+  }
+
+  /* ---- Chapter 21 additions ---- */
+  .background-box table.data-table.fin { margin-top: 1rem; }
+  .background-box table.data-table.fin th.indent { padding-left: 1.8rem; font-weight: 400; }
+  .background-box table.data-table.fin tr.grp th { background: var(--panel); color: var(--wcu-purple-dark); font-weight: 700; }
+  .background-box table.data-table.fin tr.total th, .background-box table.data-table.fin tr.total td { background: var(--panel); font-weight: 700; }
+  .background-box ul.info-list { list-style: none; margin: 0.6rem 0; padding: 0; }
+  .background-box ul.info-list li { margin: 0.55rem 0; padding-left: 0; }
+  table.grid-table tr.subhead th { background: var(--panel); color: var(--wcu-purple-dark); font-weight: 700; text-align: left; border-left: 5px solid var(--wcu-purple); }
+  table.grid-table tr.total-row th[scope="row"] { font-weight: 800; }
+  table.grid-table tr.total-row td { border-top: 2px solid var(--field-border); }
+  table.grid-table.cols-1 tbody th[scope="row"] { width: 62%; }
+  @media print { table.grid-table input[type="number"] { border: 1px solid #000; } }
+</style>
+</head>
+<body>
+
+<section class="print-only" id="printHeader" aria-label="Score summary for printing">
+  <p class="ph-title" id="phTitle"></p>
+  <p class="ph-ids">Name: <strong id="phName"></strong> &nbsp;&nbsp; Student ID: <strong id="phId"></strong> &nbsp;&nbsp; Printed: <strong id="phDate"></strong></p>
+  <p class="ph-total">Total grade: <span id="phTotal">0</span> / 100</p>
+  <table><caption>Points by part</caption><thead><tr><th scope="col">Part</th><th scope="col" class="num">Correct</th><th scope="col" class="num">Points earned</th><th scope="col" class="num">Points possible</th></tr></thead><tbody id="phRows"></tbody></table>
+</section>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header>
+  <div class="eyebrow">ACCT 352 &middot; Intermediate Accounting II</div>
+  <h1>Statement of Cash Flows: Investments, Deferred Taxes, and Treasury Stock</h1>
+  <p class="sub">Handle equity-method income, cash equivalents, deferred taxes, a patent, and a land purchase that was part cash and part note</p>
+</header>
+
+<main id="main" tabindex="-1">
+
+  <noscript><div class="js-warning" role="alert">This homework packet needs JavaScript. Please turn JavaScript on in your browser and reload the page.</div></noscript>
+
+  <section class="meta-bar" aria-labelledby="setupHeading">
+    <h2 id="setupHeading" class="sr-only">Set up your scenario</h2>
+    <label for="studentId">Student ID</label>
+    <input type="text" id="studentId" placeholder="e.g. 920123456" maxlength="20" inputmode="numeric" autocomplete="off" aria-describedby="yearNote">
+    <button type="button" id="btnGenerate">Generate Scenario</button>
+    <span class="year-note" id="yearNote"></span>
+  </section>
+
+  <div class="rounding-note" id="noteCalc"></div>
+
+  <div class="check-note">
+    <strong>Checking your work:</strong> you have <strong>3 attempts per part</strong>. Each time you select <em>Check My Work</em>, a <strong class="bad-mark" aria-hidden="true">&#10007;</strong> mark and the words &ldquo;Incorrect,&rdquo; &ldquo;Not answered,&rdquo; or &ldquo;Incorrect line&rdquo; appear next to every amount or journal entry line that is wrong, so you can fix it and check again. A message under each table also tells you how many amounts or lines are correct. Your attempts are saved in this browser for your Student ID, and regenerating the scenario will not reset them. After your third attempt, that part is locked.<br><strong>Scoring:</strong> this packet is worth <strong>100 points</strong>. Each part shows its point value in its heading. Your points for a part come from your <em>most recent</em> check of that part, and your total prints at the very top of the PDF when you select <em>Print / Save as PDF</em>. Enter your name and Student ID first so they print with the score.
+  </div>
+
+  <div id="problems">
+    <p>Select &ldquo;Generate Scenario&rdquo; above to build your version of this problem.</p>
+  </div>
+
+  <section class="score-card" id="scoreCard" aria-labelledby="scoreCardH">
+    <h2 id="scoreCardH" class="sr-only">Your score</h2>
+    <p class="big" id="scoreBig" role="status">Score so far: 0 / 100</p>
+    <div class="table-scroll"><table><caption>Points by part (based on your most recent check of each part)</caption><thead><tr><th scope="col">Part</th><th scope="col" class="num">Correct</th><th scope="col" class="num">Points earned</th><th scope="col" class="num">Points possible</th></tr></thead><tbody id="scoreRows"></tbody></table></div>
+  </section>
+  <div class="overall-score" id="overallScore" role="status">Check every part above to see your combined score.</div>
+
+  <section class="submit-box" aria-labelledby="submitHeading">
+    <h2 id="submitHeading" class="sr-only">Name and printing</h2>
+    <label for="studentName">Your name:</label>
+    <input type="text" id="studentName" placeholder="Full name" autocomplete="name">
+    <button type="button" id="btnPrint">Print / Save as PDF</button>
+  </section>
+
+  <div id="announce" class="sr-only" role="status" aria-live="polite"></div>
+
+</main>
+
+<footer>Statement of Cash Flows: Investments, Deferred Taxes, and Treasury Stock &middot; The Statement of Cash Flows &middot; ACCT 352 &middot; Western Carolina University</footer>
+
+<script>
+/* ---------------------------------------------------------------------
+   Statement of cash flows packet.
+   Numbers come from the last six digits of the Student ID; dates use the current year.
+--------------------------------------------------------------------- */
+
+const TOL_DOLLARS = 0.5;   // whole-number answers must match exactly (amounts are in thousands)
+const YEAR = new Date().getFullYear();
+const MAX_ATTEMPTS = 3;
+const TOL = TOL_DOLLARS;
+
+function seedFromString(str) {
+  let h = 2166136261 >>> 0;
+  for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); }
+  return h >>> 0;
+}
+function mulberry32(a) {
+  return function() {
+    a |= 0; a = (a + 0x6D2B79F5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+function pick(rng, arr) { return arr[Math.floor(rng() * arr.length)]; }
+function last6Of(id) { return String(id).replace(/\D/g, '').slice(-6).padStart(6, '0'); }
+function num(n) { return Math.abs(Math.round(n)).toLocaleString('en-US'); }
+function fmt(n) { return (n < 0 ? '−' : '') + '$' + num(n); }
+function sum(a) { return a.reduce(function(x, y) { return x + y; }, 0); }
+function rnd(x) { return Math.round(x); }
+function Y(k) { return String(YEAR + k); }
+
+const NOTE_TAIL = ' Amounts are in thousands of dollars, and every amount in this packet is a whole number, so your answers must match exactly. This scenario is generated from the last six digits of the Student ID entered above &mdash; the same ID always produces the same numbers, and the dates update automatically each year.';
+
+function dataTable(caption, heads, rows, numCols, totalLast) {
+  const h = heads.map(function(t, i) { return '<th scope="col"' + (numCols.indexOf(i) >= 0 ? ' class="num"' : '') + '>' + t + '</th>'; }).join('');
+  const b = rows.map(function(r, ri) {
+    const cells = r.map(function(c, i) {
+      if (i === 0) return '<th scope="row">' + c + '</th>';
+      return '<td class="' + (numCols.indexOf(i) >= 0 ? 'num' : '') + '">' + c + '</td>';
+    }).join('');
+    return '<tr' + (totalLast && ri === rows.length - 1 ? ' class="total"' : '') + '>' + cells + '</tr>';
+  }).join('');
+  return '<div class="table-scroll"><table class="data-table"><caption>' + caption + '</caption><thead><tr>' + h + '</tr></thead><tbody>' + b + '</tbody></table></div>';
+}
+
+function gridPart(id, n, total, short, title, kind, o) { return Object.assign({ id: id, short: short, kind: kind, title: title,
+  heading: 'Part ' + n + ' of ' + total + ' &mdash; ' + title + (o && o.pts ? ' (' + o.pts + ' points)' : ''), btn: 'Check My Work — Part ' + n }, o); }
+
+function shuffle(rng, arr) { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rng() * (i + 1)); const t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+function scnRng(last6) { return mulberry32(seedFromString(EX_CODE + '-' + last6)); }
+function opts(list) { return list.map(function(t) { return { v: t, t: t }; }); }
+
+/* ---------------------------------------------------------------------
+   SCF engine: builds one internally consistent company for the year
+   (comparative balance sheets, income statement, additional information)
+   and computes every cash flow independently from the transactions.
+   Amounts are in thousands of dollars and are always whole numbers.
+--------------------------------------------------------------------- */
+function scfGenerate(rng, cfg) {
+  function R(lo, hi, step) { step = step || 1; var n = Math.floor((hi - lo) / step); return lo + step * Math.floor(rng() * (n + 1)); }
+  function P(arr) { return arr[Math.floor(rng() * arr.length)]; }
+  for (var tries = 0; tries < 600; tries++) {
+    var m = scfAttempt(R, P, cfg);
+    if (m) { m.tries = tries; return m; }
+  }
+  throw new Error('scfGenerate: no scenario found for config');
+}
+
+function scfAttempt(R, P, cfg) {
+  var b = {}, e = {}, t = {};          // b = beginning balances, e = ending balances, t = transactions
+  var rd = Math.round;
+
+  /* ----- beginning balances ----- */
+  b.cash = R(35, 110, 1);
+  b.ar = R(90, 320, 5);            b.allow = cfg.bad ? R(5, 18, 1) : 0;
+  b.irr = cfg.irr ? R(1, 7, 1) : 0;
+  b.sti = 0;
+  b.inv = R(110, 420, 5);          b.prepaid = R(4, 24, 1);
+  b.lti = cfg.eqm ? R(80, 260, 10) : 0;
+  b.land = R(160, 420, 10);        b.ppe = R(500, 1100, 10);
+  b.accdep = rd(b.ppe * R(22, 42, 1) / 100);
+  b.patent = cfg.patent ? R(20, 60, 2) : 0;
+  b.ap = R(60, 220, 2);            b.sal = R(4, 25, 1);
+  b.intpay = cfg.intpay ? R(2, 9, 1) : 0;
+  b.taxpay = R(6, 30, 1);          b.unearned = cfg.unearned ? R(10, 45, 1) : 0;
+  b.divpay = cfg.divpay ? R(6, 24, 1) : 0;
+  b.dtl = cfg.dtl ? R(8, 30, 1) : 0;
+  b.notes = (cfg.notesRepay || cfg.notesBorrow) ? R(60, 200, 10) : 0;
+  b.bonds = R(150, 450, 10);
+  b.adj = cfg.bondAdj === 'disc' ? R(6, 20, 1) : (cfg.bondAdj === 'prem' ? R(5, 15, 1) : 0);
+  b.cs = R(150, 350, 10);          b.apic = R(40, 120, 5);
+  b.treas = 0;
+  var assets0 = b.cash + b.ar - b.allow + b.irr + b.sti + b.inv + b.prepaid + b.lti + b.land + b.ppe - b.accdep + b.patent;
+  var liab0 = b.ap + b.sal + b.intpay + b.taxpay + b.unearned + b.divpay + b.dtl + b.notes + b.bonds + (cfg.bondAdj === 'prem' ? b.adj : (cfg.bondAdj === 'disc' ? -b.adj : 0));
+  b.re = assets0 - liab0 - b.cs - b.apic;
+  if (b.re < 120) return null;
+
+  /* ----- operating activity ----- */
+  t.S = R(1000, 2800, 10);
+  t.COGS = rd(t.S * R(54, 66, 1) / 100);
+  t.SAL = rd(t.S * R(9, 15, 1) / 100);
+  t.INSX = R(24, 70, 1);
+  t.DEP = R(35, 90, 1);
+  t.AMT = cfg.patent ? R(3, 8, 1) : 0;
+  t.BD = cfg.bad ? Math.max(2, rd(t.S * R(5, 15, 1) / 1000)) : 0;
+  t.WO = cfg.bad ? R(Math.max(1, t.BD - 8), Math.min(b.allow + t.BD - 3, t.BD + 8), 1) : 0;
+  if (cfg.bad && t.WO < 1) return null;
+  e.allow = b.allow + t.BD - t.WO;  if (cfg.bad && e.allow < 2) return null;
+  e.ar = b.ar + R(-25, 45, 1);
+  e.unearned = cfg.unearned ? b.unearned + R(-8, 12, 1) : 0;  if (cfg.unearned && e.unearned < 3) return null;
+  t.cashCust = t.S - (e.ar - b.ar) - t.WO + (e.unearned - b.unearned);
+
+  t.interestInc = cfg.invRev ? R(4, 20, 1) : 0;
+  t.EI = cfg.eqm ? R(6, 30, 1) : 0;
+  t.divRecv = cfg.eqm ? rd(t.EI * R(0, 6, 1) / 10) : 0;
+  e.irr = cfg.irr ? Math.max(1, b.irr + R(-2, 4, 1)) : 0;
+  t.IR = t.interestInc + t.EI;
+  t.cashInvRev = t.interestInc - (e.irr - b.irr) + t.divRecv;
+  t.CG = cfg.cashEq ? R(1, 6, 1) : 0;
+
+  e.inv = b.inv + R(-30, 40, 1);
+  e.ap = b.ap + R(-15, 25, 1);  if (e.ap < 20) return null;
+  t.purch = t.COGS + (e.inv - b.inv);
+  t.cashSup = t.purch - (e.ap - b.ap);
+  e.sal = b.sal + R(-4, 8, 1);  if (e.sal < 1) return null;
+  t.cashEmp = t.SAL - (e.sal - b.sal);
+  e.prepaid = b.prepaid + R(-3, 6, 1);  if (e.prepaid < 1) return null;
+  t.cashIns = t.INSX + (e.prepaid - b.prepaid);
+  e.patent = b.patent - t.AMT;
+
+  /* ----- debt and interest ----- */
+  var rate = R(70, 100, 5) / 1000;
+  t.issueBond = cfg.bondIssue ? R(40, 120, 10) : 0;
+  t.matBond = cfg.bondMat ? R(30, 100, 10) : 0;
+  t.earlyFace = cfg.bondEarly ? R(50, 100, 50) : 0;
+  t.callPct = cfg.bondEarly ? P([2, 4]) : 0;
+  t.lossBond = rd(t.earlyFace * t.callPct / 100);
+  t.convFace = cfg.conv ? R(20, 60, 10) : 0;
+  e.bonds = b.bonds + t.issueBond - t.matBond - t.earlyFace - t.convFace;  if (e.bonds < 60) return null;
+  t.AD = cfg.bondAdj ? R(1, Math.min(4, b.adj - 1), 1) : 0;
+  e.adj = b.adj - t.AD;
+  t.coupon = rd(rate * (b.bonds + e.bonds) / 2);
+  t.noteBorrow = cfg.notesBorrow ? R(40, 120, 10) : 0;
+  t.noteRepay = cfg.notesRepay ? Math.min(R(20, 80, 10), b.notes) : 0;
+  t.noteEquip = cfg.noteEquip ? R(30, 90, 10) : 0;
+  t.landNote = cfg.landNote ? R(20, 60, 10) : 0;
+  e.notes = b.notes + t.noteBorrow - t.noteRepay + t.noteEquip + t.landNote;
+  t.noteInt = e.notes + b.notes > 0 ? rd(0.09 * (b.notes + e.notes) / 2) : 0;
+  t.IE = t.coupon + t.noteInt + (cfg.bondAdj === 'disc' ? t.AD : (cfg.bondAdj === 'prem' ? -t.AD : 0));
+  e.intpay = cfg.intpay ? Math.max(1, b.intpay + R(-2, 4, 1)) : 0;
+  t.cashInt = t.coupon + t.noteInt - (e.intpay - b.intpay);
+
+  /* ----- investing ----- */
+  t.landCost = cfg.landSale ? R(40, 110, 10) : 0;
+  t.landGain = cfg.landSale ? (cfg.landLoss ? -R(4, 25, 1) : R(5, 40, 1)) : 0;
+  t.landPrice = t.landCost + t.landGain;
+  t.landBuyCash = cfg.landBuy ? R(20, 70, 5) : 0;
+  t.landBuyNoteCash = cfg.landNote ? R(20, 60, 10) : 0;      // cash portion when part of the price is a note
+  t.eqCost = cfg.equipSale ? R(40, 120, 10) : 0;
+  t.eqAccDep = rd(t.eqCost * R(35, 75, 1) / 100);
+  t.eqBook = t.eqCost - t.eqAccDep;
+  t.eqGain = cfg.equipSale ? (cfg.equipGain ? R(2, 12, 1) : -R(2, 14, 1)) : 0;
+  t.eqPrice = t.eqBook + t.eqGain;  if (cfg.equipSale && t.eqPrice < 1) return null;
+  t.eqBuyCash = cfg.equipBuy ? R(60, 160, 10) : 0;
+  t.stiBuy = cfg.sti ? R(10, 40, 2) : 0;
+  t.ltiBuy = cfg.lti ? R(10, 60, 2) : 0;
+  e.sti = b.sti + t.stiBuy;
+  e.lti = b.lti + t.EI - t.divRecv + t.ltiBuy;
+  e.land = b.land - t.landCost + t.landBuyCash + t.landBuyNoteCash + t.landNote;
+  e.ppe = b.ppe - t.eqCost + t.eqBuyCash + t.noteEquip;
+  e.accdep = b.accdep + t.DEP - t.eqAccDep;
+  if (e.accdep < 20 || e.accdep > e.ppe * 0.75) return null;
+
+  /* ----- income taxes ----- */
+  var revs = t.S + t.IR + t.CG + (t.landGain > 0 ? t.landGain : 0) + (t.eqGain > 0 ? t.eqGain : 0);
+  var exps = t.COGS + t.SAL + t.INSX + t.DEP + t.AMT + t.BD + t.IE + t.lossBond + (t.landGain < 0 ? -t.landGain : 0) + (t.eqGain < 0 ? -t.eqGain : 0);
+  t.pretax = revs - exps;
+  if (t.pretax < 0.04 * t.S) return null;
+  t.taxRate = P([25, 30, 35]);
+  t.TAX = rd(t.pretax * t.taxRate / 100);
+  e.dtl = cfg.dtl ? b.dtl + R(-3, 8, 1) : 0;  if (cfg.dtl && e.dtl < 2) return null;
+  t.currTax = t.TAX - (e.dtl - b.dtl);
+  e.taxpay = Math.max(1, b.taxpay + R(-8, 8, 1));
+  t.cashTax = t.currTax - (e.taxpay - b.taxpay);
+  if (t.cashTax < 1) return null;
+  t.NI = t.pretax - t.TAX;
+  if (t.NI < 0.03 * t.S || t.NI > 0.2 * t.S) return null;
+
+  /* ----- equity ----- */
+  t.par = P([5, 10]);
+  t.ns = cfg.stockSale ? R(2, 12, 1) : 0;
+  t.price = t.par + R(2, 10, 1);
+  t.stockProceeds = t.ns * t.price;
+  t.nd = cfg.stockDiv ? R(1, 5, 1) : 0;
+  t.mkt = t.par + R(3, 9, 1);
+  t.stockDivValue = t.nd * t.mkt;
+  t.ncv = cfg.conv ? R(1, Math.floor(t.convFace / t.par), 1) : 0;   // thousand shares from conversion
+  if (cfg.conv && (t.ncv * t.par > t.convFace || t.ncv < 1)) return null;
+  t.treasBuy = cfg.treasury ? R(10, 60, 2) : 0;
+  t.divDecl = Math.max(4, rd(t.NI * R(25, 55, 1) / 100));
+  e.divpay = cfg.divpay ? Math.max(2, b.divpay + R(-6, 8, 1)) : 0;
+  t.cashDiv = t.divDecl - (e.divpay - b.divpay);
+  e.cs = b.cs + t.ns * t.par + t.nd * t.par + t.ncv * t.par;
+  e.apic = b.apic + t.ns * (t.price - t.par) + t.nd * (t.mkt - t.par) + (t.convFace - t.ncv * t.par);
+  e.treas = t.treasBuy;
+  e.re = b.re + t.NI - t.divDecl - t.stockDivValue;
+  if (e.re < 40) return null;
+
+  /* ----- cash flows, built from the transactions ----- */
+  var f = {};
+  f.opIn = { cust: t.cashCust, inv: t.cashInvRev, cg: t.CG };
+  f.opOut = { sup: -t.cashSup, emp: -t.cashEmp, ins: -t.cashIns, int: -t.cashInt, tax: -t.cashTax };
+  f.op = t.cashCust + t.cashInvRev + t.CG - t.cashSup - t.cashEmp - t.cashIns - t.cashInt - t.cashTax;
+  f.inv = { landSale: t.landPrice, eqSale: t.eqPrice, landBuy: -(t.landBuyCash + t.landBuyNoteCash), eqBuy: -t.eqBuyCash, sti: -t.stiBuy, lti: -t.ltiBuy };
+  f.invTot = t.landPrice + t.eqPrice - t.landBuyCash - t.landBuyNoteCash - t.eqBuyCash - t.stiBuy - t.ltiBuy;
+  f.fin = { stock: t.stockProceeds, bondIssue: t.issueBond, noteBorrow: t.noteBorrow, bondMat: -t.matBond, bondEarly: -(t.earlyFace + t.lossBond), noteRepay: -t.noteRepay, treas: -t.treasBuy, div: -t.cashDiv };
+  f.finTot = t.stockProceeds + t.issueBond + t.noteBorrow - t.matBond - t.earlyFace - t.lossBond - t.noteRepay - t.treasBuy - t.cashDiv;
+  f.net = f.op + f.invTot + f.finTot;
+  e.cash = b.cash + f.net;
+  if (e.cash < 25 || e.cash > 380) return null;
+
+  /* ----- the two balance sheets must balance ----- */
+  var assets1 = e.cash + e.ar - e.allow + e.irr + e.sti + e.inv + e.prepaid + e.lti + e.land + e.ppe - e.accdep + e.patent;
+  var liab1 = e.ap + e.sal + e.intpay + e.taxpay + e.unearned + e.divpay + e.dtl + e.notes + e.bonds + (cfg.bondAdj === 'prem' ? e.adj : (cfg.bondAdj === 'disc' ? -e.adj : 0));
+  var eq1 = e.cs + e.apic + e.re - e.treas;
+  if (assets1 !== liab1 + eq1) return null;
+  if (assets0 !== liab0 + b.cs + b.apic + b.re) return null;
+
+  return { cfg: cfg, b: b, e: e, t: t, f: f, assets0: assets0, assets1: assets1 };
+}
+
+if (typeof module !== 'undefined') module.exports = { scfGenerate: scfGenerate, scfAttempt: scfAttempt };
+
+
+/* ---------------------------------------------------------------------
+   SCF model: turns a generated company into statements, additional
+   information, and graded answer rows. (No DOM access, so it can be tested.)
+--------------------------------------------------------------------- */
+function scfK(n) { return (n < 0 ? '−' : '') + Math.abs(Math.round(n)).toLocaleString('en-US'); }
+function scfMoney(n) { return '$' + Math.abs(Math.round(n)).toLocaleString('en-US'); }
+function scfTh(n) { return '$' + Math.abs(Math.round(n)).toLocaleString('en-US') + ' thousand'; }
+
+function scfStatements(m, o) {
+  var c = m.cfg, b = m.b, e = m.e, t = m.t, L = o.labels || {};
+  var insLab = L.ins || 'insurance';
+  var bs = [];
+  function A(k, label, v1, v0, o2) { bs.push(Object.assign({ k: k, label: label, v1: v1, v0: v0 }, o2 || {})); }
+  A('cash', 'Cash', e.cash, b.cash, { grp: 'Assets' });
+  A('ar', 'Accounts receivable', e.ar, b.ar);
+  if (c.bad) A('allow', 'Less: Allowance for uncollectible accounts', -e.allow, -b.allow, { indent: true });
+  if (c.irr) A('irr', 'Investment revenue receivable', e.irr, b.irr);
+  if (c.sti) A('sti', 'Short-term investments', e.sti, b.sti);
+  A('inv', 'Inventory', e.inv, b.inv);
+  A('prepaid', 'Prepaid ' + insLab, e.prepaid, b.prepaid);
+  if (c.eqm || c.lti) A('lti', 'Long-term investments', e.lti, b.lti);
+  A('land', 'Land', e.land, b.land);
+  A('ppe', 'Buildings and equipment', e.ppe, b.ppe);
+  A('accdep', 'Less: Accumulated depreciation', -e.accdep, -b.accdep, { indent: true });
+  if (c.patent) A('patent', 'Patent', e.patent, b.patent);
+  bs.push({ k: 'assets', label: 'Total assets', v1: m.assets1, v0: m.assets0, total: true });
+  A('ap', 'Accounts payable', e.ap, b.ap, { grp: 'Liabilities' });
+  A('sal', 'Salaries payable', e.sal, b.sal);
+  if (c.intpay) A('intpay', 'Interest payable', e.intpay, b.intpay);
+  A('taxpay', 'Income tax payable', e.taxpay, b.taxpay);
+  if (c.unearned) A('unearned', 'Unearned revenue', e.unearned, b.unearned);
+  if (c.divpay) A('divpay', 'Dividends payable', e.divpay, b.divpay);
+  if (c.dtl) A('dtl', 'Deferred tax liability', e.dtl, b.dtl);
+  if (e.notes + b.notes > 0) A('notes', 'Notes payable', e.notes, b.notes);
+  A('bonds', 'Bonds payable', e.bonds, b.bonds);
+  if (c.bondAdj === 'disc') A('adj', 'Less: Discount on bonds', -e.adj, -b.adj, { indent: true });
+  if (c.bondAdj === 'prem') A('adj', 'Add: Premium on bonds', e.adj, b.adj, { indent: true });
+  A('cs', 'Common stock, $' + t.par + ' par', e.cs, b.cs, { grp: 'Shareholders’ equity' });
+  A('apic', 'Paid-in capital in excess of par', e.apic, b.apic);
+  A('re', 'Retained earnings', e.re, b.re);
+  if (c.treasury) A('treas', 'Less: Treasury stock, at cost', -e.treas, -b.treas, { indent: true });
+  bs.push({ k: 'le', label: 'Total liabilities and shareholders’ equity', v1: m.assets1, v0: m.assets0, total: true });
+
+  var is = [];
+  function I(label, v, o2) { is.push(Object.assign({ label: label, v: v }, o2 || {})); }
+  I('Sales revenue', t.S, { grp: 'Revenues and gains' });
+  if (t.IR) I('Investment revenue', t.IR);
+  if (c.cashEq) I('Gain on sale of Treasury bills', t.CG);
+  if (t.landGain > 0) I('Gain on sale of land', t.landGain);
+  if (t.eqGain > 0) I('Gain on sale of equipment', t.eqGain);
+  var rev = t.S + t.IR + t.CG + Math.max(t.landGain, 0) + Math.max(t.eqGain, 0);
+  I('Total revenues and gains', rev, { total: true });
+  I('Cost of goods sold', t.COGS, { grp: 'Expenses and losses' });
+  I('Salaries expense', t.SAL);
+  I(insLab.charAt(0).toUpperCase() + insLab.slice(1) + ' expense', t.INSX);
+  I('Depreciation expense', t.DEP);
+  if (c.patent) I('Amortization expense', t.AMT);
+  if (c.bad) I('Bad debt expense', t.BD);
+  I('Interest expense', t.IE);
+  if (t.landGain < 0) I('Loss on sale of land', -t.landGain);
+  if (t.eqGain < 0) I('Loss on sale of equipment', -t.eqGain);
+  if (c.bondEarly) I('Loss on early retirement of bonds', t.lossBond);
+  I('Income tax expense', t.TAX);
+  var exp = t.COGS + t.SAL + t.INSX + t.DEP + t.AMT + t.BD + t.IE + Math.max(-t.landGain, 0) + Math.max(-t.eqGain, 0) + t.lossBond + t.TAX;
+  I('Total expenses and losses', exp, { total: true });
+  I('Net income', t.NI, { total: true, ni: true });
+  if (rev - exp !== t.NI) throw new Error('income statement does not foot');
+  return { bs: bs, is: is, rev: rev, exp: exp };
+}
+
+/* Additional information, lettered, built from the transactions */
+function scfInfo(m, o) {
+  var c = m.cfg, t = m.t, b = m.b, items = [];
+  var Y = o.Y, tn = scfTh;
+  function add(s) { items.push(s); }
+  if (c.landSale) add('Land that cost ' + tn(t.landCost) + ' was sold for ' + tn(t.landPrice) + ' cash.');
+  if (c.equipSale) add('Equipment that originally cost ' + tn(t.eqCost) + ' and had accumulated depreciation of ' + tn(t.eqAccDep) + ' was sold for ' + tn(t.eqPrice) + ' cash.');
+  if (c.landBuy) add('Land was purchased for ' + tn(t.landBuyCash) + ' cash for use as a parking lot.');
+  if (c.landNote) add('Land costing ' + tn(t.landBuyNoteCash + t.landNote) + ' was acquired by paying ' + tn(t.landBuyNoteCash) + ' cash and issuing a 9%, seven-year, ' + tn(t.landNote) + ' note payable to the seller.');
+  if (c.equipBuy) add('New equipment was purchased for ' + tn(t.eqBuyCash) + ' cash.');
+  if (c.noteEquip) add('On December 30, ' + Y + ', new equipment was acquired by issuing a 9%, five-year, ' + tn(t.noteEquip) + ' note payable to the seller.');
+  if (c.sti) add('The common shares of Tessentee Creek Corporation were purchased for ' + tn(t.stiBuy) + ' as a short-term investment. The investment does not qualify as a cash equivalent.');
+  if (c.lti) add('The common stock of an unrelated company was purchased for ' + tn(t.ltiBuy) + ' cash as a long-term investment.');
+  if (c.eqm) add('Investment revenue includes ' + tn(t.EI) + ' of equity-method income, the company’s share of the net income of an investee. The investee paid the company cash dividends of ' + tn(t.divRecv) + ' during the year.');
+  if (c.cashEq) add('Treasury bills were sold during ' + Y + ' at a gain of ' + tn(t.CG) + '. The company classifies its Treasury bills as cash equivalents.');
+  if (c.dtl) add('Temporary differences between pretax accounting income and taxable income changed the deferred tax liability account, as shown on the balance sheets. Income tax payable is the current tax owed.');
+  if (c.bad) add('Accounts totaling ' + tn(t.WO) + ' were written off as uncollectible during the year. Bad debt expense is shown on the income statement.');
+  if (c.bondMat) add('On January 1, ' + Y + ', an older series of bonds with a face amount of ' + tn(t.matBond) + ', issued at their face amount, matured and was retired for cash.');
+  if (c.bondIssue) add('The company issued bonds with a face amount of ' + tn(t.issueBond) + ' at par for cash.');
+  if (c.bondEarly) add('The company retired bonds with a face amount of ' + tn(t.earlyFace) + ' before maturity by paying ' + (100 + t.callPct) + '% of face value in cash. The bonds had been issued at par.');
+  if (c.conv) add('Bonds with a face amount of ' + tn(t.convFace) + ' were converted into ' + t.ncv + ' thousand shares of $' + t.par + ' par common stock. The bonds had been issued at par.');
+  if (c.notesBorrow) add('The company borrowed ' + tn(t.noteBorrow) + ' cash by issuing a note payable to its bank.');
+  if (c.notesRepay) add('The company repaid ' + tn(t.noteRepay) + ' of the principal of notes payable to its bank.');
+  if (c.stockSale) add(t.ns + ' thousand shares of common stock were sold for $' + t.price + ' per share.');
+  if (c.stockDiv) add('The company distributed a stock dividend of ' + t.nd + ' thousand shares. The market price of the $' + t.par + ' par common stock was $' + t.mkt + ' per share on the date of the dividend.');
+  if (c.treasury) add('Treasury stock was purchased for ' + tn(t.treasBuy) + ' cash.');
+  add('Cash dividends declared during the year totaled ' + tn(t.divDecl) + (c.divpay ? '. The balance of dividends payable is shown on the balance sheets.' : ' and all were paid in cash.'));
+  if (c.bondAdj) add('Bond interest expense includes amortization of the bond ' + (c.bondAdj === 'disc' ? 'discount' : 'premium') + ' for the year.');
+  return items.map(function (s, i) { return { letter: String.fromCharCode(97 + i), text: s }; });
+}
+
+/* Rows for each graded part. Row = { label, ans:[n] } or { head:'text' } */
+function scfParts(m, o) {
+  var c = m.cfg, t = m.t, b = m.b, e = m.e, f = m.f, L = o.labels || {};
+  var insLab = L.ins || 'insurance';
+  var Rw = function (label, v, extra) { return Object.assign({ label: label, ans: [Math.round(v)] }, extra || {}); };
+  var H = function (s) { return { head: s }; };
+  /* Part 1: operating, direct method */
+  var p1 = [H('Cash inflows')];
+  p1.push(Rw('Cash received from customers', f.opIn.cust));
+  if (c.invRev || c.eqm) p1.push(Rw('Cash received from investment revenue', f.opIn.inv));
+  if (c.cashEq) p1.push(Rw('Cash received from sale of Treasury bills (the gain)', f.opIn.cg));
+  p1.push(H('Cash outflows'));
+  p1.push(Rw('Cash paid to suppliers of goods', f.opOut.sup));
+  p1.push(Rw('Cash paid to employees', f.opOut.emp));
+  p1.push(Rw('Cash paid for ' + insLab, f.opOut.ins));
+  p1.push(Rw('Cash paid for interest', f.opOut.int));
+  p1.push(Rw('Cash paid for income taxes', f.opOut.tax));
+  p1.push(Rw('Net cash flows from operating activities', f.op, { total: true }));
+  /* Part 2: investing, financing, net change, noncash */
+  var p2 = [H('Investing activities')];
+  if (c.landSale) p2.push(Rw('Sale of land', f.inv.landSale));
+  if (c.equipSale) p2.push(Rw('Sale of equipment', f.inv.eqSale));
+  if (c.landBuy || c.landNote) p2.push(Rw('Purchase of land', f.inv.landBuy));
+  if (c.equipBuy) p2.push(Rw('Purchase of equipment', f.inv.eqBuy));
+  if (c.sti) p2.push(Rw('Purchase of short-term investments', f.inv.sti));
+  if (c.lti) p2.push(Rw('Purchase of long-term investments', f.inv.lti));
+  p2.push(Rw('Net cash flows from investing activities', f.invTot, { total: true }));
+  p2.push(H('Financing activities'));
+  if (c.stockSale) p2.push(Rw('Sale of common stock', f.fin.stock));
+  if (c.bondIssue) p2.push(Rw('Issuance of bonds', f.fin.bondIssue));
+  if (c.notesBorrow) p2.push(Rw('Borrowing on notes payable', f.fin.noteBorrow));
+  if (c.bondMat) p2.push(Rw('Retirement of bonds payable at maturity', f.fin.bondMat));
+  if (c.bondEarly) p2.push(Rw('Early retirement of bonds payable', f.fin.bondEarly));
+  if (c.notesRepay) p2.push(Rw('Repayment of notes payable', f.fin.noteRepay));
+  if (c.treasury) p2.push(Rw('Purchase of treasury stock', f.fin.treas));
+  p2.push(Rw('Payment of cash dividends', f.fin.div));
+  p2.push(Rw('Net cash flows from financing activities', f.finTot, { total: true }));
+  p2.push(H('Change in cash'));
+  p2.push(Rw('Net increase (decrease) in cash', f.net, { total: true }));
+  p2.push(Rw('Cash balance, January 1', b.cash));
+  p2.push(Rw('Cash balance, December 31', e.cash, { total: true }));
+  var nc = [];
+  if (c.noteEquip) nc.push(Rw('Equipment acquired by issuing a note payable', t.noteEquip));
+  if (c.landNote) nc.push(Rw('Note payable issued as part of the price of land', t.landNote));
+  if (c.conv) nc.push(Rw('Bonds converted into common stock (face amount)', t.convFace));
+  if (nc.length) { p2.push(H('Noncash investing and financing activities (enter as positive amounts)')); p2 = p2.concat(nc); }
+  /* Part 3: reconciliation, indirect method */
+  var p3 = [Rw('Net income', t.NI)];
+  p3.push(H('Adjustments for noncash effects'));
+  p3.push(Rw('Depreciation expense', t.DEP));
+  if (c.patent) p3.push(Rw('Amortization of patent', t.AMT));
+  if (c.bondAdj) p3.push(Rw('Amortization of bond ' + (c.bondAdj === 'disc' ? 'discount' : 'premium'), c.bondAdj === 'disc' ? t.AD : -t.AD));
+  if (c.landSale) p3.push(Rw('Loss (gain) on sale of land', -t.landGain));
+  if (c.equipSale) p3.push(Rw('Loss (gain) on sale of equipment', -t.eqGain));
+  if (c.bondEarly) p3.push(Rw('Loss on early retirement of bonds', t.lossBond));
+  if (c.eqm) p3.push(Rw('Equity-method income not received in cash', -(t.EI - t.divRecv)));
+  if (c.dtl) p3.push(Rw('Deferred income taxes', e.dtl - b.dtl));
+  p3.push(H('Changes in operating assets and liabilities'));
+  var arNet = (e.ar - e.allow) - (b.ar - b.allow);
+  p3.push(Rw('Accounts receivable' + (c.bad ? ', net of the allowance' : ''), -arNet));
+  if (c.irr) p3.push(Rw('Investment revenue receivable', -(e.irr - b.irr)));
+  p3.push(Rw('Inventory', -(e.inv - b.inv)));
+  p3.push(Rw('Prepaid ' + insLab, -(e.prepaid - b.prepaid)));
+  p3.push(Rw('Accounts payable', e.ap - b.ap));
+  p3.push(Rw('Salaries payable', e.sal - b.sal));
+  if (c.intpay) p3.push(Rw('Interest payable', e.intpay - b.intpay));
+  p3.push(Rw('Income tax payable', e.taxpay - b.taxpay));
+  if (c.unearned) p3.push(Rw('Unearned revenue', e.unearned - b.unearned));
+  p3.push(Rw('Net cash flows from operating activities', f.op, { total: true }));
+  return { p1: p1, p2: p2, p3: p3 };
+}
+
+/* Indirect-method total computed from net income and balance changes only (used by tests) */
+function scfIndirectTotal(m) {
+  var p = scfParts(m, { labels: {} }).p3, s = 0;
+  p.forEach(function (r) { if (!r.head && !r.total) s += r.ans[0]; });
+  return s;
+}
+
+/* Part 4 bank: classification items. answer index into SCF_CLASS_OPTS */
+var SCF_CLASS_OPTS = [
+  'Operating activity',
+  'Investing activity',
+  'Financing activity',
+  'Noncash investing and financing disclosure',
+  'Not a cash flow (not reported as one)'
+];
+function scfClassItems(m) {
+  var c = m.cfg, items = [];
+  items.push(['Cash paid to bondholders for interest', 0]);
+  items.push(['Cash dividends paid to shareholders', 2]);
+  items.push(['Cash received from customers', 0]);
+  items.push(['Depreciation expense for the year', 4]);
+  if (c.landSale) items.push(['Cash proceeds from the sale of land', 1]);
+  if (c.landSale) items.push(['The gain or loss on the sale of land (the gain or loss itself)', 4]);
+  if (c.equipSale) items.push(['Cash proceeds from the sale of equipment', 1]);
+  if (c.equipSale) items.push(['The gain or loss on the sale of equipment (the gain or loss itself)', 4]);
+  if (c.landBuy || c.landNote) items.push(['Cash paid to purchase land', 1]);
+  if (c.equipBuy) items.push(['Cash paid to purchase equipment', 1]);
+  if (c.noteEquip) items.push(['Acquiring equipment by issuing a note payable to the seller', 3]);
+  if (c.landNote) items.push(['The note payable issued as part of the price of land', 3]);
+  if (c.sti) items.push(['Cash paid to purchase short-term investments that are not cash equivalents', 1]);
+  if (c.lti) items.push(['Cash paid to purchase long-term investments in stock', 1]);
+  if (c.eqm) items.push(['Equity-method income that was not received in cash', 4]);
+  if (c.eqm) items.push(['Cash dividends received from an equity-method investee', 0]);
+  if (c.cashEq) items.push(['Purchase of a Treasury bill classified as a cash equivalent', 4]);
+  if (c.cashEq) items.push(['The gain on the sale of a Treasury bill classified as a cash equivalent', 0]);
+  if (c.stockSale) items.push(['Cash received from selling common stock', 2]);
+  if (c.stockDiv) items.push(['Distribution of a stock dividend', 4]);
+  if (c.treasury) items.push(['Cash paid to buy treasury stock', 2]);
+  if (c.bondIssue) items.push(['Cash received from issuing bonds', 2]);
+  if (c.bondMat) items.push(['Cash paid to retire bonds at maturity', 2]);
+  if (c.bondEarly) items.push(['The loss on early retirement of bonds (the loss itself)', 4]);
+  if (c.bondEarly) items.push(['Cash paid to retire bonds before maturity (the full amount paid)', 2]);
+  if (c.conv) items.push(['Converting bonds into common stock', 3]);
+  if (c.notesBorrow) items.push(['Cash borrowed from the bank on a note payable', 2]);
+  if (c.dtl) items.push(['Deferred income taxes (the change in the deferred tax liability)', 4]);
+  if (c.patent) items.push(['Amortization of a patent', 4]);
+  return items;
+}
+
+if (typeof module !== 'undefined') module.exports = { scfStatements: scfStatements, scfInfo: scfInfo, scfParts: scfParts, scfClassItems: scfClassItems, scfIndirectTotal: scfIndirectTotal, SCF_CLASS_OPTS: SCF_CLASS_OPTS };
+
+
+const EX_CODE = 'scfinv';
+const ACCOUNTS = ['Cash'];
+const COMPANY = 'Blowing Rock Tool & Die Company';
+const INS_LABEL = 'insurance';
+const PKT_CFG = {"eqm": true, "irr": true, "invRev": true, "cashEq": true, "dtl": true, "patent": true, "intpay": true, "bondAdj": "disc", "bondIssue": true, "landNote": true, "equipSale": true, "equipBuy": true, "lti": true, "stockDiv": true, "treasury": true};
+const NOTE_CALC = '<strong>How to enter answers:</strong> type numbers only, with no commas or dollar signs. Enter cash <em>inflows</em> and adjustments that <em>increase</em> cash as positive numbers, and cash <em>outflows</em> and adjustments that <em>decrease</em> cash as negative numbers (use a minus sign). If an amount does not apply, enter 0.' + NOTE_TAIL;
+
+function buildScenario(studentId) {
+  const last6 = last6Of(studentId);
+  const rng = scnRng(last6);
+  const m = scfGenerate(rng, PKT_CFG);
+  const s = { last6: last6, m: m, rng: rng };
+  return s;
+}
+
+function stmtTables(m) {
+  const labels = { ins: INS_LABEL };
+  const st = scfStatements(m, { labels: labels });
+  const y1 = Y(0), y0 = Y(-1);
+  const par = function(v) { return v < 0 ? '(' + scfK(-v) + ')' : scfK(v); };
+  function tbl(cap, c1, c2, rows, isBs) {
+    let body = '';
+    rows.forEach(function(r) {
+      if (r.grp) body += '<tr class="grp"><th scope="colgroup" colspan="3">' + r.grp + '</th></tr>';
+      const cls = r.total ? ' class="total"' : '';
+      const th = '<th scope="row"' + (r.indent ? ' class="indent"' : '') + '>' + r.label + '</th>';
+      if (isBs) body += '<tr' + cls + '>' + th + '<td class="num">' + par(r.v1) + '</td><td class="num">' + par(r.v0) + '</td></tr>';
+      else body += '<tr' + cls + '>' + th + '<td class="num">' + par(r.v) + '</td><td class="num"></td></tr>';
+    });
+    const heads = isBs ? '<th scope="col">Account</th><th scope="col" class="num">' + c1 + '</th><th scope="col" class="num">' + c2 + '</th>'
+                       : '<th scope="col">Item</th><th scope="col" class="num">' + c1 + '</th><th scope="col" class="num"><span class="sr-only">Not used</span></th>';
+    return '<div class="table-scroll"><table class="data-table fin"><caption>' + cap + '</caption><thead><tr>' + heads + '</tr></thead><tbody>' + body + '</tbody></table></div>';
+  }
+  return tbl('Comparative balance sheets (in thousands of dollars)', 'December 31, ' + y1, 'December 31, ' + y0, st.bs, true) +
+         tbl('Income statement for the year ended December 31, ' + y1 + ' (in thousands of dollars)', 'Year ' + y1, '', st.is, false);
+}
+
+function buildModel(s) {
+  const m = s.m, y0 = Y(0), y1 = Y(-1);
+  const info = scfInfo(m, { Y: y0 });
+  const labels = { ins: INS_LABEL };
+  const P = scfParts(m, { labels: labels });
+  const OR = mulberry32(seedFromString(EX_CODE + '-opt-' + s.last6));
+  const so = function(list) { return opts(shuffle(OR, list)); };
+  const bg = '<p><strong>' + COMPANY + '</strong> manufactures precision tooling for furniture makers and owns part of a supplier. Its fiscal year ends December 31. The company owns an equity-method investment, sold Treasury bills classified as cash equivalents, and bought land with part cash and part note. The comparative balance sheets, the income statement, and additional information from the accounting records for ' + y0 + ' appear below. Amounts are in thousands of dollars.</p>' +
+    stmtTables(m) +
+    '<h3>Additional information from the accounting records</h3><ul class="info-list">' + info.map(function(i) { return '<li><strong>' + i.letter + '.</strong> ' + i.text + '</li>'; }).join('') + '</ul>' +
+    '<p><strong>Required:</strong> Prepare the statement of cash flows for the year ended December 31, ' + y0 + ', using the <strong>direct method</strong> for cash flows from operating activities, including the noncash investing and financing disclosure. Then prepare the schedule that reconciles net income to net cash flows from operating activities (the <strong>indirect method</strong>). The check is that both methods give the same net cash flows from operating activities, and that the net change in cash matches the change in the cash balance.</p>';
+  const sg = function(rows) { return rows.map(function(r) { return r.head ? { head: r.head } : { label: r.label, ans: r.ans, total: !!r.total }; }); };
+  const classAll = scfClassItems(m);
+  const picked = shuffle(OR, classAll).slice(0, 8);
+  const classRows = picked.map(function(it) { return { label: it[0], ans: [SCF_CLASS_OPTS[it[1]]], options: so(SCF_CLASS_OPTS) }; });
+  const IFRS_OPTS = ['Operating activities only', 'Operating or financing activities, at the company’s choice', 'Investing activities only'];
+  classRows.push({ label: 'Under IFRS, cash paid for interest may be reported in', ans: [IFRS_OPTS[1]], options: so(IFRS_OPTS) });
+  classRows.push({ label: 'Under U.S. GAAP, cash paid for interest is reported in', ans: ['Operating activities'], options: so(['Operating activities', 'Financing activities', 'Investing activities']) });
+  const parts = [
+    gridPart('op', 1, 4, 'Part 1 (Operating, direct)', 'Cash Flows from Operating Activities: Direct Method', 'grid', { pts: 30, corner: 'Line item', cols: ['Amount'],
+      instructions: 'Convert each income statement amount to the cash flow it produced. Cash inflows are positive; cash outflows are negative. Include the net cash flows from operating activities.',
+      rows: sg(P.p1) }),
+    gridPart('invfin', 2, 4, 'Part 2 (Investing, financing, cash)', 'Investing and Financing Activities, Change in Cash, and Noncash Activities', 'grid', { pts: 30, corner: 'Line item', cols: ['Amount'],
+      instructions: 'Complete the rest of the statement. Cash inflows are positive; cash outflows are negative. Report each investing and financing cash flow at the cash amount only, and tie the net change to the cash account.',
+      rows: sg(P.p2) }),
+    gridPart('recon', 3, 4, 'Part 3 (Reconciliation, indirect)', 'Reconciliation of Net Income to Net Cash Flows from Operating Activities', 'grid', { pts: 30, corner: 'Line item', cols: ['Amount'],
+      instructions: 'Start with net income. Enter each adjustment with its sign: positive if it increases cash flow compared with net income, negative if it decreases cash flow. The total must equal the net cash flows from operating activities you found in Part 1.',
+      rows: sg(P.p3) }),
+    gridPart('concepts', 4, 4, 'Part 4 (Classification)', 'Where Does Each Item Go?', 'grid', { pts: 10, corner: 'Item', cols: ['Answer'],
+      instructions: 'Choose the best answer for each item.',
+      rows: classRows })
+  ];
+  return { bgTitle: 'The Scenario', background: bg, parts: parts,
+    sections: [ { id: 'all', title: COMPANY + ': Statement of Cash Flows', parts: parts,
+      intro: '<p><strong>Work in this order:</strong> (1) find the cash effect of each operating item, (2) find the investing and financing cash flows and tie to the cash account, (3) reconcile net income to operating cash flow, (4) classify items. A useful check: the total of Part 3 must equal the total of Part 1.</p>' } ] };
+}
+
+/* ---------------------------------------------------------------------
+   ATTEMPT LIMIT (saved per Student ID in this browser)
+--------------------------------------------------------------------- */
+const memAttempts = {};
+function attemptKey(part, last6) { return 'ch21hw-' + EX_CODE + '-attempts-' + last6 + '-' + part; }
+function getAttempts(part, last6) {
+  const key = attemptKey(part, last6 || SCN.last6);
+  let stored = 0;
+  try { stored = parseInt(window.localStorage.getItem(key) || '0', 10) || 0; } catch (e) { /* storage blocked */ }
+  return Math.max(stored, memAttempts[key] || 0);
+}
+function setAttempts(part, n) {
+  const key = attemptKey(part, SCN.last6);
+  memAttempts[key] = n;
+  try { window.localStorage.setItem(key, String(n)); } catch (e) { /* storage blocked */ }
+}
+function lockPart(part, locked) {
+  document.getElementById('part-' + part).querySelectorAll('input, select').forEach(function(el) { el.disabled = locked; });
+}
+function updateAttemptsUI(part) {
+  const used = getAttempts(part);
+  const btn = document.getElementById('btn-' + part);
+  const lab = document.getElementById('attempts-' + part);
+  if (used >= MAX_ATTEMPTS) {
+    btn.disabled = true;
+    lab.className = 'attempts out';
+    lab.textContent = 'No attempts remaining (' + MAX_ATTEMPTS + ' of ' + MAX_ATTEMPTS + ' used). This part is locked.';
+    lockPart(part, true);
+  } else {
+    btn.disabled = false;
+    lab.className = 'attempts';
+    lab.textContent = 'Attempts used: ' + used + ' of ' + MAX_ATTEMPTS;
+    lockPart(part, false);
+  }
+}
+
+/* ---------------------------------------------------------------------
+   RENDERING
+--------------------------------------------------------------------- */
+let SCN = null;
+let MODEL = null;
+const DEFAULT_OVERALL = 'Check every part above to see your combined score.';
+
+function announce(msg) {
+  const el = document.getElementById('announce');
+  el.textContent = '';
+  window.setTimeout(function() { el.textContent = msg; }, 50);
+}
+
+function generateScenario(announceIt) {
+  const raw = document.getElementById('studentId').value.trim();
+  SCN = buildScenario(raw || '920123456');
+  MODEL = buildModel(SCN);
+  renderAll();
+  MODEL.parts.forEach(function(p) { updateAttemptsUI(p.id); });
+  refreshScoreViews();
+  const overall = document.getElementById('overallScore');
+  if (overall.textContent !== DEFAULT_OVERALL) overall.textContent = DEFAULT_OVERALL;
+  if (announceIt) announce('Scenario generated for the Student ID ending in ' + SCN.last6 + '. All answer fields are empty.');
+}
+
+function regenerate() {
+  const raw = document.getElementById('studentId').value.trim();
+  const l6 = last6Of(raw || '920123456');
+  const used = MODEL.parts.reduce(function(sum, p) { return sum + getAttempts(p.id, l6); }, 0);
+  if (used > 0 && !window.confirm('Regenerating the scenario will clear everything you have typed. Attempts you have already used will still count. Continue?')) return;
+  generateScenario(true);
+}
+
+function renderAll() {
+  let html = '';
+  html += '<section aria-labelledby="bg-h"><h2 class="problem-title" id="bg-h">' + (MODEL.bgTitle || 'Background') + '</h2><div class="background-box">' + MODEL.background + '</div></section>';
+  MODEL.sections.forEach(function(sec) {
+    html += '<section aria-labelledby="sec-h-' + sec.id + '">';
+    html += '<h2 class="problem-title" id="sec-h-' + sec.id + '">' + sec.title + '</h2>';
+    html += '<div class="background-box">' + sec.intro + '</div>';
+    sec.parts.forEach(function(p) {
+      html += '<section aria-labelledby="part-h-' + p.id + '">';
+      html += '<h3 id="part-h-' + p.id + '">' + p.heading + '</h3>';
+      html += '<p class="part-instructions">' + p.instructions + '</p>';
+      html += '<div id="part-' + p.id + '">' + (p.kind === 'entries' ? renderEntries(p) : renderGrid(p)) + '</div>';
+      html += '<div class="check-row"><button type="button" id="btn-' + p.id + '" data-part="' + p.id + '" aria-describedby="attempts-' + p.id + '">' + p.btn + '</button>' +
+              '<div class="check-status"><span class="part-score" id="score-' + p.id + '" role="status"></span><span class="attempts" id="attempts-' + p.id + '"></span></div></div>';
+      html += '</section>';
+    });
+    html += '</section>';
+  });
+  document.getElementById('problems').innerHTML = html;
+  sizeScrollers();
+  document.querySelectorAll('#problems button[data-part]').forEach(function(b) {
+    b.addEventListener('click', function() { checkPart(b.getAttribute('data-part')); });
+  });
+}
+
+/* ---- answer grids (rows of items by columns, or a single Amount column) ---- */
+function attrText(s) { return String(s).replace(/<[^>]+>/g, '').replace(/&rsquo;/g, '\u2019').replace(/&mdash;/g, '\u2014').replace(/"/g, ''); }
+
+function gridHasSelect(p) { return p.rows.some(function(r) { return r.ans && r.ans.some(function(a) { return typeof a === 'string'; }); }); }
+function cellId(p, i, j) { return 'g-' + p.id + '-' + i + '-' + j; }
+
+function renderGrid(p) {
+  const multi = p.cols.length > 1;
+  let head = '<tr><th scope="col">' + p.corner + '</th>' + p.cols.map(function(c) { return '<th scope="col">' + c + '</th>'; }).join('') + '</tr>';
+  let body = '';
+  p.rows.forEach(function(r, i) {
+    if (r.head) { body += '<tr class="subhead"><th scope="colgroup" colspan="' + (p.cols.length + 1) + '">' + r.head + '</th></tr>'; return; }
+    body += '<tr' + (r.total ? ' class="total-row"' : '') + '><th scope="row">' + r.label + '</th>';
+    r.ans.forEach(function(a, j) {
+      if (a === null) { body += '<td><span aria-hidden="true">\u2014</span><span class="sr-only">Not applicable</span></td>'; return; }
+      const label = attrText(r.label) + (multi ? ', ' + p.cols[j] : '');
+      if (typeof a === 'string') {
+        body += '<td><select id="' + cellId(p, i, j) + '" aria-label="' + label + '" autocomplete="off"><option value="">Select\u2026</option>' +
+                (r.options || p.options).map(function(o) { return '<option value="' + o.v + '">' + o.t + '</option>'; }).join('') + '</select>' +
+                '<span class="cell-mark" id="m-' + cellId(p, i, j) + '"></span></td>';
+        return;
+      }
+      body += '<td><input type="number" step="any" inputmode="decimal" autocomplete="off" id="' + cellId(p, i, j) + '" aria-label="' + label + '">' +
+              '<span class="cell-mark" id="m-' + cellId(p, i, j) + '"></span></td>';
+    });
+    body += '</tr>';
+  });
+  return '<div class="entry-block" id="block-' + p.id + '"><div class="table-scroll"><table class="grid-table cols-' + p.cols.length + '"><caption class="sr-only">' + attrText(p.title) + '</caption>' +
+         '<thead>' + head + '</thead><tbody>' + body + '</tbody></table></div><div class="entry-result" id="result-' + p.id + '"></div></div>';
+}
+
+/* ---- journal entries ---- */
+function acctOptions() {
+  return ACCOUNTS.map(function(a) { return '<option value="' + a + '">' + a + '</option>'; }).join('');
+}
+function stripTags(str) { return String(str).replace(/<[^>]+>/g, '').replace(/&mdash;/g, '\u2014').replace(/&ldquo;|&rdquo;/g, '"'); }
+
+function renderEntries(p) {
+  let html = '';
+  p.blocks.forEach(function(b) {
+    const uid = p.id + '-' + b.key;
+    const nRows = b.lines.length + 1;     // one spare row so the line count does not give away the answer
+    let rows = '';
+    for (let i = 0; i < nRows; i++) {
+      const ln = p.party + ' entry (' + b.key + '), line ' + (i + 1);
+      rows += '<tr>' +
+        '<td><select id="' + uid + '-acct-' + i + '" aria-label="' + ln + ', account" autocomplete="off"><option value="">Select account\u2026</option>' + acctOptions() + '</select></td>' +
+        '<td><input type="number" step="any" id="' + uid + '-dr-' + i + '" aria-label="' + ln + ', debit amount" autocomplete="off"></td>' +
+        '<td><input type="number" step="any" id="' + uid + '-cr-' + i + '" aria-label="' + ln + ', credit amount" autocomplete="off"></td>' +
+        '<td class="mark-cell" id="mark-' + uid + '-' + i + '"></td></tr>';
+    }
+    html += '<div class="entry-block" role="group" id="block-' + uid + '" aria-labelledby="recap-' + uid + '">' +
+      '<div class="tx-recap" id="recap-' + uid + '"><span class="letter">(' + b.key + ')</span> ' + b.tx + '</div>' +
+      '<div class="entry-desc">' + b.desc + '</div>' +
+      '<div class="table-scroll"><table class="je-table"><caption class="sr-only">' + p.party + ' journal entry (' + b.key + '): ' + stripTags(b.tx) + '</caption>' +
+      '<thead><tr><th scope="col" style="width:55%">Account</th><th scope="col">Debit</th><th scope="col">Credit</th><th scope="col" class="mark-th"><span class="sr-only">Status</span></th></tr></thead>' +
+      '<tbody>' + rows + '</tbody></table></div><div class="entry-result" id="result-' + uid + '"></div></div>';
+  });
+  return html;
+}
+
+function setEntryMark(uid, i, bad) {
+  const m = document.getElementById('mark-' + uid + '-' + i);
+  m.innerHTML = bad ? '<span aria-hidden="true">\u2717</span> <span class="mark-text">Incorrect line</span>' : '';
+  m.parentElement.querySelectorAll('select, input').forEach(function(el) {
+    if (bad) el.setAttribute('aria-invalid', 'true'); else el.removeAttribute('aria-invalid');
+  });
+}
+
+function checkEntry(uid, b) {
+  const expected = b.lines.slice();
+  const nRows = expected.length + 1;
+  const remaining = expected.slice();
+  let correct = 0, badRows = 0;
+  for (let i = 0; i < nRows; i++) {
+    const acct = document.getElementById(uid + '-acct-' + i).value;
+    const drRaw = document.getElementById(uid + '-dr-' + i).value;
+    const crRaw = document.getElementById(uid + '-cr-' + i).value;
+    const dr = parseFloat(drRaw), cr = parseFloat(crRaw);
+    const hasDr = !isNaN(dr) && dr > 0, hasCr = !isNaN(cr) && cr > 0;
+    setEntryMark(uid, i, false);
+    if (acct === '' && drRaw === '' && crRaw === '') continue;
+    let ok = false;
+    if (acct && hasDr !== hasCr) {
+      const side = hasDr ? 'debit' : 'credit';
+      const amt = hasDr ? dr : cr;
+      const idx = remaining.findIndex(function(exp) { return exp.a === acct && exp.side === side && Math.abs(exp.amt - amt) <= TOL; });
+      if (idx >= 0) { ok = true; correct++; remaining.splice(idx, 1); }
+    }
+    if (!ok) { badRows++; setEntryMark(uid, i, true); }
+  }
+  const n = expected.length;
+  const block = document.getElementById('block-' + uid);
+  const resultEl = document.getElementById('result-' + uid);
+  if (correct === n && badRows === 0) {
+    block.className = 'entry-block entry-correct';
+    resultEl.className = 'entry-result ok';
+    resultEl.innerHTML = '<span aria-hidden="true">\u2713</span> All ' + n + ' lines correct.';
+  } else {
+    block.className = 'entry-block entry-incorrect';
+    resultEl.className = 'entry-result no';
+    let msg = correct + ' of ' + n + ' lines correct.';
+    if (badRows) msg += ' Fix the line' + (badRows > 1 ? 's' : '') + ' marked \u201CIncorrect line\u201D.';
+    const missing = n - correct - badRows;
+    if (missing > 0) msg += ' ' + missing + ' more line' + (missing > 1 ? 's are' : ' is') + ' needed.';
+    resultEl.innerHTML = '<span aria-hidden="true">\u2717</span> ' + msg;
+  }
+  return { correct: correct, total: n };
+}
+
+function gradeEntries(p) {
+  let c = 0, t = 0;
+  p.blocks.forEach(function(b) { const r = checkEntry(p.id + '-' + b.key, b); c += r.correct; t += r.total; });
+  return { correct: c, total: t, unit: 'lines' };
+}
+
+function setMark(id, state) {          // state: '' | 'bad' | 'blank'
+  const m = document.getElementById('m-' + id), el = document.getElementById(id);
+  if (state) {
+    m.innerHTML = '<span aria-hidden="true">\u2717</span> ' + (state === 'blank' ? 'Not answered' : 'Incorrect');
+    el.setAttribute('aria-invalid', 'true');
+  } else {
+    m.innerHTML = '';
+    el.removeAttribute('aria-invalid');
+  }
+}
+
+function gradeGrid(p) {
+  let correct = 0, total = 0;
+  p.rows.forEach(function(r, i) {
+    if (r.head) return;
+    r.ans.forEach(function(a, j) {
+      if (a === null) return;
+      total++;
+      const id = cellId(p, i, j);
+      const raw = document.getElementById(id).value;
+      if (typeof a === 'string') {
+        if (raw === '') { setMark(id, 'blank'); return; }
+        if (raw === a) { correct++; setMark(id, ''); } else { setMark(id, 'bad'); }
+        return;
+      }
+      const v = parseFloat(raw);
+      if (raw === '' || isNaN(v)) { setMark(id, 'blank'); return; }
+      if (Math.abs(v - a) <= (r.tol != null ? r.tol : TOL) + 1e-9) { correct++; setMark(id, ''); }
+      else { setMark(id, 'bad'); }
+    });
+  });
+  const block = document.getElementById('block-' + p.id), res = document.getElementById('result-' + p.id);
+  if (correct === total) {
+    block.className = 'entry-block entry-correct'; res.className = 'entry-result ok';
+    res.innerHTML = '<span aria-hidden="true">\u2713</span> All ' + total + ' ' + (gridHasSelect(p) ? 'answers' : 'amounts') + ' correct.';
+  } else {
+    block.className = 'entry-block entry-incorrect'; res.className = 'entry-result no';
+    res.innerHTML = '<span aria-hidden="true">\u2717</span> ' + correct + ' of ' + total + ' ' + (gridHasSelect(p) ? 'answers' : 'amounts') + ' correct. Fix the ' + (gridHasSelect(p) ? 'answers' : 'amounts') + ' marked &ldquo;Incorrect&rdquo; or &ldquo;Not answered&rdquo;.';
+  }
+  return { correct: correct, total: total, unit: gridHasSelect(p) ? 'answers' : 'amounts' };
+}
+
+/* ---------------------------------------------------------------------
+   CHECKING
+--------------------------------------------------------------------- */
+function partHasInput(part) {
+  let any = false;
+  document.getElementById('part-' + part).querySelectorAll('input, select').forEach(function(el) { if (el.value !== '') any = true; });
+  return any;
+}
+
+function checkPart(partId) {
+  if (!MODEL) { return; }
+  const p = MODEL.parts.find(function(x) { return x.id === partId; });
+  if (getAttempts(partId) >= MAX_ATTEMPTS) { updateAttemptsUI(partId); return; }
+  const scoreEl = document.getElementById('score-' + partId);
+  if (!partHasInput(partId)) {
+    scoreEl.textContent = 'Enter your answers first. This did not use an attempt.';
+    return;
+  }
+  const attempt = getAttempts(partId) + 1;
+  setAttempts(partId, attempt);
+  const r = (p.kind === 'entries') ? gradeEntries(p) : gradeGrid(p);
+  saveScore(partId, r.correct, r.total);
+  scoreEl.textContent = r.correct + ' of ' + r.total + ' ' + r.unit + ' correct (attempt ' + attempt + ' of ' + MAX_ATTEMPTS + ')';
+  updateAttemptsUI(partId);
+  updateOverall();
+  refreshScoreViews();
+}
+
+function updateOverall() {
+  const texts = MODEL.parts.map(function(p) { return document.getElementById('score-' + p.id).textContent; });
+  const done = texts.filter(function(t) { return /attempt \d of/.test(t); }).length;
+  const el = document.getElementById('overallScore');
+  if (done === MODEL.parts.length) {
+    el.innerHTML = MODEL.parts.map(function(p, i) {
+      return '<strong>' + p.short + ':</strong> ' + texts[i];
+    }).join(' &nbsp;&nbsp; ');
+  } else if (done > 0) {
+    el.textContent = 'Check the remaining parts to see your combined score.';
+  }
+}
+
+/* Editing an amount or a journal entry line clears its Incorrect mark until the next check */
+function clearMark(e) {
+  const t = e.target;
+  if (!t || !t.closest) return;
+  if ((t.tagName === 'INPUT' || t.tagName === 'SELECT') && t.id && t.id.indexOf('g-') === 0) {          // answer grids
+    const m = document.getElementById('m-' + t.id);
+    if (m && m.innerHTML !== '') setMark(t.id, '');
+    return;
+  }
+  const tr = t.closest('tr');                                               // journal entry rows
+  if (!tr) return;
+  const mc = tr.querySelector('.mark-cell');
+  if (mc && mc.innerHTML !== '') {
+    mc.innerHTML = '';
+    tr.querySelectorAll('select, input').forEach(function(el) { el.removeAttribute('aria-invalid'); });
+  }
+}
+document.addEventListener('input', clearMark);
+document.addEventListener('change', clearMark);
+
+
+/* ---------------------------------------------------------------------
+   100-POINT SCORING. Each part is worth the points shown in its heading.
+   Points earned = points possible x (correct / total) from the LATEST check of that part.
+   The total prints at the top of the PDF.
+--------------------------------------------------------------------- */
+function scoreKey(part) { return 'ch21hw-' + EX_CODE + '-score-' + SCN.last6 + '-' + part; }
+const memScores = {};
+function saveScore(part, c, t) {
+  const k = scoreKey(part);
+  memScores[k] = c + '/' + t;
+  try { window.localStorage.setItem(k, c + '/' + t); } catch (e) { /* storage blocked */ }
+}
+function loadScore(part) {
+  const k = scoreKey(part);
+  let v = null;
+  try { v = window.localStorage.getItem(k); } catch (e) { /* storage blocked */ }
+  v = v || memScores[k] || null;
+  if (!v) return null;
+  const a = v.split('/'); return { c: parseInt(a[0], 10), t: parseInt(a[1], 10) };
+}
+function pts1(x) { return (Math.round(x * 10) / 10).toString(); }
+function computeScores() {
+  let total = 0;
+  const rows = MODEL.parts.map(function(p) {
+    const sc = loadScore(p.id);
+    const earned = sc && sc.t ? p.pts * sc.c / sc.t : 0;
+    total += earned;
+    return { name: p.short + ': ' + p.title, correct: sc ? (sc.c + ' of ' + sc.t) : 'Not yet checked', earned: earned, pts: p.pts };
+  });
+  return { rows: rows, total: total };
+}
+function refreshScoreViews() {
+  if (!MODEL) return;
+  const s = computeScores();
+  document.getElementById('scoreBig').textContent = 'Score so far: ' + pts1(s.total) + ' / 100';
+  const html = s.rows.map(function(r) { return '<tr><th scope="row">' + r.name + '</th><td class="num">' + r.correct + '</td><td class="num">' + pts1(r.earned) + '</td><td class="num">' + r.pts + '</td></tr>'; }).join('') +
+    '<tr><th scope="row">Total</th><td class="num"></td><td class="num"><strong>' + pts1(s.total) + '</strong></td><td class="num"><strong>100</strong></td></tr>';
+  document.getElementById('scoreRows').innerHTML = html;
+  document.getElementById('phRows').innerHTML = html;
+  document.getElementById('phTotal').textContent = pts1(s.total);
+  document.getElementById('phTitle').textContent = document.title.replace(': Homework Packet', '') + ' \u2014 ACCT 352 Homework Packet';
+  document.getElementById('phName').textContent = document.getElementById('studentName').value.trim() || '(name not entered)';
+  document.getElementById('phId').textContent = document.getElementById('studentId').value.trim() || '(not entered)';
+  document.getElementById('phDate').textContent = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+window.addEventListener('beforeprint', refreshScoreViews);
+document.getElementById('studentName').addEventListener('input', refreshScoreViews);
+document.getElementById('studentId').addEventListener('input', function() { if (MODEL) { document.getElementById('phId').textContent = this.value.trim() || '(not entered)'; } });
+
+/* ---------------------------------------------------------------------
+   INIT
+--------------------------------------------------------------------- */
+document.getElementById('yearNote').textContent = 'Dates are in ' + YEAR + ' and roll forward automatically next year.';
+document.getElementById('noteCalc').innerHTML = NOTE_CALC;
+document.getElementById('btnGenerate').addEventListener('click', regenerate);
+document.getElementById('btnPrint').addEventListener('click', function() { refreshScoreViews(); window.print(); });
+document.getElementById('studentId').addEventListener('keydown', function(e) { if (e.key === 'Enter') { e.preventDefault(); regenerate(); } });
+generateScenario(false);
+
+/* Tables that are wider than the screen scroll sideways; make them keyboard-focusable only when they actually overflow */
+function sizeScrollers() {
+  let n = 0;
+  document.querySelectorAll('.table-scroll').forEach(function(w) {
+    const cap = w.querySelector('caption');
+    if (w.querySelector('input, select, textarea, button, a[href]')) { return; }
+    if (w.scrollWidth > w.clientWidth + 1) {
+      if (cap && !cap.id) { cap.id = 'tcap-' + (++n); }
+      w.setAttribute('tabindex', '0'); w.setAttribute('role', 'group');
+      if (cap) { w.setAttribute('aria-labelledby', cap.id); }
+    } else { w.removeAttribute('tabindex'); w.removeAttribute('role'); w.removeAttribute('aria-labelledby'); }
+  });
+}
+let scrollTimer;
+window.addEventListener('resize', function() { clearTimeout(scrollTimer); scrollTimer = setTimeout(sizeScrollers, 150); });
+if (document.fonts && document.fonts.ready) { document.fonts.ready.then(sizeScrollers); }
+</script>
+
+</body>
+</html>
